@@ -1,6 +1,6 @@
 import About from "./components/About";
-import BrowserCard from "./components/BrowserCard";
 import BrowserRankingList from "./components/BrowserRankingList";
+import Explanation from "./components/Explanation";
 
 export default function Home() {
   return (
@@ -14,6 +14,7 @@ export default function Home() {
         <About />
         <BrowserRankingList />
       </main>
+      <Explanation />
       <footer className="text-center text-sm p-8">
         <p>
           developed by{" "}
