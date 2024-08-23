@@ -1,0 +1,234 @@
+[
+  {
+    "name": "Mullvad Browser",
+    "engine": "Gecko",
+    "logo": "/images/browser-logos/mullvad.png",
+    "website": "https://mullvad.net/en/browser",
+    "versions": [
+      {
+        "version": "13.5.2",
+        "releaseDate": "2024-01-01",
+        "scores": {
+          "speedometer3": 0,
+          "privacyScore": null,
+          "overallScore": 0
+        }
+      }
+    ]
+  },
+  {
+    "name": "Librewolf",
+    "engine": "Gecko",
+    "logo": "/images/browser-logos/librewolf.svg",
+    "website": "https://librewolf.net/",
+    "versions": [
+      {
+        "version": "129.0.1-1",
+        "releaseDate": "2024-01-01",
+        "scores": {
+          "speedometer3": 5.77,
+          "privacyScore": null,
+          "overallScore": 5.77
+        }
+      },
+      {
+        "version": "128.0-2",
+        "releaseDate": "2024-01-01",
+        "scores": {
+          "speedometer3": 6.06,
+          "privacyScore": null,
+          "overallScore": 6.06
+        }
+      }
+    ]
+  },
+  {
+    "name": "Firefox",
+    "engine": "Gecko",
+    "logo": "/images/browser-logos/firefox.png",
+    "website": "https://www.mozilla.org/firefox/",
+    "versions": [
+      {
+        "version": "129.0.2",
+        "releaseDate": "2024-08-20",
+        "scores": {
+          "speedometer3": 8.75,
+          "privacyScore": null,
+          "overallScore": 8.75
+        }
+      },
+      {
+        "version": "123.0",
+        "releaseDate": "2024-02-20",
+        "scores": {
+          "speedometer3": 8.35,
+          "privacyScore": null,
+          "overallScore": 8.35
+        }
+      }
+    ]
+  },
+  {
+    "name": "Firefox Developer Edition",
+    "engine": "Gecko",
+    "logo": "/images/browser-logos/firefox-dev.png",
+    "website": "https://www.mozilla.org/en-US/firefox/developer/",
+    "versions": [
+      {
+        "version": "130.0b8",
+        "releaseDate": "2024-08-06",
+        "scores": {
+          "speedometer3": 8.73,
+          "privacyScore": null,
+          "overallScore": 8.73
+        }
+      },
+      {
+        "version": "130.0b3",
+        "releaseDate": "2024-08-06",
+        "scores": {
+          "speedometer3": 8.78,
+          "privacyScore": null,
+          "overallScore": 8.78
+        }
+      }
+    ]
+  },
+  {
+    "name": "Firefox Nightly",
+    "engine": "Gecko",
+    "logo": "/images/browser-logos/firefox-beta.png",
+    "website": "https://www.mozilla.org/en-US/firefox/channel/desktop/#nightly",
+    "versions": [
+      {
+        "version": "131.0a1",
+        "releaseDate": "2024-08-05",
+        "scores": {
+          "speedometer3": 8.62,
+          "privacyScore": null,
+          "overallScore": 8.62
+        }
+      },
+      {
+        "version": "130.0b3",
+        "releaseDate": "2024-08-06",
+        "scores": {
+          "speedometer3": 8.78,
+          "privacyScore": null,
+          "overallScore": 8.78
+        }
+      }
+    ]
+  },
+  {
+    "name": "Brave",
+    "engine": "Blink",
+    "logo": "/images/browser-logos/brave.png",
+    "website": "https://brave.com/",
+    "versions": [
+      {
+        "version": "1.69.153",
+        "releaseDate": "2024-08-22",
+        "scores": {
+          "speedometer3": 8.06,
+          "privacyScore": null,
+          "overallScore": 8.06
+        }
+      },
+      {
+        "version": "1.68.141",
+        "releaseDate": "2024-08-14",
+        "scores": {
+          "speedometer3": 8.46,
+          "privacyScore": null,
+          "overallScore": 8.46
+        }
+      }
+    ]
+  },
+  {
+    "name": "Google Chrome",
+    "engine": "Blink",
+    "logo": "/images/browser-logos/chrome.png",
+    "website": "https://www.google.com/chrome/",
+    "versions": [
+      {
+        "version": "128.0.6613.85",
+        "releaseDate": "2024-01-01",
+        "scores": {
+          "speedometer3": 8.43,
+          "privacyScore": null,
+          "overallScore": 8.43
+        }
+      }
+    ]
+  },
+  {
+    "name": "Google Chrome Canary",
+    "engine": "Blink",
+    "logo": "/images/browser-logos/chrome-dev.png",
+    "website": "https://www.google.com/chrome/canary/",
+    "versions": [
+      {
+        "version": "130.0.6673.0",
+        "releaseDate": "2024-01-01",
+        "scores": {
+          "speedometer3": 8.48,
+          "privacyScore": null,
+          "overallScore": 8.48
+        }
+      }
+    ]
+  },
+  {
+    "name": "Orion",
+    "engine": "WebKit",
+    "logo": "/images/browser-logos/orion.png",
+    "website": "https://kagi.com/orion/",
+    "versions": [
+      {
+        "version": "0.99.128.2.1-beta",
+        "releaseDate": "2024-08-03",
+        "scores": {
+          "speedometer3": 7.89,
+          "privacyScore": null,
+          "overallScore": 7.89
+        }
+      }
+    ]
+  },
+  {
+    "name": "Safari",
+    "engine": "WebKit",
+    "logo": "/images/browser-logos/safari.png",
+    "website": "https://www.apple.com/safari/",
+    "versions": [
+      {
+        "version": "17.6",
+        "releaseDate": "2024-07-22",
+        "scores": {
+          "speedometer3": 7.56,
+          "privacyScore": null,
+          "overallScore": 7.56
+        }
+      }
+    ]
+  },
+  {
+    "name": "Microsoft Edge",
+    "engine": "Blink",
+    "logo": "/images/browser-logos/edge.png",
+    "website": "https://www.microsoft.com/edge",
+    "versions": [
+      {
+        "version": "128.0.2739.42",
+        "releaseDate": "2023-06-26",
+        "scores": {
+          "speedometer3": 9.27,
+          "privacyScore": null,
+          "overallScore": 9.27
+        }
+      }
+    ]
+  }
+]
