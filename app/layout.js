@@ -4,7 +4,7 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
-  title: "BrowseRater - macOS Browser Performance",
+  title: "BrowseRating - macOS Browser Performance",
   description:
     "Compare performance of macOS browsers based on Speedometer 3 and privacytests",
 };
