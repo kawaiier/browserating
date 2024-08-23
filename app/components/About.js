@@ -15,7 +15,22 @@ export default function About() {
           2.3 GHz 8-core Intel Core i9 processor
         </span>{" "}
         and <span className="font-medium text-indigo-600">16 GB of RAM</span>,
-        without any extensions enabled.
+        without any extensions enabled.{" "}
+      </p>
+      <p className="text-gray-700 leading-relaxed text-lg font-light pt-2">
+        For each browser,{" "}
+        <span className="font-medium text-indigo-600">
+          five tests were conducted
+        </span>
+        . The{" "}
+        <span className="font-medium text-indigo-600">
+          best and worst results were eliminated
+        </span>
+        , and the{" "}
+        <span className="font-medium text-indigo-600">
+          average of the remaining three tests was calculated
+        </span>{" "}
+        to determine the final result.
       </p>
     </div>
   );
