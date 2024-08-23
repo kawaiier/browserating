@@ -6,9 +6,12 @@ export default function Home() {
   return (
     <>
       <header className="pt-8">
-        <h1 className="text-3xl font-bold mb-6 text-center">
-          macOS Browser Performance Ranking
+        <h1 className="text-4xl font-bold mb-2 text-center text-indigo-600">
+          BrowserRating
         </h1>
+        <h2 className="text-2xl font-semibold mb-6 text-center text-gray-700">
+          macOS Browser Performance Ranking
+        </h2>
       </header>
       <main className="container mx-auto px-4 py-8">
         <About />
