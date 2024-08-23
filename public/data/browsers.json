@@ -1,5 +1,22 @@
 [
   {
+    "name": "Floorp",
+    "engine": "Gecko",
+    "logo": "/images/browser-logos/floorp.png",
+    "website": "https://floorp.app/en",
+    "versions": [
+      {
+        "version": "11.17.6",
+        "releaseDate": "2024-08-01",
+        "scores": {
+          "speedometer3": 12.97,
+          "privacyScore": null,
+          "overallScore": 12.97
+        }
+      }
+    ]
+  },
+  {
     "name": "Mullvad Browser",
     "engine": "Gecko",
     "logo": "/images/browser-logos/mullvad.png",
@@ -9,9 +26,9 @@
         "version": "13.5.2",
         "releaseDate": "2024-01-01",
         "scores": {
-          "speedometer3": 0,
+          "speedometer3": 5.5,
           "privacyScore": null,
-          "overallScore": 0
+          "overallScore": 5.5
         }
       }
     ]
@@ -26,9 +43,9 @@
         "version": "129.0.1-1",
         "releaseDate": "2024-01-01",
         "scores": {
-          "speedometer3": 5.77,
+          "speedometer3": 9.29,
           "privacyScore": null,
-          "overallScore": 5.77
+          "overallScore": 9.29
         }
       },
       {
@@ -52,9 +69,9 @@
         "version": "129.0.2",
         "releaseDate": "2024-08-20",
         "scores": {
-          "speedometer3": 8.75,
+          "speedometer3": 13.07,
           "privacyScore": null,
-          "overallScore": 8.75
+          "overallScore": 13.07
         }
       },
       {
@@ -78,9 +95,9 @@
         "version": "130.0b8",
         "releaseDate": "2024-08-06",
         "scores": {
-          "speedometer3": 8.73,
+          "speedometer3": 13.1,
           "privacyScore": null,
-          "overallScore": 8.73
+          "overallScore": 13.1
         }
       },
       {
@@ -104,9 +121,9 @@
         "version": "131.0a1",
         "releaseDate": "2024-08-05",
         "scores": {
-          "speedometer3": 8.62,
+          "speedometer3": 13.03,
           "privacyScore": null,
-          "overallScore": 8.62
+          "overallScore": 13.03
         }
       },
       {
@@ -130,9 +147,9 @@
         "version": "1.69.153",
         "releaseDate": "2024-08-22",
         "scores": {
-          "speedometer3": 8.06,
+          "speedometer3": 12.2,
           "privacyScore": null,
-          "overallScore": 8.06
+          "overallScore": 12.2
         }
       },
       {
@@ -156,9 +173,9 @@
         "version": "128.0.6613.85",
         "releaseDate": "2024-01-01",
         "scores": {
-          "speedometer3": 8.43,
+          "speedometer3": 12.81,
           "privacyScore": null,
-          "overallScore": 8.43
+          "overallScore": 12.81
         }
       }
     ]
@@ -173,9 +190,9 @@
         "version": "130.0.6673.0",
         "releaseDate": "2024-01-01",
         "scores": {
-          "speedometer3": 8.48,
+          "speedometer3": 12.93,
           "privacyScore": null,
-          "overallScore": 8.48
+          "overallScore": 12.93
         }
       }
     ]
@@ -190,9 +207,9 @@
         "version": "0.99.128.2.1-beta",
         "releaseDate": "2024-08-03",
         "scores": {
-          "speedometer3": 7.89,
+          "speedometer3": 11.08,
           "privacyScore": null,
-          "overallScore": 7.89
+          "overallScore": 11.08
         }
       }
     ]
@@ -207,9 +224,9 @@
         "version": "17.6",
         "releaseDate": "2024-07-22",
         "scores": {
-          "speedometer3": 7.56,
+          "speedometer3": 10.51,
           "privacyScore": null,
-          "overallScore": 7.56
+          "overallScore": 10.51
         }
       }
     ]
@@ -224,9 +241,43 @@
         "version": "128.0.2739.42",
         "releaseDate": "2023-06-26",
         "scores": {
-          "speedometer3": 9.27,
+          "speedometer3": 13.63,
           "privacyScore": null,
-          "overallScore": 9.27
+          "overallScore": 13.63
+        }
+      }
+    ]
+  },
+  {
+    "name": "Opera",
+    "engine": "Blink",
+    "logo": "/images/browser-logos/opera.png",
+    "website": "https://www.opera.com/",
+    "versions": [
+      {
+        "version": "113.0.5230.32",
+        "releaseDate": "2023-01-01",
+        "scores": {
+          "speedometer3": 9.15,
+          "privacyScore": null,
+          "overallScore": 9.15
+        }
+      }
+    ]
+  },
+  {
+    "name": "Vivaldi",
+    "engine": "Blink",
+    "logo": "/images/browser-logos/vivaldi.png",
+    "website": "https://vivaldi.com/",
+    "versions": [
+      {
+        "version": "6.8.3381.55",
+        "releaseDate": "2023-01-01",
+        "scores": {
+          "speedometer3": 13.03,
+          "privacyScore": null,
+          "overallScore": 13.03
         }
       }
     ]
