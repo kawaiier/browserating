@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-export default function BrowserCard({ browser }) {
+export default function BrowserCard({ browser, getEngineColor }) {
   const latestVersion = browser.versions[0]; // Assuming versions are sorted newest first
 
   return (
@@ -29,7 +29,9 @@ export default function BrowserCard({ browser }) {
           <span className="bg-gray-200 text-gray-700 px-2 py-1 rounded-full text-sm mr-2">
             {latestVersion.version}
           </span>
-          <span className="bg-yellow-200 text-yellow-700 px-2 py-1 rounded-full text-sm">
+          <span
+            className={`px-2 py-1 rounded-full text-sm ${getEngineColor(browser.engine)}`}
+          >
             {browser.engine}
           </span>
         </div>
