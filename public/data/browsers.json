@@ -280,6 +280,22 @@
     ]
   },
   {
+    "name": "DuckDuckGo Browser",
+    "engine": "WebKit",
+    "logo": "/images/browser-logos/ddg.jpg",
+    "website": "https://duckduckgo.com/",
+    "versions": [
+      {
+        "version": "1.102.0",
+        "scores": {
+          "speedometer3": 6.89,
+          "privacyScore": null,
+          "overallScore": 6.89
+        }
+      }
+    ]
+  },
+  {
     "name": "Microsoft Edge",
     "engine": "Blink",
     "logo": "/images/browser-logos/edge.png",
