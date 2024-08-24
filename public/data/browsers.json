@@ -7,7 +7,6 @@
     "versions": [
       {
         "version": "11.17.6",
-        "releaseDate": "2024-08-01",
         "scores": {
           "speedometer3": 12.97,
           "privacyScore": null,
@@ -133,6 +132,55 @@
           "speedometer3": 8.78,
           "privacyScore": null,
           "overallScore": 8.78
+        }
+      }
+    ]
+  },
+  {
+    "name": "Waterfox",
+    "engine": "Gecko",
+    "logo": "/images/browser-logos/waterfox.png",
+    "website": "https://www.waterfox.net/",
+    "versions": [
+      {
+        "version": "6.0.18",
+        "scores": {
+          "speedometer3": 8.56,
+          "privacyScore": null,
+          "overallScore": 8.56
+        }
+      }
+    ]
+  },
+  {
+    "name": "Zen Browser",
+    "engine": "Gecko",
+    "logo": "/images/browser-logos/zen.svg",
+    "website": "https://www.zen-browser.app/",
+    "versions": [
+      {
+        "version": "1.0.0-a28",
+        "scores": {
+          "speedometer3": 11.5,
+          "privacyScore": null,
+          "overallScore": 11.5
+        }
+      }
+    ]
+  },
+  {
+    "name": "Tor Browser",
+    "engine": "Gecko",
+    "logo": "/images/browser-logos/tor.png",
+    "website": "https://www.torproject.org/download/",
+    "versions": [
+      {
+        "version": "12.5.2",
+        "releaseDate": "2024-08-05",
+        "scores": {
+          "speedometer3": 5.48,
+          "privacyScore": null,
+          "overallScore": 5.48
         }
       }
     ]
@@ -266,6 +314,22 @@
     ]
   },
   {
+    "name": "Opera GX",
+    "engine": "Blink",
+    "logo": "/images/browser-logos/opera-gx.png",
+    "website": "https://www.opera.com/gx",
+    "versions": [
+      {
+        "version": "112.0.5197.104",
+        "scores": {
+          "speedometer3": 12.27,
+          "privacyScore": null,
+          "overallScore": 12.27
+        }
+      }
+    ]
+  },
+  {
     "name": "Vivaldi",
     "engine": "Blink",
     "logo": "/images/browser-logos/vivaldi.png",
@@ -278,6 +342,54 @@
           "speedometer3": 13.03,
           "privacyScore": null,
           "overallScore": 13.03
+        }
+      }
+    ]
+  },
+  {
+    "name": "Yandex Browser",
+    "engine": "Blink",
+    "logo": "/images/browser-logos/yandex.png",
+    "website": "https://browser.yandex.com/",
+    "versions": [
+      {
+        "version": "24.7.1.1116",
+        "scores": {
+          "speedometer3": 11.07,
+          "privacyScore": null,
+          "overallScore": 11.07
+        }
+      }
+    ]
+  },
+  {
+    "name": "Arc Browser",
+    "engine": "Blink",
+    "logo": "/images/browser-logos/arc.png",
+    "website": "https://arc.net/",
+    "versions": [
+      {
+        "version": "1.57.1",
+        "scores": {
+          "speedometer3": 12.4,
+          "privacyScore": null,
+          "overallScore": 12.4
+        }
+      }
+    ]
+  },
+  {
+    "name": "Sigma OS",
+    "engine": "Blink",
+    "logo": "/images/browser-logos/sigmaos.png",
+    "website": "https://sigmaos.com/",
+    "versions": [
+      {
+        "version": "1.17.0",
+        "scores": {
+          "speedometer3": 4.84,
+          "privacyScore": null,
+          "overallScore": 4.84
         }
       }
     ]
