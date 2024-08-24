@@ -84,11 +84,12 @@ export default function BrowserRankingList() {
         ))}
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-6">
-        {filteredBrowsers.map((browser) => (
+        {filteredBrowsers.map((browser, index) => (
           <BrowserCard
             key={browser.name}
             browser={browser}
             getEngineColor={getEngineColor}
+            rank={index + 1}
           />
         ))}
       </div>

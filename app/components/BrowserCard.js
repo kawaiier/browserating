@@ -1,10 +1,25 @@
 import Image from "next/image";
 
-export default function BrowserCard({ browser, getEngineColor }) {
-  const latestVersion = browser.versions[0]; // Assuming versions are sorted newest first
+export default function BrowserCard({ browser, getEngineColor, rank }) {
+  const latestVersion = browser.versions[0];
+
+  const getRankStyle = (rank) => {
+    switch (rank) {
+      case 1:
+        return "ring-4 ring-yellow-400"; // Gold
+      case 2:
+        return "ring-4 ring-gray-300"; // Silver
+      case 3:
+        return "ring-4 ring-amber-600"; // Bronze
+      default:
+        return "";
+    }
+  };
 
   return (
-    <div className="bg-white shadow-lg rounded-lg overflow-hidden max-w-sm">
+    <div
+      className={`bg-white shadow-lg rounded-lg overflow-hidden max-w-sm ${getRankStyle(rank)}`}
+    >
       <div className="p-4">
         <div className="flex items-center mb-4">
           <Image
