@@ -439,7 +439,7 @@
   },
   {
     "name": "Sigma OS",
-    "engine": "Blink",
+    "engine": "WebKit",
     "logo": "/images/browser-logos/sigmaos.png",
     "website": "https://sigmaos.com/",
     "versions": [
