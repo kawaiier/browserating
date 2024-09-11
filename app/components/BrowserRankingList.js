@@ -68,7 +68,7 @@ export default function BrowserRankingList() {
 
   return (
     <div>
-      <div className="mb-4 flex flex-wrap gap-2">
+      <div className="mb-4 flex flex-wrap gap-2 mt-6">
         {engines.map((engine) => (
           <button
             key={engine}
