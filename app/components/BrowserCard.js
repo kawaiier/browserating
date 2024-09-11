@@ -3,6 +3,12 @@ import Image from "next/image";
 export default function BrowserCard({ browser, getEngineColor, rank }) {
   const latestVersion = browser.versions[0];
 
+  // Get previous version's speedometer3 score
+  const prevSpeedometer3Score =
+    browser.versions.length > 1
+      ? browser.versions[1].scores.speedometer3
+      : null;
+
   const getRankStyle = (rank) => {
     switch (rank) {
       case 1:
@@ -52,7 +58,15 @@ export default function BrowserCard({ browser, getEngineColor, rank }) {
         </div>
         <div className="space-y-2">
           <p className="text-2xl font-bold text-center mt-4">
-            {latestVersion.scores.overallScore.toFixed(2)}
+            {latestVersion.scores.speedometer3.toFixed(2)}
+          </p>
+          <p
+            title={browser.versions[1]?.version}
+            className={`text-xs text-gray-600 text-center ${prevSpeedometer3Score ? "" : "opacity-50"}`}
+          >
+            Previous Version:{" "}
+            {(prevSpeedometer3Score && prevSpeedometer3Score.toFixed(2)) ||
+              "N/A"}
           </p>
         </div>
       </div>

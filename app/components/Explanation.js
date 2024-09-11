@@ -68,8 +68,7 @@ export default function Explanation() {
       </p>
 
       <p className="text-sm text-gray-600 mt-8">
-        Last updated: <time dateTime="2023-08-23">August 23, 2023</time> | Next
-        update scheduled: September 23, 2023
+        Last updated: <time dateTime="2024-09-11">September 11, 2024</time>
       </p>
     </section>
   );

@@ -6,11 +6,15 @@
     "website": "https://floorp.app/en",
     "versions": [
       {
+        "version": "11.18.1",
+        "scores": {
+          "speedometer3": 13.4
+        }
+      },
+      {
         "version": "11.17.6",
         "scores": {
-          "speedometer3": 12.97,
-          "privacyScore": null,
-          "overallScore": 12.97
+          "speedometer3": 12.97
         }
       }
     ]
@@ -22,12 +26,15 @@
     "website": "https://mullvad.net/en/browser",
     "versions": [
       {
-        "version": "13.5.2",
-        "releaseDate": "2024-01-01",
+        "version": "13.5.3",
         "scores": {
-          "speedometer3": 5.5,
-          "privacyScore": null,
-          "overallScore": 5.5
+          "speedometer3": 5.48
+        }
+      },
+      {
+        "version": "13.5.2",
+        "scores": {
+          "speedometer3": 5.5
         }
       }
     ]
@@ -39,21 +46,21 @@
     "website": "https://librewolf.net/",
     "versions": [
       {
-        "version": "129.0.1-1",
-        "releaseDate": "2024-01-01",
+        "version": "130.0-3",
         "scores": {
-          "speedometer3": 9.29,
-          "privacyScore": null,
-          "overallScore": 9.29
+          "speedometer3": 9.33
+        }
+      },
+      {
+        "version": "129.0.1-1",
+        "scores": {
+          "speedometer3": 9.29
         }
       },
       {
         "version": "128.0-2",
-        "releaseDate": "2024-01-01",
         "scores": {
-          "speedometer3": 6.06,
-          "privacyScore": null,
-          "overallScore": 6.06
+          "speedometer3": 6.06
         }
       }
     ]
@@ -65,21 +72,21 @@
     "website": "https://www.mozilla.org/firefox/",
     "versions": [
       {
-        "version": "129.0.2",
-        "releaseDate": "2024-08-20",
+        "version": "130.0",
         "scores": {
-          "speedometer3": 13.07,
-          "privacyScore": null,
-          "overallScore": 13.07
+          "speedometer3": 13.47
+        }
+      },
+      {
+        "version": "129.0.2",
+        "scores": {
+          "speedometer3": 13.07
         }
       },
       {
         "version": "123.0",
-        "releaseDate": "2024-02-20",
         "scores": {
-          "speedometer3": 8.35,
-          "privacyScore": null,
-          "overallScore": 8.35
+          "speedometer3": 8.35
         }
       }
     ]
@@ -91,21 +98,21 @@
     "website": "https://www.mozilla.org/en-US/firefox/developer/",
     "versions": [
       {
-        "version": "130.0b8",
-        "releaseDate": "2024-08-06",
+        "version": "131.0b4",
         "scores": {
-          "speedometer3": 13.1,
-          "privacyScore": null,
-          "overallScore": 13.1
+          "speedometer3": 13.37
+        }
+      },
+      {
+        "version": "130.0b8",
+        "scores": {
+          "speedometer3": 13.1
         }
       },
       {
         "version": "130.0b3",
-        "releaseDate": "2024-08-06",
         "scores": {
-          "speedometer3": 8.78,
-          "privacyScore": null,
-          "overallScore": 8.78
+          "speedometer3": 8.78
         }
       }
     ]
@@ -117,21 +124,21 @@
     "website": "https://www.mozilla.org/en-US/firefox/channel/desktop/#nightly",
     "versions": [
       {
-        "version": "131.0a1",
-        "releaseDate": "2024-08-05",
+        "version": "132.0a1",
         "scores": {
-          "speedometer3": 13.03,
-          "privacyScore": null,
-          "overallScore": 13.03
+          "speedometer3": 13.07
+        }
+      },
+      {
+        "version": "131.0a1",
+        "scores": {
+          "speedometer3": 13.03
         }
       },
       {
         "version": "130.0b3",
-        "releaseDate": "2024-08-06",
         "scores": {
-          "speedometer3": 8.78,
-          "privacyScore": null,
-          "overallScore": 8.78
+          "speedometer3": 8.78
         }
       }
     ]
@@ -143,11 +150,15 @@
     "website": "https://www.waterfox.net/",
     "versions": [
       {
+        "version": "6.0.19",
+        "scores": {
+          "speedometer3": 8.59
+        }
+      },
+      {
         "version": "6.0.18",
         "scores": {
-          "speedometer3": 8.56,
-          "privacyScore": null,
-          "overallScore": 8.56
+          "speedometer3": 8.56
         }
       }
     ]
@@ -159,11 +170,15 @@
     "website": "https://www.zen-browser.app/",
     "versions": [
       {
+        "version": "1.0.0-a39",
+        "scores": {
+          "speedometer3": 11.87
+        }
+      },
+      {
         "version": "1.0.0-a28",
         "scores": {
-          "speedometer3": 11.5,
-          "privacyScore": null,
-          "overallScore": 11.5
+          "speedometer3": 11.5
         }
       }
     ]
@@ -175,12 +190,15 @@
     "website": "https://www.torproject.org/download/",
     "versions": [
       {
-        "version": "12.5.2",
-        "releaseDate": "2024-08-05",
+        "version": "13.5.3",
         "scores": {
-          "speedometer3": 5.48,
-          "privacyScore": null,
-          "overallScore": 5.48
+          "speedometer3": 5.43
+        }
+      },
+      {
+        "version": "12.5.2",
+        "scores": {
+          "speedometer3": 5.48
         }
       }
     ]
@@ -192,21 +210,21 @@
     "website": "https://brave.com/",
     "versions": [
       {
-        "version": "1.69.153",
-        "releaseDate": "2024-08-22",
+        "version": "1.69.162",
         "scores": {
-          "speedometer3": 12.2,
-          "privacyScore": null,
-          "overallScore": 12.2
+          "speedometer3": 12.27
+        }
+      },
+      {
+        "version": "1.69.153",
+        "scores": {
+          "speedometer3": 12.2
         }
       },
       {
         "version": "1.68.141",
-        "releaseDate": "2024-08-14",
         "scores": {
-          "speedometer3": 8.46,
-          "privacyScore": null,
-          "overallScore": 8.46
+          "speedometer3": 8.46
         }
       }
     ]
@@ -218,12 +236,15 @@
     "website": "https://www.google.com/chrome/",
     "versions": [
       {
-        "version": "128.0.6613.85",
-        "releaseDate": "2024-01-01",
+        "version": "128.0.6613.121",
         "scores": {
-          "speedometer3": 12.81,
-          "privacyScore": null,
-          "overallScore": 12.81
+          "speedometer3": 13.23
+        }
+      },
+      {
+        "version": "128.0.6613.85",
+        "scores": {
+          "speedometer3": 12.81
         }
       }
     ]
@@ -235,12 +256,15 @@
     "website": "https://www.google.com/chrome/canary/",
     "versions": [
       {
-        "version": "130.0.6673.0",
-        "releaseDate": "2024-01-01",
+        "version": "130.0.6710.0",
         "scores": {
-          "speedometer3": 12.93,
-          "privacyScore": null,
-          "overallScore": 12.93
+          "speedometer3": 14.37
+        }
+      },
+      {
+        "version": "130.0.6673.0",
+        "scores": {
+          "speedometer3": 12.93
         }
       }
     ]
@@ -253,11 +277,8 @@
     "versions": [
       {
         "version": "0.99.128.2.1-beta",
-        "releaseDate": "2024-08-03",
         "scores": {
-          "speedometer3": 11.08,
-          "privacyScore": null,
-          "overallScore": 11.08
+          "speedometer3": 11.08
         }
       }
     ]
@@ -270,11 +291,8 @@
     "versions": [
       {
         "version": "17.6",
-        "releaseDate": "2024-07-22",
         "scores": {
-          "speedometer3": 10.51,
-          "privacyScore": null,
-          "overallScore": 10.51
+          "speedometer3": 10.51
         }
       }
     ]
@@ -286,11 +304,15 @@
     "website": "https://duckduckgo.com/",
     "versions": [
       {
+        "version": "1.105.0",
+        "scores": {
+          "speedometer3": 6.53
+        }
+      },
+      {
         "version": "1.102.0",
         "scores": {
-          "speedometer3": 6.89,
-          "privacyScore": null,
-          "overallScore": 6.89
+          "speedometer3": 6.89
         }
       }
     ]
@@ -302,12 +324,15 @@
     "website": "https://www.microsoft.com/edge",
     "versions": [
       {
-        "version": "128.0.2739.42",
-        "releaseDate": "2023-06-26",
+        "version": "128.0.2739.67",
         "scores": {
-          "speedometer3": 13.63,
-          "privacyScore": null,
-          "overallScore": 13.63
+          "speedometer3": 13.9
+        }
+      },
+      {
+        "version": "128.0.2739.42",
+        "scores": {
+          "speedometer3": 13.63
         }
       }
     ]
@@ -319,12 +344,15 @@
     "website": "https://www.opera.com/",
     "versions": [
       {
-        "version": "113.0.5230.32",
-        "releaseDate": "2023-01-01",
+        "version": "113.0.5230.86",
         "scores": {
-          "speedometer3": 9.15,
-          "privacyScore": null,
-          "overallScore": 9.15
+          "speedometer3": 9.38
+        }
+      },
+      {
+        "version": "113.0.5230.32",
+        "scores": {
+          "speedometer3": 9.15
         }
       }
     ]
@@ -336,11 +364,15 @@
     "website": "https://www.opera.com/gx",
     "versions": [
       {
+        "version": "113.0.5230.75",
+        "scores": {
+          "speedometer3": 13.03
+        }
+      },
+      {
         "version": "112.0.5197.104",
         "scores": {
-          "speedometer3": 12.27,
-          "privacyScore": null,
-          "overallScore": 12.27
+          "speedometer3": 12.27
         }
       }
     ]
@@ -352,12 +384,15 @@
     "website": "https://vivaldi.com/",
     "versions": [
       {
-        "version": "6.8.3381.55",
-        "releaseDate": "2023-01-01",
+        "version": "6.9.3447.44",
         "scores": {
-          "speedometer3": 13.03,
-          "privacyScore": null,
-          "overallScore": 13.03
+          "speedometer3": 12.47
+        }
+      },
+      {
+        "version": "6.8.3381.55",
+        "scores": {
+          "speedometer3": 13.03
         }
       }
     ]
@@ -369,11 +404,15 @@
     "website": "https://browser.yandex.com/",
     "versions": [
       {
+        "version": "24.7.1.1144",
+        "scores": {
+          "speedometer3": 10.97
+        }
+      },
+      {
         "version": "24.7.1.1116",
         "scores": {
-          "speedometer3": 11.07,
-          "privacyScore": null,
-          "overallScore": 11.07
+          "speedometer3": 11.07
         }
       }
     ]
@@ -385,11 +424,15 @@
     "website": "https://arc.net/",
     "versions": [
       {
+        "version": "1.59.0",
+        "scores": {
+          "speedometer3": 12.4
+        }
+      },
+      {
         "version": "1.57.1",
         "scores": {
-          "speedometer3": 12.4,
-          "privacyScore": null,
-          "overallScore": 12.4
+          "speedometer3": 12.4
         }
       }
     ]
@@ -401,11 +444,15 @@
     "website": "https://sigmaos.com/",
     "versions": [
       {
+        "version": "1.17.0.6",
+        "scores": {
+          "speedometer3": 4.74
+        }
+      },
+      {
         "version": "1.17.0",
         "scores": {
-          "speedometer3": 4.84,
-          "privacyScore": null,
-          "overallScore": 4.84
+          "speedometer3": 4.84
         }
       }
     ]

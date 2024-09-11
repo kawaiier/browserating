@@ -28,8 +28,8 @@ export default function BrowserRankingList() {
         const data = await getBrowsers();
         const sortedBrowsers = data.sort(
           (a, b) =>
-            b.versions[0].scores.overallScore -
-            a.versions[0].scores.overallScore,
+            b.versions[0].scores.speedometer3 -
+            a.versions[0].scores.speedometer3,
         );
         setBrowsers(sortedBrowsers);
         setFilteredBrowsers(sortedBrowsers);
