@@ -76,8 +76,8 @@ export default function BrowserRankingList() {
   if (error) return <p>{error}</p>;
 
   return (
-    <div>
-      <div className="flex space-x-2">
+    <div className="p-6">
+      <div className="mb-4 flex flex-wrap gap-2">
         {engines.map((engine) => (
           <button
             key={engine}
@@ -93,7 +93,7 @@ export default function BrowserRankingList() {
         ))}
       </div>
 
-      <div className="flex space-x-2 mt-4">
+      <div className="mb-4 flex flex-wrap gap-2">
         {platforms.map((platform) => (
           <button
             key={platform}
@@ -109,7 +109,7 @@ export default function BrowserRankingList() {
         ))}
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {filteredBrowsers.map((browser, index) => (
           <BrowserCard
             key={browser.name}
