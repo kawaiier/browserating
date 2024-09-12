@@ -1,12 +1,21 @@
 import Image from "next/image";
 
-export default function BrowserCard({ browser, getEngineColor, rank }) {
-  const latestVersion = browser.versions[0];
+export default function BrowserCard({
+  browser,
+  getEngineColor,
+  rank,
+  selectedPlatform,
+}) {
+  // Find platform data based on the selected platform
+  const platformData = browser.platforms.find(
+    (platform) => platform.name === selectedPlatform,
+  );
+  if (!platformData) return null;
 
-  // Get previous version's speedometer3 score
+  const latestVersion = platformData.versions[0];
   const prevSpeedometer3Score =
-    browser.versions.length > 1
-      ? browser.versions[1].scores.speedometer3
+    platformData.versions.length > 1
+      ? platformData.versions[1].scores.speedometer3
       : null;
 
   const getRankStyle = (rank) => {
@@ -61,7 +70,7 @@ export default function BrowserCard({ browser, getEngineColor, rank }) {
             {latestVersion.scores.speedometer3.toFixed(2)}
           </p>
           <p
-            title={browser.versions[1]?.version}
+            title={platformData.versions[1]?.version}
             className={`text-xs text-gray-600 text-center ${prevSpeedometer3Score ? "" : "opacity-50"}`}
           >
             Previous Version:{" "}
