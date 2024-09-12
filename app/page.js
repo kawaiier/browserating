@@ -7,7 +7,7 @@ export default function Home() {
     <>
       <header className="pt-8">
         <h1 className="text-4xl font-bold mb-2 text-center text-indigo-600">
-          BrowserRating
+          Browserating
         </h1>
         <h2 className="text-2xl font-semibold mb-6 text-center text-gray-700">
           macOS Browser Performance Ranking

@@ -6,9 +6,9 @@ export default function Explanation() {
       </h2>
 
       <p className="mb-4">
-        At BrowseRater, we provide comprehensive{" "}
+        Browserating provides comprehensive{" "}
         <strong>macOS browser performance rankings</strong> to help you make
-        informed decisions about your web browsing experience. Our rankings are
+        informed decisions about your web browsing experience. The rankings are
         currently based on <em>Speedometer 3 benchmark results</em>, a key
         indicator of browser speed and responsiveness.
       </p>
