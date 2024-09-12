@@ -28,7 +28,7 @@
           {
             "version": "11.18.1",
             "scores": {
-              "speedometer3": 0.0
+              "speedometer3": 15.56
             }
           }
         ]
@@ -64,7 +64,7 @@
           {
             "version": "13.5.3",
             "scores": {
-              "speedometer3": 0.0
+              "speedometer3": 6.54
             }
           }
         ]
@@ -121,7 +121,6 @@
     "platforms": [
       {
         "name": "macOS",
-
         "versions": [
           {
             "version": "130.0",
@@ -149,7 +148,7 @@
           {
             "version": "130.0",
             "scores": {
-              "speedometer3": 0.0
+              "speedometer3": 16.33
             }
           }
         ]
@@ -191,7 +190,7 @@
           {
             "version": "131.0b4",
             "scores": {
-              "speedometer3": 0.0
+              "speedometer3": 16.13
             }
           }
         ]
@@ -234,7 +233,7 @@
           {
             "version": "132.0a1",
             "scores": {
-              "speedometer3": 0.0
+              "speedometer3": 16.03
             }
           }
         ]
@@ -271,7 +270,7 @@
           {
             "version": "6.0.19",
             "scores": {
-              "speedometer3": 0.0
+              "speedometer3": 10.2
             }
           }
         ]
@@ -308,7 +307,7 @@
           {
             "version": "1.0.0-a39",
             "scores": {
-              "speedometer3": 0.0
+              "speedometer3": 14.83
             }
           }
         ]
@@ -345,7 +344,7 @@
           {
             "version": "13.5.3",
             "scores": {
-              "speedometer3": 0.0
+              "speedometer3": 6.47
             }
           }
         ]
@@ -388,7 +387,7 @@
           {
             "version": "1.69.162",
             "scores": {
-              "speedometer3": 0.0
+              "speedometer3": 16.83
             }
           }
         ]
@@ -425,7 +424,7 @@
           {
             "version": "128.0.6613.121",
             "scores": {
-              "speedometer3": 0.0
+              "speedometer3": 18.57
             }
           }
         ]
@@ -462,7 +461,7 @@
           {
             "version": "130.0.6710.0",
             "scores": {
-              "speedometer3": 0.0
+              "speedometer3": 18.03
             }
           }
         ]
@@ -561,7 +560,7 @@
           {
             "version": "1.105.0",
             "scores": {
-              "speedometer3": 0.0
+              "speedometer3": 17.07
             }
           }
         ]
@@ -598,7 +597,7 @@
           {
             "version": "128.0.2739.67",
             "scores": {
-              "speedometer3": 0.0
+              "speedometer3": 17.4
             }
           }
         ]
@@ -635,7 +634,7 @@
           {
             "version": "113.0.5230.86",
             "scores": {
-              "speedometer3": 0.0
+              "speedometer3": 17.8
             }
           }
         ]
@@ -672,7 +671,7 @@
           {
             "version": "113.0.5230.75",
             "scores": {
-              "speedometer3": 0.0
+              "speedometer3": 17.53
             }
           }
         ]
@@ -709,7 +708,7 @@
           {
             "version": "6.9.3447.44",
             "scores": {
-              "speedometer3": 0.0
+              "speedometer3": 17.87
             }
           }
         ]
@@ -747,7 +746,7 @@
           {
             "version": "24.7.1.1144",
             "scores": {
-              "speedometer3": 0.0
+              "speedometer3": 17.6
             }
           }
         ]
@@ -784,7 +783,7 @@
           {
             "version": "1.59.0",
             "scores": {
-              "speedometer3": 0.0
+              "speedometer3": 17.23
             }
           }
         ]
