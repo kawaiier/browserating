@@ -53,6 +53,12 @@ export default function About() {
         </span>{" "}
         to determine the final result.
       </p>
+      <hr className="border-gray-200 my-4" />
+      <p className="text-gray-700 leading-relaxed text-lg font-light pt-2">
+        <span className="font-bold text-indigo-600">
+          The higher the score, the faster the browser.
+        </span>
+      </p>
     </div>
   );
 }
