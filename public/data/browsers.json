@@ -4,18 +4,34 @@
     "engine": "Gecko",
     "logo": "/images/browser-logos/floorp.png",
     "website": "https://floorp.app/en",
-    "versions": [
+    "platforms": [
       {
-        "version": "11.18.1",
-        "scores": {
-          "speedometer3": 13.4
-        }
+        "name": "macOS",
+        "versions": [
+          {
+            "version": "11.18.1",
+            "scores": {
+              "speedometer3": 13.4
+            }
+          },
+          {
+            "version": "11.17.6",
+            "scores": {
+              "speedometer3": 12.97
+            }
+          }
+        ]
       },
       {
-        "version": "11.17.6",
-        "scores": {
-          "speedometer3": 12.97
-        }
+        "name": "Windows",
+        "versions": [
+          {
+            "version": "11.18.1",
+            "scores": {
+              "speedometer3": 0.0
+            }
+          }
+        ]
       }
     ]
   },
@@ -24,18 +40,34 @@
     "engine": "Gecko",
     "logo": "/images/browser-logos/mullvad.png",
     "website": "https://mullvad.net/en/browser",
-    "versions": [
+    "platforms": [
       {
-        "version": "13.5.3",
-        "scores": {
-          "speedometer3": 5.48
-        }
+        "name": "macOS",
+        "versions": [
+          {
+            "version": "13.5.3",
+            "scores": {
+              "speedometer3": 5.48
+            }
+          },
+          {
+            "version": "13.5.2",
+            "scores": {
+              "speedometer3": 5.5
+            }
+          }
+        ]
       },
       {
-        "version": "13.5.2",
-        "scores": {
-          "speedometer3": 5.5
-        }
+        "name": "Windows",
+        "versions": [
+          {
+            "version": "13.5.3",
+            "scores": {
+              "speedometer3": 0.0
+            }
+          }
+        ]
       }
     ]
   },
@@ -44,24 +76,40 @@
     "engine": "Gecko",
     "logo": "/images/browser-logos/librewolf.svg",
     "website": "https://librewolf.net/",
-    "versions": [
+    "platforms": [
       {
-        "version": "130.0-3",
-        "scores": {
-          "speedometer3": 9.33
-        }
+        "name": "macOS",
+        "versions": [
+          {
+            "version": "130.0-3",
+            "scores": {
+              "speedometer3": 9.33
+            }
+          },
+          {
+            "version": "129.0.1-1",
+            "scores": {
+              "speedometer3": 9.29
+            }
+          },
+          {
+            "version": "128.0-2",
+            "scores": {
+              "speedometer3": 6.06
+            }
+          }
+        ]
       },
       {
-        "version": "129.0.1-1",
-        "scores": {
-          "speedometer3": 9.29
-        }
-      },
-      {
-        "version": "128.0-2",
-        "scores": {
-          "speedometer3": 6.06
-        }
+        "name": "Windows",
+        "versions": [
+          {
+            "version": "130.0-3",
+            "scores": {
+              "speedometer3": 11.03
+            }
+          }
+        ]
       }
     ]
   },
@@ -70,24 +118,41 @@
     "engine": "Gecko",
     "logo": "/images/browser-logos/firefox.png",
     "website": "https://www.mozilla.org/firefox/",
-    "versions": [
+    "platforms": [
       {
-        "version": "130.0",
-        "scores": {
-          "speedometer3": 13.47
-        }
+        "name": "macOS",
+
+        "versions": [
+          {
+            "version": "130.0",
+            "scores": {
+              "speedometer3": 13.47
+            }
+          },
+          {
+            "version": "129.0.2",
+            "scores": {
+              "speedometer3": 13.07
+            }
+          },
+          {
+            "version": "123.0",
+            "scores": {
+              "speedometer3": 8.35
+            }
+          }
+        ]
       },
       {
-        "version": "129.0.2",
-        "scores": {
-          "speedometer3": 13.07
-        }
-      },
-      {
-        "version": "123.0",
-        "scores": {
-          "speedometer3": 8.35
-        }
+        "name": "Windows",
+        "versions": [
+          {
+            "version": "130.0",
+            "scores": {
+              "speedometer3": 0.0
+            }
+          }
+        ]
       }
     ]
   },
@@ -96,24 +161,40 @@
     "engine": "Gecko",
     "logo": "/images/browser-logos/firefox-dev.png",
     "website": "https://www.mozilla.org/en-US/firefox/developer/",
-    "versions": [
+    "platforms": [
       {
-        "version": "131.0b4",
-        "scores": {
-          "speedometer3": 13.37
-        }
+        "name": "macOS",
+        "versions": [
+          {
+            "version": "131.0b4",
+            "scores": {
+              "speedometer3": 13.37
+            }
+          },
+          {
+            "version": "130.0b8",
+            "scores": {
+              "speedometer3": 13.1
+            }
+          },
+          {
+            "version": "130.0b3",
+            "scores": {
+              "speedometer3": 8.78
+            }
+          }
+        ]
       },
       {
-        "version": "130.0b8",
-        "scores": {
-          "speedometer3": 13.1
-        }
-      },
-      {
-        "version": "130.0b3",
-        "scores": {
-          "speedometer3": 8.78
-        }
+        "name": "Windows",
+        "versions": [
+          {
+            "version": "131.0b4",
+            "scores": {
+              "speedometer3": 0.0
+            }
+          }
+        ]
       }
     ]
   },
@@ -122,24 +203,41 @@
     "engine": "Gecko",
     "logo": "/images/browser-logos/firefox-beta.png",
     "website": "https://www.mozilla.org/en-US/firefox/channel/desktop/#nightly",
-    "versions": [
+    "platforms": [
       {
-        "version": "132.0a1",
-        "scores": {
-          "speedometer3": 13.07
-        }
+        "name": "macOS",
+
+        "versions": [
+          {
+            "version": "132.0a1",
+            "scores": {
+              "speedometer3": 13.07
+            }
+          },
+          {
+            "version": "131.0a1",
+            "scores": {
+              "speedometer3": 13.03
+            }
+          },
+          {
+            "version": "130.0b3",
+            "scores": {
+              "speedometer3": 8.78
+            }
+          }
+        ]
       },
       {
-        "version": "131.0a1",
-        "scores": {
-          "speedometer3": 13.03
-        }
-      },
-      {
-        "version": "130.0b3",
-        "scores": {
-          "speedometer3": 8.78
-        }
+        "name": "Windows",
+        "versions": [
+          {
+            "version": "132.0a1",
+            "scores": {
+              "speedometer3": 0.0
+            }
+          }
+        ]
       }
     ]
   },
@@ -148,18 +246,35 @@
     "engine": "Gecko",
     "logo": "/images/browser-logos/waterfox.png",
     "website": "https://www.waterfox.net/",
-    "versions": [
+    "platforms": [
       {
-        "version": "6.0.19",
-        "scores": {
-          "speedometer3": 8.59
-        }
+        "name": "macOS",
+
+        "versions": [
+          {
+            "version": "6.0.19",
+            "scores": {
+              "speedometer3": 8.59
+            }
+          },
+          {
+            "version": "6.0.18",
+            "scores": {
+              "speedometer3": 8.56
+            }
+          }
+        ]
       },
       {
-        "version": "6.0.18",
-        "scores": {
-          "speedometer3": 8.56
-        }
+        "name": "Windows",
+        "versions": [
+          {
+            "version": "6.0.19",
+            "scores": {
+              "speedometer3": 0.0
+            }
+          }
+        ]
       }
     ]
   },
@@ -168,18 +283,35 @@
     "engine": "Gecko",
     "logo": "/images/browser-logos/zen.svg",
     "website": "https://www.zen-browser.app/",
-    "versions": [
+    "platforms": [
       {
-        "version": "1.0.0-a39",
-        "scores": {
-          "speedometer3": 11.87
-        }
+        "name": "macOS",
+
+        "versions": [
+          {
+            "version": "1.0.0-a39",
+            "scores": {
+              "speedometer3": 11.87
+            }
+          },
+          {
+            "version": "1.0.0-a28",
+            "scores": {
+              "speedometer3": 11.5
+            }
+          }
+        ]
       },
       {
-        "version": "1.0.0-a28",
-        "scores": {
-          "speedometer3": 11.5
-        }
+        "name": "Windows",
+        "versions": [
+          {
+            "version": "1.0.0-a39",
+            "scores": {
+              "speedometer3": 0.0
+            }
+          }
+        ]
       }
     ]
   },
@@ -188,18 +320,35 @@
     "engine": "Gecko",
     "logo": "/images/browser-logos/tor.png",
     "website": "https://www.torproject.org/download/",
-    "versions": [
+    "platforms": [
       {
-        "version": "13.5.3",
-        "scores": {
-          "speedometer3": 5.43
-        }
+        "name": "macOS",
+
+        "versions": [
+          {
+            "version": "13.5.3",
+            "scores": {
+              "speedometer3": 5.43
+            }
+          },
+          {
+            "version": "12.5.2",
+            "scores": {
+              "speedometer3": 5.48
+            }
+          }
+        ]
       },
       {
-        "version": "12.5.2",
-        "scores": {
-          "speedometer3": 5.48
-        }
+        "name": "Windows",
+        "versions": [
+          {
+            "version": "13.5.3",
+            "scores": {
+              "speedometer3": 0.0
+            }
+          }
+        ]
       }
     ]
   },
@@ -208,24 +357,41 @@
     "engine": "Blink",
     "logo": "/images/browser-logos/brave.png",
     "website": "https://brave.com/",
-    "versions": [
+    "platforms": [
       {
-        "version": "1.69.162",
-        "scores": {
-          "speedometer3": 12.27
-        }
+        "name": "macOS",
+
+        "versions": [
+          {
+            "version": "1.69.162",
+            "scores": {
+              "speedometer3": 12.27
+            }
+          },
+          {
+            "version": "1.69.153",
+            "scores": {
+              "speedometer3": 12.2
+            }
+          },
+          {
+            "version": "1.68.141",
+            "scores": {
+              "speedometer3": 8.46
+            }
+          }
+        ]
       },
       {
-        "version": "1.69.153",
-        "scores": {
-          "speedometer3": 12.2
-        }
-      },
-      {
-        "version": "1.68.141",
-        "scores": {
-          "speedometer3": 8.46
-        }
+        "name": "Windows",
+        "versions": [
+          {
+            "version": "1.69.162",
+            "scores": {
+              "speedometer3": 0.0
+            }
+          }
+        ]
       }
     ]
   },
@@ -234,18 +400,35 @@
     "engine": "Blink",
     "logo": "/images/browser-logos/chrome.png",
     "website": "https://www.google.com/chrome/",
-    "versions": [
+    "platforms": [
       {
-        "version": "128.0.6613.121",
-        "scores": {
-          "speedometer3": 13.23
-        }
+        "name": "macOS",
+
+        "versions": [
+          {
+            "version": "128.0.6613.121",
+            "scores": {
+              "speedometer3": 13.23
+            }
+          },
+          {
+            "version": "128.0.6613.85",
+            "scores": {
+              "speedometer3": 12.81
+            }
+          }
+        ]
       },
       {
-        "version": "128.0.6613.85",
-        "scores": {
-          "speedometer3": 12.81
-        }
+        "name": "Windows",
+        "versions": [
+          {
+            "version": "128.0.6613.121",
+            "scores": {
+              "speedometer3": 0.0
+            }
+          }
+        ]
       }
     ]
   },
@@ -254,18 +437,35 @@
     "engine": "Blink",
     "logo": "/images/browser-logos/chrome-dev.png",
     "website": "https://www.google.com/chrome/canary/",
-    "versions": [
+    "platforms": [
       {
-        "version": "130.0.6710.0",
-        "scores": {
-          "speedometer3": 14.37
-        }
+        "name": "macOS",
+
+        "versions": [
+          {
+            "version": "130.0.6710.0",
+            "scores": {
+              "speedometer3": 14.37
+            }
+          },
+          {
+            "version": "130.0.6673.0",
+            "scores": {
+              "speedometer3": 12.93
+            }
+          }
+        ]
       },
       {
-        "version": "130.0.6673.0",
-        "scores": {
-          "speedometer3": 12.93
-        }
+        "name": "Windows",
+        "versions": [
+          {
+            "version": "130.0.6710.0",
+            "scores": {
+              "speedometer3": 0.0
+            }
+          }
+        ]
       }
     ]
   },
@@ -274,12 +474,29 @@
     "engine": "WebKit",
     "logo": "/images/browser-logos/orion.png",
     "website": "https://kagi.com/orion/",
-    "versions": [
+    "platforms": [
       {
-        "version": "0.99.128.2.1-beta",
-        "scores": {
-          "speedometer3": 11.08
-        }
+        "name": "macOS",
+
+        "versions": [
+          {
+            "version": "0.99.128.2.1-beta",
+            "scores": {
+              "speedometer3": 11.08
+            }
+          }
+        ]
+      },
+      {
+        "name": "Windows",
+        "versions": [
+          {
+            "version": "0.99.128.2.1-beta",
+            "scores": {
+              "speedometer3": 0.0
+            }
+          }
+        ]
       }
     ]
   },
@@ -288,12 +505,29 @@
     "engine": "WebKit",
     "logo": "/images/browser-logos/safari.png",
     "website": "https://www.apple.com/safari/",
-    "versions": [
+    "platforms": [
       {
-        "version": "17.6",
-        "scores": {
-          "speedometer3": 10.51
-        }
+        "name": "macOS",
+
+        "versions": [
+          {
+            "version": "17.6",
+            "scores": {
+              "speedometer3": 10.51
+            }
+          }
+        ]
+      },
+      {
+        "name": "Windows",
+        "versions": [
+          {
+            "version": "17.6",
+            "scores": {
+              "speedometer3": 0.0
+            }
+          }
+        ]
       }
     ]
   },
@@ -302,18 +536,35 @@
     "engine": "WebKit",
     "logo": "/images/browser-logos/ddg.jpg",
     "website": "https://duckduckgo.com/",
-    "versions": [
+    "platforms": [
       {
-        "version": "1.105.0",
-        "scores": {
-          "speedometer3": 6.53
-        }
+        "name": "macOS",
+
+        "versions": [
+          {
+            "version": "1.105.0",
+            "scores": {
+              "speedometer3": 6.53
+            }
+          },
+          {
+            "version": "1.102.0",
+            "scores": {
+              "speedometer3": 6.89
+            }
+          }
+        ]
       },
       {
-        "version": "1.102.0",
-        "scores": {
-          "speedometer3": 6.89
-        }
+        "name": "Windows",
+        "versions": [
+          {
+            "version": "1.105.0",
+            "scores": {
+              "speedometer3": 0.0
+            }
+          }
+        ]
       }
     ]
   },
@@ -322,18 +573,35 @@
     "engine": "Blink",
     "logo": "/images/browser-logos/edge.png",
     "website": "https://www.microsoft.com/edge",
-    "versions": [
+    "platforms": [
       {
-        "version": "128.0.2739.67",
-        "scores": {
-          "speedometer3": 13.9
-        }
+        "name": "macOS",
+
+        "versions": [
+          {
+            "version": "128.0.2739.67",
+            "scores": {
+              "speedometer3": 13.9
+            }
+          },
+          {
+            "version": "128.0.2739.42",
+            "scores": {
+              "speedometer3": 13.63
+            }
+          }
+        ]
       },
       {
-        "version": "128.0.2739.42",
-        "scores": {
-          "speedometer3": 13.63
-        }
+        "name": "Windows",
+        "versions": [
+          {
+            "version": "128.0.2739.67",
+            "scores": {
+              "speedometer3": 0.0
+            }
+          }
+        ]
       }
     ]
   },
@@ -342,18 +610,35 @@
     "engine": "Blink",
     "logo": "/images/browser-logos/opera.png",
     "website": "https://www.opera.com/",
-    "versions": [
+    "platforms": [
       {
-        "version": "113.0.5230.86",
-        "scores": {
-          "speedometer3": 9.38
-        }
+        "name": "macOS",
+
+        "versions": [
+          {
+            "version": "113.0.5230.86",
+            "scores": {
+              "speedometer3": 9.38
+            }
+          },
+          {
+            "version": "113.0.5230.32",
+            "scores": {
+              "speedometer3": 9.15
+            }
+          }
+        ]
       },
       {
-        "version": "113.0.5230.32",
-        "scores": {
-          "speedometer3": 9.15
-        }
+        "name": "Windows",
+        "versions": [
+          {
+            "version": "113.0.5230.86",
+            "scores": {
+              "speedometer3": 0.0
+            }
+          }
+        ]
       }
     ]
   },
@@ -362,18 +647,35 @@
     "engine": "Blink",
     "logo": "/images/browser-logos/opera-gx.png",
     "website": "https://www.opera.com/gx",
-    "versions": [
+    "platforms": [
       {
-        "version": "113.0.5230.75",
-        "scores": {
-          "speedometer3": 13.03
-        }
+        "name": "macOS",
+
+        "versions": [
+          {
+            "version": "113.0.5230.75",
+            "scores": {
+              "speedometer3": 13.03
+            }
+          },
+          {
+            "version": "112.0.5197.104",
+            "scores": {
+              "speedometer3": 12.27
+            }
+          }
+        ]
       },
       {
-        "version": "112.0.5197.104",
-        "scores": {
-          "speedometer3": 12.27
-        }
+        "name": "Windows",
+        "versions": [
+          {
+            "version": "113.0.5230.75",
+            "scores": {
+              "speedometer3": 0.0
+            }
+          }
+        ]
       }
     ]
   },
@@ -382,18 +684,35 @@
     "engine": "Blink",
     "logo": "/images/browser-logos/vivaldi.png",
     "website": "https://vivaldi.com/",
-    "versions": [
+    "platforms": [
       {
-        "version": "6.9.3447.44",
-        "scores": {
-          "speedometer3": 12.47
-        }
+        "name": "macOS",
+
+        "versions": [
+          {
+            "version": "6.9.3447.44",
+            "scores": {
+              "speedometer3": 12.47
+            }
+          },
+          {
+            "version": "6.8.3381.55",
+            "scores": {
+              "speedometer3": 13.03
+            }
+          }
+        ]
       },
       {
-        "version": "6.8.3381.55",
-        "scores": {
-          "speedometer3": 13.03
-        }
+        "name": "Windows",
+        "versions": [
+          {
+            "version": "6.9.3447.44",
+            "scores": {
+              "speedometer3": 0.0
+            }
+          }
+        ]
       }
     ]
   },
@@ -402,18 +721,36 @@
     "engine": "Blink",
     "logo": "/images/browser-logos/yandex.png",
     "website": "https://browser.yandex.com/",
-    "versions": [
+    "platforms": [
       {
-        "version": "24.7.1.1144",
-        "scores": {
-          "speedometer3": 10.97
-        }
+        "name": "macOS",
+
+        "versions": [
+          {
+            "version": "24.7.1.1144",
+            "scores": {
+              "speedometer3": 10.97
+            }
+          },
+          {
+            "version": "24.7.1.1116",
+            "scores": {
+              "speedometer3": 11.07
+            }
+          }
+        ]
       },
       {
-        "version": "24.7.1.1116",
-        "scores": {
-          "speedometer3": 11.07
-        }
+        "name": "Windows",
+
+        "versions": [
+          {
+            "version": "24.7.1.1144",
+            "scores": {
+              "speedometer3": 0.0
+            }
+          }
+        ]
       }
     ]
   },
@@ -422,18 +759,35 @@
     "engine": "Blink",
     "logo": "/images/browser-logos/arc.png",
     "website": "https://arc.net/",
-    "versions": [
+    "platforms": [
       {
-        "version": "1.59.0",
-        "scores": {
-          "speedometer3": 12.4
-        }
+        "name": "macOS",
+
+        "versions": [
+          {
+            "version": "1.59.0",
+            "scores": {
+              "speedometer3": 12.4
+            }
+          },
+          {
+            "version": "1.57.1",
+            "scores": {
+              "speedometer3": 12.4
+            }
+          }
+        ]
       },
       {
-        "version": "1.57.1",
-        "scores": {
-          "speedometer3": 12.4
-        }
+        "name": "Windows",
+        "versions": [
+          {
+            "version": "1.59.0",
+            "scores": {
+              "speedometer3": 0.0
+            }
+          }
+        ]
       }
     ]
   },
@@ -442,18 +796,35 @@
     "engine": "WebKit",
     "logo": "/images/browser-logos/sigmaos.png",
     "website": "https://sigmaos.com/",
-    "versions": [
+    "platforms": [
       {
-        "version": "1.17.0.6",
-        "scores": {
-          "speedometer3": 4.74
-        }
+        "name": "macOS",
+
+        "versions": [
+          {
+            "version": "1.17.0.6",
+            "scores": {
+              "speedometer3": 4.74
+            }
+          },
+          {
+            "version": "1.17.0",
+            "scores": {
+              "speedometer3": 4.84
+            }
+          }
+        ]
       },
       {
-        "version": "1.17.0",
-        "scores": {
-          "speedometer3": 4.84
-        }
+        "name": "Windows",
+        "versions": [
+          {
+            "version": "1.17.0.6",
+            "scores": {
+              "speedometer3": 0.0
+            }
+          }
+        ]
       }
     ]
   }
