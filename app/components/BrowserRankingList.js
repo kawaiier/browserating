@@ -62,7 +62,7 @@ export default function BrowserRankingList() {
     ...new Set(browsers.map((browser) => browser.engine)),
   ];
 
-  const platforms = ["macOS", "Windows"];
+  const platforms = ["macOS", "Windows", "Android"];
 
   const handleEngineFilter = (engine) => {
     setSelectedEngine(engine);

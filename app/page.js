@@ -1,4 +1,4 @@
-import About from "./components/About";
+import About from "./components/About/About";
 import BrowserRankingList from "./components/BrowserRankingList";
 import Explanation from "./components/Explanation";
 

@@ -152,6 +152,17 @@
             }
           }
         ]
+      },
+      {
+        "name": "Android",
+        "versions": [
+          {
+            "version": "130.0",
+            "scores": {
+              "speedometer3": 5.79
+            }
+          }
+        ]
       }
     ]
   },
@@ -198,9 +209,28 @@
     ]
   },
   {
-    "name": "Firefox Nightly",
+    "name": "Firefox Beta",
     "engine": "Gecko",
     "logo": "/images/browser-logos/firefox-beta.png",
+    "website": "https://www.mozilla.org/en-US/firefox/channel/desktop/#beta",
+    "platforms": [
+      {
+        "name": "Android",
+        "versions": [
+          {
+            "version": "131.0b5",
+            "scores": {
+              "speedometer3": 5.87
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Firefox Nightly",
+    "engine": "Gecko",
+    "logo": "/images/browser-logos/firefox-nightly.png",
     "website": "https://www.mozilla.org/en-US/firefox/channel/desktop/#nightly",
     "platforms": [
       {
@@ -234,6 +264,17 @@
             "version": "132.0a1",
             "scores": {
               "speedometer3": 16.03
+            }
+          }
+        ]
+      },
+      {
+        "name": "Android",
+        "versions": [
+          {
+            "version": "132.0a1",
+            "scores": {
+              "speedometer3": 5.78
             }
           }
         ]
@@ -271,6 +312,17 @@
             "version": "6.0.19",
             "scores": {
               "speedometer3": 10.2
+            }
+          }
+        ]
+      },
+      {
+        "name": "Android",
+        "versions": [
+          {
+            "version": "1.0.8.2",
+            "scores": {
+              "speedometer3": 4.91
             }
           }
         ]
@@ -391,6 +443,55 @@
             }
           }
         ]
+      },
+      {
+        "name": "Android",
+        "versions": [
+          {
+            "version": "1.69.164",
+            "scores": {
+              "speedometer3": 7.00
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Brave Beta",
+    "engine": "Blink",
+    "logo": "/images/browser-logos/bravebeta.webp",
+    "website": "https://brave.com/",
+    "platforms": [
+      {
+        "name": "Android",
+        "versions": [
+          {
+            "version": "1.70.107",
+            "scores": {
+              "speedometer3": 6.97
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Brave Nightly",
+    "engine": "Blink",
+    "logo": "/images/browser-logos/bravenightly.webp",
+    "website": "https://brave.com/",
+    "platforms": [
+      {
+        "name": "Android",
+        "versions": [
+          {
+            "version": "1.72.3",
+            "scores": {
+              "speedometer3": 6.93
+            }
+          }
+        ]
       }
     ]
   },
@@ -428,13 +529,24 @@
             }
           }
         ]
+      },
+      {
+        "name": "Android",
+        "versions": [
+          {
+            "version": "128.0.6613.146",
+            "scores": {
+              "speedometer3": 9.68
+            }
+          }
+        ]
       }
     ]
   },
   {
     "name": "Google Chrome Canary",
     "engine": "Blink",
-    "logo": "/images/browser-logos/chrome-dev.png",
+    "logo": "/images/browser-logos/chrome-canary.png",
     "website": "https://www.google.com/chrome/canary/",
     "platforms": [
       {
@@ -462,6 +574,74 @@
             "version": "130.0.6710.0",
             "scores": {
               "speedometer3": 18.03
+            }
+          }
+        ]
+      },
+      {
+        "name": "Android",
+        "versions": [
+          {
+            "version": "130.0.6715.0",
+            "scores": {
+              "speedometer3": 9.38
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Google Chrome Beta",
+    "engine": "Blink",
+    "logo": "/images/browser-logos/chromebeta.png",
+    "website": "https://www.google.com/chrome/beta/",
+    "platforms": [
+      {
+        "name": "Android",
+        "versions": [
+          {
+            "version": "129.0.6668.38",
+            "scores": {
+              "speedometer3": 9.71
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Samsung Internet",
+    "engine": "Blink",
+    "logo": "/images/browser-logos/samsung-internet.png",
+    "website": "https://www.samsung.com/us/support/owners/app/samsung-internet",
+    "platforms": [
+      {
+        "name": "Android",
+        "versions": [
+          {
+            "version": "26.0.3.7",
+            "scores": {
+              "speedometer3": 5.99
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Samsung Internet Beta",
+    "engine": "Blink",
+    "logo": "/images/browser-logos/samsung-internet-beta.png",
+    "website": "https://www.samsung.com/us/support/owners/app/samsung-internet",
+    "platforms": [
+      {
+        "name": "Android",
+        "versions": [
+          {
+            "version": "27.0.0.58",
+            "scores": {
+              "speedometer3": 6.81
             }
           }
         ]
@@ -564,6 +744,17 @@
             }
           }
         ]
+      },
+      {
+        "name": "Android",
+        "versions": [
+          {
+            "version": "5.213.0",
+            "scores": {
+              "speedometer3": 9.24
+            }
+          }
+        ]
       }
     ]
   },
@@ -598,6 +789,55 @@
             "version": "128.0.2739.67",
             "scores": {
               "speedometer3": 17.4
+            }
+          }
+        ]
+      },
+      {
+        "name": "Android",
+        "versions": [
+          {
+            "version": "127.0.2651.1111",
+            "scores": {
+              "speedometer3": 5.55
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Microsoft Edge Beta",
+    "engine": "Blink",
+    "logo": "/images/browser-logos/edge-beta.png",
+    "website": "https://www.microsoft.com/edge",
+    "platforms": [
+      {
+        "name": "Android",
+        "versions": [
+          {
+            "version": "129.0.2792.37",
+            "scores": {
+              "speedometer3": 5.04
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Microsoft Edge Canary",
+    "engine": "Blink",
+    "logo": "/images/browser-logos/edge-canary.png",
+    "website": "https://www.microsoft.com/edge",
+    "platforms": [
+      {
+        "name": "Android",
+        "versions": [
+          {
+            "version": "130.0.2832.0",
+            "scores": {
+              "speedometer3": 5.58
             }
           }
         ]
@@ -638,6 +878,55 @@
             }
           }
         ]
+      },
+      {
+        "name": "Android",
+        "versions": [
+          {
+            "version": "84.4.4452.81430",
+            "scores": {
+              "speedometer3": 5.59
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Opera Beta",
+    "engine": "Blink",
+    "logo": "/images/browser-logos/opera-beta.webp",
+    "website": "https://www.opera.com/",
+    "platforms": [
+      {
+        "name": "Android",
+        "versions": [
+          {
+            "version": "85.0.4475.81340",
+            "scores": {
+              "speedometer3": 5.49
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Opera Mini",
+    "engine": "Blink",
+    "logo": "/images/browser-logos/opera-mini.png",
+    "website": "https://www.opera.com/",
+    "platforms": [
+      {
+        "name": "Android",
+        "versions": [
+          {
+            "version": "84.0.2254.73823",
+            "scores": {
+              "speedometer3": 6.94
+            }
+          }
+        ]
       }
     ]
   },
@@ -672,6 +961,17 @@
             "version": "113.0.5230.75",
             "scores": {
               "speedometer3": 17.53
+            }
+          }
+        ]
+      },
+      {
+        "name": "Android",
+        "versions": [
+          {
+            "version": "2.5.7",
+            "scores": {
+              "speedometer3": 8.99
             }
           }
         ]
@@ -712,6 +1012,36 @@
             }
           }
         ]
+      },
+      {
+        "name": "Android",
+        "versions": [
+          {
+            "version": "6.9.3451.58",
+            "scores": {
+              "speedometer3": 6.93
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Vivaldi Snapshot",
+    "engine": "Blink",
+    "logo": "/images/browser-logos/vivaldi-snapshot.png",
+    "website": "https://vivaldi.com/",
+    "platforms": [
+      {
+        "name": "Android",
+        "versions": [
+          {
+            "version": "6.10.3464.4",
+            "scores": {
+              "speedometer3": 6.47
+            }
+          }
+        ]
       }
     ]
   },
@@ -747,6 +1077,55 @@
             "version": "24.7.1.1144",
             "scores": {
               "speedometer3": 17.6
+            }
+          }
+        ]
+      },
+      {
+        "name": "Android",
+        "versions": [
+          {
+            "version": "24.7.6.41",
+            "scores": {
+              "speedometer3": 8.34
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Yandex Browser Beta",
+    "engine": "Blink",
+    "logo": "/images/browser-logos/yandex-beta.webp",
+    "website": "https://browser.yandex.com/",
+    "platforms": [
+      {
+        "name": "Android",
+        "versions": [
+          {
+            "version": "24.7.8.22",
+            "scores": {
+              "speedometer3": 8.13
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Yandex Browser Alpha",
+    "engine": "Blink",
+    "logo": "/images/browser-logos/yandex-alpha.png",
+    "website": "https://browser.yandex.com/",
+    "platforms": [
+      {
+        "name": "Android",
+        "versions": [
+          {
+            "version": "24.7.6.28",
+            "scores": {
+              "speedometer3": 8.10
             }
           }
         ]
@@ -821,6 +1200,196 @@
             "version": "1.17.0.6",
             "scores": {
               "speedometer3": 0.0
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Cromite",
+    "engine": "Blink",
+    "logo": "/images/browser-logos/cromite.png",
+    "website": "https://github.com/uazo/cromite",
+    "platforms": [
+      {
+        "name": "Android",
+        "versions": [
+          {
+            "version": "128.0.6613.120",
+            "scores": {
+              "speedometer3": 6.08
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Kiwi",
+    "engine": "Blink",
+    "logo": "/images/browser-logos/kiwi.png",
+    "website": "https://kiwibrowser.com/",
+    "platforms": [
+      {
+        "name": "Android",
+        "versions": [
+          {
+            "version": "124.0.6327.4",
+            "scores": {
+              "speedometer3": 5.37
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Via",
+    "engine": "Blink",
+    "logo": "/images/browser-logos/via.png",
+    "website": "https://www.viayoo.com/en/",
+    "platforms": [
+      {
+        "name": "Android",
+        "versions": [
+          {
+            "version": "5.9.0",
+            "scores": {
+              "speedometer3": 9.06
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Soul",
+    "engine": "Blink",
+    "logo": "/images/browser-logos/soul.png",
+    "website": "https://play.google.com/store/apps/details?id=com.mycompany.app.soulbrowser&hl=en",
+    "platforms": [
+      {
+        "name": "Android",
+        "versions": [
+          {
+            "version": "1.4.34",
+            "scores": {
+              "speedometer3": 9.14
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Quetta",
+    "engine": "Blink",
+    "logo": "/images/browser-logos/quetta.png",
+    "website": "https://www.quetta.net/",
+    "platforms": [
+      {
+        "name": "Android",
+        "versions": [
+          {
+            "version": "1.1.9",
+            "scores": {
+              "speedometer3": 4.37
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Thorium",
+    "engine": "Blink",
+    "logo": "/images/browser-logos/thorium.webp",
+    "website": "https://thorium.rocks/",
+    "platforms": [
+      {
+        "name": "Android",
+        "versions": [
+          {
+            "version": "2.7.5",
+            "scores": {
+              "speedometer3": 7.46
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Mull",
+    "engine": "Gecko",
+    "logo": "/images/browser-logos/mull.png",
+    "website": "https://f-droid.org/en/packages/us.spotco.fennec_dos/",
+    "platforms": [
+      {
+        "name": "Android",
+        "versions": [
+          {
+            "version": "129.0.2",
+            "scores": {
+              "speedometer3": 3.54
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Icaraven",
+    "engine": "Gecko",
+    "logo": "/images/browser-logos/iceraven.png",
+    "website": "https://github.com/fork-maintainers/iceraven-browser",
+    "platforms": [
+      {
+        "name": "Android",
+        "versions": [
+          {
+            "version": "2.23.0",
+            "scores": {
+              "speedometer3": 5.94
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Ghostery",
+    "engine": "Gecko",
+    "logo": "/images/browser-logos/ghostery.png",
+    "website": "https://www.ghostery.com/ghostery-private-browser",
+    "platforms": [
+      {
+        "name": "Android",
+        "versions": [
+          {
+            "version": "1.0.2430",
+            "scores": {
+              "speedometer3": 4.14
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Kito",
+    "engine": "Gecko",
+    "logo": "/images/browser-logos/kito.png",
+    "website": "https://play.google.com/store/apps/details?id=com.yjllqint.kito&hl=en",
+    "platforms": [
+      {
+        "name": "Android",
+        "versions": [
+          {
+            "version": "7.6.4.1",
+            "scores": {
+              "speedometer3": 3.95
             }
           }
         ]
