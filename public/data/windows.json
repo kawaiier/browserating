@@ -1,0 +1,242 @@
+[
+  {
+    "name": "Arc Browser",
+    "engine": "Blink",
+    "versions": [
+      {
+        "version": "1.59.0",
+        "scores": {
+          "speedometer3": 17.23
+        }
+      }
+    ]
+  },
+  {
+    "name": "Brave",
+    "engine": "Blink",
+    "versions": [
+      {
+        "version": "1.69.162",
+        "scores": {
+          "speedometer3": 16.83
+        }
+      }
+    ]
+  },
+  {
+    "name": "DuckDuckGo Browser",
+    "engine": "Blink",
+    "versions": [
+      {
+        "version": "1.105.0",
+        "scores": {
+          "speedometer3": 17.07
+        }
+      }
+    ]
+  },
+  {
+    "name": "Firefox",
+    "engine": "Gecko",
+    "versions": [
+      {
+        "version": "130.0",
+        "scores": {
+          "speedometer3": 16.33
+        }
+      }
+    ]
+  },
+  {
+    "name": "Firefox Developer Edition",
+    "engine": "Gecko",
+    "versions": [
+      {
+        "version": "131.0b4",
+        "scores": {
+          "speedometer3": 16.13
+        }
+      }
+    ]
+  },
+  {
+    "name": "Firefox Nightly",
+    "engine": "Gecko",
+    "versions": [
+      {
+        "version": "132.0a1",
+        "scores": {
+          "speedometer3": 15.97
+        }
+      }
+    ]
+  },
+  {
+    "name": "Floorp",
+    "engine": "Gecko",
+    "versions": [
+      {
+        "version": "11.18.1",
+        "scores": {
+          "speedometer3": 15.56
+        }
+      }
+    ]
+  },
+  {
+    "name": "Google Chrome",
+    "engine": "Blink",
+    "versions": [
+      {
+        "version": "128.0.6613.121",
+        "scores": {
+          "speedometer3": 18.57
+        }
+      }
+    ]
+  },
+  {
+    "name": "Google Chrome Canary",
+    "engine": "Blink",
+    "versions": [
+      {
+        "version": "130.0.6710.0",
+        "scores": {
+          "speedometer3": 18.03
+        }
+      }
+    ]
+  },
+  {
+    "name": "Librewolf",
+    "engine": "Gecko",
+    "versions": [
+      {
+        "version": "130.0-3",
+        "scores": {
+          "speedometer3": 11.03
+        }
+      }
+    ]
+  },
+  {
+    "name": "Microsoft Edge",
+    "engine": "Blink",
+    "versions": [
+      {
+        "version": "128.0.2739.67",
+        "scores": {
+          "speedometer3": 17.4
+        }
+      }
+    ]
+  },
+  {
+    "name": "Mullvad Browser",
+    "engine": "Gecko",
+    "versions": [
+      {
+        "version": "13.5.3",
+        "scores": {
+          "speedometer3": 6.54
+        }
+      }
+    ]
+  },
+  {
+    "name": "Opera",
+    "engine": "Blink",
+    "versions": [
+      {
+        "version": "113.0.5230.86",
+        "scores": {
+          "speedometer3": 17.8
+        }
+      }
+    ]
+  },
+  {
+    "name": "Opera GX",
+    "engine": "Blink",
+    "versions": [
+      {
+        "version": "113.0.5230.75",
+        "scores": {
+          "speedometer3": 17.53
+        }
+      }
+    ]
+  },
+  {
+    "name": "Tor Browser",
+    "engine": "Gecko",
+    "versions": [
+      {
+        "version": "13.5.3",
+        "scores": {
+          "speedometer3": 5.43
+        }
+      },
+      {
+        "version": "12.5.2",
+        "scores": {
+          "speedometer3": 5.48
+        }
+      }
+    ]
+  },
+  {
+    "name": "Vivaldi",
+    "engine": "Blink",
+    "versions": [
+      {
+        "version": "6.9.3447.44",
+        "scores": {
+          "speedometer3": 17.87
+        }
+      }
+    ]
+  },
+  {
+    "name": "Waterfox",
+    "engine": "Gecko",
+    "versions": [
+      {
+        "version": "6.0.19",
+        "scores": {
+          "speedometer3": 10.2
+        }
+      }
+    ]
+  },
+  {
+    "name": "Yandex Browser",
+    "engine": "Blink",
+    "versions": [
+      {
+        "version": "24.7.1.1144",
+        "scores": {
+          "speedometer3": 17.6
+        }
+      }
+    ]
+  },
+  {
+    "name": "Zen Browser",
+    "engine": "Gecko",
+    "versions": [
+      {
+        "version": "1.0.0-a39",
+        "scores": {
+          "speedometer3": 14.83
+        }
+      },
+      {
+        "version": "1.0.0-a28",
+        "scores": {
+          "speedometer3": 11.5
+        }
+      }
+    ]
+  }
+]

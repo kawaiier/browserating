@@ -20,7 +20,7 @@ export default function Home() {
       <Explanation />
       <footer className="text-center text-sm p-8 flex flex-col items-center gap-2 mt-8">
         <a href="https://x.com/kawaiier101" className="text-gray-400 mx-auto">
-          <span class="[&>svg]:h-5 [&>svg]:w-5">
+          <span className="[&>svg]:h-5 [&>svg]:w-5">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="currentColor"

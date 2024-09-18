@@ -1,1399 +1,228 @@
 [
   {
     "name": "Floorp",
-    "engine": "Gecko",
     "logo": "/images/browser-logos/floorp.png",
-    "website": "https://floorp.app/en",
-    "platforms": [
-      {
-        "name": "macOS",
-        "versions": [
-          {
-            "version": "11.18.1",
-            "scores": {
-              "speedometer3": 13.4
-            }
-          },
-          {
-            "version": "11.17.6",
-            "scores": {
-              "speedometer3": 12.97
-            }
-          }
-        ]
-      },
-      {
-        "name": "Windows",
-        "versions": [
-          {
-            "version": "11.18.1",
-            "scores": {
-              "speedometer3": 15.56
-            }
-          }
-        ]
-      }
-    ]
+    "website": "https://floorp.app/en"
   },
   {
     "name": "Mullvad Browser",
-    "engine": "Gecko",
     "logo": "/images/browser-logos/mullvad.png",
-    "website": "https://mullvad.net/en/browser",
-    "platforms": [
-      {
-        "name": "macOS",
-        "versions": [
-          {
-            "version": "13.5.3",
-            "scores": {
-              "speedometer3": 5.48
-            }
-          },
-          {
-            "version": "13.5.2",
-            "scores": {
-              "speedometer3": 5.5
-            }
-          }
-        ]
-      },
-      {
-        "name": "Windows",
-        "versions": [
-          {
-            "version": "13.5.3",
-            "scores": {
-              "speedometer3": 6.54
-            }
-          }
-        ]
-      }
-    ]
+    "website": "https://mullvad.net/en/browser"
   },
   {
     "name": "Librewolf",
-    "engine": "Gecko",
     "logo": "/images/browser-logos/librewolf.svg",
-    "website": "https://librewolf.net/",
-    "platforms": [
-      {
-        "name": "macOS",
-        "versions": [
-          {
-            "version": "130.0-3",
-            "scores": {
-              "speedometer3": 9.33
-            }
-          },
-          {
-            "version": "129.0.1-1",
-            "scores": {
-              "speedometer3": 9.29
-            }
-          },
-          {
-            "version": "128.0-2",
-            "scores": {
-              "speedometer3": 6.06
-            }
-          }
-        ]
-      },
-      {
-        "name": "Windows",
-        "versions": [
-          {
-            "version": "130.0-3",
-            "scores": {
-              "speedometer3": 11.03
-            }
-          }
-        ]
-      }
-    ]
+    "website": "https://librewolf.net/"
   },
   {
     "name": "Firefox",
-    "engine": "Gecko",
     "logo": "/images/browser-logos/firefox.png",
-    "website": "https://www.mozilla.org/firefox/",
-    "platforms": [
-      {
-        "name": "macOS",
-        "versions": [
-          {
-            "version": "130.0",
-            "scores": {
-              "speedometer3": 13.47
-            }
-          },
-          {
-            "version": "129.0.2",
-            "scores": {
-              "speedometer3": 13.07
-            }
-          },
-          {
-            "version": "123.0",
-            "scores": {
-              "speedometer3": 8.35
-            }
-          }
-        ]
-      },
-      {
-        "name": "Windows",
-        "versions": [
-          {
-            "version": "130.0",
-            "scores": {
-              "speedometer3": 16.33
-            }
-          }
-        ]
-      },
-      {
-        "name": "Android",
-        "versions": [
-          {
-            "version": "130.0",
-            "scores": {
-              "speedometer3": 5.79
-            }
-          }
-        ]
-      }
-    ]
+    "website": "https://www.mozilla.org/firefox/"
   },
   {
     "name": "Firefox Developer Edition",
     "engine": "Gecko",
     "logo": "/images/browser-logos/firefox-dev.png",
-    "website": "https://www.mozilla.org/en-US/firefox/developer/",
-    "platforms": [
-      {
-        "name": "macOS",
-        "versions": [
-          {
-            "version": "131.0b4",
-            "scores": {
-              "speedometer3": 13.37
-            }
-          },
-          {
-            "version": "130.0b8",
-            "scores": {
-              "speedometer3": 13.1
-            }
-          },
-          {
-            "version": "130.0b3",
-            "scores": {
-              "speedometer3": 8.78
-            }
-          }
-        ]
-      },
-      {
-        "name": "Windows",
-        "versions": [
-          {
-            "version": "131.0b4",
-            "scores": {
-              "speedometer3": 16.13
-            }
-          }
-        ]
-      }
-    ]
+    "website": "https://www.mozilla.org/en-US/firefox/developer/"
   },
   {
     "name": "Firefox Beta",
-    "engine": "Gecko",
     "logo": "/images/browser-logos/firefox-beta.png",
-    "website": "https://www.mozilla.org/en-US/firefox/channel/desktop/#beta",
-    "platforms": [
-      {
-        "name": "Android",
-        "versions": [
-          {
-            "version": "131.0b5",
-            "scores": {
-              "speedometer3": 5.87
-            }
-          }
-        ]
-      }
-    ]
+    "website": "https://www.mozilla.org/en-US/firefox/channel/desktop/#beta"
   },
   {
     "name": "Firefox Nightly",
-    "engine": "Gecko",
     "logo": "/images/browser-logos/firefox-nightly.png",
-    "website": "https://www.mozilla.org/en-US/firefox/channel/desktop/#nightly",
-    "platforms": [
-      {
-        "name": "macOS",
-
-        "versions": [
-          {
-            "version": "132.0a1",
-            "scores": {
-              "speedometer3": 13.07
-            }
-          },
-          {
-            "version": "131.0a1",
-            "scores": {
-              "speedometer3": 13.03
-            }
-          },
-          {
-            "version": "130.0b3",
-            "scores": {
-              "speedometer3": 8.78
-            }
-          }
-        ]
-      },
-      {
-        "name": "Windows",
-        "versions": [
-          {
-            "version": "132.0a1",
-            "scores": {
-              "speedometer3": 16.03
-            }
-          }
-        ]
-      },
-      {
-        "name": "Android",
-        "versions": [
-          {
-            "version": "132.0a1",
-            "scores": {
-              "speedometer3": 5.78
-            }
-          }
-        ]
-      }
-    ]
+    "website": "https://www.mozilla.org/en-US/firefox/channel/desktop/#nightly"
   },
   {
     "name": "Waterfox",
-    "engine": "Gecko",
     "logo": "/images/browser-logos/waterfox.png",
-    "website": "https://www.waterfox.net/",
-    "platforms": [
-      {
-        "name": "macOS",
-
-        "versions": [
-          {
-            "version": "6.0.19",
-            "scores": {
-              "speedometer3": 8.59
-            }
-          },
-          {
-            "version": "6.0.18",
-            "scores": {
-              "speedometer3": 8.56
-            }
-          }
-        ]
-      },
-      {
-        "name": "Windows",
-        "versions": [
-          {
-            "version": "6.0.19",
-            "scores": {
-              "speedometer3": 10.2
-            }
-          }
-        ]
-      },
-      {
-        "name": "Android",
-        "versions": [
-          {
-            "version": "1.0.8.2",
-            "scores": {
-              "speedometer3": 4.91
-            }
-          }
-        ]
-      }
-    ]
+    "website": "https://www.waterfox.net/"
   },
   {
     "name": "Zen Browser",
-    "engine": "Gecko",
     "logo": "/images/browser-logos/zen.svg",
-    "website": "https://www.zen-browser.app/",
-    "platforms": [
-      {
-        "name": "macOS",
-
-        "versions": [
-          {
-            "version": "1.0.0-a39",
-            "scores": {
-              "speedometer3": 11.87
-            }
-          },
-          {
-            "version": "1.0.0-a28",
-            "scores": {
-              "speedometer3": 11.5
-            }
-          }
-        ]
-      },
-      {
-        "name": "Windows",
-        "versions": [
-          {
-            "version": "1.0.0-a39",
-            "scores": {
-              "speedometer3": 14.83
-            }
-          }
-        ]
-      }
-    ]
+    "website": "https://www.zen-browser.app/"
   },
   {
     "name": "Tor Browser",
-    "engine": "Gecko",
     "logo": "/images/browser-logos/tor.png",
-    "website": "https://www.torproject.org/download/",
-    "platforms": [
-      {
-        "name": "macOS",
-
-        "versions": [
-          {
-            "version": "13.5.3",
-            "scores": {
-              "speedometer3": 5.43
-            }
-          },
-          {
-            "version": "12.5.2",
-            "scores": {
-              "speedometer3": 5.48
-            }
-          }
-        ]
-      },
-      {
-        "name": "Windows",
-        "versions": [
-          {
-            "version": "13.5.3",
-            "scores": {
-              "speedometer3": 6.47
-            }
-          }
-        ]
-      }
-    ]
+    "website": "https://www.torproject.org/download/"
   },
   {
     "name": "Brave",
-    "engine": "Blink",
     "logo": "/images/browser-logos/brave.png",
-    "website": "https://brave.com/",
-    "platforms": [
-      {
-        "name": "macOS",
-
-        "versions": [
-          {
-            "version": "1.69.162",
-            "scores": {
-              "speedometer3": 12.27
-            }
-          },
-          {
-            "version": "1.69.153",
-            "scores": {
-              "speedometer3": 12.2
-            }
-          },
-          {
-            "version": "1.68.141",
-            "scores": {
-              "speedometer3": 8.46
-            }
-          }
-        ]
-      },
-      {
-        "name": "Windows",
-        "versions": [
-          {
-            "version": "1.69.162",
-            "scores": {
-              "speedometer3": 16.83
-            }
-          }
-        ]
-      },
-      {
-        "name": "Android",
-        "versions": [
-          {
-            "version": "1.69.164",
-            "scores": {
-              "speedometer3": 7.00
-            }
-          }
-        ]
-      }
-    ]
+    "website": "https://brave.com/"
   },
   {
     "name": "Brave Beta",
-    "engine": "Blink",
     "logo": "/images/browser-logos/bravebeta.webp",
-    "website": "https://brave.com/",
-    "platforms": [
-      {
-        "name": "Android",
-        "versions": [
-          {
-            "version": "1.70.107",
-            "scores": {
-              "speedometer3": 6.97
-            }
-          }
-        ]
-      }
-    ]
+    "website": "https://brave.com/"
   },
   {
     "name": "Brave Nightly",
-    "engine": "Blink",
     "logo": "/images/browser-logos/bravenightly.webp",
-    "website": "https://brave.com/",
-    "platforms": [
-      {
-        "name": "Android",
-        "versions": [
-          {
-            "version": "1.72.3",
-            "scores": {
-              "speedometer3": 6.93
-            }
-          }
-        ]
-      }
-    ]
+    "website": "https://brave.com/"
   },
   {
     "name": "Google Chrome",
-    "engine": "Blink",
     "logo": "/images/browser-logos/chrome.png",
-    "website": "https://www.google.com/chrome/",
-    "platforms": [
-      {
-        "name": "macOS",
-
-        "versions": [
-          {
-            "version": "128.0.6613.121",
-            "scores": {
-              "speedometer3": 13.23
-            }
-          },
-          {
-            "version": "128.0.6613.85",
-            "scores": {
-              "speedometer3": 12.81
-            }
-          }
-        ]
-      },
-      {
-        "name": "Windows",
-        "versions": [
-          {
-            "version": "128.0.6613.121",
-            "scores": {
-              "speedometer3": 18.57
-            }
-          }
-        ]
-      },
-      {
-        "name": "Android",
-        "versions": [
-          {
-            "version": "128.0.6613.146",
-            "scores": {
-              "speedometer3": 9.68
-            }
-          }
-        ]
-      }
-    ]
+    "website": "https://www.google.com/chrome/"
   },
   {
     "name": "Google Chrome Canary",
-    "engine": "Blink",
     "logo": "/images/browser-logos/chrome-canary.png",
-    "website": "https://www.google.com/chrome/canary/",
-    "platforms": [
-      {
-        "name": "macOS",
-
-        "versions": [
-          {
-            "version": "130.0.6710.0",
-            "scores": {
-              "speedometer3": 14.37
-            }
-          },
-          {
-            "version": "130.0.6673.0",
-            "scores": {
-              "speedometer3": 12.93
-            }
-          }
-        ]
-      },
-      {
-        "name": "Windows",
-        "versions": [
-          {
-            "version": "130.0.6710.0",
-            "scores": {
-              "speedometer3": 18.03
-            }
-          }
-        ]
-      },
-      {
-        "name": "Android",
-        "versions": [
-          {
-            "version": "130.0.6715.0",
-            "scores": {
-              "speedometer3": 9.38
-            }
-          }
-        ]
-      }
-    ]
+    "website": "https://www.google.com/chrome/canary/"
   },
   {
     "name": "Google Chrome Beta",
-    "engine": "Blink",
     "logo": "/images/browser-logos/chromebeta.png",
-    "website": "https://www.google.com/chrome/beta/",
-    "platforms": [
-      {
-        "name": "Android",
-        "versions": [
-          {
-            "version": "129.0.6668.38",
-            "scores": {
-              "speedometer3": 9.71
-            }
-          }
-        ]
-      }
-    ]
+    "website": "https://www.google.com/chrome/beta/"
   },
   {
     "name": "Samsung Internet",
-    "engine": "Blink",
     "logo": "/images/browser-logos/samsung-internet.png",
-    "website": "https://www.samsung.com/us/support/owners/app/samsung-internet",
-    "platforms": [
-      {
-        "name": "Android",
-        "versions": [
-          {
-            "version": "26.0.3.7",
-            "scores": {
-              "speedometer3": 5.99
-            }
-          }
-        ]
-      }
-    ]
+    "website": "https://www.samsung.com/us/support/owners/app/samsung-internet"
   },
   {
     "name": "Samsung Internet Beta",
-    "engine": "Blink",
     "logo": "/images/browser-logos/samsung-internet-beta.png",
-    "website": "https://www.samsung.com/us/support/owners/app/samsung-internet",
-    "platforms": [
-      {
-        "name": "Android",
-        "versions": [
-          {
-            "version": "27.0.0.58",
-            "scores": {
-              "speedometer3": 6.81
-            }
-          }
-        ]
-      }
-    ]
+    "website": "https://www.samsung.com/us/support/owners/app/samsung-internet"
   },
   {
     "name": "Orion",
-    "engine": "WebKit",
     "logo": "/images/browser-logos/orion.png",
-    "website": "https://kagi.com/orion/",
-    "platforms": [
-      {
-        "name": "macOS",
-
-        "versions": [
-          {
-            "version": "0.99.128.2.1-beta",
-            "scores": {
-              "speedometer3": 11.08
-            }
-          }
-        ]
-      },
-      {
-        "name": "Windows",
-        "versions": [
-          {
-            "version": "0.99.128.2.1-beta",
-            "scores": {
-              "speedometer3": 0.0
-            }
-          }
-        ]
-      }
-    ]
+    "website": "https://kagi.com/orion/"
   },
   {
     "name": "Safari",
-    "engine": "WebKit",
     "logo": "/images/browser-logos/safari.png",
-    "website": "https://www.apple.com/safari/",
-    "platforms": [
-      {
-        "name": "macOS",
-
-        "versions": [
-          {
-            "version": "17.6",
-            "scores": {
-              "speedometer3": 10.51
-            }
-          }
-        ]
-      },
-      {
-        "name": "Windows",
-        "versions": [
-          {
-            "version": "17.6",
-            "scores": {
-              "speedometer3": 0.0
-            }
-          }
-        ]
-      }
-    ]
+    "website": "https://www.apple.com/safari/"
   },
   {
     "name": "DuckDuckGo Browser",
-    "engine": "WebKit",
     "logo": "/images/browser-logos/ddg.jpg",
-    "website": "https://duckduckgo.com/",
-    "platforms": [
-      {
-        "name": "macOS",
-
-        "versions": [
-          {
-            "version": "1.105.0",
-            "scores": {
-              "speedometer3": 6.53
-            }
-          },
-          {
-            "version": "1.102.0",
-            "scores": {
-              "speedometer3": 6.89
-            }
-          }
-        ]
-      },
-      {
-        "name": "Windows",
-        "versions": [
-          {
-            "version": "1.105.0",
-            "scores": {
-              "speedometer3": 17.07
-            }
-          }
-        ]
-      },
-      {
-        "name": "Android",
-        "versions": [
-          {
-            "version": "5.213.0",
-            "scores": {
-              "speedometer3": 9.24
-            }
-          }
-        ]
-      }
-    ]
+    "website": "https://duckduckgo.com/"
   },
   {
     "name": "Microsoft Edge",
-    "engine": "Blink",
     "logo": "/images/browser-logos/edge.png",
-    "website": "https://www.microsoft.com/edge",
-    "platforms": [
-      {
-        "name": "macOS",
-
-        "versions": [
-          {
-            "version": "128.0.2739.67",
-            "scores": {
-              "speedometer3": 13.9
-            }
-          },
-          {
-            "version": "128.0.2739.42",
-            "scores": {
-              "speedometer3": 13.63
-            }
-          }
-        ]
-      },
-      {
-        "name": "Windows",
-        "versions": [
-          {
-            "version": "128.0.2739.67",
-            "scores": {
-              "speedometer3": 17.4
-            }
-          }
-        ]
-      },
-      {
-        "name": "Android",
-        "versions": [
-          {
-            "version": "127.0.2651.1111",
-            "scores": {
-              "speedometer3": 5.55
-            }
-          }
-        ]
-      }
-    ]
+    "website": "https://www.microsoft.com/edge"
   },
   {
     "name": "Microsoft Edge Beta",
-    "engine": "Blink",
     "logo": "/images/browser-logos/edge-beta.png",
-    "website": "https://www.microsoft.com/edge",
-    "platforms": [
-      {
-        "name": "Android",
-        "versions": [
-          {
-            "version": "129.0.2792.37",
-            "scores": {
-              "speedometer3": 5.04
-            }
-          }
-        ]
-      }
-    ]
+    "website": "https://www.microsoft.com/edge"
   },
   {
     "name": "Microsoft Edge Canary",
-    "engine": "Blink",
     "logo": "/images/browser-logos/edge-canary.png",
-    "website": "https://www.microsoft.com/edge",
-    "platforms": [
-      {
-        "name": "Android",
-        "versions": [
-          {
-            "version": "130.0.2832.0",
-            "scores": {
-              "speedometer3": 5.58
-            }
-          }
-        ]
-      }
-    ]
+    "website": "https://www.microsoft.com/edge"
   },
   {
     "name": "Opera",
-    "engine": "Blink",
     "logo": "/images/browser-logos/opera.png",
-    "website": "https://www.opera.com/",
-    "platforms": [
-      {
-        "name": "macOS",
-
-        "versions": [
-          {
-            "version": "113.0.5230.86",
-            "scores": {
-              "speedometer3": 9.38
-            }
-          },
-          {
-            "version": "113.0.5230.32",
-            "scores": {
-              "speedometer3": 9.15
-            }
-          }
-        ]
-      },
-      {
-        "name": "Windows",
-        "versions": [
-          {
-            "version": "113.0.5230.86",
-            "scores": {
-              "speedometer3": 17.8
-            }
-          }
-        ]
-      },
-      {
-        "name": "Android",
-        "versions": [
-          {
-            "version": "84.4.4452.81430",
-            "scores": {
-              "speedometer3": 5.59
-            }
-          }
-        ]
-      }
-    ]
+    "website": "https://www.opera.com/"
   },
   {
     "name": "Opera Beta",
-    "engine": "Blink",
     "logo": "/images/browser-logos/opera-beta.webp",
-    "website": "https://www.opera.com/",
-    "platforms": [
-      {
-        "name": "Android",
-        "versions": [
-          {
-            "version": "85.0.4475.81340",
-            "scores": {
-              "speedometer3": 5.49
-            }
-          }
-        ]
-      }
-    ]
+    "website": "https://www.opera.com/"
   },
   {
     "name": "Opera Mini",
-    "engine": "Blink",
     "logo": "/images/browser-logos/opera-mini.png",
-    "website": "https://www.opera.com/",
-    "platforms": [
-      {
-        "name": "Android",
-        "versions": [
-          {
-            "version": "84.0.2254.73823",
-            "scores": {
-              "speedometer3": 6.94
-            }
-          }
-        ]
-      }
-    ]
+    "website": "https://www.opera.com/"
   },
   {
     "name": "Opera GX",
-    "engine": "Blink",
     "logo": "/images/browser-logos/opera-gx.png",
-    "website": "https://www.opera.com/gx",
-    "platforms": [
-      {
-        "name": "macOS",
-
-        "versions": [
-          {
-            "version": "113.0.5230.75",
-            "scores": {
-              "speedometer3": 13.03
-            }
-          },
-          {
-            "version": "112.0.5197.104",
-            "scores": {
-              "speedometer3": 12.27
-            }
-          }
-        ]
-      },
-      {
-        "name": "Windows",
-        "versions": [
-          {
-            "version": "113.0.5230.75",
-            "scores": {
-              "speedometer3": 17.53
-            }
-          }
-        ]
-      },
-      {
-        "name": "Android",
-        "versions": [
-          {
-            "version": "2.5.7",
-            "scores": {
-              "speedometer3": 8.99
-            }
-          }
-        ]
-      }
-    ]
+    "website": "https://www.opera.com/gx"
   },
   {
     "name": "Vivaldi",
-    "engine": "Blink",
     "logo": "/images/browser-logos/vivaldi.png",
-    "website": "https://vivaldi.com/",
-    "platforms": [
-      {
-        "name": "macOS",
-
-        "versions": [
-          {
-            "version": "6.9.3447.44",
-            "scores": {
-              "speedometer3": 12.47
-            }
-          },
-          {
-            "version": "6.8.3381.55",
-            "scores": {
-              "speedometer3": 13.03
-            }
-          }
-        ]
-      },
-      {
-        "name": "Windows",
-        "versions": [
-          {
-            "version": "6.9.3447.44",
-            "scores": {
-              "speedometer3": 17.87
-            }
-          }
-        ]
-      },
-      {
-        "name": "Android",
-        "versions": [
-          {
-            "version": "6.9.3451.58",
-            "scores": {
-              "speedometer3": 6.93
-            }
-          }
-        ]
-      }
-    ]
+    "website": "https://vivaldi.com/"
   },
   {
     "name": "Vivaldi Snapshot",
-    "engine": "Blink",
     "logo": "/images/browser-logos/vivaldi-snapshot.png",
-    "website": "https://vivaldi.com/",
-    "platforms": [
-      {
-        "name": "Android",
-        "versions": [
-          {
-            "version": "6.10.3464.4",
-            "scores": {
-              "speedometer3": 6.47
-            }
-          }
-        ]
-      }
-    ]
+    "website": "https://vivaldi.com/"
   },
   {
     "name": "Yandex Browser",
-    "engine": "Blink",
     "logo": "/images/browser-logos/yandex.png",
-    "website": "https://browser.yandex.com/",
-    "platforms": [
-      {
-        "name": "macOS",
-
-        "versions": [
-          {
-            "version": "24.7.1.1144",
-            "scores": {
-              "speedometer3": 10.97
-            }
-          },
-          {
-            "version": "24.7.1.1116",
-            "scores": {
-              "speedometer3": 11.07
-            }
-          }
-        ]
-      },
-      {
-        "name": "Windows",
-
-        "versions": [
-          {
-            "version": "24.7.1.1144",
-            "scores": {
-              "speedometer3": 17.6
-            }
-          }
-        ]
-      },
-      {
-        "name": "Android",
-        "versions": [
-          {
-            "version": "24.7.6.41",
-            "scores": {
-              "speedometer3": 8.34
-            }
-          }
-        ]
-      }
-    ]
+    "website": "https://browser.yandex.com/"
   },
   {
     "name": "Yandex Browser Beta",
-    "engine": "Blink",
     "logo": "/images/browser-logos/yandex-beta.webp",
-    "website": "https://browser.yandex.com/",
-    "platforms": [
-      {
-        "name": "Android",
-        "versions": [
-          {
-            "version": "24.7.8.22",
-            "scores": {
-              "speedometer3": 8.13
-            }
-          }
-        ]
-      }
-    ]
+    "website": "https://browser.yandex.com/"
   },
   {
     "name": "Yandex Browser Alpha",
-    "engine": "Blink",
     "logo": "/images/browser-logos/yandex-alpha.png",
-    "website": "https://browser.yandex.com/",
-    "platforms": [
-      {
-        "name": "Android",
-        "versions": [
-          {
-            "version": "24.7.6.28",
-            "scores": {
-              "speedometer3": 8.10
-            }
-          }
-        ]
-      }
-    ]
+    "website": "https://browser.yandex.com/"
   },
   {
     "name": "Arc Browser",
-    "engine": "Blink",
     "logo": "/images/browser-logos/arc.png",
-    "website": "https://arc.net/",
-    "platforms": [
-      {
-        "name": "macOS",
-
-        "versions": [
-          {
-            "version": "1.59.0",
-            "scores": {
-              "speedometer3": 12.4
-            }
-          },
-          {
-            "version": "1.57.1",
-            "scores": {
-              "speedometer3": 12.4
-            }
-          }
-        ]
-      },
-      {
-        "name": "Windows",
-        "versions": [
-          {
-            "version": "1.59.0",
-            "scores": {
-              "speedometer3": 17.23
-            }
-          }
-        ]
-      }
-    ]
+    "website": "https://arc.net/"
   },
   {
     "name": "Sigma OS",
-    "engine": "WebKit",
     "logo": "/images/browser-logos/sigmaos.png",
-    "website": "https://sigmaos.com/",
-    "platforms": [
-      {
-        "name": "macOS",
-
-        "versions": [
-          {
-            "version": "1.17.0.6",
-            "scores": {
-              "speedometer3": 4.74
-            }
-          },
-          {
-            "version": "1.17.0",
-            "scores": {
-              "speedometer3": 4.84
-            }
-          }
-        ]
-      },
-      {
-        "name": "Windows",
-        "versions": [
-          {
-            "version": "1.17.0.6",
-            "scores": {
-              "speedometer3": 0.0
-            }
-          }
-        ]
-      }
-    ]
+    "website": "https://sigmaos.com/"
   },
   {
     "name": "Cromite",
-    "engine": "Blink",
     "logo": "/images/browser-logos/cromite.png",
-    "website": "https://github.com/uazo/cromite",
-    "platforms": [
-      {
-        "name": "Android",
-        "versions": [
-          {
-            "version": "128.0.6613.120",
-            "scores": {
-              "speedometer3": 6.08
-            }
-          }
-        ]
-      }
-    ]
+    "website": "https://github.com/uazo/cromite"
   },
   {
     "name": "Kiwi",
-    "engine": "Blink",
     "logo": "/images/browser-logos/kiwi.png",
-    "website": "https://kiwibrowser.com/",
-    "platforms": [
-      {
-        "name": "Android",
-        "versions": [
-          {
-            "version": "124.0.6327.4",
-            "scores": {
-              "speedometer3": 5.37
-            }
-          }
-        ]
-      }
-    ]
+    "website": "https://kiwibrowser.com/"
   },
   {
     "name": "Via",
-    "engine": "Blink",
     "logo": "/images/browser-logos/via.png",
-    "website": "https://www.viayoo.com/en/",
-    "platforms": [
-      {
-        "name": "Android",
-        "versions": [
-          {
-            "version": "5.9.0",
-            "scores": {
-              "speedometer3": 9.06
-            }
-          }
-        ]
-      }
-    ]
+    "website": "https://www.viayoo.com/en/"
   },
   {
     "name": "Soul",
-    "engine": "Blink",
     "logo": "/images/browser-logos/soul.png",
-    "website": "https://play.google.com/store/apps/details?id=com.mycompany.app.soulbrowser&hl=en",
-    "platforms": [
-      {
-        "name": "Android",
-        "versions": [
-          {
-            "version": "1.4.34",
-            "scores": {
-              "speedometer3": 9.14
-            }
-          }
-        ]
-      }
-    ]
+    "website": "https://play.google.com/store/apps/details?id=com.mycompany.app.soulbrowser&hl=en"
   },
   {
     "name": "Quetta",
-    "engine": "Blink",
     "logo": "/images/browser-logos/quetta.png",
-    "website": "https://www.quetta.net/",
-    "platforms": [
-      {
-        "name": "Android",
-        "versions": [
-          {
-            "version": "1.1.9",
-            "scores": {
-              "speedometer3": 4.37
-            }
-          }
-        ]
-      }
-    ]
+    "website": "https://www.quetta.net/"
   },
   {
     "name": "Thorium",
-    "engine": "Blink",
     "logo": "/images/browser-logos/thorium.webp",
-    "website": "https://thorium.rocks/",
-    "platforms": [
-      {
-        "name": "Android",
-        "versions": [
-          {
-            "version": "2.7.5",
-            "scores": {
-              "speedometer3": 7.46
-            }
-          }
-        ]
-      }
-    ]
+    "website": "https://thorium.rocks/"
   },
   {
     "name": "Mull",
-    "engine": "Gecko",
     "logo": "/images/browser-logos/mull.png",
-    "website": "https://f-droid.org/en/packages/us.spotco.fennec_dos/",
-    "platforms": [
-      {
-        "name": "Android",
-        "versions": [
-          {
-            "version": "129.0.2",
-            "scores": {
-              "speedometer3": 3.54
-            }
-          }
-        ]
-      }
-    ]
+    "website": "https://f-droid.org/en/packages/us.spotco.fennec_dos/"
   },
   {
     "name": "Icaraven",
-    "engine": "Gecko",
     "logo": "/images/browser-logos/iceraven.png",
-    "website": "https://github.com/fork-maintainers/iceraven-browser",
-    "platforms": [
-      {
-        "name": "Android",
-        "versions": [
-          {
-            "version": "2.23.0",
-            "scores": {
-              "speedometer3": 5.94
-            }
-          }
-        ]
-      }
-    ]
+    "website": "https://github.com/fork-maintainers/iceraven-browser"
   },
   {
     "name": "Ghostery",
-    "engine": "Gecko",
     "logo": "/images/browser-logos/ghostery.png",
-    "website": "https://www.ghostery.com/ghostery-private-browser",
-    "platforms": [
-      {
-        "name": "Android",
-        "versions": [
-          {
-            "version": "1.0.2430",
-            "scores": {
-              "speedometer3": 4.14
-            }
-          }
-        ]
-      }
-    ]
+    "website": "https://www.ghostery.com/ghostery-private-browser"
   },
   {
     "name": "Kito",
-    "engine": "Gecko",
     "logo": "/images/browser-logos/kito.png",
-    "website": "https://play.google.com/store/apps/details?id=com.yjllqint.kito&hl=en",
-    "platforms": [
-      {
-        "name": "Android",
-        "versions": [
-          {
-            "version": "7.6.4.1",
-            "scores": {
-              "speedometer3": 3.95
-            }
-          }
-        ]
-      }
-    ]
+    "website": "https://play.google.com/store/apps/details?id=com.yjllqint.kito&hl=en"
   }
 ]

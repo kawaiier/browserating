@@ -11,14 +11,20 @@ const engineColors = {
 };
 
 const getEngineColor = (engine) => {
-  return engineColors[engine] || "bg-red-200 text-red-700 hover:bg-red-300"; // Default to red for "Other"
+  return engineColors[engine] || "bg-red-200 text-red-700 hover:bg-red-300"; // Default to red for "Unknown"
+};
+
+const platformNames = {
+  macos: "macOS",
+  windows: "Windows",
+  android: "Android",
 };
 
 export default function BrowserRankingList() {
   const [browsers, setBrowsers] = useState([]);
   const [filteredBrowsers, setFilteredBrowsers] = useState([]);
   const [selectedEngine, setSelectedEngine] = useState("All");
-  const [selectedPlatform, setSelectedPlatform] = useState("macOS"); // Default to macOS
+  const [selectedPlatform, setSelectedPlatform] = useState("macos"); // Default to macOS
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -40,12 +46,9 @@ export default function BrowserRankingList() {
 
   const sortBrowsersByPlatform = (browsers, platform) => {
     return browsers.sort((a, b) => {
-      const aPlatform = a.platforms.find((p) => p.name === platform);
-      const bPlatform = b.platforms.find((p) => p.name === platform);
-      return (
-        (bPlatform?.versions[0]?.scores.speedometer3 || 0) -
-        (aPlatform?.versions[0]?.scores.speedometer3 || 0)
-      );
+      const aScore = a[platform]?.[0]?.scores?.speedometer3 || 0;
+      const bScore = b[platform]?.[0]?.scores?.speedometer3 || 0;
+      return bScore - aScore;
     });
   };
 
@@ -61,8 +64,7 @@ export default function BrowserRankingList() {
     "All",
     ...new Set(browsers.map((browser) => browser.engine)),
   ];
-
-  const platforms = ["macOS", "Windows", "Android"];
+  const platforms = ["macos", "windows", "android"];
 
   const handleEngineFilter = (engine) => {
     setSelectedEngine(engine);
@@ -70,6 +72,9 @@ export default function BrowserRankingList() {
 
   const handlePlatformChange = (platform) => {
     setSelectedPlatform(platform);
+    const sortedBrowsers = sortBrowsersByPlatform(browsers, platform);
+    setBrowsers(sortedBrowsers);
+    setFilteredBrowsers(sortedBrowsers);
   };
 
   if (isLoading) return <p>Loading...</p>;
@@ -92,7 +97,6 @@ export default function BrowserRankingList() {
           </button>
         ))}
       </div>
-
       <div className="mb-4 flex flex-wrap gap-2">
         {platforms.map((platform) => (
           <button
@@ -104,11 +108,10 @@ export default function BrowserRankingList() {
                 : ""
             }`}
           >
-            {platform}
+            {platformNames[platform]}
           </button>
         ))}
       </div>
-
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {filteredBrowsers.map((browser, index) => (
           <BrowserCard
