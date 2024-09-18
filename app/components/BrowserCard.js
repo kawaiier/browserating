@@ -6,17 +6,12 @@ export default function BrowserCard({
   rank,
   selectedPlatform,
 }) {
-  // Find platform data based on the selected platform
-  const platformData = browser.platforms.find(
-    (platform) => platform.name === selectedPlatform,
-  );
-  if (!platformData) return null;
+  const platformData = browser[selectedPlatform];
+  if (!platformData || platformData.length === 0) return null;
 
-  const latestVersion = platformData.versions[0];
+  const latestVersion = platformData[0];
   const prevSpeedometer3Score =
-    platformData.versions.length > 1
-      ? platformData.versions[1].scores.speedometer3
-      : null;
+    platformData.length > 1 ? platformData[1].scores.speedometer3 : null;
 
   const getRankStyle = (rank) => {
     switch (rank) {
@@ -70,7 +65,7 @@ export default function BrowserCard({
             {latestVersion.scores.speedometer3.toFixed(2)}
           </p>
           <p
-            title={platformData.versions[1]?.version}
+            title={platformData[1]?.version}
             className={`text-xs text-gray-600 text-center ${prevSpeedometer3Score ? "" : "opacity-50"}`}
           >
             Previous Version:{" "}
