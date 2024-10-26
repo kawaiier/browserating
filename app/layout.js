@@ -13,7 +13,14 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <head></head>
+      <head>
+        <Script
+          src="https://cdn.counter.dev/script.js"
+          data-id="543bdca5-3749-4923-8c4c-1593e1a96e57"
+          data-utcoffset="4"
+          strategy="afterInteractive"
+        />
+      </head>
       <body className={inter.className}>{children}</body>
     </html>
   );
