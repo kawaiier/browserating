@@ -2,15 +2,18 @@ export default function Explanation() {
   return (
     <section className="max-w-4xl mx-auto px-4 py-8 mt-12 bg-gray-50 rounded-lg shadow-md">
       <h2 className="text-3xl font-bold mb-6">
-        Understanding macOS Browser Performance Rankings
+        Understanding Browser Performance Rankings
       </h2>
 
       <p className="mb-4">
         Browserating provides comprehensive{" "}
-        <strong>macOS browser performance rankings</strong> to help you make
-        informed decisions about your web browsing experience. The rankings are
-        currently based on <em>Speedometer 3 benchmark results</em>, a key
-        indicator of browser speed and responsiveness.
+        <strong>
+          browser performance rankings across macOS, Windows, and Android
+        </strong>{" "}
+        to help you make informed decisions about your web browsing experience.
+        The rankings are currently based on{" "}
+        <em>Speedometer 3 benchmark results</em>, a key indicator of browser
+        speed and responsiveness.
       </p>
 
       <h3 className="text-2xl font-semibold mb-4">
@@ -63,12 +66,12 @@ export default function Explanation() {
       <p className="mb-4">
         Browser technology is constantly evolving. Our rankings are regularly
         updated to reflect the latest versions and performance improvements.
-        Bookmark this page to stay informed about the best-performing{" "}
-        <strong>macOS browsers</strong>.
+        Bookmark this page to stay informed about the best-performing browsers
+        across <strong>macOS, Windows, and Android platforms</strong>.
       </p>
 
       <p className="text-sm text-gray-600 mt-8">
-        Last updated: <time dateTime="2024-09-12">September 12, 2024</time>
+        Last updated: <time dateTime="2024-10-27">October 27, 2024</time>
       </p>
     </section>
   );

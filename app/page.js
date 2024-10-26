@@ -10,7 +10,7 @@ export default function Home() {
           Browserating
         </h1>
         <h2 className="text-2xl font-semibold mb-6 text-center text-gray-700">
-          macOS Browser Performance Ranking
+          Browser Performance Ranking for macOS, Windows and Android
         </h2>
       </header>
       <main className="container mx-auto px-4 py-8">
