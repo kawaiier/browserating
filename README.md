@@ -1,16 +1,16 @@
 # Browserating
-Browserating is a Next.js web application that provides performance rankings and comparisons for macOS browsers. It uses data from Speedometer 3 benchmarks (and privacytests in the future) to give users a comprehensive view of browser performance.
+Browserating is a Next.js web application that provides performance rankings and comparisons for macOS, Windows and Android browsers. It uses data from Speedometer 3 benchmarks to give users a comprehensive view of browser performance.
 
 ## Features
 
 - Responsive design for optimal viewing on various devices
-- Display a ranking list of macOS browsers based on performance metrics
+- Display a ranking list of macOS, Windows and Android browsers based on performance metrics
 - Filter browsers based on their engine
 
 ## In development
 
 - Show detailed information for each browser, including multiple versions
-- Compare browsers based on Speedometer 3 scores, privacy scores, and overall performance (help needed)
+- Compare browsers based on Speedometer 3 scores + privacy scores, and overall performance (help needed)
 
 ## Technologies Used
 
@@ -42,9 +42,9 @@ Browserating is a Next.js web application that provides performance rankings and
 
 ## Data Management
 
-Browser data is stored in `public/data/browsers.json`. To update browser information:
+Browser data is stored in `public/data/`. To update browser information:
 
-1. Open `public/data/browsers.json`
+1. Open `android.json`, `macos.json`, or `windows.json` in a text editor
 2. Modify the JSON data following the existing structure
 3. Save the file
 
@@ -57,5 +57,4 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 ## Acknowledgments
 
 - Speedometer 3 for providing benchmark data - https://browserbench.org/Speedometer3.0/
-- Privacytests - https://privacytests.org/
 - All browser developers for their continuous work on improving web technologies
