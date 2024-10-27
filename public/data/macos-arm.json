@@ -6,7 +6,7 @@
       {
         "version": "1.66.0",
         "scores": {
-          "speedometer3": 0.0
+          "speedometer3": 36.87
         }
       }
     ]
@@ -30,7 +30,7 @@
       {
         "version": "1.110.0",
         "scores": {
-          "speedometer3": 0.0
+          "speedometer3": 34.6
         }
       }
     ]
@@ -42,7 +42,7 @@
       {
         "version": "131.0.3",
         "scores": {
-          "speedometer3": 0.0
+          "speedometer3": 37.36
         }
       }
     ]
@@ -66,7 +66,7 @@
       {
         "version": "133.0a1",
         "scores": {
-          "speedometer3": 0.0
+          "speedometer3": 36.57
         }
       }
     ]
@@ -90,7 +90,7 @@
       {
         "version": "130.0.6723.70",
         "scores": {
-          "speedometer3": 0.0
+          "speedometer3": 40.37
         }
       }
     ]
@@ -102,7 +102,7 @@
       {
         "version": "132.0.6799.0",
         "scores": {
-          "speedometer3": 0.0
+          "speedometer3": 42.53
         }
       }
     ]
@@ -126,19 +126,7 @@
       {
         "version": "130.0.2849.56",
         "scores": {
-          "speedometer3": 0.0
-        }
-      }
-    ]
-  },
-  {
-    "name": "Mullvad Browser",
-    "engine": "Gecko",
-    "versions": [
-      {
-        "version": "13.5.7",
-        "scores": {
-          "speedometer3": 0.0
+          "speedometer3": 34.9
         }
       }
     ]
@@ -150,7 +138,7 @@
       {
         "version": "114.0.5282.115",
         "scores": {
-          "speedometer3": 0.0
+          "speedometer3": 38.3
         }
       }
     ]
@@ -162,7 +150,7 @@
       {
         "version": "114.0.5282.123",
         "scores": {
-          "speedometer3": 0.0
+          "speedometer3": 38.47
         }
       }
     ]
@@ -192,37 +180,13 @@
     ]
   },
   {
-    "name": "Sigma OS",
-    "engine": "WebKit",
-    "versions": [
-      {
-        "version": "1.17.0.8",
-        "scores": {
-          "speedometer3": 0.0
-        }
-      }
-    ]
-  },
-  {
-    "name": "Tor Browser",
-    "engine": "Gecko",
-    "versions": [
-      {
-        "version": "14.0",
-        "scores": {
-          "speedometer3": 0.0
-        }
-      }
-    ]
-  },
-  {
     "name": "Vivaldi",
     "engine": "Blink",
     "versions": [
       {
         "version": "7.0.3495.6",
         "scores": {
-          "speedometer3": 0.0
+          "speedometer3": 39.83
         }
       }
     ]
@@ -234,7 +198,7 @@
       {
         "version": "6.0.20",
         "scores": {
-          "speedometer3": 0.0
+          "speedometer3": 23.7
         }
       }
     ]
@@ -246,7 +210,7 @@
       {
         "version": "24.10.1.616",
         "scores": {
-          "speedometer3": 0.0
+          "speedometer3": 32.53
         }
       }
     ]
@@ -258,7 +222,7 @@
       {
         "version": "1.0.1-a.12",
         "scores": {
-          "speedometer3": 0.0
+          "speedometer3": 31.08
         }
       }
     ]
