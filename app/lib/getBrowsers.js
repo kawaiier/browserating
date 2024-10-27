@@ -36,10 +36,8 @@ export async function getBrowsers() {
     return {
       ...browser,
       android: androidBrowser ? androidBrowser.versions : [],
-      macos: [
-        ...(macosIntelBrowser ? macosIntelBrowser.versions : []), 
-        ...(macosArmBrowser ? macosArmBrowser.versions : [])
-      ],
+      "macos-intel": macosIntelBrowser ? macosIntelBrowser.versions : [],
+      "macos-arm": macosArmBrowser ? macosArmBrowser.versions : [],
       windows: windowsBrowser ? windowsBrowser.versions : [],
       engine:
         androidBrowser?.engine ||

@@ -15,7 +15,8 @@ const getEngineColor = (engine) => {
 };
 
 const platformNames = {
-  macos: "macOS",
+  "macos-intel": "macOS Intel",
+  "macos-arm": "macOS ARM",
   windows: "Windows",
   android: "Android",
 };
@@ -24,7 +25,7 @@ export default function BrowserRankingList() {
   const [browsers, setBrowsers] = useState([]);
   const [filteredBrowsers, setFilteredBrowsers] = useState([]);
   const [selectedEngine, setSelectedEngine] = useState("All");
-  const [selectedPlatform, setSelectedPlatform] = useState("macos"); // Default to macOS
+  const [selectedPlatform, setSelectedPlatform] = useState("macos-intel"); // Default to macOS Intel
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -64,7 +65,7 @@ export default function BrowserRankingList() {
     "All",
     ...new Set(browsers.map((browser) => browser.engine)),
   ];
-  const platforms = ["macos", "windows", "android"];
+  const platforms = ["macos-intel", "macos-arm", "windows", "android"];
 
   const handleEngineFilter = (engine) => {
     setSelectedEngine(engine);
