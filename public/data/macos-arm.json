@@ -1,0 +1,266 @@
+[
+  {
+    "name": "Arc Browser",
+    "engine": "Blink",
+    "versions": [
+      {
+        "version": "1.66.0",
+        "scores": {
+          "speedometer3": 0.0
+        }
+      }
+    ]
+  },
+  {
+    "name": "Brave",
+    "engine": "Blink",
+    "versions": [
+      {
+        "version": "1.71.118",
+        "scores": {
+          "speedometer3": 39.17
+        }
+      }
+    ]
+  },
+  {
+    "name": "DuckDuckGo Browser",
+    "engine": "WebKit",
+    "versions": [
+      {
+        "version": "1.110.0",
+        "scores": {
+          "speedometer3": 0.0
+        }
+      }
+    ]
+  },
+  {
+    "name": "Firefox",
+    "engine": "Gecko",
+    "versions": [
+      {
+        "version": "131.0.3",
+        "scores": {
+          "speedometer3": 0.0
+        }
+      }
+    ]
+  },
+  {
+    "name": "Firefox Developer Edition",
+    "engine": "Gecko",
+    "versions": [
+      {
+        "version": "132.0b9",
+        "scores": {
+          "speedometer3": 37.5
+        }
+      }
+    ]
+  },
+  {
+    "name": "Firefox Nightly",
+    "engine": "Gecko",
+    "versions": [
+      {
+        "version": "133.0a1",
+        "scores": {
+          "speedometer3": 0.0
+        }
+      }
+    ]
+  },
+  {
+    "name": "Floorp",
+    "engine": "Gecko",
+    "versions": [
+      {
+        "version": "11.19.1",
+        "scores": {
+          "speedometer3": 36.03
+        }
+      }
+    ]
+  },
+  {
+    "name": "Google Chrome",
+    "engine": "Blink",
+    "versions": [
+      {
+        "version": "130.0.6723.70",
+        "scores": {
+          "speedometer3": 0.0
+        }
+      }
+    ]
+  },
+  {
+    "name": "Google Chrome Canary",
+    "engine": "Blink",
+    "versions": [
+      {
+        "version": "132.0.6799.0",
+        "scores": {
+          "speedometer3": 0.0
+        }
+      }
+    ]
+  },
+  {
+    "name": "Librewolf",
+    "engine": "Gecko",
+    "versions": [
+      {
+        "version": "131.0.3-1",
+        "scores": {
+          "speedometer3": 11.3
+        }
+      }
+    ]
+  },
+  {
+    "name": "Microsoft Edge",
+    "engine": "Blink",
+    "versions": [
+      {
+        "version": "130.0.2849.56",
+        "scores": {
+          "speedometer3": 0.0
+        }
+      }
+    ]
+  },
+  {
+    "name": "Mullvad Browser",
+    "engine": "Gecko",
+    "versions": [
+      {
+        "version": "13.5.7",
+        "scores": {
+          "speedometer3": 0.0
+        }
+      }
+    ]
+  },
+  {
+    "name": "Opera",
+    "engine": "Blink",
+    "versions": [
+      {
+        "version": "114.0.5282.115",
+        "scores": {
+          "speedometer3": 0.0
+        }
+      }
+    ]
+  },
+  {
+    "name": "Opera GX",
+    "engine": "Blink",
+    "versions": [
+      {
+        "version": "114.0.5282.123",
+        "scores": {
+          "speedometer3": 0.0
+        }
+      }
+    ]
+  },
+  {
+    "name": "Orion",
+    "engine": "WebKit",
+    "versions": [
+      {
+        "version": "0.99.128.2.1-beta",
+        "scores": {
+          "speedometer3": 40.1
+        }
+      }
+    ]
+  },
+  {
+    "name": "Safari",
+    "engine": "WebKit",
+    "versions": [
+      {
+        "version": "18.01",
+        "scores": {
+          "speedometer3": 42.27
+        }
+      }
+    ]
+  },
+  {
+    "name": "Sigma OS",
+    "engine": "WebKit",
+    "versions": [
+      {
+        "version": "1.17.0.8",
+        "scores": {
+          "speedometer3": 0.0
+        }
+      }
+    ]
+  },
+  {
+    "name": "Tor Browser",
+    "engine": "Gecko",
+    "versions": [
+      {
+        "version": "14.0",
+        "scores": {
+          "speedometer3": 0.0
+        }
+      }
+    ]
+  },
+  {
+    "name": "Vivaldi",
+    "engine": "Blink",
+    "versions": [
+      {
+        "version": "7.0.3495.6",
+        "scores": {
+          "speedometer3": 0.0
+        }
+      }
+    ]
+  },
+  {
+    "name": "Waterfox",
+    "engine": "Gecko",
+    "versions": [
+      {
+        "version": "6.0.20",
+        "scores": {
+          "speedometer3": 0.0
+        }
+      }
+    ]
+  },
+  {
+    "name": "Yandex Browser",
+    "engine": "Blink",
+    "versions": [
+      {
+        "version": "24.10.1.616",
+        "scores": {
+          "speedometer3": 0.0
+        }
+      }
+    ]
+  },
+  {
+    "name": "Zen Browser",
+    "engine": "Gecko",
+    "versions": [
+      {
+        "version": "1.0.1-a.12",
+        "scores": {
+          "speedometer3": 0.0
+        }
+      }
+    ]
+  }
+]
