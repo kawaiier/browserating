@@ -34,7 +34,7 @@ export default function Home() {
         <p className="mx-auto">
           developed by{" "}
           <a
-            href="kawaiier.dev"
+            href="https://kawaiier.dev"
             className="font-bold mx-auto hover:text-blue-700"
             target="_blank"
           >
