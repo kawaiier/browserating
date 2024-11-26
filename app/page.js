@@ -1,19 +1,14 @@
 "use client";
+import Image from "next/image";
 import About from "./components/About/About";
 import BrowserRankingList from "./components/BrowserRankingList";
 import Explanation from "./components/Explanation";
 import Newsletter from "./components/Newsletter";
+import Header from "./components/Header";
 export default function Home() {
   return (
     <>
-      <header className="pt-8">
-        <h1 className="text-4xl font-bold mb-2 text-center text-indigo-600">
-          Browserating
-        </h1>
-        <h2 className="text-2xl font-semibold mb-6 text-center text-gray-700">
-          Browser Performance Ranking for macOS, Windows and Android
-        </h2>
-      </header>
+      <Header />
       <main className="container mx-auto px-4 py-8">
         <About />
         <BrowserRankingList />
