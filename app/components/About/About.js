@@ -11,7 +11,7 @@ export default function About() {
           <>
             All browsers have been tested on a{" "}
             <span className="font-medium text-indigo-600">
-              clean install of macOS Sequoia 15.0.1.
+              clean install of macOS Sequoia 15.1.1.
             </span>
             The testing was conducted on a{" "}
             <span className="font-medium text-indigo-600">

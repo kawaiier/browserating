@@ -4,6 +4,12 @@
     "engine": "Blink",
     "versions": [
       {
+        "version": "1.70.0",
+        "scores": {
+          "speedometer3": 38.03
+        }
+      },
+      {
         "version": "1.66.0",
         "scores": {
           "speedometer3": 36.87
@@ -15,6 +21,12 @@
     "name": "Brave",
     "engine": "Blink",
     "versions": [
+      {
+        "version": "1.73.91",
+        "scores": {
+          "speedometer3": 39.2
+        }
+      },
       {
         "version": "1.71.118",
         "scores": {
@@ -28,6 +40,12 @@
     "engine": "WebKit",
     "versions": [
       {
+        "version": "1.115.0",
+        "scores": {
+          "speedometer3": 34
+        }
+      },
+      {
         "version": "1.110.0",
         "scores": {
           "speedometer3": 34.6
@@ -39,6 +57,12 @@
     "name": "Firefox",
     "engine": "Gecko",
     "versions": [
+      {
+        "version": "132.0.2",
+        "scores": {
+          "speedometer3": 36.88
+        }
+      },
       {
         "version": "131.0.3",
         "scores": {
@@ -52,6 +76,12 @@
     "engine": "Gecko",
     "versions": [
       {
+        "version": "134.0b1",
+        "scores": {
+          "speedometer3": 36.27
+        }
+      },
+      {
         "version": "132.0b9",
         "scores": {
           "speedometer3": 37.5
@@ -63,6 +93,12 @@
     "name": "Firefox Nightly",
     "engine": "Gecko",
     "versions": [
+      {
+        "version": "135.0a1",
+        "scores": {
+          "speedometer3": 36.33
+        }
+      },
       {
         "version": "133.0a1",
         "scores": {
@@ -76,6 +112,12 @@
     "engine": "Gecko",
     "versions": [
       {
+        "version": "11.21.0",
+        "scores": {
+          "speedometer3": 35.2
+        }
+      },
+      {
         "version": "11.19.1",
         "scores": {
           "speedometer3": 36.03
@@ -87,6 +129,12 @@
     "name": "Google Chrome",
     "engine": "Blink",
     "versions": [
+      {
+        "version": "131.0.6778.86",
+        "scores": {
+          "speedometer3": 42.03
+        }
+      },
       {
         "version": "130.0.6723.70",
         "scores": {
@@ -100,6 +148,12 @@
     "engine": "Blink",
     "versions": [
       {
+        "version": "133.0.6860.0",
+        "scores": {
+          "speedometer3": 41.48
+        }
+      },
+      {
         "version": "132.0.6799.0",
         "scores": {
           "speedometer3": 42.53
@@ -111,6 +165,12 @@
     "name": "Librewolf",
     "engine": "Gecko",
     "versions": [
+      {
+        "version": "132.0.2-1",
+        "scores": {
+          "speedometer3": 10.83
+        }
+      },
       {
         "version": "131.0.3-1",
         "scores": {
@@ -124,6 +184,12 @@
     "engine": "Blink",
     "versions": [
       {
+        "version": "131.0.2903.70",
+        "scores": {
+          "speedometer3": 37.91
+        }
+      },
+      {
         "version": "130.0.2849.56",
         "scores": {
           "speedometer3": 34.9
@@ -135,6 +201,12 @@
     "name": "Opera",
     "engine": "Blink",
     "versions": [
+      {
+        "version": "114.0.5282.222",
+        "scores": {
+          "speedometer3": 39.23
+        }
+      },
       {
         "version": "114.0.5282.115",
         "scores": {
@@ -148,6 +220,12 @@
     "engine": "Blink",
     "versions": [
       {
+        "version": "114.0.5282.233",
+        "scores": {
+          "speedometer3": 39.57
+        }
+      },
+      {
         "version": "114.0.5282.123",
         "scores": {
           "speedometer3": 38.47
@@ -159,6 +237,12 @@
     "name": "Orion",
     "engine": "WebKit",
     "versions": [
+      {
+        "version": "0.99.129-beta",
+        "scores": {
+          "speedometer3": 40.67
+        }
+      },
       {
         "version": "0.99.128.2.1-beta",
         "scores": {
@@ -172,6 +256,12 @@
     "engine": "WebKit",
     "versions": [
       {
+        "version": "18.1.1",
+        "scores": {
+          "speedometer3": 43.77
+        }
+      },
+      {
         "version": "18.01",
         "scores": {
           "speedometer3": 42.27
@@ -183,6 +273,12 @@
     "name": "Vivaldi",
     "engine": "Blink",
     "versions": [
+      {
+        "version": "7.0.3495.18",
+        "scores": {
+          "speedometer3": 39.9
+        }
+      },
       {
         "version": "7.0.3495.6",
         "scores": {
@@ -196,6 +292,12 @@
     "engine": "Gecko",
     "versions": [
       {
+        "version": "6.5.2",
+        "scores": {
+          "speedometer3": 34.23
+        }
+      },
+      {
         "version": "6.0.20",
         "scores": {
           "speedometer3": 23.7
@@ -208,6 +310,12 @@
     "engine": "Blink",
     "versions": [
       {
+        "version": "24.10.1.687",
+        "scores": {
+          "speedometer3": 32.91
+        }
+      },
+      {
         "version": "24.10.1.616",
         "scores": {
           "speedometer3": 32.53
@@ -219,6 +327,12 @@
     "name": "Zen Browser",
     "engine": "Gecko",
     "versions": [
+      {
+        "version": "1.0.1-a.19",
+        "scores": {
+          "speedometer3": 30.13
+        }
+      },
       {
         "version": "1.0.1-a.12",
         "scores": {
