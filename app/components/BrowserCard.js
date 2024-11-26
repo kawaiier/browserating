@@ -64,9 +64,33 @@ export default function BrowserCard({
           <p className="text-2xl font-bold text-center mt-4">
             {latestVersion.scores.speedometer3.toFixed(2)}
           </p>
+          {prevSpeedometer3Score && (
+            <p className="text-sm text-center">
+              <span
+                className={`${
+                  latestVersion.scores.speedometer3 - prevSpeedometer3Score > 0
+                    ? "text-green-600"
+                    : latestVersion.scores.speedometer3 -
+                          prevSpeedometer3Score <
+                        0
+                      ? "text-red-600"
+                      : "text-gray-600"
+                }`}
+              >
+                {latestVersion.scores.speedometer3 - prevSpeedometer3Score > 0
+                  ? "+"
+                  : ""}
+                {(
+                  latestVersion.scores.speedometer3 - prevSpeedometer3Score
+                ).toFixed(2)}
+              </span>
+            </p>
+          )}
           <p
             title={platformData[1]?.version}
-            className={`text-xs text-gray-600 text-center ${prevSpeedometer3Score ? "" : "opacity-50"}`}
+            className={`text-xs text-gray-600 text-center ${
+              prevSpeedometer3Score ? "" : "opacity-50"
+            }`}
           >
             Previous Version:{" "}
             {(prevSpeedometer3Score && prevSpeedometer3Score.toFixed(2)) ||
