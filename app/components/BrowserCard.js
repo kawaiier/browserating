@@ -87,14 +87,17 @@ export default function BrowserCard({
             </p>
           )}
           <p
-            title={platformData[1]?.version}
             className={`text-xs text-gray-600 text-center ${
               prevSpeedometer3Score ? "" : "opacity-50"
             }`}
           >
-            Previous Version:{" "}
-            {(prevSpeedometer3Score && prevSpeedometer3Score.toFixed(2)) ||
-              "N/A"}
+            <span
+              className="border-b border-dashed border-gray-400 cursor-help"
+              title="Previous version score"
+            >
+              {(prevSpeedometer3Score && prevSpeedometer3Score.toFixed(2)) ||
+                "N/A"}
+            </span>
           </p>
         </div>
       </div>
