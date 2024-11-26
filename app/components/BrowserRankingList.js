@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import BrowserCard from "./BrowserCard";
 import { getBrowsers } from "../lib/getBrowsers";
 
@@ -21,11 +21,20 @@ const platformNames = {
   android: "Android",
 };
 
+// Skeleton Loader Component
+const SkeletonLoader = () => (
+  <div className="animate-pulse flex flex-col space-y-4">
+    <div className="h-24 bg-gray-200 rounded"></div>
+    <div className="h-6 bg-gray-200 rounded w-3/4"></div>
+    <div className="h-6 bg-gray-200 rounded w-1/2"></div>
+  </div>
+);
+
 export default function BrowserRankingList() {
   const [browsers, setBrowsers] = useState([]);
   const [filteredBrowsers, setFilteredBrowsers] = useState([]);
   const [selectedEngine, setSelectedEngine] = useState("All");
-  const [selectedPlatform, setSelectedPlatform] = useState("macos-arm"); // Default to macOS ARM
+  const [selectedPlatform, setSelectedPlatform] = useState("macos-arm");
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -33,9 +42,8 @@ export default function BrowserRankingList() {
     async function fetchBrowsers() {
       try {
         const data = await getBrowsers();
-        const sortedBrowsers = sortBrowsersByPlatform(data, selectedPlatform);
-        setBrowsers(sortedBrowsers);
-        setFilteredBrowsers(sortedBrowsers);
+        setBrowsers(data);
+        setFilteredBrowsers(data);
         setIsLoading(false);
       } catch (err) {
         setError("Failed to load browser data");
@@ -43,7 +51,7 @@ export default function BrowserRankingList() {
       }
     }
     fetchBrowsers();
-  }, [selectedPlatform]);
+  }, []);
 
   const sortBrowsersByPlatform = (browsers, platform) => {
     return browsers.sort((a, b) => {
@@ -53,18 +61,23 @@ export default function BrowserRankingList() {
     });
   };
 
+  const sortedBrowsers = useMemo(
+    () => sortBrowsersByPlatform(browsers, selectedPlatform),
+    [browsers, selectedPlatform]
+  );
+
   useEffect(() => {
     const filtered =
       selectedEngine === "All"
-        ? browsers
-        : browsers.filter((browser) => browser.engine === selectedEngine);
+        ? sortedBrowsers
+        : sortedBrowsers.filter((browser) => browser.engine === selectedEngine);
     setFilteredBrowsers(filtered);
-  }, [selectedEngine, browsers]);
+  }, [selectedEngine, sortedBrowsers]);
 
-  const engines = [
-    "All",
-    ...new Set(browsers.map((browser) => browser.engine)),
-  ];
+  const engines = useMemo(
+    () => ["All", ...new Set(browsers.map((browser) => browser.engine))],
+    [browsers]
+  );
   const platforms = ["macos-intel", "macos-arm", "windows", "android"];
 
   const handleEngineFilter = (engine) => {
@@ -73,13 +86,59 @@ export default function BrowserRankingList() {
 
   const handlePlatformChange = (platform) => {
     setSelectedPlatform(platform);
-    const sortedBrowsers = sortBrowsersByPlatform(browsers, platform);
-    setBrowsers(sortedBrowsers);
-    setFilteredBrowsers(sortedBrowsers);
   };
 
-  if (isLoading) return <p>Loading...</p>;
-  if (error) return <p>{error}</p>;
+  if (isLoading) {
+    return (
+      <div className="p-6">
+        <div className="mb-4 flex flex-wrap gap-2">
+          {engines.map((engine) => (
+            <button
+              key={engine}
+              onClick={() => handleEngineFilter(engine)}
+              className={`px-2 py-1 rounded-full text-sm ${getEngineColor(
+                engine
+              )}`}
+              aria-pressed={selectedEngine === engine}
+            >
+              {engine}
+            </button>
+          ))}
+        </div>
+        <div className="mb-4 flex flex-wrap gap-2">
+          {platforms.map((platform) => (
+            <button
+              key={platform}
+              onClick={() => handlePlatformChange(platform)}
+              className={`px-2 py-1 rounded-full text-sm ${
+                selectedPlatform === platform
+                  ? "ring-2 ring-offset-2 ring-gray-300"
+                  : ""
+              }`}
+              aria-pressed={selectedPlatform === platform}
+            >
+              {platformNames[platform]}
+            </button>
+          ))}
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {/* Display skeleton loaders while loading */}
+          {[...Array(6)].map((_, index) => (
+            <SkeletonLoader key={index} />
+          ))}
+        </div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div>
+        <p>{error}</p>
+        <button onClick={() => window.location.reload()}>Retry</button>
+      </div>
+    );
+  }
 
   return (
     <div className="p-6">
@@ -88,11 +147,14 @@ export default function BrowserRankingList() {
           <button
             key={engine}
             onClick={() => handleEngineFilter(engine)}
-            className={`px-2 py-1 rounded-full text-sm ${getEngineColor(engine)} ${
+            className={`px-2 py-1 rounded-full text-sm ${getEngineColor(
+              engine
+            )} ${
               selectedEngine === engine
                 ? "ring-2 ring-offset-2 ring-gray-300"
                 : ""
             }`}
+            aria-pressed={selectedEngine === engine}
           >
             {engine}
           </button>
@@ -108,6 +170,7 @@ export default function BrowserRankingList() {
                 ? "ring-2 ring-offset-2 ring-gray-300"
                 : ""
             }`}
+            aria-pressed={selectedPlatform === platform}
           >
             {platformNames[platform]}
           </button>
