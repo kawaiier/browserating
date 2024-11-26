@@ -2,7 +2,7 @@
 import About from "./components/About/About";
 import BrowserRankingList from "./components/BrowserRankingList";
 import Explanation from "./components/Explanation";
-
+import Newsletter from "./components/Newsletter";
 export default function Home() {
   return (
     <>
@@ -18,6 +18,7 @@ export default function Home() {
         <About />
         <BrowserRankingList />
       </main>
+      <Newsletter />
       <Explanation />
       <footer className="text-center text-sm p-8 flex flex-col items-center gap-2 mt-8">
         <div className="flex flex-row gap-2">
