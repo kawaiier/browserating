@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { Line } from "react-chartjs-2";
+import { Bar } from "react-chartjs-2";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -9,6 +9,7 @@ import {
   Title,
   Tooltip,
   Legend,
+  BarElement,
 } from "chart.js";
 
 ChartJS.register(
@@ -18,7 +19,8 @@ ChartJS.register(
   LineElement,
   Title,
   Tooltip,
-  Legend
+  Legend,
+  BarElement
 );
 
 const BrowserDetailsModal = ({ browser, selectedPlatform, onClose }) => {
@@ -45,6 +47,7 @@ const BrowserDetailsModal = ({ browser, selectedPlatform, onClose }) => {
       {
         label: "Speedometer 3 Score",
         data: sortedData.map((data) => data.scores.speedometer3),
+        backgroundColor: "#7853E0",
         borderColor: "#7853E0",
         tension: 0.1,
       },
@@ -112,7 +115,7 @@ const BrowserDetailsModal = ({ browser, selectedPlatform, onClose }) => {
             Performance History
           </h3>
           <div className="h-72">
-            <Line data={chartData} options={{ maintainAspectRatio: false }} />
+            <Bar data={chartData} options={{ maintainAspectRatio: false }} />
           </div>
         </div>
 
