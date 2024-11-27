@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const DONATION_ADDRESSES = {
   BTC: "bc1qfyad27catyr8rtdhhydn8ummf996kxtesuw4hr",
@@ -10,6 +10,7 @@ const DONATION_ADDRESSES = {
 
 export default function Footer() {
   const [isCopied, setIsCopied] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
 
   const handleCopy = (text) => {
     navigator.clipboard.writeText(text);
@@ -18,7 +19,7 @@ export default function Footer() {
   };
 
   const truncateAddress = (address, type) => {
-    if (type === "XMR" && window.innerWidth < 640) {
+    if (type === "XMR") {
       return `${address.slice(0, 20)}...${address.slice(-20)}`;
     }
     return address;
