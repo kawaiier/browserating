@@ -23,9 +23,21 @@ ChartJS.register(
 
 const BrowserDetailsModal = ({ browser, selectedPlatform, onClose }) => {
   const platformData = browser[selectedPlatform];
-
-  // Sort the data chronologically (oldest to newest)
+  const latestVersion = platformData[0];
   const sortedData = [...platformData].reverse();
+
+  const getEngineColor = (engine) => {
+    switch (engine.toLowerCase()) {
+      case "blink":
+        return "bg-blue-100 text-blue-800";
+      case "gecko":
+        return "bg-orange-100 text-orange-800";
+      case "webkit":
+        return "bg-green-100 text-green-800";
+      default:
+        return "bg-gray-100 text-gray-800";
+    }
+  };
 
   const chartData = {
     labels: sortedData.map((data) => data.version),
@@ -45,21 +57,34 @@ const BrowserDetailsModal = ({ browser, selectedPlatform, onClose }) => {
       onClick={onClose}
     >
       <div
-        className="bg-white rounded-xl shadow-lg p-8 max-w-3xl w-full max-h-[90vh] overflow-y-auto"
+        className="bg-white rounded-xl shadow-lg p-8 max-w-3xl w-full max-h-[90vh] overflow-y-auto fade-in"
         onClick={(e) => e.stopPropagation()}
+        role="dialog"
+        aria-modal="true"
       >
         <div className="flex justify-between items-center mb-6">
-          <div className="flex items-center space-x-4">
-            <Image
-              src={browser.logo}
-              alt={`${browser.name} logo`}
-              width={48}
-              height={48}
-              className="object-contain"
-            />
-            <h2 className="text-3xl font-bold bg-gradient-to-r from-violet-600 to-indigo-600 bg-clip-text text-transparent">
-              {browser.name}
-            </h2>
+          <div>
+            <div className="flex items-center space-x-4 mb-2">
+              <Image
+                src={browser.logo}
+                alt={`${browser.name} logo`}
+                width={48}
+                height={48}
+                className="object-contain"
+              />
+              <h2 className="text-3xl font-bold text-gray-800">
+                {browser.name}
+              </h2>
+            </div>
+            <div className="flex items-center ml-1">
+              <span
+                className={`px-2 py-1 rounded-full text-sm ${getEngineColor(
+                  browser.engine
+                )}`}
+              >
+                {browser.engine}
+              </span>
+            </div>
           </div>
           <button
             onClick={onClose}
