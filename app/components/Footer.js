@@ -105,6 +105,16 @@ export default function Footer() {
               ))}
             </div>
           </div>
+
+          {/* Privacy Policy Link */}
+          <div className="text-sm text-gray-600">
+            <a
+              href="/privacy"
+              className="hover:text-purple-700 transition-colors"
+            >
+              Privacy Policy
+            </a>
+          </div>
         </div>
       </div>
     </footer>
