@@ -90,30 +90,37 @@ export default function BrowserRankingList() {
 
   if (isLoading) {
     return (
-      <div className="p-6">
-        <div className="mb-4 flex flex-wrap gap-2">
+      <div className="p-6 lg:px-10">
+        {/* Engine Filters */}
+        <div className="mb-4 flex flex-wrap gap-3">
           {engines.map((engine) => (
             <button
               key={engine}
               onClick={() => handleEngineFilter(engine)}
-              className={`px-2 py-1 rounded-full text-sm ${getEngineColor(
+              className={`px-3 py-1 rounded-full text-sm ${getEngineColor(
                 engine
-              )}`}
+              )} ${
+                selectedEngine === engine
+                  ? "ring-2 ring-offset-2 ring-gray-300"
+                  : ""
+              }`}
               aria-pressed={selectedEngine === engine}
             >
               {engine}
             </button>
           ))}
         </div>
-        <div className="mb-4 flex flex-wrap gap-2">
+
+        {/* Platform Filters */}
+        <div className="mb-4 flex flex-wrap gap-3">
           {platforms.map((platform) => (
             <button
               key={platform}
               onClick={() => handlePlatformChange(platform)}
-              className={`px-2 py-1 rounded-full text-sm ${
+              className={`px-3 py-1 rounded-full text-sm ${
                 selectedPlatform === platform
                   ? "ring-2 ring-offset-2 ring-gray-300"
-                  : ""
+                  : "bg-gray-100 hover:bg-gray-200"
               }`}
               aria-pressed={selectedPlatform === platform}
             >
@@ -121,10 +128,17 @@ export default function BrowserRankingList() {
             </button>
           ))}
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {/* Display skeleton loaders while loading */}
-          {[...Array(6)].map((_, index) => (
-            <SkeletonLoader key={index} />
+
+        {/* Browser Cards */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 justify-items-center">
+          {filteredBrowsers.map((browser, index) => (
+            <BrowserCard
+              key={browser.name}
+              browser={browser}
+              getEngineColor={getEngineColor}
+              rank={index + 1}
+              selectedPlatform={selectedPlatform}
+            />
           ))}
         </div>
       </div>
