@@ -1,11 +1,12 @@
 "use client";
-import Image from "next/image";
+
 import About from "./components/About/About";
 import BrowserRankingList from "./components/BrowserRankingList";
 import Explanation from "./components/Explanation";
 import Newsletter from "./components/Newsletter";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
+
 export default function Home() {
   return (
     <>
