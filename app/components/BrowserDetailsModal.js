@@ -57,7 +57,9 @@ const BrowserDetailsModal = ({ browser, selectedPlatform, onClose }) => {
               height={48}
               className="object-contain"
             />
-            <h2 className="text-3xl font-bold text-gray-800">{browser.name}</h2>
+            <h2 className="text-3xl font-bold bg-gradient-to-r from-violet-600 to-indigo-600 bg-clip-text text-transparent">
+              {browser.name}
+            </h2>
           </div>
           <button
             onClick={onClose}

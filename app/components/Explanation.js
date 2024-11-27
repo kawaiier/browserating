@@ -1,6 +1,6 @@
 export default function Explanation() {
   return (
-    <section className="max-w-4xl mx-auto px-4 py-8 mt-12 bg-gray-50 rounded-lg shadow-md">
+    <section className="max-w-4xl mx-auto p-10 mt-12 bg-gray-50 rounded-lg shadow-md">
       <h2 className="text-3xl font-bold mb-6">
         Understanding Browser Performance Rankings
       </h2>

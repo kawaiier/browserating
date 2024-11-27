@@ -14,12 +14,12 @@ export default function Newsletter() {
   }, []);
 
   return (
-    <div className="w-full max-w-3xl mx-auto px-4 py-8">
-      <div className="bg-white rounded-lg shadow-md p-6">
-        <h2 className="text-2xl font-bold mb-4 text-gray-800">
-          Stay Updated with Browserating
+    <div className="w-full max-w-3xl mx-auto px-4 py-8 ">
+      <div className="bg-white rounded-lg shadow-md p-6 bg-gradient-to-br from-[#7853E0] to-[#FFC045]">
+        <h2 className="text-2xl font-bold mb-4 text-white">
+          📫 Stay Updated with Browserating
         </h2>
-        <p className="text-gray-600 mb-6">
+        <p className="text-white mb-6">
           Subscribe to our newsletter for the latest browser testing insights
           and updates.
         </p>

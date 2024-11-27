@@ -53,7 +53,7 @@ const BrowserCard = React.memo(
                   href={browser.website}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-blue-600 hover:text-blue-800"
+                  className="bg-gradient-to-r from-violet-600 to-indigo-600 bg-clip-text text-transparent hover:text-violet-900"
                 >
                   {browser.name}
                 </a>

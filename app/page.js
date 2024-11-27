@@ -11,11 +11,11 @@ export default function Home() {
     <>
       <Header />
       <main className="container mx-auto px-4 py-8">
-        <About />
         <BrowserRankingList />
+        <Newsletter />
+        <About />
+        <Explanation />
       </main>
-      <Newsletter />
-      <Explanation />
       <Footer />
     </>
   );
