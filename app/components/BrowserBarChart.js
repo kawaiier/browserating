@@ -38,18 +38,20 @@ export default function BrowserBarChart({
 
   return (
     <div className="space-y-4 w-full">
-      <h3 className="text-lg font-semibold">Performance Comparison</h3>
-      <p className="text-sm text-gray-500">Scroll to view</p>
+      <h3 className="text-lg font-semibold dark:text-gray-100">
+        Performance Comparison
+      </h3>
+      <p className="text-sm text-gray-500 dark:text-gray-400">Scroll to view</p>
       <div className="overflow-x-auto scrollbar">
         <div className="h-[400px] flex justify-start gap-4 p-4 min-w-fit">
           {chartData.map((item) => (
             <div key={item.name} className="flex flex-col w-24 flex-shrink-0">
-              <div className="text-sm font-medium text-center mb-2">
+              <div className="text-sm font-medium text-center mb-2 dark:text-gray-300">
                 {Math.round(item.score).toLocaleString()}
               </div>
 
               <div className="flex-1 relative group">
-                <div className="absolute inset-0 bg-gray-100 rounded-t-lg">
+                <div className="absolute inset-0 bg-gray-100 dark:bg-gray-700 rounded-t-lg">
                   <div
                     className={`w-full ${getEngineColor(
                       item.engine
@@ -70,7 +72,7 @@ export default function BrowserBarChart({
 
               <div className="h-[60px] flex items-center justify-center mt-2">
                 <div
-                  className="text-sm font-medium text-center w-full break-words"
+                  className="text-sm font-medium text-center w-full break-words dark:text-gray-300"
                   title={item.name}
                 >
                   {item.name}
@@ -93,16 +95,24 @@ export default function BrowserBarChart({
 
         .scrollbar::-webkit-scrollbar-track {
           background: #f1f5f9;
-          border-radius: 4px;
+          @media (prefers-color-scheme: dark) {
+            background: #1f2937;
+          }
         }
 
         .scrollbar::-webkit-scrollbar-thumb {
           background: #cbd5e1;
           border-radius: 4px;
+          @media (prefers-color-scheme: dark) {
+            background: #4b5563;
+          }
         }
 
         .scrollbar::-webkit-scrollbar-thumb:hover {
           background: #94a3b8;
+          @media (prefers-color-scheme: dark) {
+            background: #6b7280;
+          }
         }
       `}</style>
     </div>

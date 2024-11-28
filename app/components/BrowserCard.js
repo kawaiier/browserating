@@ -29,12 +29,14 @@ const BrowserCard = React.memo(
     return (
       <>
         <div
-          className={`bg-white shadow-lg rounded-lg overflow-hidden max-w-sm transition-transform transform  hover:scale-105 ${getRankStyle(
+          className={`bg-white dark:bg-gray-800 shadow-lg rounded-lg overflow-hidden max-w-sm 
+          transition-all transform hover:scale-105 ${getRankStyle(
             rank
-          )} cursor-pointer`}
+          )} cursor-pointer
+          dark:shadow-[0_0_100px_13px_rgba(126,4,255,0.07)]`}
           style={{
             boxShadow:
-              "1px 0px 100px 13px rgba(126,4,255, 0.11), 36px 24px 100px 7px rgba(255,187,0, 0.12)",
+              "1px 0px 50px 5px rgba(126,4,255, 0.05), 18px 12px 50px 3px rgba(255,187,0, 0.06)",
           }}
           role="article"
           aria-labelledby={`browser-${browser.name}`}
@@ -47,7 +49,7 @@ const BrowserCard = React.memo(
                 alt={`${browser.name} logo`}
                 width={50}
                 height={50}
-                className="mr-4"
+                className="mr-4 dark:brightness-90"
               />
               <h3
                 id={`browser-${browser.name}`}
@@ -57,14 +59,18 @@ const BrowserCard = React.memo(
                   href={browser.website}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="bg-gradient-to-r from-violet-600 to-indigo-600 bg-clip-text text-transparent hover:text-violet-900"
+                  className="bg-gradient-to-r from-violet-600 to-indigo-600 bg-clip-text text-transparent 
+                  hover:text-violet-900 dark:hover:text-violet-400 transition-colors"
                 >
                   {browser.name}
                 </a>
               </h3>
             </div>
             <div className="mb-4">
-              <span className="bg-gray-200 text-gray-700 px-2 py-1 rounded-full text-sm mr-2">
+              <span
+                className="bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 
+                px-2 py-1 rounded-full text-sm mr-2"
+              >
                 {latestVersion.version}
               </span>
               <span
@@ -76,7 +82,7 @@ const BrowserCard = React.memo(
               </span>
             </div>
             <div className="space-y-2">
-              <p className="text-2xl font-bold text-center mt-4">
+              <p className="text-2xl font-bold text-center mt-4 dark:text-white">
                 {latestVersion.scores.speedometer3.toFixed(2)}
               </p>
               {prevSpeedometer3Score && (
@@ -86,12 +92,12 @@ const BrowserCard = React.memo(
                       latestVersion.scores.speedometer3 -
                         prevSpeedometer3Score >
                       0
-                        ? "text-green-600"
+                        ? "text-green-600 dark:text-green-400"
                         : latestVersion.scores.speedometer3 -
                             prevSpeedometer3Score <
                           0
-                        ? "text-red-600"
-                        : "text-gray-600"
+                        ? "text-red-600 dark:text-red-400"
+                        : "text-gray-600 dark:text-gray-400"
                     }`}
                   >
                     {latestVersion.scores.speedometer3 - prevSpeedometer3Score >
@@ -105,12 +111,12 @@ const BrowserCard = React.memo(
                 </p>
               )}
               <p
-                className={`text-xs text-gray-600 text-center ${
+                className={`text-xs text-gray-600 dark:text-gray-400 text-center ${
                   prevSpeedometer3Score ? "" : "opacity-50"
                 }`}
               >
                 <span
-                  className="border-b border-dashed border-gray-400 cursor-help"
+                  className="border-b border-dashed border-gray-400 dark:border-gray-500 cursor-help"
                   title="Previous version score"
                 >
                   {(prevSpeedometer3Score &&

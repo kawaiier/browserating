@@ -16,3 +16,17 @@
 .fade-in {
   animation: fade-in 0.4s ease-in-out forwards; /* Adjust duration and easing as needed */
 }
+
+@keyframes twinkle {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.3;
+  }
+}
+
+.animate-twinkle {
+  animation: twinkle 2s ease-in-out infinite;
+}

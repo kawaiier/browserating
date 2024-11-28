@@ -14,32 +14,43 @@ export default function Newsletter() {
   }, []);
 
   return (
-    <div className="w-full max-w-3xl mx-auto px-4 py-8 ">
-      <div className="bg-white rounded-lg shadow-md p-6 bg-gradient-to-br from-[#7853E0] to-[#FFC045]">
-        <h2 className="text-2xl font-bold mb-4 text-white">
-          📫 Stay Updated with Browserating
+    <section className="max-w-4xl mx-auto px-4 py-8 mt-12 bg-gradient-to-br from-purple-50 to-blue-50 dark:from-gray-800 dark:to-gray-900 rounded-lg shadow-lg dark:shadow-gray-900/50">
+      <div className="text-center mb-8">
+        <h2 className="text-2xl md:text-3xl font-bold mb-4 bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
+          Stay Updated with Browser Performance
         </h2>
-        <p className="text-white mb-6">
-          Subscribe to our newsletter for the latest browser testing insights
-          and updates.
+        <p className="text-gray-600 dark:text-gray-300">
+          Get notified when we publish new browser performance comparisons
         </p>
-        <div className="w-full">
-          <iframe
-            ref={iframeRef}
-            src="https://embeds.beehiiv.com/276ea08f-2b4f-433b-82f9-6e3648ac6869?slim=true"
-            data-test-id="beehiiv-embed"
-            height="52"
-            frameBorder="0"
-            scrolling="no"
-            className="w-full"
-            style={{
-              margin: 0,
-              borderRadius: "0px !important",
-              backgroundColor: "transparent",
-            }}
-          />
-        </div>
       </div>
-    </div>
+
+      <form className="max-w-md mx-auto">
+        <div className="flex flex-col sm:flex-row gap-4">
+          <input
+            type="email"
+            placeholder="Enter your email"
+            className="flex-1 px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 
+            bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 
+            placeholder-gray-500 dark:placeholder-gray-400
+            focus:outline-none focus:ring-2 focus:ring-purple-500 dark:focus:ring-purple-400
+            transition-colors duration-200"
+            required
+          />
+          <button
+            type="submit"
+            className="px-6 py-2 bg-gradient-to-r from-purple-600 to-blue-600 
+            text-white font-medium rounded-lg shadow-md 
+            hover:from-purple-700 hover:to-blue-700 
+            focus:outline-none focus:ring-2 focus:ring-purple-500 dark:focus:ring-purple-400
+            transition-all duration-200 transform hover:scale-105"
+          >
+            Subscribe
+          </button>
+        </div>
+        <p className="text-xs text-gray-500 dark:text-gray-400 mt-4 text-center">
+          We respect your privacy. Unsubscribe at any time.
+        </p>
+      </form>
+    </section>
   );
 }

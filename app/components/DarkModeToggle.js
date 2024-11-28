@@ -1,0 +1,79 @@
+import React from "react";
+
+export default function DarkModeToggle({ darkMode, toggleDarkMode }) {
+  // Pre-calculate star positions to avoid repositioning on every render
+  const stars = Array.from({ length: 6 }).map(() => ({
+    top: Math.random() * 100,
+    left: Math.random() * 100,
+    delay: Math.random() * 1500,
+  }));
+
+  return (
+    <button
+      onClick={toggleDarkMode}
+      className="relative p-2 w-12 h-12 rounded-full bg-gradient-to-b from-blue-50 to-blue-100 
+            dark:from-gray-700 dark:to-gray-800 hover:from-blue-100 hover:to-blue-200 
+            dark:hover:from-gray-600 dark:hover:to-gray-700
+            shadow-md transition-all duration-300 ease-in-out transform hover:scale-110"
+      aria-label={darkMode ? "Switch to light mode" : "Switch to dark mode"}
+      role="button"
+    >
+      <div className="relative w-full h-full">
+        {/* Sun */}
+        <div
+          className={`absolute inset-0 transform transition-transform duration-500 
+                ${darkMode ? "scale-0 rotate-90" : "scale-100 rotate-0"}`}
+        >
+          {/* Main sun circle */}
+          <div className="absolute inset-[3px] bg-yellow-400 rounded-full" />
+
+          {/* Sun rays */}
+          {[...Array(12)].map((_, i) => (
+            <div
+              key={i}
+              className="absolute w-[2px] h-[7px] bg-yellow-400 rounded"
+              style={{
+                top: "calc(50% - 3px)", // Adjust based on ray size
+                left: "calc(50% - 1px)", // Adjust based on ray size
+                transform: `rotate(${i * 30}deg) translate(8px, 8px)`, // Adjust translate values
+              }}
+            />
+          ))}
+        </div>
+
+        {/* Moon */}
+        <div
+          className={`absolute inset-0 transform transition-transform duration-500
+                ${darkMode ? "scale-100 rotate-0" : "scale-0 -rotate-90"}`}
+        >
+          {/* Main moon circle */}
+          <div className="absolute inset-0 bg-slate-200 rounded-full" />
+
+          {/* Moon craters */}
+          <div className="absolute top-2 left-2 w-2 h-2 bg-slate-400 rounded-full opacity-75" />
+          <div className="absolute top-4 right-3 w-1.5 h-1.5 bg-slate-400 rounded-full opacity-75" />
+          <div className="absolute bottom-2 right-2 w-2.5 h-2.5 bg-slate-400 rounded-full opacity-75" />
+        </div>
+
+        {/* Stars (visible in dark mode) */}
+        <div
+          className={`absolute inset-0 transition-opacity duration-500 ${
+            darkMode ? "opacity-100" : "opacity-0"
+          }`}
+        >
+          {stars.map((star, i) => (
+            <div
+              key={i} // Consider using a unique identifier if available
+              className="absolute w-0.5 h-0.5 bg-white rounded-full animate-twinkle"
+              style={{
+                top: `${star.top}%`,
+                left: `${star.left}%`,
+                animationDelay: `${star.delay}ms`,
+              }}
+            />
+          ))}
+        </div>
+      </div>
+    </button>
+  );
+}
