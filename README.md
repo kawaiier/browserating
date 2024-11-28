@@ -69,3 +69,7 @@ If you find this project useful, please consider supporting me with a coffee.
 - **XMR**: `41zM5Hk39icMLDnbAckLpJHMwMPQKAQEADYA1AvjoZw9Y9NC7atnubrWPZKXWRbpZeGg66DkstQmA1oPZurRBcvRFbQ3PLs`
 - **LTC**: `ltc1qnqldulnxsxpz4g89uklsepjeqx7cajynzyr7tc`
 - **MATIC**: `0x6c056E9ccB183c08e9248eAF26160B5793221513`
+
+## Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=kawaiier/browserating&type=Date)](https://star-history.com/#kawaiier/browserating&Date)
