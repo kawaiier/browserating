@@ -2,6 +2,7 @@
 import { useState, useEffect, useMemo } from "react";
 import BrowserCard from "./BrowserCard";
 import { getBrowsers } from "../lib/getBrowsers";
+import BrowserBarChart from "./BrowserBarChart";
 
 const engineColors = {
   Blink: "bg-blue-200 text-blue-700 hover:bg-blue-300",
@@ -37,6 +38,7 @@ export default function BrowserRankingList() {
   const [selectedPlatform, setSelectedPlatform] = useState("macos-arm");
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [selectedBrowsers, setSelectedBrowsers] = useState([]);
 
   useEffect(() => {
     async function fetchBrowsers() {
@@ -86,6 +88,16 @@ export default function BrowserRankingList() {
 
   const handlePlatformChange = (platform) => {
     setSelectedPlatform(platform);
+  };
+
+  const handleBrowserSelect = (browser) => {
+    setSelectedBrowsers((prev) => {
+      const exists = prev.find((b) => b.name === browser.name);
+      if (exists) {
+        return prev.filter((b) => b.name !== browser.name);
+      }
+      return [...prev, browser];
+    });
   };
 
   if (isLoading) {
@@ -200,6 +212,14 @@ export default function BrowserRankingList() {
             selectedPlatform={selectedPlatform}
           />
         ))}
+      </div>
+
+      <div className="mt-12">
+        <BrowserBarChart
+          browsers={filteredBrowsers}
+          platform={selectedPlatform}
+          getEngineColor={getEngineColor}
+        />
       </div>
     </div>
   );
