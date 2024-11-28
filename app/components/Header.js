@@ -61,6 +61,10 @@ export default function Header() {
                 <span className="text-indigo-600 font-semibold">Android</span>
               </span>
             </h2>
+            <p className="text-xsm mt-4 text-gray-600">
+              The score displayed below reflects the browser&apos;s performance
+              in the Speedometer 3 benchmark. The higher the score, the better.
+            </p>
           </div>
         </div>
       </div>
