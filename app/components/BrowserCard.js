@@ -29,15 +29,9 @@ const BrowserCard = React.memo(
     return (
       <>
         <div
-          className={`bg-white dark:bg-gray-800 shadow-lg rounded-lg overflow-hidden max-w-sm 
-          transition-all transform hover:scale-105 ${getRankStyle(
-            rank
-          )} cursor-pointer
-          dark:shadow-[0_0_100px_13px_rgba(126,4,255,0.07)]`}
-          style={{
-            boxShadow:
-              "1px 0px 50px 5px rgba(126,4,255, 0.05), 18px 12px 50px 3px rgba(255,187,0, 0.06)",
-          }}
+          className={`bg-white dark:bg-gray-800 shadow-[1px_0px_50px_5px_rgba(241,247,255,0.5),_18px_12px_50px_3px_rgba(241,247,255,0.5)]
+  dark:shadow-[0_0_100px_13px_rgba(126,4,255,0.07)] rounded-lg overflow-hidden max-w-sm 
+  transition-all transform hover:scale-105 cursor-pointer`}
           role="article"
           aria-labelledby={`browser-${browser.name}`}
           onClick={() => setShowModal(true)}

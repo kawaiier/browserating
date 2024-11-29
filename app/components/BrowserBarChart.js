@@ -63,7 +63,7 @@ export default function BrowserBarChart({
                     }}
                   >
                     {/* Hover Score */}
-                    <div className="opacity-0 group-hover:opacity-100 absolute inset-0 flex items-center justify-center text-white font-medium transition-opacity duration-200">
+                    <div className="opacity-0 group-hover:opacity-100 absolute inset-0 flex items-center justify-center text-gray-500 dark:text-gray-200 font-medium transition-opacity duration-200">
                       {item.score.toLocaleString(undefined, {
                         maximumFractionDigits: 1,
                       })}

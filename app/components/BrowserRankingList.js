@@ -6,11 +6,11 @@ import BrowserBarChart from "./BrowserBarChart";
 
 const engineColors = {
   Blink:
-    "bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-100 hover:bg-blue-200 dark:hover:bg-blue-800",
+    "bg-blue-100 dark:bg-sky-900 text-blue-800 dark:text-blue-100 hover:bg-blue-200 dark:hover:bg-sky-800",
   Gecko:
-    "bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-100 hover:bg-green-200 dark:hover:bg-green-800",
+    "bg-green-100 dark:bg-emerald-900 text-green-800 dark:text-green-100 hover:bg-green-200 dark:hover:bg-emerald-800",
   WebKit:
-    "bg-orange-100 dark:bg-orange-900 text-orange-800 dark:text-orange-100 hover:bg-orange-200 dark:hover:bg-orange-800",
+    "bg-orange-100 dark:bg-amber-900 text-orange-800 dark:text-orange-100 hover:bg-orange-200 dark:hover:bg-amber-800",
   All: "bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-100 hover:bg-gray-200 dark:hover:bg-gray-600",
 };
 
