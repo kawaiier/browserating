@@ -15,9 +15,9 @@ export default function Home() {
   useEffect(() => {
     // Check initial theme preference
     const isDarkMode =
-      localStorage.getItem("darkMode") === "true" ||
+      localStorage?.getItem("darkMode") === "true" ||
       (!("darkMode" in localStorage) &&
-        window.matchMedia("(prefers-color-scheme: dark)").matches);
+        window?.matchMedia?.("(prefers-color-scheme: dark)")?.matches);
 
     setDarkMode(isDarkMode);
     if (isDarkMode) {

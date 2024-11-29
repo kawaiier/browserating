@@ -5,12 +5,9 @@ export default function BrowserBarChart({
   platform,
   getEngineColor,
 }) {
-  if (!browsers || !platform || !getEngineColor) {
-    console.warn("BrowserBarChart: Missing required props");
-    return null;
-  }
-
   const chartData = useMemo(() => {
+    if (!browsers || !platform) return [];
+
     return browsers
       .filter((browser) => {
         const scores = browser[platform]?.[0]?.scores;
@@ -27,6 +24,11 @@ export default function BrowserBarChart({
   const maxScore = useMemo(() => {
     return Math.max(...chartData.map((item) => item.score), 1);
   }, [chartData]);
+
+  if (!browsers || !platform || !getEngineColor) {
+    console.warn("BrowserBarChart: Missing required props");
+    return null;
+  }
 
   if (chartData.length === 0) {
     return (
