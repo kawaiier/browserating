@@ -4,11 +4,11 @@ import ScoreExplanation from "./ ScoreExplanation";
 
 export default function About() {
   return (
-    <section className="max-w-4xl mx-auto px-4 py-8 mt-12 bg-gray-50 dark:bg-gray-800 rounded-lg shadow-md dark:shadow-gray-900/50">
+    <section className="dark:text-gray-300 text-gray-700 max-w-4xl mx-auto px-4 py-8 mt-12 bg-gray-50 dark:bg-gray-800 rounded-lg shadow-md dark:shadow-gray-900/50">
       <SystemInfo
         title="macOS System Information (Apple Silicon)"
         details={
-          <p className="text-gray-300">
+          <>
             All browsers have been tested on a{" "}
             <span className="font-medium text-[#7853E0] dark:text-[#9B7BE8]">
               clean install of macOS Sequoia 15.1.1.
@@ -25,13 +25,13 @@ export default function About() {
             <span className="font-medium text-[#7853E0] dark:text-[#9B7BE8]">
               36 GB of RAM
             </span>
-          </p>
+          </>
         }
       />
       <SystemInfo
         title="macOS System Information (Intel)"
         details={
-          <p className="text-gray-300">
+          <>
             All browsers have been tested on a{" "}
             <span className="font-medium text-[#7853E0] dark:text-[#9B7BE8]">
               clean install of macOS Ventura 13.6.9.
@@ -48,13 +48,13 @@ export default function About() {
             <span className="font-medium text-[#7853E0] dark:text-[#9B7BE8]">
               16 GB of RAM
             </span>
-          </p>
+          </>
         }
       />
       <SystemInfo
         title="Windows System Information"
         details={
-          <p className="text-gray-300">
+          <>
             All browsers have been tested on an{" "}
             <span className="font-medium text-[#7853E0] dark:text-[#9B7BE8]">
               old install of Windows 10 Pro.
@@ -71,13 +71,13 @@ export default function About() {
             <span className="font-medium text-[#7853E0] dark:text-[#9B7BE8]">
               16 GB of RAM
             </span>
-          </p>
+          </>
         }
       />
       <SystemInfo
         title="Android System Information"
         details={
-          <p className="text-gray-300">
+          <>
             All browsers have been tested on{" "}
             <span className="font-medium text-[#7853E0] dark:text-[#9B7BE8]">
               Nothing OS 2.6 Android 14.
@@ -94,7 +94,7 @@ export default function About() {
             <span className="font-medium text-[#7853E0] dark:text-[#9B7BE8]">
               8 GB of RAM
             </span>
-          </p>
+          </>
         }
       />
       <TestProcedure />
