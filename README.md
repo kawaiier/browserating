@@ -63,6 +63,8 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 
 If you find this project useful, please consider supporting me with a coffee.
 
+[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/J3J8TMWMG)
+
 ### Donation Addresses
 
 - **BTC**: `bc1qfyad27catyr8rtdhhydn8ummf996kxtesuw4hr`
