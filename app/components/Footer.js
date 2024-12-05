@@ -82,6 +82,19 @@ export default function Footer() {
                 source code
               </a>
             </p>
+            {/* Ko-fi Link */}
+            <a
+              href="https://ko-fi.com/J3J8TMWMG"
+              target="_blank"
+              className="flex justify-center mt-2"
+            >
+              <Image
+                height={36}
+                width={109}
+                src="https://storage.ko-fi.com/cdn/kofi4.png?v=6"
+                alt="Buy Me a Coffee at ko-fi.com"
+              />
+            </a>
           </div>
 
           {/* Minimal Donations Section */}
