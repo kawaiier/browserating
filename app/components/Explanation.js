@@ -32,7 +32,7 @@ export default function Explanation() {
         Real-World Context
       </h3>
       <p className="mb-4 text-gray-700 dark:text-gray-300">
-        It's important to note that while these benchmarks provide valuable
+        It&apos;s important to note that while these benchmarks provide valuable
         comparative data, the performance differences may not be immediately
         noticeable in everyday browsing. Most modern browsers deliver excellent
         performance for typical usage, with factors like internet connectivity
@@ -54,10 +54,10 @@ export default function Explanation() {
         Memory Usage Comparison
       </h3>
       <p className="mb-4 text-gray-700 dark:text-gray-300">
-        To provide a more comprehensive comparison, we've included average RAM
-        usage measurements for browsers with a single active YouTube tab. Keep
-        in mind that actual memory consumption can vary significantly based on
-        several factors, including:
+        To provide a more comprehensive comparison, we&apos;ve included average
+        RAM usage measurements for browsers with a single active YouTube tab.
+        Keep in mind that actual memory consumption can vary significantly based
+        on several factors, including:
       </p>
       <ul className="list-disc pl-6 mb-4 text-gray-700 dark:text-gray-300">
         <li>Number and types of installed extensions/add-ons</li>
@@ -70,11 +70,11 @@ export default function Explanation() {
         Looking Ahead
       </h3>
       <p className="mb-4 text-gray-700 dark:text-gray-300">
-        We're committed to expanding our benchmark suite and maintaining
+        We&apos;re committed to expanding our benchmark suite and maintaining
         up-to-date comparisons. While our current scores are pending updates due
-        to technical considerations, we're preparing to conduct a comprehensive
-        round of testing across all major browsers in the coming weeks. Stay
-        tuned for fresh performance insights across{" "}
+        to technical considerations, we&apos;re preparing to conduct a
+        comprehensive round of testing across all major browsers in the coming
+        weeks. Stay tuned for fresh performance insights across{" "}
         <strong className="text-gray-900 dark:text-gray-100">
           multiple operating systems and browser versions
         </strong>
