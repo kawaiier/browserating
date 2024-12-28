@@ -46,6 +46,11 @@
     "website": "https://www.zen-browser.app/"
   },
   {
+    "name": "Zen Browser Twilight",
+    "logo": "/images/browser-logos/zen-twilight.png",
+    "website": "https://zen-browser.app/download/?twilight"
+  },
+  {
     "name": "Tor Browser",
     "logo": "/images/browser-logos/tor.png",
     "website": "https://www.torproject.org/download/"
