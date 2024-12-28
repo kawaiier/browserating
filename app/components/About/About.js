@@ -1,6 +1,6 @@
+import ScoreExplanation from "./ScoreExplanation";
 import SystemInfo from "./SystemInfo";
 import TestProcedure from "./TestProcedure";
-import ScoreExplanation from "./ ScoreExplanation";
 
 export default function About() {
   return (
@@ -11,7 +11,7 @@ export default function About() {
           <>
             All browsers have been tested on a{" "}
             <span className="font-medium text-[#7853E0] dark:text-[#9B7BE8]">
-              clean install of macOS Sequoia 15.1.1.
+              clean install of macOS Sequoia 15.2.
             </span>
             The testing was conducted on a{" "}
             <span className="font-medium text-[#7853E0] dark:text-[#9B7BE8]">
