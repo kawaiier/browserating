@@ -30,7 +30,7 @@ const BrowserCard = React.memo(
       <>
         <div
           className={`bg-white dark:bg-gray-800 shadow-[1px_0px_50px_5px_rgba(241,247,255,0.5),_18px_12px_50px_3px_rgba(241,247,255,0.5)]
-  dark:shadow-[0_0_100px_13px_rgba(126,4,255,0.07)] rounded-lg overflow-hidden max-w-sm 
+  dark:shadow-[0_0_100px_13px_rgba(126,4,255,0.07)] rounded-lg overflow-hidden max-w-sm
   transition-all transform hover:scale-105 cursor-pointer`}
           role="article"
           aria-labelledby={`browser-${browser.name}`}
@@ -53,7 +53,7 @@ const BrowserCard = React.memo(
                   href={browser.website}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="bg-gradient-to-r from-violet-600 to-indigo-600 bg-clip-text text-transparent 
+                  className="bg-gradient-to-r from-violet-600 to-indigo-600 bg-clip-text text-transparent
                   hover:text-violet-900 dark:hover:text-violet-400 transition-colors"
                 >
                   {browser.name}
@@ -62,62 +62,107 @@ const BrowserCard = React.memo(
             </div>
             <div className="mb-4">
               <span
-                className="bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 
+                className="bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300
                 px-2 py-1 rounded-full text-sm mr-2"
               >
                 {latestVersion.version}
               </span>
               <span
                 className={`px-2 py-1 rounded-full text-sm ${getEngineColor(
-                  browser.engine
+                  browser.engine,
                 )}`}
               >
                 {browser.engine}
               </span>
             </div>
-            <div className="space-y-2">
-              <p className="text-2xl font-bold text-center mt-4 dark:text-white">
-                {latestVersion.scores.speedometer3.toFixed(2)}
-              </p>
-              {prevSpeedometer3Score && (
-                <p className="text-sm text-center">
-                  <span
-                    className={`${
-                      latestVersion.scores.speedometer3 -
+            <div className="space-y-2 flex items-baseline  gap-8">
+              <div className="text-center">
+                <p className="text-xs text-gray-600 dark:text-gray-400 mb-1">
+                  Speedometer 3
+                </p>
+                <p className="text-2xl font-bold dark:text-white">
+                  {latestVersion.scores.speedometer3.toFixed(2)}
+                </p>
+                {prevSpeedometer3Score && (
+                  <p className="text-sm">
+                    <span
+                      className={`${
+                        latestVersion.scores.speedometer3 -
+                          prevSpeedometer3Score >
+                        0
+                          ? "text-green-600 dark:text-green-400"
+                          : latestVersion.scores.speedometer3 -
+                                prevSpeedometer3Score <
+                              0
+                            ? "text-red-600 dark:text-red-400"
+                            : "text-gray-600 dark:text-gray-400"
+                      }`}
+                    >
+                      {latestVersion.scores.speedometer3 -
                         prevSpeedometer3Score >
                       0
-                        ? "text-green-600 dark:text-green-400"
-                        : latestVersion.scores.speedometer3 -
-                            prevSpeedometer3Score <
+                        ? "+"
+                        : ""}
+                      {(
+                        latestVersion.scores.speedometer3 -
+                        prevSpeedometer3Score
+                      ).toFixed(2)}
+                    </span>
+                  </p>
+                )}
+                <p
+                  className={`text-xs text-gray-600 dark:text-gray-400 ${
+                    prevSpeedometer3Score ? "" : "opacity-50"
+                  }`}
+                ></p>
+              </div>
+
+              {/* New RAM score display */}
+              {latestVersion.scores.ram && (
+                <div className="text-center mt-4">
+                  <p className="text-xs text-gray-600 dark:text-gray-400 mb-1">
+                    RAM Usage
+                  </p>
+                  <p className="text-2xl font-bold dark:text-white">
+                    {latestVersion.scores.ram.toFixed(0)} MB
+                  </p>
+                  {platformData.length > 1 && platformData[1].scores.ram && (
+                    <p className="text-sm">
+                      <span
+                        className={`${
+                          latestVersion.scores.ram -
+                            platformData[1].scores.ram <
                           0
-                        ? "text-red-600 dark:text-red-400"
-                        : "text-gray-600 dark:text-gray-400"
-                    }`}
-                  >
-                    {latestVersion.scores.speedometer3 - prevSpeedometer3Score >
-                    0
-                      ? "+"
-                      : ""}
-                    {(
-                      latestVersion.scores.speedometer3 - prevSpeedometer3Score
-                    ).toFixed(2)}
-                  </span>
-                </p>
+                            ? "text-green-600 dark:text-green-400"
+                            : latestVersion.scores.ram -
+                                  platformData[1].scores.ram >
+                                0
+                              ? "text-red-600 dark:text-red-400"
+                              : "text-gray-600 dark:text-gray-400"
+                        }`}
+                      >
+                        {latestVersion.scores.ram - platformData[1].scores.ram <
+                        0
+                          ? ""
+                          : "+"}
+                        {(
+                          latestVersion.scores.ram - platformData[1].scores.ram
+                        ).toFixed(0)}
+                      </span>
+                    </p>
+                  )}
+                  {platformData.length > 1 && platformData[1].scores.ram && (
+                    <p className="text-xs text-gray-600 dark:text-gray-400">
+                      <span
+                        className="border-b border-dashed border-gray-400 dark:border-gray-500 cursor-help"
+                        title="Previous version RAM usage"
+                      >
+                        {platformData[1].scores.ram.toFixed(0)} MB
+                      </span>
+                    </p>
+                  )}
+                </div>
               )}
-              <p
-                className={`text-xs text-gray-600 dark:text-gray-400 text-center ${
-                  prevSpeedometer3Score ? "" : "opacity-50"
-                }`}
-              >
-                <span
-                  className="border-b border-dashed border-gray-400 dark:border-gray-500 cursor-help"
-                  title="Previous version score"
-                >
-                  {(prevSpeedometer3Score &&
-                    prevSpeedometer3Score.toFixed(2)) ||
-                    "N/A"}
-                </span>
-              </p>
             </div>
           </div>
         </div>
@@ -131,7 +176,7 @@ const BrowserCard = React.memo(
         )}
       </>
     );
-  }
+  },
 );
 
 // Add display name for the memoized component
