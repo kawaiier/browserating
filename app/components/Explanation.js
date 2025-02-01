@@ -6,12 +6,11 @@ export default function Explanation() {
       </h2>
 
       <p className="mb-4 text-gray-700 dark:text-gray-300">
-        BrowseRater began as a curiosity-driven project to quantify the
+        BrowseRating began as a curiosity-driven project to quantify the
         perceived speed differences between browsers. What started as a personal
         investigation has evolved into a{" "}
         <strong className="text-gray-900 dark:text-gray-100">
           comprehensive benchmarking platform comparing browser performance
-          across operating systems
         </strong>{" "}
         through synthetic testing methodologies.
       </p>
@@ -20,7 +19,7 @@ export default function Explanation() {
         Our Testing Methodology
       </h3>
       <p className="mb-4 text-gray-700 dark:text-gray-300">
-        BrowseRater conducts controlled performance tests on identical hardware
+        BrowseRating conducts controlled performance tests on identical hardware
         configurations, ensuring fair comparisons between browsers. Each browser
         undergoes the same synthetic tests, with detailed system specifications
         displayed alongside the results for complete transparency. While these
@@ -67,6 +66,22 @@ export default function Explanation() {
       </ul>
 
       <h3 className="text-2xl font-semibold mb-4 text-gray-900 dark:text-gray-100">
+        Ad Blocking Ability
+      </h3>
+      <p className="mb-4 text-gray-700 dark:text-gray-300">
+        Built-in ad blocking capabilities have become increasingly important for
+        modern browsers as they directly impact both performance and user
+        privacy. By blocking intrusive advertisements and tracking scripts at
+        the browser level, users can experience faster page load times, reduced
+        bandwidth usage, and better overall browsing security without relying on
+        third-party extensions. Native ad blocking also tends to be more
+        efficient than extension-based solutions, consuming fewer system
+        resources while providing comprehensive protection against unwanted
+        content and potential security threats that could be delivered through
+        ad networks.
+      </p>
+
+      <h3 className="text-2xl font-semibold mb-4 text-gray-900 dark:text-gray-100">
         Looking Ahead
       </h3>
       <p className="mb-4 text-gray-700 dark:text-gray-300">
@@ -76,13 +91,9 @@ export default function Explanation() {
         comprehensive round of testing across all major browsers in the coming
         weeks. Stay tuned for fresh performance insights across{" "}
         <strong className="text-gray-900 dark:text-gray-100">
-          multiple operating systems and browser versions
+          multiple browser versions
         </strong>
         .
-      </p>
-
-      <p className="text-sm text-gray-600 dark:text-gray-400 mt-8">
-        Last updated: <time dateTime="2024-12-28">December 28, 2024</time>
       </p>
     </section>
   );

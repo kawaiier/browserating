@@ -117,50 +117,35 @@ const BrowserCard = React.memo(
                 ></p>
               </div>
 
-              {/* New RAM score display */}
               {latestVersion.scores.ram && (
                 <div className="text-center mt-4">
                   <p className="text-xs text-gray-600 dark:text-gray-400 mb-1">
                     RAM Usage
                   </p>
                   <p className="text-2xl font-bold dark:text-white">
-                    {latestVersion.scores.ram.toFixed(0)} MB
+                    {latestVersion.scores.ram.toFixed(0)}{" "}
                   </p>
-                  {platformData.length > 1 && platformData[1].scores.ram && (
-                    <p className="text-sm">
-                      <span
-                        className={`${
-                          latestVersion.scores.ram -
-                            platformData[1].scores.ram <
-                          0
-                            ? "text-green-600 dark:text-green-400"
-                            : latestVersion.scores.ram -
-                                  platformData[1].scores.ram >
-                                0
-                              ? "text-red-600 dark:text-red-400"
-                              : "text-gray-600 dark:text-gray-400"
-                        }`}
-                      >
-                        {latestVersion.scores.ram - platformData[1].scores.ram <
-                        0
-                          ? ""
-                          : "+"}
-                        {(
-                          latestVersion.scores.ram - platformData[1].scores.ram
-                        ).toFixed(0)}
-                      </span>
-                    </p>
-                  )}
-                  {platformData.length > 1 && platformData[1].scores.ram && (
-                    <p className="text-xs text-gray-600 dark:text-gray-400">
-                      <span
-                        className="border-b border-dashed border-gray-400 dark:border-gray-500 cursor-help"
-                        title="Previous version RAM usage"
-                      >
-                        {platformData[1].scores.ram.toFixed(0)} MB
-                      </span>
-                    </p>
-                  )}
+                  <span className="text-gray-600 dark:text-gray-400 text-sm">
+                    MB
+                  </span>
+                </div>
+              )}
+
+              {/* New Adblock score display */}
+              {latestVersion.scores.adblock && (
+                <div className="text-center mt-4">
+                  <p className="text-xs text-gray-600 dark:text-gray-400 mb-1">
+                    Adblock
+                  </p>
+                  <p className="text-2xl font-bold dark:text-white">
+                    {latestVersion.scores.adblock.toFixed(0)}/100
+                  </p>
+                  <div className="w-24 sm:w-32 h-4 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden mt-1">
+                    <div
+                      className="h-full bg-violet-600 dark:bg-violet-500 rounded-full transition-all duration-500"
+                      style={{ width: `${latestVersion.scores.adblock}%` }}
+                    ></div>
+                  </div>
                 </div>
               )}
             </div>

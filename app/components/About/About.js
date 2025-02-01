@@ -28,7 +28,7 @@ export default function About() {
           </>
         }
       />
-      <SystemInfo
+      {/* <SystemInfo
         title="macOS System Information (Intel)"
         details={
           <>
@@ -96,7 +96,7 @@ export default function About() {
             </span>
           </>
         }
-      />
+      /> */}
       <TestProcedure />
       <hr className="border-gray-200 dark:border-gray-700 my-4" />
       <ScoreExplanation />

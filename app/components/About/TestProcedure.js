@@ -20,6 +20,17 @@ export default function TestProcedure() {
         the average memory consumption was measured
       </span>{" "}
       while playing the same 2K YouTube video.
+      <br />
+      For adblock test,{" "}
+      <a
+        href="https://adblock-tester.com/"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="font-medium text-[#7853E0] dark:text-[#9B7BE8]"
+      >
+        AdBlock Tester
+      </a>{" "}
+      website was used.
     </p>
   );
 }

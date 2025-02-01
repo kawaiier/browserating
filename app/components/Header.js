@@ -65,19 +65,22 @@ export default function Header({ darkMode, toggleDarkMode }) {
                 <span className="text-purple-600 dark:text-purple-400 font-semibold">
                   macOS
                 </span>
-                <span className="text-gray-400 dark:text-gray-500">/</span>
+                {/* <span className="text-gray-400 dark:text-gray-500">/</span>
                 <span className="text-blue-600 dark:text-blue-400 font-semibold">
                   Windows
                 </span>
                 <span className="text-gray-400 dark:text-gray-500">/</span>
                 <span className="text-indigo-600 dark:text-indigo-400 font-semibold">
                   Android
-                </span>
+                </span> */}
               </span>
             </h2>
             <p className="text-xsm mt-4 text-gray-600 dark:text-gray-400">
               The score displayed below reflects the browser&apos;s performance
               in the Speedometer 3 benchmark. The higher the score, the better.
+            </p>
+            <p className="text-sm text-gray-600 dark:text-gray-400 mt-8">
+              Last updated: <time dateTime="2025-02-01">February 1, 2025</time>
             </p>
           </div>
         </div>
