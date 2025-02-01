@@ -57,6 +57,7 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 ## Acknowledgments
 
 - Speedometer 3 for providing benchmark data - https://browserbench.org/Speedometer3.0/
+- Creator of AdBlock Tester - https://adblock-tester.com/
 - All browser developers for their continuous work on improving web technologies
 
 ## Say Thanks
