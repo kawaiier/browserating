@@ -79,71 +79,77 @@ const BrowserCard = React.memo(
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
               {/* Speedometer Score */}
-              <div className="text-center">
+              <div className="text-center flex flex-col justify-between h-full">
                 <p className="text-xs text-gray-600 dark:text-gray-400 mb-1">
                   Speedometer 3
                 </p>
-                <p className="text-2xl sm:text-3xl font-bold dark:text-white">
-                  {latestVersion.scores.speedometer3.toFixed(2)}
-                </p>
-                {prevSpeedometer3Score && (
-                  <p className="text-sm">
-                    <span
-                      className={`${
-                        latestVersion.scores.speedometer3 -
+                <div>
+                  <p className="text-2xl sm:text-3xl md:text-xl font-bold dark:text-white">
+                    {latestVersion.scores.speedometer3.toFixed(2)}
+                  </p>
+                  {prevSpeedometer3Score && (
+                    <p className="text-sm">
+                      <span
+                        className={`${
+                          latestVersion.scores.speedometer3 -
+                            prevSpeedometer3Score >
+                          0
+                            ? "text-green-600 dark:text-green-400"
+                            : latestVersion.scores.speedometer3 -
+                                prevSpeedometer3Score <
+                              0
+                            ? "text-red-600 dark:text-red-400"
+                            : "text-gray-600 dark:text-gray-400"
+                        }`}
+                      >
+                        {latestVersion.scores.speedometer3 -
                           prevSpeedometer3Score >
                         0
-                          ? "text-green-600 dark:text-green-400"
-                          : latestVersion.scores.speedometer3 -
-                              prevSpeedometer3Score <
-                            0
-                          ? "text-red-600 dark:text-red-400"
-                          : "text-gray-600 dark:text-gray-400"
-                      }`}
-                    >
-                      {latestVersion.scores.speedometer3 -
-                        prevSpeedometer3Score >
-                      0
-                        ? "+"
-                        : ""}
-                      {(
-                        latestVersion.scores.speedometer3 -
-                        prevSpeedometer3Score
-                      ).toFixed(2)}
-                    </span>
-                  </p>
-                )}
+                          ? "+"
+                          : ""}
+                        {(
+                          latestVersion.scores.speedometer3 -
+                          prevSpeedometer3Score
+                        ).toFixed(2)}
+                      </span>
+                    </p>
+                  )}
+                </div>
               </div>
 
               {/* RAM Score */}
               {latestVersion.scores.ram && (
-                <div className="text-center">
+                <div className="text-center flex flex-col justify-between h-full">
                   <p className="text-xs text-gray-600 dark:text-gray-400 mb-1">
                     RAM Usage
                   </p>
-                  <p className="text-2xl sm:text-3xl font-bold dark:text-white">
-                    {latestVersion.scores.ram.toFixed(0)}
-                  </p>
-                  <span className="text-gray-600 dark:text-gray-400 text-sm">
-                    MB
-                  </span>
+                  <div>
+                    <p className="text-2xl sm:text-3xl md:text-xl font-bold dark:text-white">
+                      {latestVersion.scores.ram.toFixed(0)}
+                    </p>
+                    <span className="text-gray-600 dark:text-gray-400 text-sm">
+                      MB
+                    </span>
+                  </div>
                 </div>
               )}
 
               {/* Adblock Score */}
               {latestVersion.scores.adblock && (
-                <div className="text-center">
+                <div className="text-center flex flex-col justify-between h-full">
                   <p className="text-xs text-gray-600 dark:text-gray-400 mb-1">
                     Adblock
                   </p>
-                  <p className="text-2xl sm:text-3xl font-bold dark:text-white">
-                    {latestVersion.scores.adblock.toFixed(0)}/100
-                  </p>
-                  <div className="w-full sm:w-10/12 md:w-9/12 lg:w-8/12 h-4 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden mt-1 mx-auto">
-                    <div
-                      className="h-full bg-violet-600 dark:bg-violet-500 rounded-full transition-all duration-500"
-                      style={{ width: `${latestVersion.scores.adblock}%` }}
-                    ></div>
+                  <div className="pb-1">
+                    <p className="text-2xl sm:text-3xl md:text-xl font-bold dark:text-white">
+                      {latestVersion.scores.adblock.toFixed(0)}/100
+                    </p>
+                    <div className="w-full sm:w-10/12 md:w-9/12 lg:w-8/12 h-4 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden mt-1 mx-auto">
+                      <div
+                        className="h-full bg-violet-600 dark:bg-violet-500 rounded-full transition-all duration-500"
+                        style={{ width: `${latestVersion.scores.adblock}%` }}
+                      ></div>
+                    </div>
                   </div>
                 </div>
               )}

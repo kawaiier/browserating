@@ -45,7 +45,7 @@ export default function BrowserBarChart({
       </h3>
       <p className="text-sm text-gray-500 dark:text-gray-400">Scroll to view</p>
       <div className="overflow-x-auto scrollbar">
-        <div className="h-[400px] flex justify-start gap-4 p-4 min-w-fit">
+        <div className="h-[300px] flex justify-start gap-4 p-4 min-w-fit">
           {chartData.map((item) => (
             <div key={item.name} className="flex flex-col w-24 flex-shrink-0">
               <div className="text-sm font-medium text-center mb-2 dark:text-gray-300">
