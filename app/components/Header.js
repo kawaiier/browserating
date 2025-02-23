@@ -1,6 +1,7 @@
-import Image from "next/image";
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
+
 import DarkModeToggle from "./DarkModeToggle";
+import Image from "next/image";
 
 export default function Header({ darkMode, toggleDarkMode }) {
   return (
@@ -65,23 +66,26 @@ export default function Header({ darkMode, toggleDarkMode }) {
                 <span className="text-purple-600 dark:text-purple-400 font-semibold">
                   macOS
                 </span>
-                {/* <span className="text-gray-400 dark:text-gray-500">/</span>
+                <span className="text-gray-400 dark:text-gray-500">/</span>
                 <span className="text-blue-600 dark:text-blue-400 font-semibold">
                   Windows
                 </span>
                 <span className="text-gray-400 dark:text-gray-500">/</span>
                 <span className="text-indigo-600 dark:text-indigo-400 font-semibold">
                   Android
-                </span> */}
+                </span>
               </span>
             </h2>
             <p className="text-xsm mt-4 text-gray-600 dark:text-gray-400">
               The score displayed below reflects the browser&apos;s performance
               in the Speedometer 3 benchmark. The higher the score, the better.
             </p>
-            <p className="text-sm text-gray-600 dark:text-gray-400 mt-8">
-              Last updated: <time dateTime="2025-02-23">February 23, 2025</time>
-            </p>
+            <div className="bg-gradient-to-r from-purple-600 to-blue-600 text-white p-4 rounded-md mt-8 inline-block">
+              <p className="text-sm font-mono">
+                Last updated:{" "}
+                <time dateTime="2025-02-23">February 23, 2025</time>
+              </p>
+            </div>
           </div>
         </div>
       </div>
