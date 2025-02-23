@@ -30,6 +30,9 @@ const platformNames = {
   android: "Android",
 };
 
+// Add this new constant for the NEW badge
+const NEW_PLATFORM = "macos-arm";
+
 // Skeleton Loader Component
 const SkeletonLoader = () => (
   <div className="animate-pulse flex flex-col space-y-4">
@@ -117,7 +120,7 @@ export default function BrowserRankingList() {
             <button
               key={platform}
               onClick={() => handlePlatformChange(platform)}
-              className={`px-3 py-1 rounded-full text-sm ${
+              className={`px-3 py-1 rounded-full text-sm relative ${
                 selectedPlatform === platform
                   ? "ring-2 ring-offset-2 ring-gray-300 dark:ring-gray-500 dark:ring-offset-gray-900"
                   : ""
@@ -125,6 +128,15 @@ export default function BrowserRankingList() {
               aria-pressed={selectedPlatform === platform}
             >
               {platformNames[platform]}
+              {platform === NEW_PLATFORM && (
+                <span
+                  className="absolute -top-2 -right-2 bg-gradient-to-r from-purple-600 to-blue-600 text-white text-xs px-1.5 py-0.5 rounded-full font-semibold 
+                  rotate-12 animate-bounce-gentle hover:rotate-0 transition-all duration-300 cursor-pointer
+                  shadow-md hover:shadow-lg"
+                >
+                  updated
+                </span>
+              )}
             </button>
           ))}
         </div>
@@ -183,7 +195,7 @@ export default function BrowserRankingList() {
           <button
             key={platform}
             onClick={() => handlePlatformChange(platform)}
-            className={`px-3 py-1 rounded-full text-sm ${
+            className={`px-3 py-1 rounded-full text-sm relative ${
               selectedPlatform === platform
                 ? "ring-2 ring-offset-2 ring-gray-300 dark:ring-gray-500 dark:ring-offset-gray-900"
                 : ""
@@ -191,6 +203,15 @@ export default function BrowserRankingList() {
             aria-pressed={selectedPlatform === platform}
           >
             {platformNames[platform]}
+            {platform === NEW_PLATFORM && (
+              <span
+                className="absolute -top-2 -right-2 bg-gradient-to-r from-purple-600 to-blue-600 text-white text-xs px-1.5 py-0.5 rounded-full font-semibold 
+                rotate-12 animate-bounce-gentle hover:rotate-0 transition-all duration-300 cursor-pointer
+                shadow-md hover:shadow-lg"
+              >
+                updated
+              </span>
+            )}
           </button>
         ))}
       </div>

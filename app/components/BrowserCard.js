@@ -46,6 +46,7 @@ const BrowserCard = React.memo(
                 width={50}
                 height={50}
                 className="mr-4 dark:brightness-90"
+                style={{ width: "auto", height: "50px" }}
               />
               <h3
                 id={`browser-${browser.name}`}
