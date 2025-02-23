@@ -80,7 +80,7 @@ export default function Header({ darkMode, toggleDarkMode }) {
               in the Speedometer 3 benchmark. The higher the score, the better.
             </p>
             <p className="text-sm text-gray-600 dark:text-gray-400 mt-8">
-              Last updated: <time dateTime="2025-02-01">February 1, 2025</time>
+              Last updated: <time dateTime="2025-02-23">February 23, 2025</time>
             </p>
           </div>
         </div>

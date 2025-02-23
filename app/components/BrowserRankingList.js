@@ -1,8 +1,10 @@
 "use client";
-import { useState, useEffect, useMemo } from "react";
+
+import { useEffect, useMemo, useState } from "react";
+
+import BrowserBarChart from "./BrowserBarChart";
 import BrowserCard from "./BrowserCard";
 import { getBrowsers } from "../lib/getBrowsers";
-import BrowserBarChart from "./BrowserBarChart";
 
 const engineColors = {
   Blink:
@@ -41,7 +43,7 @@ export default function BrowserRankingList() {
   const [browsers, setBrowsers] = useState([]);
   const [filteredBrowsers, setFilteredBrowsers] = useState([]);
   const [selectedEngine, setSelectedEngine] = useState("All");
-  const selectedPlatform = "macos-arm";
+  const [selectedPlatform, setSelectedPlatform] = useState("macos-arm");
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
   const [selectedBrowsers, setSelectedBrowsers] = useState([]);
@@ -71,7 +73,7 @@ export default function BrowserRankingList() {
 
   const sortedBrowsers = useMemo(
     () => sortBrowsersByPlatform(browsers, selectedPlatform),
-    [browsers, selectedPlatform],
+    [browsers, selectedPlatform]
   );
 
   useEffect(() => {
@@ -84,17 +86,17 @@ export default function BrowserRankingList() {
 
   const engines = useMemo(
     () => ["All", ...new Set(browsers.map((browser) => browser.engine))],
-    [browsers],
+    [browsers]
   );
-  // const platforms = ["macos-intel", "macos-arm", "windows", "android"];
+  const platforms = ["macos-intel", "macos-arm", "windows", "android"];
 
   const handleEngineFilter = (engine) => {
     setSelectedEngine(engine);
   };
 
-  // const handlePlatformChange = (platform) => {
-  //   setSelectedPlatform(platform);
-  // };
+  const handlePlatformChange = (platform) => {
+    setSelectedPlatform(platform);
+  };
 
   const handleBrowserSelect = (browser) => {
     setSelectedBrowsers((prev) => {
@@ -109,6 +111,24 @@ export default function BrowserRankingList() {
   if (isLoading) {
     return (
       <div className="p-6 lg:px-10">
+        {/* Platform Selection */}
+        <div className="mb-4 flex flex-wrap gap-3">
+          {platforms.map((platform) => (
+            <button
+              key={platform}
+              onClick={() => handlePlatformChange(platform)}
+              className={`px-3 py-1 rounded-full text-sm ${
+                selectedPlatform === platform
+                  ? "ring-2 ring-offset-2 ring-gray-300 dark:ring-gray-500 dark:ring-offset-gray-900"
+                  : ""
+              }`}
+              aria-pressed={selectedPlatform === platform}
+            >
+              {platformNames[platform]}
+            </button>
+          ))}
+        </div>
+
         {/* Engine Filters */}
         <div className="mb-4 flex flex-wrap gap-3">
           {engines.map((engine) => (
@@ -116,7 +136,7 @@ export default function BrowserRankingList() {
               key={engine}
               onClick={() => handleEngineFilter(engine)}
               className={`px-3 py-1 rounded-full text-sm ${getEngineColor(
-                engine,
+                engine
               )}
               ${
                 selectedEngine === engine
@@ -157,6 +177,24 @@ export default function BrowserRankingList() {
 
   return (
     <div className="p-6 lg:px-10">
+      {/* Platform Selection */}
+      <div className="mb-4 flex flex-wrap gap-3">
+        {platforms.map((platform) => (
+          <button
+            key={platform}
+            onClick={() => handlePlatformChange(platform)}
+            className={`px-3 py-1 rounded-full text-sm ${
+              selectedPlatform === platform
+                ? "ring-2 ring-offset-2 ring-gray-300 dark:ring-gray-500 dark:ring-offset-gray-900"
+                : ""
+            }`}
+            aria-pressed={selectedPlatform === platform}
+          >
+            {platformNames[platform]}
+          </button>
+        ))}
+      </div>
+
       {/* Engine Filters */}
       <div className="mb-4 flex flex-wrap gap-3">
         {engines.map((engine) => (

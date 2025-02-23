@@ -11,7 +11,7 @@ export default function About() {
           <>
             All browsers have been tested on a{" "}
             <span className="font-medium text-[#7853E0] dark:text-[#9B7BE8]">
-              clean install of macOS Sequoia 15.2.
+              clean install of macOS Sequoia 15.3.1.{" "}
             </span>
             The testing was conducted on a{" "}
             <span className="font-medium text-[#7853E0] dark:text-[#9B7BE8]">
@@ -28,7 +28,7 @@ export default function About() {
           </>
         }
       />
-      {/* <SystemInfo
+      <SystemInfo
         title="macOS System Information (Intel)"
         details={
           <>
@@ -96,7 +96,7 @@ export default function About() {
             </span>
           </>
         }
-      /> */}
+      />
       <TestProcedure />
       <hr className="border-gray-200 dark:border-gray-700 my-4" />
       <ScoreExplanation />
