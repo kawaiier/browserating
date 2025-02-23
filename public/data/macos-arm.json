@@ -588,6 +588,20 @@
     ]
   },
   {
+    "name": "Waterfox",
+    "engine": "Gecko",
+    "versions": [
+      {
+        "version": "6.5.4",
+        "scores": {
+          "speedometer3": 34.87,
+          "ram": 585,
+          "adblock": 34
+        }
+      }
+    ]
+  },
+  {
     "name": "Yandex Browser",
     "engine": "Blink",
     "versions": [
