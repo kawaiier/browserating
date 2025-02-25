@@ -120,11 +120,14 @@ export default function BrowserRankingList() {
             <button
               key={platform}
               onClick={() => handlePlatformChange(platform)}
-              className={`px-3 py-1 rounded-full text-sm relative ${
-                selectedPlatform === platform
-                  ? "ring-2 ring-offset-2 ring-gray-300 dark:ring-gray-500 dark:ring-offset-gray-900"
-                  : ""
-              }`}
+              className={`px-3 py-1 rounded-full text-sm relative 
+                ${
+                  selectedPlatform === platform
+                    ? "ring-2 ring-offset-2 ring-gray-300 dark:ring-gray-500 dark:ring-offset-gray-900"
+                    : ""
+                }
+                bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-100 
+                hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors`}
               aria-pressed={selectedPlatform === platform}
             >
               {platformNames[platform]}
@@ -195,11 +198,14 @@ export default function BrowserRankingList() {
           <button
             key={platform}
             onClick={() => handlePlatformChange(platform)}
-            className={`px-3 py-1 rounded-full text-sm relative ${
-              selectedPlatform === platform
-                ? "ring-2 ring-offset-2 ring-gray-300 dark:ring-gray-500 dark:ring-offset-gray-900"
-                : ""
-            }`}
+            className={`px-3 py-1 rounded-full text-sm relative 
+              ${
+                selectedPlatform === platform
+                  ? "ring-2 ring-offset-2 ring-gray-300 dark:ring-gray-500 dark:ring-offset-gray-900"
+                  : ""
+              }
+              bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-100 
+              hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors`}
             aria-pressed={selectedPlatform === platform}
           >
             {platformNames[platform]}
