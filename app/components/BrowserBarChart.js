@@ -32,57 +32,117 @@ export default function BrowserBarChart({
 
   if (chartData.length === 0) {
     return (
-      <div className="text-center text-gray-500 py-8">
+      <div
+        className="text-center text-gray-500 py-8"
+        role="status"
+        aria-live="polite"
+      >
         No performance data available for the selected platform
       </div>
     );
   }
 
+  // Get platform display name
+  const platformNames = {
+    "macos-arm": "macOS ARM",
+    "macos-intel": "macOS Intel",
+    windows: "Windows",
+    android: "Android",
+  };
+
+  const platformName = platformNames[platform] || platform;
+
   return (
     <div className="space-y-4 w-full">
-      <h3 className="text-lg font-semibold dark:text-gray-100">
-        Performance Comparison
-      </h3>
-      <p className="text-sm text-gray-500 dark:text-gray-400">Scroll to view</p>
-      <div className="overflow-x-auto scrollbar">
-        <div className="h-[300px] flex justify-start gap-4 p-4 min-w-fit">
-          {chartData.map((item) => (
-            <div key={item.name} className="flex flex-col w-24 flex-shrink-0">
-              <div className="text-sm font-medium text-center mb-2 dark:text-gray-300">
-                {Math.round(item.score).toLocaleString()}
-              </div>
+      <div className="flex justify-between items-center">
+        <h3 className="text-lg font-semibold dark:text-gray-100">
+          Performance Comparison - {platformName}
+        </h3>
+        <p className="text-sm text-gray-500 dark:text-gray-400">
+          <span className="hidden sm:inline">Scroll to view all browsers</span>
+          <span className="sm:hidden">Swipe to view</span>
+        </p>
+      </div>
 
-              <div className="flex-1 relative group">
-                <div className="absolute inset-0 bg-gray-100 dark:bg-gray-700 rounded-t-lg">
-                  <div
-                    className={`w-full ${getEngineColor(
-                      item.engine
-                    )} rounded-t-lg absolute bottom-0 transition-all duration-200 hover:brightness-90`}
-                    style={{
-                      height: `${(item.score / maxScore) * 100}%`,
-                    }}
-                  >
-                    {/* Hover Score */}
-                    <div className="opacity-0 group-hover:opacity-100 absolute inset-0 flex items-center justify-center text-gray-500 dark:text-gray-200 font-medium transition-opacity duration-200">
-                      {item.score.toLocaleString(undefined, {
-                        maximumFractionDigits: 1,
-                      })}
+      <div
+        className="overflow-x-auto scrollbar"
+        tabIndex="0"
+        role="region"
+        aria-label={`Browser performance chart for ${platformName}`}
+      >
+        <div className="h-[300px] flex justify-start gap-4 p-4 min-w-fit">
+          {chartData.map((item, index) => {
+            const percentHeight = (item.score / maxScore) * 100;
+            const scoreFormatted = item.score.toLocaleString(undefined, {
+              maximumFractionDigits: 1,
+            });
+
+            return (
+              <div
+                key={item.name}
+                className="flex flex-col w-24 flex-shrink-0"
+                role="presentation"
+              >
+                <div
+                  className="text-sm font-medium text-center mb-2 dark:text-gray-300"
+                  aria-hidden="true"
+                >
+                  {Math.round(item.score).toLocaleString()}
+                </div>
+
+                <div
+                  className="flex-1 relative group"
+                  role="graphics-symbol"
+                  aria-label={`${
+                    item.name
+                  } score: ${scoreFormatted}, ${percentHeight.toFixed(
+                    1
+                  )}% of maximum score`}
+                  aria-roledescription="bar"
+                >
+                  <div className="absolute inset-0 bg-gray-100 dark:bg-gray-700 rounded-t-lg">
+                    <div
+                      className={`w-full ${getEngineColor(
+                        item.engine
+                      )} rounded-t-lg absolute bottom-0 transition-all duration-200 hover:brightness-90`}
+                      style={{
+                        height: `${percentHeight}%`,
+                      }}
+                    >
+                      {/* Hover Score */}
+                      <div className="opacity-0 group-hover:opacity-100 absolute inset-0 flex items-center justify-center text-gray-500 dark:text-gray-200 font-medium transition-opacity duration-200">
+                        {scoreFormatted}
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
 
-              <div className="h-[60px] flex items-center justify-center mt-2">
-                <div
-                  className="text-sm font-medium text-center w-full break-words dark:text-gray-300"
-                  title={item.name}
-                >
-                  {item.name}
+                <div className="h-[60px] flex items-center justify-center mt-2">
+                  <div
+                    className="text-sm font-medium text-center w-full break-words dark:text-gray-300"
+                    title={item.name}
+                  >
+                    {item.name}
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
+      </div>
+
+      {/* Screen reader only summary */}
+      <div className="sr-only">
+        <h4>Summary of browser performance on {platformName}</h4>
+        <p>From highest to lowest score:</p>
+        <ol>
+          {[...chartData].reverse().map((item, index) => (
+            <li key={`summary-${item.name}`}>
+              {item.name} with a score of {item.score.toFixed(1)} using{" "}
+              {item.engine} engine
+            </li>
+          ))}
+        </ol>
       </div>
 
       <style jsx>{`
