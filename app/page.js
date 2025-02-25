@@ -1,12 +1,13 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
+
 import About from "./components/About/About";
 import BrowserRankingList from "./components/BrowserRankingList";
 import Explanation from "./components/Explanation";
-import Newsletter from "./components/Newsletter";
-import Header from "./components/Header";
 import Footer from "./components/Footer";
+import Header from "./components/Header";
+import Newsletter from "./components/Newsletter";
 
 export default function Home() {
   const [darkMode, setDarkMode] = useState(false);
@@ -40,8 +41,14 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-white dark:bg-gray-900 transition-colors duration-200">
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:absolute focus:z-50 focus:p-4 focus:bg-white focus:text-black focus:top-0 focus:left-0 focus:outline-none focus:ring-2 focus:ring-purple-500"
+      >
+        Skip to content
+      </a>
       <Header darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
-      <main className="container mx-auto px-4 py-8">
+      <main id="main-content" className="container mx-auto px-4 py-8">
         <BrowserRankingList />
         <Newsletter />
         <About />
