@@ -27,16 +27,35 @@ const BrowserCard = React.memo(
       }
     };
 
+    // Calculate score difference for accessibility text
+    const scoreDifference = prevSpeedometer3Score
+      ? latestVersion.scores.speedometer3 - prevSpeedometer3Score
+      : null;
+
+    const scoreChangeText = scoreDifference
+      ? `${scoreDifference > 0 ? "Increased" : "Decreased"} by ${Math.abs(
+          scoreDifference
+        ).toFixed(2)} points from previous version`
+      : "";
+
     return (
       <>
         <div
           className={`bg-white dark:bg-gray-800 shadow-[1px_0px_50px_5px_rgba(241,247,255,0.5),_18px_12px_50px_3px_rgba(241,247,255,0.5)]
             dark:shadow-[0_0_100px_13px_rgba(126,4,255,0.07)]
             rounded-lg overflow-hidden w-full sm:max-w-sm md:max-w-md lg:max-w-lg
-            transition-transform transform hover:scale-105 cursor-pointer`}
+            transition-transform transform hover:scale-105 cursor-pointer
+            ${getRankStyle(rank)}`}
           role="article"
           aria-labelledby={`browser-${browser.name}`}
           onClick={() => setShowModal(true)}
+          onKeyDown={(e) => {
+            if (e.key === "Enter" || e.key === " ") {
+              e.preventDefault();
+              setShowModal(true);
+            }
+          }}
+          tabIndex="0"
         >
           <div className="p-4 sm:p-6">
             <div className="flex items-center mb-4">
@@ -58,6 +77,8 @@ const BrowserCard = React.memo(
                   rel="noopener noreferrer"
                   className="bg-gradient-to-r from-violet-600 to-indigo-600 bg-clip-text text-transparent
                     hover:text-violet-900 dark:hover:text-violet-400 transition-colors"
+                  onClick={(e) => e.stopPropagation()}
+                  aria-label={`Visit ${browser.name} website`}
                 >
                   {browser.name}
                 </a>
@@ -89,7 +110,7 @@ const BrowserCard = React.memo(
                     {latestVersion.scores.speedometer3.toFixed(2)}
                   </p>
                   {prevSpeedometer3Score && (
-                    <p className="text-sm">
+                    <p className="text-sm" aria-label={scoreChangeText}>
                       <span
                         className={`${
                           latestVersion.scores.speedometer3 -
@@ -145,7 +166,13 @@ const BrowserCard = React.memo(
                     <p className="text-2xl sm:text-3xl md:text-xl font-bold dark:text-white">
                       {latestVersion.scores.adblock.toFixed(0)}/100
                     </p>
-                    <div className="w-full sm:w-10/12 md:w-9/12 lg:w-8/12 h-4 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden mt-1 mx-auto">
+                    <div
+                      className="w-full sm:w-10/12 md:w-9/12 lg:w-8/12 h-4 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden mt-1 mx-auto"
+                      role="progressbar"
+                      aria-valuenow={latestVersion.scores.adblock.toFixed(0)}
+                      aria-valuemin="0"
+                      aria-valuemax="100"
+                    >
                       <div
                         className="h-full bg-violet-600 dark:bg-violet-500 rounded-full transition-all duration-500"
                         style={{ width: `${latestVersion.scores.adblock}%` }}
