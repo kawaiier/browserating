@@ -5,9 +5,16 @@ import Image from "next/image";
 
 export default function Header({ darkMode, toggleDarkMode }) {
   return (
-    <header className="relative overflow-hidden bg-gradient-to-b from-blue-50 to-white dark:from-gray-900 dark:to-gray-800 py-12">
+    <header
+      className="relative overflow-hidden bg-gradient-to-b from-blue-50 to-white dark:from-gray-900 dark:to-gray-800 py-12"
+      role="banner"
+    >
       {/* Background Pattern */}
-      <svg className="absolute inset-0 w-full h-full" viewBox="0 0 400 400">
+      <svg
+        className="absolute inset-0 w-full h-full"
+        viewBox="0 0 400 400"
+        aria-hidden="true"
+      >
         <defs>
           <pattern
             id="bg_pattern"
@@ -43,14 +50,16 @@ export default function Header({ darkMode, toggleDarkMode }) {
             <div className="relative">
               <div className="absolute -inset-1 bg-gradient-to-r from-purple-600 to-blue-600 rounded-lg blur opacity-25"></div>
               <div className="relative bg-white dark:bg-gray-800 rounded-lg shadow-xl p-2">
-                <Image
-                  src="/images/logo.png"
-                  alt="Browserating Logo"
-                  width={180}
-                  height={90}
-                  className="w-auto h-auto"
-                  priority
-                />
+                <a href="/" aria-label="BrowseRating Home">
+                  <Image
+                    src="/images/logo.png"
+                    alt="Browserating Logo"
+                    width={180}
+                    height={90}
+                    className="w-auto h-auto"
+                    priority
+                  />
+                </a>
               </div>
             </div>
           </div>
@@ -66,17 +75,27 @@ export default function Header({ darkMode, toggleDarkMode }) {
                 <span className="text-purple-600 dark:text-purple-400 font-semibold">
                   macOS
                 </span>
-                <span className="text-gray-400 dark:text-gray-500">/</span>
+                <span
+                  className="text-gray-400 dark:text-gray-500"
+                  aria-hidden="true"
+                >
+                  /
+                </span>
                 <span className="text-blue-600 dark:text-blue-400 font-semibold">
                   Windows
                 </span>
-                <span className="text-gray-400 dark:text-gray-500">/</span>
+                <span
+                  className="text-gray-400 dark:text-gray-500"
+                  aria-hidden="true"
+                >
+                  /
+                </span>
                 <span className="text-indigo-600 dark:text-indigo-400 font-semibold">
                   Android
                 </span>
               </span>
             </h2>
-            <p className="text-xsm mt-4 text-gray-600 dark:text-gray-400">
+            <p className="text-sm mt-4 text-gray-600 dark:text-gray-400">
               The score displayed below reflects the browser&apos;s performance
               in the Speedometer 3 benchmark. The higher the score, the better.
             </p>
