@@ -2,6 +2,7 @@ import "./globals.css";
 
 import { Inter } from "next/font/google";
 import Script from "next/script";
+import { Analytics } from "@vercel/analytics/next";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -16,7 +17,7 @@ export const metadata = {
     title: "BrowseRating - Browser Performance Comparison",
     description:
       "Compare browser performance across macOS, Windows and Android based on Speedometer 3 benchmark results.",
-    url: "https://browserating.kawaiier.dev",
+    url: "https://browserating.com",
     siteName: "BrowseRating",
     locale: "en_US",
     type: "website",
@@ -40,14 +41,14 @@ export default function RootLayout({ children }) {
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta name="theme-color" content="#7853E0" />
-        <link rel="canonical" href="https://browserating.kawaiier.dev" />
+        <link rel="canonical" href="https://browserating.com" />
         <Script id="schema-org" type="application/ld+json">
           {`
             {
               "@context": "https://schema.org",
               "@type": "WebSite",
               "name": "BrowseRating",
-              "url": "https://browserating.kawaiier.dev",
+              "url": "https://browserating.com",
               "description": "Compare performance of macOS, Windows and Android browsers based on Speedometer 3 benchmark results.",
             }
           `}
@@ -64,15 +65,15 @@ export default function RootLayout({ children }) {
                 "@type": "Person",
                 "name": "kawaiier"
               },
-              "license": "https://browserating.kawaiier.dev/privacy",
-              "dateModified": "2025-02-23"
+              "license": "https://browserating.com/privacy",
+              "dateModified": "2025-03-07"
             }
           `}
         </Script>
       </head>
       <body className={inter.className}>
         {children}
-
+        <Analytics />
         <Script
           src="https://cdn.counter.dev/script.js"
           data-id="543bdca5-3749-4923-8c4c-1593e1a96e57"
