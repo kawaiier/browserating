@@ -105,6 +105,13 @@ export default function Header({ darkMode, toggleDarkMode }) {
                 <time dateTime="2025-02-23">February 23, 2025</time>
               </p>
             </div>
+            <div className="mt-4 text-gray-600 dark:text-gray-400 max-w-xl">
+              <p className="text-sm italic">
+                The rating is updated monthly. If you would like weekly updates,
+                consider supporting the project. Your support will motivate me
+                to dedicate time each week to conduct these tests.
+              </p>
+            </div>
           </div>
         </div>
       </div>
