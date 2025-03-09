@@ -4,9 +4,7 @@ export default function PrivacyPage() {
   return (
     <section className="max-w-4xl mx-auto p-10 my-12 bg-gray-50 rounded-lg shadow-md">
       <h2 className="text-3xl font-bold mb-6">Privacy Policy</h2>
-      <p className="text-sm text-gray-600 mb-4">
-        Last updated: November 27, 2024
-      </p>
+      <p className="text-sm text-gray-600 mb-4">Last updated: March 9, 2025</p>
 
       <h3 className="text-2xl font-semibold mb-4">Introduction</h3>
       <p className="mb-4">
@@ -36,8 +34,8 @@ export default function PrivacyPage() {
 
       <h4 className="text-xl font-semibold mb-2">Anonymous Usage Statistics</h4>
       <p className="mb-4">
-        We use Counter.dev to collect anonymous statistical information about
-        website visits, including:
+        We use Counter.dev and Vercel Analytics to collect anonymous statistical
+        information about website visits, including:
       </p>
       <ul className="list-disc pl-6 mb-4">
         <li>Day and time of visits</li>
@@ -49,6 +47,8 @@ export default function PrivacyPage() {
         <li>Screen size</li>
         <li>Preferred language</li>
         <li>Pages visited</li>
+        <li>Web vitals metrics (page load time, interaction times)</li>
+        <li>Route changes</li>
       </ul>
       <p className="mb-4">This data is:</p>
       <ul className="list-disc pl-6 mb-4">
@@ -60,7 +60,7 @@ export default function PrivacyPage() {
 
       <h4 className="text-xl font-semibold mb-2">Technical Services</h4>
       <p className="mb-4">
-        We use Cloudflare as our DNS provider, which may process technical
+        We use Bunny.net as our CDN provider, which may process technical
         information necessary for delivering our website content efficiently and
         securely.
       </p>
@@ -95,9 +95,10 @@ export default function PrivacyPage() {
         operate our website:
       </p>
       <ul className="list-disc pl-6 mb-4">
-        <li>Cloudflare (DNS services)</li>
+        <li>Bunny.net (CDN services)</li>
         <li>Beehive (newsletter management)</li>
         <li>Counter.dev (anonymous analytics)</li>
+        <li>Vercel Analytics (anonymous performance and usage analytics)</li>
       </ul>
 
       <h3 className="text-2xl font-semibold mb-4">Data Security</h3>
