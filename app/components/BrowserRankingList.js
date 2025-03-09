@@ -264,9 +264,6 @@ export default function BrowserRankingList() {
 
       {/* Chart Section */}
       <div className="mt-12">
-        <h3 className="text-xl font-semibold mb-4 text-gray-800 dark:text-gray-200">
-          Performance Comparison Chart
-        </h3>
         <BrowserBarChart
           browsers={filteredBrowsers}
           platform={selectedPlatform}
