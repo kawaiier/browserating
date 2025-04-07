@@ -5,7 +5,7 @@ export default function ScoreExplanation() {
         <span className="font-bold text-[#7853E0] dark:text-[#9B7BE8]">
           The higher the score, the faster the browser.
         </span>{" "}
-        Speedometer 3 measures browser performance by simulating user
+        Speedometer 3.1 measures browser performance by simulating user
         interactions on various web applications.
       </p>
 
@@ -15,7 +15,7 @@ export default function ScoreExplanation() {
         </h4>
         <ul className="list-disc list-inside space-y-2 text-gray-700 dark:text-gray-300">
           <li>
-            <span className="font-medium">Speedometer 3:</span> Higher scores
+            <span className="font-medium">Speedometer 3.1:</span> Higher scores
             indicate faster JavaScript and DOM performance
           </li>
           <li>

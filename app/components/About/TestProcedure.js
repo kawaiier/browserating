@@ -49,9 +49,11 @@ export default function TestProcedure() {
         <p className="ml-3 text-gray-700 dark:text-gray-300 leading-relaxed">
           For RAM usage test,{" "}
           <span className="font-medium text-[#7853E0] dark:text-[#9B7BE8]">
-            the average memory consumption was measured
+            the cumulative memory consumption was measured
           </span>{" "}
-          while playing the same 2K YouTube video.
+          after sequentially loading seven diverse websites: IGN, ESPN, Figma,
+          Britannica, Wired, Bloomberg, and Reddit's popular page. Measurements
+          were taken using Activity Monitor, filtered by each browser's name.
         </p>
       </div>
 
