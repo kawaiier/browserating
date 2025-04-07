@@ -96,7 +96,7 @@ export default function BrowserRankingList() {
 
   const sortedBrowsers = useMemo(
     () => sortBrowsersByPlatform(browsers, selectedPlatform),
-    [browsers, selectedPlatform]
+    [browsers, selectedPlatform],
   );
 
   useEffect(() => {
@@ -109,7 +109,7 @@ export default function BrowserRankingList() {
 
   const engines = useMemo(
     () => ["All", ...new Set(browsers.map((browser) => browser.engine))],
-    [browsers]
+    [browsers],
   );
   const platforms = ["macos-intel", "macos-arm", "windows", "android"];
 
@@ -141,22 +141,21 @@ export default function BrowserRankingList() {
         <button
           key={platform}
           onClick={() => handlePlatformChange(platform)}
-          className={`px-3 py-1 rounded-full text-sm relative 
+          className={`px-3 py-1 rounded-full text-sm relative
           ${
             selectedPlatform === platform
               ? "ring-2 ring-offset-2 ring-gray-300 dark:ring-gray-500 dark:ring-offset-gray-900"
               : ""
           }
-          bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-100 
+          bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-100
           hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors`}
-          aria-pressed={selectedPlatform === platform}
           role="radio"
           aria-checked={selectedPlatform === platform}
         >
           {platformNames[platform]}
           {platform === NEW_PLATFORM && (
             <span
-              className="absolute -top-2 -right-2 bg-gradient-to-r from-purple-600 to-blue-600 text-white text-xs px-1.5 py-0.5 rounded-full font-semibold 
+              className="absolute -top-2 -right-2 bg-gradient-to-r from-purple-600 to-blue-600 text-white text-xs px-1.5 py-0.5 rounded-full font-semibold
             animate-bounce-gentle hover:scale-105 transition-all duration-300 cursor-pointer
             shadow-md hover:shadow-lg"
               aria-label="Recently updated"
@@ -186,7 +185,6 @@ export default function BrowserRankingList() {
               ? "ring-2 ring-offset-2 ring-gray-300 dark:ring-gray-500 dark:ring-offset-gray-900"
               : ""
           }`}
-          aria-pressed={selectedEngine === engine}
           role="radio"
           aria-checked={selectedEngine === engine}
         >
