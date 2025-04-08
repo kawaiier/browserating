@@ -52,8 +52,9 @@ export default function TestProcedure() {
             the cumulative memory consumption was measured
           </span>{" "}
           after sequentially loading seven diverse websites: IGN, ESPN, Figma,
-          Britannica, Wired, Bloomberg, and Reddit's popular page. Measurements
-          were taken using Activity Monitor, filtered by each browser's name.
+          Britannica, Wired, Bloomberg, and Reddit&apos;s popular page.
+          Measurements were taken using Activity Monitor, filtered by each
+          browser&apos;s name.
         </p>
       </div>
 
