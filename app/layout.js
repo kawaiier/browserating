@@ -3,6 +3,7 @@ import "./globals.css";
 import { Analytics } from "@vercel/analytics/next";
 import { Inter } from "next/font/google";
 import Script from "next/script";
+import StickyAnnouncement from "./components/StickyAnnouncement";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -74,6 +75,7 @@ export default function RootLayout({ children }) {
       <body className={inter.className}>
         {children}
         <Analytics />
+        <StickyAnnouncement />
         <Script
           src="https://cdn.counter.dev/script.js"
           data-id="543bdca5-3749-4923-8c4c-1593e1a96e57"
