@@ -102,7 +102,7 @@ export default function Header({ darkMode, toggleDarkMode }) {
             </p>
             <div className="bg-gradient-to-r from-purple-600 to-blue-600 text-white p-4 rounded-md mt-8 inline-block">
               <p className="text-sm font-mono">
-                Last updated: <time dateTime="2025-04-06">April 6, 2025</time>
+                Last updated: <time dateTime="2025-05-03">May 3, 2025</time>
               </p>
             </div>
             <div className="mt-4 text-gray-600 dark:text-gray-400 max-w-xl">
