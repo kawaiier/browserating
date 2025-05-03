@@ -229,5 +229,20 @@
     "name": "Kito",
     "logo": "/images/browser-logos/kito.png",
     "website": "https://play.google.com/store/apps/details?id=com.yjllqint.kito&hl=en"
+  },
+  {
+    "name": "Dia",
+    "logo": "/images/browser-logos/dia.png",
+    "website": "https://www.diabrowser.com/"
+  },
+  {
+    "name": "Deta Surf",
+    "logo": "/images/browser-logos/deta-surf.png",
+    "website": "https://deta.surf/"
+  },
+  {
+    "name": "Strawberry",
+    "logo": "/images/browser-logos/strawberry.jpeg",
+    "website": "https://strawberrybrowser.com/"
   }
 ]
