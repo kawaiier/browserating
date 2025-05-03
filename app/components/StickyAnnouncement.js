@@ -12,9 +12,8 @@ const StickyAnnouncement = () => {
   return (
     <div className="fixed bottom-0 left-0 right-0 bg-gradient-to-r from-purple-600 to-blue-600 text-white p-4 flex items-center justify-between shadow-md z-50">
       <p className="text-sm md:text-base">
-        Subscribe to my new subreddit{" "}
-        <span className="font-bold">/r/aiBrowsing</span> — A place for
-        discussing browsers and extensions that incorporate AI features
+        Subscribe to <span className="font-bold">/r/aiBrowsing</span> — A place
+        for discussing browsers and extensions that incorporate AI features
       </p>
       <div className="flex items-center space-x-4">
         <a
