@@ -69,29 +69,11 @@ export default function Header({ darkMode, toggleDarkMode }) {
             <h1 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent leading-normal pb-2">
               BrowseRating
             </h1>
-            <h2 className="text-xl md:text-2xl font-medium text-gray-600 dark:text-gray-300 leading-relaxed">
+            <h2 class="text-xl md:text-2xl font-medium text-gray-600 dark:text-gray-300 leading-relaxed">
               Browser Performance Ranking for
-              <span className="inline-flex gap-1.5 ml-2">
-                <span className="text-purple-600 dark:text-purple-400 font-semibold">
-                  macOS
-                </span>
-                <span
-                  className="text-gray-400 dark:text-gray-500"
-                  aria-hidden="true"
-                >
-                  /
-                </span>
-                <span className="text-blue-600 dark:text-blue-400 font-semibold">
-                  Windows
-                </span>
-                <span
-                  className="text-gray-400 dark:text-gray-500"
-                  aria-hidden="true"
-                >
-                  /
-                </span>
-                <span className="text-indigo-600 dark:text-indigo-400 font-semibold">
-                  Android
+              <span class="inline-flex gap-1.5 ml-2">
+                <span class="bg-gradient-to-r from-purple-600 via-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent font-semibold">
+                  macOS / Windows / Android / iPad
                 </span>
               </span>
             </h2>
@@ -102,7 +84,7 @@ export default function Header({ darkMode, toggleDarkMode }) {
             </p>
             <div className="bg-gradient-to-r from-purple-600 to-blue-600 text-white p-4 rounded-md mt-8 inline-block">
               <p className="text-sm font-mono">
-                Last updated: <time dateTime="2025-05-03">May 3, 2025</time>
+                Last updated: <time dateTime="2025-05-23">May 23, 2025</time>
               </p>
             </div>
             <div className="mt-4 text-gray-600 dark:text-gray-400 max-w-xl">

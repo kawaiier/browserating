@@ -10,14 +10,18 @@ export default function BrowserBarChart({
 
     return browsers
       .filter((browser) => {
-        const scores = browser[platform]?.[0]?.scores;
+        const platformData = browser[platform];
+        const scores = platformData?.versions?.[0]?.scores;
         return scores && typeof scores.speedometer3 === "number";
       })
-      .map((browser) => ({
-        name: browser.name,
-        score: browser[platform][0].scores.speedometer3,
-        engine: browser.engine || "unknown",
-      }))
+      .map((browser) => {
+        const platformData = browser[platform];
+        return {
+          name: browser.name,
+          score: platformData.versions[0].scores.speedometer3,
+          engine: platformData.engine || "unknown",
+        };
+      })
       .sort((a, b) => a.score - b.score);
   }, [browsers, platform]);
 
@@ -48,6 +52,7 @@ export default function BrowserBarChart({
     "macos-intel": "macOS Intel",
     windows: "Windows",
     android: "Android",
+    ipad: "iPad OS",
   };
 
   const platformName = platformNames[platform] || platform;

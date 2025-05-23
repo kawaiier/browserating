@@ -8,11 +8,21 @@ const BrowserCard = React.memo(
     const [showModal, setShowModal] = useState(false);
 
     const platformData = browser[selectedPlatform];
-    if (!platformData || platformData.length === 0) return null;
+    if (
+      !platformData ||
+      !platformData.versions ||
+      platformData.versions.length === 0
+    )
+      return null;
 
-    const latestVersion = platformData[0];
+    const latestVersion = platformData.versions[0];
     const prevSpeedometer3Score =
-      platformData.length > 1 ? platformData[1].scores.speedometer3 : null;
+      platformData.versions.length > 1
+        ? platformData.versions[1].scores.speedometer3
+        : null;
+
+    // Use the platform-specific engine
+    const platformEngine = platformData.engine;
 
     const getRankStyle = (rank) => {
       switch (rank) {
@@ -93,17 +103,17 @@ const BrowserCard = React.memo(
               </span>
               <span
                 className={`px-2 py-1 rounded-full text-sm ${getEngineColor(
-                  browser.engine
+                  platformEngine
                 )}`}
               >
-                {browser.engine}
+                {platformEngine}
               </span>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
               {/* Speedometer Score */}
               <div className="text-center flex flex-col justify-between h-full">
                 <p className="text-xs text-gray-600 dark:text-gray-400 mb-1">
-                  Speedometer 3
+                  Speedometer 3.1
                 </p>
                 <div>
                   <p className="text-2xl sm:text-3xl md:text-xl font-bold dark:text-white">

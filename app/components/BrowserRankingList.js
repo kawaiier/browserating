@@ -28,10 +28,11 @@ const platformNames = {
   "macos-intel": "macOS Intel",
   windows: "Windows",
   android: "Android",
+  ipad: "iPad OS",
 };
 
 // Add this new constant for the NEW badge
-const NEW_PLATFORM = "macos-arm";
+const NEW_PLATFORM = "ipad";
 
 // Skeleton Loader Component
 const SkeletonLoader = () => (
@@ -88,30 +89,38 @@ export default function BrowserRankingList() {
 
   const sortBrowsersByPlatform = (browsers, platform) => {
     return browsers.sort((a, b) => {
-      const aScore = a[platform]?.[0]?.scores?.speedometer3 || 0;
-      const bScore = b[platform]?.[0]?.scores?.speedometer3 || 0;
+      const aScore = a[platform]?.versions?.[0]?.scores?.speedometer3 || 0;
+      const bScore = b[platform]?.versions?.[0]?.scores?.speedometer3 || 0;
       return bScore - aScore;
     });
   };
 
   const sortedBrowsers = useMemo(
     () => sortBrowsersByPlatform(browsers, selectedPlatform),
-    [browsers, selectedPlatform],
+    [browsers, selectedPlatform]
   );
 
   useEffect(() => {
     const filtered =
       selectedEngine === "All"
         ? sortedBrowsers
-        : sortedBrowsers.filter((browser) => browser.engine === selectedEngine);
+        : sortedBrowsers.filter((browser) => {
+            const platformData = browser[selectedPlatform];
+            return platformData?.engine === selectedEngine;
+          });
     setFilteredBrowsers(filtered);
-  }, [selectedEngine, sortedBrowsers]);
+  }, [selectedEngine, sortedBrowsers, selectedPlatform]);
 
-  const engines = useMemo(
-    () => ["All", ...new Set(browsers.map((browser) => browser.engine))],
-    [browsers],
-  );
-  const platforms = ["macos-intel", "macos-arm", "windows", "android"];
+  const engines = useMemo(() => {
+    const platformEngines = browsers
+      .filter((browser) => browser[selectedPlatform])
+      .map((browser) => browser[selectedPlatform].engine)
+      .filter(Boolean);
+
+    return ["All", ...new Set(platformEngines)];
+  }, [browsers, selectedPlatform]);
+
+  const platforms = ["macos-intel", "macos-arm", "windows", "android", "ipad"];
 
   const handleEngineFilter = (engine) => {
     setSelectedEngine(engine);
@@ -119,6 +128,7 @@ export default function BrowserRankingList() {
 
   const handlePlatformChange = (platform) => {
     setSelectedPlatform(platform);
+    setSelectedEngine("All"); // Reset engine filter when platform changes
   };
 
   const handleBrowserSelect = (browser) => {
@@ -159,7 +169,7 @@ export default function BrowserRankingList() {
             animate-bounce-gentle hover:scale-105 transition-all duration-300 cursor-pointer
             shadow-md hover:shadow-lg"
               aria-label="Recently updated"
-              style={{ transform: "none" }} /* Ensure no rotation is applied */
+              style={{ transform: "none" }}
             >
               updated
             </span>
@@ -255,6 +265,7 @@ export default function BrowserRankingList() {
               getEngineColor={getEngineColor}
               rank={index + 1}
               selectedPlatform={selectedPlatform}
+              platformEngine={browser[selectedPlatform]?.engine}
             />
           ))
         )}

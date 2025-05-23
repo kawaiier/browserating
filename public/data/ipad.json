@@ -1,0 +1,122 @@
+[
+  {
+    "name": "Arc Browser",
+    "engine": "WebKit",
+    "versions": [
+      {
+        "version": "1.43.0",
+        "scores": {
+          "speedometer3": 27.2
+        }
+      }
+    ]
+  },
+  {
+    "name": "Brave",
+    "engine": "WebKit",
+    "versions": [
+      {
+        "version": "1.78.1",
+        "scores": {
+          "speedometer3": 21.83
+        }
+      }
+    ]
+  },
+  {
+    "name": "Google Chrome",
+    "engine": "WebKit",
+    "versions": [
+      {
+        "version": "137.0.7151.34",
+        "scores": {
+          "speedometer3": 22.27
+        }
+      }
+    ]
+  },
+  {
+    "name": "DuckDuckGo",
+    "engine": "WebKit",
+    "versions": [
+      {
+        "version": "7.169.0",
+        "scores": {
+          "speedometer3": 25.07
+        }
+      }
+    ]
+  },
+  {
+    "name": "Firefox",
+    "engine": "WebKit",
+    "versions": [
+      {
+        "version": "138.2",
+        "scores": {
+          "speedometer3": 27.87
+        }
+      }
+    ]
+  },
+  {
+    "name": "Microsoft Edge",
+    "engine": "WebKit",
+    "versions": [
+      {
+        "version": "136.3240.77",
+        "scores": {
+          "speedometer3": 23.23
+        }
+      }
+    ]
+  },
+  {
+    "name": "Opera",
+    "engine": "WebKit",
+    "versions": [
+      {
+        "version": "5.5.3",
+        "scores": {
+          "speedometer3": 27.17
+        }
+      }
+    ]
+  },
+  {
+    "name": "Orion",
+    "engine": "WebKit",
+    "versions": [
+      {
+        "version": "1.3.23",
+        "scores": {
+          "speedometer3": 26.1
+        }
+      }
+    ]
+  },
+  {
+    "name": "Safari",
+    "engine": "WebKit",
+    "versions": [
+      {
+        "version": "18.5",
+        "scores": {
+          "speedometer3": 30.9
+        }
+      }
+    ]
+  },
+  {
+    "name": "Vivaldi",
+    "engine": "WebKit",
+    "versions": [
+      {
+        "version": "7.4.3691.46",
+        "scores": {
+          "speedometer3": 19.3
+        }
+      }
+    ]
+  }
+]

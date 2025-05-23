@@ -108,6 +108,29 @@ export default function About() {
             </>
           }
         />
+        <SystemInfo
+          title="iPad System Information"
+          details={
+            <>
+              All browsers have been tested on{" "}
+              <span className="font-medium text-[#7853E0] dark:text-[#9B7BE8]">
+                iPadOS 18.5.
+              </span>
+              The test was conducted on a{" "}
+              <span className="font-medium text-[#7853E0] dark:text-[#9B7BE8]">
+                iPad Mini 7th Generation
+              </span>
+              , equipped with a{" "}
+              <span className="font-medium text-[#7853E0] dark:text-[#9B7BE8]">
+                A17 Pro CPU
+              </span>{" "}
+              and{" "}
+              <span className="font-medium text-[#7853E0] dark:text-[#9B7BE8]">
+                8 GB of RAM
+              </span>
+            </>
+          }
+        />
         <div className="mt-8">
           <h3 className="text-xl font-semibold mb-4 text-gray-800 dark:text-gray-200">
             Testing Procedure
