@@ -58,41 +58,88 @@ export default function Footer() {
       <div className="container mx-auto px-4 max-w-full md:max-w-4xl">
         <div className="flex flex-col items-center space-y-6">
           {/* Social Links */}
+
           <nav aria-label="Social media links">
-            <ul className="flex flex-wrap justify-center space-x-6">
+            <ul className="flex flex-wrap justify-center gap-6">
               <li>
                 <a
                   href="https://x.com/kawaiier101"
-                  className="text-gray-400 hover:text-gray-600 transition-colors"
+                  className="group flex items-center justify-center w-10 h-10 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-500 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700 hover:text-gray-700 dark:hover:text-gray-200 transition-all duration-300 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 dark:focus:ring-offset-gray-900"
                   target="_blank"
                   rel="noopener noreferrer"
-                  aria-label="Follow on X (Twitter)"
+                  aria-label="Follow us on X (formerly Twitter)"
                 >
-                  <span className="block h-6 w-6">
-                    <svg
-                      viewBox="0 0 512 512"
-                      fill="currentColor"
-                      aria-hidden="true"
-                    >
-                      <path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z" />
-                    </svg>
+                  <span className="relative block h-5 w-5 group-hover:scale-110 transition-transform duration-300">
+                    <Image
+                      src="/images/TwitterLogo.svg"
+                      alt=""
+                      fill
+                      sizes="20px"
+                      className="object-contain"
+                      priority={false}
+                    />
                   </span>
                 </a>
               </li>
+
+              <li>
+                <a
+                  href="https://t.me/thebrowsershq"
+                  className="group flex items-center justify-center w-10 h-10 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-500 dark:text-gray-400 hover:bg-blue-50 dark:hover:bg-blue-900/20 hover:text-blue-600 dark:hover:text-blue-400 transition-all duration-300 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 dark:focus:ring-offset-gray-900"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Join our Telegram channel"
+                >
+                  <span className="relative block h-5 w-5 group-hover:scale-110 transition-transform duration-300">
+                    <Image
+                      src="/images/TelegramLogo.svg"
+                      alt=""
+                      fill
+                      sizes="20px"
+                      className="object-contain"
+                      priority={false}
+                    />
+                  </span>
+                </a>
+              </li>
+
+              <li>
+                <a
+                  href="https://www.reddit.com/r/aiBrowsing/"
+                  className="group flex items-center justify-center w-10 h-10 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-500 dark:text-gray-400 hover:bg-orange-50 dark:hover:bg-orange-900/20 hover:text-orange-600 dark:hover:text-orange-400 transition-all duration-300 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 dark:focus:ring-offset-gray-900"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Join our Reddit community"
+                >
+                  <span className="relative block h-5 w-5 group-hover:scale-110 transition-transform duration-300">
+                    <Image
+                      src="/images/RedditLogo.svg"
+                      alt=""
+                      fill
+                      sizes="20px"
+                      className="object-contain"
+                      priority={false}
+                    />
+                  </span>
+                </a>
+              </li>
+
               <li>
                 <a
                   href="https://bsky.app/profile/kawaiier.bsky.social"
-                  className="text-gray-400 hover:text-gray-600 transition-colors"
+                  className="group flex items-center justify-center w-10 h-10 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-500 dark:text-gray-400 hover:bg-sky-50 dark:hover:bg-sky-900/20 hover:text-sky-600 dark:hover:text-sky-400 transition-all duration-300 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 dark:focus:ring-offset-gray-900"
                   target="_blank"
                   rel="noopener noreferrer"
-                  aria-label="Follow on Bluesky"
+                  aria-label="Follow us on Bluesky"
                 >
-                  <span className="relative block h-6 w-6">
+                  <span className="relative block h-5 w-5 group-hover:scale-110 transition-transform duration-300">
                     <Image
                       src="/images/BlueskyLogo.png"
                       alt=""
                       fill
-                      sizes="24px"
+                      sizes="20px"
+                      className="object-contain"
+                      priority={false}
                     />
                   </span>
                 </a>
