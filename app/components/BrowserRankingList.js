@@ -32,7 +32,7 @@ const platformNames = {
 };
 
 // Add this new constant for the NEW badge
-const NEW_PLATFORM = "ipad";
+const NEW_PLATFORM = "android";
 
 // Skeleton Loader Component
 const SkeletonLoader = () => (

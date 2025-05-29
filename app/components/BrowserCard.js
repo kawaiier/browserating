@@ -51,11 +51,17 @@ const BrowserCard = React.memo(
     return (
       <>
         <div
-          className={`bg-white dark:bg-gray-800 shadow-[1px_0px_50px_5px_rgba(241,247,255,0.5),_18px_12px_50px_3px_rgba(241,247,255,0.5)]
+          className={`relative bg-white dark:bg-gray-800 shadow-[1px_0px_50px_5px_rgba(241,247,255,0.5),_18px_12px_50px_3px_rgba(241,247,255,0.5)]
             dark:shadow-[0_0_100px_13px_rgba(126,4,255,0.07)]
             rounded-lg overflow-hidden w-full sm:max-w-sm md:max-w-md lg:max-w-lg
             transition-transform transform hover:scale-105 cursor-pointer
-            ${getRankStyle(rank)}`}
+            ${getRankStyle(rank)}
+            ${
+              selectedPlatform === "android" &&
+              platformData.versions.length === 1
+                ? "opacity-50"
+                : ""
+            }`}
           role="article"
           aria-labelledby={`browser-${browser.name}`}
           onClick={() => setShowModal(true)}
@@ -65,8 +71,18 @@ const BrowserCard = React.memo(
               setShowModal(true);
             }
           }}
-          tabIndex="0"
+          tabIndex={
+            selectedPlatform === "android" && platformData.versions.length === 1
+              ? -1
+              : 0
+          }
         >
+          {selectedPlatform === "android" &&
+            platformData.versions.length === 1 && (
+              <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center z-10">
+                <span className="text-white text-2xl font-bold">Outdated</span>
+              </div>
+            )}
           <div className="p-4 sm:p-6">
             <div className="flex items-center mb-4">
               <Image

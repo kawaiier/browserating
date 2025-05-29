@@ -4,6 +4,12 @@
     "engine": "Blink",
     "versions": [
       {
+        "version": "1.78.102",
+        "scores": {
+          "speedometer3": 8.08
+        }
+      },
+      {
         "version": "1.69.164",
         "scores": {
           "speedometer3": 7.0
@@ -40,6 +46,12 @@
     "engine": "Blink",
     "versions": [
       {
+        "version": "136.0.7103.125",
+        "scores": {
+          "speedometer3": 7.21
+        }
+      },
+      {
         "version": "128.0.6613.120",
         "scores": {
           "speedometer3": 6.08
@@ -52,6 +64,12 @@
     "engine": "Blink",
     "versions": [
       {
+        "version": "5.233.0",
+        "scores": {
+          "speedometer3": 9.07
+        }
+      },
+      {
         "version": "5.213.0",
         "scores": {
           "speedometer3": 9.24
@@ -63,6 +81,12 @@
     "name": "Firefox",
     "engine": "Gecko",
     "versions": [
+      {
+        "version": "138.0.4",
+        "scores": {
+          "speedometer3": 5.04
+        }
+      },
       {
         "version": "130.0",
         "scores": {
@@ -124,6 +148,12 @@
     "engine": "Blink",
     "versions": [
       {
+        "version": "136.0.7103.126",
+        "scores": {
+          "speedometer3": 6.04
+        }
+      },
+      {
         "version": "128.0.6613.146",
         "scores": {
           "speedometer3": 9.68
@@ -160,6 +190,12 @@
     "engine": "Gecko",
     "versions": [
       {
+        "version": "2.31.0",
+        "scores": {
+          "speedometer3": 4.91
+        }
+      },
+      {
         "version": "2.23.0",
         "scores": {
           "speedometer3": 5.94
@@ -195,6 +231,12 @@
     "name": "Microsoft Edge",
     "engine": "Blink",
     "versions": [
+      {
+        "version": "136.0.3240.91",
+        "scores": {
+          "speedometer3": 5.5
+        }
+      },
       {
         "version": "127.0.2651.1111",
         "scores": {
@@ -244,6 +286,12 @@
     "engine": "Blink",
     "versions": [
       {
+        "version": "89.3.4705.84083",
+        "scores": {
+          "speedometer3": 6.38
+        }
+      },
+      {
         "version": "84.4.4452.81430",
         "scores": {
           "speedometer3": 5.59
@@ -268,6 +316,12 @@
     "engine": "Blink",
     "versions": [
       {
+        "version": "2.7.5",
+        "scores": {
+          "speedometer3": 12.3
+        }
+      },
+      {
         "version": "2.5.7",
         "scores": {
           "speedometer3": 8.99
@@ -279,6 +333,12 @@
     "name": "Opera Mini",
     "engine": "Blink",
     "versions": [
+      {
+        "version": "91.0.2254.77465",
+        "scores": {
+          "speedometer3": 8.41
+        }
+      },
       {
         "version": "84.0.2254.73823",
         "scores": {
@@ -292,6 +352,12 @@
     "engine": "Blink",
     "versions": [
       {
+        "version": "1.5.5",
+        "scores": {
+          "speedometer3": 5.83
+        }
+      },
+      {
         "version": "1.1.9",
         "scores": {
           "speedometer3": 4.37
@@ -303,6 +369,12 @@
     "name": "Samsung Internet",
     "engine": "Blink",
     "versions": [
+      {
+        "version": "28.0.0.59",
+        "scores": {
+          "speedometer3": 5.73
+        }
+      },
       {
         "version": "26.0.3.7",
         "scores": {
@@ -328,6 +400,12 @@
     "engine": "Blink",
     "versions": [
       {
+        "version": "1.4.72",
+        "scores": {
+          "speedometer3": 9.79
+        }
+      },
+      {
         "version": "1.4.34",
         "scores": {
           "speedometer3": 9.14
@@ -339,6 +417,12 @@
     "name": "Thorium",
     "engine": "Blink",
     "versions": [
+      {
+        "version": "126.0.6478.246",
+        "scores": {
+          "speedometer3": 9.8
+        }
+      },
       {
         "version": "2.7.5",
         "scores": {
@@ -352,6 +436,12 @@
     "engine": "Blink",
     "versions": [
       {
+        "version": "6.5.1",
+        "scores": {
+          "speedometer3": 10.95
+        }
+      },
+      {
         "version": "5.9.0",
         "scores": {
           "speedometer3": 9.06
@@ -363,6 +453,12 @@
     "name": "Vivaldi",
     "engine": "Blink",
     "versions": [
+      {
+        "version": "7.4.3691.42",
+        "scores": {
+          "speedometer3": 8.57
+        }
+      },
       {
         "version": "6.9.3451.58",
         "scores": {
@@ -388,6 +484,12 @@
     "engine": "Gecko",
     "versions": [
       {
+        "version": "1.0.13",
+        "scores": {
+          "speedometer3": 3.8
+        }
+      },
+      {
         "version": "1.0.8.2",
         "scores": {
           "speedometer3": 4.91
@@ -399,6 +501,12 @@
     "name": "Yandex Browser",
     "engine": "Blink",
     "versions": [
+      {
+        "version": "25.4.4.105",
+        "scores": {
+          "speedometer3": 7.8
+        }
+      },
       {
         "version": "24.7.6.41",
         "scores": {
