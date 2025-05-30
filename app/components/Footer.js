@@ -188,7 +188,10 @@ export default function Footer() {
           </div>
 
           {/* Minimal Donations Section */}
-          <div className="flex flex-col items-center text-xs text-gray-500 w-full px-4 sm:px-0">
+          <div
+            className="flex flex-col items-center text-xs text-gray-500 w-full px-4 sm:px-0"
+            id="support"
+          >
             <h3 className="text-sm font-bold mb-2">Donations</h3>
             <p className={isCopied ? "text-green-500" : ""} aria-live="polite">
               {isCopied
