@@ -40,7 +40,7 @@ const platformIcons = {
   ipad: "📱",
 };
 
-const NEW_PLATFORM = "android";
+const NEW_PLATFORM = "macos-arm";
 const OUTDATED_PLATFORMS = ["windows", "macos-intel"];
 
 // Enhanced Skeleton Loader
@@ -121,12 +121,12 @@ const SearchBar = ({
 const StatsBar = ({ browsers, selectedPlatform }) => {
   const stats = useMemo(() => {
     const validBrowsers = browsers.filter(
-      (b) => b[selectedPlatform]?.versions?.length > 0
+      (b) => b[selectedPlatform]?.versions?.length > 0,
     );
     if (validBrowsers.length === 0) return null;
 
     const scores = validBrowsers.map(
-      (b) => b[selectedPlatform].versions[0].scores.speedometer3
+      (b) => b[selectedPlatform].versions[0].scores.speedometer3,
     );
     const avgScore = scores.reduce((a, b) => a + b, 0) / scores.length;
     const maxScore = Math.max(...scores);
@@ -185,11 +185,11 @@ export default function BrowserRankingList() {
   const [filteredBrowsers, setFilteredBrowsers] = useState([]);
   const [selectedEngine, setSelectedEngine] = useLocalStorage(
     "selectedEngine",
-    "All"
+    "All",
   );
   const [selectedPlatform, setSelectedPlatform] = useLocalStorage(
     "selectedPlatform",
-    "macos-arm"
+    "macos-arm",
   );
   const [searchTerm, setSearchTerm] = useState("");
   const [isLoading, setIsLoading] = useState(true);
@@ -216,7 +216,7 @@ export default function BrowserRankingList() {
     } catch (err) {
       if (err.name !== "AbortError") {
         setError(
-          "Failed to load browser data. Please check your connection and try again."
+          "Failed to load browser data. Please check your connection and try again.",
         );
         setIsLoading(false);
       }
@@ -243,7 +243,7 @@ export default function BrowserRankingList() {
 
   const sortedBrowsers = useMemo(
     () => sortBrowsersByPlatform(browsers, selectedPlatform),
-    [browsers, selectedPlatform, sortBrowsersByPlatform]
+    [browsers, selectedPlatform, sortBrowsersByPlatform],
   );
 
   const filteredAndSearchedBrowsers = useMemo(() => {
@@ -271,7 +271,9 @@ export default function BrowserRankingList() {
       filtered = filtered.filter(
         (browser) =>
           browser.name.toLowerCase().includes(searchLower) ||
-          browser[selectedPlatform]?.engine?.toLowerCase().includes(searchLower)
+          browser[selectedPlatform]?.engine
+            ?.toLowerCase()
+            .includes(searchLower),
       );
     }
 
@@ -297,7 +299,7 @@ export default function BrowserRankingList() {
     (engine) => {
       setSelectedEngine(engine);
     },
-    [setSelectedEngine]
+    [setSelectedEngine],
   );
 
   const handlePlatformChange = useCallback(
@@ -306,7 +308,7 @@ export default function BrowserRankingList() {
       setSelectedEngine("All");
       setSearchTerm("");
     },
-    [setSelectedPlatform, setSelectedEngine]
+    [setSelectedPlatform, setSelectedEngine],
   );
 
   const handleRetry = useCallback(() => {
@@ -384,7 +386,7 @@ export default function BrowserRankingList() {
             key={engine}
             onClick={() => handleEngineFilter(engine)}
             className={`px-4 py-2 rounded-xl text-sm font-medium transition-all duration-200 focus:outline-none focus:ring-4 focus:ring-purple-500/50 ${getEngineColor(
-              engine
+              engine,
             )}
             ${
               selectedEngine === engine

@@ -244,5 +244,10 @@
     "name": "Strawberry",
     "logo": "/images/browser-logos/strawberry.jpeg",
     "website": "https://strawberrybrowser.com/"
+  },
+  {
+    "name": "Fellou",
+    "logo": "/images/browser-logos/fellou.jpg",
+    "website": "https://fellou.ai/"
   }
 ]
