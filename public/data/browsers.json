@@ -249,5 +249,15 @@
     "name": "Fellou",
     "logo": "/images/browser-logos/fellou.jpg",
     "website": "https://fellou.ai/"
+  },
+  {
+    "name": "BrowserOS",
+    "logo": "/images/browser-logos/browseros.jpg",
+    "website": "https://www.browseros.com/"
+  },
+  {
+    "name": "Kosmik",
+    "logo": "/images/browser-logos/kosmik.jpg",
+    "website": "https://www.kosmik.app/"
   }
 ]
