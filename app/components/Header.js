@@ -78,7 +78,7 @@ export default function Header({ darkMode, toggleDarkMode }) {
                 r="3"
                 fill="#8B5CF6"
                 opacity="0.2"
-                className="animate-pulse"
+                className="sm:animate-pulse"
               />
             </pattern>
           </defs>
@@ -89,19 +89,19 @@ export default function Header({ darkMode, toggleDarkMode }) {
       {/* Floating geometric shapes */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div
-          className="absolute top-20 left-10 w-20 h-20 bg-gradient-to-br from-purple-400 to-blue-500 rounded-full opacity-10 animate-bounce"
+          className="absolute top-20 left-10 w-20 h-20 bg-gradient-to-br from-purple-400 to-blue-500 rounded-full opacity-10 sm:animate-bounce"
           style={{ animationDelay: "0s", animationDuration: "6s" }}
         ></div>
         <div
-          className="absolute top-40 right-20 w-16 h-16 bg-gradient-to-br from-blue-400 to-cyan-500 rounded-lg rotate-45 opacity-10 animate-pulse"
+          className="absolute top-40 right-20 w-16 h-16 bg-gradient-to-br from-blue-400 to-cyan-500 rounded-lg rotate-45 opacity-10 sm:animate-pulse"
           style={{ animationDelay: "1s" }}
         ></div>
         <div
-          className="absolute bottom-32 left-20 w-12 h-12 bg-gradient-to-br from-indigo-400 to-purple-500 rounded-full opacity-10 animate-bounce"
+          className="absolute bottom-32 left-20 w-12 h-12 bg-gradient-to-br from-indigo-400 to-purple-500 rounded-full opacity-10 sm:animate-bounce"
           style={{ animationDelay: "2s", animationDuration: "4s" }}
         ></div>
         <div
-          className="absolute bottom-20 right-32 w-24 h-6 bg-gradient-to-r from-purple-400 to-pink-500 rounded-full opacity-10 animate-pulse"
+          className="absolute bottom-20 right-32 w-24 h-6 bg-gradient-to-r from-purple-400 to-pink-500 rounded-full opacity-10 sm:animate-pulse"
           style={{ animationDelay: "3s" }}
         ></div>
       </div>
@@ -336,23 +336,25 @@ export default function Header({ darkMode, toggleDarkMode }) {
                   : "translate-y-8 opacity-0"
               }`}
             >
-              <div className="inline-flex items-center gap-4 bg-gradient-to-r from-purple-600/10 to-blue-600/10 backdrop-blur-sm border border-purple-200/30 dark:border-purple-700/30 rounded-xl px-6 py-4">
-                <div className="flex items-center gap-2">
-                  <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-                  <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
-                    Last updated:
-                  </span>
+              <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-4 bg-gradient-to-r from-purple-600/10 to-blue-600/10 backdrop-blur-sm border border-purple-200/30 dark:border-purple-700/30 rounded-xl px-3 sm:px-6 py-3 sm:py-4 w-full">
+                <div className="flex flex-col sm:flex-row items-start sm:items-center gap-0 sm:gap-2">
+                  <div className="flex items-center gap-2">
+                    <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+                    <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                      Last updated:
+                    </span>
+                  </div>
                   <time
                     dateTime="2025-07-30"
-                    className="text-sm font-mono font-semibold text-purple-700 dark:text-purple-300"
+                    className="text-sm font-mono font-semibold text-purple-700 dark:text-purple-300 ml-6 sm:ml-2 sm:mt-0 mt-1"
                   >
                     July 30, 2025
                   </time>
                 </div>
                 <div className="hidden sm:block w-px h-6 bg-gray-300 dark:bg-gray-600"></div>
-                <div className="text-sm text-gray-600 dark:text-gray-400">
+                <div className="flex flex-col sm:flex-row items-start sm:items-center gap-0 sm:gap-2 text-sm text-gray-600 dark:text-gray-400">
                   <span className="font-medium">Next update:</span>
-                  <span className="ml-1 text-blue-600 dark:text-blue-400">
+                  <span className="text-blue-600 dark:text-blue-400 sm:ml-1 ml-6 sm:mt-0 mt-1">
                     August 10, 2025
                   </span>
                 </div>
