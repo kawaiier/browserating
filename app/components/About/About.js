@@ -11,7 +11,7 @@ export default function About() {
       icon: "🍎",
       gradient: "from-blue-500 to-purple-500",
       specs: {
-        os: "macOS Sequoia 15.4",
+        os: "macOS Sequoia 15.6",
         device: "14-inch MacBook Pro (2023)",
         processor: "M3 Pro",
         memory: "36 GB RAM",
@@ -256,7 +256,7 @@ export default function About() {
                   }`}
                   onClick={() =>
                     setExpandedSystem(
-                      expandedSystem === system.id ? null : system.id
+                      expandedSystem === system.id ? null : system.id,
                     )
                   }
                 >
@@ -330,7 +330,7 @@ export default function About() {
                                     >
                                       {highlight}
                                     </span>
-                                  )
+                                  ),
                                 )}
                               </div>
                             </div>

@@ -343,17 +343,17 @@ export default function Header({ darkMode, toggleDarkMode }) {
                     Last updated:
                   </span>
                   <time
-                    dateTime="2025-06-10"
+                    dateTime="2025-07-30"
                     className="text-sm font-mono font-semibold text-purple-700 dark:text-purple-300"
                   >
-                    June 10, 2025
+                    July 30, 2025
                   </time>
                 </div>
                 <div className="hidden sm:block w-px h-6 bg-gray-300 dark:bg-gray-600"></div>
                 <div className="text-sm text-gray-600 dark:text-gray-400">
                   <span className="font-medium">Next update:</span>
                   <span className="ml-1 text-blue-600 dark:text-blue-400">
-                    July 10, 2025
+                    August 10, 2025
                   </span>
                 </div>
               </div>
