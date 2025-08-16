@@ -259,5 +259,10 @@
     "name": "Kosmik",
     "logo": "/images/browser-logos/kosmik.jpg",
     "website": "https://www.kosmik.app/"
+  },
+  {
+    "name": "Neo",
+    "logo": "/images/browser-logos/neo.jpg",
+    "website": "https://neobrowser.ai/"
   }
 ]
