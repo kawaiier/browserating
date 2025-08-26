@@ -348,7 +348,7 @@ export default function Header({ darkMode, toggleDarkMode }) {
                     dateTime="2025-08-16"
                     className="text-sm font-mono font-semibold text-purple-700 dark:text-purple-300 ml-6 sm:ml-2 sm:mt-0 mt-1"
                   >
-                    August 16, 2025
+                    August 26, 2025
                   </time>
                 </div>
                 <div className="hidden sm:block w-px h-6 bg-gray-300 dark:bg-gray-600"></div>

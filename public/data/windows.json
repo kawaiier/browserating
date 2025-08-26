@@ -4,6 +4,12 @@
     "engine": "Blink",
     "versions": [
       {
+        "version": "1.68.0",
+        "scores": {
+          "speedometer3": 21.92
+        }
+      },
+      {
         "version": "1.59.0",
         "scores": {
           "speedometer3": 17.23
@@ -15,6 +21,12 @@
     "name": "Brave",
     "engine": "Blink",
     "versions": [
+      {
+        "version": "1.81.136",
+        "scores": {
+          "speedometer3": 21.02
+        }
+      },
       {
         "version": "1.69.162",
         "scores": {
@@ -28,7 +40,13 @@
     "engine": "Blink",
     "versions": [
       {
-        "version": "1.105.0",
+        "version": "0.125.3",
+        "scores": {
+          "speedometer3": 17.77
+        }
+      },
+      {
+        "version": "0.105.0",
         "scores": {
           "speedometer3": 17.07
         }
@@ -39,6 +57,12 @@
     "name": "Firefox",
     "engine": "Gecko",
     "versions": [
+      {
+        "version": "142.0",
+        "scores": {
+          "speedometer3": 17.83
+        }
+      },
       {
         "version": "130.0",
         "scores": {
@@ -52,6 +76,12 @@
     "engine": "Gecko",
     "versions": [
       {
+        "version": "143.0b4",
+        "scores": {
+          "speedometer3": 17.63
+        }
+      },
+      {
         "version": "131.0b4",
         "scores": {
           "speedometer3": 16.13
@@ -63,6 +93,12 @@
     "name": "Firefox Nightly",
     "engine": "Gecko",
     "versions": [
+      {
+        "version": "144.0a1",
+        "scores": {
+          "speedometer3": 17.73
+        }
+      },
       {
         "version": "132.0a1",
         "scores": {
@@ -88,6 +124,12 @@
     "engine": "Blink",
     "versions": [
       {
+        "version": "139.0.7258.139",
+        "scores": {
+          "speedometer3": 23.25
+        }
+      },
+      {
         "version": "128.0.6613.121",
         "scores": {
           "speedometer3": 18.57
@@ -100,21 +142,15 @@
     "engine": "Blink",
     "versions": [
       {
+        "version": "141.0.7376.0",
+        "scores": {
+          "speedometer3": 22.52
+        }
+      },
+      {
         "version": "130.0.6710.0",
         "scores": {
           "speedometer3": 18.03
-        }
-      }
-    ]
-  },
-  {
-    "name": "Librewolf",
-    "engine": "Gecko",
-    "versions": [
-      {
-        "version": "130.0-3",
-        "scores": {
-          "speedometer3": 11.03
         }
       }
     ]
@@ -124,6 +160,12 @@
     "engine": "Blink",
     "versions": [
       {
+        "version": "139.0.3405.111",
+        "scores": {
+          "speedometer3": 23.91
+        }
+      },
+      {
         "version": "128.0.2739.67",
         "scores": {
           "speedometer3": 17.4
@@ -132,21 +174,15 @@
     ]
   },
   {
-    "name": "Mullvad Browser",
-    "engine": "Gecko",
-    "versions": [
-      {
-        "version": "13.5.3",
-        "scores": {
-          "speedometer3": 6.54
-        }
-      }
-    ]
-  },
-  {
     "name": "Opera",
     "engine": "Blink",
     "versions": [
+      {
+        "version": "120.0.5543.201",
+        "scores": {
+          "speedometer3": 21.17
+        }
+      },
       {
         "version": "113.0.5230.86",
         "scores": {
@@ -160,6 +196,12 @@
     "engine": "Blink",
     "versions": [
       {
+        "version": "120.0.5543.204",
+        "scores": {
+          "speedometer3": 21.2
+        }
+      },
+      {
         "version": "113.0.5230.75",
         "scores": {
           "speedometer3": 17.53
@@ -168,27 +210,15 @@
     ]
   },
   {
-    "name": "Tor Browser",
-    "engine": "Gecko",
-    "versions": [
-      {
-        "version": "13.5.3",
-        "scores": {
-          "speedometer3": 5.43
-        }
-      },
-      {
-        "version": "12.5.2",
-        "scores": {
-          "speedometer3": 5.48
-        }
-      }
-    ]
-  },
-  {
     "name": "Vivaldi",
     "engine": "Blink",
     "versions": [
+      {
+        "version": "7.5.3735.64",
+        "scores": {
+          "speedometer3": 21.7
+        }
+      },
       {
         "version": "6.9.3447.44",
         "scores": {
@@ -202,6 +232,12 @@
     "engine": "Gecko",
     "versions": [
       {
+        "version": "6.5.11",
+        "scores": {
+          "speedometer3": 15.23
+        }
+      },
+      {
         "version": "6.0.19",
         "scores": {
           "speedometer3": 10.2
@@ -214,6 +250,12 @@
     "engine": "Blink",
     "versions": [
       {
+        "version": "25.8.0.1872",
+        "scores": {
+          "speedometer3": 21.85
+        }
+      },
+      {
         "version": "24.7.1.1144",
         "scores": {
           "speedometer3": 17.6
@@ -225,6 +267,24 @@
     "name": "Zen Browser",
     "engine": "Gecko",
     "versions": [
+      {
+        "version": "1.14.11b",
+        "scores": {
+          "speedometer3": 17.08
+        }
+      }
+    ]
+  },
+  {
+    "name": "Zen Browser Twilight",
+    "engine": "Gecko",
+    "versions": [
+      {
+        "version": "1.15t (2025-08-25)",
+        "scores": {
+          "speedometer3": 16.77
+        }
+      },
       {
         "version": "1.0.0-a39",
         "scores": {
