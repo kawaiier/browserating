@@ -40,7 +40,7 @@ const platformIcons = {
   ipad: "📱",
 };
 
-const NEW_PLATFORM = "windows";
+const NEW_PLATFORM = "macos-arm";
 const OUTDATED_PLATFORMS = ["android", "macos-intel"];
 
 // Enhanced Skeleton Loader

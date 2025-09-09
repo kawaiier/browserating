@@ -264,5 +264,15 @@
     "name": "Neo",
     "logo": "/images/browser-logos/neo.jpg",
     "website": "https://neobrowser.ai/"
+  },
+  {
+    "name": "Comet",
+    "logo": "/images/browser-logos/comet.svg",
+    "website": "https://www.perplexity.ai/comet"
+  },
+  {
+    "name": "Ora",
+    "logo": "/images/browser-logos/ora.png",
+    "website": "https://www.orabrowser.com/"
   }
 ]

@@ -345,17 +345,17 @@ export default function Header({ darkMode, toggleDarkMode }) {
                     </span>
                   </div>
                   <time
-                    dateTime="2025-08-16"
+                    dateTime="2025-09-09"
                     className="text-sm font-mono font-semibold text-purple-700 dark:text-purple-300 ml-6 sm:ml-2 sm:mt-0 mt-1"
                   >
-                    August 26, 2025
+                    September 9, 2025
                   </time>
                 </div>
                 <div className="hidden sm:block w-px h-6 bg-gray-300 dark:bg-gray-600"></div>
                 <div className="flex flex-col sm:flex-row items-start sm:items-center gap-0 sm:gap-2 text-sm text-gray-600 dark:text-gray-400">
                   <span className="font-medium">Next update:</span>
                   <span className="text-blue-600 dark:text-blue-400 sm:ml-1 ml-6 sm:mt-0 mt-1">
-                    September 6, 2025
+                    October 5, 2025
                   </span>
                 </div>
               </div>
