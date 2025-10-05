@@ -274,5 +274,15 @@
     "name": "Ora",
     "logo": "/images/browser-logos/ora.png",
     "website": "https://www.orabrowser.com/"
+  },
+  {
+    "name": "Helium",
+    "logo": "/images/browser-logos/helium.jpg",
+    "website": "https://helium.computer/"
+  },
+  {
+    "name": "Web",
+    "logo": "/images/browser-logos/web.png",
+    "website": "https://github.com/nuance-dev/Web"
   }
 ]
