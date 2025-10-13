@@ -50,7 +50,7 @@ export default function RootLayout({ children }) {
               "@type": "WebSite",
               "name": "BrowseRating",
               "url": "https://browserating.com",
-              "description": "Compare performance of macOS, Windows and Android browsers based on Speedometer 3 benchmark results, adblocking quality, and RAM usage.",
+              "description": "Compare performance of macOS, Windows and Android browsers based on Speedometer 3.1 benchmark results, adblocking quality, and RAM usage."
             }
           `}
         </Script>
