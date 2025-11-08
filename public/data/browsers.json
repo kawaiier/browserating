@@ -242,7 +242,7 @@
   },
   {
     "name": "Strawberry",
-    "logo": "/images/browser-logos/strawberry.jpeg",
+    "logo": "/images/browser-logos/strawberry.png",
     "website": "https://strawberrybrowser.com/"
   },
   {
@@ -284,5 +284,15 @@
     "name": "Web",
     "logo": "/images/browser-logos/web.png",
     "website": "https://github.com/nuance-dev/Web"
+  },
+  {
+    "name": "Meteor",
+    "logo": "/images/browser-logos/meteor.jpg",
+    "website": "https://www.browse.dev/"
+  },
+  {
+    "name": "Nook",
+    "logo": "/images/browser-logos/nook.jpg",
+    "website": "https://browsewithnook.com/"
   }
 ]
