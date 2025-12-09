@@ -7,34 +7,29 @@ version: 2
 updates:
   # 1️⃣ npm (Node.js / TypeScript) dependencies
   - package-ecosystem: "npm"
-    directory: "/" # Location of package.json & package-lock.json
+    directory: "/"
     schedule:
-      interval: "daily" # Check for updates every day
-      time: "04:00" # (optional) UTC time of the check
-      day: "monday" # (optional) day is ignored for daily interval
-    open-pull-requests-limit: 10 # Max simultaneous PRs for npm updates
-    allow:
-      - dependency-type: "direct" # Only direct dependencies (no dev‑only updates)
-    # Optional: automatically merge patch updates
-    automerge: true
-    # Optional: custom labels for PRs
+      interval: "daily"
+      time: "04:00"
+    open-pull-requests-limit: 10
     labels:
-      - "dependency"
+      - "dependencies"
       - "npm"
+    commit-message:
+      prefix: "chore"
+      prefix-development: "chore"
+      include: "scope"
 
   # 2️⃣ Docker images referenced in Dockerfiles
   - package-ecosystem: "docker"
-    directory: "/" # Adjust if Dockerfile lives elsewhere
+    directory: "/"
     schedule:
       interval: "weekly"
       day: "wednesday"
       time: "03:00"
     open-pull-requests-limit: 5
-    # Only update images that use a version tag (e.g., node:14)
-    allow:
-      - dependency-type: "direct"
     labels:
-      - "dependency"
+      - "dependencies"
       - "docker"
 
   # 3️⃣ GitHub Actions workflow files
@@ -46,22 +41,5 @@ updates:
       time: "02:00"
     open-pull-requests-limit: 5
     labels:
-      - "dependency"
+      - "dependencies"
       - "github-actions"
-# -------------------------------------------------
-# Additional optional settings (uncomment if needed)
-# -------------------------------------------------
-# security-updates:
-#   - "npm"                            # Enable security‑only updates for npm
-#   - "docker"
-#   - "github-actions"
-#
-# commit-message:
-#   prefix: "chore(deps)"               # Prefix for Dependabot PR titles
-#
-# reviewers:
-#   - "team-leads"
-#   - "devops"
-#
-# # Pull request target branch (default: main)
-# target-branch: "main"
