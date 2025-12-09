@@ -4,6 +4,14 @@
     "engine": "Blink",
     "versions": [
       {
+        "version": "1.124.0",
+        "scores": {
+          "speedometer3": 42.57,
+          "ram": null,
+          "adblock": null
+        }
+      },
+      {
         "version": "1.120.0",
         "scores": {
           "speedometer3": 41.77,
@@ -109,6 +117,14 @@
     "engine": "Blink",
     "versions": [
       {
+        "version": "1.85.111",
+        "scores": {
+          "speedometer3": 45.9,
+          "ram": null,
+          "adblock": null
+        }
+      },
+      {
         "version": "1.84.135",
         "scores": {
           "speedometer3": 43.47,
@@ -213,6 +229,14 @@
     "name": "BrowserOS",
     "engine": "Blink",
     "versions": [
+      {
+        "version": "0.30.0",
+        "scores": {
+          "speedometer3": 38.79,
+          "ram": null,
+          "adblock": null
+        }
+      },
       {
         "version": "0.29.0",
         "scores": {
@@ -344,6 +368,13 @@
     "engine": "WebKit",
     "versions": [
       {
+        "version": "1.168.0",
+        "scores": {
+          "speedometer3": 37.23,
+          "adblock": null
+        }
+      },
+      {
         "version": "1.163.0",
         "scores": {
           "speedometer3": 34.5,
@@ -452,6 +483,14 @@
     "engine": "Gecko",
     "versions": [
       {
+        "version": "145.0.2",
+        "scores": {
+          "speedometer3": 37.9,
+          "ram": null,
+          "adblock": null
+        }
+      },
+      {
         "version": "144.0.2",
         "scores": {
           "speedometer3": 38.41,
@@ -556,6 +595,14 @@
     "name": "Firefox Developer Edition",
     "engine": "Gecko",
     "versions": [
+      {
+        "version": "146.0b9",
+        "scores": {
+          "speedometer3": 39.53,
+          "ram": null,
+          "adblock": null
+        }
+      },
       {
         "version": "145.0b9",
         "scores": {
@@ -662,6 +709,14 @@
     "engine": "Gecko",
     "versions": [
       {
+        "version": "148.0a1 (2025-12-08)",
+        "scores": {
+          "speedometer3": 39.63,
+          "ram": null,
+          "adblock": null
+        }
+      },
+      {
         "version": "146.0a1 (2025-11-07)",
         "scores": {
           "speedometer3": 38.2,
@@ -767,6 +822,14 @@
     "engine": "Gecko",
     "versions": [
       {
+        "version": "12.8.3",
+        "scores": {
+          "speedometer3": 31.7,
+          "ram": null,
+          "adblock": null
+        }
+      },
+      {
         "version": "12.4.0",
         "scores": {
           "speedometer3": 30.3,
@@ -788,6 +851,14 @@
     "name": "Google Chrome",
     "engine": "Blink",
     "versions": [
+      {
+        "version": "143.0.7499.41",
+        "scores": {
+          "speedometer3": 48.47,
+          "ram": null,
+          "adblock": null
+        }
+      },
       {
         "version": "142.0.7444.135",
         "scores": {
@@ -894,6 +965,14 @@
     "engine": "Blink",
     "versions": [
       {
+        "version": "145.0.7569.0",
+        "scores": {
+          "speedometer3": 48.5,
+          "ram": null,
+          "adblock": null
+        }
+      },
+      {
         "version": "144.0.7516.0",
         "scores": {
           "speedometer3": 47.78,
@@ -999,6 +1078,14 @@
     "engine": "Blink",
     "versions": [
       {
+        "version": "0.7.1.1",
+        "scores": {
+          "speedometer3": 46.37,
+          "ram": null,
+          "adblock": null
+        }
+      },
+      {
         "version": "0.6.3.1",
         "scores": {
           "speedometer3": 46.55,
@@ -1072,6 +1159,14 @@
     "name": "Microsoft Edge",
     "engine": "Blink",
     "versions": [
+      {
+        "version": "143.0.3650.66",
+        "scores": {
+          "speedometer3": 48.99,
+          "ram": null,
+          "adblock": null
+        }
+      },
       {
         "version": "142.0.3595.65",
         "scores": {
@@ -1178,6 +1273,14 @@
     "engine": "Blink",
     "versions": [
       {
+        "version": "142.0.3270.177",
+        "scores": {
+          "speedometer3": 46.41,
+          "ram": null,
+          "adblock": null
+        }
+      },
+      {
         "version": "141.0.2768.125",
         "scores": {
           "speedometer3": 45.77,
@@ -1216,6 +1319,14 @@
     "engine": "WebKit",
     "versions": [
       {
+        "version": "1.0.5",
+        "scores": {
+          "speedometer3": 44.97,
+          "ram": null,
+          "adblock": null
+        }
+      },
+      {
         "version": "1.0.4",
         "scores": {
           "speedometer3": 44.93,
@@ -1229,6 +1340,14 @@
     "name": "Opera",
     "engine": "Blink",
     "versions": [
+      {
+        "version": "125.0.5729.15",
+        "scores": {
+          "speedometer3": 44.77,
+          "ram": null,
+          "adblock": null
+        }
+      },
       {
         "version": "123.0.5669.47",
         "scores": {
@@ -1326,6 +1445,14 @@
     "name": "Opera GX",
     "engine": "Blink",
     "versions": [
+      {
+        "version": "124.0.5705.61",
+        "scores": {
+          "speedometer3": 43.37,
+          "ram": null,
+          "adblock": null
+        }
+      },
       {
         "version": "123.0.5669.57",
         "scores": {
@@ -1461,6 +1588,14 @@
     "name": "Orion",
     "engine": "WebKit",
     "versions": [
+      {
+        "version": "1.0.0",
+        "scores": {
+          "speedometer3": 47.17,
+          "ram": null,
+          "adblock": null
+        }
+      },
       {
         "version": "0.99.137-beta",
         "scores": {
@@ -1621,6 +1756,20 @@
     ]
   },
   {
+    "name": "Shift",
+    "engine": "Blink",
+    "versions": [
+      {
+        "version": "139.1.3.2975",
+        "scores": {
+          "speedometer3": 47.31,
+          "ram": null,
+          "adblock": null
+        }
+      }
+    ]
+  },
+  {
     "name": "Sigma OS",
     "engine": "WebKit",
     "versions": [
@@ -1701,6 +1850,13 @@
     "engine": "Blink",
     "versions": [
       {
+        "version": "1.3.2-beta.0",
+        "scores": {
+          "speedometer3": 43.82,
+          "ram": null
+        }
+      },
+      {
         "version": "1.3.0-beta.0",
         "scores": {
           "speedometer3": 42.96,
@@ -1754,6 +1910,14 @@
     "name": "Ungoogled Chromium",
     "engine": "Blink",
     "versions": [
+      {
+        "version": "143.0.7499.40",
+        "scores": {
+          "speedometer3": 40.36,
+          "ram": null,
+          "adblock": null
+        }
+      },
       {
         "version": "140.0.7339.185",
         "scores": {
@@ -1832,6 +1996,14 @@
     "name": "Vivaldi",
     "engine": "Blink",
     "versions": [
+      {
+        "version": "7.7.3851.58",
+        "scores": {
+          "speedometer3": 46.4,
+          "ram": null,
+          "adblock": null
+        }
+      },
       {
         "version": "7.6.3797.63",
         "scores": {
@@ -1938,6 +2110,14 @@
     "engine": "Gecko",
     "versions": [
       {
+        "version": "6.6.5.1",
+        "scores": {
+          "speedometer3": 36.87,
+          "ram": null,
+          "adblock": null
+        }
+      },
+      {
         "version": "6.6.4",
         "scores": {
           "speedometer3": 35.59,
@@ -2021,6 +2201,14 @@
     "name": "Yandex Browser",
     "engine": "Blink",
     "versions": [
+      {
+        "version": "25.10.2.1168",
+        "scores": {
+          "speedometer3": 38.56,
+          "ram": null,
+          "adblock": null
+        }
+      },
       {
         "version": "25.8.5.977",
         "scores": {
@@ -2119,6 +2307,14 @@
     "name": "Zen Browser",
     "engine": "Gecko",
     "versions": [
+      {
+        "version": "1.17.12b",
+        "scores": {
+          "speedometer3": 36.43,
+          "ram": null,
+          "adblock": null
+        }
+      },
       {
         "version": "1.17.6b",
         "scores": {
@@ -2224,6 +2420,14 @@
     "name": "Zen Browser Twilight",
     "engine": "Gecko",
     "versions": [
+      {
+        "version": "1.18t (2025-12-08)",
+        "scores": {
+          "speedometer3": 36.58,
+          "ram": null,
+          "adblock": null
+        }
+      },
       {
         "version": "1.18t (2025-11-07)",
         "scores": {
