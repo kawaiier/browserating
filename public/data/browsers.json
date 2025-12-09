@@ -294,5 +294,10 @@
     "name": "Nook",
     "logo": "/images/browser-logos/nook.jpg",
     "website": "https://browsewithnook.com/"
+  },
+  {
+    "name": "Shift",
+    "logo": "/images/browser-logos/shift.jpg",
+    "website": "https://shift.com/"
   }
 ]
