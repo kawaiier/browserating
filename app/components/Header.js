@@ -344,18 +344,34 @@ export default function Header({ darkMode, toggleDarkMode }) {
                       Last updated:
                     </span>
                   </div>
-                  <time
-                    dateTime="2025-11-08"
-                    className="text-sm font-mono font-semibold text-purple-700 dark:text-purple-300 ml-6 sm:ml-2 sm:mt-0 mt-1"
-                  >
-                    November 8, 2025
-                  </time>
+
+                  <div className="flex items-center ml-6 sm:ml-2 sm:mt-0 mt-1 gap-1 relative group">
+                    <time
+                      dateTime="2025-12-09"
+                      className="text-sm font-mono font-semibold text-purple-700 dark:text-purple-300"
+                    >
+                      December 9, 2025
+                    </time>
+
+                    {/* ? Tooltip */}
+                    <span className="text-purple-600 dark:text-purple-300 cursor-help font-bold select-none">
+                      ?
+                    </span>
+
+                    <div className="absolute left-0 top-6 w-64 text-xs bg-gray-900 text-gray-100 dark:bg-gray-800 p-3 rounded-lg shadow-xl opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
+                      I ran into several issues during this testing cycle, so
+                      results will be rolled out gradually. Follow me on X
+                      (@kawaiier101) for updates.
+                    </div>
+                  </div>
                 </div>
+
                 <div className="hidden sm:block w-px h-6 bg-gray-300 dark:bg-gray-600"></div>
+
                 <div className="flex flex-col sm:flex-row items-start sm:items-center gap-0 sm:gap-2 text-sm text-gray-600 dark:text-gray-400">
                   <span className="font-medium">Next update:</span>
                   <span className="text-blue-600 dark:text-blue-400 sm:ml-1 ml-6 sm:mt-0 mt-1">
-                    ~ December 6, 2025
+                    ~ January 10, 2026
                   </span>
                 </div>
               </div>
