@@ -1,11 +1,67 @@
-# To get started with Dependabot version updates, you'll need to specify which
-# package ecosystems to update and where the package manifests are located.
-# Please see the documentation for all configuration options:
-# https://docs.github.com/code-security/dependabot/dependabot-version-updates/configuration-options-for-the-dependabot.yml-file
-
+# .github/dependabot.yml
+# -------------------------------------------------
+# Dependabot version‑update configuration
+# -------------------------------------------------
 version: 2
+
 updates:
-  - package-ecosystem: "" # See documentation for possible values
-    directory: "/" # Location of package manifests
+  # 1️⃣ npm (Node.js / TypeScript) dependencies
+  - package-ecosystem: "npm"
+    directory: "/" # Location of package.json & package-lock.json
+    schedule:
+      interval: "daily" # Check for updates every day
+      time: "04:00" # (optional) UTC time of the check
+      day: "monday" # (optional) day is ignored for daily interval
+    open-pull-requests-limit: 10 # Max simultaneous PRs for npm updates
+    allow:
+      - dependency-type: "direct" # Only direct dependencies (no dev‑only updates)
+    # Optional: automatically merge patch updates
+    automerge: true
+    # Optional: custom labels for PRs
+    labels:
+      - "dependency"
+      - "npm"
+
+  # 2️⃣ Docker images referenced in Dockerfiles
+  - package-ecosystem: "docker"
+    directory: "/" # Adjust if Dockerfile lives elsewhere
     schedule:
       interval: "weekly"
+      day: "wednesday"
+      time: "03:00"
+    open-pull-requests-limit: 5
+    # Only update images that use a version tag (e.g., node:14)
+    allow:
+      - dependency-type: "direct"
+    labels:
+      - "dependency"
+      - "docker"
+
+  # 3️⃣ GitHub Actions workflow files
+  - package-ecosystem: "github-actions"
+    directory: "/.github/workflows"
+    schedule:
+      interval: "weekly"
+      day: "friday"
+      time: "02:00"
+    open-pull-requests-limit: 5
+    labels:
+      - "dependency"
+      - "github-actions"
+# -------------------------------------------------
+# Additional optional settings (uncomment if needed)
+# -------------------------------------------------
+# security-updates:
+#   - "npm"                            # Enable security‑only updates for npm
+#   - "docker"
+#   - "github-actions"
+#
+# commit-message:
+#   prefix: "chore(deps)"               # Prefix for Dependabot PR titles
+#
+# reviewers:
+#   - "team-leads"
+#   - "devops"
+#
+# # Pull request target branch (default: main)
+# target-branch: "main"
