@@ -299,5 +299,15 @@
     "name": "Shift",
     "logo": "/images/browser-logos/shift.jpg",
     "website": "https://shift.com/"
+  },
+  {
+    "name": "Axonium",
+    "logo": "/images/browser-logos/axonium.png",
+    "website": "https://axonium.fr/"
+  },
+  {
+    "name": "ChatGPT Atlas",
+    "logo": "/images/browser-logos/chatgpt-atlas.png",
+    "website": "https://chatgpt.com/atlas/"
   }
 ]

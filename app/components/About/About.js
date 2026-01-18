@@ -11,7 +11,7 @@ export default function About() {
       icon: "🍎",
       gradient: "from-blue-500 to-purple-500",
       specs: {
-        os: "macOS Tahoe 26.1",
+        os: "macOS Tahoe 26.2",
         device: "14-inch MacBook Pro (2023)",
         processor: "M3 Pro",
         memory: "36 GB RAM",

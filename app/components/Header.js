@@ -147,7 +147,7 @@ export default function Header({ darkMode, toggleDarkMode }) {
             <div className="flex flex-wrap gap-4 lg:gap-6 text-center lg:text-left">
               <div className="bg-white/10 dark:bg-gray-800/20 backdrop-blur-sm rounded-xl px-4 py-3 border border-white/20 dark:border-gray-700/30">
                 <div className="text-2xl font-bold text-gray-900 dark:text-white">
-                  100+
+                  200+
                 </div>
                 <div className="text-sm text-gray-600 dark:text-gray-400">
                   Browsers Tested
@@ -347,22 +347,11 @@ export default function Header({ darkMode, toggleDarkMode }) {
 
                   <div className="flex items-center ml-6 sm:ml-2 sm:mt-0 mt-1 gap-1 relative group">
                     <time
-                      dateTime="2025-12-09"
+                      dateTime="2026-01-18"
                       className="text-sm font-mono font-semibold text-purple-700 dark:text-purple-300"
                     >
-                      December 9, 2025
+                      January 18, 2026
                     </time>
-
-                    {/* ? Tooltip */}
-                    <span className="text-purple-600 dark:text-purple-300 cursor-help font-bold select-none">
-                      ?
-                    </span>
-
-                    <div className="absolute left-0 top-6 w-64 text-xs bg-gray-900 text-gray-100 dark:bg-gray-800 p-3 rounded-lg shadow-xl opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
-                      I ran into several issues during this testing cycle, so
-                      results will be rolled out gradually. Follow me on X
-                      (@kawaiier101) for updates.
-                    </div>
                   </div>
                 </div>
 
@@ -371,7 +360,7 @@ export default function Header({ darkMode, toggleDarkMode }) {
                 <div className="flex flex-col sm:flex-row items-start sm:items-center gap-0 sm:gap-2 text-sm text-gray-600 dark:text-gray-400">
                   <span className="font-medium">Next update:</span>
                   <span className="text-blue-600 dark:text-blue-400 sm:ml-1 ml-6 sm:mt-0 mt-1">
-                    ~ January 10, 2026
+                    ~ February 14, 2026
                   </span>
                 </div>
               </div>
