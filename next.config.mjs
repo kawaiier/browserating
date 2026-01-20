@@ -1,7 +1,17 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  turbopack: {
+    root: __dirname,
+  },
   images: {
-    domains: ["storage.ko-fi.com"],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'storage.ko-fi.com',
+        port: '',
+        pathname: '/**',
+      },
+    ],
   },
 };
 
