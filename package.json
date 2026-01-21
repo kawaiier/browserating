@@ -13,7 +13,7 @@
   },
   "dependencies": {
     "@vercel/analytics": "^1.5.0",
-    "chart.js": "^4.4.6",
+    "chart.js": "^4.5.1",
     "lucide-react": "^0.562.0",
     "next": "16.0.8",
     "react": "^19",
