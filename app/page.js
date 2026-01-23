@@ -5,10 +5,10 @@ import Footer from "./components/Footer";
 import Header from "./components/Header";
 import Newsletter from "./components/Newsletter";
 import DarkModeProvider from "./components/DarkModeProvider";
-import { getBrowsers } from "./lib/getBrowsers";
+import { getBrowsersServer } from "./lib/getBrowsersServer";
 
 export default async function Home() {
-  const initialBrowsers = await getBrowsers();
+  const initialBrowsers = await getBrowsersServer();
 
   return (
     <DarkModeProvider>
