@@ -1,4 +1,6 @@
-import { useEffect, useState } from "react";
+'use client';
+
+import { useEffect, useState } from 'react';
 
 export default function Newsletter() {
   const [subscriberCount, setSubscriberCount] = useState(7); // Dynamic count
@@ -33,10 +35,10 @@ export default function Newsletter() {
           <div className="mt-8 text-center">
             <div className="mb-4 p-3 sm:p-4 bg-orange-50 dark:bg-orange-900/20 border border-orange-200 dark:border-orange-800/50 rounded-lg">
               <p className="text-orange-700 dark:text-orange-300 text-xs sm:text-sm leading-relaxed">
-                ⚠️{" "}
+                ⚠️{' '}
                 <span className="block sm:inline mt-1 sm:mt-0">
-                  Subscribed before Aug 24, 2025? Please re-subscribe due to
-                  technical issues. Sorry for the inconvenience!
+                  Subscribed before Aug 24, 2025? Please re-subscribe due to technical issues. Sorry
+                  for the inconvenience!
                 </span>
               </p>
             </div>

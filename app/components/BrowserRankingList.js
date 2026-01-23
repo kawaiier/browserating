@@ -1,47 +1,47 @@
-"use client";
+'use client';
 
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
-import BrowserBarChart from "./BrowserBarChart";
-import BrowserCard from "./BrowserCard";
-import { getBrowsers } from "../lib/getBrowsers";
-import { useLocalStorage } from "../hooks/useLocalStorage";
+import BrowserBarChart from './BrowserBarChart';
+import BrowserCard from './BrowserCard';
+import { getBrowsers } from '../lib/getBrowsers';
+import { useLocalStorage } from '../hooks/useLocalStorage';
 
 const engineColors = {
   Blink:
-    "bg-blue-100 dark:bg-sky-900/50 text-blue-800 dark:text-blue-100 hover:bg-blue-200 dark:hover:bg-sky-800 border border-blue-200 dark:border-sky-700",
+    'bg-blue-100 dark:bg-sky-900/50 text-blue-800 dark:text-blue-100 hover:bg-blue-200 dark:hover:bg-sky-800 border border-blue-200 dark:border-sky-700',
   Gecko:
-    "bg-green-100 dark:bg-emerald-900/50 text-green-800 dark:text-green-100 hover:bg-green-200 dark:hover:bg-emerald-800 border border-green-200 dark:border-emerald-700",
+    'bg-green-100 dark:bg-emerald-900/50 text-green-800 dark:text-green-100 hover:bg-green-200 dark:hover:bg-emerald-800 border border-green-200 dark:border-emerald-700',
   WebKit:
-    "bg-orange-100 dark:bg-amber-900/50 text-orange-800 dark:text-orange-100 hover:bg-orange-200 dark:hover:bg-amber-800 border border-orange-200 dark:border-amber-700",
-  All: "bg-gray-100 dark:bg-gray-700/50 text-gray-800 dark:text-gray-100 hover:bg-gray-200 dark:hover:bg-gray-600 border border-gray-200 dark:border-gray-600",
+    'bg-orange-100 dark:bg-amber-900/50 text-orange-800 dark:text-orange-100 hover:bg-orange-200 dark:hover:bg-amber-800 border border-orange-200 dark:border-amber-700',
+  All: 'bg-gray-100 dark:bg-gray-700/50 text-gray-800 dark:text-gray-100 hover:bg-gray-200 dark:hover:bg-gray-600 border border-gray-200 dark:border-gray-600',
 };
 
 const getEngineColor = (engine) => {
   return (
     engineColors[engine] ||
-    "bg-red-100 dark:bg-red-900/50 text-red-800 dark:text-red-100 hover:bg-red-200 dark:hover:bg-red-800 border border-red-200 dark:border-red-700"
+    'bg-red-100 dark:bg-red-900/50 text-red-800 dark:text-red-100 hover:bg-red-200 dark:hover:bg-red-800 border border-red-200 dark:border-red-700'
   );
 };
 
 const platformNames = {
-  "macos-arm": "macOS ARM",
-  "macos-intel": "macOS Intel",
-  windows: "Windows",
-  android: "Android",
-  ipad: "iPad OS",
+  'macos-arm': 'macOS ARM',
+  'macos-intel': 'macOS Intel',
+  windows: 'Windows',
+  android: 'Android',
+  ipad: 'iPad OS',
 };
 
 const platformIcons = {
-  "macos-arm": "🍎",
-  "macos-intel": "💻",
-  windows: "🪟",
-  android: "🤖",
-  ipad: "📱",
+  'macos-arm': '🍎',
+  'macos-intel': '💻',
+  windows: '🪟',
+  android: '🤖',
+  ipad: '📱',
 };
 
-const NEW_PLATFORM = "macos-arm";
-const OUTDATED_PLATFORMS = ["android", "macos-intel"];
+const NEW_PLATFORM = 'macos-arm';
+const OUTDATED_PLATFORMS = ['android', 'macos-intel'];
 
 // Enhanced Skeleton Loader
 const SkeletonLoader = ({ index }) => (
@@ -63,10 +63,7 @@ const SkeletonLoader = ({ index }) => (
       </div>
       <div className="grid grid-cols-3 gap-4">
         {[1, 2, 3].map((i) => (
-          <div
-            key={i}
-            className="bg-gray-50 dark:bg-gray-700/50 rounded-lg p-4"
-          >
+          <div key={i} className="bg-gray-50 dark:bg-gray-700/50 rounded-lg p-4">
             <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded mb-2"></div>
             <div className="h-8 bg-gray-200 dark:bg-gray-700 rounded"></div>
           </div>
@@ -77,20 +74,10 @@ const SkeletonLoader = ({ index }) => (
 );
 
 // Search Component
-const SearchBar = ({
-  searchTerm,
-  onSearchChange,
-  totalBrowsers,
-  filteredCount,
-}) => (
+const SearchBar = ({ searchTerm, onSearchChange, totalBrowsers, filteredCount }) => (
   <div className="relative mb-6">
     <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-      <svg
-        className="h-5 w-5 text-gray-400"
-        fill="none"
-        stroke="currentColor"
-        viewBox="0 0 24 24"
-      >
+      <svg className="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path
           strokeLinecap="round"
           strokeLinejoin="round"
@@ -120,21 +107,15 @@ const SearchBar = ({
 // Statistics Component
 const StatsBar = ({ browsers, selectedPlatform }) => {
   const stats = useMemo(() => {
-    const validBrowsers = browsers.filter(
-      (b) => b[selectedPlatform]?.versions?.length > 0,
-    );
+    const validBrowsers = browsers.filter((b) => b[selectedPlatform]?.versions?.length > 0);
     if (validBrowsers.length === 0) return null;
 
-    const scores = validBrowsers.map(
-      (b) => b[selectedPlatform].versions[0].scores.speedometer3,
-    );
+    const scores = validBrowsers.map((b) => b[selectedPlatform].versions[0].scores.speedometer3);
     const avgScore = scores.reduce((a, b) => a + b, 0) / scores.length;
     const maxScore = Math.max(...scores);
     const minScore = Math.min(...scores);
 
-    const engines = [
-      ...new Set(validBrowsers.map((b) => b[selectedPlatform].engine)),
-    ];
+    const engines = [...new Set(validBrowsers.map((b) => b[selectedPlatform].engine))];
 
     return {
       total: validBrowsers.length,
@@ -154,13 +135,11 @@ const StatsBar = ({ browsers, selectedPlatform }) => {
           <div className="text-gray-700 dark:text-gray-300">
             <span className="font-semibold text-purple-700 dark:text-purple-300">
               {stats.total}
-            </span>{" "}
+            </span>{' '}
             browsers tested
           </div>
           <div className="text-gray-700 dark:text-gray-300">
-            <span className="font-semibold text-blue-700 dark:text-blue-300">
-              {stats.engines}
-            </span>{" "}
+            <span className="font-semibold text-blue-700 dark:text-blue-300">{stats.engines}</span>{' '}
             engines
           </div>
         </div>
@@ -169,7 +148,7 @@ const StatsBar = ({ browsers, selectedPlatform }) => {
             Avg: <span className="font-semibold">{stats.avgScore}</span>
           </div>
           <div className="text-gray-700 dark:text-gray-300">
-            Range: <span className="font-semibold">{stats.minScore}</span> -{" "}
+            Range: <span className="font-semibold">{stats.minScore}</span> -{' '}
             <span className="font-semibold text-green-700 dark:text-green-300">
               {stats.maxScore}
             </span>
@@ -180,25 +159,23 @@ const StatsBar = ({ browsers, selectedPlatform }) => {
   );
 };
 
-export default function BrowserRankingList() {
-  const [browsers, setBrowsers] = useState([]);
-  const [filteredBrowsers, setFilteredBrowsers] = useState([]);
-  const [selectedEngine, setSelectedEngine] = useLocalStorage(
-    "selectedEngine",
-    "All",
-  );
-  const [selectedPlatform, setSelectedPlatform] = useLocalStorage(
-    "selectedPlatform",
-    "macos-arm",
-  );
-  const [searchTerm, setSearchTerm] = useState("");
-  const [isLoading, setIsLoading] = useState(true);
+export default function BrowserRankingList({ initialBrowsers = [] }) {
+  const [browsers, setBrowsers] = useState(initialBrowsers);
+  const [filteredBrowsers, setFilteredBrowsers] = useState(initialBrowsers);
+  const [selectedEngine, setSelectedEngine] = useLocalStorage('selectedEngine', 'All');
+  const [selectedPlatform, setSelectedPlatform] = useLocalStorage('selectedPlatform', 'macos-arm');
+  const [searchTerm, setSearchTerm] = useState('');
+  const [isLoading, setIsLoading] = useState(initialBrowsers.length === 0);
   const [error, setError] = useState(null);
   const [retryCount, setRetryCount] = useState(0);
-  const [viewMode, setViewMode] = useLocalStorage("viewMode", "grid");
+  const [viewMode, setViewMode] = useLocalStorage('viewMode', 'grid');
   const abortControllerRef = useRef(null);
 
   const fetchBrowsers = useCallback(async () => {
+    if (initialBrowsers.length > 0 && retryCount === 0) {
+      setIsLoading(false);
+      return;
+    }
     try {
       setIsLoading(true);
       setError(null);
@@ -214,14 +191,12 @@ export default function BrowserRankingList() {
       setBrowsers(data);
       setIsLoading(false);
     } catch (err) {
-      if (err.name !== "AbortError") {
-        setError(
-          "Failed to load browser data. Please check your connection and try again.",
-        );
+      if (err.name !== 'AbortError') {
+        setError('Failed to load browser data. Please check your connection and try again.');
         setIsLoading(false);
       }
     }
-  }, []);
+  }, [initialBrowsers.length, retryCount]);
 
   useEffect(() => {
     fetchBrowsers();
@@ -243,23 +218,19 @@ export default function BrowserRankingList() {
 
   const sortedBrowsers = useMemo(
     () => sortBrowsersByPlatform(browsers, selectedPlatform),
-    [browsers, selectedPlatform, sortBrowsersByPlatform],
+    [browsers, selectedPlatform, sortBrowsersByPlatform]
   );
 
   const filteredAndSearchedBrowsers = useMemo(() => {
     let filtered = sortedBrowsers.filter((browser) => {
       const platformData = browser[selectedPlatform];
-      if (
-        !platformData ||
-        !platformData.versions ||
-        platformData.versions.length === 0
-      ) {
+      if (!platformData || !platformData.versions || platformData.versions.length === 0) {
         return false;
       }
       return true;
     });
 
-    if (selectedEngine !== "All") {
+    if (selectedEngine !== 'All') {
       filtered = filtered.filter((browser) => {
         const platformData = browser[selectedPlatform];
         return platformData?.engine === selectedEngine;
@@ -271,9 +242,7 @@ export default function BrowserRankingList() {
       filtered = filtered.filter(
         (browser) =>
           browser.name.toLowerCase().includes(searchLower) ||
-          browser[selectedPlatform]?.engine
-            ?.toLowerCase()
-            .includes(searchLower),
+          browser[selectedPlatform]?.engine?.toLowerCase().includes(searchLower)
       );
     }
 
@@ -290,25 +259,25 @@ export default function BrowserRankingList() {
       .map((browser) => browser[selectedPlatform].engine)
       .filter(Boolean);
 
-    return ["All", ...new Set(platformEngines)];
+    return ['All', ...new Set(platformEngines)];
   }, [browsers, selectedPlatform]);
 
-  const platforms = ["macos-arm", "android", "ipad", "windows", "macos-intel"];
+  const platforms = ['macos-arm', 'android', 'ipad', 'windows', 'macos-intel'];
 
   const handleEngineFilter = useCallback(
     (engine) => {
       setSelectedEngine(engine);
     },
-    [setSelectedEngine],
+    [setSelectedEngine]
   );
 
   const handlePlatformChange = useCallback(
     (platform) => {
       setSelectedPlatform(platform);
-      setSelectedEngine("All");
-      setSearchTerm("");
+      setSelectedEngine('All');
+      setSearchTerm('');
     },
-    [setSelectedPlatform, setSelectedEngine],
+    [setSelectedPlatform, setSelectedEngine]
   );
 
   const handleRetry = useCallback(() => {
@@ -325,11 +294,7 @@ export default function BrowserRankingList() {
       <h3 className="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-3 uppercase tracking-wide">
         Select Platform
       </h3>
-      <div
-        className="flex flex-wrap gap-3"
-        role="radiogroup"
-        aria-label="Select platform"
-      >
+      <div className="flex flex-wrap gap-3" role="radiogroup" aria-label="Select platform">
         {platforms.map((platform) => (
           <button
             key={platform}
@@ -337,8 +302,8 @@ export default function BrowserRankingList() {
             className={`group relative px-4 py-3 rounded-xl text-sm font-medium transition-all duration-200 focus:outline-none focus:ring-4 focus:ring-purple-500/50
             ${
               selectedPlatform === platform
-                ? "bg-purple-100 dark:bg-purple-900/30 text-purple-800 dark:text-purple-200 ring-2 ring-purple-500 shadow-lg scale-105"
-                : "bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600 hover:scale-102"
+                ? 'bg-purple-100 dark:bg-purple-900/30 text-purple-800 dark:text-purple-200 ring-2 ring-purple-500 shadow-lg scale-105'
+                : 'bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600 hover:scale-102'
             }`}
             role="radio"
             aria-checked={selectedPlatform === platform}
@@ -376,27 +341,23 @@ export default function BrowserRankingList() {
       <h3 className="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-3 uppercase tracking-wide">
         Filter by Engine
       </h3>
-      <div
-        className="flex flex-wrap gap-3"
-        role="radiogroup"
-        aria-label="Filter by engine"
-      >
+      <div className="flex flex-wrap gap-3" role="radiogroup" aria-label="Filter by engine">
         {engines.map((engine) => (
           <button
             key={engine}
             onClick={() => handleEngineFilter(engine)}
             className={`px-4 py-2 rounded-xl text-sm font-medium transition-all duration-200 focus:outline-none focus:ring-4 focus:ring-purple-500/50 ${getEngineColor(
-              engine,
+              engine
             )}
             ${
               selectedEngine === engine
-                ? "ring-2 ring-offset-2 ring-purple-500 shadow-lg scale-105"
-                : "hover:scale-102"
+                ? 'ring-2 ring-offset-2 ring-purple-500 shadow-lg scale-105'
+                : 'hover:scale-102'
             }`}
             role="radio"
             aria-checked={selectedEngine === engine}
           >
-            {engine === "All" ? "All Engines" : `${engine} Engine`}
+            {engine === 'All' ? 'All Engines' : `${engine} Engine`}
           </button>
         ))}
       </div>
@@ -405,16 +366,14 @@ export default function BrowserRankingList() {
 
   const renderViewModeToggle = () => (
     <div className="flex items-center gap-2 mb-6">
-      <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
-        View:
-      </span>
+      <span className="text-sm font-medium text-gray-700 dark:text-gray-300">View:</span>
       <div className="flex bg-gray-100 dark:bg-gray-700 rounded-lg p-1">
         <button
-          onClick={() => setViewMode("grid")}
+          onClick={() => setViewMode('grid')}
           className={`px-3 py-1.5 rounded-md text-sm font-medium transition-all duration-200 ${
-            viewMode === "grid"
-              ? "bg-white dark:bg-gray-600 text-gray-900 dark:text-white shadow-sm"
-              : "text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white"
+            viewMode === 'grid'
+              ? 'bg-white dark:bg-gray-600 text-gray-900 dark:text-white shadow-sm'
+              : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white'
           }`}
         >
           <span className="flex items-center gap-2">
@@ -425,11 +384,11 @@ export default function BrowserRankingList() {
           </span>
         </button>
         <button
-          onClick={() => setViewMode("list")}
+          onClick={() => setViewMode('list')}
           className={`px-3 py-1.5 rounded-md text-sm font-medium transition-all duration-200 ${
-            viewMode === "list"
-              ? "bg-white dark:bg-gray-600 text-gray-900 dark:text-white shadow-sm"
-              : "text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white"
+            viewMode === 'list'
+              ? 'bg-white dark:bg-gray-600 text-gray-900 dark:text-white shadow-sm'
+              : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white'
           }`}
         >
           <span className="flex items-center gap-2">
@@ -449,17 +408,12 @@ export default function BrowserRankingList() {
 
   if (isLoading) {
     return (
-      <section
-        className="p-6 lg:px-10 max-w-7xl mx-auto"
-        aria-label="Browser Rankings"
-      >
+      <section className="p-6 lg:px-10 max-w-7xl mx-auto" aria-label="Browser Rankings">
         <div className="mb-8">
           <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
             Browser Rankings
           </h2>
-          <p className="text-gray-600 dark:text-gray-400">
-            Loading performance data...
-          </p>
+          <p className="text-gray-600 dark:text-gray-400">Loading performance data...</p>
         </div>
 
         {renderPlatformButtons()}
@@ -483,10 +437,7 @@ export default function BrowserRankingList() {
 
   if (error) {
     return (
-      <section
-        className="p-6 lg:px-10 max-w-7xl mx-auto"
-        aria-label="Error Loading Data"
-      >
+      <section className="p-6 lg:px-10 max-w-7xl mx-auto" aria-label="Error Loading Data">
         <div className="text-center py-12">
           <div className="w-16 h-16 mx-auto mb-4 bg-red-100 dark:bg-red-900/30 rounded-full flex items-center justify-center">
             <svg
@@ -514,9 +465,7 @@ export default function BrowserRankingList() {
             disabled={isLoading}
             className="px-6 py-3 bg-purple-600 hover:bg-purple-700 disabled:bg-purple-400 text-white rounded-xl font-medium transition-colors focus:outline-none focus:ring-4 focus:ring-purple-500/50"
           >
-            {isLoading
-              ? "Retrying..."
-              : `Retry ${retryCount > 0 ? `(${retryCount})` : ""}`}
+            {isLoading ? 'Retrying...' : `Retry ${retryCount > 0 ? `(${retryCount})` : ''}`}
           </button>
         </div>
       </section>
@@ -524,18 +473,13 @@ export default function BrowserRankingList() {
   }
 
   return (
-    <section
-      className="p-6 lg:px-10 max-w-7xl mx-auto"
-      aria-label="Browser Rankings"
-      id="rankings"
-    >
+    <section className="p-6 lg:px-10 max-w-7xl mx-auto" aria-label="Browser Rankings" id="rankings">
       <div className="mb-8">
         <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
           Browser Performance Rankings
         </h2>
         <p className="text-gray-600 dark:text-gray-400">
-          Compare browser performance across different platforms using
-          Speedometer 3.1 benchmark
+          Compare browser performance across different platforms using Speedometer 3.1 benchmark
         </p>
       </div>
 
@@ -554,9 +498,9 @@ export default function BrowserRankingList() {
       <div className="flex justify-between items-center mb-6">
         <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
           {filteredBrowsers.length === 0
-            ? "No browsers found"
+            ? 'No browsers found'
             : `${filteredBrowsers.length} ${
-                filteredBrowsers.length === 1 ? "browser" : "browsers"
+                filteredBrowsers.length === 1 ? 'browser' : 'browsers'
               } on ${platformNames[selectedPlatform]}`}
         </h3>
         {filteredBrowsers.length > 0 && renderViewModeToggle()}
@@ -565,9 +509,7 @@ export default function BrowserRankingList() {
       {/* Browser Cards */}
       <div
         className={`${
-          viewMode === "grid"
-            ? "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
-            : "space-y-4"
+          viewMode === 'grid' ? 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6' : 'space-y-4'
         } mb-12`}
         aria-live="polite"
       >
@@ -594,13 +536,13 @@ export default function BrowserRankingList() {
             <p className="text-gray-600 dark:text-gray-400 mb-4">
               {searchTerm
                 ? `No browsers match "${searchTerm}" with the selected filters.`
-                : "No browsers match the selected filters."}
+                : 'No browsers match the selected filters.'}
             </p>
-            {(searchTerm || selectedEngine !== "All") && (
+            {(searchTerm || selectedEngine !== 'All') && (
               <button
                 onClick={() => {
-                  setSearchTerm("");
-                  setSelectedEngine("All");
+                  setSearchTerm('');
+                  setSelectedEngine('All');
                 }}
                 className="px-4 py-2 text-purple-600 hover:text-purple-700 dark:text-purple-400 dark:hover:text-purple-300 font-medium"
               >
