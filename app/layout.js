@@ -1,35 +1,35 @@
-import "./globals.css";
+import './globals.css';
 
-import { Analytics } from "@vercel/analytics/next";
-import { Inter } from "next/font/google";
-import Script from "next/script";
-import StickyAnnouncement from "./components/StickyAnnouncement";
+import { Analytics } from '@vercel/analytics/next';
+import { Inter } from 'next/font/google';
+import Script from 'next/script';
+import StickyAnnouncement from './components/StickyAnnouncement';
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({ subsets: ['latin'] });
 
 export const metadata = {
-  metadataBase: new URL("https://browserating.com"),
-  title: "BrowseRating - Browser Performance for macOS, Windows and Android",
+  metadataBase: new URL('https://browserating.com'),
+  title: 'BrowseRating - Browser Performance for macOS, Windows and Android',
   description:
-    "Compare performance of macOS, Windows and Android browsers based on Speedometer 3 benchmark results, adblocking quality, and RAM usage. Find the fastest and most efficient browsers for your device.",
+    'Compare performance of macOS, Windows and Android browsers based on Speedometer 3 benchmark results, adblocking quality, and RAM usage. Find the fastest and most efficient browsers for your device.',
   keywords:
-    "browser performance, browser benchmark, Speedometer 3, browser comparison, fastest browser, macOS browser, Windows browser, Android browser, adblocking quality, RAM usage, browser speed test, browser rankings, best browser 2026, browser performance comparison, web browser benchmarks, browser efficiency, browser memory usage, browser testing, browser performance metrics",
-  authors: [{ name: "Sergei Manvelov" }],
+    'browser performance, browser benchmark, Speedometer 3, browser comparison, fastest browser, macOS browser, Windows browser, Android browser, adblocking quality, RAM usage, browser speed test, browser rankings, best browser 2026, browser performance comparison, web browser benchmarks, browser efficiency, browser memory usage, browser testing, browser performance metrics',
+  authors: [{ name: 'Sergei Manvelov' }],
   openGraph: {
-    title: "BrowseRating - Browser Performance Comparison",
+    title: 'BrowseRating - Browser Performance Comparison',
     description:
-      "Compare browser performance across macOS, Windows and Android based on Speedometer 3 benchmark results, adblocking quality, and RAM usage.",
-    url: "https://browserating.com",
-    siteName: "BrowseRating",
-    locale: "en_US",
-    type: "website",
+      'Compare browser performance across macOS, Windows and Android based on Speedometer 3 benchmark results, adblocking quality, and RAM usage.',
+    url: 'https://browserating.com',
+    siteName: 'BrowseRating',
+    locale: 'en_US',
+    type: 'website',
   },
   twitter: {
-    card: "summary_large_image",
-    title: "BrowseRating - Browser Performance Comparison",
+    card: 'summary_large_image',
+    title: 'BrowseRating - Browser Performance Comparison',
     description:
-      "Compare browser performance across macOS, Windows and Android based on Speedometer 3 benchmark results, adblocking quality, and RAM usage.",
-    creator: "@kawaiier101",
+      'Compare browser performance across macOS, Windows and Android based on Speedometer 3 benchmark results, adblocking quality, and RAM usage.',
+    creator: '@kawaiier101',
   },
   robots: {
     index: true,

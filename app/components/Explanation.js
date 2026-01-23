@@ -1,6 +1,6 @@
-"use client";
+'use client';
 
-import React, { useState } from "react";
+import React, { useState } from 'react';
 
 const StatCard = ({ icon, number, label, description }) => (
   <div className="bg-white dark:bg-gray-800 rounded-xl p-6 border border-gray-200 dark:border-gray-700 hover:shadow-lg transition-all duration-300 group">
@@ -12,14 +12,10 @@ const StatCard = ({ icon, number, label, description }) => (
         <div className="text-2xl font-bold text-gray-900 dark:text-white group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors">
           {number}
         </div>
-        <div className="text-sm font-medium text-gray-600 dark:text-gray-400">
-          {label}
-        </div>
+        <div className="text-sm font-medium text-gray-600 dark:text-gray-400">{label}</div>
       </div>
     </div>
-    <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">
-      {description}
-    </p>
+    <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">{description}</p>
   </div>
 );
 
@@ -30,9 +26,7 @@ const FeatureCard = ({ icon, title, description, highlights }) => (
         {icon}
       </div>
       <div className="flex-1">
-        <h3 className="font-semibold text-gray-900 dark:text-white mb-2">
-          {title}
-        </h3>
+        <h3 className="font-semibold text-gray-900 dark:text-white mb-2">{title}</h3>
         <p className="text-gray-600 dark:text-gray-400 text-sm mb-3 leading-relaxed">
           {description}
         </p>
@@ -41,9 +35,7 @@ const FeatureCard = ({ icon, title, description, highlights }) => (
             {highlights.map((highlight, index) => (
               <div key={index} className="flex items-center gap-2 text-sm">
                 <div className="w-1.5 h-1.5 bg-purple-500 rounded-full"></div>
-                <span className="text-gray-600 dark:text-gray-400">
-                  {highlight}
-                </span>
+                <span className="text-gray-600 dark:text-gray-400">{highlight}</span>
               </div>
             ))}
           </div>
@@ -58,11 +50,11 @@ const TimelineItem = ({ phase, title, description, status, date }) => (
     <div className="flex flex-col items-center">
       <div
         className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold ${
-          status === "completed"
-            ? "bg-green-500 text-white"
-            : status === "current"
-            ? "bg-purple-500 text-white"
-            : "bg-gray-300 dark:bg-gray-600 text-gray-600 dark:text-gray-400"
+          status === 'completed'
+            ? 'bg-green-500 text-white'
+            : status === 'current'
+              ? 'bg-purple-500 text-white'
+              : 'bg-gray-300 dark:bg-gray-600 text-gray-600 dark:text-gray-400'
         }`}
       >
         {phase}
@@ -74,116 +66,104 @@ const TimelineItem = ({ phase, title, description, status, date }) => (
         <h3 className="font-semibold text-gray-900 dark:text-white">{title}</h3>
         <span
           className={`px-2 py-1 rounded-full text-xs font-medium ${
-            status === "completed"
-              ? "bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-300"
-              : status === "current"
-              ? "bg-purple-100 dark:bg-purple-900/30 text-purple-800 dark:text-purple-300"
-              : "bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-400"
+            status === 'completed'
+              ? 'bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-300'
+              : status === 'current'
+                ? 'bg-purple-100 dark:bg-purple-900/30 text-purple-800 dark:text-purple-300'
+                : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-400'
           }`}
         >
-          {status === "completed"
-            ? "Completed"
-            : status === "current"
-            ? "In Progress"
-            : "Planned"}
+          {status === 'completed' ? 'Completed' : status === 'current' ? 'In Progress' : 'Planned'}
         </span>
       </div>
-      <p className="text-gray-600 dark:text-gray-400 text-sm mb-2">
-        {description}
-      </p>
+      <p className="text-gray-600 dark:text-gray-400 text-sm mb-2">{description}</p>
       <span className="text-xs text-gray-500 dark:text-gray-500">{date}</span>
     </div>
   </div>
 );
 
 export default function Explanation() {
-  const [activeTab, setActiveTab] = useState("story");
+  const [activeTab, setActiveTab] = useState('story');
 
   const tabs = [
-    { id: "story", label: "Our Story", icon: "📖" },
-    { id: "methodology", label: "How We Test", icon: "🔬" },
-    { id: "metrics", label: "What We Measure", icon: "📊" },
+    { id: 'story', label: 'Our Story', icon: '📖' },
+    { id: 'methodology', label: 'How We Test', icon: '🔬' },
+    { id: 'metrics', label: 'What We Measure', icon: '📊' },
   ];
 
   const testingFeatures = [
     {
-      icon: "⚡",
-      title: "Performance Benchmarking",
+      icon: '⚡',
+      title: 'Performance Benchmarking',
       description:
-        "Industry-standard Speedometer 3.1 tests measuring real-world JavaScript and DOM performance across all major browsers.",
+        'Industry-standard Speedometer 3.1 tests measuring real-world JavaScript and DOM performance across all major browsers.',
       highlights: [
-        "Controlled testing environment",
-        "Multiple test runs for accuracy",
-        "Statistical significance validation",
+        'Controlled testing environment',
+        'Multiple test runs for accuracy',
+        'Statistical significance validation',
       ],
     },
     {
-      icon: "🧠",
-      title: "Memory Analysis",
+      icon: '🧠',
+      title: 'Memory Analysis',
       description:
-        "Comprehensive RAM usage monitoring across diverse website loads to understand real-world memory consumption patterns.",
-      highlights: [
-        "Multi-site testing scenario",
-        "System-level memory tracking",
-      ],
+        'Comprehensive RAM usage monitoring across diverse website loads to understand real-world memory consumption patterns.',
+      highlights: ['Multi-site testing scenario', 'System-level memory tracking'],
     },
     {
-      icon: "🛡️",
-      title: "Ad-blocking",
+      icon: '🛡️',
+      title: 'Ad-blocking',
       description:
-        "Built-in ad-blocking effectiveness testing to evaluate protection against trackers and ads.",
-      highlights: ["First-party blocker evaluation"],
+        'Built-in ad-blocking effectiveness testing to evaluate protection against trackers and ads.',
+      highlights: ['First-party blocker evaluation'],
     },
   ];
 
   const roadmapItems = [
     {
       phase: 1,
-      title: "Foundation & Core Testing",
+      title: 'Foundation & Core Testing',
       description:
-        "Established testing methodology and infrastructure for consistent browser performance evaluation.",
-      status: "completed",
-      date: "Q1 2024",
+        'Established testing methodology and infrastructure for consistent browser performance evaluation.',
+      status: 'completed',
+      date: 'Q1 2024',
     },
     {
       phase: 2,
-      title: "Multi-Platform Expansion",
+      title: 'Multi-Platform Expansion',
       description:
-        "Extended testing to cover macOS (Intel & Apple Silicon), Windows, Android, and iPad platforms.",
-      status: "completed",
-      date: "Q2 2024",
+        'Extended testing to cover macOS (Intel & Apple Silicon), Windows, Android, and iPad platforms.',
+      status: 'completed',
+      date: 'Q2 2024',
     },
     {
       phase: 3,
-      title: "Enhanced Metrics & Analysis",
+      title: 'Enhanced Metrics & Analysis',
       description:
-        "Adding memory usage tracking, ad-blocking evaluation, and trend analysis across browser versions.",
-      status: "current",
-      date: "Q3 2024",
+        'Adding memory usage tracking, ad-blocking evaluation, and trend analysis across browser versions.',
+      status: 'current',
+      date: 'Q3 2024',
     },
     {
       phase: 4,
-      title: "Real-World Performance Tests",
+      title: 'Real-World Performance Tests',
       description:
-        "Implementing website-specific performance tests and user experience metrics beyond synthetic benchmarks.",
-      status: "planned",
-      date: "Q4 2024",
+        'Implementing website-specific performance tests and user experience metrics beyond synthetic benchmarks.',
+      status: 'planned',
+      date: 'Q4 2024',
     },
     {
       phase: 5,
-      title: "Community & API Access",
+      title: 'Community & API Access',
       description:
-        "Public API for performance data and community-contributed testing scenarios and configurations.",
-      status: "planned",
-      date: "Q1 2025",
+        'Public API for performance data and community-contributed testing scenarios and configurations.',
+      status: 'planned',
+      date: 'Q1 2025',
     },
   ];
 
   return (
-    <section
-      className="max-w-6xl mx-auto px-4 py-12 mt-16"
-      aria-labelledby="explanation-heading"
-    >
+    <section className="max-w-6xl mx-auto px-4 py-12 mt-16" aria-labelledby="explanation-heading">
       {/* Header */}
       <div className="text-center mb-12">
         <h2
@@ -193,8 +173,8 @@ export default function Explanation() {
           Why BrowseRating Exists
         </h2>
         <p className="text-lg text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
-          The definitive source for unbiased browser performance data, helping
-          millions make informed choices about their browsing experience.
+          The definitive source for unbiased browser performance data, helping millions make
+          informed choices about their browsing experience.
         </p>
       </div>
 
@@ -234,8 +214,8 @@ export default function Explanation() {
             onClick={() => setActiveTab(tab.id)}
             className={`flex items-center gap-2 px-6 py-3 rounded-xl font-medium transition-all duration-300 ${
               activeTab === tab.id
-                ? "bg-gradient-to-r from-purple-600 to-blue-600 text-white shadow-lg scale-105"
-                : "bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700"
+                ? 'bg-gradient-to-r from-purple-600 to-blue-600 text-white shadow-lg scale-105'
+                : 'bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700'
             }`}
           >
             <span className="text-lg">{tab.icon}</span>
@@ -247,7 +227,7 @@ export default function Explanation() {
       {/* Content Sections */}
       <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl border border-gray-200 dark:border-gray-700 overflow-hidden">
         {/* Our Story */}
-        {activeTab === "story" && (
+        {activeTab === 'story' && (
           <div className="p-8">
             <div className="max-w-4xl mx-auto">
               <div className="prose prose-lg dark:prose-invert max-w-none">
@@ -257,17 +237,14 @@ export default function Explanation() {
                     From Curiosity to Community Resource
                   </h3>
                   <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-0">
-                    BrowseRating started as a simple question:{" "}
-                    <em>&quot;Which browser is actually fastest?&quot;</em> What
-                    began as a weekend curiosity project has quietly grown into
-                    a trusted resource for browser performance comparison.
-                    Referenced in developer forums and Reddit threads, our tools
-                    help IT professionals, developers, and performance
-                    enthusiasts make informed browser choices based on real
-                    data. With steady growth averaging 300+ monthly visits,
-                    we&apos;ve become a go-to reference for those who need
-                    reliable, independent browser performance metrics without
-                    the marketing noise.
+                    BrowseRating started as a simple question:{' '}
+                    <em>&quot;Which browser is actually fastest?&quot;</em> What began as a weekend
+                    curiosity project has quietly grown into a trusted resource for browser
+                    performance comparison. Referenced in developer forums and Reddit threads, our
+                    tools help IT professionals, developers, and performance enthusiasts make
+                    informed browser choices based on real data. With steady growth averaging 300+
+                    monthly visits, we&apos;ve become a go-to reference for those who need reliable,
+                    independent browser performance metrics without the marketing noise.
                   </p>
                 </div>
 
@@ -278,10 +255,9 @@ export default function Explanation() {
                       Our Mission
                     </h3>
                     <p className="text-gray-600 dark:text-gray-400 leading-relaxed">
-                      To provide transparent, unbiased browser performance data
-                      that empowers users to make informed decisions. No
-                      marketing spin, no vendor bias—just pure performance
-                      metrics tested under identical conditions across all major
+                      To provide transparent, unbiased browser performance data that empowers users
+                      to make informed decisions. No marketing spin, no vendor bias—just pure
+                      performance metrics tested under identical conditions across all major
                       platforms.
                     </p>
                   </div>
@@ -291,11 +267,10 @@ export default function Explanation() {
                       Why Independence Matters
                     </h3>
                     <p className="text-gray-600 dark:text-gray-400 leading-relaxed">
-                      Unlike browser vendors&apos; cherry-picked benchmarks or
-                      tech media&apos;s sponsored content, our testing is
-                      completely independent. We purchase our own hardware, run
-                      standardized tests, and publish complete methodologies
-                      alongside every result.
+                      Unlike browser vendors&apos; cherry-picked benchmarks or tech media&apos;s
+                      sponsored content, our testing is completely independent. We purchase our own
+                      hardware, run standardized tests, and publish complete methodologies alongside
+                      every result.
                     </p>
                   </div>
                 </div>
@@ -306,15 +281,14 @@ export default function Explanation() {
                     Real-World Context
                   </h3>
                   <p className="text-amber-700 dark:text-amber-300 text-sm leading-relaxed mb-3">
-                    While our benchmarks provide valuable comparative data, most
-                    modern browsers deliver excellent performance for everyday
-                    use. The &quot;best&quot; browser depends on your specific
-                    needs: privacy features, extension ecosystem, platform
+                    While our benchmarks provide valuable comparative data, most modern browsers
+                    deliver excellent performance for everyday use. The &quot;best&quot; browser
+                    depends on your specific needs: privacy features, extension ecosystem, platform
                     integration, or development tools.
                   </p>
                   <p className="text-amber-700 dark:text-amber-300 text-sm leading-relaxed mb-0">
-                    <strong>Our role:</strong> Provide the performance piece of
-                    your decision-making puzzle, not the entire solution.
+                    <strong>Our role:</strong> Provide the performance piece of your decision-making
+                    puzzle, not the entire solution.
                   </p>
                 </div>
               </div>
@@ -323,7 +297,7 @@ export default function Explanation() {
         )}
 
         {/* Methodology */}
-        {activeTab === "methodology" && (
+        {activeTab === 'methodology' && (
           <div className="p-8">
             <div className="grid gap-6 mb-8">
               {testingFeatures.map((feature, index) => (
@@ -382,7 +356,7 @@ export default function Explanation() {
         )}
 
         {/* Metrics */}
-        {activeTab === "metrics" && (
+        {activeTab === 'metrics' && (
           <div className="p-8">
             <div className="space-y-8">
               <div className="text-center mb-8">
@@ -390,8 +364,8 @@ export default function Explanation() {
                   What Each Metric Tells You
                 </h3>
                 <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto leading-relaxed">
-                  Our testing goes beyond simple speed tests to give you a
-                  complete picture of browser performance and capabilities.
+                  Our testing goes beyond simple speed tests to give you a complete picture of
+                  browser performance and capabilities.
                 </p>
               </div>
 
@@ -406,34 +380,24 @@ export default function Explanation() {
                         Speedometer 3.1 Performance
                       </h4>
                       <p className="text-gray-600 dark:text-gray-400 mb-4 leading-relaxed">
-                        The gold standard for browser performance testing.
-                        Measures JavaScript execution, DOM manipulation, and CSS
-                        styling through realistic web application simulations.
+                        The gold standard for browser performance testing. Measures JavaScript
+                        execution, DOM manipulation, and CSS styling through realistic web
+                        application simulations.
                       </p>
                       <div className="grid grid-cols-3 gap-4 text-sm">
                         <div className="text-center p-3 bg-white/50 dark:bg-gray-800/50 rounded-lg">
-                          <div className="font-bold text-green-600 dark:text-green-400">
-                            40+
-                          </div>
-                          <div className="text-gray-600 dark:text-gray-400">
-                            Excellent
-                          </div>
+                          <div className="font-bold text-green-600 dark:text-green-400">40+</div>
+                          <div className="text-gray-600 dark:text-gray-400">Excellent</div>
                         </div>
                         <div className="text-center p-3 bg-white/50 dark:bg-gray-800/50 rounded-lg">
                           <div className="font-bold text-yellow-600 dark:text-yellow-400">
                             25-40
                           </div>
-                          <div className="text-gray-600 dark:text-gray-400">
-                            Good
-                          </div>
+                          <div className="text-gray-600 dark:text-gray-400">Good</div>
                         </div>
                         <div className="text-center p-3 bg-white/50 dark:bg-gray-800/50 rounded-lg">
-                          <div className="font-bold text-red-600 dark:text-red-400">
-                            &lt;25
-                          </div>
-                          <div className="text-gray-600 dark:text-gray-400">
-                            Needs Work
-                          </div>
+                          <div className="font-bold text-red-600 dark:text-red-400">&lt;25</div>
+                          <div className="text-gray-600 dark:text-gray-400">Needs Work</div>
                         </div>
                       </div>
                     </div>
@@ -450,9 +414,8 @@ export default function Explanation() {
                         Memory Efficiency
                       </h4>
                       <p className="text-gray-600 dark:text-gray-400 mb-4 leading-relaxed">
-                        Real-world RAM usage across diverse websites. Lower
-                        numbers mean better efficiency and more room for other
-                        applications on your system.
+                        Real-world RAM usage across diverse websites. Lower numbers mean better
+                        efficiency and more room for other applications on your system.
                       </p>
                       <div className="bg-green-100 dark:bg-green-900/30 rounded-lg p-4">
                         <h5 className="font-medium text-green-800 dark:text-green-200 mb-2">
@@ -479,9 +442,8 @@ export default function Explanation() {
                         Ad-blocking effectiveness
                       </h4>
                       <p className="text-gray-600 dark:text-gray-400 mb-4 leading-relaxed">
-                        Built-in ad-blocking and tracker protection
-                        capabilities. Higher scores mean better protection
-                        against ads and trackers.
+                        Built-in ad-blocking and tracker protection capabilities. Higher scores mean
+                        better protection against ads and trackers.
                       </p>
                       <div className="grid grid-cols-2 gap-4 text-sm">
                         <div>
@@ -513,16 +475,15 @@ export default function Explanation() {
         )}
 
         {/* Roadmap */}
-        {activeTab === "roadmap" && (
+        {activeTab === 'roadmap' && (
           <div className="p-8">
             <div className="text-center mb-8">
               <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-3">
                 The Future of Browser Testing
               </h3>
               <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto leading-relaxed">
-                We`&apos;`re constantly evolving our testing methodology and
-                expanding our coverage to provide even more valuable insights
-                for the browsing community.
+                We`&apos;`re constantly evolving our testing methodology and expanding our coverage
+                to provide even more valuable insights for the browsing community.
               </p>
             </div>
 
@@ -545,10 +506,9 @@ export default function Explanation() {
                 Join Our Mission
               </h3>
               <p className="text-gray-600 dark:text-gray-400 leading-relaxed mb-4">
-                Help us build the most comprehensive browser performance
-                database. Whether through feedback, suggestions, or supporting
-                our testing infrastructure, every contribution makes our data
-                more valuable for the entire community.
+                Help us build the most comprehensive browser performance database. Whether through
+                feedback, suggestions, or supporting our testing infrastructure, every contribution
+                makes our data more valuable for the entire community.
               </p>
               <div className="flex flex-wrap gap-3">
                 <a

@@ -1,7 +1,7 @@
-"use client";
+'use client';
 
-import React from "react";
-import { useDarkMode } from "./DarkModeProvider";
+import React from 'react';
+import { useDarkMode } from './DarkModeProvider';
 
 export default function DarkModeToggle() {
   const { darkMode, toggleDarkMode } = useDarkMode();
@@ -21,15 +21,15 @@ export default function DarkModeToggle() {
             dark:hover:from-gray-600 dark:hover:to-gray-700
             shadow-md transition-all duration-300 ease-in-out transform hover:scale-110
             focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 dark:focus:ring-purple-400"
-      aria-label={darkMode ? "Switch to light mode" : "Switch to dark mode"}
+      aria-label={darkMode ? 'Switch to light mode' : 'Switch to dark mode'}
       aria-pressed={darkMode}
-      title={darkMode ? "Switch to light mode" : "Switch to dark mode"}
+      title={darkMode ? 'Switch to light mode' : 'Switch to dark mode'}
     >
       <div className="relative w-full h-full">
         {/* Sun */}
         <div
           className={`absolute inset-0 transform transition-transform duration-500 
-                ${darkMode ? "scale-0 rotate-90" : "scale-100 rotate-0"}`}
+                ${darkMode ? 'scale-0 rotate-90' : 'scale-100 rotate-0'}`}
           aria-hidden="true"
         >
           {/* Main sun circle */}
@@ -41,8 +41,8 @@ export default function DarkModeToggle() {
               key={`ray-${i}`}
               className="absolute w-[2px] h-[7px] bg-yellow-400 rounded"
               style={{
-                top: "calc(50% - 3px)", // Adjust based on ray size
-                left: "calc(50% - 1px)", // Adjust based on ray size
+                top: 'calc(50% - 3px)', // Adjust based on ray size
+                left: 'calc(50% - 1px)', // Adjust based on ray size
                 transform: `rotate(${i * 30}deg) translate(8px, 8px)`, // Adjust translate values
               }}
             />
@@ -52,7 +52,7 @@ export default function DarkModeToggle() {
         {/* Moon */}
         <div
           className={`absolute inset-0 transform transition-transform duration-500
-                ${darkMode ? "scale-100 rotate-0" : "scale-0 -rotate-90"}`}
+                ${darkMode ? 'scale-100 rotate-0' : 'scale-0 -rotate-90'}`}
           aria-hidden="true"
         >
           {/* Main moon circle */}
@@ -67,7 +67,7 @@ export default function DarkModeToggle() {
         {/* Stars (visible in dark mode) */}
         <div
           className={`absolute inset-0 transition-opacity duration-500 ${
-            darkMode ? "opacity-100" : "opacity-0"
+            darkMode ? 'opacity-100' : 'opacity-0'
           }`}
           aria-hidden="true"
         >

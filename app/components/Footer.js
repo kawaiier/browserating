@@ -1,19 +1,19 @@
-"use client";
+'use client';
 
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 
-import Image from "next/image";
+import Image from 'next/image';
 
 const DONATION_ADDRESSES = {
-  BTC: "bc1qfyad27catyr8rtdhhydn8ummf996kxtesuw4hr",
-  XMR: "41zM5Hk39icMLDnbAckLpJHMwMPQKAQEADYA1AvjoZw9Y9NC7atnubrWPZKXWRbpZeGg66DkstQmA1oPZurRBcvRFbQ3PLs",
-  LTC: "ltc1qnqldulnxsxpz4g89uklsepjeqx7cajynzyr7tc",
-  MATIC: "0x6c056E9ccB183c08e9248eAF26160B5793221513",
+  BTC: 'bc1qfyad27catyr8rtdhhydn8ummf996kxtesuw4hr',
+  XMR: '41zM5Hk39icMLDnbAckLpJHMwMPQKAQEADYA1AvjoZw9Y9NC7atnubrWPZKXWRbpZeGg66DkstQmA1oPZurRBcvRFbQ3PLs',
+  LTC: 'ltc1qnqldulnxsxpz4g89uklsepjeqx7cajynzyr7tc',
+  MATIC: '0x6c056E9ccB183c08e9248eAF26160B5793221513',
 };
 
 export default function Footer() {
   const [isCopied, setIsCopied] = useState(false);
-  const [copiedCurrency, setCopiedCurrency] = useState("");
+  const [copiedCurrency, setCopiedCurrency] = useState('');
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
@@ -23,9 +23,9 @@ export default function Footer() {
     };
 
     checkMobile();
-    window.addEventListener("resize", checkMobile);
+    window.addEventListener('resize', checkMobile);
 
-    return () => window.removeEventListener("resize", checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
   const handleCopy = (text, currency) => {
@@ -34,19 +34,19 @@ export default function Footer() {
     setCopiedCurrency(currency);
     setTimeout(() => {
       setIsCopied(false);
-      setCopiedCurrency("");
+      setCopiedCurrency('');
     }, 2000);
   };
 
   const truncateAddress = (address, type) => {
     if (isMobile) {
-      if (type === "XMR") {
+      if (type === 'XMR') {
         return `${address.slice(0, 10)}...${address.slice(-10)}`;
       }
       return `${address.slice(0, 8)}...${address.slice(-8)}`;
     }
 
-    if (type === "XMR") {
+    if (type === 'XMR') {
       return `${address.slice(0, 20)}...${address.slice(-20)}`;
     }
     return address;
@@ -152,7 +152,7 @@ export default function Footer() {
           {/* Developer Info */}
           <div className="text-center">
             <p className="text-sm text-gray-600">
-              developed by{" "}
+              developed by{' '}
               <a
                 href="https://kawaiier.dev"
                 className="font-medium bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent leading-normal hover:text-purple-700 transition-colors"
@@ -161,7 +161,7 @@ export default function Footer() {
               >
                 kawaiier
               </a>
-              {" · "}
+              {' · '}
               <a
                 href="https://github.com/kawaiier/browserating"
                 className="text-gray-500 hover:text-purple-700 transition-colors"
@@ -195,10 +195,8 @@ export default function Footer() {
             id="support"
           >
             <h3 className="text-sm font-bold mb-2">Donations</h3>
-            <p className={isCopied ? "text-green-500" : ""} aria-live="polite">
-              {isCopied
-                ? `${copiedCurrency} address copied! ✓`
-                : "Click to copy"}
+            <p className={isCopied ? 'text-green-500' : ''} aria-live="polite">
+              {isCopied ? `${copiedCurrency} address copied! ✓` : 'Click to copy'}
             </p>
             <div className="w-full max-w-sm">
               {Object.entries(DONATION_ADDRESSES).map(([currency, address]) => (
@@ -206,7 +204,7 @@ export default function Footer() {
                   key={currency}
                   onClick={() => handleCopy(address, currency)}
                   onKeyDown={(e) => {
-                    if (e.key === "Enter" || e.key === " ") {
+                    if (e.key === 'Enter' || e.key === ' ') {
                       e.preventDefault();
                       handleCopy(address, currency);
                     }
@@ -216,10 +214,8 @@ export default function Footer() {
                   role="button"
                   aria-label={`Copy ${currency} address: ${address}`}
                 >
-                  <span className="font-semibold">{currency}:</span>{" "}
-                  <span className="break-all">
-                    {truncateAddress(address, currency)}
-                  </span>
+                  <span className="font-semibold">{currency}:</span>{' '}
+                  <span className="break-all">{truncateAddress(address, currency)}</span>
                 </div>
               ))}
             </div>
