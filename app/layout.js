@@ -8,11 +8,12 @@ import StickyAnnouncement from "./components/StickyAnnouncement";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
+  metadataBase: new URL("https://browserating.com"),
   title: "BrowseRating - Browser Performance for macOS, Windows and Android",
   description:
     "Compare performance of macOS, Windows and Android browsers based on Speedometer 3 benchmark results, adblocking quality, and RAM usage. Find the fastest and most efficient browsers for your device.",
   keywords:
-    "browser performance, browser benchmark, Speedometer 3, browser comparison, fastest browser, macOS browser, Windows browser, Android browser, adblocking quality, RAM usage",
+    "browser performance, browser benchmark, Speedometer 3, browser comparison, fastest browser, macOS browser, Windows browser, Android browser, adblocking quality, RAM usage, browser speed test, browser rankings, best browser 2026, browser performance comparison, web browser benchmarks, browser efficiency, browser memory usage, browser testing, browser performance metrics",
   authors: [{ name: "Sergei Manvelov" }],
   openGraph: {
     title: "BrowseRating - Browser Performance Comparison",
@@ -50,7 +51,50 @@ export default function RootLayout({ children }) {
               "@type": "WebSite",
               "name": "BrowseRating",
               "url": "https://browserating.com",
-              "description": "Compare performance of macOS, Windows and Android browsers based on Speedometer 3.1 benchmark results, adblocking quality, and RAM usage."
+              "description": "Compare performance of macOS, Windows and Android browsers based on Speedometer 3.1 benchmark results, adblocking quality, and RAM usage.",
+              "publisher": {
+                "@type": "Organization",
+                "name": "BrowseRating",
+                "logo": {
+                  "@type": "ImageObject",
+                  "url": "https://browserating.com/images/logo.png"
+                }
+              }
+            }
+          `}
+        </Script>
+        <Script id="organization-schema" type="application/ld+json">
+          {`
+            {
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              "name": "BrowseRating",
+              "url": "https://browserating.com",
+              "logo": "https://browserating.com/images/logo.png",
+              "sameAs": [
+                "https://x.com/kawaiier101",
+                "https://t.me/thebrowsershq",
+                "https://www.reddit.com/r/aiBrowsing/"
+              ],
+              "contactPoint": {
+                "@type": "ContactPoint",
+                "email": "kawaiier@tutanota.com",
+                "contactType": "customer support"
+              }
+            }
+          `}
+        </Script>
+        <Script id="breadcrumb-schema" type="application/ld+json">
+          {`
+            {
+              "@context": "https://schema.org",
+              "@type": "BreadcrumbList",
+              "itemListElement": [{
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Home",
+                "item": "https://browserating.com"
+              }]
             }
           `}
         </Script>
@@ -59,15 +103,22 @@ export default function RootLayout({ children }) {
             {
               "@context": "https://schema.org",
               "@type": "Dataset",
-              "name": "Browser Performance Comparison",
-              "description": "Performance comparison of web browsers across different platforms based on Speedometer 3 benchmark, adblocking quality, and RAM usage.",
-              "keywords": ["browser performance", "browser benchmark", "Speedometer 3", "browser comparison", "adblocking quality", "RAM usage"],
+              "name": "Browser Performance Comparison 2026",
+              "description": "Comprehensive performance comparison of web browsers (Chrome, Firefox, Safari, Edge, Brave, etc.) across macOS, Windows, and Android platforms. Metrics include Speedometer 3.1 scores, RAM consumption, and ad-blocking effectiveness.",
+              "keywords": ["browser performance", "browser benchmark", "Speedometer 3.1", "browser comparison", "adblocking quality", "RAM usage", "fastest browser 2026", "macOS browsers", "Windows browsers", "Android browsers"],
               "creator": {
                 "@type": "Person",
-                "name": "Sergei Manvelov"
+                "name": "Sergei Manvelov",
+                "url": "https://kawaiier.dev"
+              },
+              "includedInDataCatalog": {
+                "@type": "DataCatalog",
+                "name": "BrowseRating Data"
               },
               "license": "https://browserating.com/privacy",
-              "dateModified": "2025-03-07"
+              "dateModified": "2026-01-23",
+              "version": "1.2.0",
+              "isAccessibleForFree": true
             }
           `}
         </Script>

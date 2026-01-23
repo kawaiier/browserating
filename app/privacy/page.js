@@ -1,9 +1,12 @@
-"use client";
-
 import Footer from "../components/Footer";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
+
+export const metadata = {
+  title: "Privacy Policy - BrowseRating",
+  description: "Learn about how BrowseRating collects, uses, and protects your information.",
+};
 
 export default function PrivacyPage() {
   return (

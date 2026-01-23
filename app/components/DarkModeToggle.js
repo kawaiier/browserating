@@ -1,6 +1,10 @@
-import React from "react";
+"use client";
 
-export default function DarkModeToggle({ darkMode, toggleDarkMode }) {
+import React from "react";
+import { useDarkMode } from "./DarkModeProvider";
+
+export default function DarkModeToggle() {
+  const { darkMode, toggleDarkMode } = useDarkMode();
   // Pre-calculate star positions to avoid repositioning on every render
   const stars = Array.from({ length: 6 }).map((_, i) => ({
     top: Math.random() * 100,

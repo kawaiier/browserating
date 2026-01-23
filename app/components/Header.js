@@ -1,10 +1,14 @@
+"use client";
+
 import { useEffect, useState } from "react";
 
 import DarkModeToggle from "./DarkModeToggle";
 import Image from "next/image";
 import Link from "next/link";
+import { useDarkMode } from "./DarkModeProvider";
 
-export default function Header({ darkMode, toggleDarkMode }) {
+export default function Header() {
+  const { darkMode, toggleDarkMode } = useDarkMode();
   const [isVisible, setIsVisible] = useState(false);
   const [currentPlatform, setCurrentPlatform] = useState(0);
 

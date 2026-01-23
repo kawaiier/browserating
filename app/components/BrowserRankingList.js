@@ -180,9 +180,9 @@ const StatsBar = ({ browsers, selectedPlatform }) => {
   );
 };
 
-export default function BrowserRankingList() {
-  const [browsers, setBrowsers] = useState([]);
-  const [filteredBrowsers, setFilteredBrowsers] = useState([]);
+export default function BrowserRankingList({ initialBrowsers = [] }) {
+  const [browsers, setBrowsers] = useState(initialBrowsers);
+  const [filteredBrowsers, setFilteredBrowsers] = useState(initialBrowsers);
   const [selectedEngine, setSelectedEngine] = useLocalStorage(
     "selectedEngine",
     "All",
@@ -192,13 +192,17 @@ export default function BrowserRankingList() {
     "macos-arm",
   );
   const [searchTerm, setSearchTerm] = useState("");
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(initialBrowsers.length === 0);
   const [error, setError] = useState(null);
   const [retryCount, setRetryCount] = useState(0);
   const [viewMode, setViewMode] = useLocalStorage("viewMode", "grid");
   const abortControllerRef = useRef(null);
 
   const fetchBrowsers = useCallback(async () => {
+    if (initialBrowsers.length > 0 && retryCount === 0) {
+      setIsLoading(false);
+      return;
+    }
     try {
       setIsLoading(true);
       setError(null);
@@ -221,7 +225,7 @@ export default function BrowserRankingList() {
         setIsLoading(false);
       }
     }
-  }, []);
+  }, [initialBrowsers.length, retryCount]);
 
   useEffect(() => {
     fetchBrowsers();

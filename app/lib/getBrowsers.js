@@ -1,46 +1,83 @@
+import { promises as fs } from "fs";
+import path from "path";
+
 export async function getBrowsers() {
-  const [
-    browsersResponse,
-    androidResponse,
-    macosIntelResponse,
-    macosArmResponse,
-    windowsResponse,
-    ipadResponse,
-  ] = await Promise.all([
-    fetch("/data/browsers.json"),
-    fetch("/data/android.json"),
-    fetch("/data/macos-intel.json"),
-    fetch("/data/macos-arm.json"),
-    fetch("/data/windows.json"),
-    fetch("/data/ipad.json"),
-  ]);
+  const isServer = typeof window === "undefined";
 
-  if (
-    !browsersResponse.ok ||
-    !androidResponse.ok ||
-    !macosIntelResponse.ok ||
-    !macosArmResponse.ok ||
-    !windowsResponse.ok ||
-    !ipadResponse.ok
-  ) {
-    throw new Error("Failed to fetch browser data");
-  }
-
-  const [
-    browsers,
+  let browsers,
     androidData,
     macosIntelData,
     macosArmData,
     windowsData,
-    ipadData,
-  ] = await Promise.all([
-    browsersResponse.json(),
-    androidResponse.json(),
-    macosIntelResponse.json(),
-    macosArmResponse.json(),
-    windowsResponse.json(),
-    ipadResponse.json(),
-  ]);
+    ipadData;
+
+  if (isServer) {
+    const dataDir = path.join(process.cwd(), "public", "data");
+    const readFile = async (filename) => {
+      const filePath = path.join(dataDir, filename);
+      const content = await fs.readFile(filePath, "utf8");
+      return JSON.parse(content);
+    };
+
+    [
+      browsers,
+      androidData,
+      macosIntelData,
+      macosArmData,
+      windowsData,
+      ipadData,
+    ] = await Promise.all([
+      readFile("browsers.json"),
+      readFile("android.json"),
+      readFile("macos-intel.json"),
+      readFile("macos-arm.json"),
+      readFile("windows.json"),
+      readFile("ipad.json"),
+    ]);
+  } else {
+    const [
+      browsersResponse,
+      androidResponse,
+      macosIntelResponse,
+      macosArmResponse,
+      windowsResponse,
+      ipadResponse,
+    ] = await Promise.all([
+      fetch("/data/browsers.json"),
+      fetch("/data/android.json"),
+      fetch("/data/macos-intel.json"),
+      fetch("/data/macos-arm.json"),
+      fetch("/data/windows.json"),
+      fetch("/data/ipad.json"),
+    ]);
+
+    if (
+      !browsersResponse.ok ||
+      !androidResponse.ok ||
+      !macosIntelResponse.ok ||
+      !macosArmResponse.ok ||
+      !windowsResponse.ok ||
+      !ipadResponse.ok
+    ) {
+      throw new Error("Failed to fetch browser data");
+    }
+
+    [
+      browsers,
+      androidData,
+      macosIntelData,
+      macosArmData,
+      windowsData,
+      ipadData,
+    ] = await Promise.all([
+      browsersResponse.json(),
+      androidResponse.json(),
+      macosIntelResponse.json(),
+      macosArmResponse.json(),
+      windowsResponse.json(),
+      ipadResponse.json(),
+    ]);
+  }
 
   // Merge the data from all sources
   return browsers.map((browser) => {
