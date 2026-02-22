@@ -41,7 +41,7 @@ const platformIcons = {
 };
 
 const NEW_PLATFORM = 'macos-arm';
-const OUTDATED_PLATFORMS = ['android', 'macos-intel'];
+const OUTDATED_PLATFORMS = ['android', 'macos-intel', 'windows', 'ipad'];
 
 // Enhanced Skeleton Loader
 const SkeletonLoader = ({ index }) => (

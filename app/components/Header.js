@@ -322,6 +322,23 @@ export default function Header({ lastModified }) {
                     </time>
                   </div>
                 </div>
+                <span className="text-white">|</span>
+                <div className="flex flex-col sm:flex-row items-start sm:items-center gap-0 sm:gap-2">
+                  <div className="flex items-center gap-2">
+                    <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                      Next update:
+                    </span>
+                  </div>
+
+                  <div className="flex items-center ml-6 sm:ml-2 sm:mt-0 mt-1 gap-1 relative group">
+                    <time
+                      dateTime="2026-03-22"
+                      className="text-sm font-mono font-semibold text-purple-700 dark:text-purple-300"
+                    >
+                      March 22, 2026
+                    </time>
+                  </div>
+                </div>
               </div>
 
               <p className="text-sm text-gray-500 dark:text-gray-400 mt-4 max-w-2xl mx-auto italic">
