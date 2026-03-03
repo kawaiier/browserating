@@ -13,6 +13,19 @@ export default async function sitemap() {
     priority: 0.7,
   }));
 
+  const platformPages = [
+    { platform: 'macos-arm' },
+    { platform: 'macos-intel' },
+    { platform: 'windows' },
+    { platform: 'android' },
+    { platform: 'ipad' },
+  ].map(({ platform }) => ({
+    url: `${baseUrl}/platforms/${platform}`,
+    lastModified: dataLastModified,
+    changeFrequency: 'weekly',
+    priority: 0.8,
+  }));
+
   return [
     {
       url: baseUrl,
@@ -21,6 +34,7 @@ export default async function sitemap() {
       priority: 1,
     },
     ...browserPages,
+    ...platformPages,
     {
       url: `${baseUrl}/privacy`,
       lastModified: '2024-11-27',
