@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 
 import BrowserDetailsModal from './BrowserDetailsModal';
 import Image from 'next/image';
+import Link from 'next/link';
 
 const BrowserCard = React.memo(
   ({ browser, getEngineColor, rank, selectedPlatform, isLoading = false }) => {
@@ -245,9 +246,18 @@ const BrowserCard = React.memo(
               )}
             </div>
 
-            {/* Action hint — hidden on touch devices */}
-            <div className="hidden sm:block mt-3 text-center">
-              <span className="text-[10px] text-gray-300 dark:text-gray-600">Tap for history</span>
+            {/* Footer actions */}
+            <div className="mt-3 flex items-center justify-between">
+              <span className="hidden sm:block text-[10px] text-gray-300 dark:text-gray-600">
+                Tap for history
+              </span>
+              <Link
+                href={`/browsers/${browser.name.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')}`}
+                className="ml-auto text-[11px] text-purple-500 dark:text-purple-400 hover:text-purple-700 dark:hover:text-purple-300 hover:underline"
+                onClick={(e) => e.stopPropagation()}
+              >
+                Full details →
+              </Link>
             </div>
           </div>
         </div>
