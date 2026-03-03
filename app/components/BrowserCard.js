@@ -121,7 +121,7 @@ const BrowserCard = React.memo(
 
     return (
       <>
-        <article
+        <div
           ref={cardRef}
           className={`
             bg-white dark:bg-gray-800/90
@@ -156,7 +156,7 @@ const BrowserCard = React.memo(
                 >
                   <Image
                     src={browser.logo}
-                    alt=""
+                    alt={`${browser.name} logo`}
                     width={40}
                     height={40}
                     className="object-contain dark:brightness-90 group-hover:scale-110 transition-transform duration-300 w-7 h-7 sm:w-8 sm:h-8"
@@ -250,7 +250,7 @@ const BrowserCard = React.memo(
               <span className="text-[10px] text-gray-300 dark:text-gray-600">Tap for history</span>
             </div>
           </div>
-        </article>
+        </div>
 
         {showModal && (
           <BrowserDetailsModal

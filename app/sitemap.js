@@ -1,16 +1,19 @@
-export default function sitemap() {
+import { getDataLastModified } from './lib/getDataLastModified';
+
+export default async function sitemap() {
   const baseUrl = 'https://browserating.com';
+  const dataLastModified = await getDataLastModified();
 
   return [
     {
       url: baseUrl,
-      lastModified: new Date(),
+      lastModified: dataLastModified,
       changeFrequency: 'weekly',
       priority: 1,
     },
     {
       url: `${baseUrl}/privacy`,
-      lastModified: new Date(),
+      lastModified: '2024-11-27',
       changeFrequency: 'monthly',
       priority: 0.5,
     },
