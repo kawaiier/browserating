@@ -35,7 +35,7 @@ export default function PrivacyPage() {
       <div className="pt-16">
         <section className="max-w-4xl mx-auto p-10 my-12 bg-gray-50 rounded-lg shadow-md">
           <h2 className="text-3xl font-bold mb-6">Privacy Policy</h2>
-          <p className="text-sm text-gray-600 mb-4">Last updated: March 9, 2025</p>
+          <p className="text-sm text-gray-600 mb-4">Last updated: March 3, 2026</p>
 
           <h3 className="text-2xl font-semibold mb-4">Introduction</h3>
           <p className="mb-4">
@@ -80,6 +80,9 @@ export default function PrivacyPage() {
             <li>Web vitals metrics (page load time, interaction times)</li>
             <li>Route changes</li>
           </ul>
+          <p className="mb-4">
+            We also use <a href="https://search.google.com/search-console" target="_blank" rel="noopener noreferrer">Google Search Console</a> to understand how our site appears in Google Search and to collect aggregated search performance data (queries, impressions, clicks, click‑through rate, and average position). This data is processed by Google — see <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">Google’s privacy documentation</a> for details.
+          </p>
           <p className="mb-4">This data is:</p>
           <ul className="list-disc pl-6 mb-4">
             <li>Collected anonymously</li>
@@ -123,6 +126,9 @@ export default function PrivacyPage() {
             <li>Beehive (newsletter management)</li>
             <li>Counter.dev (anonymous analytics)</li>
             <li>Vercel Analytics (anonymous performance and usage analytics)</li>
+            <li>
+              <a href="https://search.google.com/search-console" target="_blank" rel="noopener noreferrer">Google Search Console</a> (aggregated search performance data: queries, impressions, clicks, CTR, and average position)
+            </li>
           </ul>
 
           <h3 className="text-2xl font-semibold mb-4">Data Security</h3>
