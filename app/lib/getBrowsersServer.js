@@ -1,6 +1,8 @@
 import { promises as fs } from 'fs';
 import path from 'path';
 
+import { mergeBrowserData } from './mergeBrowserData';
+
 export async function getBrowsersServer() {
   const dataDir = path.join(process.cwd(), 'public', 'data');
 
@@ -20,31 +22,11 @@ export async function getBrowsersServer() {
       readFile('ipad.json'),
     ]);
 
-  return browsers.map((browser) => {
-    const androidBrowser = androidData.find((b) => b.name === browser.name);
-    const macosIntelBrowser = macosIntelData.find((b) => b.name === browser.name);
-    const macosArmBrowser = macosArmData.find((b) => b.name === browser.name);
-    const windowsBrowser = windowsData.find((b) => b.name === browser.name);
-    const ipadBrowser = ipadData.find((b) => b.name === browser.name);
-
-    return {
-      ...browser,
-      android: androidBrowser
-        ? { versions: androidBrowser.versions, engine: androidBrowser.engine }
-        : null,
-      'macos-intel': macosIntelBrowser
-        ? {
-            versions: macosIntelBrowser.versions,
-            engine: macosIntelBrowser.engine,
-          }
-        : null,
-      'macos-arm': macosArmBrowser
-        ? { versions: macosArmBrowser.versions, engine: macosArmBrowser.engine }
-        : null,
-      windows: windowsBrowser
-        ? { versions: windowsBrowser.versions, engine: windowsBrowser.engine }
-        : null,
-      ipad: ipadBrowser ? { versions: ipadBrowser.versions, engine: ipadBrowser.engine } : null,
-    };
+  return mergeBrowserData(browsers, {
+    android: androidData,
+    'macos-intel': macosIntelData,
+    'macos-arm': macosArmData,
+    windows: windowsData,
+    ipad: ipadData,
   });
 }

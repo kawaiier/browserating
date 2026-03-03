@@ -1,3 +1,5 @@
+'use client';
+
 import { Bar, Line } from 'react-chartjs-2';
 import {
   BarElement,
@@ -13,6 +15,7 @@ import {
 import { useEffect, useRef, useState } from 'react';
 
 import Image from 'next/image';
+import { getEngineColor, platformNames } from '../lib/constants';
 
 ChartJS.register(
   CategoryScale,
@@ -123,19 +126,6 @@ const BrowserDetailsModal = ({ browser, selectedPlatform, onClose }) => {
   const sortedData = [...platformData.versions].reverse();
   const platformEngine = platformData.engine;
 
-  const getEngineColor = (engine) => {
-    switch (engine.toLowerCase()) {
-      case 'blink':
-        return 'bg-blue-100 dark:bg-sky-900/50 text-blue-800 dark:text-blue-200 border border-blue-200 dark:border-sky-700';
-      case 'gecko':
-        return 'bg-green-100 dark:bg-emerald-900/50 text-green-800 dark:text-green-200 border border-green-200 dark:border-emerald-700';
-      case 'webkit':
-        return 'bg-orange-100 dark:bg-amber-900/50 text-orange-800 dark:text-orange-200 border border-orange-200 dark:border-amber-700';
-      default:
-        return 'bg-gray-100 dark:bg-gray-700/50 text-gray-800 dark:text-gray-200 border border-gray-200 dark:border-gray-600';
-    }
-  };
-
   const getPerformanceTrend = () => {
     if (sortedData.length < 2) return { trend: 'stable', change: 0 };
 
@@ -222,14 +212,6 @@ const BrowserDetailsModal = ({ browser, selectedPlatform, onClose }) => {
         },
       },
     },
-  };
-
-  const platformNames = {
-    'macos-arm': 'macOS ARM',
-    'macos-intel': 'macOS Intel',
-    windows: 'Windows',
-    android: 'Android',
-    ipad: 'iPad OS',
   };
 
   const platformName = platformNames[selectedPlatform] || selectedPlatform;
@@ -523,9 +505,6 @@ const BrowserDetailsModal = ({ browser, selectedPlatform, onClose }) => {
                           {version.scores.ram ? `${version.scores.ram.toFixed(0)} MB` : '—'}
                         </td>
                         <td className="py-3 px-3 sm:px-4 text-right font-mono text-gray-600 dark:text-gray-400">
-                          {version.scores.ram ? `${version.scores.ram.toFixed(0)} MB` : '—'}
-                        </td>
-                        <td className="py-3 px-4 text-right font-mono text-gray-600 dark:text-gray-400">
                           {version.scores.adblock ? `${version.scores.adblock.toFixed(0)}%` : '—'}
                         </td>
                       </tr>
@@ -537,19 +516,6 @@ const BrowserDetailsModal = ({ browser, selectedPlatform, onClose }) => {
           )}
         </main>
       </div>
-
-      <style jsx>{`
-        @keyframes scale-in {
-          from {
-            transform: scale(0.95);
-            opacity: 0;
-          }
-          to {
-            transform: scale(1);
-            opacity: 1;
-          }
-        }
-      `}</style>
     </div>
   );
 };

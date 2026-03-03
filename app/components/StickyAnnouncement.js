@@ -63,6 +63,7 @@ const StickyAnnouncement = () => {
       // localStorage unavailable (SSR, private browsing, etc.) — show the banner
     }
 
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- initializing from localStorage on mount
     setCurrentAnnouncement(announcements[Math.floor(Math.random() * announcements.length)]);
     setIsVisible(true);
   }, []);

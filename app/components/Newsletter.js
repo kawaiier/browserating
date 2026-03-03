@@ -1,18 +1,4 @@
-'use client';
-
-import { useEffect, useState } from 'react';
-
 export default function Newsletter() {
-  const [subscriberCount, setSubscriberCount] = useState(7); // Dynamic count
-
-  // Simulate growing subscriber count
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setSubscriberCount((prev) => prev + Math.floor(Math.random() * 3));
-    }, 30000); // Update every 30 seconds
-    return () => clearInterval(interval);
-  }, []);
-
   return (
     <section className="relative overflow-hidden py-16 px-4 sm:px-6 lg:px-8">
       {/* Background pattern */}
