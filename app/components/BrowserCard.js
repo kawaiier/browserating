@@ -83,6 +83,7 @@ const BrowserCard = React.memo(
     const handleCardInteraction = (e) => {
       if (e.type === 'click' || (e.type === 'keydown' && (e.key === 'Enter' || e.key === ' '))) {
         if (e.type === 'keydown') e.preventDefault();
+        cardRef.current?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
         setShowModal(true);
       }
     };

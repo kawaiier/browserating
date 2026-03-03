@@ -4,11 +4,11 @@ import React, { useState } from 'react';
 
 const StatCard = ({ icon, number, label, description }) => (
   <div className="bg-white dark:bg-gray-800 rounded-xl p-6 border border-gray-200 dark:border-gray-700 hover:shadow-lg transition-all duration-300 group">
-    <div className="flex items-center gap-4 mb-3">
+    <div className="flex flex-col items-center sm:flex-row sm:items-start gap-4 mb-3">
       <div className="w-12 h-12 bg-gradient-to-br from-purple-500 to-blue-500 rounded-xl flex items-center justify-center text-white text-xl">
         {icon}
       </div>
-      <div>
+      <div className="text-center sm:text-left">
         <div className="text-2xl font-bold text-gray-900 dark:text-white group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors">
           {number}
         </div>
@@ -21,17 +21,17 @@ const StatCard = ({ icon, number, label, description }) => (
 
 const FeatureCard = ({ icon, title, description, highlights }) => (
   <div className="bg-gradient-to-br from-gray-50 to-white dark:from-gray-800 dark:to-gray-700 rounded-xl p-6 border border-gray-200 dark:border-gray-600 hover:border-purple-300 dark:hover:border-purple-600 transition-all duration-300">
-    <div className="flex items-start gap-4">
+    <div className="flex flex-col items-center sm:flex-row sm:items-start gap-4">
       <div className="w-10 h-10 bg-gradient-to-br from-purple-500 to-blue-500 rounded-lg flex items-center justify-center text-white text-lg flex-shrink-0">
         {icon}
       </div>
-      <div className="flex-1">
+      <div className="flex-1 text-center sm:text-left">
         <h3 className="font-semibold text-gray-900 dark:text-white mb-2">{title}</h3>
         <p className="text-gray-600 dark:text-gray-400 text-sm mb-3 leading-relaxed">
           {description}
         </p>
         {highlights && (
-          <div className="space-y-2">
+          <div className="space-y-2 inline-flex flex-col items-start">
             {highlights.map((highlight, index) => (
               <div key={index} className="flex items-center gap-2 text-sm">
                 <div className="w-1.5 h-1.5 bg-purple-500 rounded-full"></div>
@@ -371,11 +371,11 @@ export default function Explanation() {
 
               <div className="grid gap-6">
                 <div className="bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 rounded-xl p-6 border border-blue-200 dark:border-blue-800">
-                  <div className="flex items-start gap-4">
+                  <div className="flex flex-col items-center sm:flex-row sm:items-start gap-4">
                     <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-500 rounded-xl flex items-center justify-center text-white text-xl font-bold">
                       ⚡
                     </div>
-                    <div className="flex-1">
+                    <div className="flex-1 text-center sm:text-left">
                       <h4 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
                         Speedometer 3.1 Performance
                       </h4>
@@ -405,11 +405,11 @@ export default function Explanation() {
                 </div>
 
                 <div className="bg-gradient-to-r from-green-50 to-emerald-50 dark:from-green-900/20 dark:to-emerald-900/20 rounded-xl p-6 border border-green-200 dark:border-green-800">
-                  <div className="flex items-start gap-4">
+                  <div className="flex flex-col items-center sm:flex-row sm:items-start gap-4">
                     <div className="w-12 h-12 bg-gradient-to-br from-green-500 to-emerald-500 rounded-xl flex items-center justify-center text-white text-xl font-bold">
                       🧠
                     </div>
-                    <div className="flex-1">
+                    <div className="flex-1 text-center sm:text-left">
                       <h4 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
                         Memory Efficiency
                       </h4>
@@ -433,11 +433,11 @@ export default function Explanation() {
                 </div>
 
                 <div className="bg-gradient-to-r from-purple-50 to-pink-50 dark:from-purple-900/20 dark:to-pink-900/20 rounded-xl p-6 border border-purple-200 dark:border-purple-800">
-                  <div className="flex items-start gap-4">
+                  <div className="flex flex-col items-center sm:flex-row sm:items-start gap-4">
                     <div className="w-12 h-12 bg-gradient-to-br from-purple-500 to-pink-500 rounded-xl flex items-center justify-center text-white text-xl font-bold">
                       🛡️
                     </div>
-                    <div className="flex-1">
+                    <div className="flex-1 text-center sm:text-left">
                       <h4 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
                         Ad-blocking effectiveness
                       </h4>

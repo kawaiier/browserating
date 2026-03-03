@@ -150,7 +150,7 @@ export default function Header({ lastModified }) {
           <div className="text-center max-w-5xl mx-auto">
             {/* Main Title */}
             <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold mb-6 transition-all duration-1000 delay-300 translate-y-0 opacity-100">
-              <span className="bg-gradient-to-r from-purple-600 via-blue-600 to-indigo-600 bg-clip-text text-transparent leading-tight block pb-2">
+              <span className="bg-gradient-to-r from-purple-600 via-blue-600 to-indigo-600 bg-clip-text text-transparent leading-normal block pb-3">
                 Browserating
               </span>
             </h1>
@@ -274,40 +274,30 @@ export default function Header({ lastModified }) {
 
             {/* Last Updated Info */}
             <div className="transition-all duration-1000 delay-1000 translate-y-0 opacity-100">
-              <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-4 bg-gradient-to-r from-purple-600/10 to-blue-600/10 backdrop-blur-sm border border-purple-200/30 dark:border-purple-700/30 rounded-xl px-3 sm:px-6 py-3 sm:py-4 w-full">
-                <div className="flex flex-col sm:flex-row items-start sm:items-center gap-0 sm:gap-2">
-                  <div className="flex items-center gap-2">
-                    <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-                    <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
-                      Last updated:
-                    </span>
-                  </div>
-
-                  <div className="flex items-center ml-6 sm:ml-2 sm:mt-0 mt-1 gap-1 relative group">
-                    <time
-                      dateTime={lastModified}
-                      className="text-sm font-mono font-semibold text-purple-700 dark:text-purple-300"
-                    >
-                      {lastModifiedFormatted}
-                    </time>
-                  </div>
+              <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-4 bg-gradient-to-r from-purple-600/10 to-blue-600/10 backdrop-blur-sm border border-purple-200/30 dark:border-purple-700/30 rounded-xl px-4 sm:px-6 py-3 sm:py-4 w-full">
+                <div className="flex items-center gap-2">
+                  <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+                  <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                    Last updated:
+                  </span>
+                  <time
+                    dateTime={lastModified}
+                    className="text-sm font-mono font-semibold text-purple-700 dark:text-purple-300"
+                  >
+                    {lastModifiedFormatted}
+                  </time>
                 </div>
-                <span className="text-white">|</span>
-                <div className="flex flex-col sm:flex-row items-start sm:items-center gap-0 sm:gap-2">
-                  <div className="flex items-center gap-2">
-                    <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
-                      Next update:
-                    </span>
-                  </div>
-
-                  <div className="flex items-center ml-6 sm:ml-2 sm:mt-0 mt-1 gap-1 relative group">
-                    <time
-                      dateTime="2026-03-22"
-                      className="text-sm font-mono font-semibold text-purple-700 dark:text-purple-300"
-                    >
-                      ~ March 22, 2026
-                    </time>
-                  </div>
+                <span className="hidden sm:inline text-gray-400 dark:text-gray-500">|</span>
+                <div className="flex items-center gap-2 pt-2 sm:pt-0 border-t sm:border-t-0 border-purple-200/30 dark:border-purple-700/30 w-full sm:w-auto">
+                  <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                    Next update:
+                  </span>
+                  <time
+                    dateTime="2026-03-22"
+                    className="text-sm font-mono font-semibold text-purple-700 dark:text-purple-300"
+                  >
+                    ~ March 22, 2026
+                  </time>
                 </div>
               </div>
 

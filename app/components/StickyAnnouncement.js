@@ -1,58 +1,80 @@
-"use client";
+'use client';
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react';
 
 const announcements = [
-    {
-      id: 1,
-      content: (
-        <p className="text-sm md:text-base">
-          Subscribe to <span className="font-bold">/r/aiBrowsing</span> — A
-          place for discussing browsers and extensions that incorporate AI
-          features
-        </p>
-      ),
-      buttonText: "Subscribe",
-      buttonUrl: "https://www.reddit.com/r/aiBrowsing/",
-      gradient: "from-orange-500 to-red-500",
-      buttonClass: "bg-orange-600 hover:bg-orange-700 text-white",
-    },
-    {
-      id: 2,
-      content: (
-        <p className="text-sm md:text-base">
-          Follow me on <span className="font-bold">X</span> for the latest
-          updates and more
-        </p>
-      ),
-      buttonText: "Follow",
-      buttonUrl: "https://x.com/kawaiier101",
-      gradient: "from-black to-blue-500",
-      buttonClass: "bg-black hover:bg-blue-700 text-white",
-    },
-    {
-      id: 3,
-      content: (
-        <p className="text-sm md:text-base">
-          Join our <span className="font-bold">Telegram</span> community to
-          discuss browsers and extensions
-        </p>
-      ),
-      buttonText: "Join",
-      buttonUrl: "https://t.me/thebrowsershq",
-      gradient: "from-blue-400 to-cyan-400",
-      buttonClass: "bg-blue-500 hover:bg-cyan-500 text-white",
-    },
+  {
+    id: 1,
+    content: (
+      <p className="text-sm md:text-base">
+        Subscribe to <span className="font-bold">/r/aiBrowsing</span> — A place for discussing
+        browsers and extensions that incorporate AI features
+      </p>
+    ),
+    buttonText: 'Subscribe',
+    buttonUrl: 'https://www.reddit.com/r/aiBrowsing/',
+    gradient: 'from-orange-500 to-red-500',
+    buttonClass: 'bg-orange-600 hover:bg-orange-700 text-white',
+  },
+  {
+    id: 2,
+    content: (
+      <p className="text-sm md:text-base">
+        Follow me on <span className="font-bold">X</span> for the latest updates and more
+      </p>
+    ),
+    buttonText: 'Follow',
+    buttonUrl: 'https://x.com/kawaiier101',
+    gradient: 'from-black to-blue-500',
+    buttonClass: 'bg-black hover:bg-blue-700 text-white',
+  },
+  {
+    id: 3,
+    content: (
+      <p className="text-sm md:text-base">
+        Join our <span className="font-bold">Telegram</span> community to discuss browsers and
+        extensions
+      </p>
+    ),
+    buttonText: 'Join',
+    buttonUrl: 'https://t.me/thebrowsershq',
+    gradient: 'from-blue-400 to-cyan-400',
+    buttonClass: 'bg-blue-500 hover:bg-cyan-500 text-white',
+  },
 ];
 
+const STORAGE_KEY = 'announcement_dismissed_at';
+const ONE_WEEK_MS = 7 * 24 * 60 * 60 * 1000;
+
 const StickyAnnouncement = () => {
-  const [isVisible, setIsVisible] = useState(true);
+  const [isVisible, setIsVisible] = useState(false);
   const [currentAnnouncement, setCurrentAnnouncement] = useState(null);
 
   useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect
+    try {
+      const dismissedAt = localStorage.getItem(STORAGE_KEY);
+      if (dismissedAt) {
+        const elapsed = Date.now() - parseInt(dismissedAt, 10);
+        if (elapsed < ONE_WEEK_MS) {
+          return; // Still within the one-week cooldown
+        }
+      }
+    } catch {
+      // localStorage unavailable (SSR, private browsing, etc.) — show the banner
+    }
+
     setCurrentAnnouncement(announcements[Math.floor(Math.random() * announcements.length)]);
+    setIsVisible(true);
   }, []);
+
+  const handleDismiss = () => {
+    setIsVisible(false);
+    try {
+      localStorage.setItem(STORAGE_KEY, Date.now().toString());
+    } catch {
+      // localStorage unavailable — dismiss for this session only
+    }
+  };
 
   if (!isVisible || !currentAnnouncement) {
     return null;
@@ -66,22 +88,14 @@ const StickyAnnouncement = () => {
       <div className="flex items-center space-x-4">
         <a
           href={currentAnnouncement.buttonUrl}
-          target={
-            currentAnnouncement.buttonUrl.startsWith("http")
-              ? "_blank"
-              : "_self"
-          }
-          rel={
-            currentAnnouncement.buttonUrl.startsWith("http")
-              ? "noopener noreferrer"
-              : ""
-          }
+          target={currentAnnouncement.buttonUrl.startsWith('http') ? '_blank' : '_self'}
+          rel={currentAnnouncement.buttonUrl.startsWith('http') ? 'noopener noreferrer' : ''}
           className={`${currentAnnouncement.buttonClass} font-semibold py-2 px-4 rounded text-sm md:text-base transition duration-150 ease-in-out`}
         >
           {currentAnnouncement.buttonText}
         </a>
         <button
-          onClick={() => setIsVisible(false)}
+          onClick={handleDismiss}
           className="text-white hover:text-gray-200 text-xl font-bold leading-none flex items-center justify-center h-6 w-6 rounded-full focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-50"
           aria-label="Dismiss announcement"
         >

@@ -183,13 +183,13 @@ export default function About() {
             <div className="grid gap-8">
               {testingSteps.map((step, index) => (
                 <div key={index} className="group">
-                  <div className="flex items-start gap-4 p-6 bg-gradient-to-r from-gray-50 to-white dark:from-gray-700 dark:to-gray-800 rounded-xl border border-gray-200 dark:border-gray-600 hover:shadow-lg transition-all duration-300">
+                  <div className="flex flex-col items-center sm:flex-row sm:items-start gap-4 p-6 bg-gradient-to-r from-gray-50 to-white dark:from-gray-700 dark:to-gray-800 rounded-xl border border-gray-200 dark:border-gray-600 hover:shadow-lg transition-all duration-300">
                     <div className="flex-shrink-0">
                       <div className="w-12 h-12 bg-gradient-to-br from-purple-500 to-blue-500 rounded-xl flex items-center justify-center text-white text-xl font-bold shadow-lg">
                         {step.icon}
                       </div>
                     </div>
-                    <div className="flex-1">
+                    <div className="flex-1 text-center sm:text-left">
                       <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
                         {step.title}
                       </h3>
@@ -365,7 +365,7 @@ export default function About() {
                   key={index}
                   className="bg-gray-50 dark:bg-gray-700 rounded-xl p-6 border border-gray-200 dark:border-gray-600"
                 >
-                  <div className="flex items-start gap-4">
+                  <div className="flex flex-col items-center sm:flex-row sm:items-start gap-4">
                     <div
                       className={`w-12 h-12 rounded-xl flex items-center justify-center ${metric.color} bg-current/10 flex-shrink-0`}
                     >
@@ -373,7 +373,7 @@ export default function About() {
                         {index === 0 ? '⚡' : index === 1 ? '🧠' : '🛡️'}
                       </span>
                     </div>
-                    <div className="flex-1">
+                    <div className="flex-1 text-center sm:text-left">
                       <h4 className={`text-lg font-semibold mb-2 ${metric.color}`}>
                         {metric.metric}
                       </h4>
