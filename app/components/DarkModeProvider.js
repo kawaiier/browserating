@@ -9,16 +9,17 @@ export function DarkModeProvider({ children }) {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    // Check initial theme preference
     const isDarkMode =
       localStorage?.getItem('darkMode') === 'true' ||
       (!('darkMode' in localStorage) &&
         window?.matchMedia?.('(prefers-color-scheme: dark)')?.matches);
 
-    // eslint-disable-next-line react-hooks/set-state-in-effect
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- syncing React state with localStorage on mount
     setDarkMode(isDarkMode);
     if (isDarkMode) {
       document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
     }
     setMounted(true);
   }, []);
@@ -30,12 +31,8 @@ export function DarkModeProvider({ children }) {
     localStorage.setItem('darkMode', newDarkMode);
   };
 
-  if (!mounted) {
-    return null;
-  }
-
   return (
-    <DarkModeContext.Provider value={{ darkMode, toggleDarkMode }}>
+    <DarkModeContext.Provider value={{ darkMode, toggleDarkMode, mounted }}>
       {children}
     </DarkModeContext.Provider>
   );

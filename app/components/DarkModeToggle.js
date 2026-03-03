@@ -3,15 +3,20 @@
 import React from 'react';
 import { useDarkMode } from './DarkModeProvider';
 
-const stars = Array.from({ length: 6 }, (_, i) => ({
-  top: Math.random() * 100,
-  left: Math.random() * 100,
-  delay: Math.random() * 1500,
-  key: `star-${i}`,
-}));
-
 export default function DarkModeToggle() {
   const { darkMode, toggleDarkMode } = useDarkMode();
+  const [stars, setStars] = React.useState([]);
+
+  React.useEffect(() => {
+    setStars(
+      Array.from({ length: 6 }, (_, i) => ({
+        top: Math.random() * 100,
+        left: Math.random() * 100,
+        delay: Math.random() * 1500,
+        key: `star-${i}`,
+      }))
+    );
+  }, []);
 
   return (
     <button

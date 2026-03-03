@@ -1,23 +1,9 @@
-'use client';
-
-import { useEffect, useState } from 'react';
-
 export default function Newsletter() {
-  const [subscriberCount, setSubscriberCount] = useState(7); // Dynamic count
-
-  // Simulate growing subscriber count
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setSubscriberCount((prev) => prev + Math.floor(Math.random() * 3));
-    }, 30000); // Update every 30 seconds
-    return () => clearInterval(interval);
-  }, []);
-
   return (
     <section className="relative overflow-hidden py-16 px-4 sm:px-6 lg:px-8">
       {/* Background pattern */}
 
-      <div className="bg-white/10 dark:bg-gray-800/20 backdrop-blur-sm rounded-xl p-8 shadow-2xl border border-white/20 dark:border-gray-700/30">
+      <div className="bg-white/10 dark:bg-gray-800/20 backdrop-blur-sm rounded-xl p-4 sm:p-8 shadow-2xl border border-white/20 dark:border-gray-700/30">
         <div className="max-w-2xl mx-auto">
           <iframe
             src="https://embeds.beehiiv.com/276ea08f-2b4f-433b-82f9-6e3648ac6869"
@@ -26,7 +12,7 @@ export default function Newsletter() {
             height="320"
             frameBorder="0"
             scrolling="no"
-            className="rounded-lg border-2 border-white/20 dark:border-gray-700/50 bg-white/10 dark:bg-gray-800/10 backdrop-blur-sm"
+            className="rounded-lg border-2 border-white/20 dark:border-gray-700/50 bg-white/10 dark:bg-gray-800/10 backdrop-blur-sm min-h-[320px]"
             style={{
               margin: 0,
             }}

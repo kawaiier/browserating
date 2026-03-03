@@ -7,7 +7,7 @@ import StickyAnnouncement from './components/StickyAnnouncement';
 
 const inter = Inter({ subsets: ['latin'] });
 
-const BUILD_DATE = new Date().toISOString().split('T')[0];
+const RENDER_DATE = new Date().toISOString().split('T')[0];
 
 export const metadata = {
   metadataBase: new URL('https://browserating.com'),
@@ -44,10 +44,21 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta name="theme-color" content="#7853E0" />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+      try {
+        if (localStorage.darkMode === 'true' || (!('darkMode' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+          document.documentElement.classList.add('dark');
+        }
+      } catch (e) {}
+    `,
+          }}
+        />
         <Script id="schema-org" type="application/ld+json">
           {`
             {
@@ -106,7 +117,7 @@ export default function RootLayout({ children }) {
                 "name": "BrowseRating Data"
               },
               "license": "https://browserating.com/privacy",
-              "dateModified": "${BUILD_DATE}",
+              "dateModified": "${RENDER_DATE}",
               "version": "1.2.0",
               "isAccessibleForFree": true
             }

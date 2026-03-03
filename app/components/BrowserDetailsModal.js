@@ -1,4 +1,6 @@
-import { Bar, Line } from "react-chartjs-2";
+'use client';
+
+import { Bar, Line } from 'react-chartjs-2';
 import {
   BarElement,
   CategoryScale,
@@ -9,10 +11,11 @@ import {
   PointElement,
   Title,
   Tooltip,
-} from "chart.js";
-import { useEffect, useRef, useState } from "react";
+} from 'chart.js';
+import { useEffect, useRef, useState } from 'react';
 
-import Image from "next/image";
+import Image from 'next/image';
+import { getEngineColor, platformNames } from '../lib/constants';
 
 ChartJS.register(
   CategoryScale,
@@ -26,8 +29,8 @@ ChartJS.register(
 );
 
 const BrowserDetailsModal = ({ browser, selectedPlatform, onClose }) => {
-  const [activeTab, setActiveTab] = useState("overview");
-  const [chartType, setChartType] = useState("bar");
+  const [activeTab, setActiveTab] = useState('overview');
+  const [chartType, setChartType] = useState('bar');
   const modalRef = useRef(null);
   const closeButtonRef = useRef(null);
   const firstFocusableRef = useRef(null);
@@ -37,11 +40,11 @@ const BrowserDetailsModal = ({ browser, selectedPlatform, onClose }) => {
   // Focus management
   useEffect(() => {
     const handleKeyDown = (e) => {
-      if (e.key === "Escape") {
+      if (e.key === 'Escape') {
         onClose();
       }
       // Trap focus within modal
-      if (e.key === "Tab") {
+      if (e.key === 'Tab') {
         const focusableElements = modalRef.current?.querySelectorAll(
           'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
         );
@@ -58,21 +61,17 @@ const BrowserDetailsModal = ({ browser, selectedPlatform, onClose }) => {
       }
     };
 
-    document.addEventListener("keydown", handleKeyDown);
+    document.addEventListener('keydown', handleKeyDown);
 
     // Focus the close button on mount
     setTimeout(() => closeButtonRef.current?.focus(), 100);
 
     return () => {
-      document.removeEventListener("keydown", handleKeyDown);
+      document.removeEventListener('keydown', handleKeyDown);
     };
   }, [onClose]);
 
-  if (
-    !platformData ||
-    !platformData.versions ||
-    platformData.versions.length === 0
-  ) {
+  if (!platformData || !platformData.versions || platformData.versions.length === 0) {
     return (
       <div
         className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-4"
@@ -127,35 +126,19 @@ const BrowserDetailsModal = ({ browser, selectedPlatform, onClose }) => {
   const sortedData = [...platformData.versions].reverse();
   const platformEngine = platformData.engine;
 
-  const getEngineColor = (engine) => {
-    switch (engine.toLowerCase()) {
-      case "blink":
-        return "bg-blue-100 dark:bg-sky-900/50 text-blue-800 dark:text-blue-200 border border-blue-200 dark:border-sky-700";
-      case "gecko":
-        return "bg-green-100 dark:bg-emerald-900/50 text-green-800 dark:text-green-200 border border-green-200 dark:border-emerald-700";
-      case "webkit":
-        return "bg-orange-100 dark:bg-amber-900/50 text-orange-800 dark:text-orange-200 border border-orange-200 dark:border-amber-700";
-      default:
-        return "bg-gray-100 dark:bg-gray-700/50 text-gray-800 dark:text-gray-200 border border-gray-200 dark:border-gray-600";
-    }
-  };
-
   const getPerformanceTrend = () => {
-    if (sortedData.length < 2) return { trend: "stable", change: 0 };
+    if (sortedData.length < 2) return { trend: 'stable', change: 0 };
 
     const recent = sortedData.slice(-3).map((d) => d.scores.speedometer3);
     const older = sortedData.slice(-6, -3).map((d) => d.scores.speedometer3);
 
     const recentAvg = recent.reduce((a, b) => a + b, 0) / recent.length;
-    const olderAvg =
-      older.length > 0
-        ? older.reduce((a, b) => a + b, 0) / older.length
-        : recentAvg;
+    const olderAvg = older.length > 0 ? older.reduce((a, b) => a + b, 0) / older.length : recentAvg;
 
     const change = ((recentAvg - olderAvg) / olderAvg) * 100;
 
-    if (Math.abs(change) < 2) return { trend: "stable", change: 0 };
-    return { trend: change > 0 ? "improving" : "declining", change };
+    if (Math.abs(change) < 2) return { trend: 'stable', change: 0 };
+    return { trend: change > 0 ? 'improving' : 'declining', change };
   };
 
   const trend = getPerformanceTrend();
@@ -164,18 +147,17 @@ const BrowserDetailsModal = ({ browser, selectedPlatform, onClose }) => {
     labels: sortedData.map((data) => `v${data.version}`),
     datasets: [
       {
-        label: "Speedometer 3.1 Score",
+        label: 'Speedometer 3.1 Score',
         data: sortedData.map((data) => data.scores.speedometer3),
-        backgroundColor:
-          chartType === "bar" ? "rgba(120, 83, 224, 0.8)" : "transparent",
-        borderColor: "#7853E0",
-        borderWidth: chartType === "line" ? 3 : 1,
-        fill: chartType === "line",
+        backgroundColor: chartType === 'bar' ? 'rgba(120, 83, 224, 0.8)' : 'transparent',
+        borderColor: '#7853E0',
+        borderWidth: chartType === 'line' ? 3 : 1,
+        fill: chartType === 'line',
         tension: 0.4,
-        pointBackgroundColor: "#7853E0",
-        pointBorderColor: "#fff",
+        pointBackgroundColor: '#7853E0',
+        pointBorderColor: '#fff',
         pointBorderWidth: 2,
-        pointRadius: chartType === "line" ? 6 : 0,
+        pointRadius: chartType === 'line' ? 6 : 0,
         pointHoverRadius: 8,
       },
     ],
@@ -186,16 +168,16 @@ const BrowserDetailsModal = ({ browser, selectedPlatform, onClose }) => {
     maintainAspectRatio: false,
     interaction: {
       intersect: false,
-      mode: "index",
+      mode: 'index',
     },
     scales: {
       x: {
         grid: {
-          color: "rgba(120, 83, 224, 0.1)",
-          borderColor: "rgba(120, 83, 224, 0.2)",
+          color: 'rgba(120, 83, 224, 0.1)',
+          borderColor: 'rgba(120, 83, 224, 0.2)',
         },
         ticks: {
-          color: "#6B7280",
+          color: '#6B7280',
           font: { size: 12 },
           maxTicksLimit: 8,
         },
@@ -203,11 +185,11 @@ const BrowserDetailsModal = ({ browser, selectedPlatform, onClose }) => {
       y: {
         beginAtZero: false,
         grid: {
-          color: "rgba(120, 83, 224, 0.1)",
-          borderColor: "rgba(120, 83, 224, 0.2)",
+          color: 'rgba(120, 83, 224, 0.1)',
+          borderColor: 'rgba(120, 83, 224, 0.2)',
         },
         ticks: {
-          color: "#6B7280",
+          color: '#6B7280',
           font: { size: 12 },
         },
       },
@@ -217,36 +199,27 @@ const BrowserDetailsModal = ({ browser, selectedPlatform, onClose }) => {
         display: false,
       },
       tooltip: {
-        backgroundColor: "rgba(0, 0, 0, 0.8)",
-        titleColor: "#fff",
-        bodyColor: "#fff",
-        borderColor: "#7853E0",
+        backgroundColor: 'rgba(0, 0, 0, 0.8)',
+        titleColor: '#fff',
+        bodyColor: '#fff',
+        borderColor: '#7853E0',
         borderWidth: 1,
         cornerRadius: 8,
         displayColors: false,
         callbacks: {
-          title: (context) =>
-            `Version ${sortedData[context[0].dataIndex].version}`,
+          title: (context) => `Version ${sortedData[context[0].dataIndex].version}`,
           label: (context) => `Score: ${context.parsed.y.toFixed(2)}`,
         },
       },
     },
   };
 
-  const platformNames = {
-    "macos-arm": "macOS ARM",
-    "macos-intel": "macOS Intel",
-    windows: "Windows",
-    android: "Android",
-    ipad: "iPad OS",
-  };
-
   const platformName = platformNames[selectedPlatform] || selectedPlatform;
 
   const tabs = [
-    { id: "overview", label: "Overview", icon: "📊" },
-    { id: "history", label: "Version History", icon: "📈" },
-    { id: "metrics", label: "All Metrics", icon: "🎯" },
+    { id: 'overview', label: 'Overview', icon: '📊' },
+    { id: 'history', label: 'Version History', icon: '📈' },
+    { id: 'metrics', label: 'All Metrics', icon: '🎯' },
   ];
 
   return (
@@ -260,11 +233,11 @@ const BrowserDetailsModal = ({ browser, selectedPlatform, onClose }) => {
     >
       <div
         ref={modalRef}
-        className="bg-white dark:bg-gray-800 rounded-2xl shadow-2xl w-full max-w-4xl max-h-[90vh] overflow-hidden animate-[scale-in_0.3s_ease-out_forwards]"
+        className="bg-white dark:bg-gray-800 rounded-2xl shadow-2xl w-full max-w-4xl max-h-[90vh] overflow-hidden animate-[scale-in_0.3s_ease-out_forwards] flex flex-col"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
-        <header className="sticky top-0 bg-white/95 dark:bg-gray-800/95 backdrop-blur-sm border-b border-gray-200 dark:border-gray-700 p-6 z-10">
+        <header className="sticky top-0 bg-white/95 dark:bg-gray-800/95 backdrop-blur-sm border-b border-gray-200 dark:border-gray-700 p-4 sm:p-6 z-10 shrink-0">
           <div className="flex justify-between items-start">
             <div className="flex items-center space-x-4">
               <div className="relative">
@@ -279,17 +252,14 @@ const BrowserDetailsModal = ({ browser, selectedPlatform, onClose }) => {
               <div>
                 <h1
                   id="modal-title"
-                  className="text-3xl font-bold text-gray-900 dark:text-white"
+                  className="text-xl sm:text-3xl font-bold text-gray-900 dark:text-white"
                 >
                   {browser.name}
                 </h1>
-                <p
-                  id="modal-description"
-                  className="text-gray-600 dark:text-gray-400 mt-1"
-                >
+                <p id="modal-description" className="text-gray-600 dark:text-gray-400 mt-1">
                   Performance analysis on {platformName}
                 </p>
-                <div className="flex items-center gap-3 mt-3">
+                <div className="flex flex-wrap items-center gap-2 sm:gap-3 mt-2 sm:mt-3">
                   <span
                     className={`px-3 py-1.5 rounded-lg text-sm font-medium ${getEngineColor(
                       platformEngine
@@ -300,15 +270,15 @@ const BrowserDetailsModal = ({ browser, selectedPlatform, onClose }) => {
                   <span className="px-3 py-1.5 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-lg text-sm font-medium">
                     v{latestVersion.version}
                   </span>
-                  {trend.trend !== "stable" && (
+                  {trend.trend !== 'stable' && (
                     <span
                       className={`px-3 py-1.5 rounded-lg text-sm font-medium ${
-                        trend.trend === "improving"
-                          ? "bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-300"
-                          : "bg-red-100 dark:bg-red-900/30 text-red-800 dark:text-red-300"
+                        trend.trend === 'improving'
+                          ? 'bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-300'
+                          : 'bg-red-100 dark:bg-red-900/30 text-red-800 dark:text-red-300'
                       }`}
                     >
-                      {trend.trend === "improving" ? "📈" : "📉"}{" "}
+                      {trend.trend === 'improving' ? '📈' : '📉'}{' '}
                       {Math.abs(trend.change).toFixed(1)}%
                     </span>
                   )}
@@ -321,12 +291,7 @@ const BrowserDetailsModal = ({ browser, selectedPlatform, onClose }) => {
               className="p-2 text-gray-400 hover:text-gray-600 dark:text-gray-500 dark:hover:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-xl transition-all duration-200 focus:outline-none focus:ring-4 focus:ring-purple-500/50"
               aria-label="Close modal"
             >
-              <svg
-                className="w-6 h-6"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path
                   strokeLinecap="round"
                   strokeLinejoin="round"
@@ -338,17 +303,17 @@ const BrowserDetailsModal = ({ browser, selectedPlatform, onClose }) => {
           </div>
 
           {/* Tabs */}
-          <nav className="flex space-x-1 mt-6" role="tablist">
+          <nav className="flex flex-wrap gap-1 mt-4 sm:mt-6" role="tablist">
             {tabs.map((tab) => (
               <button
                 key={tab.id}
                 role="tab"
                 aria-selected={activeTab === tab.id}
                 onClick={() => setActiveTab(tab.id)}
-                className={`px-4 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 focus:outline-none focus:ring-4 focus:ring-purple-500/50 ${
+                className={`px-3 py-2 sm:px-4 sm:py-2.5 rounded-xl text-xs sm:text-sm font-medium transition-all duration-200 focus:outline-none focus:ring-4 focus:ring-purple-500/50 ${
                   activeTab === tab.id
-                    ? "bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300"
-                    : "text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700"
+                    ? 'bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300'
+                    : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700'
                 }`}
               >
                 <span className="mr-2">{tab.icon}</span>
@@ -359,8 +324,8 @@ const BrowserDetailsModal = ({ browser, selectedPlatform, onClose }) => {
         </header>
 
         {/* Content */}
-        <main className="p-6 overflow-y-auto max-h-[calc(90vh-200px)]">
-          {activeTab === "overview" && (
+        <main className="p-4 sm:p-6 overflow-y-auto flex-1 min-h-0">
+          {activeTab === 'overview' && (
             <div className="space-y-8">
               {/* Performance Chart */}
               <section>
@@ -370,18 +335,16 @@ const BrowserDetailsModal = ({ browser, selectedPlatform, onClose }) => {
                   </h2>
                   <div className="flex items-center gap-2">
                     <button
-                      onClick={() =>
-                        setChartType(chartType === "bar" ? "line" : "bar")
-                      }
+                      onClick={() => setChartType(chartType === 'bar' ? 'line' : 'bar')}
                       className="px-3 py-1.5 text-sm bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors focus:outline-none focus:ring-2 focus:ring-purple-500/50"
                     >
-                      {chartType === "bar" ? "📈 Line" : "📊 Bar"}
+                      {chartType === 'bar' ? '📈 Line' : '📊 Bar'}
                     </button>
                   </div>
                 </div>
                 <div className="bg-gray-50 dark:bg-gray-700/30 rounded-xl p-6">
-                  <div className="h-80">
-                    {chartType === "bar" ? (
+                  <div className="h-48 sm:h-64 md:h-80">
+                    {chartType === 'bar' ? (
                       <Bar data={chartData} options={chartOptions} />
                     ) : (
                       <Line data={chartData} options={chartOptions} />
@@ -433,7 +396,7 @@ const BrowserDetailsModal = ({ browser, selectedPlatform, onClose }) => {
             </div>
           )}
 
-          {activeTab === "history" && (
+          {activeTab === 'history' && (
             <section>
               <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-6">
                 Version History
@@ -458,8 +421,7 @@ const BrowserDetailsModal = ({ browser, selectedPlatform, onClose }) => {
                         </div>
                         {version.releaseDate && (
                           <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
-                            Released:{" "}
-                            {new Date(version.releaseDate).toLocaleDateString()}
+                            Released: {new Date(version.releaseDate).toLocaleDateString()}
                           </p>
                         )}
                       </div>
@@ -474,16 +436,16 @@ const BrowserDetailsModal = ({ browser, selectedPlatform, onClose }) => {
                     </div>
 
                     {(version.scores.ram || version.scores.adblock) && (
-                      <div className="flex gap-6 text-sm">
+                      <div className="flex flex-wrap gap-x-6 gap-y-1 text-sm">
                         {version.scores.ram && (
                           <div className="text-gray-600 dark:text-gray-400">
-                            <span className="font-medium">Memory:</span>{" "}
+                            <span className="font-medium">Memory:</span>{' '}
                             {version.scores.ram.toFixed(0)} MB
                           </div>
                         )}
                         {version.scores.adblock && (
                           <div className="text-gray-600 dark:text-gray-400">
-                            <span className="font-medium">Ad Blocking:</span>{" "}
+                            <span className="font-medium">Ad Blocking:</span>{' '}
                             {version.scores.adblock.toFixed(0)}%
                           </div>
                         )}
@@ -495,25 +457,25 @@ const BrowserDetailsModal = ({ browser, selectedPlatform, onClose }) => {
             </section>
           )}
 
-          {activeTab === "metrics" && (
+          {activeTab === 'metrics' && (
             <section>
               <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-6">
                 All Performance Metrics
               </h2>
               <div className="overflow-x-auto">
-                <table className="w-full text-sm">
+                <table className="min-w-full text-sm">
                   <thead>
                     <tr className="border-b border-gray-200 dark:border-gray-700">
-                      <th className="text-left py-3 px-4 font-semibold text-gray-900 dark:text-white">
+                      <th className="text-left py-3 px-3 sm:px-4 font-semibold text-gray-900 dark:text-white">
                         Version
                       </th>
-                      <th className="text-right py-3 px-4 font-semibold text-gray-900 dark:text-white">
+                      <th className="text-right py-3 px-3 sm:px-4 font-semibold text-gray-900 dark:text-white">
                         Speedometer
                       </th>
-                      <th className="text-right py-3 px-4 font-semibold text-gray-900 dark:text-white">
+                      <th className="text-right py-3 px-3 sm:px-4 font-semibold text-gray-900 dark:text-white">
                         Memory
                       </th>
-                      <th className="text-right py-3 px-4 font-semibold text-gray-900 dark:text-white">
+                      <th className="text-right py-3 px-3 sm:px-4 font-semibold text-gray-900 dark:text-white">
                         Ad Block
                       </th>
                     </tr>
@@ -524,7 +486,7 @@ const BrowserDetailsModal = ({ browser, selectedPlatform, onClose }) => {
                         key={version.version}
                         className="border-b border-gray-100 dark:border-gray-700/50 hover:bg-gray-50 dark:hover:bg-gray-700/30"
                       >
-                        <td className="py-3 px-4">
+                        <td className="py-3 px-3 sm:px-4">
                           <div className="flex items-center gap-2">
                             <span className="font-medium text-gray-900 dark:text-white">
                               {version.version}
@@ -536,18 +498,14 @@ const BrowserDetailsModal = ({ browser, selectedPlatform, onClose }) => {
                             )}
                           </div>
                         </td>
-                        <td className="py-3 px-4 text-right font-mono text-gray-900 dark:text-white">
+                        <td className="py-3 px-3 sm:px-4 text-right font-mono text-gray-900 dark:text-white">
                           {version.scores.speedometer3.toFixed(2)}
                         </td>
-                        <td className="py-3 px-4 text-right font-mono text-gray-600 dark:text-gray-400">
-                          {version.scores.ram
-                            ? `${version.scores.ram.toFixed(0)} MB`
-                            : "—"}
+                        <td className="py-3 px-3 sm:px-4 text-right font-mono text-gray-600 dark:text-gray-400">
+                          {version.scores.ram ? `${version.scores.ram.toFixed(0)} MB` : '—'}
                         </td>
-                        <td className="py-3 px-4 text-right font-mono text-gray-600 dark:text-gray-400">
-                          {version.scores.adblock
-                            ? `${version.scores.adblock.toFixed(0)}%`
-                            : "—"}
+                        <td className="py-3 px-3 sm:px-4 text-right font-mono text-gray-600 dark:text-gray-400">
+                          {version.scores.adblock ? `${version.scores.adblock.toFixed(0)}%` : '—'}
                         </td>
                       </tr>
                     ))}
@@ -558,19 +516,6 @@ const BrowserDetailsModal = ({ browser, selectedPlatform, onClose }) => {
           )}
         </main>
       </div>
-
-      <style jsx>{`
-        @keyframes scale-in {
-          from {
-            transform: scale(0.95);
-            opacity: 0;
-          }
-          to {
-            transform: scale(1);
-            opacity: 1;
-          }
-        }
-      `}</style>
     </div>
   );
 };

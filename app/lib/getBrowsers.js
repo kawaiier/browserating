@@ -1,56 +1,39 @@
+import { mergeBrowserData } from './mergeBrowserData';
+
 export async function getBrowsers() {
-  const [
-    browsersResponse,
-    androidResponse,
-    macosIntelResponse,
-    macosArmResponse,
-    windowsResponse,
-    ipadResponse,
-  ] = await Promise.all([
-    fetch('/data/browsers.json'),
-    fetch('/data/android.json'),
-    fetch('/data/macos-intel.json'),
-    fetch('/data/macos-arm.json'),
-    fetch('/data/windows.json'),
-    fetch('/data/ipad.json'),
-  ]);
+  const [browsers, androidData, macosIntelData, macosArmData, windowsData, ipadData] =
+    await Promise.all([
+      fetch('/data/browsers.json').then((r) => {
+        if (!r.ok) throw new Error('Failed to fetch browsers.json');
+        return r.json();
+      }),
+      fetch('/data/android.json').then((r) => {
+        if (!r.ok) throw new Error('Failed to fetch android.json');
+        return r.json();
+      }),
+      fetch('/data/macos-intel.json').then((r) => {
+        if (!r.ok) throw new Error('Failed to fetch macos-intel.json');
+        return r.json();
+      }),
+      fetch('/data/macos-arm.json').then((r) => {
+        if (!r.ok) throw new Error('Failed to fetch macos-arm.json');
+        return r.json();
+      }),
+      fetch('/data/windows.json').then((r) => {
+        if (!r.ok) throw new Error('Failed to fetch windows.json');
+        return r.json();
+      }),
+      fetch('/data/ipad.json').then((r) => {
+        if (!r.ok) throw new Error('Failed to fetch ipad.json');
+        return r.json();
+      }),
+    ]);
 
-  if (
-    !browsersResponse.ok ||
-    !androidResponse.ok ||
-    !macosIntelResponse.ok ||
-    !macosArmResponse.ok ||
-    !windowsResponse.ok ||
-    !ipadResponse.ok
-  ) {
-    throw new Error('Failed to fetch browser data');
-  }
-
-  return browsers.map((browser) => {
-    const androidBrowser = androidData.find((b) => b.name === browser.name);
-    const macosIntelBrowser = macosIntelData.find((b) => b.name === browser.name);
-    const macosArmBrowser = macosArmData.find((b) => b.name === browser.name);
-    const windowsBrowser = windowsData.find((b) => b.name === browser.name);
-    const ipadBrowser = ipadData.find((b) => b.name === browser.name);
-
-    return {
-      ...browser,
-      android: androidBrowser
-        ? { versions: androidBrowser.versions, engine: androidBrowser.engine }
-        : null,
-      'macos-intel': macosIntelBrowser
-        ? {
-            versions: macosIntelBrowser.versions,
-            engine: macosIntelBrowser.engine,
-          }
-        : null,
-      'macos-arm': macosArmBrowser
-        ? { versions: macosArmBrowser.versions, engine: macosArmBrowser.engine }
-        : null,
-      windows: windowsBrowser
-        ? { versions: windowsBrowser.versions, engine: windowsBrowser.engine }
-        : null,
-      ipad: ipadBrowser ? { versions: ipadBrowser.versions, engine: ipadBrowser.engine } : null,
-    };
+  return mergeBrowserData(browsers, {
+    android: androidData,
+    'macos-intel': macosIntelData,
+    'macos-arm': macosArmData,
+    windows: windowsData,
+    ipad: ipadData,
   });
 }

@@ -1,44 +1,12 @@
 'use client';
 
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 
 import BrowserBarChart from './BrowserBarChart';
 import BrowserCard from './BrowserCard';
 import { getBrowsers } from '../lib/getBrowsers';
+import { engineColors, getEngineColor, platformNames, platformIcons } from '../lib/constants';
 import { useLocalStorage } from '../hooks/useLocalStorage';
-
-const engineColors = {
-  Blink:
-    'bg-blue-100 dark:bg-sky-900/50 text-blue-800 dark:text-blue-100 hover:bg-blue-200 dark:hover:bg-sky-800 border border-blue-200 dark:border-sky-700',
-  Gecko:
-    'bg-green-100 dark:bg-emerald-900/50 text-green-800 dark:text-green-100 hover:bg-green-200 dark:hover:bg-emerald-800 border border-green-200 dark:border-emerald-700',
-  WebKit:
-    'bg-orange-100 dark:bg-amber-900/50 text-orange-800 dark:text-orange-100 hover:bg-orange-200 dark:hover:bg-amber-800 border border-orange-200 dark:border-amber-700',
-  All: 'bg-gray-100 dark:bg-gray-700/50 text-gray-800 dark:text-gray-100 hover:bg-gray-200 dark:hover:bg-gray-600 border border-gray-200 dark:border-gray-600',
-};
-
-const getEngineColor = (engine) => {
-  return (
-    engineColors[engine] ||
-    'bg-red-100 dark:bg-red-900/50 text-red-800 dark:text-red-100 hover:bg-red-200 dark:hover:bg-red-800 border border-red-200 dark:border-red-700'
-  );
-};
-
-const platformNames = {
-  'macos-arm': 'macOS ARM',
-  'macos-intel': 'macOS Intel',
-  windows: 'Windows',
-  android: 'Android',
-  ipad: 'iPad OS',
-};
-
-const platformIcons = {
-  'macos-arm': '🍎',
-  'macos-intel': '💻',
-  windows: '🪟',
-  android: '🤖',
-  ipad: '📱',
-};
 
 const NEW_PLATFORMS = ['macos-arm', 'ipad'];
 const OUTDATED_PLATFORMS = ['android', 'macos-intel', 'windows'];
@@ -61,9 +29,9 @@ const SkeletonLoader = ({ index }) => (
         <div className="h-8 bg-gray-200 dark:bg-gray-700 rounded-full w-20"></div>
         <div className="h-8 bg-gray-200 dark:bg-gray-700 rounded-full w-16"></div>
       </div>
-      <div className="grid grid-cols-3 gap-4">
+      <div className="grid grid-cols-3 gap-2 sm:gap-4">
         {[1, 2, 3].map((i) => (
-          <div key={i} className="bg-gray-50 dark:bg-gray-700/50 rounded-lg p-4">
+          <div key={i} className="bg-gray-50 dark:bg-gray-700/50 rounded-lg p-2 sm:p-4">
             <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded mb-2"></div>
             <div className="h-8 bg-gray-200 dark:bg-gray-700 rounded"></div>
           </div>
@@ -161,7 +129,6 @@ const StatsBar = ({ browsers, selectedPlatform }) => {
 
 export default function BrowserRankingList({ initialBrowsers = [] }) {
   const [browsers, setBrowsers] = useState(initialBrowsers);
-  const [filteredBrowsers, setFilteredBrowsers] = useState(initialBrowsers);
   const [selectedEngine, setSelectedEngine] = useLocalStorage('selectedEngine', 'All');
   const [selectedPlatform, setSelectedPlatform] = useLocalStorage('selectedPlatform', 'macos-arm');
   const [searchTerm, setSearchTerm] = useState('');
@@ -169,7 +136,6 @@ export default function BrowserRankingList({ initialBrowsers = [] }) {
   const [error, setError] = useState(null);
   const [retryCount, setRetryCount] = useState(0);
   const [viewMode, setViewMode] = useLocalStorage('viewMode', 'grid');
-  const abortControllerRef = useRef(null);
 
   const fetchBrowsers = useCallback(async () => {
     if (initialBrowsers.length > 0 && retryCount === 0) {
@@ -180,32 +146,18 @@ export default function BrowserRankingList({ initialBrowsers = [] }) {
       setIsLoading(true);
       setError(null);
 
-      // Cancel previous request if exists
-      if (abortControllerRef.current) {
-        abortControllerRef.current.abort();
-      }
-
-      abortControllerRef.current = new AbortController();
-
       const data = await getBrowsers();
       setBrowsers(data);
       setIsLoading(false);
     } catch (err) {
-      if (err.name !== 'AbortError') {
-        setError('Failed to load browser data. Please check your connection and try again.');
-        setIsLoading(false);
-      }
+      setError('Failed to load browser data. Please check your connection and try again.');
+      setIsLoading(false);
     }
   }, [initialBrowsers.length, retryCount]);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- data fetch on mount is an intentional side effect
     fetchBrowsers();
-
-    return () => {
-      if (abortControllerRef.current) {
-        abortControllerRef.current.abort();
-      }
-    };
   }, [fetchBrowsers]);
 
   const sortBrowsersByPlatform = useCallback((browsers, platform) => {
@@ -249,10 +201,6 @@ export default function BrowserRankingList({ initialBrowsers = [] }) {
     return filtered;
   }, [selectedEngine, sortedBrowsers, selectedPlatform, searchTerm]);
 
-  useEffect(() => {
-    setFilteredBrowsers(filteredAndSearchedBrowsers);
-  }, [filteredAndSearchedBrowsers]);
-
   const engines = useMemo(() => {
     const platformEngines = browsers
       .filter((browser) => browser[selectedPlatform]?.versions?.length > 0)
@@ -294,7 +242,11 @@ export default function BrowserRankingList({ initialBrowsers = [] }) {
       <h3 className="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-3 uppercase tracking-wide">
         Select Platform
       </h3>
-      <div className="flex flex-wrap gap-3" role="radiogroup" aria-label="Select platform">
+      <div
+        className="flex flex-wrap gap-x-3 gap-y-5"
+        role="radiogroup"
+        aria-label="Select platform"
+      >
         {platforms.map((platform) => (
           <button
             key={platform}
@@ -490,20 +442,20 @@ export default function BrowserRankingList({ initialBrowsers = [] }) {
         searchTerm={searchTerm}
         onSearchChange={handleSearchChange}
         totalBrowsers={sortedBrowsers.length}
-        filteredCount={filteredBrowsers.length}
+        filteredCount={filteredAndSearchedBrowsers.length}
       />
 
       <StatsBar browsers={sortedBrowsers} selectedPlatform={selectedPlatform} />
 
-      <div className="flex justify-between items-center mb-6">
+      <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2 mb-6">
         <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
-          {filteredBrowsers.length === 0
+          {filteredAndSearchedBrowsers.length === 0
             ? 'No browsers found'
-            : `${filteredBrowsers.length} ${
-                filteredBrowsers.length === 1 ? 'browser' : 'browsers'
+            : `${filteredAndSearchedBrowsers.length} ${
+                filteredAndSearchedBrowsers.length === 1 ? 'browser' : 'browsers'
               } on ${platformNames[selectedPlatform]}`}
         </h3>
-        {filteredBrowsers.length > 0 && renderViewModeToggle()}
+        {filteredAndSearchedBrowsers.length > 0 && renderViewModeToggle()}
       </div>
 
       {/* Browser Cards */}
@@ -513,7 +465,7 @@ export default function BrowserRankingList({ initialBrowsers = [] }) {
         } mb-12`}
         aria-live="polite"
       >
-        {filteredBrowsers.length === 0 ? (
+        {filteredAndSearchedBrowsers.length === 0 ? (
           <div className="col-span-full text-center py-12">
             <div className="w-16 h-16 mx-auto mb-4 bg-gray-100 dark:bg-gray-700 rounded-full flex items-center justify-center">
               <svg
@@ -551,7 +503,7 @@ export default function BrowserRankingList({ initialBrowsers = [] }) {
             )}
           </div>
         ) : (
-          filteredBrowsers.map((browser, index) => (
+          filteredAndSearchedBrowsers.map((browser, index) => (
             <BrowserCard
               key={`${browser.name}-${selectedPlatform}`}
               browser={browser}
@@ -565,10 +517,10 @@ export default function BrowserRankingList({ initialBrowsers = [] }) {
       </div>
 
       {/* Chart Section */}
-      {filteredBrowsers.length > 0 && (
+      {filteredAndSearchedBrowsers.length > 0 && (
         <div className="mt-12">
           <BrowserBarChart
-            browsers={filteredBrowsers}
+            browsers={filteredAndSearchedBrowsers}
             platform={selectedPlatform}
             getEngineColor={getEngineColor}
           />

@@ -4,11 +4,11 @@ import React, { useState } from 'react';
 
 const StatCard = ({ icon, number, label, description }) => (
   <div className="bg-white dark:bg-gray-800 rounded-xl p-6 border border-gray-200 dark:border-gray-700 hover:shadow-lg transition-all duration-300 group">
-    <div className="flex items-center gap-4 mb-3">
+    <div className="flex flex-col items-center sm:flex-row sm:items-start gap-4 mb-3">
       <div className="w-12 h-12 bg-gradient-to-br from-purple-500 to-blue-500 rounded-xl flex items-center justify-center text-white text-xl">
         {icon}
       </div>
-      <div>
+      <div className="text-center sm:text-left">
         <div className="text-2xl font-bold text-gray-900 dark:text-white group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors">
           {number}
         </div>
@@ -21,17 +21,17 @@ const StatCard = ({ icon, number, label, description }) => (
 
 const FeatureCard = ({ icon, title, description, highlights }) => (
   <div className="bg-gradient-to-br from-gray-50 to-white dark:from-gray-800 dark:to-gray-700 rounded-xl p-6 border border-gray-200 dark:border-gray-600 hover:border-purple-300 dark:hover:border-purple-600 transition-all duration-300">
-    <div className="flex items-start gap-4">
+    <div className="flex flex-col items-center sm:flex-row sm:items-start gap-4">
       <div className="w-10 h-10 bg-gradient-to-br from-purple-500 to-blue-500 rounded-lg flex items-center justify-center text-white text-lg flex-shrink-0">
         {icon}
       </div>
-      <div className="flex-1">
+      <div className="flex-1 text-center sm:text-left">
         <h3 className="font-semibold text-gray-900 dark:text-white mb-2">{title}</h3>
         <p className="text-gray-600 dark:text-gray-400 text-sm mb-3 leading-relaxed">
           {description}
         </p>
         {highlights && (
-          <div className="space-y-2">
+          <div className="space-y-2 inline-flex flex-col items-start">
             {highlights.map((highlight, index) => (
               <div key={index} className="flex items-center gap-2 text-sm">
                 <div className="w-1.5 h-1.5 bg-purple-500 rounded-full"></div>
@@ -41,43 +41,6 @@ const FeatureCard = ({ icon, title, description, highlights }) => (
           </div>
         )}
       </div>
-    </div>
-  </div>
-);
-
-const TimelineItem = ({ phase, title, description, status, date }) => (
-  <div className="flex gap-4">
-    <div className="flex flex-col items-center">
-      <div
-        className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold ${
-          status === 'completed'
-            ? 'bg-green-500 text-white'
-            : status === 'current'
-              ? 'bg-purple-500 text-white'
-              : 'bg-gray-300 dark:bg-gray-600 text-gray-600 dark:text-gray-400'
-        }`}
-      >
-        {phase}
-      </div>
-      <div className="w-0.5 h-16 bg-gray-200 dark:bg-gray-600 mt-2"></div>
-    </div>
-    <div className="pb-16">
-      <div className="flex items-center gap-3 mb-2">
-        <h3 className="font-semibold text-gray-900 dark:text-white">{title}</h3>
-        <span
-          className={`px-2 py-1 rounded-full text-xs font-medium ${
-            status === 'completed'
-              ? 'bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-300'
-              : status === 'current'
-                ? 'bg-purple-100 dark:bg-purple-900/30 text-purple-800 dark:text-purple-300'
-                : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-400'
-          }`}
-        >
-          {status === 'completed' ? 'Completed' : status === 'current' ? 'In Progress' : 'Planned'}
-        </span>
-      </div>
-      <p className="text-gray-600 dark:text-gray-400 text-sm mb-2">{description}</p>
-      <span className="text-xs text-gray-500 dark:text-gray-500">{date}</span>
     </div>
   </div>
 );
@@ -116,49 +79,6 @@ export default function Explanation() {
       description:
         'Built-in ad-blocking effectiveness testing to evaluate protection against trackers and ads.',
       highlights: ['First-party blocker evaluation'],
-    },
-  ];
-
-  const roadmapItems = [
-    {
-      phase: 1,
-      title: 'Foundation & Core Testing',
-      description:
-        'Established testing methodology and infrastructure for consistent browser performance evaluation.',
-      status: 'completed',
-      date: 'Q1 2024',
-    },
-    {
-      phase: 2,
-      title: 'Multi-Platform Expansion',
-      description:
-        'Extended testing to cover macOS (Intel & Apple Silicon), Windows, Android, and iPad platforms.',
-      status: 'completed',
-      date: 'Q2 2024',
-    },
-    {
-      phase: 3,
-      title: 'Enhanced Metrics & Analysis',
-      description:
-        'Adding memory usage tracking, ad-blocking evaluation, and trend analysis across browser versions.',
-      status: 'current',
-      date: 'Q3 2024',
-    },
-    {
-      phase: 4,
-      title: 'Real-World Performance Tests',
-      description:
-        'Implementing website-specific performance tests and user experience metrics beyond synthetic benchmarks.',
-      status: 'planned',
-      date: 'Q4 2024',
-    },
-    {
-      phase: 5,
-      title: 'Community & API Access',
-      description:
-        'Public API for performance data and community-contributed testing scenarios and configurations.',
-      status: 'planned',
-      date: 'Q1 2025',
     },
   ];
 
@@ -228,7 +148,7 @@ export default function Explanation() {
       <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl border border-gray-200 dark:border-gray-700 overflow-hidden">
         {/* Our Story */}
         {activeTab === 'story' && (
-          <div className="p-8">
+          <div className="p-4 sm:p-8">
             <div className="max-w-4xl mx-auto">
               <div className="prose prose-lg dark:prose-invert max-w-none">
                 <div className="bg-gradient-to-r from-purple-50 to-blue-50 dark:from-purple-900/20 dark:to-blue-900/20 rounded-xl p-6 mb-8 border border-purple-200 dark:border-purple-700">
@@ -298,7 +218,7 @@ export default function Explanation() {
 
         {/* Methodology */}
         {activeTab === 'methodology' && (
-          <div className="p-8">
+          <div className="p-4 sm:p-8">
             <div className="grid gap-6 mb-8">
               {testingFeatures.map((feature, index) => (
                 <FeatureCard
@@ -357,7 +277,7 @@ export default function Explanation() {
 
         {/* Metrics */}
         {activeTab === 'metrics' && (
-          <div className="p-8">
+          <div className="p-4 sm:p-8">
             <div className="space-y-8">
               <div className="text-center mb-8">
                 <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-3">
@@ -371,11 +291,11 @@ export default function Explanation() {
 
               <div className="grid gap-6">
                 <div className="bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 rounded-xl p-6 border border-blue-200 dark:border-blue-800">
-                  <div className="flex items-start gap-4">
+                  <div className="flex flex-col items-center sm:flex-row sm:items-start gap-4">
                     <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-500 rounded-xl flex items-center justify-center text-white text-xl font-bold">
                       ⚡
                     </div>
-                    <div className="flex-1">
+                    <div className="flex-1 text-center sm:text-left">
                       <h4 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
                         Speedometer 3.1 Performance
                       </h4>
@@ -405,11 +325,11 @@ export default function Explanation() {
                 </div>
 
                 <div className="bg-gradient-to-r from-green-50 to-emerald-50 dark:from-green-900/20 dark:to-emerald-900/20 rounded-xl p-6 border border-green-200 dark:border-green-800">
-                  <div className="flex items-start gap-4">
+                  <div className="flex flex-col items-center sm:flex-row sm:items-start gap-4">
                     <div className="w-12 h-12 bg-gradient-to-br from-green-500 to-emerald-500 rounded-xl flex items-center justify-center text-white text-xl font-bold">
                       🧠
                     </div>
-                    <div className="flex-1">
+                    <div className="flex-1 text-center sm:text-left">
                       <h4 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
                         Memory Efficiency
                       </h4>
@@ -433,11 +353,11 @@ export default function Explanation() {
                 </div>
 
                 <div className="bg-gradient-to-r from-purple-50 to-pink-50 dark:from-purple-900/20 dark:to-pink-900/20 rounded-xl p-6 border border-purple-200 dark:border-purple-800">
-                  <div className="flex items-start gap-4">
+                  <div className="flex flex-col items-center sm:flex-row sm:items-start gap-4">
                     <div className="w-12 h-12 bg-gradient-to-br from-purple-500 to-pink-500 rounded-xl flex items-center justify-center text-white text-xl font-bold">
                       🛡️
                     </div>
-                    <div className="flex-1">
+                    <div className="flex-1 text-center sm:text-left">
                       <h4 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
                         Ad-blocking effectiveness
                       </h4>
@@ -469,60 +389,6 @@ export default function Explanation() {
                     </div>
                   </div>
                 </div>
-              </div>
-            </div>
-          </div>
-        )}
-
-        {/* Roadmap */}
-        {activeTab === 'roadmap' && (
-          <div className="p-8">
-            <div className="text-center mb-8">
-              <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-3">
-                The Future of Browser Testing
-              </h3>
-              <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto leading-relaxed">
-                We`&apos;`re constantly evolving our testing methodology and expanding our coverage
-                to provide even more valuable insights for the browsing community.
-              </p>
-            </div>
-
-            <div className="max-w-3xl mx-auto">
-              {roadmapItems.map((item, index) => (
-                <TimelineItem
-                  key={index}
-                  phase={item.phase}
-                  title={item.title}
-                  description={item.description}
-                  status={item.status}
-                  date={item.date}
-                />
-              ))}
-            </div>
-
-            <div className="mt-8 bg-gradient-to-r from-indigo-50 to-purple-50 dark:from-indigo-900/20 dark:to-purple-900/20 rounded-xl p-6 border border-indigo-200 dark:border-indigo-800">
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-3 flex items-center gap-2">
-                <span className="text-2xl">🤝</span>
-                Join Our Mission
-              </h3>
-              <p className="text-gray-600 dark:text-gray-400 leading-relaxed mb-4">
-                Help us build the most comprehensive browser performance database. Whether through
-                feedback, suggestions, or supporting our testing infrastructure, every contribution
-                makes our data more valuable for the entire community.
-              </p>
-              <div className="flex flex-wrap gap-3">
-                <a
-                  href="#newsletter"
-                  className="inline-flex items-center gap-2 bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-lg font-medium transition-colors"
-                >
-                  📧 Get Updates
-                </a>
-                <a
-                  href="#support"
-                  className="inline-flex items-center gap-2 bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 text-gray-800 dark:text-gray-200 px-4 py-2 rounded-lg font-medium transition-colors"
-                >
-                  💝 Support Project
-                </a>
               </div>
             </div>
           </div>
