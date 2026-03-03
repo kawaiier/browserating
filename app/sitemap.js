@@ -1,10 +1,12 @@
 import { getDataLastModified } from './lib/getDataLastModified';
 import { getAllBrowserSlugs } from './lib/getBrowserBySlug';
+import { generateComparisonSlugs } from './lib/getComparisonData';
 
 export default async function sitemap() {
   const baseUrl = 'https://browserating.com';
   const dataLastModified = await getDataLastModified();
   const browserSlugs = await getAllBrowserSlugs();
+  const comparisonSlugs = await generateComparisonSlugs();
 
   const browserPages = browserSlugs.map(({ slug }) => ({
     url: `${baseUrl}/browsers/${slug}`,
@@ -26,6 +28,13 @@ export default async function sitemap() {
     priority: 0.8,
   }));
 
+  const comparisonPages = comparisonSlugs.slice(0, 100).map(({ slug }) => ({
+    url: `${baseUrl}/compare/${slug}`,
+    lastModified: dataLastModified,
+    changeFrequency: 'weekly',
+    priority: 0.6,
+  }));
+
   return [
     {
       url: baseUrl,
@@ -35,6 +44,7 @@ export default async function sitemap() {
     },
     ...browserPages,
     ...platformPages,
+    ...comparisonPages,
     {
       url: `${baseUrl}/privacy`,
       lastModified: '2024-11-27',
