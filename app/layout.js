@@ -23,18 +23,27 @@ export const metadata = {
   openGraph: {
     title: 'BrowseRating - Browser Performance Comparison',
     description:
-      'Compare browser performance across macOS, Windows and Android based on Speedometer 3 benchmark results, adblocking quality, and RAM usage.',
+      'Compare browser performance across macOS, Windows, Android and iPad based on Speedometer 3.1 benchmark results, adblocking quality, and RAM usage.',
     url: 'https://browserating.com',
     siteName: 'BrowseRating',
     locale: 'en_US',
     type: 'website',
+    images: [
+      {
+        url: 'https://browserating.com/images/og-image.png',
+        width: 1200,
+        height: 630,
+        alt: 'BrowseRating - Browser Performance Comparison',
+      },
+    ],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'BrowseRating - Browser Performance Comparison',
     description:
-      'Compare browser performance across macOS, Windows and Android based on Speedometer 3 benchmark results, adblocking quality, and RAM usage.',
+      'Compare browser performance across macOS, Windows, Android and iPad based on Speedometer 3.1 benchmark results, adblocking quality, and RAM usage.',
     creator: '@kawaiier101',
+    images: ['https://browserating.com/images/og-image.png'],
   },
   robots: {
     index: true,
