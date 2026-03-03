@@ -22,7 +22,7 @@
     "react-dom": "^19"
   },
   "devDependencies": {
-    "@commitlint/cli": "^20.3.1",
+    "@commitlint/cli": "^20.4.2",
     "@commitlint/config-conventional": "^20.3.1",
     "@eslint/eslintrc": "^3.3.3",
     "@typescript-eslint/eslint-plugin": "^8.54.0",
