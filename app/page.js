@@ -7,9 +7,13 @@ import Newsletter from './components/Newsletter';
 import DarkModeProvider from './components/DarkModeProvider';
 import ErrorBoundary from './components/ErrorBoundary';
 import { getBrowsersServer } from './lib/getBrowsersServer';
+import { getDataLastModified } from './lib/getDataLastModified';
 
 export default async function Home() {
-  const initialBrowsers = await getBrowsersServer();
+  const [initialBrowsers, lastModified] = await Promise.all([
+    getBrowsersServer(),
+    getDataLastModified(),
+  ]);
 
   return (
     <ErrorBoundary>
@@ -21,7 +25,7 @@ export default async function Home() {
           >
             Skip to main content
           </a>
-          <Header />
+          <Header lastModified={lastModified} />
           <main id="main-content" className="container mx-auto px-4 py-8 scroll-mt-4" tabIndex={-1}>
             <BrowserRankingList initialBrowsers={initialBrowsers} />
             <Newsletter />

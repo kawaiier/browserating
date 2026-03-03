@@ -7,7 +7,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useDarkMode } from './DarkModeProvider';
 
-export default function Header() {
+export default function Header({ lastModified }) {
   const { darkMode, toggleDarkMode } = useDarkMode();
   const [isVisible, setIsVisible] = useState(false);
   const [currentPlatform, setCurrentPlatform] = useState(0);
@@ -32,11 +32,13 @@ export default function Header() {
     return () => clearInterval(interval);
   }, [platforms.length]);
 
-  const currentDate = new Date().toLocaleDateString('en-US', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
-  });
+  const lastModifiedFormatted = lastModified
+    ? new Date(lastModified + 'T00:00:00').toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+      })
+    : null;
 
   return (
     <header
@@ -313,21 +315,29 @@ export default function Header() {
 
                   <div className="flex items-center ml-6 sm:ml-2 sm:mt-0 mt-1 gap-1 relative group">
                     <time
-                      dateTime="2026-01-18"
+                      dateTime={lastModified}
                       className="text-sm font-mono font-semibold text-purple-700 dark:text-purple-300"
                     >
-                      January 18, 2026
+                      {lastModifiedFormatted}
                     </time>
                   </div>
                 </div>
+                <span className="text-white">|</span>
+                <div className="flex flex-col sm:flex-row items-start sm:items-center gap-0 sm:gap-2">
+                  <div className="flex items-center gap-2">
+                    <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                      Next update:
+                    </span>
+                  </div>
 
-                <div className="hidden sm:block w-px h-6 bg-gray-300 dark:bg-gray-600"></div>
-
-                <div className="flex flex-col sm:flex-row items-start sm:items-center gap-0 sm:gap-2 text-sm text-gray-600 dark:text-gray-400">
-                  <span className="font-medium">Next update:</span>
-                  <span className="text-blue-600 dark:text-blue-400 sm:ml-1 ml-6 sm:mt-0 mt-1">
-                    ~ February 14, 2026
-                  </span>
+                  <div className="flex items-center ml-6 sm:ml-2 sm:mt-0 mt-1 gap-1 relative group">
+                    <time
+                      dateTime="2026-03-22"
+                      className="text-sm font-mono font-semibold text-purple-700 dark:text-purple-300"
+                    >
+                      March 22, 2026
+                    </time>
+                  </div>
                 </div>
               </div>
 

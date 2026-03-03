@@ -7,6 +7,8 @@ import StickyAnnouncement from './components/StickyAnnouncement';
 
 const inter = Inter({ subsets: ['latin'] });
 
+const BUILD_DATE = new Date().toISOString().split('T')[0];
+
 export const metadata = {
   metadataBase: new URL('https://browserating.com'),
   title: 'BrowseRating - Browser Performance for macOS, Windows and Android',
@@ -15,6 +17,9 @@ export const metadata = {
   keywords:
     'browser performance, browser benchmark, Speedometer 3, browser comparison, fastest browser, macOS browser, Windows browser, Android browser, adblocking quality, RAM usage, browser speed test, browser rankings, best browser 2026, browser performance comparison, web browser benchmarks, browser efficiency, browser memory usage, browser testing, browser performance metrics',
   authors: [{ name: 'Sergei Manvelov' }],
+  alternates: {
+    canonical: 'https://browserating.com',
+  },
   openGraph: {
     title: 'BrowseRating - Browser Performance Comparison',
     description:
@@ -43,7 +48,6 @@ export default function RootLayout({ children }) {
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta name="theme-color" content="#7853E0" />
-        <link rel="canonical" href="https://browserating.com" />
         <Script id="schema-org" type="application/ld+json">
           {`
             {
@@ -84,20 +88,6 @@ export default function RootLayout({ children }) {
             }
           `}
         </Script>
-        <Script id="breadcrumb-schema" type="application/ld+json">
-          {`
-            {
-              "@context": "https://schema.org",
-              "@type": "BreadcrumbList",
-              "itemListElement": [{
-                "@type": "ListItem",
-                "position": 1,
-                "name": "Home",
-                "item": "https://browserating.com"
-              }]
-            }
-          `}
-        </Script>
         <Script id="browser-comparison-schema" type="application/ld+json">
           {`
             {
@@ -116,7 +106,7 @@ export default function RootLayout({ children }) {
                 "name": "BrowseRating Data"
               },
               "license": "https://browserating.com/privacy",
-              "dateModified": "2026-01-23",
+              "dateModified": "${BUILD_DATE}",
               "version": "1.2.0",
               "isAccessibleForFree": true
             }
