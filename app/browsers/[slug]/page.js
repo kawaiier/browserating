@@ -1,4 +1,5 @@
 import { getBrowserBySlug, getAllBrowserSlugs } from '@/app/lib/getBrowserBySlug';
+import { getBrowsersServer } from '@/app/lib/getBrowsersServer';
 import { notFound } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -7,6 +8,7 @@ import DarkModeProvider from '@/app/components/DarkModeProvider';
 import ErrorBoundary from '@/app/components/ErrorBoundary';
 import Header from '@/app/components/Header';
 import Footer from '@/app/components/Footer';
+import BrowserCompareDropdown from '@/app/components/BrowserCompareDropdown';
 
 export async function generateStaticParams() {
   const slugs = await getAllBrowserSlugs();
@@ -36,14 +38,23 @@ export async function generateMetadata({ params }) {
 
 export default async function BrowserPage({ params }) {
   const { slug } = await params;
-  const [browser, lastModified] = await Promise.all([
+  const [browser, allBrowsers, lastModified] = await Promise.all([
     getBrowserBySlug(slug),
+    getBrowsersServer(),
     getDataLastModified(),
   ]);
 
   if (!browser) {
     notFound();
   }
+
+  const compareBrowsers = allBrowsers
+    .map((b) => ({
+      name: b.name,
+      slug: b.name.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, ''),
+    }))
+    .filter((b) => b.slug !== slug)
+    .sort((a, b) => a.name.localeCompare(b.name));
 
   const platforms = ['macos-arm', 'macos-intel', 'windows', 'android', 'ipad'];
   const platformLabels = {
@@ -159,6 +170,12 @@ export default async function BrowserPage({ params }) {
                   })}
                 </div>
               </section>
+
+              <BrowserCompareDropdown
+                currentSlug={slug}
+                currentName={browser.name}
+                browsers={compareBrowsers}
+              />
             </article>
           </main>
           <Footer />
