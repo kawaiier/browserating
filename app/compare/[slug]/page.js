@@ -14,7 +14,8 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }) {
-  const parts = params.slug.split('-vs-');
+  const { slug } = await params;
+  const parts = slug.split('-vs-');
   if (parts.length !== 2) return { title: 'Comparison Not Found' };
 
   const data = await getComparisonData(parts[0], parts[1]);
@@ -24,14 +25,15 @@ export async function generateMetadata({ params }) {
     title: `${data.browserA.name} vs ${data.browserB.name} - Browser Performance Comparison`,
     description: `Compare ${data.browserA.name} and ${data.browserB.name} performance. Speedometer 3.1 benchmarks, RAM usage, and more.`,
     alternates: {
-      canonical: `https://browserating.com/compare/${params.slug}`,
+      canonical: `https://browserating.com/compare/${slug}`,
     },
   };
 }
 
 export default async function ComparePage({ params }) {
+  const { slug } = await params;
   const [data, lastModified] = await Promise.all([
-    getComparisonData(params.slug.split('-vs-')[0], params.slug.split('-vs-')[1]),
+    getComparisonData(slug.split('-vs-')[0], slug.split('-vs-')[1]),
     getDataLastModified(),
   ]);
 

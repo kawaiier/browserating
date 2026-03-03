@@ -14,7 +14,8 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }) {
-  const browser = await getBrowserBySlug(params.slug);
+  const { slug } = await params;
+  const browser = await getBrowserBySlug(slug);
 
   if (!browser) {
     return { title: 'Browser Not Found' };
@@ -24,7 +25,7 @@ export async function generateMetadata({ params }) {
     title: `${browser.name} Browser Performance - Speedometer 3.1 Benchmarks`,
     description: `${browser.name} browser benchmarks across platforms. Compare Speedometer 3.1 scores, RAM usage, and performance metrics.`,
     alternates: {
-      canonical: `https://browserating.com/browsers/${params.slug}`,
+      canonical: `https://browserating.com/browsers/${slug}`,
     },
     openGraph: {
       title: `${browser.name} Browser Performance`,
@@ -34,8 +35,9 @@ export async function generateMetadata({ params }) {
 }
 
 export default async function BrowserPage({ params }) {
+  const { slug } = await params;
   const [browser, lastModified] = await Promise.all([
-    getBrowserBySlug(params.slug),
+    getBrowserBySlug(slug),
     getDataLastModified(),
   ]);
 

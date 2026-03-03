@@ -18,32 +18,34 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }) {
-  const platformLabel = getPlatformLabel(params.platform);
+  const { platform } = await params;
+  const platformLabel = getPlatformLabel(platform);
 
-  if (!platformLabel || platformLabel === params.platform) {
+  if (!platformLabel || platformLabel === platform) {
     return { title: 'Platform Not Found' };
   }
 
-  const browsers = await getBrowsersByPlatform(params.platform);
+  const browsers = await getBrowsersByPlatform(platform);
   const browserCount = browsers?.length || 0;
 
   return {
     title: `Best Browsers for ${platformLabel} 2026 - Performance Rankings`,
     description: `Compare the fastest browsers for ${platformLabel} in 2026. Speedometer 3.1 benchmarks for ${browserCount} browsers.`,
     alternates: {
-      canonical: `https://browserating.com/platforms/${params.platform}`,
+      canonical: `https://browserating.com/platforms/${platform}`,
     },
   };
 }
 
 export default async function PlatformPage({ params }) {
+  const { platform } = await params;
   const [browsers, lastModified] = await Promise.all([
-    getBrowsersByPlatform(params.platform),
+    getBrowsersByPlatform(platform),
     getDataLastModified(),
   ]);
-  const platformLabel = getPlatformLabel(params.platform);
+  const platformLabel = getPlatformLabel(platform);
 
-  if (!browsers || platformLabel === params.platform) {
+  if (!browsers || platformLabel === platform) {
     notFound();
   }
 
@@ -85,7 +87,7 @@ export default async function PlatformPage({ params }) {
                       .toLowerCase()
                       .replace(/\s+/g, '-')
                       .replace(/[^a-z0-9-]/g, '');
-                    const score = browser[params.platform]?.versions?.[0]?.scores?.speedometer3;
+                    const score = browser[platform]?.versions?.[0]?.scores?.speedometer3;
 
                     return (
                       <div
