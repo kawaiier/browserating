@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 const announcements = [
     {
@@ -47,9 +47,12 @@ const announcements = [
 
 const StickyAnnouncement = () => {
   const [isVisible, setIsVisible] = useState(true);
-  const [currentAnnouncement] = useState(
-    () => announcements[Math.floor(Math.random() * announcements.length)]
-  );
+  const [currentAnnouncement, setCurrentAnnouncement] = useState(null);
+
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setCurrentAnnouncement(announcements[Math.floor(Math.random() * announcements.length)]);
+  }, []);
 
   if (!isVisible || !currentAnnouncement) {
     return null;
