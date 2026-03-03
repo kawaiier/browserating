@@ -187,16 +187,11 @@ const BrowserCard = React.memo(
                   href={browser.website}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="shrink-0 p-1.5 text-gray-300 dark:text-gray-600 hover:text-gray-500 dark:hover:text-gray-400 transition-colors rounded-lg"
+                  className="shrink-0 flex items-center justify-center w-9 h-9 text-gray-300 dark:text-gray-600 hover:text-gray-500 dark:hover:text-gray-400 transition-colors rounded-lg"
                   onClick={(e) => e.stopPropagation()}
                   aria-label={`Visit ${browser.name} website`}
                 >
-                  <svg
-                    className="w-3.5 h-3.5"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path
                       strokeLinecap="round"
                       strokeLinejoin="round"

@@ -228,7 +228,7 @@ export default function Explanation() {
       <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl border border-gray-200 dark:border-gray-700 overflow-hidden">
         {/* Our Story */}
         {activeTab === 'story' && (
-          <div className="p-8">
+          <div className="p-4 sm:p-8">
             <div className="max-w-4xl mx-auto">
               <div className="prose prose-lg dark:prose-invert max-w-none">
                 <div className="bg-gradient-to-r from-purple-50 to-blue-50 dark:from-purple-900/20 dark:to-blue-900/20 rounded-xl p-6 mb-8 border border-purple-200 dark:border-purple-700">
@@ -298,7 +298,7 @@ export default function Explanation() {
 
         {/* Methodology */}
         {activeTab === 'methodology' && (
-          <div className="p-8">
+          <div className="p-4 sm:p-8">
             <div className="grid gap-6 mb-8">
               {testingFeatures.map((feature, index) => (
                 <FeatureCard
@@ -357,7 +357,7 @@ export default function Explanation() {
 
         {/* Metrics */}
         {activeTab === 'metrics' && (
-          <div className="p-8">
+          <div className="p-4 sm:p-8">
             <div className="space-y-8">
               <div className="text-center mb-8">
                 <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-3">
@@ -476,7 +476,7 @@ export default function Explanation() {
 
         {/* Roadmap */}
         {activeTab === 'roadmap' && (
-          <div className="p-8">
+          <div className="p-4 sm:p-8">
             <div className="text-center mb-8">
               <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-3">
                 The Future of Browser Testing

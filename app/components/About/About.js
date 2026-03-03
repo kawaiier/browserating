@@ -179,7 +179,7 @@ export default function About() {
       <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl border border-gray-200 dark:border-gray-700 overflow-hidden">
         {/* Testing Methodology */}
         {activeSection === 'methodology' && (
-          <div className="p-8">
+          <div className="p-4 sm:p-8">
             <div className="grid gap-8">
               {testingSteps.map((step, index) => (
                 <div key={index} className="group">
@@ -242,7 +242,7 @@ export default function About() {
 
         {/* Test Systems */}
         {activeSection === 'systems' && (
-          <div className="p-8">
+          <div className="p-4 sm:p-8">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
               {systemConfigs.map((system) => (
                 <div
@@ -267,32 +267,36 @@ export default function About() {
                       </div>
 
                       <div className="space-y-3">
-                        <div className="flex justify-between items-center">
-                          <span className="text-gray-600 dark:text-gray-400">
+                        <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-0.5 sm:gap-4">
+                          <span className="text-gray-600 dark:text-gray-400 shrink-0">
                             Operating System:
                           </span>
-                          <span className="font-medium text-gray-900 dark:text-white">
+                          <span className="font-medium text-gray-900 dark:text-white sm:text-right">
                             {system.specs.os}
                           </span>
                         </div>
-                        <div className="flex justify-between items-center">
-                          <span className="text-gray-600 dark:text-gray-400">Device:</span>
-                          <span className="font-medium text-gray-900 dark:text-white text-right">
+                        <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-0.5 sm:gap-4">
+                          <span className="text-gray-600 dark:text-gray-400 shrink-0">Device:</span>
+                          <span className="font-medium text-gray-900 dark:text-white sm:text-right">
                             {system.specs.device}
                           </span>
                         </div>
 
                         {expandedSystem === system.id && (
                           <div className="mt-4 pt-4 border-t border-gray-200 dark:border-gray-700 space-y-3">
-                            <div className="flex justify-between items-center">
-                              <span className="text-gray-600 dark:text-gray-400">Processor:</span>
-                              <span className="font-medium text-gray-900 dark:text-white text-right">
+                            <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-0.5 sm:gap-4">
+                              <span className="text-gray-600 dark:text-gray-400 shrink-0">
+                                Processor:
+                              </span>
+                              <span className="font-medium text-gray-900 dark:text-white sm:text-right">
                                 {system.specs.processor}
                               </span>
                             </div>
-                            <div className="flex justify-between items-center">
-                              <span className="text-gray-600 dark:text-gray-400">Memory:</span>
-                              <span className="font-medium text-gray-900 dark:text-white">
+                            <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-0.5 sm:gap-4">
+                              <span className="text-gray-600 dark:text-gray-400 shrink-0">
+                                Memory:
+                              </span>
+                              <span className="font-medium text-gray-900 dark:text-white sm:text-right">
                                 {system.specs.memory}
                               </span>
                             </div>
@@ -342,7 +346,7 @@ export default function About() {
 
         {/* Score Guide */}
         {activeSection === 'scores' && (
-          <div className="p-8">
+          <div className="p-4 sm:p-8">
             <div className="mb-6">
               <div className="bg-gradient-to-r from-purple-100 to-blue-100 dark:from-purple-900/30 dark:to-blue-900/30 rounded-xl p-6 border border-purple-200 dark:border-purple-700">
                 <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3 flex items-center gap-2">

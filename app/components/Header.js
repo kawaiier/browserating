@@ -36,7 +36,7 @@ export default function Header({ lastModified }) {
 
   return (
     <header
-      className="relative p-8 overflow-hidden bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 dark:from-gray-950 dark:via-gray-900 dark:to-purple-950 min-h-[600px] flex items-center"
+      className="relative px-4 sm:px-8 py-8 overflow-hidden bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 dark:from-gray-950 dark:via-gray-900 dark:to-purple-950 min-h-[480px] sm:min-h-[600px] flex items-center"
       role="banner"
     >
       {/* Animated Background Pattern */}
@@ -97,7 +97,7 @@ export default function Header({ lastModified }) {
       </div>
 
       {/* Dark Mode Toggle */}
-      <div className="absolute top-6 right-6 z-20">
+      <div className="absolute top-4 right-4 sm:top-6 sm:right-6 z-20">
         <DarkModeToggle darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
       </div>
 
@@ -105,7 +105,7 @@ export default function Header({ lastModified }) {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="max-w-7xl mx-auto transition-all duration-1000 transform translate-y-0 opacity-100">
           {/* Top Section - Logo and Navigation */}
-          <div className="flex flex-col lg:flex-row items-center justify-between mb-12">
+          <div className="flex flex-col lg:flex-row items-center justify-between mb-6 lg:mb-12">
             {/* Logo */}
             <div className="mb-8 lg:mb-0">
               <div className="relative group">
@@ -149,7 +149,7 @@ export default function Header({ lastModified }) {
           {/* Hero Section */}
           <div className="text-center max-w-5xl mx-auto">
             {/* Main Title */}
-            <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold mb-6 transition-all duration-1000 delay-300 translate-y-0 opacity-100">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-6 transition-all duration-1000 delay-300 translate-y-0 opacity-100">
               <span className="bg-gradient-to-r from-purple-600 via-blue-600 to-indigo-600 bg-clip-text text-transparent leading-normal block pb-3">
                 Browserating
               </span>

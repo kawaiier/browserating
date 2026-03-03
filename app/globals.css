@@ -73,3 +73,8 @@ textarea:focus-visible,
   outline-color: #9b7be8;
   box-shadow: 0 0 0 4px rgba(155, 123, 232, 0.2);
 }
+
+/* Prevent horizontal overflow on mobile */
+body {
+  overflow-x: hidden;
+}

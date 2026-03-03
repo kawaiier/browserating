@@ -82,10 +82,10 @@ const StickyAnnouncement = () => {
 
   return (
     <div
-      className={`fixed bottom-0 left-0 right-0 bg-gradient-to-r ${currentAnnouncement.gradient} text-white p-4 flex items-center justify-between shadow-md z-50`}
+      className={`fixed bottom-0 left-0 right-0 bg-gradient-to-r ${currentAnnouncement.gradient} text-white p-3 sm:p-4 flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-0 sm:justify-between shadow-md z-50`}
     >
       {currentAnnouncement.content}
-      <div className="flex items-center space-x-4">
+      <div className="flex items-center space-x-4 self-end sm:self-auto shrink-0">
         <a
           href={currentAnnouncement.buttonUrl}
           target={currentAnnouncement.buttonUrl.startsWith('http') ? '_blank' : '_self'}

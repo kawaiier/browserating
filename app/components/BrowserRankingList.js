@@ -61,9 +61,9 @@ const SkeletonLoader = ({ index }) => (
         <div className="h-8 bg-gray-200 dark:bg-gray-700 rounded-full w-20"></div>
         <div className="h-8 bg-gray-200 dark:bg-gray-700 rounded-full w-16"></div>
       </div>
-      <div className="grid grid-cols-3 gap-4">
+      <div className="grid grid-cols-3 gap-2 sm:gap-4">
         {[1, 2, 3].map((i) => (
-          <div key={i} className="bg-gray-50 dark:bg-gray-700/50 rounded-lg p-4">
+          <div key={i} className="bg-gray-50 dark:bg-gray-700/50 rounded-lg p-2 sm:p-4">
             <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded mb-2"></div>
             <div className="h-8 bg-gray-200 dark:bg-gray-700 rounded"></div>
           </div>
@@ -294,7 +294,11 @@ export default function BrowserRankingList({ initialBrowsers = [] }) {
       <h3 className="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-3 uppercase tracking-wide">
         Select Platform
       </h3>
-      <div className="flex flex-wrap gap-3" role="radiogroup" aria-label="Select platform">
+      <div
+        className="flex flex-wrap gap-x-3 gap-y-5"
+        role="radiogroup"
+        aria-label="Select platform"
+      >
         {platforms.map((platform) => (
           <button
             key={platform}
@@ -495,7 +499,7 @@ export default function BrowserRankingList({ initialBrowsers = [] }) {
 
       <StatsBar browsers={sortedBrowsers} selectedPlatform={selectedPlatform} />
 
-      <div className="flex justify-between items-center mb-6">
+      <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2 mb-6">
         <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
           {filteredBrowsers.length === 0
             ? 'No browsers found'

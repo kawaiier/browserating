@@ -1,11 +1,7 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from 'react';
 
-export default function BrowserBarChart({
-  browsers,
-  platform,
-  getEngineColor,
-}) {
-  const [sortOrder, setSortOrder] = useState("desc");
+export default function BrowserBarChart({ browsers, platform, getEngineColor }) {
+  const [sortOrder, setSortOrder] = useState('desc');
   const [hoveredBar, setHoveredBar] = useState(null);
   const [selectedBars, setSelectedBars] = useState([]);
   const chartRef = useRef(null);
@@ -17,7 +13,7 @@ export default function BrowserBarChart({
       .filter((browser) => {
         const platformData = browser[platform];
         const scores = platformData?.versions?.[0]?.scores;
-        return scores && typeof scores.speedometer3 === "number";
+        return scores && typeof scores.speedometer3 === 'number';
       })
       .map((browser) => {
         const platformData = browser[platform];
@@ -28,10 +24,8 @@ export default function BrowserBarChart({
           name: browser.name,
           score: currentScore,
           previousScore: previousScore,
-          trend: previousScore
-            ? ((currentScore - previousScore) / previousScore) * 100
-            : 0,
-          engine: platformData.engine || "unknown",
+          trend: previousScore ? ((currentScore - previousScore) / previousScore) * 100 : 0,
+          engine: platformData.engine || 'unknown',
           ramUsage: platformData.versions[0].scores.ram,
           adblockScore: platformData.versions[0].scores.adblock,
         };
@@ -39,9 +33,9 @@ export default function BrowserBarChart({
 
     // Sort data based on selected order
     switch (sortOrder) {
-      case "asc":
+      case 'asc':
         return data.sort((a, b) => a.score - b.score);
-      case "alphabetical":
+      case 'alphabetical':
         return data.sort((a, b) => a.name.localeCompare(b.name));
       default: // desc
         return data.sort((a, b) => b.score - a.score);
@@ -56,26 +50,24 @@ export default function BrowserBarChart({
   const getPerformanceCategory = (score) => {
     if (score >= maxScore * 0.9)
       return {
-        label: "Excellent",
-        color: "text-green-600 dark:text-green-400",
+        label: 'Excellent',
+        color: 'text-green-600 dark:text-green-400',
       };
     if (score >= maxScore * 0.7)
-      return { label: "Good", color: "text-blue-600 dark:text-blue-400" };
+      return { label: 'Good', color: 'text-blue-600 dark:text-blue-400' };
     if (score >= maxScore * 0.5)
-      return { label: "Fair", color: "text-yellow-600 dark:text-yellow-400" };
-    return { label: "Poor", color: "text-red-600 dark:text-red-400" };
+      return { label: 'Fair', color: 'text-yellow-600 dark:text-yellow-400' };
+    return { label: 'Poor', color: 'text-red-600 dark:text-red-400' };
   };
 
   const handleBarClick = (itemName) => {
     setSelectedBars((prev) =>
-      prev.includes(itemName)
-        ? prev.filter((name) => name !== itemName)
-        : [...prev, itemName]
+      prev.includes(itemName) ? prev.filter((name) => name !== itemName) : [...prev, itemName]
     );
   };
 
   const handleKeyDown = (e, itemName) => {
-    if (e.key === "Enter" || e.key === " ") {
+    if (e.key === 'Enter' || e.key === ' ') {
       e.preventDefault();
       handleBarClick(itemName);
     }
@@ -89,12 +81,12 @@ export default function BrowserBarChart({
       }
     };
 
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
   if (!browsers || !platform || !getEngineColor) {
-    console.warn("BrowserBarChart: Missing required props");
+    console.warn('BrowserBarChart: Missing required props');
     return null;
   }
 
@@ -129,11 +121,11 @@ export default function BrowserBarChart({
   }
 
   const platformNames = {
-    "macos-arm": "macOS ARM",
-    "macos-intel": "macOS Intel",
-    windows: "Windows",
-    android: "Android",
-    ipad: "iPad OS",
+    'macos-arm': 'macOS ARM',
+    'macos-intel': 'macOS Intel',
+    windows: 'Windows',
+    android: 'Android',
+    ipad: 'iPad OS',
   };
 
   const platformName = platformNames[platform] || platform;
@@ -141,15 +133,14 @@ export default function BrowserBarChart({
   return (
     <div className="bg-white dark:bg-gray-800 rounded-2xl border border-gray-200 dark:border-gray-700 overflow-hidden">
       {/* Header */}
-      <div className="p-6 border-b border-gray-200 dark:border-gray-700">
+      <div className="p-4 sm:p-6 border-b border-gray-200 dark:border-gray-700">
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
           <div>
             <h3 className="text-xl font-bold text-gray-900 dark:text-white">
               Performance Comparison
             </h3>
             <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
-              Speedometer 3.1 scores on {platformName} • {chartData.length}{" "}
-              browsers
+              Speedometer 3.1 scores on {platformName} • {chartData.length} browsers
             </p>
           </div>
 
@@ -189,195 +180,184 @@ export default function BrowserBarChart({
         <div className="mt-4 flex flex-wrap gap-4 text-sm">
           <div className="flex items-center gap-2">
             <div className="w-3 h-3 bg-green-500 rounded"></div>
-            <span className="text-gray-600 dark:text-gray-400">
-              Excellent (90-100%)
-            </span>
+            <span className="text-gray-600 dark:text-gray-400">Excellent (90-100%)</span>
           </div>
           <div className="flex items-center gap-2">
             <div className="w-3 h-3 bg-blue-500 rounded"></div>
-            <span className="text-gray-600 dark:text-gray-400">
-              Good (70-89%)
-            </span>
+            <span className="text-gray-600 dark:text-gray-400">Good (70-89%)</span>
           </div>
           <div className="flex items-center gap-2">
             <div className="w-3 h-3 bg-yellow-500 rounded"></div>
-            <span className="text-gray-600 dark:text-gray-400">
-              Fair (50-69%)
-            </span>
+            <span className="text-gray-600 dark:text-gray-400">Fair (50-69%)</span>
           </div>
           <div className="flex items-center gap-2">
             <div className="w-3 h-3 bg-red-500 rounded"></div>
-            <span className="text-gray-600 dark:text-gray-400">
-              Poor (&lt;50%)
-            </span>
+            <span className="text-gray-600 dark:text-gray-400">Poor (&lt;50%)</span>
           </div>
         </div>
       </div>
 
       {/* Chart */}
-      <div className="p-6">
-        <div
-          ref={chartRef}
-          className="overflow-x-auto scrollbar-thin scrollbar-thumb-gray-300 dark:scrollbar-thumb-gray-600 scrollbar-track-gray-100 dark:scrollbar-track-gray-800"
-          tabIndex="0"
-          role="region"
-          aria-label={`Interactive browser performance chart for ${platformName}. Use arrow keys to navigate, Enter or Space to select bars.`}
-        >
+      <div className="p-4 sm:p-6">
+        <div className="relative">
           <div
-            className="flex items-end justify-start gap-3 p-4 min-w-fit"
-            style={{
-              minWidth: `${chartData.length * 120}px`,
-              height: "400px",
-            }}
+            ref={chartRef}
+            className="overflow-x-auto scrollbar-thin scrollbar-thumb-gray-300 dark:scrollbar-thumb-gray-600 scrollbar-track-gray-100 dark:scrollbar-track-gray-800"
+            tabIndex="0"
+            role="region"
+            aria-label={`Interactive browser performance chart for ${platformName}. Use arrow keys to navigate, Enter or Space to select bars.`}
           >
-            {chartData.map((item, index) => {
-              const percentHeight = (item.score / maxScore) * 100;
-              const barHeight = Math.max(percentHeight * 3.2, 20); // Minimum 20px height, scale by 3.2 for visibility
-              const scoreFormatted = item.score.toLocaleString(undefined, {
-                maximumFractionDigits: 1,
-              });
-              const isHovered = hoveredBar === item.name;
-              const isSelected = selectedBars.includes(item.name);
-              const performance = getPerformanceCategory(item.score);
+            <div
+              className="flex items-end justify-start gap-3 p-4 min-w-fit"
+              style={{
+                minWidth: `${chartData.length * 120}px`,
+                height: '400px',
+              }}
+            >
+              {chartData.map((item, index) => {
+                const percentHeight = (item.score / maxScore) * 100;
+                const barHeight = Math.max(percentHeight * 3.2, 20); // Minimum 20px height, scale by 3.2 for visibility
+                const scoreFormatted = item.score.toLocaleString(undefined, {
+                  maximumFractionDigits: 1,
+                });
+                const isHovered = hoveredBar === item.name;
+                const isSelected = selectedBars.includes(item.name);
+                const performance = getPerformanceCategory(item.score);
 
-              return (
-                <div
-                  key={item.name}
-                  className="flex flex-col w-28 flex-shrink-0 group cursor-pointer"
-                  onClick={() => handleBarClick(item.name)}
-                  onKeyDown={(e) => handleKeyDown(e, item.name)}
-                  onMouseEnter={() => setHoveredBar(item.name)}
-                  onMouseLeave={() => setHoveredBar(null)}
-                  tabIndex="0"
-                  role="button"
-                  aria-pressed={isSelected}
-                  aria-label={`${item.name}: ${scoreFormatted} points using ${
-                    item.engine
-                  } engine${
-                    item.trend !== 0
-                      ? `, trend: ${
-                          item.trend > 0 ? "+" : ""
-                        }${item.trend.toFixed(1)}%`
-                      : ""
-                  }`}
-                  style={{ height: "400px" }}
-                >
-                  {/* Rank and Score */}
-                  <div className="text-center mb-2">
-                    <div className="text-xs text-gray-500 dark:text-gray-400 mb-1">
-                      #{index + 1}
-                    </div>
-                    <div className={`text-sm font-bold ${performance.color}`}>
-                      {scoreFormatted}
-                    </div>
-                    {item.trend !== 0 && (
-                      <div
-                        className={`text-xs ${
-                          item.trend > 0
-                            ? "text-green-600 dark:text-green-400"
-                            : "text-red-600 dark:text-red-400"
-                        }`}
-                      >
-                        {item.trend > 0 ? "↗" : "↘"}{" "}
-                        {Math.abs(item.trend).toFixed(1)}%
-                      </div>
-                    )}
-                  </div>
-
-                  {/* Bar Container */}
+                return (
                   <div
-                    className="flex-1 flex flex-col justify-end"
-                    style={{ minHeight: "280px" }}
+                    key={item.name}
+                    className="flex flex-col w-28 flex-shrink-0 group cursor-pointer"
+                    onClick={() => handleBarClick(item.name)}
+                    onKeyDown={(e) => handleKeyDown(e, item.name)}
+                    onMouseEnter={() => setHoveredBar(item.name)}
+                    onMouseLeave={() => setHoveredBar(null)}
+                    tabIndex="0"
+                    role="button"
+                    aria-pressed={isSelected}
+                    aria-label={`${item.name}: ${scoreFormatted} points using ${
+                      item.engine
+                    } engine${
+                      item.trend !== 0
+                        ? `, trend: ${item.trend > 0 ? '+' : ''}${item.trend.toFixed(1)}%`
+                        : ''
+                    }`}
+                    style={{ height: '400px' }}
                   >
-                    {/* Bar */}
-                    <div
-                      className={`relative transition-all duration-300 rounded-t-xl ${
-                        isSelected
-                          ? "ring-4 ring-purple-500 ring-offset-2 dark:ring-offset-gray-800"
-                          : ""
-                      } ${isHovered ? "transform scale-105" : ""}`}
-                      style={{
-                        height: `${barHeight}px`,
-                        minHeight: "20px",
-                      }}
-                      role="graphics-symbol"
-                      aria-roledescription="performance bar"
-                    >
-                      <div
-                        className={`w-full h-full rounded-t-xl transition-all duration-500 relative ${getEngineColor(
-                          item.engine
-                        )} ${
-                          isHovered || isSelected
-                            ? "shadow-lg brightness-110"
-                            : "hover:brightness-105"
-                        }`}
-                      >
-                        {/* Performance indicator */}
+                    {/* Rank and Score */}
+                    <div className="text-center mb-2">
+                      <div className="text-xs text-gray-500 dark:text-gray-400 mb-1">
+                        #{index + 1}
+                      </div>
+                      <div className={`text-sm font-bold ${performance.color}`}>
+                        {scoreFormatted}
+                      </div>
+                      {item.trend !== 0 && (
                         <div
-                          className={`absolute top-1 right-1 w-2 h-2 rounded-full ${
-                            item.score >= maxScore * 0.9
-                              ? "bg-green-400"
-                              : item.score >= maxScore * 0.7
-                              ? "bg-blue-400"
-                              : item.score >= maxScore * 0.5
-                              ? "bg-yellow-400"
-                              : "bg-red-400"
+                          className={`text-xs ${
+                            item.trend > 0
+                              ? 'text-green-600 dark:text-green-400'
+                              : 'text-red-600 dark:text-red-400'
                           }`}
-                        ></div>
+                        >
+                          {item.trend > 0 ? '↗' : '↘'} {Math.abs(item.trend).toFixed(1)}%
+                        </div>
+                      )}
+                    </div>
 
-                        {/* Hover tooltip */}
-                        {isHovered && (
-                          <div className="absolute -top-20 left-1/2 transform -translate-x-1/2 bg-gray-900 dark:bg-gray-100 text-white dark:text-gray-900 text-xs rounded-lg px-3 py-2 whitespace-nowrap shadow-lg z-10">
-                            <div className="font-semibold">{item.name}</div>
-                            <div>Score: {scoreFormatted}</div>
-                            <div>Engine: {item.engine}</div>
-                            {item.ramUsage && (
-                              <div>RAM: {item.ramUsage.toFixed(0)} MB</div>
-                            )}
-                            {item.adblockScore && (
-                              <div>
-                                Adblock: {item.adblockScore.toFixed(0)}%
-                              </div>
-                            )}
-                            <div className="absolute top-full left-1/2 transform -translate-x-1/2 border-4 border-transparent border-t-gray-900 dark:border-t-gray-100"></div>
-                          </div>
-                        )}
+                    {/* Bar Container */}
+                    <div
+                      className="flex-1 flex flex-col justify-end"
+                      style={{ minHeight: '280px' }}
+                    >
+                      {/* Bar */}
+                      <div
+                        className={`relative transition-all duration-300 rounded-t-xl ${
+                          isSelected
+                            ? 'ring-4 ring-purple-500 ring-offset-2 dark:ring-offset-gray-800'
+                            : ''
+                        } ${isHovered ? 'transform scale-105' : ''}`}
+                        style={{
+                          height: `${barHeight}px`,
+                          minHeight: '20px',
+                        }}
+                        role="graphics-symbol"
+                        aria-roledescription="performance bar"
+                      >
+                        <div
+                          className={`w-full h-full rounded-t-xl transition-all duration-500 relative ${getEngineColor(
+                            item.engine
+                          )} ${
+                            isHovered || isSelected
+                              ? 'shadow-lg brightness-110'
+                              : 'hover:brightness-105'
+                          }`}
+                        >
+                          {/* Performance indicator */}
+                          <div
+                            className={`absolute top-1 right-1 w-2 h-2 rounded-full ${
+                              item.score >= maxScore * 0.9
+                                ? 'bg-green-400'
+                                : item.score >= maxScore * 0.7
+                                  ? 'bg-blue-400'
+                                  : item.score >= maxScore * 0.5
+                                    ? 'bg-yellow-400'
+                                    : 'bg-red-400'
+                            }`}
+                          ></div>
+
+                          {/* Hover tooltip */}
+                          {(isHovered || isSelected) && (
+                            <div className="absolute -top-20 left-1/2 transform -translate-x-1/2 bg-gray-900 dark:bg-gray-100 text-white dark:text-gray-900 text-xs rounded-lg px-3 py-2 whitespace-nowrap shadow-lg z-10">
+                              <div className="font-semibold">{item.name}</div>
+                              <div>Score: {scoreFormatted}</div>
+                              <div>Engine: {item.engine}</div>
+                              {item.ramUsage && <div>RAM: {item.ramUsage.toFixed(0)} MB</div>}
+                              {item.adblockScore && (
+                                <div>Adblock: {item.adblockScore.toFixed(0)}%</div>
+                              )}
+                              <div className="absolute top-full left-1/2 transform -translate-x-1/2 border-4 border-transparent border-t-gray-900 dark:border-t-gray-100"></div>
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Browser name and engine */}
+                    <div className="mt-3 text-center">
+                      <div
+                        className={`text-sm font-medium text-gray-900 dark:text-white break-words leading-tight ${
+                          isSelected ? 'text-purple-700 dark:text-purple-300' : ''
+                        }`}
+                        title={item.name}
+                      >
+                        {item.name}
+                      </div>
+                      <div
+                        className={`text-xs mt-1 px-2 py-1 rounded-full ${getEngineColor(
+                          item.engine
+                        )}`}
+                      >
+                        {item.engine}
                       </div>
                     </div>
                   </div>
-
-                  {/* Browser name and engine */}
-                  <div className="mt-3 text-center">
-                    <div
-                      className={`text-sm font-medium text-gray-900 dark:text-white break-words leading-tight ${
-                        isSelected ? "text-purple-700 dark:text-purple-300" : ""
-                      }`}
-                      title={item.name}
-                    >
-                      {item.name}
-                    </div>
-                    <div
-                      className={`text-xs mt-1 px-2 py-1 rounded-full ${getEngineColor(
-                        item.engine
-                      )}`}
-                    >
-                      {item.engine}
-                    </div>
-                  </div>
-                </div>
-              );
-            })}
+                );
+              })}
+            </div>
           </div>
+          {/* Scroll affordance for mobile */}
+          <div
+            className="absolute right-0 top-0 bottom-0 w-8 bg-gradient-to-l from-white dark:from-gray-800 pointer-events-none sm:hidden"
+            aria-hidden="true"
+          />
         </div>
 
         {/* Chart Instructions */}
         <div className="mt-4 text-center">
           <p className="text-xs text-gray-500 dark:text-gray-400">
             Click or tap bars to select • Hover for details •
-            <span className="hidden sm:inline">
-              {" "}
-              Scroll horizontally to view all browsers
-            </span>
+            <span className="hidden sm:inline"> Scroll horizontally to view all browsers</span>
             <span className="sm:hidden"> Swipe to scroll</span>
           </p>
         </div>
@@ -385,7 +365,7 @@ export default function BrowserBarChart({
 
       {/* Selected Browser Comparison */}
       {selectedBars.length > 1 && (
-        <div className="border-t border-gray-200 dark:border-gray-700 p-6">
+        <div className="border-t border-gray-200 dark:border-gray-700 p-4 sm:p-6">
           <h4 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
             Comparison ({selectedBars.length} selected)
           </h4>
@@ -393,24 +373,15 @@ export default function BrowserBarChart({
             {chartData
               .filter((item) => selectedBars.includes(item.name))
               .map((item) => (
-                <div
-                  key={item.name}
-                  className="bg-gray-50 dark:bg-gray-700/50 rounded-lg p-4"
-                >
+                <div key={item.name} className="bg-gray-50 dark:bg-gray-700/50 rounded-lg p-4">
                   <div className="flex items-center justify-between mb-2">
-                    <span className="font-medium text-gray-900 dark:text-white">
-                      {item.name}
-                    </span>
+                    <span className="font-medium text-gray-900 dark:text-white">{item.name}</span>
                     <button
                       onClick={() => handleBarClick(item.name)}
                       className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300"
                       aria-label={`Remove ${item.name} from comparison`}
                     >
-                      <svg
-                        className="w-4 h-4"
-                        fill="currentColor"
-                        viewBox="0 0 20 20"
-                      >
+                      <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
                         <path
                           fillRule="evenodd"
                           d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
@@ -421,28 +392,20 @@ export default function BrowserBarChart({
                   </div>
                   <div className="space-y-1 text-sm">
                     <div>
-                      Score:{" "}
-                      <span className="font-semibold">
-                        {item.score.toFixed(1)}
-                      </span>
+                      Score: <span className="font-semibold">{item.score.toFixed(1)}</span>
                     </div>
                     <div>
                       Engine: <span className="font-medium">{item.engine}</span>
                     </div>
                     {item.ramUsage && (
                       <div>
-                        RAM:{" "}
-                        <span className="font-medium">
-                          {item.ramUsage.toFixed(0)} MB
-                        </span>
+                        RAM: <span className="font-medium">{item.ramUsage.toFixed(0)} MB</span>
                       </div>
                     )}
                     {item.adblockScore && (
                       <div>
-                        Adblock:{" "}
-                        <span className="font-medium">
-                          {item.adblockScore.toFixed(0)}%
-                        </span>
+                        Adblock:{' '}
+                        <span className="font-medium">{item.adblockScore.toFixed(0)}%</span>
                       </div>
                     )}
                   </div>
@@ -456,22 +419,22 @@ export default function BrowserBarChart({
       <div className="sr-only">
         <h4>Summary of browser performance on {platformName}</h4>
         <p>
-          Sorted by{" "}
-          {sortOrder === "desc"
-            ? "highest to lowest"
-            : sortOrder === "asc"
-            ? "lowest to highest"
-            : "alphabetical order"}
+          Sorted by{' '}
+          {sortOrder === 'desc'
+            ? 'highest to lowest'
+            : sortOrder === 'asc'
+              ? 'lowest to highest'
+              : 'alphabetical order'}
           :
         </p>
         <ol>
           {chartData.map((item, index) => (
             <li key={`summary-${item.name}`}>
-              {item.name} ranked #{index + 1} with a score of{" "}
-              {item.score.toFixed(1)} using {item.engine} engine
+              {item.name} ranked #{index + 1} with a score of {item.score.toFixed(1)} using{' '}
+              {item.engine} engine
               {item.trend !== 0 &&
                 `, showing a ${
-                  item.trend > 0 ? "positive" : "negative"
+                  item.trend > 0 ? 'positive' : 'negative'
                 } trend of ${Math.abs(item.trend).toFixed(1)}%`}
             </li>
           ))}
