@@ -40,8 +40,8 @@ const platformIcons = {
   ipad: '📱',
 };
 
-const NEW_PLATFORM = 'macos-arm';
-const OUTDATED_PLATFORMS = ['android', 'macos-intel'];
+const NEW_PLATFORMS = ['macos-arm', 'ipad'];
+const OUTDATED_PLATFORMS = ['android', 'macos-intel', 'windows'];
 
 // Enhanced Skeleton Loader
 const SkeletonLoader = ({ index }) => (
@@ -313,7 +313,7 @@ export default function BrowserRankingList({ initialBrowsers = [] }) {
               {platformNames[platform]}
             </span>
 
-            {platform === NEW_PLATFORM && (
+            {NEW_PLATFORMS.includes(platform) && (
               <span
                 className="absolute -top-2 -right-2 bg-gradient-to-r from-purple-600 to-blue-600 text-white text-xs px-2 py-1 rounded-full font-bold animate-pulse shadow-lg"
                 aria-label="Recently updated"

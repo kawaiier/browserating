@@ -309,5 +309,15 @@
     "name": "ChatGPT Atlas",
     "logo": "/images/browser-logos/chatgpt-atlas.png",
     "website": "https://chatgpt.com/atlas/"
+  },
+  {
+    "name": "Aloha Browser",
+    "logo": "/images/browser-logos/aloha.png",
+    "website": "https://alohabrowser.com/"
+  },
+  {
+    "name": "Beam",
+    "logo": "/images/browser-logos/beam.png",
+    "website": "https://www.beambrowser.app/"
   }
 ]
