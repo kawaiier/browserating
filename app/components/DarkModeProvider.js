@@ -15,6 +15,7 @@ export function DarkModeProvider({ children }) {
       (!('darkMode' in localStorage) &&
         window?.matchMedia?.('(prefers-color-scheme: dark)')?.matches);
 
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setDarkMode(isDarkMode);
     if (isDarkMode) {
       document.documentElement.classList.add('dark');

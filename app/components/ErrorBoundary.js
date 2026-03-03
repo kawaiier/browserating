@@ -1,6 +1,7 @@
 'use client';
 
 import { Component } from 'react';
+import Link from 'next/link';
 
 class ErrorBoundary extends Component {
   constructor(props) {
@@ -58,12 +59,12 @@ class ErrorBoundary extends Component {
               >
                 Try Again
               </button>
-              <a
+              <Link
                 href="/"
                 className="block w-full px-6 py-3 text-center text-purple-600 hover:text-purple-700 dark:text-purple-400 dark:hover:text-purple-300 font-medium transition-colors"
               >
                 Go to Homepage
-              </a>
+              </Link>
             </div>
             {process.env.NODE_ENV === 'development' && this.state.error && (
               <details className="mt-6 text-left">

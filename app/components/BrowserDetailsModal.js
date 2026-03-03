@@ -28,7 +28,6 @@ ChartJS.register(
 const BrowserDetailsModal = ({ browser, selectedPlatform, onClose }) => {
   const [activeTab, setActiveTab] = useState("overview");
   const [chartType, setChartType] = useState("bar");
-  const [isAnimating, setIsAnimating] = useState(false);
   const modalRef = useRef(null);
   const closeButtonRef = useRef(null);
   const firstFocusableRef = useRef(null);
@@ -68,11 +67,6 @@ const BrowserDetailsModal = ({ browser, selectedPlatform, onClose }) => {
       document.removeEventListener("keydown", handleKeyDown);
     };
   }, [onClose]);
-
-  // Animation on mount
-  useEffect(() => {
-    setIsAnimating(true);
-  }, []);
 
   if (
     !platformData ||
@@ -266,9 +260,7 @@ const BrowserDetailsModal = ({ browser, selectedPlatform, onClose }) => {
     >
       <div
         ref={modalRef}
-        className={`bg-white dark:bg-gray-800 rounded-2xl shadow-2xl w-full max-w-4xl max-h-[90vh] overflow-hidden transform transition-all duration-500 ${
-          isAnimating ? "scale-100 opacity-100" : "scale-95 opacity-0"
-        }`}
+        className="bg-white dark:bg-gray-800 rounded-2xl shadow-2xl w-full max-w-4xl max-h-[90vh] overflow-hidden animate-[scale-in_0.3s_ease-out_forwards]"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}

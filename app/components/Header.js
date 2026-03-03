@@ -9,7 +9,6 @@ import { useDarkMode } from './DarkModeProvider';
 
 export default function Header({ lastModified }) {
   const { darkMode, toggleDarkMode } = useDarkMode();
-  const [isVisible, setIsVisible] = useState(false);
   const [currentPlatform, setCurrentPlatform] = useState(0);
 
   const platforms = [
@@ -18,11 +17,6 @@ export default function Header({ lastModified }) {
     { name: 'Android', icon: '🤖', color: 'from-green-500 to-emerald-500' },
     { name: 'iPad', icon: '📱', color: 'from-purple-500 to-pink-500' },
   ];
-
-  // Animation on mount
-  useEffect(() => {
-    setIsVisible(true);
-  }, []);
 
   // Rotating platform showcase
   useEffect(() => {
@@ -109,11 +103,7 @@ export default function Header({ lastModified }) {
 
       {/* Main Content */}
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div
-          className={`max-w-7xl mx-auto transition-all duration-1000 transform ${
-            isVisible ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
-          }`}
-        >
+        <div className="max-w-7xl mx-auto transition-all duration-1000 transform translate-y-0 opacity-100">
           {/* Top Section - Logo and Navigation */}
           <div className="flex flex-col lg:flex-row items-center justify-between mb-12">
             {/* Logo */}
@@ -121,7 +111,7 @@ export default function Header({ lastModified }) {
               <div className="relative group">
                 <div className="absolute -inset-2 bg-gradient-to-r from-purple-600 via-blue-600 to-indigo-600 rounded-2xl blur-lg opacity-25 group-hover:opacity-40 transition-opacity duration-300"></div>
                 <div className="relative bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm rounded-2xl shadow-2xl p-4 border border-white/20 dark:border-gray-700/50">
-                  <a
+                  <Link
                     href="/"
                     aria-label="BrowseRating Home"
                     className="block transform hover:scale-105 transition-transform duration-300"
@@ -134,7 +124,7 @@ export default function Header({ lastModified }) {
                       className="w-auto h-auto max-h-16"
                       priority
                     />
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>
@@ -159,22 +149,14 @@ export default function Header({ lastModified }) {
           {/* Hero Section */}
           <div className="text-center max-w-5xl mx-auto">
             {/* Main Title */}
-            <h1
-              className={`text-5xl sm:text-6xl lg:text-7xl font-bold mb-6 transition-all duration-1000 delay-300 ${
-                isVisible ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
-              }`}
-            >
+            <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold mb-6 transition-all duration-1000 delay-300 translate-y-0 opacity-100">
               <span className="bg-gradient-to-r from-purple-600 via-blue-600 to-indigo-600 bg-clip-text text-transparent leading-tight block pb-2">
                 Browserating
               </span>
             </h1>
 
             {/* Subtitle with animated platform showcase */}
-            <div
-              className={`mb-8 transition-all duration-1000 delay-500 ${
-                isVisible ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
-              }`}
-            >
+            <div className="mb-8 transition-all duration-1000 delay-500 translate-y-0 opacity-100">
               <h2 className="text-xl sm:text-2xl lg:text-3xl font-medium text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
                 Browser Performance Ranking for
               </h2>
@@ -194,11 +176,7 @@ export default function Header({ lastModified }) {
             </div>
 
             {/* Description */}
-            <div
-              className={`max-w-3xl mx-auto mb-10 transition-all duration-1000 delay-700 ${
-                isVisible ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
-              }`}
-            >
+            <div className="max-w-3xl mx-auto mb-10 transition-all duration-1000 delay-700 translate-y-0 opacity-100">
               <p className="text-lg text-gray-600 dark:text-gray-400 leading-relaxed mb-6">
                 Discover the fastest browsers across different platforms using the industry-standard
                 <strong className="text-purple-600 dark:text-purple-400">
@@ -257,11 +235,7 @@ export default function Header({ lastModified }) {
             </div>
 
             {/* Call to Action */}
-            <div
-              className={`flex flex-col sm:flex-row items-center justify-center gap-4 mb-10 transition-all duration-1000 delay-900 ${
-                isVisible ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
-              }`}
-            >
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-10 transition-all duration-1000 delay-900 translate-y-0 opacity-100">
               <a
                 href="#rankings"
                 className="group inline-flex items-center gap-2 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white font-semibold px-8 py-4 rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300"
@@ -299,11 +273,7 @@ export default function Header({ lastModified }) {
             </div>
 
             {/* Last Updated Info */}
-            <div
-              className={`transition-all duration-1000 delay-1000 ${
-                isVisible ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
-              }`}
-            >
+            <div className="transition-all duration-1000 delay-1000 translate-y-0 opacity-100">
               <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-4 bg-gradient-to-r from-purple-600/10 to-blue-600/10 backdrop-blur-sm border border-purple-200/30 dark:border-purple-700/30 rounded-xl px-3 sm:px-6 py-3 sm:py-4 w-full">
                 <div className="flex flex-col sm:flex-row items-start sm:items-center gap-0 sm:gap-2">
                   <div className="flex items-center gap-2">

@@ -1,13 +1,8 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
-const StickyAnnouncement = () => {
-  const [isVisible, setIsVisible] = useState(true);
-  const [currentAnnouncement, setCurrentAnnouncement] = useState(null);
-
-  // Define three different announcements
-  const announcements = [
+const announcements = [
     {
       id: 1,
       content: (
@@ -48,13 +43,13 @@ const StickyAnnouncement = () => {
       gradient: "from-blue-400 to-cyan-400",
       buttonClass: "bg-blue-500 hover:bg-cyan-500 text-white",
     },
-  ];
+];
 
-  // Select a random announcement on component mount
-  useEffect(() => {
-    const randomIndex = Math.floor(Math.random() * announcements.length);
-    setCurrentAnnouncement(announcements[randomIndex]);
-  }, []);
+const StickyAnnouncement = () => {
+  const [isVisible, setIsVisible] = useState(true);
+  const [currentAnnouncement] = useState(
+    () => announcements[Math.floor(Math.random() * announcements.length)]
+  );
 
   if (!isVisible || !currentAnnouncement) {
     return null;
