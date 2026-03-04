@@ -1,9 +1,9 @@
 # Browserating
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Next.js](https://img.shields.io/badge/Next.js-16.0.8-black)](https://nextjs.org/)
+[![Next.js](https://img.shields.io/badge/Next.js-16.1.6-black)](https://nextjs.org/)
 [![React](https://img.shields.io/badge/React-19-blue)](https://reactjs.org/)
-[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3.4.1-38B2AC)](https://tailwindcss.com/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4.1.18-38B2AC)](https://tailwindcss.com/)
 [![SEO Optimized](https://img.shields.io/badge/SEO-Optimized-green)](https://browserating.com)
 
 **Browserating** is a comprehensive, SEO-optimized Next.js web application that provides unbiased browser performance rankings and comparisons across multiple platforms. Using data from Speedometer 3.1 benchmarks, it delivers detailed insights into browser efficiency, ad-blocking capabilities, and RAM usage to help users make informed decisions about their browsing experience.
@@ -12,27 +12,31 @@
 
 ## ✨ Features
 
-- **🔍 Comprehensive Browser Rankings**: Performance comparisons across macOS, Windows, Android, and iPad platforms
+- **🔍 Comprehensive Browser Rankings**: Performance comparisons across macOS (ARM & Intel), Windows, Android, and iPad platforms
 - **📱 Responsive Design**: Optimized for all devices with mobile-first approach
 - **🎯 Advanced Filtering**: Filter browsers by engine (Blink, Gecko, WebKit) and platform
 - **📊 Detailed Metrics**: Speedometer 3.1 scores, RAM usage, ad-blocking effectiveness, and more
 - **🎨 Interactive Charts**: Visual representations of performance data using Chart.js
 - **🌙 Dark Mode Support**: Full dark/light theme toggle with system preference detection
 - **🔒 Privacy-Focused**: Transparent data practices with dedicated privacy policy
-- **⚡ Server-Side Rendering**: Fast loading with Next.js SSR and optimized performance
-- **🔍 SEO Optimized**: Structured data, sitemaps, and meta tags for search engines
+- **⚡ Server-Side Rendering**: Fast loading with Next.js SSR and static generation
+- **🔍 SEO Optimized**: Structured data (JSON-LD), dynamic sitemaps, and meta tags for search engines
 - **♿ Accessibility**: WCAG compliant with keyboard navigation and screen reader support
+- **🔗 Individual Browser Pages**: Dedicated pages for each browser with cross-platform benchmarks (`/browsers/[slug]`)
+- **⚖️ Head-to-Head Comparisons**: Side-by-side browser comparison pages (`/compare/[browser-a]-vs-[browser-b]`)
+- **📋 Platform Pages**: Dedicated ranking pages per platform (`/platforms/[platform]`)
 
 ## 🚀 Tech Stack
 
-- **Framework**: Next.js 16.0.8 (App Router)
-- **Frontend**: React 19, Tailwind CSS 3.4.1
-- **Charts**: Chart.js 4.4.6 with react-chartjs-2
-- **Icons**: Lucide React 0.562.0
-- **Analytics**: Vercel Analytics 1.5.0
+- **Framework**: Next.js 16.1.6 (App Router)
+- **Frontend**: React 19, Tailwind CSS 4.1.18
+- **Language**: TypeScript (dev), JavaScript
+- **Charts**: Chart.js 4.5.1 with react-chartjs-2 5.3.0
+- **Icons**: Lucide React 0.576.0
+- **Analytics**: Vercel Analytics 1.6.1, counter.dev
 - **Data Storage**: JSON files
 - **Deployment**: Vercel
-- **Development Tools**: ESLint, Prettier, Husky
+- **Development Tools**: ESLint 10, Prettier 3.8.1, Husky 9, lint-staged, commitlint
 
 ## 📋 Prerequisites
 
@@ -72,13 +76,25 @@ The application provides several key functionalities:
 ### Browser Rankings
 
 - View comprehensive performance rankings across all supported platforms
-- Sort and filter browsers by various criteria
+- Sort and filter browsers by engine (Blink, Gecko, WebKit) and platform
 - Access detailed metrics for each browser version
 
-### Platform-Specific Views
+### Individual Browser Pages (`/browsers/[slug]`)
 
-- **macOS**: ARM and Intel processor comparisons
-- **Windows**: Gaming and productivity optimizations
+- Dedicated page per browser with cross-platform benchmark data
+- Links to the browser's official website
+- Quick jump to head-to-head comparison
+
+### Head-to-Head Comparisons (`/compare/[browser-a]-vs-[browser-b]`)
+
+- Side-by-side Speedometer 3.1 score comparison across all platforms
+- Winner highlighted per platform
+
+### Platform-Specific Views (`/platforms/[platform]`)
+
+- **macOS ARM**: Apple Silicon browser rankings
+- **macOS Intel**: Intel processor browser rankings
+- **Windows**: Windows browser performance
 - **Android**: Mobile browser performance analysis
 - **iPad**: iPadOS-specific browser testing
 
@@ -189,4 +205,4 @@ If you find Browserating useful, please consider supporting its development:
 
 ---
 
-_Built with ❤️ using Next.js and React. Helping users choose the best browser for their needs since 2024._
+_Built with ❤️ using Next.js and React. Helping users choose the best browser for their needs since 2024. Updated for 2026._
