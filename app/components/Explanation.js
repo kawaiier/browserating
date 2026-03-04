@@ -102,7 +102,7 @@ export default function Explanation() {
       <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-12">
         <StatCard
           icon="🌐"
-          number="100+"
+          number="64+"
           label="Browsers Tested"
           description="Comprehensive coverage of major browsers across all platforms"
         />

@@ -1,6 +1,7 @@
 export default function Newsletter() {
   return (
     <section className="relative overflow-hidden py-16 px-4 sm:px-6 lg:px-8">
+      <h2 className="sr-only">Stay Updated on Browser Performance</h2>
       {/* Background pattern */}
 
       <div className="bg-white/10 dark:bg-gray-800/20 backdrop-blur-sm rounded-xl p-4 sm:p-8 shadow-2xl border border-white/20 dark:border-gray-700/30">

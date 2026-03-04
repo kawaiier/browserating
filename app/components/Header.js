@@ -132,7 +132,7 @@ export default function Header({ lastModified }) {
             {/* Quick Stats */}
             <div className="flex flex-wrap gap-4 lg:gap-6 text-center lg:text-left">
               <div className="bg-white/10 dark:bg-gray-800/20 backdrop-blur-sm rounded-xl px-4 py-3 border border-white/20 dark:border-gray-700/30">
-                <div className="text-2xl font-bold text-gray-900 dark:text-white">200+</div>
+                <div className="text-2xl font-bold text-gray-900 dark:text-white">64+</div>
                 <div className="text-sm text-gray-600 dark:text-gray-400">Browsers Tested</div>
               </div>
               <div className="bg-white/10 dark:bg-gray-800/20 backdrop-blur-sm rounded-xl px-4 py-3 border border-white/20 dark:border-gray-700/30">
@@ -151,7 +151,10 @@ export default function Header({ lastModified }) {
             {/* Main Title */}
             <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-6 transition-all duration-1000 delay-300 translate-y-0 opacity-100">
               <span className="bg-gradient-to-r from-purple-600 via-blue-600 to-indigo-600 bg-clip-text text-transparent leading-normal block pb-3">
-                Browserating
+                Browser Performance Rankings
+              </span>
+              <span className="block text-2xl sm:text-3xl md:text-4xl font-medium text-gray-700 dark:text-gray-300 mt-2">
+                by BrowseRating
               </span>
             </h1>
 
