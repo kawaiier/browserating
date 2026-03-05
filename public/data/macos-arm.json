@@ -9,7 +9,8 @@
           "speedometer3": 42.97,
           "ram": null,
           "adblock": null
-        }
+        },
+        "date": "2026-02-22"
       },
       {
         "version": "1.130.1",
@@ -17,7 +18,8 @@
           "speedometer3": 42.68,
           "ram": null,
           "adblock": null
-        }
+        },
+        "date": "2026-01-18"
       },
       {
         "version": "1.124.0",
@@ -25,7 +27,8 @@
           "speedometer3": 42.57,
           "ram": null,
           "adblock": null
-        }
+        },
+        "date": "2025-12-09"
       },
       {
         "version": "1.120.0",
@@ -33,7 +36,8 @@
           "speedometer3": 41.77,
           "ram": null,
           "adblock": null
-        }
+        },
+        "date": "2025-11-08"
       },
       {
         "version": "1.115.0",
@@ -41,7 +45,8 @@
           "speedometer3": 41.16,
           "ram": null,
           "adblock": null
-        }
+        },
+        "date": "2025-10-05"
       },
       {
         "version": "1.111.0",
@@ -49,7 +54,8 @@
           "speedometer3": 42.26,
           "ram": null,
           "adblock": null
-        }
+        },
+        "date": "2025-09-09"
       },
       {
         "version": "1.108.0",
@@ -57,7 +63,8 @@
           "speedometer3": 43.74,
           "ram": null,
           "adblock": null
-        }
+        },
+        "date": "2025-08-16"
       },
       {
         "version": "1.105.0",
@@ -65,7 +72,8 @@
           "speedometer3": 42.97,
           "ram": null,
           "adblock": null
-        }
+        },
+        "date": "2025-07-30"
       },
       {
         "version": "1.97.1",
@@ -73,7 +81,8 @@
           "speedometer3": 41.63,
           "ram": 4853.1,
           "adblock": 96
-        }
+        },
+        "date": "2025-06-10"
       },
       {
         "version": "1.91.2",
@@ -81,7 +90,8 @@
           "speedometer3": 41.32,
           "ram": 4853.1,
           "adblock": 96
-        }
+        },
+        "date": "2025-05-03"
       },
       {
         "version": "1.89.0",
@@ -89,7 +99,8 @@
           "speedometer3": 43.23,
           "ram": 4853.1,
           "adblock": 96
-        }
+        },
+        "date": "2025-04-06"
       },
       {
         "version": "1.83.0",
@@ -97,7 +108,8 @@
           "speedometer3": 38.52,
           "ram": 159,
           "adblock": 96
-        }
+        },
+        "date": "2025-02-23"
       },
       {
         "version": "1.79.1",
@@ -105,26 +117,30 @@
           "speedometer3": 37.23,
           "ram": 156,
           "adblock": 96
-        }
+        },
+        "date": "2025-02-01"
       },
       {
         "version": "1.74.0",
         "scores": {
           "speedometer3": 37.37,
           "ram": 160
-        }
+        },
+        "date": "2024-12-28"
       },
       {
         "version": "1.70.0",
         "scores": {
           "speedometer3": 38.03
-        }
+        },
+        "date": "2024-11-26"
       },
       {
         "version": "1.66.0",
         "scores": {
           "speedometer3": 36.87
-        }
+        },
+        "date": "2024-10-27"
       }
     ]
   },
@@ -138,7 +154,8 @@
           "speedometer3": 36.37,
           "ram": null,
           "adblock": null
-        }
+        },
+        "date": "2026-02-22"
       },
       {
         "version": "1.3.2",
@@ -146,9 +163,9 @@
           "speedometer3": 36.7,
           "ram": null,
           "adblock": null
-        }
+        },
+        "date": "2026-01-18"
       }
-
     ]
   },
   {
@@ -161,7 +178,8 @@
           "speedometer3": 46.19,
           "ram": null,
           "adblock": null
-        }
+        },
+        "date": "2026-02-22"
       },
       {
         "version": "1.86.139",
@@ -169,7 +187,8 @@
           "speedometer3": 45.71,
           "ram": null,
           "adblock": null
-        }
+        },
+        "date": "2026-01-18"
       },
       {
         "version": "1.85.111",
@@ -177,7 +196,8 @@
           "speedometer3": 45.9,
           "ram": null,
           "adblock": null
-        }
+        },
+        "date": "2025-12-09"
       },
       {
         "version": "1.84.135",
@@ -185,7 +205,8 @@
           "speedometer3": 43.47,
           "ram": null,
           "adblock": null
-        }
+        },
+        "date": "2025-11-08"
       },
       {
         "version": "1.83.109",
@@ -193,7 +214,8 @@
           "speedometer3": 44.2,
           "ram": null,
           "adblock": null
-        }
+        },
+        "date": "2025-10-05"
       },
       {
         "version": "1.82.161",
@@ -201,7 +223,8 @@
           "speedometer3": 45.96,
           "ram": null,
           "adblock": null
-        }
+        },
+        "date": "2025-09-09"
       },
       {
         "version": "1.81.135",
@@ -209,7 +232,8 @@
           "speedometer3": 45.9,
           "ram": null,
           "adblock": null
-        }
+        },
+        "date": "2025-08-16"
       },
       {
         "version": "1.80.124",
@@ -217,7 +241,8 @@
           "speedometer3": 44.13,
           "ram": null,
           "adblock": null
-        }
+        },
+        "date": "2025-07-30"
       },
       {
         "version": "1.79.119",
@@ -225,7 +250,8 @@
           "speedometer3": 43.48,
           "ram": 4116.6,
           "adblock": 96
-        }
+        },
+        "date": "2025-06-10"
       },
       {
         "version": "1.78.94",
@@ -233,7 +259,8 @@
           "speedometer3": 43.73,
           "ram": 4116.6,
           "adblock": 96
-        }
+        },
+        "date": "2025-05-03"
       },
       {
         "version": "1.77.95",
@@ -241,7 +268,8 @@
           "speedometer3": 43.77,
           "ram": 4116.6,
           "adblock": 96
-        }
+        },
+        "date": "2025-04-06"
       },
       {
         "version": "1.75.180",
@@ -249,7 +277,8 @@
           "speedometer3": 40.91,
           "ram": 172,
           "adblock": 96
-        }
+        },
+        "date": "2025-02-23"
       },
       {
         "version": "1.74.51",
@@ -257,26 +286,30 @@
           "speedometer3": 39.37,
           "ram": 170,
           "adblock": 96
-        }
+        },
+        "date": "2025-02-01"
       },
       {
         "version": "1.73.104",
         "scores": {
           "speedometer3": 39.07,
           "ram": 190
-        }
+        },
+        "date": "2024-12-28"
       },
       {
         "version": "1.73.91",
         "scores": {
           "speedometer3": 39.2
-        }
+        },
+        "date": "2024-11-26"
       },
       {
         "version": "1.71.118",
         "scores": {
           "speedometer3": 39.17
-        }
+        },
+        "date": "2024-10-27"
       }
     ]
   },
@@ -290,7 +323,8 @@
           "speedometer3": 39.88,
           "ram": null,
           "adblock": null
-        }
+        },
+        "date": "2026-02-22"
       },
       {
         "version": "0.36.2.0",
@@ -298,7 +332,8 @@
           "speedometer3": 37.43,
           "ram": null,
           "adblock": null
-        }
+        },
+        "date": "2026-01-18"
       },
       {
         "version": "0.30.0",
@@ -306,7 +341,8 @@
           "speedometer3": 38.79,
           "ram": null,
           "adblock": null
-        }
+        },
+        "date": "2025-12-09"
       },
       {
         "version": "0.29.0",
@@ -314,7 +350,8 @@
           "speedometer3": 38.08,
           "ram": null,
           "adblock": null
-        }
+        },
+        "date": "2025-11-08"
       },
       {
         "version": "0.26.0",
@@ -322,7 +359,8 @@
           "speedometer3": 37.99,
           "ram": null,
           "adblock": null
-        }
+        },
+        "date": "2025-10-05"
       },
       {
         "version": "0.23.1",
@@ -330,7 +368,8 @@
           "speedometer3": 38.87,
           "ram": null,
           "adblock": null
-        }
+        },
+        "date": "2025-09-09"
       },
       {
         "version": "0.20.0",
@@ -338,7 +377,8 @@
           "speedometer3": 39.05,
           "ram": null,
           "adblock": null
-        }
+        },
+        "date": "2025-09-09"
       },
       {
         "version": "0.16.0",
@@ -346,7 +386,8 @@
           "speedometer3": 38.6,
           "ram": null,
           "adblock": null
-        }
+        },
+        "date": "2025-09-09"
       }
     ]
   },
@@ -360,7 +401,8 @@
           "speedometer3": 34.17,
           "ram": null,
           "adblock": null
-        }
+        },
+        "date": "2026-02-22"
       },
       {
         "version": "20260115010550000",
@@ -368,7 +410,8 @@
           "speedometer3": 33.62,
           "ram": null,
           "adblock": null
-        }
+        },
+        "date": "2026-01-18"
       }
     ]
   },
@@ -382,7 +425,8 @@
           "speedometer3": 47.39,
           "ram": null,
           "adblock": null
-        }
+        },
+        "date": "2026-02-22"
       },
       {
         "version": "37648",
@@ -390,7 +434,8 @@
           "speedometer3": 47.02,
           "ram": null,
           "adblock": null
-        }
+        },
+        "date": "2026-01-18"
       },
       {
         "version": "25826",
@@ -398,7 +443,8 @@
           "speedometer3": 46.77,
           "ram": null,
           "adblock": null
-        }
+        },
+        "date": "2025-11-08"
       },
       {
         "version": "21337",
@@ -406,7 +452,8 @@
           "speedometer3": 44.7,
           "ram": null,
           "adblock": null
-        }
+        },
+        "date": "2025-10-05"
       },
       {
         "version": "19064",
@@ -414,7 +461,8 @@
           "speedometer3": 46.97,
           "ram": null,
           "adblock": null
-        }
+        },
+        "date": "2025-09-09"
       }
     ]
   },
@@ -427,62 +475,71 @@
         "scores": {
           "speedometer3": 44.78,
           "ram": null
-        }
+        },
+        "date": "2026-02-22"
       },
       {
         "version": "1.15.0 (73651)-RC",
         "scores": {
           "speedometer3": 43.6,
           "ram": null
-        }
+        },
+        "date": "2026-01-18"
       },
       {
         "version": "1.5.0 (70554)",
         "scores": {
           "speedometer3": 34.42,
           "ram": null
-        }
+        },
+        "date": "2025-11-08"
       },
       {
         "version": "0.49.0",
         "scores": {
           "speedometer3": 41.63,
           "ram": null
-        }
+        },
+        "date": "2025-10-05"
       },
       {
         "version": "0.46.0",
         "scores": {
           "speedometer3": 42.63,
           "ram": null
-        }
+        },
+        "date": "2025-09-09"
       },
       {
         "version": "0.43.0",
         "scores": {
           "speedometer3": 44.67,
           "ram": null
-        }
+        },
+        "date": "2025-08-16"
       },
       {
         "version": "0.40.0",
         "scores": {
           "speedometer3": 43.3,
           "ram": null
-        }
+        },
+        "date": "2025-07-30"
       },
       {
         "version": "0.32.1",
         "scores": {
           "speedometer3": 34.87,
           "ram": 2861
-        }
+        },
+        "date": "2025-06-10"
       },
       {
         "version": "0.26.0",
         "scores": {
           "speedometer3": 40.83
-        }
+        },
+        "date": "2025-10-05"
       }
     ]
   },
@@ -495,82 +552,94 @@
         "scores": {
           "speedometer3": 36.5,
           "adblock": null
-        }
+        },
+        "date": "2026-02-22"
       },
       {
         "version": "1.172.0",
         "scores": {
           "speedometer3": 36.67,
           "adblock": null
-        }
+        },
+        "date": "2026-01-18"
       },
       {
         "version": "1.168.0",
         "scores": {
           "speedometer3": 37.23,
           "adblock": null
-        }
+        },
+        "date": "2025-12-09"
       },
       {
         "version": "1.163.0",
         "scores": {
           "speedometer3": 34.5,
           "adblock": null
-        }
+        },
+        "date": "2025-11-08"
       },
       {
         "version": "1.158.0",
         "scores": {
           "speedometer3": 36.37,
           "adblock": null
-        }
+        },
+        "date": "2025-10-05"
       },
       {
         "version": "1.155.0",
         "scores": {
           "speedometer3": 36.73,
           "adblock": null
-        }
+        },
+        "date": "2025-09-09"
       },
       {
         "version": "1.151.0",
         "scores": {
           "speedometer3": 36.07,
           "adblock": null
-        }
+        },
+        "date": "2025-08-16"
       },
       {
         "version": "1.149.0",
         "scores": {
           "speedometer3": 36.03,
           "adblock": null
-        }
+        },
+        "date": "2025-07-30"
       },
       {
         "version": "1.141.1",
         "scores": {
           "speedometer3": 35.13,
           "adblock": 60
-        }
+        },
+        "date": "2025-06-10"
       },
       {
         "version": "1.118.1",
         "scores": {
           "speedometer3": 35.07,
           "adblock": 60
-        }
+        },
+        "date": "2024-12-28"
       },
       {
         "version": "1.115.0",
         "scores": {
           "speedometer3": 34
-        }
+        },
+        "date": "2025-10-05"
       },
       {
         "version": "1.110.0",
         "scores": {
           "speedometer3": 34.6
-        }
+        },
+        "date": "2024-10-27"
       }
     ]
   },
@@ -583,42 +652,48 @@
         "scores": {
           "speedometer3": 27.43,
           "ram": null
-        }
+        },
+        "date": "2026-01-18"
       },
       {
         "version": "CE 1.0.15",
         "scores": {
           "speedometer3": 19.23,
           "ram": null
-        }
+        },
+        "date": "2025-11-08"
       },
       {
         "version": "CE 1.0.12",
         "scores": {
           "speedometer3": 27.57,
           "ram": null
-        }
+        },
+        "date": "2025-10-05"
       },
       {
         "version": "CE 1.0.3",
         "scores": {
           "speedometer3": 37.78,
           "ram": null
-        }
+        },
+        "date": "2025-09-09"
       },
       {
         "version": "2.4.1",
         "scores": {
           "speedometer3": 37.78,
           "ram": null
-        }
+        },
+        "date": "2025-07-30"
       },
       {
         "version": "2.0.1",
         "scores": {
           "speedometer3": 37.13,
           "ram": 2999
-        }
+        },
+        "date": "2025-06-10"
       }
     ]
   },
@@ -632,7 +707,8 @@
           "speedometer3": 38.19,
           "ram": null,
           "adblock": null
-        }
+        },
+        "date": "2026-02-22"
       },
       {
         "version": "147.0.1",
@@ -640,7 +716,8 @@
           "speedometer3": 38.6,
           "ram": null,
           "adblock": null
-        }
+        },
+        "date": "2026-01-18"
       },
       {
         "version": "145.0.2",
@@ -648,7 +725,8 @@
           "speedometer3": 37.9,
           "ram": null,
           "adblock": null
-        }
+        },
+        "date": "2025-12-09"
       },
       {
         "version": "144.0.2",
@@ -656,7 +734,8 @@
           "speedometer3": 38.41,
           "ram": null,
           "adblock": null
-        }
+        },
+        "date": "2025-11-08"
       },
       {
         "version": "143.0.4",
@@ -664,7 +743,8 @@
           "speedometer3": 36.83,
           "ram": null,
           "adblock": null
-        }
+        },
+        "date": "2025-10-05"
       },
       {
         "version": "142.0.1",
@@ -672,7 +752,8 @@
           "speedometer3": 37.93,
           "ram": null,
           "adblock": null
-        }
+        },
+        "date": "2025-09-09"
       },
       {
         "version": "141.0.3",
@@ -680,7 +761,8 @@
           "speedometer3": 38.53,
           "ram": null,
           "adblock": null
-        }
+        },
+        "date": "2025-08-16"
       },
       {
         "version": "141.0",
@@ -688,7 +770,8 @@
           "speedometer3": 38.2,
           "ram": null,
           "adblock": null
-        }
+        },
+        "date": "2025-07-30"
       },
       {
         "version": "139.0.1",
@@ -696,7 +779,8 @@
           "speedometer3": 35.92,
           "ram": 18600,
           "adblock": 34
-        }
+        },
+        "date": "2025-06-10"
       },
       {
         "version": "138.0.1",
@@ -704,7 +788,8 @@
           "speedometer3": 38.67,
           "ram": 18600,
           "adblock": 34
-        }
+        },
+        "date": "2025-05-03"
       },
       {
         "version": "137.0",
@@ -712,7 +797,8 @@
           "speedometer3": 38.53,
           "ram": 18600,
           "adblock": 34
-        }
+        },
+        "date": "2025-04-06"
       },
       {
         "version": "135.0.1",
@@ -720,7 +806,8 @@
           "speedometer3": 37.63,
           "ram": 602,
           "adblock": 34
-        }
+        },
+        "date": "2025-02-23"
       },
       {
         "version": "134.0.2",
@@ -728,26 +815,30 @@
           "speedometer3": 36.2,
           "ram": 484,
           "adblock": 34
-        }
+        },
+        "date": "2025-02-01"
       },
       {
         "version": "133.0.3",
         "scores": {
           "speedometer3": 36.98,
           "ram": 459
-        }
+        },
+        "date": "2024-12-28"
       },
       {
         "version": "132.0.2",
         "scores": {
           "speedometer3": 36.88
-        }
+        },
+        "date": "2024-11-26"
       },
       {
         "version": "131.0.3",
         "scores": {
           "speedometer3": 37.36
-        }
+        },
+        "date": "2024-10-27"
       }
     ]
   },
@@ -761,7 +852,8 @@
           "speedometer3": 39.09,
           "ram": null,
           "adblock": null
-        }
+        },
+        "date": "2026-02-22"
       },
       {
         "version": "148.0b3",
@@ -769,7 +861,8 @@
           "speedometer3": 37.2,
           "ram": null,
           "adblock": null
-        }
+        },
+        "date": "2026-01-18"
       },
       {
         "version": "146.0b9",
@@ -777,7 +870,8 @@
           "speedometer3": 39.53,
           "ram": null,
           "adblock": null
-        }
+        },
+        "date": "2025-12-09"
       },
       {
         "version": "145.0b9",
@@ -785,7 +879,8 @@
           "speedometer3": 38.37,
           "ram": null,
           "adblock": null
-        }
+        },
+        "date": "2025-11-08"
       },
       {
         "version": "144.0b9",
@@ -793,7 +888,8 @@
           "speedometer3": 38.23,
           "ram": null,
           "adblock": null
-        }
+        },
+        "date": "2025-10-05"
       },
       {
         "version": "143.0b9",
@@ -801,7 +897,8 @@
           "speedometer3": 38.1,
           "ram": null,
           "adblock": null
-        }
+        },
+        "date": "2025-09-09"
       },
       {
         "version": "142.0b9",
@@ -809,7 +906,8 @@
           "speedometer3": 37.2,
           "ram": null,
           "adblock": null
-        }
+        },
+        "date": "2025-08-16"
       },
       {
         "version": "142.0b4",
@@ -817,7 +915,8 @@
           "speedometer3": 38.35,
           "ram": null,
           "adblock": null
-        }
+        },
+        "date": "2025-07-30"
       },
       {
         "version": "140.0b6",
@@ -825,7 +924,8 @@
           "speedometer3": 35.59,
           "ram": 17455,
           "adblock": 34
-        }
+        },
+        "date": "2025-06-10"
       },
       {
         "version": "139.0b3",
@@ -833,7 +933,8 @@
           "speedometer3": 36.81,
           "ram": 17455,
           "adblock": 34
-        }
+        },
+        "date": "2025-05-03"
       },
       {
         "version": "138.0b3",
@@ -841,7 +942,8 @@
           "speedometer3": 38.28,
           "ram": 17455,
           "adblock": 34
-        }
+        },
+        "date": "2025-04-06"
       },
       {
         "version": "136.0b9",
@@ -849,7 +951,8 @@
           "speedometer3": 38.5,
           "ram": 708,
           "adblock": 34
-        }
+        },
+        "date": "2025-02-23"
       },
       {
         "version": "135.0b9",
@@ -857,26 +960,30 @@
           "speedometer3": 36.47,
           "ram": 705,
           "adblock": 34
-        }
+        },
+        "date": "2025-02-01"
       },
       {
         "version": "134.0b10",
         "scores": {
           "speedometer3": 38.09,
           "ram": 609
-        }
+        },
+        "date": "2024-12-28"
       },
       {
         "version": "134.0b1",
         "scores": {
           "speedometer3": 36.27
-        }
+        },
+        "date": "2024-11-26"
       },
       {
         "version": "132.0b9",
         "scores": {
           "speedometer3": 37.5
-        }
+        },
+        "date": "2024-10-27"
       }
     ]
   },
@@ -890,7 +997,8 @@
           "speedometer3": 37.84,
           "ram": null,
           "adblock": null
-        }
+        },
+        "date": "2026-02-22"
       },
       {
         "version": "149.0a1 (2026-01-18)",
@@ -898,7 +1006,8 @@
           "speedometer3": 38.63,
           "ram": null,
           "adblock": null
-        }
+        },
+        "date": "2026-01-18"
       },
       {
         "version": "148.0a1 (2025-12-08)",
@@ -906,7 +1015,8 @@
           "speedometer3": 39.63,
           "ram": null,
           "adblock": null
-        }
+        },
+        "date": "2025-12-09"
       },
       {
         "version": "146.0a1 (2025-11-07)",
@@ -914,7 +1024,8 @@
           "speedometer3": 38.2,
           "ram": null,
           "adblock": null
-        }
+        },
+        "date": "2025-11-08"
       },
       {
         "version": "145.0a1 (2025-10-04)",
@@ -922,7 +1033,8 @@
           "speedometer3": 35.73,
           "ram": null,
           "adblock": null
-        }
+        },
+        "date": "2025-10-05"
       },
       {
         "version": "144.0a1 (2025-09-09)",
@@ -930,7 +1042,8 @@
           "speedometer3": 39.15,
           "ram": null,
           "adblock": null
-        }
+        },
+        "date": "2025-09-09"
       },
       {
         "version": "143.0a1 (2025-08-16)",
@@ -938,7 +1051,8 @@
           "speedometer3": 37.73,
           "ram": null,
           "adblock": null
-        }
+        },
+        "date": "2025-08-16"
       },
       {
         "version": "143.0a1 (2025-07-29)",
@@ -946,7 +1060,8 @@
           "speedometer3": 37.7,
           "ram": null,
           "adblock": null
-        }
+        },
+        "date": "2025-07-30"
       },
       {
         "version": "141.0a1 (2025-06-07)",
@@ -954,7 +1069,8 @@
           "speedometer3": 35.85,
           "ram": 18658,
           "adblock": 34
-        }
+        },
+        "date": "2025-06-10"
       },
       {
         "version": "140.0a1 (2025-05-02)",
@@ -962,7 +1078,8 @@
           "speedometer3": 37.66,
           "ram": 18658,
           "adblock": 34
-        }
+        },
+        "date": "2025-05-03"
       },
       {
         "version": "139.0a1 (2025-04-06)",
@@ -970,7 +1087,8 @@
           "speedometer3": 38.2,
           "ram": 18658,
           "adblock": 34
-        }
+        },
+        "date": "2025-04-06"
       },
       {
         "version": "137.0a1 (2025-02-22)",
@@ -978,7 +1096,8 @@
           "speedometer3": 37.6,
           "ram": 615,
           "adblock": 34
-        }
+        },
+        "date": "2025-02-23"
       },
       {
         "version": "136.0a1 (2025-02-01)",
@@ -986,26 +1105,30 @@
           "speedometer3": 35.8,
           "ram": 645,
           "adblock": 34
-        }
+        },
+        "date": "2025-02-01"
       },
       {
         "version": "135.0a1 (2024-12-27)",
         "scores": {
           "speedometer3": 37.07,
           "ram": 650
-        }
+        },
+        "date": "2024-12-28"
       },
       {
         "version": "135.0a1 (2024-11-23)",
         "scores": {
           "speedometer3": 36.33
-        }
+        },
+        "date": "2024-12-28"
       },
       {
         "version": "133.0a1",
         "scores": {
           "speedometer3": 36.57
-        }
+        },
+        "date": "2024-10-27"
       }
     ]
   },
@@ -1019,7 +1142,8 @@
           "speedometer3": 30.98,
           "ram": null,
           "adblock": null
-        }
+        },
+        "date": "2026-02-22"
       },
       {
         "version": "12.10.2",
@@ -1027,7 +1151,8 @@
           "speedometer3": 30.08,
           "ram": null,
           "adblock": null
-        }
+        },
+        "date": "2026-01-18"
       },
       {
         "version": "12.8.3",
@@ -1035,7 +1160,8 @@
           "speedometer3": 31.7,
           "ram": null,
           "adblock": null
-        }
+        },
+        "date": "2025-12-09"
       },
       {
         "version": "12.4.0",
@@ -1043,7 +1169,8 @@
           "speedometer3": 30.3,
           "ram": null,
           "adblock": null
-        }
+        },
+        "date": "2025-11-08"
       },
       {
         "version": "143.0.5",
@@ -1051,7 +1178,8 @@
           "speedometer3": 29.54,
           "ram": null,
           "adblock": null
-        }
+        },
+        "date": "2025-10-05"
       }
     ]
   },
@@ -1065,7 +1193,8 @@
           "speedometer3": 49.03,
           "ram": null,
           "adblock": null
-        }
+        },
+        "date": "2026-02-22"
       },
       {
         "version": "144.0.7559.60",
@@ -1073,7 +1202,8 @@
           "speedometer3": 48.87,
           "ram": null,
           "adblock": null
-        }
+        },
+        "date": "2026-01-18"
       },
       {
         "version": "143.0.7499.41",
@@ -1081,7 +1211,8 @@
           "speedometer3": 48.47,
           "ram": null,
           "adblock": null
-        }
+        },
+        "date": "2025-12-09"
       },
       {
         "version": "142.0.7444.135",
@@ -1089,7 +1220,8 @@
           "speedometer3": 46.61,
           "ram": null,
           "adblock": null
-        }
+        },
+        "date": "2025-11-08"
       },
       {
         "version": "141.0.7390.55",
@@ -1097,7 +1229,8 @@
           "speedometer3": 46.87,
           "ram": null,
           "adblock": null
-        }
+        },
+        "date": "2025-10-05"
       },
       {
         "version": "140.0.7339.81",
@@ -1105,7 +1238,8 @@
           "speedometer3": 48.61,
           "ram": null,
           "adblock": null
-        }
+        },
+        "date": "2025-09-09"
       },
       {
         "version": "139.0.7258.128",
@@ -1113,7 +1247,8 @@
           "speedometer3": 48.8,
           "ram": null,
           "adblock": null
-        }
+        },
+        "date": "2025-08-16"
       },
       {
         "version": "138.0.7204.184",
@@ -1121,7 +1256,8 @@
           "speedometer3": 47.97,
           "ram": null,
           "adblock": null
-        }
+        },
+        "date": "2025-07-30"
       },
       {
         "version": "137.0.7151.69",
@@ -1129,7 +1265,8 @@
           "speedometer3": 45.63,
           "ram": 8194.1,
           "adblock": 42
-        }
+        },
+        "date": "2025-06-10"
       },
       {
         "version": "136.0.7103.49",
@@ -1137,7 +1274,8 @@
           "speedometer3": 45.27,
           "ram": 8194.1,
           "adblock": 42
-        }
+        },
+        "date": "2025-05-03"
       },
       {
         "version": "135.0.7049.42",
@@ -1145,7 +1283,8 @@
           "speedometer3": 47.4,
           "ram": 8194.1,
           "adblock": 42
-        }
+        },
+        "date": "2025-04-06"
       },
       {
         "version": "133.0.6943.127",
@@ -1153,7 +1292,8 @@
           "speedometer3": 43.83,
           "ram": 93,
           "adblock": 42
-        }
+        },
+        "date": "2025-02-23"
       },
       {
         "version": "132.0.6834.160",
@@ -1161,26 +1301,30 @@
           "speedometer3": 42.37,
           "ram": 90,
           "adblock": 42
-        }
+        },
+        "date": "2025-02-01"
       },
       {
         "version": "131.0.6778.205",
         "scores": {
           "speedometer3": 42.78,
           "ram": 74
-        }
+        },
+        "date": "2024-12-28"
       },
       {
         "version": "131.0.6778.86",
         "scores": {
           "speedometer3": 42.03
-        }
+        },
+        "date": "2024-11-26"
       },
       {
         "version": "130.0.6723.70",
         "scores": {
           "speedometer3": 40.37
-        }
+        },
+        "date": "2024-10-27"
       }
     ]
   },
@@ -1194,7 +1338,8 @@
           "speedometer3": 48.13,
           "ram": null,
           "adblock": null
-        }
+        },
+        "date": "2026-02-22"
       },
       {
         "version": "146.0.7641.1",
@@ -1202,7 +1347,8 @@
           "speedometer3": 11.07,
           "ram": null,
           "adblock": null
-        }
+        },
+        "date": "2026-01-18"
       },
       {
         "version": "145.0.7569.0",
@@ -1210,7 +1356,8 @@
           "speedometer3": 48.5,
           "ram": null,
           "adblock": null
-        }
+        },
+        "date": "2025-12-09"
       },
       {
         "version": "144.0.7516.0",
@@ -1218,7 +1365,8 @@
           "speedometer3": 47.78,
           "ram": null,
           "adblock": null
-        }
+        },
+        "date": "2025-11-08"
       },
       {
         "version": "143.0.7453.0",
@@ -1226,7 +1374,8 @@
           "speedometer3": 46.4,
           "ram": null,
           "adblock": null
-        }
+        },
+        "date": "2025-10-05"
       },
       {
         "version": "142.0.7403.0",
@@ -1234,7 +1383,8 @@
           "speedometer3": 37.24,
           "ram": null,
           "adblock": null
-        }
+        },
+        "date": "2025-09-09"
       },
       {
         "version": "141.0.7359.0",
@@ -1242,7 +1392,8 @@
           "speedometer3": 37.7,
           "ram": null,
           "adblock": null
-        }
+        },
+        "date": "2025-08-16"
       },
       {
         "version": "140.0.7327.0",
@@ -1250,7 +1401,8 @@
           "speedometer3": 46.91,
           "ram": null,
           "adblock": null
-        }
+        },
+        "date": "2025-07-30"
       },
       {
         "version": "139.0.7226.0",
@@ -1258,7 +1410,8 @@
           "speedometer3": 37.2,
           "ram": 9178.4,
           "adblock": 42
-        }
+        },
+        "date": "2025-06-10"
       },
       {
         "version": "138.0.7158.0",
@@ -1266,7 +1419,8 @@
           "speedometer3": 46.27,
           "ram": 9178.4,
           "adblock": 42
-        }
+        },
+        "date": "2025-05-03"
       },
       {
         "version": "137.0.7111.0",
@@ -1274,7 +1428,8 @@
           "speedometer3": 43.1,
           "ram": 9178.4,
           "adblock": 42
-        }
+        },
+        "date": "2025-04-06"
       },
       {
         "version": "133.0.6943.127",
@@ -1282,7 +1437,8 @@
           "speedometer3": 44.13,
           "ram": 106,
           "adblock": 42
-        }
+        },
+        "date": "2025-02-23"
       },
       {
         "version": "134.0.6992.0",
@@ -1290,26 +1446,30 @@
           "speedometer3": 43.3,
           "ram": 96,
           "adblock": 42
-        }
+        },
+        "date": "2025-02-01"
       },
       {
         "version": "133.0.6923.0",
         "scores": {
           "speedometer3": 43.53,
           "ram": 94
-        }
+        },
+        "date": "2024-12-28"
       },
       {
         "version": "133.0.6860.0",
         "scores": {
           "speedometer3": 41.48
-        }
+        },
+        "date": "2024-11-26"
       },
       {
         "version": "132.0.6799.0",
         "scores": {
           "speedometer3": 42.53
-        }
+        },
+        "date": "2024-10-27"
       }
     ]
   },
@@ -1323,7 +1483,8 @@
           "speedometer3": 46.57,
           "ram": null,
           "adblock": null
-        }
+        },
+        "date": "2026-02-22"
       },
       {
         "version": "0.7.10.1",
@@ -1331,7 +1492,8 @@
           "speedometer3": 45.83,
           "ram": null,
           "adblock": null
-        }
+        },
+        "date": "2026-01-18"
       },
       {
         "version": "0.7.1.1",
@@ -1339,7 +1501,8 @@
           "speedometer3": 46.37,
           "ram": null,
           "adblock": null
-        }
+        },
+        "date": "2025-12-09"
       },
       {
         "version": "0.6.3.1",
@@ -1347,7 +1510,8 @@
           "speedometer3": 46.55,
           "ram": null,
           "adblock": null
-        }
+        },
+        "date": "2025-11-08"
       },
       {
         "version": "0.4.13.1",
@@ -1355,7 +1519,8 @@
           "speedometer3": 44.91,
           "ram": null,
           "adblock": null
-        }
+        },
+        "date": "2025-10-05"
       }
     ]
   },
@@ -1369,7 +1534,8 @@
           "speedometer3": 30.73,
           "ram": null,
           "adblock": null
-        }
+        },
+        "date": "2025-11-08"
       },
       {
         "version": "0.30.1-0",
@@ -1377,7 +1543,8 @@
           "speedometer3": 38.93,
           "ram": null,
           "adblock": null
-        }
+        },
+        "date": "2025-10-05"
       },
       {
         "version": "0.27",
@@ -1385,7 +1552,8 @@
           "speedometer3": 39.2,
           "ram": null,
           "adblock": null
-        }
+        },
+        "date": "2025-08-16"
       },
       {
         "version": "0.26.2",
@@ -1393,7 +1561,8 @@
           "speedometer3": 38.93,
           "ram": null,
           "adblock": null
-        }
+        },
+        "date": "2025-08-16"
       }
     ]
   },
@@ -1407,7 +1576,8 @@
           "speedometer3": 37.22,
           "ram": null,
           "adblock": null
-        }
+        },
+        "date": "2025-11-08"
       }
     ]
   },
@@ -1421,7 +1591,8 @@
           "speedometer3": 48.46,
           "ram": null,
           "adblock": null
-        }
+        },
+        "date": "2026-02-22"
       },
       {
         "version": "144.0.3719.82",
@@ -1429,7 +1600,8 @@
           "speedometer3": 49.07,
           "ram": null,
           "adblock": null
-        }
+        },
+        "date": "2026-01-18"
       },
       {
         "version": "143.0.3650.66",
@@ -1437,7 +1609,8 @@
           "speedometer3": 48.99,
           "ram": null,
           "adblock": null
-        }
+        },
+        "date": "2025-12-09"
       },
       {
         "version": "142.0.3595.65",
@@ -1445,7 +1618,8 @@
           "speedometer3": 47.66,
           "ram": null,
           "adblock": null
-        }
+        },
+        "date": "2025-11-08"
       },
       {
         "version": "141.0.3537.57",
@@ -1453,7 +1627,8 @@
           "speedometer3": 46.93,
           "ram": null,
           "adblock": null
-        }
+        },
+        "date": "2025-10-05"
       },
       {
         "version": "140.0.3485.54",
@@ -1461,7 +1636,8 @@
           "speedometer3": 48.35,
           "ram": null,
           "adblock": null
-        }
+        },
+        "date": "2025-09-09"
       },
       {
         "version": "139.0.3405.86",
@@ -1469,7 +1645,8 @@
           "speedometer3": 48.87,
           "ram": null,
           "adblock": null
-        }
+        },
+        "date": "2025-08-16"
       },
       {
         "version": "138.0.3351.109",
@@ -1477,7 +1654,8 @@
           "speedometer3": 48.34,
           "ram": null,
           "adblock": null
-        }
+        },
+        "date": "2025-07-30"
       },
       {
         "version": "137.0.3296.68",
@@ -1485,7 +1663,8 @@
           "speedometer3": 46.53,
           "ram": 10568.5,
           "adblock": 42
-        }
+        },
+        "date": "2025-06-10"
       },
       {
         "version": "136.0.3240.50",
@@ -1493,7 +1672,8 @@
           "speedometer3": 46.6,
           "ram": 10568.5,
           "adblock": 42
-        }
+        },
+        "date": "2025-05-03"
       },
       {
         "version": "135.0.3179.54",
@@ -1501,7 +1681,8 @@
           "speedometer3": 40.53,
           "ram": 10568.5,
           "adblock": 42
-        }
+        },
+        "date": "2025-04-06"
       },
       {
         "version": "133.0.3065.82",
@@ -1509,7 +1690,8 @@
           "speedometer3": 40.03,
           "ram": 131,
           "adblock": 42
-        }
+        },
+        "date": "2025-02-23"
       },
       {
         "version": "132.0.2957.127",
@@ -1517,26 +1699,30 @@
           "speedometer3": 38.53,
           "ram": 127,
           "adblock": 42
-        }
+        },
+        "date": "2025-02-01"
       },
       {
         "version": "131.0.2903.112",
         "scores": {
           "speedometer3": 37.41,
           "ram": 94
-        }
+        },
+        "date": "2024-12-28"
       },
       {
         "version": "131.0.2903.70",
         "scores": {
           "speedometer3": 37.91
-        }
+        },
+        "date": "2024-11-26"
       },
       {
         "version": "130.0.2849.56",
         "scores": {
           "speedometer3": 34.9
-        }
+        },
+        "date": "2024-10-27"
       }
     ]
   },
@@ -1550,7 +1736,8 @@
           "speedometer3": 48.47,
           "ram": null,
           "adblock": null
-        }
+        },
+        "date": "2026-02-22"
       },
       {
         "version": "143.0.3528.193",
@@ -1558,7 +1745,8 @@
           "speedometer3": 47.17,
           "ram": null,
           "adblock": null
-        }
+        },
+        "date": "2026-01-18"
       },
       {
         "version": "142.0.3270.177",
@@ -1566,7 +1754,8 @@
           "speedometer3": 46.41,
           "ram": null,
           "adblock": null
-        }
+        },
+        "date": "2025-12-09"
       },
       {
         "version": "141.0.2768.125",
@@ -1574,7 +1763,8 @@
           "speedometer3": 45.77,
           "ram": null,
           "adblock": null
-        }
+        },
+        "date": "2025-11-08"
       },
       {
         "version": "140.0.2242.208",
@@ -1582,7 +1772,8 @@
           "speedometer3": 45.7,
           "ram": null,
           "adblock": null
-        }
+        },
+        "date": "2025-10-05"
       },
       {
         "version": "139.0.1955.159",
@@ -1590,7 +1781,8 @@
           "speedometer3": 47.62,
           "ram": null,
           "adblock": null
-        }
+        },
+        "date": "2025-09-09"
       },
       {
         "version": "138.0.1723.224",
@@ -1598,7 +1790,8 @@
           "speedometer3": 48.13,
           "ram": null,
           "adblock": null
-        }
+        },
+        "date": "2025-08-16"
       }
     ]
   },
@@ -1612,7 +1805,8 @@
           "speedometer3": 44.97,
           "ram": null,
           "adblock": null
-        }
+        },
+        "date": "2025-12-09"
       },
       {
         "version": "1.0.4",
@@ -1620,7 +1814,8 @@
           "speedometer3": 44.93,
           "ram": null,
           "adblock": null
-        }
+        },
+        "date": "2025-11-08"
       }
     ]
   },
@@ -1634,7 +1829,8 @@
           "speedometer3": 44.57,
           "ram": null,
           "adblock": null
-        }
+        },
+        "date": "2026-02-22"
       },
       {
         "version": "126.0.5750.43",
@@ -1642,7 +1838,8 @@
           "speedometer3": 44.77,
           "ram": null,
           "adblock": null
-        }
+        },
+        "date": "2026-01-18"
       },
       {
         "version": "125.0.5729.15",
@@ -1650,7 +1847,8 @@
           "speedometer3": 44.77,
           "ram": null,
           "adblock": null
-        }
+        },
+        "date": "2025-12-09"
       },
       {
         "version": "123.0.5669.47",
@@ -1658,7 +1856,8 @@
           "speedometer3": 44.4,
           "ram": null,
           "adblock": null
-        }
+        },
+        "date": "2025-11-08"
       },
       {
         "version": "122.0.5643.92",
@@ -1666,7 +1865,8 @@
           "speedometer3": 44.28,
           "ram": null,
           "adblock": null
-        }
+        },
+        "date": "2025-10-05"
       },
       {
         "version": "121.0.5600.50",
@@ -1674,7 +1874,8 @@
           "speedometer3": 45.07,
           "ram": null,
           "adblock": null
-        }
+        },
+        "date": "2025-09-09"
       },
       {
         "version": "120.0.5543.161",
@@ -1682,7 +1883,8 @@
           "speedometer3": 43.47,
           "ram": null,
           "adblock": null
-        }
+        },
+        "date": "2025-08-16"
       },
       {
         "version": "120.0.5543.93",
@@ -1690,7 +1892,8 @@
           "speedometer3": 45.17,
           "ram": null,
           "adblock": null
-        }
+        },
+        "date": "2025-07-30"
       },
       {
         "version": "119.0.5497.70",
@@ -1698,7 +1901,8 @@
           "speedometer3": 42.63,
           "ram": 2926.1,
           "adblock": 42
-        }
+        },
+        "date": "2025-06-10"
       },
       {
         "version": "118.0.5461.60",
@@ -1706,7 +1910,8 @@
           "speedometer3": 42.17,
           "ram": 2926.1,
           "adblock": 42
-        }
+        },
+        "date": "2025-05-03"
       },
       {
         "version": "117.0.5408.35",
@@ -1714,7 +1919,8 @@
           "speedometer3": 41.83,
           "ram": 117,
           "adblock": 42
-        }
+        },
+        "date": "2025-02-23"
       },
       {
         "version": "116.0.5366.71",
@@ -1722,26 +1928,30 @@
           "speedometer3": 40.57,
           "ram": 115,
           "adblock": 42
-        }
+        },
+        "date": "2025-02-01"
       },
       {
         "version": "115.0.5322.119",
         "scores": {
           "speedometer3": 40.07,
           "ram": 105
-        }
+        },
+        "date": "2024-12-28"
       },
       {
         "version": "114.0.5282.222",
         "scores": {
           "speedometer3": 39.23
-        }
+        },
+        "date": "2024-11-26"
       },
       {
         "version": "114.0.5282.115",
         "scores": {
           "speedometer3": 38.3
-        }
+        },
+        "date": "2024-10-27"
       }
     ]
   },
@@ -1755,7 +1965,8 @@
           "speedometer3": 44.76,
           "ram": null,
           "adblock": null
-        }
+        },
+        "date": "2026-02-22"
       },
       {
         "version": "126.0.5750.36",
@@ -1763,7 +1974,8 @@
           "speedometer3": 43.75,
           "ram": null,
           "adblock": null
-        }
+        },
+        "date": "2026-01-18"
       },
       {
         "version": "124.0.5705.61",
@@ -1771,7 +1983,8 @@
           "speedometer3": 43.37,
           "ram": null,
           "adblock": null
-        }
+        },
+        "date": "2025-12-09"
       },
       {
         "version": "123.0.5669.57",
@@ -1779,7 +1992,8 @@
           "speedometer3": 43.6,
           "ram": null,
           "adblock": null
-        }
+        },
+        "date": "2025-11-08"
       },
       {
         "version": "122.0.5643.105",
@@ -1787,7 +2001,8 @@
           "speedometer3": 42.93,
           "ram": null,
           "adblock": null
-        }
+        },
+        "date": "2025-10-05"
       },
       {
         "version": "121.0.5600.64",
@@ -1795,7 +2010,8 @@
           "speedometer3": 44.19,
           "ram": null,
           "adblock": null
-        }
+        },
+        "date": "2025-09-09"
       },
       {
         "version": "120.0.5543.160",
@@ -1803,7 +2019,8 @@
           "speedometer3": 43.77,
           "ram": null,
           "adblock": null
-        }
+        },
+        "date": "2025-08-16"
       },
       {
         "version": "120.0.5543.106",
@@ -1811,7 +2028,8 @@
           "speedometer3": 43.4,
           "ram": null,
           "adblock": null
-        }
+        },
+        "date": "2025-07-30"
       },
       {
         "version": "119.0.5497.78",
@@ -1819,7 +2037,8 @@
           "speedometer3": 42.21,
           "ram": 2551.9,
           "adblock": 42
-        }
+        },
+        "date": "2025-06-10"
       },
       {
         "version": "118.0.5461.76",
@@ -1827,7 +2046,8 @@
           "speedometer3": 42.76,
           "ram": 2551.9,
           "adblock": 42
-        }
+        },
+        "date": "2025-05-03"
       },
       {
         "version": "117.0.5408.205",
@@ -1835,7 +2055,8 @@
           "speedometer3": 39.97,
           "ram": 2551.9,
           "adblock": 42
-        }
+        },
+        "date": "2025-04-06"
       },
       {
         "version": "116.0.5366.148",
@@ -1843,7 +2064,8 @@
           "speedometer3": 41.8,
           "ram": 127,
           "adblock": 42
-        }
+        },
+        "date": "2025-02-23"
       },
       {
         "version": "116.0.5366.87",
@@ -1851,26 +2073,30 @@
           "speedometer3": 41.1,
           "ram": 120,
           "adblock": 42
-        }
+        },
+        "date": "2025-02-01"
       },
       {
         "version": "115.0.5322.124",
         "scores": {
           "speedometer3": 40.02,
           "ram": 122
-        }
+        },
+        "date": "2024-12-28"
       },
       {
         "version": "114.0.5282.233",
         "scores": {
           "speedometer3": 39.57
-        }
+        },
+        "date": "2024-11-26"
       },
       {
         "version": "114.0.5282.123",
         "scores": {
           "speedometer3": 38.47
-        }
+        },
+        "date": "2024-10-27"
       }
     ]
   },
@@ -1884,7 +2110,8 @@
           "speedometer3": 44.97,
           "ram": null,
           "adblock": null
-        }
+        },
+        "date": "2026-01-18"
       },
       {
         "version": "0.2.9",
@@ -1892,7 +2119,8 @@
           "speedometer3": 43.43,
           "ram": null,
           "adblock": null
-        }
+        },
+        "date": "2025-11-08"
       },
       {
         "version": "0.2.3",
@@ -1900,7 +2128,8 @@
           "speedometer3": 45.86,
           "ram": null,
           "adblock": null
-        }
+        },
+        "date": "2025-10-05"
       },
       {
         "version": "0.1.2",
@@ -1908,7 +2137,8 @@
           "speedometer3": 43.85,
           "ram": null,
           "adblock": null
-        }
+        },
+        "date": "2025-09-09"
       }
     ]
   },
@@ -1922,7 +2152,8 @@
           "speedometer3": 43.78,
           "ram": null,
           "adblock": null
-        }
+        },
+        "date": "2026-02-22"
       },
       {
         "version": "1.0.3.142",
@@ -1930,7 +2161,8 @@
           "speedometer3": 44.8,
           "ram": null,
           "adblock": null
-        }
+        },
+        "date": "2026-01-18"
       },
       {
         "version": "1.0.0",
@@ -1938,7 +2170,8 @@
           "speedometer3": 47.17,
           "ram": null,
           "adblock": null
-        }
+        },
+        "date": "2025-12-09"
       },
       {
         "version": "0.99.137-beta",
@@ -1946,7 +2179,8 @@
           "speedometer3": 46.41,
           "ram": null,
           "adblock": null
-        }
+        },
+        "date": "2025-11-08"
       },
       {
         "version": "0.99.136-beta",
@@ -1954,7 +2188,8 @@
           "speedometer3": 45.77,
           "ram": null,
           "adblock": null
-        }
+        },
+        "date": "2025-09-09"
       },
       {
         "version": "0.99.135.0.1-beta",
@@ -1962,7 +2197,8 @@
           "speedometer3": 45.98,
           "ram": null,
           "adblock": null
-        }
+        },
+        "date": "2025-08-16"
       },
       {
         "version": "0.99.135-beta",
@@ -1970,7 +2206,8 @@
           "speedometer3": 46.06,
           "ram": null,
           "adblock": null
-        }
+        },
+        "date": "2025-07-30"
       },
       {
         "version": "0.99.133-beta",
@@ -1978,7 +2215,8 @@
           "speedometer3": 40.77,
           "ram": 3022,
           "adblock": 100
-        }
+        },
+        "date": "2025-05-03"
       },
       {
         "version": "0.99.132.0.3-beta",
@@ -1986,7 +2224,8 @@
           "speedometer3": 40.5,
           "ram": 3022,
           "adblock": 100
-        }
+        },
+        "date": "2025-04-06"
       },
       {
         "version": "0.99.131-beta",
@@ -1994,7 +2233,8 @@
           "speedometer3": 41.43,
           "ram": 80,
           "adblock": 100
-        }
+        },
+        "date": "2025-02-23"
       },
       {
         "version": "0.99.130.2-beta",
@@ -2002,26 +2242,30 @@
           "speedometer3": 40.13,
           "ram": 79,
           "adblock": 100
-        }
+        },
+        "date": "2025-02-01"
       },
       {
         "version": "0.99.130.1-beta",
         "scores": {
           "speedometer3": 41.27,
           "ram": 65
-        }
+        },
+        "date": "2024-12-28"
       },
       {
         "version": "0.99.129-beta",
         "scores": {
           "speedometer3": 40.67
-        }
+        },
+        "date": "2024-11-26"
       },
       {
         "version": "0.99.128.2.1-beta",
         "scores": {
           "speedometer3": 40.1
-        }
+        },
+        "date": "2024-10-27"
       }
     ]
   },
@@ -2035,7 +2279,8 @@
           "speedometer3": 45.47,
           "ram": null,
           "adblock": null
-        }
+        },
+        "date": "2026-02-22"
       },
       {
         "version": "26.2",
@@ -2043,7 +2288,8 @@
           "speedometer3": 45.43,
           "ram": null,
           "adblock": null
-        }
+        },
+        "date": "2026-01-18"
       },
       {
         "version": "26.1",
@@ -2051,7 +2297,8 @@
           "speedometer3": 46.06,
           "ram": null,
           "adblock": null
-        }
+        },
+        "date": "2025-11-08"
       },
       {
         "version": "26.0.1",
@@ -2059,7 +2306,8 @@
           "speedometer3": 46.3,
           "ram": null,
           "adblock": null
-        }
+        },
+        "date": "2025-10-05"
       },
       {
         "version": "18.6",
@@ -2067,7 +2315,8 @@
           "speedometer3": 43.83,
           "ram": 2714.2,
           "adblock": 37
-        }
+        },
+        "date": "2025-07-30"
       },
       {
         "version": "18.5",
@@ -2075,7 +2324,8 @@
           "speedometer3": 43.13,
           "ram": 2714.2,
           "adblock": 37
-        }
+        },
+        "date": "2025-06-10"
       },
       {
         "version": "18.4",
@@ -2083,7 +2333,8 @@
           "speedometer3": 42.17,
           "ram": 2714.2,
           "adblock": 37
-        }
+        },
+        "date": "2025-04-06"
       },
       {
         "version": "18.3",
@@ -2091,7 +2342,8 @@
           "speedometer3": 39.43,
           "ram": 53,
           "adblock": 37
-        }
+        },
+        "date": "2025-02-23"
       },
       {
         "version": "18.2",
@@ -2099,19 +2351,22 @@
           "speedometer3": 40.57,
           "ram": 45,
           "adblock": 37
-        }
+        },
+        "date": "2024-12-28"
       },
       {
         "version": "18.1.1",
         "scores": {
           "speedometer3": 43.77
-        }
+        },
+        "date": "2024-11-26"
       },
       {
         "version": "18.01",
         "scores": {
           "speedometer3": 42.27
-        }
+        },
+        "date": "2024-10-27"
       }
     ]
   },
@@ -2125,7 +2380,8 @@
           "speedometer3": 46.3,
           "ram": null,
           "adblock": null
-        }
+        },
+        "date": "2026-02-22"
       },
       {
         "version": "139.2.1.3195",
@@ -2133,7 +2389,8 @@
           "speedometer3": 46.9,
           "ram": null,
           "adblock": null
-        }
+        },
+        "date": "2026-01-18"
       },
       {
         "version": "139.1.3.2975",
@@ -2141,7 +2398,8 @@
           "speedometer3": 47.31,
           "ram": null,
           "adblock": null
-        }
+        },
+        "date": "2025-12-09"
       }
     ]
   },
@@ -2155,7 +2413,8 @@
           "speedometer3": 29.1,
           "ram": 2874.7,
           "adblock": 77
-        }
+        },
+        "date": "2025-04-06"
       },
       {
         "version": "1.19.0",
@@ -2163,7 +2422,8 @@
           "speedometer3": 30.8,
           "ram": 180,
           "adblock": 77
-        }
+        },
+        "date": "2025-02-23"
       }
     ]
   },
@@ -2176,62 +2436,71 @@
         "scores": {
           "speedometer3": 41.84,
           "ram": null
-        }
+        },
+        "date": "2026-02-22"
       },
       {
         "version": "0.0.76",
         "scores": {
           "speedometer3": 46.9,
           "ram": null
-        }
+        },
+        "date": "2026-01-18"
       },
       {
         "version": "0.0.70",
         "scores": {
           "speedometer3": 41.1,
           "ram": null
-        }
+        },
+        "date": "2025-11-08"
       },
       {
         "version": "0.0.61",
         "scores": {
           "speedometer3": 40.33,
           "ram": null
-        }
+        },
+        "date": "2025-10-05"
       },
       {
         "version": "0.0.58",
         "scores": {
           "speedometer3": 42.9,
           "ram": null
-        }
+        },
+        "date": "2025-09-09"
       },
       {
         "version": "0.0.55",
         "scores": {
           "speedometer3": 41.52,
           "ram": null
-        }
+        },
+        "date": "2025-08-16"
       },
       {
         "version": "0.0.50",
         "scores": {
           "speedometer3": 40.67,
           "ram": null
-        }
+        },
+        "date": "2025-07-30"
       },
       {
         "version": "0.0.43",
         "scores": {
           "speedometer3": 29.3,
           "ram": 1928
-        }
+        },
+        "date": "2025-06-10"
       },
       {
         "version": "0.0.39",
         "scores": {
           "speedometer3": 34.7
-        }
+        },
+        "date": "2025-05-03"
       }
     ]
   },
@@ -2244,55 +2513,63 @@
         "scores": {
           "speedometer3": 43.82,
           "ram": null
-        }
+        },
+        "date": "2025-12-09"
       },
       {
         "version": "1.3.0-beta.0",
         "scores": {
           "speedometer3": 42.96,
           "ram": null
-        }
+        },
+        "date": "2025-11-08"
       },
       {
         "version": "1.0.0-beta.3",
         "scores": {
           "speedometer3": 42.34,
           "ram": null
-        }
+        },
+        "date": "2025-10-05"
       },
       {
         "version": "0.5.22",
         "scores": {
           "speedometer3": 40.97,
           "ram": null
-        }
+        },
+        "date": "2025-10-05"
       },
       {
         "version": "0.5.19",
         "scores": {
           "speedometer3": 40.48,
           "ram": null
-        }
+        },
+        "date": "2025-10-05"
       },
       {
         "version": "0.5.15",
         "scores": {
           "speedometer3": 32.54,
           "ram": null
-        }
+        },
+        "date": "2025-10-05"
       },
       {
         "version": "0.5.3",
         "scores": {
           "speedometer3": 29.0,
           "ram": 2385
-        }
+        },
+        "date": "2025-10-05"
       },
       {
         "version": "0.4.10",
         "scores": {
           "speedometer3": 38.83
-        }
+        },
+        "date": "2025-10-05"
       }
     ]
   },
@@ -2306,7 +2583,8 @@
           "speedometer3": 40.05,
           "ram": null,
           "adblock": null
-        }
+        },
+        "date": "2026-01-18"
       },
       {
         "version": "143.0.7499.40",
@@ -2314,7 +2592,8 @@
           "speedometer3": 40.36,
           "ram": null,
           "adblock": null
-        }
+        },
+        "date": "2025-12-09"
       },
       {
         "version": "140.0.7339.185",
@@ -2322,7 +2601,8 @@
           "speedometer3": 38.86,
           "ram": null,
           "adblock": null
-        }
+        },
+        "date": "2025-10-05"
       },
       {
         "version": "139.0.7258.154",
@@ -2330,7 +2610,8 @@
           "speedometer3": 40.2,
           "ram": null,
           "adblock": null
-        }
+        },
+        "date": "2025-09-09"
       },
       {
         "version": "139.0.7258.127",
@@ -2338,7 +2619,8 @@
           "speedometer3": 40.42,
           "ram": null,
           "adblock": null
-        }
+        },
+        "date": "2025-08-16"
       },
       {
         "version": "138.0.7204.168",
@@ -2346,7 +2628,8 @@
           "speedometer3": 39.84,
           "ram": null,
           "adblock": null
-        }
+        },
+        "date": "2025-07-30"
       },
       {
         "version": "137.0.7151.68",
@@ -2354,7 +2637,8 @@
           "speedometer3": 38.17,
           "ram": 8874.3,
           "adblock": 42
-        }
+        },
+        "date": "2025-06-10"
       },
       {
         "version": "136.0.7103.59",
@@ -2362,7 +2646,8 @@
           "speedometer3": 38.03,
           "ram": 8874.3,
           "adblock": 42
-        }
+        },
+        "date": "2025-05-03"
       },
       {
         "version": "135.0.7049.52",
@@ -2370,7 +2655,8 @@
           "speedometer3": 37.03,
           "ram": 8874.3,
           "adblock": 42
-        }
+        },
+        "date": "2025-04-06"
       },
       {
         "version": "133.0.6943.98",
@@ -2378,7 +2664,8 @@
           "speedometer3": 36.05,
           "ram": 90,
           "adblock": 42
-        }
+        },
+        "date": "2025-02-23"
       },
       {
         "version": "132.0.6834.110",
@@ -2386,7 +2673,8 @@
           "speedometer3": 34.83,
           "ram": 78,
           "adblock": 42
-        }
+        },
+        "date": "2025-02-01"
       }
     ]
   },
@@ -2400,7 +2688,8 @@
           "speedometer3": 47.55,
           "ram": null,
           "adblock": null
-        }
+        },
+        "date": "2026-02-22"
       },
       {
         "version": "7.7.3851.67",
@@ -2408,7 +2697,8 @@
           "speedometer3": 46.27,
           "ram": null,
           "adblock": null
-        }
+        },
+        "date": "2026-01-18"
       },
       {
         "version": "7.7.3851.58",
@@ -2416,7 +2706,8 @@
           "speedometer3": 46.4,
           "ram": null,
           "adblock": null
-        }
+        },
+        "date": "2025-12-09"
       },
       {
         "version": "7.6.3797.63",
@@ -2424,7 +2715,8 @@
           "speedometer3": 46.58,
           "ram": null,
           "adblock": null
-        }
+        },
+        "date": "2025-11-08"
       },
       {
         "version": "7.6.3797.58",
@@ -2432,7 +2724,8 @@
           "speedometer3": 44.77,
           "ram": null,
           "adblock": null
-        }
+        },
+        "date": "2025-10-05"
       },
       {
         "version": "7.5.3735.66",
@@ -2440,7 +2733,8 @@
           "speedometer3": 46.91,
           "ram": null,
           "adblock": null
-        }
+        },
+        "date": "2025-09-09"
       },
       {
         "version": "7.5.3735.62",
@@ -2448,7 +2742,8 @@
           "speedometer3": 47.33,
           "ram": null,
           "adblock": null
-        }
+        },
+        "date": "2025-08-16"
       },
       {
         "version": "7.5.3735.56",
@@ -2456,7 +2751,8 @@
           "speedometer3": 47.43,
           "ram": null,
           "adblock": null
-        }
+        },
+        "date": "2025-07-30"
       },
       {
         "version": "7.4.3684.46",
@@ -2464,7 +2760,8 @@
           "speedometer3": 44.53,
           "ram": 3284.7,
           "adblock": 42
-        }
+        },
+        "date": "2025-06-10"
       },
       {
         "version": "7.3.3635.11",
@@ -2472,7 +2769,8 @@
           "speedometer3": 44.18,
           "ram": 3284.7,
           "adblock": 42
-        }
+        },
+        "date": "2025-05-03"
       },
       {
         "version": "7.3.3635.7",
@@ -2480,7 +2778,8 @@
           "speedometer3": 43.86,
           "ram": 3284.7,
           "adblock": 42
-        }
+        },
+        "date": "2025-04-06"
       },
       {
         "version": "7.1.3570.54",
@@ -2488,7 +2787,8 @@
           "speedometer3": 42.33,
           "ram": 113,
           "adblock": 42
-        }
+        },
+        "date": "2025-02-23"
       },
       {
         "version": "7.1.3570.42",
@@ -2496,26 +2796,30 @@
           "speedometer3": 42.05,
           "ram": 111,
           "adblock": 42
-        }
+        },
+        "date": "2025-02-01"
       },
       {
         "version": "7.0.3495.27",
         "scores": {
           "speedometer3": 40.27,
           "ram": 106
-        }
+        },
+        "date": "2024-12-28"
       },
       {
         "version": "7.0.3495.18",
         "scores": {
           "speedometer3": 39.9
-        }
+        },
+        "date": "2024-12-28"
       },
       {
         "version": "7.0.3495.6",
         "scores": {
           "speedometer3": 39.83
-        }
+        },
+        "date": "2024-12-28"
       }
     ]
   },
@@ -2529,7 +2833,8 @@
           "speedometer3": 35.83,
           "ram": null,
           "adblock": null
-        }
+        },
+        "date": "2026-01-18"
       },
       {
         "version": "6.6.5.1",
@@ -2537,7 +2842,8 @@
           "speedometer3": 36.87,
           "ram": null,
           "adblock": null
-        }
+        },
+        "date": "2025-12-09"
       },
       {
         "version": "6.6.4",
@@ -2545,7 +2851,8 @@
           "speedometer3": 35.59,
           "ram": null,
           "adblock": null
-        }
+        },
+        "date": "2025-11-08"
       },
       {
         "version": "6.6.3",
@@ -2553,7 +2860,8 @@
           "speedometer3": 35.77,
           "ram": null,
           "adblock": null
-        }
+        },
+        "date": "2025-10-05"
       },
       {
         "version": "6.6.2",
@@ -2561,7 +2869,8 @@
           "speedometer3": 36.37,
           "ram": null,
           "adblock": null
-        }
+        },
+        "date": "2025-09-09"
       },
       {
         "version": "6.5.11",
@@ -2569,7 +2878,8 @@
           "speedometer3": 34.13,
           "ram": null,
           "adblock": null
-        }
+        },
+        "date": "2025-07-30"
       },
       {
         "version": "6.5.9",
@@ -2577,7 +2887,8 @@
           "speedometer3": 32.37,
           "ram": 6783.4,
           "adblock": 34
-        }
+        },
+        "date": "2025-06-10"
       },
       {
         "version": "6.5.7",
@@ -2585,7 +2896,8 @@
           "speedometer3": 33.44,
           "ram": 6783.4,
           "adblock": 34
-        }
+        },
+        "date": "2025-05-03"
       },
       {
         "version": "6.5.6",
@@ -2593,7 +2905,8 @@
           "speedometer3": 33.77,
           "ram": 6783.4,
           "adblock": 34
-        }
+        },
+        "date": "2025-04-06"
       },
       {
         "version": "6.5.4",
@@ -2601,7 +2914,8 @@
           "speedometer3": 34.87,
           "ram": 585,
           "adblock": 34
-        }
+        },
+        "date": "2025-02-23"
       }
     ]
   },
@@ -2615,7 +2929,8 @@
           "speedometer3": 41.17,
           "ram": null,
           "adblock": null
-        }
+        },
+        "date": "2025-10-05"
       }
     ]
   },
@@ -2626,10 +2941,11 @@
       {
         "version": "25.12.3.1140",
         "scores": {
-          "speedometer3": 38.00,
+          "speedometer3": 38.0,
           "ram": null,
           "adblock": null
-        }
+        },
+        "date": "2026-02-22"
       },
       {
         "version": "25.12.0.2215",
@@ -2637,7 +2953,8 @@
           "speedometer3": 38.33,
           "ram": null,
           "adblock": null
-        }
+        },
+        "date": "2026-01-18"
       },
       {
         "version": "25.10.2.1168",
@@ -2645,7 +2962,8 @@
           "speedometer3": 38.56,
           "ram": null,
           "adblock": null
-        }
+        },
+        "date": "2025-12-09"
       },
       {
         "version": "25.8.5.977",
@@ -2653,7 +2971,8 @@
           "speedometer3": 37.6,
           "ram": null,
           "adblock": null
-        }
+        },
+        "date": "2025-11-08"
       },
       {
         "version": "25.8.3.830",
@@ -2661,7 +2980,8 @@
           "speedometer3": 37.93,
           "ram": null,
           "adblock": null
-        }
+        },
+        "date": "2025-10-05"
       },
       {
         "version": "25.8.0.1963",
@@ -2669,7 +2989,8 @@
           "speedometer3": 38.71,
           "ram": null,
           "adblock": null
-        }
+        },
+        "date": "2025-09-09"
       },
       {
         "version": "25.6.3.358",
@@ -2677,7 +2998,8 @@
           "speedometer3": 37.74,
           "ram": null,
           "adblock": null
-        }
+        },
+        "date": "2025-08-16"
       },
       {
         "version": "25.6.0.2391",
@@ -2685,7 +3007,8 @@
           "speedometer3": 37.4,
           "ram": null,
           "adblock": null
-        }
+        },
+        "date": "2025-07-30"
       },
       {
         "version": "25.4.1.1157",
@@ -2693,7 +3016,8 @@
           "speedometer3": 34.9,
           "ram": 3018,
           "adblock": 37
-        }
+        },
+        "date": "2025-06-10"
       },
       {
         "version": "25.2.6.720",
@@ -2701,7 +3025,8 @@
           "speedometer3": 34.36,
           "ram": 3018,
           "adblock": 37
-        }
+        },
+        "date": "2025-05-03"
       },
       {
         "version": "25.2.5.949",
@@ -2709,7 +3034,8 @@
           "speedometer3": 33.93,
           "ram": 3018,
           "adblock": 37
-        }
+        },
+        "date": "2025-04-06"
       },
       {
         "version": "25.2.0.2113",
@@ -2717,7 +3043,8 @@
           "speedometer3": 34.27,
           "ram": 118,
           "adblock": 37
-        }
+        },
+        "date": "2025-02-23"
       },
       {
         "version": "24.12.0.1845",
@@ -2725,19 +3052,22 @@
           "speedometer3": 32.81,
           "ram": 98,
           "adblock": 37
-        }
+        },
+        "date": "2024-12-28"
       },
       {
         "version": "24.10.1.687",
         "scores": {
           "speedometer3": 32.91
-        }
+        },
+        "date": "2024-11-26"
       },
       {
         "version": "24.10.1.616",
         "scores": {
           "speedometer3": 32.53
-        }
+        },
+        "date": "2024-10-27"
       }
     ]
   },
@@ -2751,7 +3081,8 @@
           "speedometer3": 36.7,
           "ram": null,
           "adblock": null
-        }
+        },
+        "date": "2026-02-22"
       },
       {
         "version": "1.17.15b",
@@ -2759,7 +3090,8 @@
           "speedometer3": 36.07,
           "ram": null,
           "adblock": null
-        }
+        },
+        "date": "2026-01-18"
       },
       {
         "version": "1.17.12b",
@@ -2767,7 +3099,8 @@
           "speedometer3": 36.43,
           "ram": null,
           "adblock": null
-        }
+        },
+        "date": "2025-12-09"
       },
       {
         "version": "1.17.6b",
@@ -2775,7 +3108,8 @@
           "speedometer3": 37.0,
           "ram": null,
           "adblock": null
-        }
+        },
+        "date": "2025-11-08"
       },
       {
         "version": "1.16.3b",
@@ -2783,7 +3117,8 @@
           "speedometer3": 34.6,
           "ram": null,
           "adblock": null
-        }
+        },
+        "date": "2025-10-05"
       },
       {
         "version": "1.15.5b",
@@ -2791,7 +3126,8 @@
           "speedometer3": 36.27,
           "ram": null,
           "adblock": null
-        }
+        },
+        "date": "2025-09-09"
       },
       {
         "version": "1.14.11b",
@@ -2799,7 +3135,8 @@
           "speedometer3": 36.64,
           "ram": null,
           "adblock": null
-        }
+        },
+        "date": "2025-08-16"
       },
       {
         "version": "1.14.9b",
@@ -2807,7 +3144,8 @@
           "speedometer3": 36.77,
           "ram": null,
           "adblock": null
-        }
+        },
+        "date": "2025-07-30"
       },
       {
         "version": "1.12.10b",
@@ -2815,7 +3153,8 @@
           "speedometer3": 35.12,
           "ram": 5648.1,
           "adblock": 34
-        }
+        },
+        "date": "2025-06-10"
       },
       {
         "version": "1.12b",
@@ -2823,7 +3162,8 @@
           "speedometer3": 35.47,
           "ram": 5648.1,
           "adblock": 34
-        }
+        },
+        "date": "2025-05-03"
       },
       {
         "version": "1.11.1b",
@@ -2831,7 +3171,8 @@
           "speedometer3": 34.33,
           "ram": 5648.1,
           "adblock": 34
-        }
+        },
+        "date": "2025-04-06"
       },
       {
         "version": "1.7.6b",
@@ -2839,7 +3180,8 @@
           "speedometer3": 37.05,
           "ram": 756,
           "adblock": 34
-        }
+        },
+        "date": "2025-02-23"
       },
       {
         "version": "1.7.4b",
@@ -2847,26 +3189,30 @@
           "speedometer3": 36.07,
           "ram": 837,
           "adblock": 34
-        }
+        },
+        "date": "2025-02-01"
       },
       {
         "version": "1.0.2-b.5",
         "scores": {
           "speedometer3": 35.73,
           "ram": 746
-        }
+        },
+        "date": "2024-12-28"
       },
       {
         "version": "1.0.1-a.19",
         "scores": {
           "speedometer3": 30.13
-        }
+        },
+        "date": "2024-11-26"
       },
       {
         "version": "1.0.1-a.12",
         "scores": {
           "speedometer3": 31.08
-        }
+        },
+        "date": "2024-10-27"
       }
     ]
   },
@@ -2880,7 +3226,8 @@
           "speedometer3": 37.4,
           "ram": null,
           "adblock": null
-        }
+        },
+        "date": "2026-02-22"
       },
       {
         "version": "1.18t (2026-01-17)",
@@ -2888,7 +3235,8 @@
           "speedometer3": 36.23,
           "ram": null,
           "adblock": null
-        }
+        },
+        "date": "2026-01-18"
       },
       {
         "version": "1.18t (2025-12-08)",
@@ -2896,7 +3244,8 @@
           "speedometer3": 36.58,
           "ram": null,
           "adblock": null
-        }
+        },
+        "date": "2025-12-09"
       },
       {
         "version": "1.18t (2025-11-07)",
@@ -2904,7 +3253,8 @@
           "speedometer3": 37.4,
           "ram": null,
           "adblock": null
-        }
+        },
+        "date": "2025-11-08"
       },
       {
         "version": "1.16t (2025-10-04)",
@@ -2912,7 +3262,8 @@
           "speedometer3": 34.7,
           "ram": null,
           "adblock": null
-        }
+        },
+        "date": "2025-10-05"
       },
       {
         "version": "1.16t (2025-09-08)",
@@ -2920,7 +3271,8 @@
           "speedometer3": 35.87,
           "ram": null,
           "adblock": null
-        }
+        },
+        "date": "2025-09-09"
       },
       {
         "version": "1.15t (2025-08-15)",
@@ -2928,7 +3280,8 @@
           "speedometer3": 36.04,
           "ram": null,
           "adblock": null
-        }
+        },
+        "date": "2025-08-16"
       },
       {
         "version": "1.15t (2025-07-30)",
@@ -2936,7 +3289,8 @@
           "speedometer3": 36.07,
           "ram": null,
           "adblock": null
-        }
+        },
+        "date": "2025-07-30"
       },
       {
         "version": "1.13t (2025-06-07)",
@@ -2944,7 +3298,8 @@
           "speedometer3": 35.18,
           "ram": 5275.3,
           "adblock": 42
-        }
+        },
+        "date": "2025-06-10"
       },
       {
         "version": "1.12t (2025-05-02)",
@@ -2952,7 +3307,8 @@
           "speedometer3": 35.23,
           "ram": 5275.3,
           "adblock": 42
-        }
+        },
+        "date": "2025-05-03"
       },
       {
         "version": "1.11.1t (2025-04-06)",
@@ -2960,7 +3316,8 @@
           "speedometer3": 34.67,
           "ram": 5275.3,
           "adblock": 42
-        }
+        },
+        "date": "2025-04-06"
       },
       {
         "version": "1.8t (2025-02-22)",
@@ -2968,7 +3325,8 @@
           "speedometer3": 36.94,
           "ram": 681,
           "adblock": 42
-        }
+        },
+        "date": "2025-02-23"
       },
       {
         "version": "1.7.4t (2025-01-30)",
@@ -2976,14 +3334,16 @@
           "speedometer3": 36.07,
           "ram": 805,
           "adblock": 34
-        }
+        },
+        "date": "2025-02-01"
       },
       {
         "version": "1.2t.6",
         "scores": {
           "speedometer3": 35.86,
           "ram": 638
-        }
+        },
+        "date": "2024-12-28"
       }
     ]
   }

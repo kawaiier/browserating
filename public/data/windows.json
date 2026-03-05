@@ -4,13 +4,22 @@
     "engine": "Blink",
     "versions": [
       {
+        "version": "1.95.0",
+        "date": "2026-03-05",
+        "scores": {
+          "speedometer3": 17.9
+        }
+      },
+      {
         "version": "1.68.0",
+        "date": "2024-09-18",
         "scores": {
           "speedometer3": 21.92
         }
       },
       {
         "version": "1.59.0",
+        "date": "2024-09-18",
         "scores": {
           "speedometer3": 17.23
         }
@@ -22,13 +31,22 @@
     "engine": "Blink",
     "versions": [
       {
+        "version": "1.87.192",
+        "date": "2026-03-05",
+        "scores": {
+          "speedometer3": 17.77
+        }
+      },
+      {
         "version": "1.81.136",
+        "date": "2024-09-18",
         "scores": {
           "speedometer3": 21.02
         }
       },
       {
         "version": "1.69.162",
+        "date": "2024-09-18",
         "scores": {
           "speedometer3": 16.83
         }
@@ -40,13 +58,22 @@
     "engine": "Blink",
     "versions": [
       {
+        "version": "0.148.1",
+        "date": "2026-03-05",
+        "scores": {
+          "speedometer3": 17.6
+        }
+      },
+      {
         "version": "0.125.3",
+        "date": "2024-09-18",
         "scores": {
           "speedometer3": 17.77
         }
       },
       {
         "version": "0.105.0",
+        "date": "2024-09-18",
         "scores": {
           "speedometer3": 17.07
         }
@@ -58,13 +85,22 @@
     "engine": "Gecko",
     "versions": [
       {
+        "version": "148.0",
+        "date": "2026-03-05",
+        "scores": {
+          "speedometer3": 19.18
+        }
+      },
+      {
         "version": "142.0",
+        "date": "2024-09-18",
         "scores": {
           "speedometer3": 17.83
         }
       },
       {
         "version": "130.0",
+        "date": "2024-09-18",
         "scores": {
           "speedometer3": 16.33
         }
@@ -76,13 +112,22 @@
     "engine": "Gecko",
     "versions": [
       {
+        "version": "149.0b4",
+        "date": "2026-03-05",
+        "scores": {
+          "speedometer3": 19.01
+        }
+      },
+      {
         "version": "143.0b4",
+        "date": "2024-09-18",
         "scores": {
           "speedometer3": 17.63
         }
       },
       {
         "version": "131.0b4",
+        "date": "2024-09-18",
         "scores": {
           "speedometer3": 16.13
         }
@@ -94,13 +139,22 @@
     "engine": "Gecko",
     "versions": [
       {
+        "version": "150.0a1 (2026-03-05)",
+        "date": "2026-03-05",
+        "scores": {
+          "speedometer3": 18.93
+        }
+      },
+      {
         "version": "144.0a1",
+        "date": "2024-09-18",
         "scores": {
           "speedometer3": 17.73
         }
       },
       {
         "version": "132.0a1",
+        "date": "2024-09-18",
         "scores": {
           "speedometer3": 15.97
         }
@@ -112,7 +166,15 @@
     "engine": "Gecko",
     "versions": [
       {
+        "version": "12.10.4",
+        "date": "2026-03-05",
+        "scores": {
+          "speedometer3": 13.35
+        }
+      },
+      {
         "version": "11.18.1",
+        "date": "2024-09-18",
         "scores": {
           "speedometer3": 15.56
         }
@@ -124,13 +186,22 @@
     "engine": "Blink",
     "versions": [
       {
+        "version": "145.0.7632.160",
+        "date": "2026-03-05",
+        "scores": {
+          "speedometer3": 19.37
+        }
+      },
+      {
         "version": "139.0.7258.139",
+        "date": "2024-09-18",
         "scores": {
           "speedometer3": 23.25
         }
       },
       {
         "version": "128.0.6613.121",
+        "date": "2024-09-18",
         "scores": {
           "speedometer3": 18.57
         }
@@ -142,13 +213,22 @@
     "engine": "Blink",
     "versions": [
       {
+        "version": "147.0.7718.0",
+        "date": "2026-03-05",
+        "scores": {
+          "speedometer3": 18.67
+        }
+      },
+      {
         "version": "141.0.7376.0",
+        "date": "2024-09-18",
         "scores": {
           "speedometer3": 22.52
         }
       },
       {
         "version": "130.0.6710.0",
+        "date": "2024-09-18",
         "scores": {
           "speedometer3": 18.03
         }
@@ -160,13 +240,22 @@
     "engine": "Blink",
     "versions": [
       {
+        "version": "145.0.3800.82",
+        "date": "2026-03-05",
+        "scores": {
+          "speedometer3": 20.23
+        }
+      },
+      {
         "version": "139.0.3405.111",
+        "date": "2024-09-18",
         "scores": {
           "speedometer3": 23.91
         }
       },
       {
         "version": "128.0.2739.67",
+        "date": "2024-09-18",
         "scores": {
           "speedometer3": 17.4
         }
@@ -178,13 +267,22 @@
     "engine": "Blink",
     "versions": [
       {
+        "version": "126.0.5750.59",
+        "date": "2026-03-05",
+        "scores": {
+          "speedometer3": 17.8
+        }
+      },
+      {
         "version": "120.0.5543.201",
+        "date": "2024-09-18",
         "scores": {
           "speedometer3": 21.17
         }
       },
       {
         "version": "113.0.5230.86",
+        "date": "2024-09-18",
         "scores": {
           "speedometer3": 17.8
         }
@@ -196,13 +294,22 @@
     "engine": "Blink",
     "versions": [
       {
+        "version": "127.0.5778.96",
+        "date": "2026-03-05",
+        "scores": {
+          "speedometer3": 18.3
+        }
+      },
+      {
         "version": "120.0.5543.204",
+        "date": "2024-09-18",
         "scores": {
           "speedometer3": 21.2
         }
       },
       {
         "version": "113.0.5230.75",
+        "date": "2024-09-18",
         "scores": {
           "speedometer3": 17.53
         }
@@ -214,13 +321,22 @@
     "engine": "Blink",
     "versions": [
       {
+        "version": "7.8.3925.76",
+        "date": "2026-03-05",
+        "scores": {
+          "speedometer3": 18.1
+        }
+      },
+      {
         "version": "7.5.3735.64",
+        "date": "2024-09-18",
         "scores": {
           "speedometer3": 21.7
         }
       },
       {
         "version": "6.9.3447.44",
+        "date": "2024-09-18",
         "scores": {
           "speedometer3": 17.87
         }
@@ -232,13 +348,22 @@
     "engine": "Gecko",
     "versions": [
       {
+        "version": "6.6.9",
+        "date": "2026-03-05",
+        "scores": {
+          "speedometer3": 16.5
+        }
+      },
+      {
         "version": "6.5.11",
+        "date": "2024-09-18",
         "scores": {
           "speedometer3": 15.23
         }
       },
       {
         "version": "6.0.19",
+        "date": "2024-09-18",
         "scores": {
           "speedometer3": 10.2
         }
@@ -250,13 +375,22 @@
     "engine": "Blink",
     "versions": [
       {
+        "version": "26.3.0.2120",
+        "date": "2026-03-05",
+        "scores": {
+          "speedometer3": 23.01
+        }
+      },
+      {
         "version": "25.8.0.1872",
+        "date": "2024-09-18",
         "scores": {
           "speedometer3": 21.85
         }
       },
       {
         "version": "24.7.1.1144",
+        "date": "2024-09-18",
         "scores": {
           "speedometer3": 17.6
         }
@@ -268,7 +402,15 @@
     "engine": "Gecko",
     "versions": [
       {
+        "version": "1.19.1b",
+        "date": "2026-03-05",
+        "scores": {
+          "speedometer3": 18.29
+        }
+      },
+      {
         "version": "1.14.11b",
+        "date": "2024-09-18",
         "scores": {
           "speedometer3": 17.08
         }
@@ -280,19 +422,29 @@
     "engine": "Gecko",
     "versions": [
       {
+        "version": "1.20t (2026-03-3)",
+        "date": "2026-03-05",
+        "scores": {
+          "speedometer3": 18.28
+        }
+      },
+      {
         "version": "1.15t (2025-08-25)",
+        "date": "2024-09-18",
         "scores": {
           "speedometer3": 16.77
         }
       },
       {
         "version": "1.0.0-a39",
+        "date": "2024-09-18",
         "scores": {
           "speedometer3": 14.83
         }
       },
       {
         "version": "1.0.0-a28",
+        "date": "2024-09-18",
         "scores": {
           "speedometer3": 11.5
         }

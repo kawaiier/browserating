@@ -8,8 +8,8 @@ import { getBrowsers } from '../lib/getBrowsers';
 import { engineColors, getEngineColor, platformNames, platformIcons } from '../lib/constants';
 import { useLocalStorage } from '../hooks/useLocalStorage';
 
-const NEW_PLATFORMS = ['macos-arm', 'ipad'];
-const OUTDATED_PLATFORMS = ['android', 'macos-intel', 'windows'];
+const NEW_PLATFORMS = ['macos-arm', 'ipad', 'windows'];
+const OUTDATED_PLATFORMS = ['android', 'macos-intel'];
 
 // Enhanced Skeleton Loader
 const SkeletonLoader = ({ index }) => (
