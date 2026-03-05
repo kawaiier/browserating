@@ -1,0 +1,525 @@
+[
+  {
+    "id": "chrome",
+    "name": "Google Chrome",
+    "tagline": "The world's most popular browser, built for the web by the web's biggest player",
+    "traits": {
+      "privacy": 3,
+      "speed": 8,
+      "customization": 7,
+      "minimalism": 5,
+      "features": 7,
+      "openSource": 3,
+      "resourceEfficiency": 4,
+      "ecosystem": 10,
+      "innovation": 5,
+      "easeOfUse": 9
+    },
+    "highlights": [
+      "Unmatched extension library via Chrome Web Store",
+      "Seamless Google account sync across devices",
+      "Best-in-class web standards and DevTools"
+    ],
+    "platforms": [
+      "windows",
+      "macos-arm",
+      "macos-intel",
+      "android",
+      "ipad"
+    ],
+    "bestFor": "Google ecosystem users who want maximum compatibility and extension choice without any friction",
+    "discontinued": false,
+    "discontinuedNote": null
+  },
+  {
+    "id": "firefox",
+    "name": "Firefox",
+    "tagline": "The independent, open-source browser that keeps the web from being a monopoly",
+    "traits": {
+      "privacy": 7,
+      "speed": 7,
+      "customization": 8,
+      "minimalism": 5,
+      "features": 7,
+      "openSource": 10,
+      "resourceEfficiency": 6,
+      "ecosystem": 4,
+      "innovation": 6,
+      "easeOfUse": 8
+    },
+    "highlights": [
+      "Fully open source with strong community governance",
+      "Enhanced Tracking Protection built-in",
+      "Deep customization via userChrome.css and extensions"
+    ],
+    "platforms": [
+      "windows",
+      "macos-arm",
+      "macos-intel",
+      "android"
+    ],
+    "bestFor": "Users who value an open, independent web and want solid privacy without giving up usability",
+    "discontinued": false,
+    "discontinuedNote": null
+  },
+  {
+    "id": "safari",
+    "name": "Safari",
+    "tagline": "Apple's browser, engineered to get the most out of every MacBook charge",
+    "traits": {
+      "privacy": 7,
+      "speed": 8,
+      "customization": 3,
+      "minimalism": 8,
+      "features": 5,
+      "openSource": 2,
+      "resourceEfficiency": 10,
+      "ecosystem": 10,
+      "innovation": 4,
+      "easeOfUse": 9
+    },
+    "highlights": [
+      "Best battery life of any macOS browser — by a wide margin",
+      "Tight iCloud Keychain and Handoff integration",
+      "Intelligent Tracking Prevention with on-device ML"
+    ],
+    "platforms": [
+      "macos-arm",
+      "macos-intel",
+      "ipad"
+    ],
+    "bestFor": "Apple device owners who want the fastest, most battery-efficient experience with zero configuration",
+    "discontinued": false,
+    "discontinuedNote": null
+  },
+  {
+    "id": "edge",
+    "name": "Microsoft Edge",
+    "tagline": "A Chromium browser that actually thought about productivity",
+    "traits": {
+      "privacy": 5,
+      "speed": 7,
+      "customization": 6,
+      "minimalism": 4,
+      "features": 9,
+      "openSource": 3,
+      "resourceEfficiency": 5,
+      "ecosystem": 9,
+      "innovation": 6,
+      "easeOfUse": 8
+    },
+    "highlights": [
+      "Built-in Copilot AI sidebar with deep Microsoft 365 integration",
+      "Vertical tabs, workspaces, and sleeping tabs built-in",
+      "PDF editor, immersive reader, and Collections included"
+    ],
+    "platforms": [
+      "windows",
+      "macos-arm",
+      "macos-intel",
+      "android",
+      "ipad"
+    ],
+    "bestFor": "Microsoft 365 users and Windows power users who want AI tools and productivity features out of the box",
+    "discontinued": false,
+    "discontinuedNote": null
+  },
+  {
+    "id": "brave",
+    "name": "Brave",
+    "tagline": "The privacy browser that doesn't compromise on speed",
+    "traits": {
+      "privacy": 9,
+      "speed": 8,
+      "customization": 6,
+      "minimalism": 6,
+      "features": 8,
+      "openSource": 9,
+      "resourceEfficiency": 7,
+      "ecosystem": 4,
+      "innovation": 7,
+      "easeOfUse": 8
+    },
+    "highlights": [
+      "Built-in ad and tracker blocking — no extension needed",
+      "Chromium-based with full Chrome extension support",
+      "Brave Search, Brave News, and optional Brave Rewards"
+    ],
+    "platforms": [
+      "windows",
+      "macos-arm",
+      "macos-intel",
+      "android",
+      "ipad"
+    ],
+    "bestFor": "Privacy-conscious users who want Chrome's compatibility without Google's data collection",
+    "discontinued": false,
+    "discontinuedNote": null
+  },
+  {
+    "id": "vivaldi",
+    "name": "Vivaldi",
+    "tagline": "The browser that bends to your will — every single setting",
+    "traits": {
+      "privacy": 7,
+      "speed": 7,
+      "customization": 10,
+      "minimalism": 2,
+      "features": 10,
+      "openSource": 5,
+      "resourceEfficiency": 5,
+      "ecosystem": 4,
+      "innovation": 8,
+      "easeOfUse": 4
+    },
+    "highlights": [
+      "Unmatched UI customization: themes, layouts, toolbar placement",
+      "Built-in tab stacking, tiling, and two-level tab bars",
+      "Integrated mail client, calendar, feed reader, and notes"
+    ],
+    "platforms": [
+      "windows",
+      "macos-arm",
+      "macos-intel",
+      "android"
+    ],
+    "bestFor": "Power users who want complete control over every pixel of their browser experience",
+    "discontinued": false,
+    "discontinuedNote": null
+  },
+  {
+    "id": "opera",
+    "name": "Opera",
+    "tagline": "The social, feature-packed browser with a built-in VPN",
+    "traits": {
+      "privacy": 5,
+      "speed": 7,
+      "customization": 5,
+      "minimalism": 4,
+      "features": 9,
+      "openSource": 2,
+      "resourceEfficiency": 5,
+      "ecosystem": 5,
+      "innovation": 6,
+      "easeOfUse": 7
+    },
+    "highlights": [
+      "Free built-in VPN with unlimited bandwidth",
+      "Side panel with WhatsApp, Telegram, Instagram, and more",
+      "Opera Flow for seamless mobile-desktop sharing"
+    ],
+    "platforms": [
+      "windows",
+      "macos-arm",
+      "macos-intel",
+      "android"
+    ],
+    "bestFor": "Social media enthusiasts who want messaging apps and VPN baked in without installing extra software",
+    "discontinued": false,
+    "discontinuedNote": null
+  },
+  {
+    "id": "opera-gx",
+    "name": "Opera GX",
+    "tagline": "The gaming browser — RAM limiter, GX sounds, and all the aesthetics",
+    "traits": {
+      "privacy": 4,
+      "speed": 7,
+      "customization": 8,
+      "minimalism": 2,
+      "features": 9,
+      "openSource": 2,
+      "resourceEfficiency": 7,
+      "ecosystem": 4,
+      "innovation": 8,
+      "easeOfUse": 7
+    },
+    "highlights": [
+      "GX Control to hard-limit CPU and RAM usage per browser",
+      "Twitch, Discord, and gaming news integrated in the sidebar",
+      "Customizable RGB color themes and GX sound effects"
+    ],
+    "platforms": [
+      "windows",
+      "macos-arm",
+      "macos-intel",
+      "android"
+    ],
+    "bestFor": "Gamers who want their browser to look and feel like a gaming peripheral and not hog system resources mid-match",
+    "discontinued": false,
+    "discontinuedNote": null
+  },
+  {
+    "id": "arc",
+    "name": "Arc Browser",
+    "tagline": "A total rethink of what a browser can be — spaces, Boosts, and no tab bar",
+    "traits": {
+      "privacy": 5,
+      "speed": 7,
+      "customization": 8,
+      "minimalism": 7,
+      "features": 9,
+      "openSource": 2,
+      "resourceEfficiency": 5,
+      "ecosystem": 6,
+      "innovation": 10,
+      "easeOfUse": 5
+    },
+    "highlights": [
+      "Spaces and Profiles to separate work, personal, and projects",
+      "Boosts to restyle or add custom JS to any website",
+      "Command Bar replaces the address bar with a smarter, faster workflow"
+    ],
+    "platforms": [
+      "windows",
+      "macos-arm",
+      "macos-intel"
+    ],
+    "bestFor": "Design-minded creatives and knowledge workers who want a browser that feels genuinely different",
+    "discontinued": true,
+    "discontinuedNote": "Active development has ended — Arc may receive limited support going forward."
+  },
+  {
+    "id": "zen",
+    "name": "Zen Browser",
+    "tagline": "Firefox, reimagined with a calm, beautiful, distraction-free interface",
+    "traits": {
+      "privacy": 8,
+      "speed": 7,
+      "customization": 7,
+      "minimalism": 9,
+      "features": 6,
+      "openSource": 10,
+      "resourceEfficiency": 7,
+      "ecosystem": 3,
+      "innovation": 8,
+      "easeOfUse": 7
+    },
+    "highlights": [
+      "Sidebar-first UI with vertical tabs and workspace separation",
+      "Built on Firefox with full Gecko privacy protections",
+      "Actively developed open source project with a growing community"
+    ],
+    "platforms": [
+      "windows",
+      "macos-arm",
+      "macos-intel"
+    ],
+    "bestFor": "Users who want Firefox's privacy and open-source values wrapped in a minimal, modern interface",
+    "discontinued": false,
+    "discontinuedNote": null
+  },
+  {
+    "id": "tor-browser",
+    "name": "Tor Browser",
+    "tagline": "Maximum anonymity — your traffic bounces through three relays before reaching its destination",
+    "traits": {
+      "privacy": 10,
+      "speed": 3,
+      "customization": 2,
+      "minimalism": 6,
+      "features": 3,
+      "openSource": 10,
+      "resourceEfficiency": 5,
+      "ecosystem": 1,
+      "innovation": 5,
+      "easeOfUse": 5
+    },
+    "highlights": [
+      "Routes all traffic through the Tor onion network by default",
+      "Anti-fingerprinting measures built into every aspect of the browser",
+      "Access to .onion sites and censorship-blocked content"
+    ],
+    "platforms": [
+      "windows",
+      "macos-arm",
+      "macos-intel",
+      "android"
+    ],
+    "bestFor": "Journalists, activists, and anyone who needs true anonymity and is willing to trade speed for it",
+    "discontinued": false,
+    "discontinuedNote": null
+  },
+  {
+    "id": "librewolf",
+    "name": "LibreWolf",
+    "tagline": "Firefox with every telemetry dial turned to zero — hardened from day one",
+    "traits": {
+      "privacy": 10,
+      "speed": 7,
+      "customization": 7,
+      "minimalism": 5,
+      "features": 5,
+      "openSource": 10,
+      "resourceEfficiency": 6,
+      "ecosystem": 2,
+      "innovation": 4,
+      "easeOfUse": 5
+    },
+    "highlights": [
+      "Ships with uBlock Origin pre-installed and strict filtering defaults",
+      "Zero Mozilla telemetry, crash reporting, or phoning home",
+      "Frequent security updates that closely track upstream Firefox"
+    ],
+    "platforms": [
+      "windows",
+      "macos-arm",
+      "macos-intel"
+    ],
+    "bestFor": "Privacy purists who want a hardened Firefox without having to configure it themselves",
+    "discontinued": false,
+    "discontinuedNote": null
+  },
+  {
+    "id": "duckduckgo",
+    "name": "DuckDuckGo Browser",
+    "tagline": "Simple privacy for everyone — no technical knowledge required",
+    "traits": {
+      "privacy": 8,
+      "speed": 7,
+      "customization": 3,
+      "minimalism": 8,
+      "features": 5,
+      "openSource": 5,
+      "resourceEfficiency": 7,
+      "ecosystem": 3,
+      "innovation": 5,
+      "easeOfUse": 10
+    },
+    "highlights": [
+      "Fire Button instantly wipes tabs, cookies, and browsing data",
+      "Duck Player provides a clean, tracker-free YouTube experience",
+      "Privacy Grade on every site so you always know what's being blocked"
+    ],
+    "platforms": [
+      "windows",
+      "macos-arm",
+      "macos-intel",
+      "android",
+      "ipad"
+    ],
+    "bestFor": "Non-technical users who want real privacy protections with zero configuration and no learning curve",
+    "discontinued": false,
+    "discontinuedNote": null
+  },
+  {
+    "id": "orion",
+    "name": "Orion",
+    "tagline": "WebKit speed and efficiency — with Chrome and Firefox extensions, and zero telemetry",
+    "traits": {
+      "privacy": 9,
+      "speed": 8,
+      "customization": 7,
+      "minimalism": 7,
+      "features": 6,
+      "openSource": 5,
+      "resourceEfficiency": 9,
+      "ecosystem": 7,
+      "innovation": 8,
+      "easeOfUse": 7
+    },
+    "highlights": [
+      "Runs Chrome and Firefox extensions natively on WebKit",
+      "Built by Kagi — zero telemetry, no ads, user-funded",
+      "Exceptional battery life and performance on Apple Silicon"
+    ],
+    "platforms": [
+      "macos-arm",
+      "macos-intel",
+      "ipad"
+    ],
+    "bestFor": "Mac users who want Safari's efficiency with Chrome's extension library and none of Apple's compromises",
+    "discontinued": false,
+    "discontinuedNote": null
+  },
+  {
+    "id": "floorp",
+    "name": "Floorp",
+    "tagline": "A Firefox fork for those who want vertical tabs and deep UI control",
+    "traits": {
+      "privacy": 8,
+      "speed": 7,
+      "customization": 9,
+      "minimalism": 4,
+      "features": 8,
+      "openSource": 10,
+      "resourceEfficiency": 6,
+      "ecosystem": 3,
+      "innovation": 7,
+      "easeOfUse": 5
+    },
+    "highlights": [
+      "Vertical tabs and sidebar workspaces built into the UI",
+      "Fully open source, developed by a Japanese student team",
+      "Deeply customizable toolbar and panel layout"
+    ],
+    "platforms": [
+      "windows",
+      "macos-arm",
+      "macos-intel"
+    ],
+    "bestFor": "Firefox power users who want vertical tab management and richer UI controls without extensions",
+    "discontinued": false,
+    "discontinuedNote": null
+  },
+  {
+    "id": "mullvad-browser",
+    "name": "Mullvad Browser",
+    "tagline": "Designed by the Tor Project to make every user look identical — the ultimate anti-fingerprint browser",
+    "traits": {
+      "privacy": 10,
+      "speed": 6,
+      "customization": 2,
+      "minimalism": 7,
+      "features": 3,
+      "openSource": 10,
+      "resourceEfficiency": 6,
+      "ecosystem": 1,
+      "innovation": 6,
+      "easeOfUse": 6
+    },
+    "highlights": [
+      "Fingerprint resistance baked into every browser setting by design",
+      "Developed in collaboration with the Tor Project",
+      "No account needed, no sync, minimal attack surface"
+    ],
+    "platforms": [
+      "windows",
+      "macos-arm",
+      "macos-intel"
+    ],
+    "bestFor": "Privacy-first users who want Tor-level fingerprint protection without routing through the Tor network",
+    "discontinued": false,
+    "discontinuedNote": null
+  },
+  {
+    "id": "thorium",
+    "name": "Thorium",
+    "tagline": "A performance-optimized Chromium build — compiled for speed, not compromise",
+    "traits": {
+      "privacy": 5,
+      "speed": 10,
+      "customization": 6,
+      "minimalism": 5,
+      "features": 5,
+      "openSource": 7,
+      "resourceEfficiency": 6,
+      "ecosystem": 7,
+      "innovation": 5,
+      "easeOfUse": 7
+    },
+    "highlights": [
+      "Recompiled with AVX2/SSE4 optimizations for measurable Speedometer gains",
+      "Chrome-compatible with most extensions and sites",
+      "Strips some Google telemetry compared to stock Chromium"
+    ],
+    "platforms": [
+      "windows",
+      "macos-arm",
+      "macos-intel"
+    ],
+    "bestFor": "Speed enthusiasts on desktop who want to squeeze every point out of their hardware's benchmark potential",
+    "discontinued": false,
+    "discontinuedNote": null
+  }
+]
