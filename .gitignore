@@ -27,6 +27,8 @@ yarn-error.log*
 
 # local env files
 .env*.local
+.env.test
+.env.staging
 
 # vercel
 .vercel
@@ -38,3 +40,27 @@ next-env.d.ts
 .env
 .cursor/
 .todo/
+
+# IDE / Editor
+.vscode/
+.idea/
+*.code-workspace
+*.swp
+*.swo
+
+# macOS
+.AppleDouble/
+.LSOverride
+._*
+
+# Windows
+Thumbs.db
+desktop.ini
+
+# Build and cache tools
+.eslintcache
+.prettier*
+.husky/_/.log
+
+# Archives
+*.tgz
