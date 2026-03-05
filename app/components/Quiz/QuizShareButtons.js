@@ -1,13 +1,18 @@
 'use client';
 
 import { SHARE_COPY } from '../../lib/quiz-constants';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const BASE_URL = 'https://browserating.com';
 
 export default function QuizShareButtons({ browserId, browserName }) {
   const [copied, setCopied] = useState(false);
+  const [hasNativeShare, setHasNativeShare] = useState(false);
   const shareUrl = `${BASE_URL}/quiz?r=${browserId}`;
+
+  useEffect(() => {
+    setHasNativeShare(!!navigator.share); // eslint-disable-line react-hooks/set-state-in-effect
+  }, []);
 
   const handleCopy = async () => {
     try {
@@ -46,8 +51,6 @@ export default function QuizShareButtons({ browserId, browserName }) {
       });
     } catch {}
   };
-
-  const hasNativeShare = typeof navigator !== 'undefined' && !!navigator.share;
 
   return (
     <div className="bg-gray-50 dark:bg-gray-800/50 rounded-2xl p-4 sm:p-5 border border-gray-200 dark:border-gray-700">

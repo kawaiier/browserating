@@ -16,29 +16,32 @@ const LS_KEY = 'brating_quiz_last_result';
 export default function QuizContainer({ browserProfiles, questions, sharedResultId }) {
   const [step, setStep] = useState(sharedResultId ? STEP_RESULTS : STEP_INTRO);
   const [answers, setAnswers] = useState([]);
-  const [results, setResults] = useState(null);
+  const [results, setResults] = useState(() => {
+    if (sharedResultId) {
+      const profile = browserProfiles.find((b) => b.id === sharedResultId);
+      if (profile) {
+        return { topResults: [profile], userTraits: null, rankedBrowsers: [], isShared: true };
+      }
+    }
+    return null;
+  });
   const [direction, setDirection] = useState('forward');
   const [computing, setComputing] = useState(false);
   const computingTimer = useRef(null);
 
+  // Restore last result from localStorage on non-shared visits
   useEffect(() => {
-    if (sharedResultId) {
-      const profile = browserProfiles.find((b) => b.id === sharedResultId);
-      if (profile) {
-        setResults({ topResults: [profile], userTraits: null, rankedBrowsers: [], isShared: true });
-      }
-    } else {
-      try {
-        const saved = localStorage.getItem(LS_KEY);
-        if (saved) {
-          const parsed = JSON.parse(saved);
-          if (parsed && parsed.topResults) {
-            setResults(parsed);
-          }
+    if (sharedResultId) return;
+    try {
+      const saved = localStorage.getItem(LS_KEY);
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        if (parsed && parsed.topResults) {
+          setResults(parsed); // eslint-disable-line react-hooks/set-state-in-effect
         }
-      } catch {}
-    }
-  }, [sharedResultId, browserProfiles]);
+      }
+    } catch {}
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     return () => {

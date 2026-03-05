@@ -17,13 +17,10 @@ const floatKeyframes = `
 `;
 
 export default function QuizIntro({ browserProfiles, onStart }) {
-  const floatBrowsers = useMemo(() => {
-    const picks = FLOAT_BROWSERS.map((id) => browserProfiles.find((b) => b.id === id)).filter(
-      Boolean
-    );
-    if (picks.length < 3) return picks;
-    return picks.slice(0, typeof window !== 'undefined' && window.innerWidth < 640 ? 3 : 5);
-  }, [browserProfiles]);
+  const floatBrowsers = useMemo(
+    () => FLOAT_BROWSERS.map((id) => browserProfiles.find((b) => b.id === id)).filter(Boolean),
+    [browserProfiles]
+  );
 
   return (
     <div className="min-h-[calc(100vh-3.5rem)] flex flex-col items-center justify-center px-4 py-12">
@@ -34,7 +31,7 @@ export default function QuizIntro({ browserProfiles, onStart }) {
           {floatBrowsers.map((browser, i) => (
             <div
               key={browser.id}
-              className="quiz-float"
+              className={`quiz-float${i >= 3 ? ' hidden sm:block' : ''}`}
               style={{
                 animation: `floatY 3s ease-in-out infinite`,
                 animationDelay: `${i * 0.3}s`,
