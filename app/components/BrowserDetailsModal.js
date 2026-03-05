@@ -419,9 +419,9 @@ const BrowserDetailsModal = ({ browser, selectedPlatform, onClose }) => {
                             </span>
                           )}
                         </div>
-                        {version.releaseDate && (
+                        {version.date && (
                           <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
-                            Released: {new Date(version.releaseDate).toLocaleDateString()}
+                            Tested: {new Date(version.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
                           </p>
                         )}
                       </div>
@@ -478,6 +478,9 @@ const BrowserDetailsModal = ({ browser, selectedPlatform, onClose }) => {
                       <th className="text-right py-3 px-3 sm:px-4 font-semibold text-gray-900 dark:text-white">
                         Ad Block
                       </th>
+                      <th className="text-right py-3 px-3 sm:px-4 font-semibold text-gray-900 dark:text-white">
+                        Tested
+                      </th>
                     </tr>
                   </thead>
                   <tbody>
@@ -506,6 +509,9 @@ const BrowserDetailsModal = ({ browser, selectedPlatform, onClose }) => {
                         </td>
                         <td className="py-3 px-3 sm:px-4 text-right font-mono text-gray-600 dark:text-gray-400">
                           {version.scores.adblock ? `${version.scores.adblock.toFixed(0)}%` : '—'}
+                        </td>
+                        <td className="py-3 px-3 sm:px-4 text-right font-mono text-gray-600 dark:text-gray-400">
+                          {version.date ? new Date(version.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : '—'}
                         </td>
                       </tr>
                     ))}
