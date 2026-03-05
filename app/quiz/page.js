@@ -7,16 +7,75 @@ import Footer from '../components/Footer';
 import QuizContainer from '../components/Quiz/QuizContainer';
 import QuizHeader from '../components/Quiz/QuizHeader';
 
-export const metadata = {
-  title: 'Browser Quiz — Find Your Perfect Browser | BrowseRating',
-  description:
-    'Answer 7 quick questions and discover which browser is the best match for your needs. Personalized recommendations based on privacy, speed, features, and more.',
-  openGraph: {
-    title: 'Find Your Perfect Browser — BrowseRating Quiz',
-    description: 'Take our 2-minute quiz to find the browser that fits you best.',
-    url: 'https://browserating.com/quiz',
-  },
-};
+export async function generateMetadata({ searchParams }) {
+  const params = await searchParams;
+  const r = params?.r ?? null;
+
+  const BASE_URL = 'https://browserating.com';
+  const ogImageBase = `${BASE_URL}/api/og/quiz`;
+
+  if (!r) {
+    return {
+      title: 'Browser Quiz — Find Your Perfect Browser | BrowseRating',
+      description:
+        'Answer 7 quick questions and discover which browser is the best match for your needs. Personalized recommendations based on privacy, speed, features, and more.',
+      openGraph: {
+        title: 'Find Your Perfect Browser — BrowseRating Quiz',
+        description: 'Take our 2-minute quiz to find the browser that fits you best.',
+        url: `${BASE_URL}/quiz`,
+        images: [{ url: ogImageBase, width: 1200, height: 630, alt: 'BrowseRating Browser Quiz' }],
+      },
+      twitter: {
+        card: 'summary_large_image',
+        images: [ogImageBase],
+      },
+    };
+  }
+
+  const profilesRaw = await fs.readFile(
+    path.join(process.cwd(), 'public', 'data', 'quiz', 'browser-profiles.json'),
+    'utf8'
+  );
+  const profiles = JSON.parse(profilesRaw);
+  const profile = profiles.find((p) => p.id === r.toLowerCase());
+
+  if (!profile) {
+    return {
+      title: 'Browser Quiz — Find Your Perfect Browser | BrowseRating',
+      description:
+        'Answer 7 quick questions and discover which browser is the best match for your needs.',
+      openGraph: {
+        title: 'Find Your Perfect Browser — BrowseRating Quiz',
+        description: 'Take our 2-minute quiz to find the browser that fits you best.',
+        url: `${BASE_URL}/quiz?r=${r}`,
+        images: [{ url: ogImageBase, width: 1200, height: 630, alt: 'BrowseRating Browser Quiz' }],
+      },
+      twitter: {
+        card: 'summary_large_image',
+        images: [ogImageBase],
+      },
+    };
+  }
+
+  const ogImageUrl = `${ogImageBase}?r=${r}`;
+
+  return {
+    title: `Your browser match: ${profile.name} | BrowseRating`,
+    description: `I matched with ${profile.name} on the BrowseRating browser quiz. Find your perfect browser!`,
+    openGraph: {
+      title: `Your browser match: ${profile.name}`,
+      description: `I matched with ${profile.name} on the BrowseRating browser quiz. Find yours at browserating.com/quiz`,
+      url: `${BASE_URL}/quiz?r=${r}`,
+      images: [{ url: ogImageUrl, width: 1200, height: 630, alt: `Your browser match: ${profile.name}` }],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: `Your browser match: ${profile.name}`,
+      description: `I matched with ${profile.name}! Find your perfect browser at browserating.com/quiz`,
+      images: [ogImageUrl],
+    },
+  };
+}
 
 export default async function QuizPage({ searchParams }) {
   const dataDir = path.join(process.cwd(), 'public', 'data');
