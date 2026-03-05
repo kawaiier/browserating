@@ -209,7 +209,7 @@ export const QUIZ_INTRO_COPY = {
 // Social share copy
 export const SHARE_COPY = {
   twitter: (browserName) =>
-    `My browser match is ${browserName}! 🎯 Find your perfect browser at browserating.com/quiz`,
+    `My browser match is ${browserName}! 🎯 Find your perfect browser:`,
   copySuccess: "Link copied!",
   copyLabel: "Copy link",
   nativeShareTitle: "My Browser Match",
