@@ -52,7 +52,21 @@ export default function QuizQuestion({
           </p>
         )}
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-6">
+        <div
+          className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-6"
+          onKeyDown={(e) => {
+            const buttons = e.currentTarget.querySelectorAll('button');
+            const idx = Array.from(buttons).indexOf(document.activeElement);
+            if (idx === -1) return;
+            if (e.key === 'ArrowDown' || e.key === 'ArrowRight') {
+              e.preventDefault();
+              buttons[(idx + 1) % buttons.length].focus();
+            } else if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') {
+              e.preventDefault();
+              buttons[(idx - 1 + buttons.length) % buttons.length].focus();
+            }
+          }}
+        >
           {question.options.map((option) => (
             <QuizOption
               key={option.id}

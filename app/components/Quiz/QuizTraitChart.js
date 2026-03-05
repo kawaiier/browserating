@@ -1,6 +1,5 @@
 'use client';
 
-import { Filler, Legend, LineElement, PointElement, RadialLinearScale, Tooltip } from 'chart.js';
 import {
   BROWSER_DATASET_STYLE,
   RADAR_CHART_OPTIONS,

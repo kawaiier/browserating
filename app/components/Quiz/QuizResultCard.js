@@ -79,6 +79,11 @@ export default function QuizResultCard({ browser, size = 'runner-up' }) {
               {browser.tagline}
             </p>
           )}
+          {isHero && browser.bestFor && (
+            <p className="mt-2 text-sm text-purple-700 dark:text-purple-300 font-medium">
+              Best for: {browser.bestFor}
+            </p>
+          )}
         </div>
       </div>
 

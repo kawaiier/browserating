@@ -5,6 +5,16 @@ import QuizShareButtons from './QuizShareButtons';
 import QuizTraitChart from './QuizTraitChart';
 import Link from 'next/link';
 
+const fadeInUpKeyframes = `
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0);    }
+}
+@media (prefers-reduced-motion: reduce) {
+  .quiz-fade-in-up { animation: none !important; opacity: 1 !important; transform: none !important; }
+}
+`;
+
 export default function QuizResults({ results, userTraits, onRetake, isShared }) {
   const { topResults } = results;
   const hero = topResults[0];
@@ -14,6 +24,7 @@ export default function QuizResults({ results, userTraits, onRetake, isShared })
 
   return (
     <div className="px-4 sm:px-6 py-10 max-w-2xl mx-auto w-full">
+      <style>{fadeInUpKeyframes}</style>
       {isShared && (
         <div className="mb-8 text-center">
           <p className="text-gray-600 dark:text-gray-400 mb-4">
@@ -45,8 +56,8 @@ export default function QuizResults({ results, userTraits, onRetake, isShared })
       )}
 
       <div
-        className="animate-in fade-in slide-in-from-bottom-4 duration-500"
-        style={{ animationFillMode: 'both' }}
+        className="quiz-fade-in-up"
+        style={{ animation: 'fadeInUp 500ms ease-out both' }}
       >
         <QuizResultCard browser={hero} size="hero" />
       </div>
@@ -66,8 +77,8 @@ export default function QuizResults({ results, userTraits, onRetake, isShared })
             {runnerUps.map((browser, i) => (
               <div
                 key={browser.id}
-                className="animate-in fade-in slide-in-from-bottom-4 duration-500"
-                style={{ animationDelay: `${(i + 1) * 150 + 200}ms`, animationFillMode: 'both' }}
+                className="quiz-fade-in-up"
+                style={{ animation: 'fadeInUp 500ms ease-out both', animationDelay: `${(i + 1) * 150 + 200}ms` }}
               >
                 <QuizResultCard browser={browser} size="runner-up" />
               </div>
