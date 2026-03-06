@@ -259,6 +259,26 @@ export default function Header({ lastModified }) {
                 </svg>
               </a>
 
+              <Link
+                href="/quiz"
+                className="group inline-flex items-center gap-2 bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white font-semibold px-8 py-4 rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300"
+              >
+                <span>Find Your Browser</span>
+                <svg
+                  className="w-5 h-5 group-hover:translate-x-1 transition-transform"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"
+                  />
+                </svg>
+              </Link>
+
               <a
                 href="#methodology"
                 className="inline-flex items-center gap-2 bg-white/20 dark:bg-gray-800/30 backdrop-blur-sm text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white font-medium px-6 py-3 rounded-xl border border-white/30 dark:border-gray-700/50 hover:bg-white/30 dark:hover:bg-gray-800/50 transition-all duration-300"
