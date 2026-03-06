@@ -54,6 +54,9 @@ export default function QuizIntro({ browserProfiles, onStart }) {
 
         <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4 leading-tight">
           {QUIZ_INTRO_COPY.headline}
+          <span className="ml-3 inline-flex items-center px-3 py-1 rounded-full text-sm font-semibold bg-gradient-to-r from-amber-100 to-orange-100 text-amber-800 dark:from-amber-900/30 dark:to-orange-900/30 dark:text-amber-300 border border-amber-200 dark:border-amber-800/50">
+            Beta
+          </span>
         </h1>
 
         <p className="text-lg text-gray-600 dark:text-gray-400 mb-8 max-w-xl mx-auto leading-relaxed">

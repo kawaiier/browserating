@@ -264,6 +264,9 @@ export default function Header({ lastModified }) {
                 className="group inline-flex items-center gap-2 bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white font-semibold px-8 py-4 rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300"
               >
                 <span>Find Your Browser</span>
+                <span className="bg-white/20 text-xs font-bold px-2 py-1 rounded-full uppercase tracking-wide">
+                  Beta
+                </span>
                 <svg
                   className="w-5 h-5 group-hover:translate-x-1 transition-transform"
                   fill="none"
