@@ -2,322 +2,386 @@
   {
     "name": "Floorp",
     "logo": "/images/browser-logos/floorp.png",
-    "website": "https://floorp.app/en"
+    "website": "https://floorp.app/en",
+    "description": "Floorp is a Firefox-based browser developed in Japan by Ablaze, featuring a highly customizable interface with multiple layout presets, a built-in notes panel, and full support for Firefox extensions. It offers UI options not available in standard Firefox, including a vertical tab bar and collapsible sidebars. Aimed at users who want Firefox's privacy and extension ecosystem with a more flexible, personalized interface."
   },
   {
     "name": "Mullvad Browser",
     "logo": "/images/browser-logos/mullvad.png",
-    "website": "https://mullvad.net/en/browser"
+    "website": "https://mullvad.net/en/browser",
+    "description": "Mullvad Browser is a privacy-hardened Firefox fork developed in collaboration between Mullvad VPN and the Tor Project. It is configured to minimize fingerprinting and resist tracking, applying many of the same anti-surveillance techniques as Tor Browser but without routing traffic through the Tor network by default. Designed to be used alongside a VPN, it aims to make all users appear as identical as possible to reduce identifiability."
   },
   {
     "name": "Librewolf",
     "logo": "/images/browser-logos/librewolf.svg",
-    "website": "https://librewolf.net/"
+    "website": "https://librewolf.net/",
+    "description": "Librewolf is a hardened fork of Firefox with all telemetry, data collection, and Mozilla-specific services removed. It ships with uBlock Origin pre-installed and applies strict privacy and security settings out of the box. Targeted at users who want Firefox's rendering engine and extension support without any of Mozilla's data collection or cloud integrations."
   },
   {
     "name": "Firefox",
     "logo": "/images/browser-logos/firefox.png",
-    "website": "https://www.mozilla.org/firefox/"
+    "website": "https://www.mozilla.org/firefox/",
+    "description": "Firefox is Mozilla's open-source browser powered by the Gecko rendering engine — the only major browser engine not derived from Chromium or WebKit. It offers strong privacy defaults, a large extension library, and broad customization options. Developed by a non-profit organization, Firefox remains one of the few mainstream alternatives to Chromium-based browsers."
   },
   {
     "name": "Firefox Developer Edition",
     "engine": "Gecko",
     "logo": "/images/browser-logos/firefox-dev.png",
-    "website": "https://www.mozilla.org/en-US/firefox/developer/"
+    "website": "https://www.mozilla.org/en-US/firefox/developer/",
+    "description": "Firefox Developer Edition is the pre-release channel of Firefox aimed at web developers, shipping around six weeks ahead of stable with experimental DevTools features and web platform APIs."
   },
   {
     "name": "Firefox Beta",
     "logo": "/images/browser-logos/firefox-beta.png",
-    "website": "https://www.mozilla.org/en-US/firefox/channel/desktop/#beta"
+    "website": "https://www.mozilla.org/en-US/firefox/channel/desktop/#beta",
+    "description": "Firefox Beta is the pre-release testing channel for Firefox, offering upcoming features and fixes approximately four weeks before they reach the stable release."
   },
   {
     "name": "Firefox Nightly",
     "logo": "/images/browser-logos/firefox-nightly.png",
-    "website": "https://www.mozilla.org/en-US/firefox/channel/desktop/#nightly"
+    "website": "https://www.mozilla.org/en-US/firefox/channel/desktop/#nightly",
+    "description": "Firefox Nightly is the earliest development channel for Firefox, updated daily with the latest code changes and experimental features intended for developers and testers."
   },
   {
     "name": "Waterfox",
     "logo": "/images/browser-logos/waterfox.png",
-    "website": "https://www.waterfox.net/"
+    "website": "https://www.waterfox.net/",
+    "description": "Waterfox is a Firefox fork that removes telemetry, data collection, and sponsored content found in standard Firefox builds. It supports both modern WebExtensions and, in some versions, legacy Firefox add-ons. Aimed at privacy-conscious users who want a familiar Firefox experience without Mozilla's usage reporting."
   },
   {
     "name": "Zen Browser",
     "logo": "/images/browser-logos/zen.svg",
-    "website": "https://www.zen-browser.app/"
+    "website": "https://www.zen-browser.app/",
+    "description": "Zen Browser is a Firefox-based browser focused on a clean, distraction-free browsing experience with a strong emphasis on tab and workspace organization. It features a compact sidebar tab layout, workspaces for separating browsing contexts, and a minimal UI that keeps content front and center. Built for users who want better session management within Firefox's privacy and extension framework."
   },
   {
     "name": "Zen Browser Twilight",
     "logo": "/images/browser-logos/zen-twilight.png",
-    "website": "https://zen-browser.app/download/?twilight"
+    "website": "https://zen-browser.app/download/?twilight",
+    "description": "Zen Browser Twilight is the nightly pre-release channel of Zen Browser, offering the latest experimental features and changes ahead of stable releases."
   },
   {
     "name": "Tor Browser",
     "logo": "/images/browser-logos/tor.png",
-    "website": "https://www.torproject.org/download/"
+    "website": "https://www.torproject.org/download/",
+    "description": "Tor Browser is a modified version of Firefox developed by the Tor Project that routes all traffic through the Tor anonymity network, masking the user's IP address across multiple relays. It is preconfigured to block fingerprinting, strip cookies between sessions, and restrict JavaScript on higher security levels. Designed for users who require strong anonymity, access to onion services, or the ability to bypass censorship."
   },
   {
     "name": "Brave",
     "logo": "/images/browser-logos/brave.png",
-    "website": "https://brave.com/"
+    "website": "https://brave.com/",
+    "description": "Brave is a Chromium-based browser with aggressive ad and tracker blocking built in by default, requiring no extensions or manual setup. It includes a built-in Tor private window, fingerprinting protection, and an optional crypto rewards system (BAT) that lets users earn tokens for viewing privacy-respecting ads. Aimed at users who want a faster, less tracked web experience out of the box."
   },
   {
     "name": "Brave Beta",
     "logo": "/images/browser-logos/bravebeta.webp",
-    "website": "https://brave.com/"
+    "website": "https://brave.com/",
+    "description": "Brave Beta is the pre-release testing channel for Brave, offering upcoming features and fixes before they reach the stable release."
   },
   {
     "name": "Brave Nightly",
     "logo": "/images/browser-logos/bravenightly.webp",
-    "website": "https://brave.com/"
+    "website": "https://brave.com/",
+    "description": "Brave Nightly is the earliest development channel for Brave, updated frequently with the latest code changes for developers and testers."
   },
   {
     "name": "Google Chrome",
     "logo": "/images/browser-logos/chrome.png",
-    "website": "https://www.google.com/chrome/"
+    "website": "https://www.google.com/chrome/",
+    "description": "Google Chrome is the world's most widely used browser, built on the Blink rendering engine and developed by Google. It is known for its speed, extensive extension library via the Chrome Web Store, and deep integration with Google services and accounts. Chrome also serves as the foundation for the open-source Chromium project, on which many other browsers are built."
   },
   {
     "name": "Google Chrome Canary",
     "logo": "/images/browser-logos/chrome-canary.png",
-    "website": "https://www.google.com/chrome/canary/"
+    "website": "https://www.google.com/chrome/canary/",
+    "description": "Google Chrome Canary is the earliest experimental build of Chrome, updated daily with the latest changes and intended for developers willing to encounter instability."
   },
   {
     "name": "Google Chrome Beta",
     "logo": "/images/browser-logos/chromebeta.png",
-    "website": "https://www.google.com/chrome/beta/"
+    "website": "https://www.google.com/chrome/beta/",
+    "description": "Google Chrome Beta is the pre-release channel for Chrome, offering upcoming features roughly four weeks before they reach the stable release."
   },
   {
     "name": "Samsung Internet",
     "logo": "/images/browser-logos/samsung-internet.png",
-    "website": "https://www.samsung.com/us/support/owners/app/samsung-internet"
+    "website": "https://www.samsung.com/us/support/owners/app/samsung-internet",
+    "description": "Samsung Internet is a Chromium-based browser pre-installed on Samsung Android devices. It features a content blocker extension system, integration with Samsung's Secure Folder, and support for Samsung DeX desktop mode. Widely used across Samsung's device lineup, it includes privacy controls such as Secret Mode and tracker blocking."
   },
   {
     "name": "Samsung Internet Beta",
     "logo": "/images/browser-logos/samsung-internet-beta.png",
-    "website": "https://www.samsung.com/us/support/owners/app/samsung-internet"
+    "website": "https://www.samsung.com/us/support/owners/app/samsung-internet",
+    "description": "Samsung Internet Beta is the pre-release testing channel for Samsung Internet, providing access to upcoming features before they roll out to stable users."
   },
   {
     "name": "Orion",
     "logo": "/images/browser-logos/orion.png",
-    "website": "https://kagi.com/orion/"
+    "website": "https://kagi.com/orion/",
+    "description": "Orion is a WebKit-based browser for macOS and iOS developed by Kagi that uniquely supports both Chrome and Firefox browser extensions without running Chromium underneath. It emphasizes speed, low resource usage, and native macOS integration, making it lighter than most Chromium-based alternatives. Users get access to a large extension ecosystem while retaining the performance characteristics of a WebKit browser."
   },
   {
     "name": "Safari",
     "logo": "/images/browser-logos/safari.png",
-    "website": "https://www.apple.com/safari/"
+    "website": "https://www.apple.com/safari/",
+    "description": "Safari is Apple's built-in browser for macOS, iOS, and iPadOS, powered by the WebKit rendering engine. It is known for strong energy efficiency, deep integration with the Apple ecosystem including Handoff, iCloud Keychain, and Passkeys, and Intelligent Tracking Prevention to limit cross-site tracking. On iOS and iPadOS, all third-party browsers are required to use WebKit, making Safari's engine universal on Apple's mobile platforms."
   },
   {
     "name": "DuckDuckGo Browser",
     "logo": "/images/browser-logos/ddg.jpg",
-    "website": "https://duckduckgo.com/"
+    "website": "https://duckduckgo.com/",
+    "description": "DuckDuckGo Browser is a privacy-focused browser from the makers of the DuckDuckGo search engine. It includes built-in tracker blocking, automatic HTTPS upgrading, a Fire Button that instantly clears all tabs and browsing data, and an email protection feature that strips trackers from incoming emails. Available on mobile and desktop, it defaults to DuckDuckGo search and avoids collecting personal data."
   },
   {
     "name": "Microsoft Edge",
     "logo": "/images/browser-logos/edge.png",
-    "website": "https://www.microsoft.com/edge"
+    "website": "https://www.microsoft.com/edge",
+    "description": "Microsoft Edge is Microsoft's Chromium-based browser, released in 2020 as a replacement for the legacy EdgeHTML-based Edge. It includes features such as Collections for organizing research, vertical tabs, a built-in PDF editor, and integration with Microsoft's Copilot AI assistant. Pre-installed on Windows, Edge is also available across macOS, iOS, and Android."
   },
   {
     "name": "Microsoft Edge Beta",
     "logo": "/images/browser-logos/edge-beta.png",
-    "website": "https://www.microsoft.com/edge"
+    "website": "https://www.microsoft.com/edge",
+    "description": "Microsoft Edge Beta is the pre-release channel for Edge, delivering upcoming features and fixes roughly four weeks ahead of the stable release."
   },
   {
     "name": "Microsoft Edge Canary",
     "logo": "/images/browser-logos/edge-canary.png",
-    "website": "https://www.microsoft.com/edge"
+    "website": "https://www.microsoft.com/edge",
+    "description": "Microsoft Edge Canary is the earliest development channel for Edge, updated daily with the latest changes for developers and early adopters."
   },
   {
     "name": "Opera",
     "logo": "/images/browser-logos/opera.png",
-    "website": "https://www.opera.com/"
+    "website": "https://www.opera.com/",
+    "description": "Opera is a Chromium-based browser with a built-in free VPN, ad blocker, and a customizable sidebar providing quick access to messaging apps, social media, and productivity tools. One of the longest-running browsers, Opera has historically introduced features later adopted elsewhere, including tabbed browsing and speed dial. Available on desktop and mobile platforms."
   },
   {
     "name": "Opera Beta",
     "logo": "/images/browser-logos/opera-beta.webp",
-    "website": "https://www.opera.com/"
+    "website": "https://www.opera.com/",
+    "description": "Opera Beta is the pre-release testing channel for Opera, offering upcoming features before they reach the stable release."
   },
   {
     "name": "Opera Mini",
     "logo": "/images/browser-logos/opera-mini.png",
-    "website": "https://www.opera.com/"
+    "website": "https://www.opera.com/",
+    "description": "Opera Mini is a lightweight browser for Android designed for low-bandwidth environments and entry-level devices. It compresses web pages through Opera's servers before delivering them, significantly reducing data consumption. Popular in markets with limited or expensive mobile data connectivity."
   },
   {
     "name": "Opera GX",
     "logo": "/images/browser-logos/opera-gx.png",
-    "website": "https://www.opera.com/gx"
+    "website": "https://www.opera.com/gx",
+    "description": "Opera GX is a variant of Opera built specifically for gamers. It includes CPU, RAM, and network bandwidth limiters that cap the browser's resource usage to avoid interfering with game performance. Additional features include gaming news, Twitch integration, Discord access, and a customizable dark visual aesthetic."
   },
   {
     "name": "Vivaldi",
     "logo": "/images/browser-logos/vivaldi.png",
-    "website": "https://vivaldi.com/"
+    "website": "https://vivaldi.com/",
+    "description": "Vivaldi is a Chromium-based browser built for power users who want deep customization over every aspect of their browsing environment. Features include tab stacking, tab tiling, a built-in email client, calendar, RSS reader, and note-taking tools, all within the browser itself. Nearly every element of the interface — color themes, keyboard shortcuts, mouse gestures, and toolbars — can be configured to the user's preference."
   },
   {
     "name": "Vivaldi Snapshot",
     "logo": "/images/browser-logos/vivaldi-snapshot.png",
-    "website": "https://vivaldi.com/"
+    "website": "https://vivaldi.com/",
+    "description": "Vivaldi Snapshot is the pre-release channel for Vivaldi, providing early access to new features and fixes before they reach the stable release."
   },
   {
     "name": "Yandex Browser",
     "logo": "/images/browser-logos/yandex.png",
-    "website": "https://browser.yandex.com/"
+    "website": "https://browser.yandex.com/",
+    "description": "Yandex Browser is a Chromium-based browser developed by Russian technology company Yandex. It integrates with Yandex services including search, translation, and Protect — a security layer that scans for malware and unsafe connections. Features include a Tableau-style start page, Turbo mode for faster loading on slow connections, and voice search."
   },
   {
     "name": "Yandex Browser Beta",
     "logo": "/images/browser-logos/yandex-beta.webp",
-    "website": "https://browser.yandex.com/"
+    "website": "https://browser.yandex.com/",
+    "description": "Yandex Browser Beta is the pre-release testing channel for Yandex Browser, offering upcoming features before they reach the stable release."
   },
   {
     "name": "Yandex Browser Alpha",
     "logo": "/images/browser-logos/yandex-alpha.png",
-    "website": "https://browser.yandex.com/"
+    "website": "https://browser.yandex.com/",
+    "description": "Yandex Browser Alpha is the earliest pre-release channel for Yandex Browser, intended for developers and testers who want the latest changes ahead of beta."
   },
   {
     "name": "Arc Browser",
     "logo": "/images/browser-logos/arc.png",
-    "website": "https://arc.net/"
+    "website": "https://arc.net/",
+    "description": "Arc is a Chromium-based browser by The Browser Company that fundamentally reimagines tab and workspace management. It replaces the traditional tab bar with a collapsible sidebar, introduces Spaces for separating browsing contexts, and includes features like Boosts for customizing websites and a built-in note-taking surface. Primarily targeted at macOS users seeking a more organized, visually distinct browsing experience."
   },
   {
     "name": "Sigma OS",
     "logo": "/images/browser-logos/sigmaos.png",
-    "website": "https://sigmaos.com/"
+    "website": "https://sigmaos.com/",
+    "description": "Sigma OS is a Chromium-based browser built around productivity and workspace organization. It allows users to group browser tabs alongside web apps into multi-app workspaces, keeping related tools visually and functionally together. Aimed at professionals and teams who manage multiple projects or clients within a single browser environment."
   },
   {
     "name": "Cromite",
     "logo": "/images/browser-logos/cromite.png",
-    "website": "https://github.com/uazo/cromite"
+    "website": "https://github.com/uazo/cromite",
+    "description": "Cromite is a Chromium fork for Android that continues the work of the discontinued Bromite project. It includes a built-in ad blocker, anti-fingerprinting patches, and additional privacy hardening not present in standard Chrome for Android. Distributed through its own F-Droid repository, it is aimed at Android users who want a privacy-focused Chromium-based browser."
   },
   {
     "name": "Kiwi",
     "logo": "/images/browser-logos/kiwi.png",
-    "website": "https://kiwibrowser.com/"
+    "website": "https://kiwibrowser.com/",
+    "description": "Kiwi is a Chromium-based browser for Android that supports desktop Chrome extensions — a feature not available in standard Chrome for Android. It also includes a built-in ad blocker, a bottom address bar option, and night mode. Popular among Android users who depend on extensions such as password managers, content blockers, or productivity tools."
   },
   {
     "name": "Via",
     "logo": "/images/browser-logos/via.png",
-    "website": "https://www.viayoo.com/en/"
+    "website": "https://www.viayoo.com/en/",
+    "description": "Via is a lightweight, minimalist Chromium-based browser for Android with an extremely small installation size and a simple, distraction-free interface. It includes basic ad filtering and a clean tab management experience without the overhead of more feature-heavy browsers. Popular among users looking for a fast, no-frills mobile browsing option."
   },
   {
     "name": "Soul",
     "logo": "/images/browser-logos/soul.png",
-    "website": "https://play.google.com/store/apps/details?id=com.mycompany.app.soulbrowser&hl=en"
+    "website": "https://play.google.com/store/apps/details?id=com.mycompany.app.soulbrowser&hl=en",
+    "description": "Soul is a minimalist Android browser focused on a clean, distraction-free reading and browsing experience. It features a stripped-back interface with minimal UI chrome, keeping the focus on content rather than browser controls. Targeted at users who prefer simplicity over a comprehensive feature set."
   },
   {
     "name": "Quetta",
     "logo": "/images/browser-logos/quetta.png",
-    "website": "https://www.quetta.net/"
+    "website": "https://www.quetta.net/",
+    "description": "Quetta is a privacy-focused browser for Android with built-in ad and tracker blocking. It features a clean, straightforward interface and aims to reduce data collection and unwanted content during browsing sessions without requiring additional extensions or configuration."
   },
   {
     "name": "Thorium",
     "logo": "/images/browser-logos/thorium.webp",
-    "website": "https://thorium.rocks/"
+    "website": "https://thorium.rocks/",
+    "description": "Thorium is a Chromium fork optimized for maximum performance through aggressive compiler flags and CPU-specific build optimizations not enabled in standard Chromium. It removes some telemetry and adds performance-tuned settings by default. Available for desktop on Windows, macOS, and Linux, it is aimed at users who want to squeeze the most performance out of a Chromium-based browser."
   },
   {
     "name": "Mull",
     "logo": "/images/browser-logos/mull.png",
-    "website": "https://f-droid.org/en/packages/us.spotco.fennec_dos/"
+    "website": "https://f-droid.org/en/packages/us.spotco.fennec_dos/",
+    "description": "Mull is a privacy-hardened Firefox fork for Android, distributed through F-Droid. Based on Mozilla's Fenix codebase, it strips out telemetry and applies stricter privacy settings by default than standard Firefox for Android. Recommended for Android users who want a Firefox-based browser with no Mozilla data collection."
   },
   {
     "name": "Icaraven",
     "logo": "/images/browser-logos/iceraven.png",
-    "website": "https://github.com/fork-maintainers/iceraven-browser"
+    "website": "https://github.com/fork-maintainers/iceraven-browser",
+    "description": "Icaraven is a community-maintained Firefox fork for Android that extends the official Firefox experience with support for a wider range of extensions beyond Mozilla's curated mobile list. It allows users to install desktop Firefox add-ons on Android that are otherwise restricted in the official app. Maintained on GitHub as an open-source project."
   },
   {
     "name": "Ghostery",
     "logo": "/images/browser-logos/ghostery.png",
-    "website": "https://www.ghostery.com/ghostery-private-browser"
+    "website": "https://www.ghostery.com/ghostery-private-browser",
+    "description": "Ghostery Private Browser is a Firefox-based browser with Ghostery's tracker intelligence built directly into the browser rather than as an extension. It blocks ads, trackers, and invasive scripts out of the box without any additional setup. Available on desktop and Android, it is aimed at users who want strong tracker blocking integrated at the browser level."
   },
   {
     "name": "Kito",
     "logo": "/images/browser-logos/kito.png",
-    "website": "https://play.google.com/store/apps/details?id=com.yjllqint.kito&hl=en"
+    "website": "https://play.google.com/store/apps/details?id=com.yjllqint.kito&hl=en",
+    "description": "Kito is a lightweight Android browser focused on speed and low resource consumption. It offers a minimal interface with basic browsing functionality and ad filtering, suited for users who want a fast and unobtrusive mobile browser."
   },
   {
     "name": "Dia",
     "logo": "/images/browser-logos/dia.png",
-    "website": "https://www.diabrowser.com/"
+    "website": "https://www.diabrowser.com/",
+    "description": "Dia is an AI-integrated browser developed by The Browser Company, the team behind Arc. It is designed around AI-assisted browsing, with the ability to answer questions, summarize pages, and assist with tasks directly within the browser interface. Currently in early access, Dia represents The Browser Company's next direction after Arc."
   },
   {
     "name": "Deta Surf",
     "logo": "/images/browser-logos/deta-surf.png",
-    "website": "https://deta.surf/"
+    "website": "https://deta.surf/",
+    "description": "Deta Surf is a personal browser with built-in AI assistance designed to help users manage and resurface their saved web content. It allows users to annotate, organize, and search across their browsing history and saved pages through an AI-powered interface. Aimed at researchers and knowledge workers who need to revisit and connect information from across the web."
   },
   {
     "name": "Strawberry",
     "logo": "/images/browser-logos/strawberry.png",
-    "website": "https://strawberrybrowser.com/"
+    "website": "https://strawberrybrowser.com/",
+    "description": "Strawberry is a minimal macOS browser focused on simplicity and a native-feeling interface. Designed for users who want a lightweight alternative to mainstream browsers without unnecessary features or UI complexity."
   },
   {
     "name": "Fellou",
     "logo": "/images/browser-logos/fellou.jpg",
-    "website": "https://fellou.ai/"
+    "website": "https://fellou.ai/",
+    "description": "Fellou is an AI-native browser built for agentic and automated web tasks. It allows AI agents to execute multi-step workflows within the browser — such as filling forms, extracting data, and navigating web apps — on behalf of the user. Designed for users who want to delegate repetitive or complex web-based tasks to AI automation."
   },
   {
     "name": "BrowserOS",
     "logo": "/images/browser-logos/browseros.jpg",
-    "website": "https://www.browseros.com/"
+    "website": "https://www.browseros.com/",
+    "description": "BrowserOS is a browser designed to function as a full operating system-like environment, enabling users to run web apps and manage their digital workflows entirely within the browser. It aims to replace traditional desktop applications with a unified, browser-native workspace."
   },
   {
     "name": "Kosmik",
     "logo": "/images/browser-logos/kosmik.jpg",
-    "website": "https://www.kosmik.app/"
+    "website": "https://www.kosmik.app/",
+    "description": "Kosmik is a spatial browser designed for creative and research workflows. It allows users to arrange web pages, images, notes, and media in a free-form visual canvas rather than linear tabs. Suited for designers, researchers, and creatives who think and work visually."
   },
   {
     "name": "Neo",
     "logo": "/images/browser-logos/neo.jpg",
-    "website": "https://neobrowser.ai/"
+    "website": "https://neobrowser.ai/",
+    "description": "Neo is an AI-powered browser that integrates AI assistance directly into the browsing experience. It is designed to help users search, summarize, and interact with web content more efficiently through built-in AI tools."
   },
   {
     "name": "Comet",
     "logo": "/images/browser-logos/comet.svg",
-    "website": "https://www.perplexity.ai/comet"
+    "website": "https://www.perplexity.ai/comet",
+    "description": "Comet is a browser developed by Perplexity with deep integration of Perplexity's AI search engine. It is designed to make AI-powered search, content summarization, and answer generation a first-class part of the browsing experience rather than a separate tool."
   },
   {
     "name": "Ora",
     "logo": "/images/browser-logos/ora.png",
-    "website": "https://www.orabrowser.com/"
+    "website": "https://www.orabrowser.com/",
+    "description": "Ora is a browser with integrated AI tools designed to assist with research and productivity tasks directly within the browsing interface, reducing the need to switch between the browser and separate AI applications."
   },
   {
     "name": "Helium",
     "logo": "/images/browser-logos/helium.jpg",
-    "website": "https://helium.computer/"
+    "website": "https://helium.computer/",
+    "description": "Helium is an AI-powered browser focused on agentic capabilities, enabling automated browsing and task execution within web environments. It is designed to allow AI to take actions on the web on behalf of users, making it suited for workflow automation and AI-driven research."
   },
   {
     "name": "Web",
     "logo": "/images/browser-logos/web.png",
-    "website": "https://github.com/nuance-dev/Web"
+    "website": "https://github.com/nuance-dev/Web",
+    "description": "Web is a minimal, open-source macOS browser developed by nuance-dev. It features a stripped-back interface built for focused, distraction-free browsing with a lightweight native macOS design. The project is available on GitHub and aimed at users who want a simple, no-frills browser experience."
   },
   {
     "name": "Meteor",
     "logo": "/images/browser-logos/meteor.jpg",
-    "website": "https://www.browse.dev/"
+    "website": "https://www.browse.dev/",
+    "description": "Meteor is a browser by browse.dev focused on productivity and structured web navigation. It is designed to help users better organize and revisit web content beyond what traditional tab-based browsing allows."
   },
   {
     "name": "Nook",
     "logo": "/images/browser-logos/nook.jpg",
-    "website": "https://browsewithnook.com/"
+    "website": "https://browsewithnook.com/",
+    "description": "Nook is a minimal browser focused on a calm, distraction-free browsing experience. It is designed for users who want a simpler interface without the clutter of tabs and toolbars typical of mainstream browsers."
   },
   {
     "name": "Shift",
     "logo": "/images/browser-logos/shift.jpg",
-    "website": "https://shift.com/"
+    "website": "https://shift.com/",
+    "description": "Shift is a multi-account browser designed for professionals who manage multiple email accounts and web apps simultaneously. It allows users to connect Gmail, Outlook, and other services in a unified sidebar, switching between accounts without logging in and out. Primarily used by individuals and teams juggling multiple work identities or clients."
   },
   {
     "name": "Axonium",
     "logo": "/images/browser-logos/axonium.png",
-    "website": "https://axonium.fr/"
+    "website": "https://axonium.fr/",
+    "description": "Axonium is a French-developed browser aimed at providing a privacy-respecting browsing alternative. Developed as part of a broader effort toward European digital independence and data sovereignty."
   },
   {
     "name": "ChatGPT Atlas",
     "logo": "/images/browser-logos/chatgpt-atlas.png",
-    "website": "https://chatgpt.com/atlas/"
+    "website": "https://chatgpt.com/atlas/",
+    "description": "ChatGPT Atlas is a browser developed by OpenAI with ChatGPT integrated as a core part of the browsing experience. It is designed to bring AI-assisted search, summarization, and task completion directly into the browser, allowing users to interact with web content through conversational AI without switching to a separate application."
   },
   {
     "name": "Aloha Browser",
     "logo": "/images/browser-logos/aloha.png",
-    "website": "https://alohabrowser.com/"
+    "website": "https://alohabrowser.com/",
+    "description": "Aloha Browser is a mobile browser for iOS and Android that combines a built-in free VPN, a media player, and private file storage in a single app. It is popular for its combination of privacy features and media capabilities, allowing users to stream and download content privately without requiring separate applications."
   },
   {
     "name": "Beam",
     "logo": "/images/browser-logos/beam.png",
-    "website": "https://www.beambrowser.app/"
+    "website": "https://www.beambrowser.app/",
+    "description": "Beam is a browser focused on clean, minimal design and fast browsing. Aimed at users who want a modern, uncluttered browser experience on macOS without the feature bloat of mainstream alternatives."
   }
 ]
