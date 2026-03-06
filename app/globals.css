@@ -1,19 +1,150 @@
 @import 'tailwindcss';
 @custom-variant dark (&:where(.dark, .dark *));
 
+@theme {
+  --color-neutral-0: #ffffff;
+  --color-neutral-25: #fcfdfe;
+  --color-neutral-50: #f7f9fb;
+  --color-neutral-100: #eef2f6;
+  --color-neutral-200: #dce3ea;
+  --color-neutral-300: #c5cfd9;
+  --color-neutral-400: #92a0af;
+  --color-neutral-500: #647181;
+  --color-neutral-600: #4a5563;
+  --color-neutral-700: #33404d;
+  --color-neutral-800: #1e2935;
+  --color-neutral-900: #121a23;
+  --color-neutral-950: #0a1118;
+
+  --color-blue-500: #2f6fed;
+  --color-blue-600: #2458c9;
+  --color-blue-700: #1c469f;
+  --color-cyan-500: #1992d4;
+
+  --color-score-excellent: #138a5b;
+  --color-score-good: #3f7ae0;
+  --color-score-fair: #a76a00;
+  --color-score-poor: #c0392b;
+
+  --color-trend-up: #138a5b;
+  --color-trend-flat: #647181;
+  --color-trend-down: #c0392b;
+
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 20px;
+  --radius-pill: 999px;
+
+  --shadow-sm: 0 1px 2px rgba(18, 26, 35, 0.06);
+  --shadow-md: 0 8px 24px rgba(18, 26, 35, 0.08);
+  --shadow-lg: 0 18px 48px rgba(18, 26, 35, 0.12);
+}
+
+@layer base {
+  :root {
+    --color-neutral-0: #ffffff;
+    --color-neutral-25: #fcfdfe;
+    --color-neutral-50: #f7f9fb;
+    --color-neutral-100: #eef2f6;
+    --color-neutral-200: #dce3ea;
+    --color-neutral-300: #c5cfd9;
+    --color-neutral-400: #92a0af;
+    --color-neutral-500: #647181;
+    --color-neutral-600: #4a5563;
+    --color-neutral-700: #33404d;
+    --color-neutral-800: #1e2935;
+    --color-neutral-900: #121a23;
+    --color-neutral-950: #0a1118;
+
+    --color-blue-500: #2f6fed;
+    --color-blue-600: #2458c9;
+    --color-blue-700: #1c469f;
+    --color-cyan-500: #1992d4;
+
+    --color-score-excellent: #138a5b;
+    --color-score-good: #3f7ae0;
+    --color-score-fair: #a76a00;
+    --color-score-poor: #c0392b;
+
+    --color-trend-up: #138a5b;
+    --color-trend-flat: #647181;
+    --color-trend-down: #c0392b;
+
+    --bg-canvas: var(--color-neutral-25);
+    --bg-surface: var(--color-neutral-0);
+    --bg-surface-subtle: var(--color-neutral-50);
+    --bg-surface-elevated: var(--color-neutral-0);
+    --bg-selected: #eef4ff;
+    --text-primary: var(--color-neutral-900);
+    --text-secondary: var(--color-neutral-700);
+    --text-muted: var(--color-neutral-500);
+    --text-inverse: var(--color-neutral-0);
+    --border-subtle: var(--color-neutral-200);
+    --border-strong: var(--color-neutral-300);
+    --accent-primary: var(--color-blue-600);
+    --accent-primary-hover: var(--color-blue-700);
+    --accent-warning: var(--color-score-fair);
+    --accent-danger: var(--color-score-poor);
+    --focus-ring: #2458c9;
+
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 16px;
+    --radius-xl: 20px;
+    --radius-pill: 999px;
+
+    --shadow-sm: 0 1px 2px rgba(18, 26, 35, 0.06);
+    --shadow-md: 0 8px 24px rgba(18, 26, 35, 0.08);
+    --shadow-lg: 0 18px 48px rgba(18, 26, 35, 0.12);
+  }
+
+  .dark {
+    --color-neutral-0: #ffffff;
+    --color-neutral-25: #121a23;
+    --color-neutral-50: #1e2935;
+    --color-neutral-100: #33404d;
+    --color-neutral-200: #4a5563;
+    --color-neutral-300: #647181;
+    --color-neutral-400: #92a0af;
+    --color-neutral-500: #c5cfd9;
+    --color-neutral-600: #dce3ea;
+    --color-neutral-700: #eef2f6;
+    --color-neutral-800: #f7f9fb;
+    --color-neutral-900: #fcfdfe;
+    --color-neutral-950: #ffffff;
+
+    --bg-canvas: var(--color-neutral-950);
+    --bg-surface: var(--color-neutral-900);
+    --bg-surface-subtle: var(--color-neutral-800);
+    --bg-surface-elevated: var(--color-neutral-800);
+    --bg-selected: #1c3a5e;
+    --text-primary: var(--color-neutral-100);
+    --text-secondary: var(--color-neutral-300);
+    --text-muted: var(--color-neutral-400);
+    --text-inverse: var(--color-neutral-900);
+    --border-subtle: var(--color-neutral-700);
+    --border-strong: var(--color-neutral-600);
+
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+    --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.4);
+    --shadow-lg: 0 18px 48px rgba(0, 0, 0, 0.5);
+  }
+}
+
 @keyframes fade-in {
   0% {
     opacity: 0;
-    transform: scale(0.95); /* Optional: Slightly scale down */
+    transform: scale(0.95);
   }
   100% {
     opacity: 1;
-    transform: scale(1); /* Return to normal scale */
+    transform: scale(1);
   }
 }
 
 .fade-in {
-  animation: fade-in 0.4s ease-in-out forwards; /* Adjust duration and easing as needed */
+  animation: fade-in 0.4s ease-in-out forwards;
 }
 
 @keyframes twinkle {
@@ -55,37 +186,33 @@
   }
 }
 
-/* Improved focus styles for better accessibility */
 :focus-visible {
-  outline: 2px solid #7853e0;
+  outline: 2px solid var(--focus-ring, #2458c9);
   outline-offset: 2px;
   border-radius: 0.25rem;
 }
 
-/* Ensure interactive elements have proper focus states */
 a:focus-visible,
 button:focus-visible,
 input:focus-visible,
 select:focus-visible,
 textarea:focus-visible,
 [tabindex]:focus-visible {
-  outline: 2px solid #7853e0;
+  outline: 2px solid var(--focus-ring, #2458c9);
   outline-offset: 2px;
-  box-shadow: 0 0 0 4px rgba(120, 83, 224, 0.2);
+  box-shadow: 0 0 0 4px rgba(36, 88, 201, 0.2);
 }
 
-/* Dark mode focus styles */
 .dark a:focus-visible,
 .dark button:focus-visible,
 .dark input:focus-visible,
 .dark select:focus-visible,
 .dark textarea:focus-visible,
 .dark [tabindex]:focus-visible {
-  outline-color: #9b7be8;
-  box-shadow: 0 0 0 4px rgba(155, 123, 232, 0.2);
+  outline-color: #5b8dee;
+  box-shadow: 0 0 0 4px rgba(91, 141, 238, 0.25);
 }
 
-/* Prevent horizontal overflow on mobile */
 body {
   overflow-x: hidden;
 }

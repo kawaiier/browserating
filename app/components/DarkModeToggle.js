@@ -21,11 +21,11 @@ export default function DarkModeToggle() {
   return (
     <button
       onClick={toggleDarkMode}
-      className="relative p-2 w-12 h-12 rounded-full bg-gradient-to-b from-blue-50 to-blue-100 
-            dark:from-gray-700 dark:to-gray-800 hover:from-blue-100 hover:to-blue-200 
-            dark:hover:from-gray-600 dark:hover:to-gray-700
-            shadow-md transition-all duration-300 ease-in-out transform hover:scale-110
-            focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 dark:focus:ring-purple-400"
+      className="relative p-2 w-12 h-12 rounded-full bg-bg-surface-subtle dark:bg-neutral-700 
+            hover:bg-border-subtle dark:hover:bg-neutral-600
+            shadow-sm border border-border-subtle dark:border-neutral-600
+            transition-all duration-300 ease-in-out transform hover:scale-110
+            focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-focus-ring"
       aria-label={darkMode ? 'Switch to light mode' : 'Switch to dark mode'}
       aria-pressed={darkMode}
       title={darkMode ? 'Switch to light mode' : 'Switch to dark mode'}

@@ -51,13 +51,11 @@ export default function BrowserBarChart({ browsers, platform, getEngineColor }) 
     if (score >= maxScore * 0.9)
       return {
         label: 'Excellent',
-        color: 'text-green-600 dark:text-green-400',
+        color: 'text-score-excellent',
       };
-    if (score >= maxScore * 0.7)
-      return { label: 'Good', color: 'text-blue-600 dark:text-blue-400' };
-    if (score >= maxScore * 0.5)
-      return { label: 'Fair', color: 'text-yellow-600 dark:text-yellow-400' };
-    return { label: 'Poor', color: 'text-red-600 dark:text-red-400' };
+    if (score >= maxScore * 0.7) return { label: 'Good', color: 'text-score-good' };
+    if (score >= maxScore * 0.5) return { label: 'Fair', color: 'text-score-fair' };
+    return { label: 'Poor', color: 'text-score-poor' };
   };
 
   const handleBarClick = (itemName) => {
@@ -157,7 +155,7 @@ export default function BrowserBarChart({ browsers, platform, getEngineColor }) 
                 id="sort-select"
                 value={sortOrder}
                 onChange={(e) => setSortOrder(e.target.value)}
-                className="text-sm border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-1.5 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-purple-500"
+                className="text-sm border border-border-subtle dark:border-neutral-600 rounded-lg px-3 py-1.5 bg-bg-surface dark:bg-neutral-700 text-text-primary dark:text-white focus:outline-none focus:ring-2 focus:ring-focus-ring"
               >
                 <option value="desc">Highest First</option>
                 <option value="asc">Lowest First</option>
@@ -168,7 +166,7 @@ export default function BrowserBarChart({ browsers, platform, getEngineColor }) 
             {selectedBars.length > 0 && (
               <button
                 onClick={() => setSelectedBars([])}
-                className="text-sm px-3 py-1.5 text-purple-600 hover:text-purple-700 dark:text-purple-400 dark:hover:text-purple-300 font-medium"
+                className="text-sm px-3 py-1.5 text-accent-primary hover:text-accent-primary-hover font-medium"
               >
                 Clear Selection ({selectedBars.length})
               </button>
@@ -179,20 +177,20 @@ export default function BrowserBarChart({ browsers, platform, getEngineColor }) 
         {/* Legend */}
         <div className="mt-4 flex flex-wrap gap-4 text-sm">
           <div className="flex items-center gap-2">
-            <div className="w-3 h-3 bg-green-500 rounded"></div>
-            <span className="text-gray-600 dark:text-gray-400">Excellent (90-100%)</span>
+            <div className="w-3 h-3 bg-score-excellent rounded"></div>
+            <span className="text-text-secondary dark:text-gray-400">Excellent (90-100%)</span>
           </div>
           <div className="flex items-center gap-2">
-            <div className="w-3 h-3 bg-blue-500 rounded"></div>
-            <span className="text-gray-600 dark:text-gray-400">Good (70-89%)</span>
+            <div className="w-3 h-3 bg-score-good rounded"></div>
+            <span className="text-text-secondary dark:text-gray-400">Good (70-89%)</span>
           </div>
           <div className="flex items-center gap-2">
-            <div className="w-3 h-3 bg-yellow-500 rounded"></div>
-            <span className="text-gray-600 dark:text-gray-400">Fair (50-69%)</span>
+            <div className="w-3 h-3 bg-score-fair rounded"></div>
+            <span className="text-text-secondary dark:text-gray-400">Fair (50-69%)</span>
           </div>
           <div className="flex items-center gap-2">
-            <div className="w-3 h-3 bg-red-500 rounded"></div>
-            <span className="text-gray-600 dark:text-gray-400">Poor (&lt;50%)</span>
+            <div className="w-3 h-3 bg-score-poor rounded"></div>
+            <span className="text-text-secondary dark:text-gray-400">Poor (&lt;50%)</span>
           </div>
         </div>
       </div>
@@ -255,9 +253,7 @@ export default function BrowserBarChart({ browsers, platform, getEngineColor }) 
                       {item.trend !== 0 && (
                         <div
                           className={`text-xs ${
-                            item.trend > 0
-                              ? 'text-green-600 dark:text-green-400'
-                              : 'text-red-600 dark:text-red-400'
+                            item.trend > 0 ? 'text-trend-up' : 'text-trend-down'
                           }`}
                         >
                           {item.trend > 0 ? '↗' : '↘'} {Math.abs(item.trend).toFixed(1)}%
@@ -274,7 +270,7 @@ export default function BrowserBarChart({ browsers, platform, getEngineColor }) 
                       <div
                         className={`relative transition-all duration-300 rounded-t-xl ${
                           isSelected
-                            ? 'ring-4 ring-purple-500 ring-offset-2 dark:ring-offset-gray-800'
+                            ? 'ring-4 ring-accent-primary ring-offset-2 dark:ring-offset-gray-800'
                             : ''
                         } ${isHovered ? 'transform scale-105' : ''}`}
                         style={{
@@ -297,12 +293,12 @@ export default function BrowserBarChart({ browsers, platform, getEngineColor }) 
                           <div
                             className={`absolute top-1 right-1 w-2 h-2 rounded-full ${
                               item.score >= maxScore * 0.9
-                                ? 'bg-green-400'
+                                ? 'bg-score-excellent'
                                 : item.score >= maxScore * 0.7
-                                  ? 'bg-blue-400'
+                                  ? 'bg-score-good'
                                   : item.score >= maxScore * 0.5
-                                    ? 'bg-yellow-400'
-                                    : 'bg-red-400'
+                                    ? 'bg-score-fair'
+                                    : 'bg-score-poor'
                             }`}
                           ></div>
 
@@ -326,8 +322,8 @@ export default function BrowserBarChart({ browsers, platform, getEngineColor }) 
                     {/* Browser name and engine */}
                     <div className="mt-3 text-center">
                       <div
-                        className={`text-sm font-medium text-gray-900 dark:text-white break-words leading-tight ${
-                          isSelected ? 'text-purple-700 dark:text-purple-300' : ''
+                        className={`text-sm font-medium text-text-primary dark:text-white break-words leading-tight ${
+                          isSelected ? 'text-accent-primary' : ''
                         }`}
                         title={item.name}
                       >

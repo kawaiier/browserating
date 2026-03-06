@@ -14,7 +14,7 @@ const announcements = [
     buttonText: 'Subscribe',
     buttonUrl: 'https://www.reddit.com/r/aiBrowsing/',
     gradient: 'from-orange-500 to-red-500',
-    buttonClass: 'bg-orange-600 hover:bg-orange-700 text-white',
+    buttonClass: 'bg-orange-500 hover:bg-orange-600 text-white',
   },
   {
     id: 2,
@@ -25,8 +25,8 @@ const announcements = [
     ),
     buttonText: 'Follow',
     buttonUrl: 'https://x.com/kawaiier101',
-    gradient: 'from-black to-blue-500',
-    buttonClass: 'bg-black hover:bg-blue-700 text-white',
+    gradient: 'from-neutral-700 to-neutral-900',
+    buttonClass: 'bg-neutral-800 hover:bg-neutral-700 text-white',
   },
   {
     id: 3,
@@ -38,8 +38,8 @@ const announcements = [
     ),
     buttonText: 'Join',
     buttonUrl: 'https://t.me/thebrowsershq',
-    gradient: 'from-blue-400 to-cyan-400',
-    buttonClass: 'bg-blue-500 hover:bg-cyan-500 text-white',
+    gradient: 'from-blue-500 to-sky-400',
+    buttonClass: 'bg-blue-500 hover:bg-blue-600 text-white',
   },
 ];
 
