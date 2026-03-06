@@ -7,6 +7,7 @@ import Link from 'next/link';
 export default function QuizResultCard({ browser, size = 'runner-up' }) {
   const [expandedHighlights, setExpandedHighlights] = useState(false);
   const isHero = size === 'hero';
+  const hasMatchPercentage = Number.isFinite(browser.matchPercentage);
 
   return (
     <div
@@ -59,15 +60,17 @@ export default function QuizResultCard({ browser, size = 'runner-up' }) {
             >
               {browser.name}
             </h2>
-            <span
-              className={`inline-flex items-center font-bold rounded-full px-2 py-0.5 ${
-                isHero
-                  ? 'text-sm bg-purple-100 dark:bg-purple-900/40 text-purple-700 dark:text-purple-300'
-                  : 'text-xs bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300'
-              }`}
-            >
-              {browser.matchPercentage}% match
-            </span>
+            {hasMatchPercentage && (
+              <span
+                className={`inline-flex items-center font-bold rounded-full px-2 py-0.5 ${
+                  isHero
+                    ? 'text-sm bg-purple-100 dark:bg-purple-900/40 text-purple-700 dark:text-purple-300'
+                    : 'text-xs bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300'
+                }`}
+              >
+                {browser.matchPercentage}% match
+              </span>
+            )}
           </div>
 
           {browser.tagline && (
