@@ -25,7 +25,7 @@ export async function generateMetadata({ params }) {
 
   return {
     title: `${browser.name} Browser Performance - Speedometer 3.1 Benchmarks`,
-    description: `${browser.name} browser benchmarks across platforms. Compare Speedometer 3.1 scores, RAM usage, and performance metrics.`,
+    description: browser.description || `${browser.name} browser benchmarks across platforms. Compare Speedometer 3.1 scores, RAM usage, and performance metrics.`,
     alternates: {
       canonical: `https://browserating.com/browsers/${slug}`,
     },
@@ -84,7 +84,7 @@ export default async function BrowserPage({ params }) {
                   '@context': 'https://schema.org',
                   '@type': 'Product',
                   name: browser.name,
-                  description: `${browser.name} browser performance benchmarks`,
+                  description: browser.description || `${browser.name} browser performance benchmarks`,
                   brand: {
                     '@type': 'Brand',
                     name: browser.name,
@@ -125,6 +125,14 @@ export default async function BrowserPage({ params }) {
                   )}
                 </div>
               </header>
+
+              {browser.description && (
+                <section className="mb-8">
+                  <p className="text-gray-700 dark:text-gray-300 text-lg leading-relaxed">
+                    {browser.description}
+                  </p>
+                </section>
+              )}
 
               <section className="mb-8">
                 <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
