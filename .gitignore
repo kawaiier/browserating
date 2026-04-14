@@ -65,3 +65,4 @@ desktop.ini
 # Archives
 *.tgz
 docs/plans/
+.swarm/
