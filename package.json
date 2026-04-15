@@ -34,7 +34,7 @@
     "postcss": "^8",
     "prettier": "^3.8.1",
     "tailwindcss": "^4.1.18",
-    "typescript": "^5.9.3"
+    "typescript": "^6.0.2"
   },
   "overrides": {
     "minimatch@3.1.2": "3.1.5",
