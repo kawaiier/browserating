@@ -66,3 +66,4 @@ desktop.ini
 *.tgz
 docs/plans/
 .swarm/
+.opencode/
