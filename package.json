@@ -12,6 +12,7 @@
     "prepare": "husky"
   },
   "dependencies": {
+    "@eslint/compat": "^2.0.5",
     "@tailwindcss/postcss": "^4.2.1",
     "@vercel/analytics": "^2.0.1",
     "chart.js": "^4.5.1",
@@ -25,10 +26,10 @@
     "@commitlint/cli": "^20.4.3",
     "@commitlint/config-conventional": "^20.4.3",
     "@eslint/eslintrc": "^3.3.5",
-    "@typescript-eslint/eslint-plugin": "^8.54.0",
-    "@typescript-eslint/parser": "^8.54.0",
+    "@typescript-eslint/eslint-plugin": "^8.59.0",
+    "@typescript-eslint/parser": "^8.59.0",
     "eslint": "^10",
-    "eslint-config-next": "16.1.6",
+    "eslint-config-next": "^16.2.3",
     "husky": "^9.1.7",
     "lint-staged": "^16.3.2",
     "postcss": "^8",
@@ -36,7 +37,7 @@
     "tailwindcss": "^4.1.18",
     "typescript": "^5.9.3"
   },
-  "overrides": {
+  "resolutions": {
     "minimatch@3.1.2": "3.1.5",
     "minimatch@9.0.5": "9.0.9"
   },

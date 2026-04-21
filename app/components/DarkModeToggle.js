@@ -3,20 +3,17 @@
 import React from 'react';
 import { useDarkMode } from './DarkModeProvider';
 
+const STARS = [
+  { top: 10, left: 20, delay: 0, key: 'star-0' },
+  { top: 25, left: 70, delay: 300, key: 'star-1' },
+  { top: 60, left: 15, delay: 700, key: 'star-2' },
+  { top: 75, left: 80, delay: 1100, key: 'star-3' },
+  { top: 40, left: 45, delay: 500, key: 'star-4' },
+  { top: 85, left: 55, delay: 900, key: 'star-5' },
+];
+
 export default function DarkModeToggle() {
   const { darkMode, toggleDarkMode } = useDarkMode();
-  const [stars, setStars] = React.useState([]);
-
-  React.useEffect(() => {
-    setStars(
-      Array.from({ length: 6 }, (_, i) => ({
-        top: Math.random() * 100,
-        left: Math.random() * 100,
-        delay: Math.random() * 1500,
-        key: `star-${i}`,
-      }))
-    );
-  }, []);
 
   return (
     <button
@@ -76,7 +73,7 @@ export default function DarkModeToggle() {
           }`}
           aria-hidden="true"
         >
-          {stars.map((star) => (
+          {STARS.map((star) => (
             <div
               key={star.key}
               className="absolute w-0.5 h-0.5 bg-white rounded-full animate-twinkle"

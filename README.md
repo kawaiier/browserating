@@ -43,7 +43,7 @@
 Before running this project, make sure you have:
 
 - **Node.js**: Version 18.17 or higher
-- **npm**: Version 9.0.0 or higher (comes with Node.js)
+- **Bun**: Version 1.0 or higher ([bun.sh](https://bun.sh))
 - **Git**: For cloning the repository
 
 ## 🛠️ Installation
@@ -58,13 +58,13 @@ Before running this project, make sure you have:
 2. **Install dependencies**:
 
    ```bash
-   npm install
+   bun install
    ```
 
 3. **Run the development server**:
 
    ```bash
-   npm run dev
+   bun dev
    ```
 
 4. **Open your browser** and visit [http://localhost:3000](http://localhost:3000) to see the application.
@@ -153,7 +153,7 @@ We welcome contributions from the community! Please see our [Contributing Guidel
 1. Fork the repository
 2. Create a feature branch: `git checkout -b feature/amazing-feature`
 3. Make your changes following our coding standards
-4. Run tests: `npm test`
+4. Run tests: `bun test`
 5. Submit a pull request
 
 ## 📈 Performance & SEO
