@@ -24,7 +24,7 @@ Thank you for your interest in contributing to Browserating! This document provi
 ### Prerequisites
 
 - Node.js 18+ installed
-- npm or yarn package manager
+- Bun package manager ([bun.sh](https://bun.sh))
 - Git installed
 - Basic knowledge of React and Next.js
 - Familiarity with Tailwind CSS
@@ -41,13 +41,13 @@ Thank you for your interest in contributing to Browserating! This document provi
 2. **Install dependencies**
 
    ```bash
-   npm install
+   bun install
    ```
 
 3. **Start the development server**
 
    ```bash
-   npm run dev
+   bun dev
    ```
 
    Open [http://localhost:3000](http://localhost:3000) in your browser.
@@ -73,7 +73,7 @@ This project uses:
 Format your code before committing:
 
 ```bash
-npm run format
+bun run format
 ```
 
 ### Linting
@@ -81,7 +81,7 @@ npm run format
 Run linting to check for code quality issues:
 
 ```bash
-npm run lint
+bun run lint
 ```
 
 ### File Naming
@@ -256,22 +256,22 @@ When requesting features, include:
 
 ```bash
 # Install dependencies
-npm install
+bun install
 
 # Start development server
-npm run dev
+bun dev
 
 # Build for production
-npm run build
+bun run build
 
 # Start production server
-npm start
+bun start
 
 # Run linting
-npm run lint
+bun run lint
 
 # Format code
-npm run format
+bun run format
 ```
 
 ## Project Structure

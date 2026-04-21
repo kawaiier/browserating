@@ -1,44 +1,39 @@
-import { useEffect, useState } from "react";
+import { useSyncExternalStore, useCallback } from "react";
+
+function subscribe(callback) {
+  window.addEventListener("storage", callback);
+  return () => window.removeEventListener("storage", callback);
+}
 
 export function useLocalStorage(key, defaultValue) {
-  // Initialize state with default value
-  const [storedValue, setStoredValue] = useState(defaultValue);
-  const [isLoaded, setIsLoaded] = useState(false);
-
-  // Load value from localStorage on mount (client-side only)
-  useEffect(() => {
+  const getSnapshot = useCallback(() => {
     try {
-      if (typeof window !== "undefined") {
-        const item = window.localStorage.getItem(key);
-        if (item) {
-          setStoredValue(JSON.parse(item));
-        }
-      }
-    } catch (error) {
-      console.warn(`Error reading localStorage key "${key}":`, error);
-    } finally {
-      setIsLoaded(true);
+      const item = window.localStorage.getItem(key);
+      return item !== null ? JSON.parse(item) : defaultValue;
+    } catch {
+      return defaultValue;
     }
-  }, [key]);
+  }, [key, defaultValue]);
 
-  // Return a wrapped version of useState's setter function that persists the new value to localStorage
-  const setValue = (value) => {
-    try {
-      // Allow value to be a function so we have the same API as useState
-      const valueToStore =
-        value instanceof Function ? value(storedValue) : value;
+  const storedValue = useSyncExternalStore(
+    subscribe,
+    getSnapshot,
+    () => defaultValue,
+  );
 
-      // Save state
-      setStoredValue(valueToStore);
-
-      // Save to localStorage (client-side only)
-      if (typeof window !== "undefined") {
+  const setValue = useCallback(
+    (value) => {
+      try {
+        const valueToStore =
+          value instanceof Function ? value(storedValue) : value;
         window.localStorage.setItem(key, JSON.stringify(valueToStore));
+        window.dispatchEvent(new Event("storage"));
+      } catch (error) {
+        console.warn(`Error setting localStorage key "${key}":`, error);
       }
-    } catch (error) {
-      console.warn(`Error setting localStorage key "${key}":`, error);
-    }
-  };
+    },
+    [key, storedValue],
+  );
 
-  return [storedValue, setValue, isLoaded];
+  return [storedValue, setValue];
 }
