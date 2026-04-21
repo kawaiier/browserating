@@ -73,7 +73,7 @@ export default function DarkModeToggle() {
           }`}
           aria-hidden="true"
         >
-          {stars.map((star) => (
+          {STARS.map((star) => (
             <div
               key={star.key}
               className="absolute w-0.5 h-0.5 bg-white rounded-full animate-twinkle"
