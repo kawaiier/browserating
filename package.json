@@ -12,7 +12,7 @@
     "prepare": "husky"
   },
   "dependencies": {
-    "@tailwindcss/postcss": "^4.2.1",
+    "@tailwindcss/postcss": "^4.2.3",
     "@vercel/analytics": "^2.0.1",
     "chart.js": "^4.5.1",
     "lucide-react": "^1.8.0",
