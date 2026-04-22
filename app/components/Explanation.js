@@ -3,39 +3,39 @@
 import React, { useState } from 'react';
 
 const StatCard = ({ icon, number, label, description }) => (
-  <div className="bg-white dark:bg-gray-800 rounded-xl p-6 border border-gray-200 dark:border-gray-700 hover:shadow-lg transition-all duration-300 group">
+  <div className="bg-white dark:bg-neutral-800 rounded-radius-md p-6 border border-border-subtle dark:border-neutral-700 hover:shadow-lg transition-all duration-300 group">
     <div className="flex flex-col items-center sm:flex-row sm:items-start gap-4 mb-3">
-      <div className="w-12 h-12 bg-gradient-to-br from-purple-500 to-blue-500 rounded-xl flex items-center justify-center text-white text-xl">
+      <div className="w-12 h-12 bg-gradient-to-br from-amber-500 to-yellow-500 rounded-radius-md flex items-center justify-center text-white text-xl">
         {icon}
       </div>
       <div className="text-center sm:text-left">
-        <div className="text-2xl font-bold text-gray-900 dark:text-white group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors">
+        <div className="text-2xl font-bold text-text-primary dark:text-white group-hover:text-accent-primary dark:group-hover:text-accent-primary transition-colors">
           {number}
         </div>
-        <div className="text-sm font-medium text-gray-600 dark:text-gray-400">{label}</div>
+        <div className="text-sm font-medium text-text-text-secondary dark:text-neutral-400">{label}</div>
       </div>
     </div>
-    <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">{description}</p>
+    <p className="text-text-text-secondary dark:text-neutral-400 text-sm leading-relaxed">{description}</p>
   </div>
 );
 
 const FeatureCard = ({ icon, title, description, highlights }) => (
-  <div className="bg-gradient-to-br from-gray-50 to-white dark:from-gray-800 dark:to-gray-700 rounded-xl p-6 border border-gray-200 dark:border-gray-600 hover:border-purple-300 dark:hover:border-purple-600 transition-all duration-300">
+  <div className="bg-gradient-to-br from-neutral-50 to-white dark:from-neutral-800 dark:to-neutral-700 rounded-radius-md p-6 border border-border-subtle dark:border-neutral-600 hover:border-accent-primary/30 dark:hover:border-accent-primary/50 transition-all duration-300">
     <div className="flex flex-col items-center sm:flex-row sm:items-start gap-4">
-      <div className="w-10 h-10 bg-gradient-to-br from-purple-500 to-blue-500 rounded-lg flex items-center justify-center text-white text-lg flex-shrink-0">
+      <div className="w-10 h-10 bg-gradient-to-br from-amber-500 to-orange-500 rounded-radius-md flex items-center justify-center text-white text-lg flex-shrink-0">
         {icon}
       </div>
       <div className="flex-1 text-center sm:text-left">
         <h3 className="font-semibold text-gray-900 dark:text-white mb-2">{title}</h3>
-        <p className="text-gray-600 dark:text-gray-400 text-sm mb-3 leading-relaxed">
+        <p className="text-text-text-secondary dark:text-neutral-400 text-sm mb-3 leading-relaxed">
           {description}
         </p>
         {highlights && (
           <div className="space-y-2 inline-flex flex-col items-start">
             {highlights.map((highlight, index) => (
               <div key={index} className="flex items-center gap-2 text-sm">
-                <div className="w-1.5 h-1.5 bg-purple-500 rounded-full"></div>
-                <span className="text-gray-600 dark:text-gray-400">{highlight}</span>
+                <div className="w-1.5 h-1.5 bg-amber-500 rounded-full"></div>
+                <span className="text-text-text-secondary dark:text-neutral-400">{highlight}</span>
               </div>
             ))}
           </div>
@@ -88,11 +88,11 @@ export default function Explanation() {
       <div className="text-center mb-12">
         <h2
           id="explanation-heading"
-          className="text-3xl md:text-4xl font-bold mb-4 bg-gradient-to-r from-purple-600 via-blue-600 to-indigo-600 bg-clip-text text-transparent"
+          className="text-3xl md:text-4xl font-bold mb-4 bg-gradient-to-r from-amber-600 via-orange-600 to-yellow-600 bg-clip-text text-transparent"
         >
           Why BrowseRating Exists
         </h2>
-        <p className="text-lg text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
+        <p className="text-lg text-text-text-secondary dark:text-neutral-400 max-w-3xl mx-auto">
           The definitive source for unbiased browser performance data, helping millions make
           informed choices about their browsing experience.
         </p>
@@ -132,10 +132,10 @@ export default function Explanation() {
           <button
             key={tab.id}
             onClick={() => setActiveTab(tab.id)}
-            className={`flex items-center gap-2 px-6 py-3 rounded-xl font-medium transition-all duration-300 ${
+            className={`flex items-center gap-2 px-6 py-3 rounded-radius-md font-medium transition-all duration-300 ${
               activeTab === tab.id
-                ? 'bg-gradient-to-r from-purple-600 to-blue-600 text-white shadow-lg scale-105'
-                : 'bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700'
+                ? 'bg-gradient-to-r from-amber-600 to-orange-500 text-white shadow-lg scale-105'
+                : 'bg-bg-surface-subtle dark:bg-neutral-800 text-text-secondary dark:text-neutral-300 hover:bg-border-subtle dark:hover:bg-neutral-700'
             }`}
           >
             <span className="text-lg">{tab.icon}</span>
@@ -145,13 +145,13 @@ export default function Explanation() {
       </div>
 
       {/* Content Sections */}
-      <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl border border-gray-200 dark:border-gray-700 overflow-hidden">
+      <div className="bg-white dark:bg-neutral-800 rounded-radius-lg shadow-md border border-border-subtle dark:border-neutral-700 overflow-hidden">
         {/* Our Story */}
         {activeTab === 'story' && (
           <div className="p-4 sm:p-8">
             <div className="max-w-4xl mx-auto">
               <div className="prose prose-lg dark:prose-invert max-w-none">
-                <div className="bg-gradient-to-r from-purple-50 to-blue-50 dark:from-purple-900/20 dark:to-blue-900/20 rounded-xl p-6 mb-8 border border-purple-200 dark:border-purple-700">
+                <div className="bg-gradient-to-r from-amber-50 to-yellow-50 dark:from-amber-900/20 dark:to-yellow-900/20 rounded-radius-md p-6 mb-8 border border-amber-200 dark:border-amber-700">
                   <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3 flex items-center gap-2">
                     <span className="text-2xl">💡</span>
                     From Curiosity to Community Resource
@@ -174,7 +174,7 @@ export default function Explanation() {
                       <span className="text-2xl">🎯</span>
                       Our Mission
                     </h3>
-                    <p className="text-gray-600 dark:text-gray-400 leading-relaxed">
+                    <p className="text-text-text-secondary dark:text-neutral-400 leading-relaxed">
                       To provide transparent, unbiased browser performance data that empowers users
                       to make informed decisions. No marketing spin, no vendor bias—just pure
                       performance metrics tested under identical conditions across all major
@@ -186,7 +186,7 @@ export default function Explanation() {
                       <span className="text-2xl">⚖️</span>
                       Why Independence Matters
                     </h3>
-                    <p className="text-gray-600 dark:text-gray-400 leading-relaxed">
+                    <p className="text-text-text-secondary dark:text-neutral-400 leading-relaxed">
                       Unlike browser vendors&apos; cherry-picked benchmarks or tech media&apos;s
                       sponsored content, our testing is completely independent. We purchase our own
                       hardware, run standardized tests, and publish complete methodologies alongside
@@ -195,7 +195,7 @@ export default function Explanation() {
                   </div>
                 </div>
 
-                <div className="bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 rounded-xl p-6">
+                <div className="bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 rounded-radius-md p-6">
                   <h3 className="text-lg font-semibold text-amber-800 dark:text-amber-200 mb-3 flex items-center gap-2">
                     <span className="text-xl">⚠️</span>
                     Real-World Context
@@ -231,7 +231,7 @@ export default function Explanation() {
               ))}
             </div>
 
-            <div className="bg-gradient-to-br from-green-50 to-blue-50 dark:from-green-900/20 dark:to-blue-900/20 rounded-xl p-6 border border-green-200 dark:border-green-800">
+            <div className="bg-gradient-to-br from-green-50 to-blue-50 dark:from-green-900/20 dark:to-blue-900/20 rounded-radius-md p-6 border border-green-200 dark:border-green-800">
               <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
                 <span className="text-2xl">🔬</span>
                 Scientific Approach to Browser Testing
@@ -243,7 +243,7 @@ export default function Explanation() {
                     <div className="font-medium text-gray-900 dark:text-white">
                       Controlled Environment
                     </div>
-                    <div className="text-gray-600 dark:text-gray-400">
+                    <div className="text-text-text-secondary dark:text-neutral-400">
                       Same OS installs, identical hardware
                     </div>
                   </div>
@@ -254,7 +254,7 @@ export default function Explanation() {
                     <div className="font-medium text-gray-900 dark:text-white">
                       Statistical Rigor
                     </div>
-                    <div className="text-gray-600 dark:text-gray-400">
+                    <div className="text-text-text-secondary dark:text-neutral-400">
                       Multiple runs, outlier elimination
                     </div>
                   </div>
@@ -265,7 +265,7 @@ export default function Explanation() {
                     <div className="font-medium text-gray-900 dark:text-white">
                       Full Transparency
                     </div>
-                    <div className="text-gray-600 dark:text-gray-400">
+                    <div className="text-text-text-secondary dark:text-neutral-400">
                       Open methodology, complete specs
                     </div>
                   </div>
@@ -283,57 +283,57 @@ export default function Explanation() {
                 <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-3">
                   What Each Metric Tells You
                 </h3>
-                <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto leading-relaxed">
+                <p className="text-text-text-secondary dark:text-neutral-400 max-w-2xl mx-auto leading-relaxed">
                   Our testing goes beyond simple speed tests to give you a complete picture of
                   browser performance and capabilities.
                 </p>
               </div>
 
               <div className="grid gap-6">
-                <div className="bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 rounded-xl p-6 border border-blue-200 dark:border-blue-800">
+                <div className="bg-gradient-to-r from-yellow-50 to-amber-50 dark:from-yellow-900/20 dark:to-amber-900/20 rounded-radius-md p-6 border border-blue-200 dark:border-blue-800">
                   <div className="flex flex-col items-center sm:flex-row sm:items-start gap-4">
-                    <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-500 rounded-xl flex items-center justify-center text-white text-xl font-bold">
+                    <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-amber-500 rounded-radius-md flex items-center justify-center text-white text-xl font-bold">
                       ⚡
                     </div>
                     <div className="flex-1 text-center sm:text-left">
                       <h4 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
                         Speedometer 3.1 Performance
                       </h4>
-                      <p className="text-gray-600 dark:text-gray-400 mb-4 leading-relaxed">
+                      <p className="text-text-text-secondary dark:text-neutral-400 mb-4 leading-relaxed">
                         The gold standard for browser performance testing. Measures JavaScript
                         execution, DOM manipulation, and CSS styling through realistic web
                         application simulations.
                       </p>
                       <div className="grid grid-cols-3 gap-4 text-sm">
-                        <div className="text-center p-3 bg-white/50 dark:bg-gray-800/50 rounded-lg">
+                        <div className="text-center p-3 bg-white/50 dark:bg-neutral-800/50 rounded-radius-md">
                           <div className="font-bold text-green-600 dark:text-green-400">40+</div>
-                          <div className="text-gray-600 dark:text-gray-400">Excellent</div>
+                          <div className="text-text-text-secondary dark:text-neutral-400">Excellent</div>
                         </div>
-                        <div className="text-center p-3 bg-white/50 dark:bg-gray-800/50 rounded-lg">
+                        <div className="text-center p-3 bg-white/50 dark:bg-neutral-800/50 rounded-radius-md">
                           <div className="font-bold text-yellow-600 dark:text-yellow-400">
                             25-40
                           </div>
-                          <div className="text-gray-600 dark:text-gray-400">Good</div>
+                          <div className="text-text-text-secondary dark:text-neutral-400">Good</div>
                         </div>
-                        <div className="text-center p-3 bg-white/50 dark:bg-gray-800/50 rounded-lg">
+                        <div className="text-center p-3 bg-white/50 dark:bg-neutral-800/50 rounded-radius-md">
                           <div className="font-bold text-red-600 dark:text-red-400">&lt;25</div>
-                          <div className="text-gray-600 dark:text-gray-400">Needs Work</div>
+                          <div className="text-text-text-secondary dark:text-neutral-400">Needs Work</div>
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
 
-                <div className="bg-gradient-to-r from-green-50 to-emerald-50 dark:from-green-900/20 dark:to-emerald-900/20 rounded-xl p-6 border border-green-200 dark:border-green-800">
+                <div className="bg-gradient-to-r from-green-50 to-emerald-50 dark:from-green-900/20 dark:to-emerald-900/20 rounded-radius-md p-6 border border-green-200 dark:border-green-800">
                   <div className="flex flex-col items-center sm:flex-row sm:items-start gap-4">
-                    <div className="w-12 h-12 bg-gradient-to-br from-green-500 to-emerald-500 rounded-xl flex items-center justify-center text-white text-xl font-bold">
+                    <div className="w-12 h-12 bg-gradient-to-br from-green-500 to-emerald-500 rounded-radius-md flex items-center justify-center text-white text-xl font-bold">
                       🧠
                     </div>
                     <div className="flex-1 text-center sm:text-left">
                       <h4 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
                         Memory Efficiency
                       </h4>
-                      <p className="text-gray-600 dark:text-gray-400 mb-4 leading-relaxed">
+                      <p className="text-text-text-secondary dark:text-neutral-400 mb-4 leading-relaxed">
                         Real-world RAM usage across diverse websites. Lower numbers mean better
                         efficiency and more room for other applications on your system.
                       </p>
@@ -352,35 +352,35 @@ export default function Explanation() {
                   </div>
                 </div>
 
-                <div className="bg-gradient-to-r from-purple-50 to-pink-50 dark:from-purple-900/20 dark:to-pink-900/20 rounded-xl p-6 border border-purple-200 dark:border-purple-800">
+                <div className="bg-gradient-to-r from-amber-50 to-orange-50 dark:from-amber-900/20 dark:to-orange-900/20 rounded-radius-md p-6 border border-amber-200 dark:border-amber-800">
                   <div className="flex flex-col items-center sm:flex-row sm:items-start gap-4">
-                    <div className="w-12 h-12 bg-gradient-to-br from-purple-500 to-pink-500 rounded-xl flex items-center justify-center text-white text-xl font-bold">
+                    <div className="w-12 h-12 bg-gradient-to-br from-amber-500 to-pink-500 rounded-radius-md flex items-center justify-center text-white text-xl font-bold">
                       🛡️
                     </div>
                     <div className="flex-1 text-center sm:text-left">
                       <h4 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
                         Ad-blocking effectiveness
                       </h4>
-                      <p className="text-gray-600 dark:text-gray-400 mb-4 leading-relaxed">
+                      <p className="text-text-text-secondary dark:text-neutral-400 mb-4 leading-relaxed">
                         Built-in ad-blocking and tracker protection capabilities. Higher scores mean
                         better protection against ads and trackers.
                       </p>
                       <div className="grid grid-cols-2 gap-4 text-sm">
                         <div>
-                          <div className="font-medium text-purple-800 dark:text-purple-200 mb-2">
+                          <div className="font-medium text-amber-800 dark:text-amber-200 mb-2">
                             Benefits of Native Blocking:
                           </div>
-                          <div className="space-y-1 text-purple-700 dark:text-purple-300">
+                          <div className="space-y-1 text-amber-700 dark:text-amber-300">
                             <div>• Faster page loading</div>
                             <div>• Reduced bandwidth usage</div>
                             <div>• Better battery life</div>
                           </div>
                         </div>
                         <div>
-                          <div className="font-medium text-purple-800 dark:text-purple-200 mb-2">
+                          <div className="font-medium text-amber-800 dark:text-amber-200 mb-2">
                             Security Advantages:
                           </div>
-                          <div className="space-y-1 text-purple-700 dark:text-purple-300">
+                          <div className="space-y-1 text-amber-700 dark:text-amber-300">
                             <div>• Tracking prevention</div>
                             <div>• Ad-blocking</div>
                           </div>

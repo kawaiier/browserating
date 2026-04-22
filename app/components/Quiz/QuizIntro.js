@@ -72,7 +72,7 @@ export default function QuizIntro({ browserProfiles, onStart }) {
               key={i}
               className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400 font-medium"
             >
-              <span className="w-1.5 h-1.5 rounded-full bg-purple-500 flex-shrink-0" />
+              <span className="w-1.5 h-1.5 rounded-full bg-accent-primary flex-shrink-0" />
               {bullet.text}
             </li>
           ))}

@@ -16,76 +16,78 @@ export default function DarkModeToggle() {
   const { darkMode, toggleDarkMode } = useDarkMode();
 
   return (
-    <button
-      onClick={toggleDarkMode}
-      className="relative p-2 w-12 h-12 rounded-full bg-bg-surface-subtle dark:bg-neutral-700 
-            hover:bg-border-subtle dark:hover:bg-neutral-600
-            shadow-sm border border-border-subtle dark:border-neutral-600
-            transition-all duration-300 ease-in-out transform hover:scale-110
-            focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-focus-ring"
-      aria-label={darkMode ? 'Switch to light mode' : 'Switch to dark mode'}
-      aria-pressed={darkMode}
-      title={darkMode ? 'Switch to light mode' : 'Switch to dark mode'}
-    >
-      <div className="relative w-full h-full">
-        {/* Sun */}
-        <div
-          className={`absolute inset-0 transform transition-transform duration-500 
-                ${darkMode ? 'scale-0 rotate-90' : 'scale-100 rotate-0'}`}
-          aria-hidden="true"
-        >
-          {/* Main sun circle */}
-          <div className="absolute inset-[3px] bg-yellow-400 rounded-full" />
+    <div className="flex items-center gap-2 px-2 py-1.5 bg-surface-subtle rounded-radius-pill border border-border-subtle">
+      <button
+        onClick={toggleDarkMode}
+        className="relative p-2 w-8 h-8 rounded-full bg-surface border border-border-subtle 
+              hover:bg-neutral-100 dark:hover:bg-neutral-700
+              shadow-sm
+              transition-all duration-200 ease-in-out
+              focus:outline-none focus:ring-2 focus:ring-focus-ring focus:ring-offset-1"
+        aria-label={darkMode ? 'Switch to light mode' : 'Switch to dark mode'}
+        aria-pressed={darkMode}
+        title={darkMode ? 'Switch to light mode' : 'Switch to dark mode'}
+      >
+        <div className="relative w-full h-full">
+          {/* Sun */}
+          <div
+            className={`absolute inset-0 transform transition-transform duration-300 
+                  ${darkMode ? 'scale-0 rotate-90' : 'scale-100 rotate-0'}`}
+            aria-hidden="true"
+          >
+            {/* Main sun circle */}
+            <div className="absolute inset-1 bg-amber-500 rounded-full" />
 
-          {/* Sun rays */}
-          {[...Array(12)].map((_, i) => (
-            <div
-              key={`ray-${i}`}
-              className="absolute w-[2px] h-[7px] bg-yellow-400 rounded"
-              style={{
-                top: 'calc(50% - 3px)', // Adjust based on ray size
-                left: 'calc(50% - 1px)', // Adjust based on ray size
-                transform: `rotate(${i * 30}deg) translate(8px, 8px)`, // Adjust translate values
-              }}
-            />
-          ))}
+            {/* Sun rays */}
+            {[...Array(8)].map((_, i) => (
+              <div
+                key={`ray-${i}`}
+                className="absolute w-1 h-2 bg-amber-500 rounded-full"
+                style={{
+                  top: '2px',
+                  left: 'calc(50% - 0.5px)',
+                  transform: `rotate(${i * 45}deg) translateY(-6px)`,
+                }}
+              />
+            ))}
+          </div>
+
+          {/* Moon */}
+          <div
+            className={`absolute inset-0 transform transition-transform duration-300
+                  ${darkMode ? 'scale-100 rotate-0' : 'scale-0 -rotate-90'}`}
+            aria-hidden="true"
+          >
+            {/* Main moon circle */}
+            <div className="absolute inset-0.5 bg-neutral-300 dark:bg-neutral-600 rounded-full" />
+
+            {/* Moon craters */}
+            <div className="absolute top-1.5 left-1.5 w-1.5 h-1.5 bg-neutral-400 dark:bg-neutral-500 rounded-full opacity-60" />
+            <div className="absolute top-3 right-2 w-1 h-1 bg-neutral-400 dark:bg-neutral-500 rounded-full opacity-60" />
+            <div className="absolute bottom-1.5 right-1.5 w-2 h-2 bg-neutral-400 dark:bg-neutral-500 rounded-full opacity-60" />
+          </div>
+
+          {/* Stars (visible in dark mode) */}
+          <div
+            className={`absolute inset-0 transition-opacity duration-300 ${
+              darkMode ? 'opacity-100' : 'opacity-0'
+            }`}
+            aria-hidden="true"
+          >
+            {STARS.map((star) => (
+              <div
+                key={star.key}
+                className="absolute w-0.5 h-0.5 bg-white rounded-full"
+                style={{
+                  top: `${star.top}%`,
+                  left: `${star.left}%`,
+                  animationDelay: `${star.delay}ms`,
+                }}
+              />
+            ))}
+          </div>
         </div>
-
-        {/* Moon */}
-        <div
-          className={`absolute inset-0 transform transition-transform duration-500
-                ${darkMode ? 'scale-100 rotate-0' : 'scale-0 -rotate-90'}`}
-          aria-hidden="true"
-        >
-          {/* Main moon circle */}
-          <div className="absolute inset-0 bg-slate-200 rounded-full" />
-
-          {/* Moon craters */}
-          <div className="absolute top-2 left-2 w-2 h-2 bg-slate-400 rounded-full opacity-75" />
-          <div className="absolute top-4 right-3 w-1.5 h-1.5 bg-slate-400 rounded-full opacity-75" />
-          <div className="absolute bottom-2 right-2 w-2.5 h-2.5 bg-slate-400 rounded-full opacity-75" />
-        </div>
-
-        {/* Stars (visible in dark mode) */}
-        <div
-          className={`absolute inset-0 transition-opacity duration-500 ${
-            darkMode ? 'opacity-100' : 'opacity-0'
-          }`}
-          aria-hidden="true"
-        >
-          {STARS.map((star) => (
-            <div
-              key={star.key}
-              className="absolute w-0.5 h-0.5 bg-white rounded-full animate-twinkle"
-              style={{
-                top: `${star.top}%`,
-                left: `${star.left}%`,
-                animationDelay: `${star.delay}ms`,
-              }}
-            />
-          ))}
-        </div>
-      </div>
-    </button>
+      </button>
+    </div>
   );
 }

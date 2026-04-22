@@ -4,10 +4,8 @@ import { useEffect, useState } from 'react';
 
 import DarkModeToggle from './DarkModeToggle';
 import Link from 'next/link';
-import { useDarkMode } from './DarkModeProvider';
 
 export default function Header({ lastModified }) {
-  const { darkMode, toggleDarkMode } = useDarkMode();
   const [scrolled, setScrolled] = useState(false);
 
   const platforms = [
@@ -48,58 +46,51 @@ export default function Header({ lastModified }) {
             {/* Logo - Left */}
             <Link
               href="/"
-              className="flex items-center gap-2 text-primary hover:text-accent-primary transition-colors focus:outline-none focus:ring-2 focus:ring-accent-primary focus:ring-offset-2 rounded-radius-md"
+              className="flex items-center gap-2 text-primary hover:text-accent-primary transition-colors focus:outline-none focus:ring-2 focus:ring-accent-primary focus:ring-offset-2 rounded-radius-pill"
               aria-label="BrowseRating Home"
             >
-              <div className="w-8 h-8 lg:w-9 lg:h-9 bg-primary rounded-radius-md flex items-center justify-center">
-                <span className="text-surface font-bold text-sm lg:text-base">BR</span>
+              <div className="px-3 py-1.5 lg:px-4 border-2 border-neutral-800 rounded-radius-pill flex items-center gap-2">
+                <div className="w-6 h-6 lg:w-7 lg:h-7 bg-neutral-900 rounded-radius-sm flex items-center justify-center">
+                  <span className="text-white font-bold text-xs lg:text-sm">BR</span>
+                </div>
+                <span className="font-semibold text-sm lg:text-lg text-neutral-900 hidden sm:block">
+                  BrowseRating
+                </span>
               </div>
-              <span className="font-semibold text-lg text-primary hidden sm:block">
-                BrowseRating
-              </span>
             </Link>
 
             {/* Primary Nav Links - Center/Left */}
             <div className="hidden md:flex items-center gap-1">
               <Link
                 href="#rankings"
-                className="px-4 py-2 text-secondary hover:text-primary hover:bg-subtle/50 rounded-radius-md transition-all text-sm font-medium relative group"
+                className="px-4 py-2 text-secondary hover:text-primary hover:bg-surface-subtle rounded-radius-pill transition-all text-sm font-medium"
               >
                 Rankings
-                <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-0.5 bg-accent-primary transition-all group-hover:w-full"></span>
               </Link>
               <Link
                 href="#methodology"
-                className="px-4 py-2 text-secondary hover:text-primary hover:bg-subtle/50 rounded-radius-md transition-all text-sm font-medium relative group"
+                className="px-4 py-2 text-secondary hover:text-primary hover:bg-surface-subtle rounded-radius-pill transition-all text-sm font-medium"
               >
                 Methodology
-                <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-0.5 bg-accent-primary transition-all group-hover:w-full"></span>
               </Link>
               <Link
                 href="/quiz"
-                className="px-4 py-2 text-secondary hover:text-primary hover:bg-subtle/50 rounded-radius-md transition-all text-sm font-medium relative group"
+                className="px-4 py-2 text-secondary hover:text-primary hover:bg-surface-subtle rounded-radius-pill transition-all text-sm font-medium"
               >
                 Find Your Browser
-                <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-0.5 bg-accent-primary transition-all group-hover:w-full"></span>
               </Link>
             </div>
 
             {/* Right: Utilities */}
-            <div className="flex items-center gap-3">
-              <a
-                href="#support"
-                className="hidden lg:inline-flex items-center px-3 py-1.5 text-sm text-secondary hover:text-primary hover:bg-subtle/50 rounded-radius-md transition-all"
-              >
-                Support
-              </a>
-              <DarkModeToggle darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
+            <div className="flex items-center gap-2">
+              <DarkModeToggle />
             </div>
           </div>
         </div>
       </nav>
 
       {/* Hero Block */}
-      <header className="bg-canvas px-4 lg:px-8 py-12 lg:py-16" role="banner">
+      <header className="bg-canvas px-4 lg:px-8 py-12 lg:py-16 bg-gradient-to-tr from-transparent via-transparent to-[#F5C400]/20" role="banner">
         <div className="container mx-auto max-w-7xl">
           <div className="grid lg:grid-cols-12 gap-8 lg:gap-12">
             {/* Left: Content (7 columns) */}
@@ -113,12 +104,12 @@ export default function Header({ lastModified }) {
               </div>
 
               {/* Title */}
-              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-primary mb-4 leading-tight">
+              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-primary mb-4 leading-tight">
                 Browser Performance Rankings
               </h1>
 
               {/* Subtitle */}
-              <p className="text-lg text-secondary mb-8 max-w-xl">
+              <p className="text-lg text-secondary mb-8 max-w-xl leading-relaxed">
                 Independent browser performance benchmarks across all major platforms, updated
                 monthly with real-world testing data.
               </p>
@@ -126,17 +117,17 @@ export default function Header({ lastModified }) {
               {/* Metrics Row */}
               <div className="flex flex-wrap gap-6 mb-8">
                 <div>
-                  <div className="text-2xl lg:text-3xl font-bold text-primary">64+</div>
+                  <div className="text-5xl lg:text-6xl font-extrabold text-neutral-900">64+</div>
                   <div className="text-sm text-muted">Browsers Tested</div>
                 </div>
-                <div className="w-px bg-subtle"></div>
+                <div className="w-px h-12 bg-border-subtle"></div>
                 <div>
-                  <div className="text-2xl lg:text-3xl font-bold text-primary">5</div>
+                  <div className="text-5xl lg:text-6xl font-extrabold text-neutral-900">5</div>
                   <div className="text-sm text-muted">Platforms</div>
                 </div>
-                <div className="w-px bg-subtle"></div>
+                <div className="w-px h-12 bg-border-subtle"></div>
                 <div>
-                  <div className="text-2xl lg:text-3xl font-bold text-primary">Monthly</div>
+                  <div className="text-5xl lg:text-6xl font-extrabold text-neutral-900">Monthly</div>
                   <div className="text-sm text-muted">Update Cadence</div>
                 </div>
               </div>
@@ -212,29 +203,47 @@ export default function Header({ lastModified }) {
             <div className="lg:col-span-5">
               <div className="bg-surface border border-subtle rounded-radius-lg p-6 shadow-sm">
                 <h2 className="text-sm font-medium text-muted uppercase tracking-wide mb-4">
-                  Quick Summary
+                  Top Benchmark Score
                 </h2>
-                <div className="space-y-4">
-                  <div className="flex items-center justify-between pb-4 border-b border-subtle">
-                    <span className="text-secondary">Top Browser (macOS)</span>
-                    <span className="font-semibold text-primary">Chrome 134</span>
-                  </div>
-                  <div className="flex items-center justify-between pb-4 border-b border-subtle">
-                    <span className="text-secondary">Top Browser (Windows)</span>
-                    <span className="font-semibold text-primary">Chrome 134</span>
-                  </div>
-                  <div className="flex items-center justify-between pb-4 border-b border-subtle">
-                    <span className="text-secondary">Top Browser (Android)</span>
-                    <span className="font-semibold text-primary">Chrome 134</span>
-                  </div>
-                  <div className="flex items-center justify-between">
-                    <span className="text-secondary">Benchmark Version</span>
-                    <span className="font-mono text-sm text-primary">Speedometer 3.1</span>
+                
+                {/* Circular Gauge */}
+                <div className="flex items-center justify-center mb-4">
+                  <div className="relative w-40 h-40">
+                    {/* Background circle */}
+                    <svg className="w-full h-full transform -rotate-90" viewBox="0 0 120 120">
+                      <circle
+                        cx="60"
+                        cy="60"
+                        r="52"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="8"
+                        className="text-border-subtle"
+                      />
+                      {/* Progress circle - amber fill */}
+                      <circle
+                        cx="60"
+                        cy="60"
+                        r="52"
+                        fill="none"
+                        stroke="#D4A800"
+                        strokeWidth="8"
+                        strokeLinecap="round"
+                        strokeDasharray="326.73"
+                        strokeDashoffset="45.74"
+                        className="drop-shadow-sm"
+                      />
+                    </svg>
+                    {/* Score in center */}
+                    <div className="absolute inset-0 flex flex-col items-center justify-center">
+                      <span className="text-4xl font-extrabold text-neutral-900">47.5</span>
+                      <span className="text-xs text-muted">Speedometer 3.1</span>
+                    </div>
                   </div>
                 </div>
-                <p className="text-xs text-muted mt-6 pt-4 border-t border-subtle">
-                  Rankings based on standardized benchmark testing across identical hardware
-                  configurations.
+                
+                <p className="text-xs text-muted text-center">
+                  Highest score among all tested browsers
                 </p>
               </div>
             </div>

@@ -1,8 +1,8 @@
 export default function SystemInfo({ title, details }) {
   return (
-    <details className="group border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
+    <details className="group border border-border-subtle dark:border-neutral-700 rounded-radius-md overflow-hidden">
       <summary
-        className="dark:text-gray-300 text-gray-700 p-4 cursor-pointer flex items-center justify-between hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+        className="dark:text-neutral-300 text-text-secondary p-4 cursor-pointer flex items-center justify-between hover:bg-bg-surface-subtle dark:hover:bg-neutral-700 transition-colors"
         aria-expanded="false"
       >
         <span className="font-medium">{title}</span>
@@ -21,7 +21,7 @@ export default function SystemInfo({ title, details }) {
           />
         </svg>
       </summary>
-      <div className="p-4 pt-2 border-t border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800">
+      <div className="p-4 pt-2 border-t border-border-subtle dark:border-neutral-700 bg-neutral-50 dark:bg-neutral-800">
         {details}
       </div>
     </details>

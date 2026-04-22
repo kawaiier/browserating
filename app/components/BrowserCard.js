@@ -4,34 +4,17 @@ import BrowserDetailsModal from './BrowserDetailsModal';
 import Image from 'next/image';
 import Link from 'next/link';
 
-const COLORS = {
-  scoreExcellent: '#138A5B',
-  scoreGood: '#3F7AE0',
-  scoreFair: '#A76A00',
-  scorePoor: '#C0392B',
-  trendUp: '#138A5B',
-  trendFlat: '#647181',
-  trendDown: '#C0392B',
-  bgSurface: '#FFFFFF',
-  bgSurfaceSubtle: '#F7F9FB',
-  textPrimary: '#121A23',
-  textSecondary: '#33404D',
-  textMuted: '#647181',
-  borderSubtle: '#DCE3EA',
-  borderStrong: '#C5CFD9',
-};
-
 const getScoreColor = (score) => {
-  if (score >= 40) return COLORS.scoreExcellent;
-  if (score >= 30) return COLORS.scoreGood;
-  if (score >= 20) return COLORS.scoreFair;
-  return COLORS.scorePoor;
+  if (score >= 40) return '#D4A800'; // amber for high scores
+  if (score >= 30) return '#B89200'; // warm good
+  if (score >= 20) return '#A76A00'; // warm fair
+  return '#C83A2E'; // warm red for poor
 };
 
 const getTrendColor = (diff) => {
-  if (diff > 0) return COLORS.trendUp;
-  if (diff < 0) return COLORS.trendDown;
-  return COLORS.trendFlat;
+  if (diff > 0) return '#D4A800'; // amber for up
+  if (diff < 0) return '#C83A2E'; // warm red for down
+  return '#9A9080'; // muted for flat
 };
 
 const BrowserCard = React.memo(
@@ -68,35 +51,32 @@ const BrowserCard = React.memo(
 
     const platformEngine = platformData.engine;
 
+    const score = latestVersion.scores.speedometer3;
+    const scoreColor = getScoreColor(score);
+    const isHighScore = score >= 40;
+
     const getRankStyle = (rank) => {
       const base = 'relative overflow-hidden';
       switch (rank) {
         case 1:
-          return `${base} ring-2 ring-[#D4AF37]/50 shadow-lg shadow-[#D4AF37]/10`;
+          return `${base} bg-[#1A1A18] text-white shadow-md`;
         case 2:
-          return `${base} ring-2 ring-[#C0C0C0]/50 shadow-lg shadow-[#C0C0C0]/10`;
+          return `${base} ring-2 ring-[#F5C400]/60 shadow-md`;
         case 3:
-          return `${base} ring-2 ring-[#CD7F32]/50 shadow-lg shadow-[#CD7F32]/10`;
+          return `${base} ring-2 ring-[#F5C400]/60 shadow-md`;
         default:
-          return base;
+          return `${base} bg-surface shadow-sm hover:shadow-md`;
       }
     };
 
     const getRankBadge = (rank) => {
       if (rank > 3) return null;
 
-      const badges = {
-        1: { text: '🥇 #1', color: 'bg-[#FFF9E6] text-[#8B6914]' },
-        2: { text: '🥈 #2', color: 'bg-[#F5F5F5] text-[#5C5C5C]' },
-        3: { text: '🥉 #3', color: 'bg-[#FFF4E6] text-[#8B5A00]' },
-      };
-
-      const badge = badges[rank];
       return (
         <div
-          className={`absolute top-3 right-3 px-2.5 py-0.5 rounded-full text-xs font-bold tracking-wide ${badge.color} shadow-sm z-10`}
+          className="absolute top-3 right-3 bg-[#1A1A18] text-white rounded-full px-3 py-1 text-xs font-semibold shadow-sm z-10"
         >
-          {badge.text}
+          #{rank}
         </div>
       );
     };
@@ -119,45 +99,54 @@ const BrowserCard = React.memo(
       }
     };
 
-    const score = latestVersion.scores.speedometer3;
-    const scoreColor = getScoreColor(score);
+    // Progress bar calculation
+    const progressWidth = Math.min((score / 60) * 100, 100);
 
     if (isLoading) {
       return (
-        <div className="bg-[#FFFFFF] rounded-2xl shadow-sm overflow-hidden animate-pulse">
-          <div className="p-5">
-            <div className="flex items-center gap-4">
-              <div className="w-16 h-16 bg-[#F7F9FB] rounded-xl shrink-0"></div>
+        <div className="bg-surface rounded-radius-xl shadow-sm overflow-hidden animate-pulse">
+          <div className="p-7">
+            <div className="flex items-center gap-4 mb-6">
+              <div className="w-16 h-16 bg-surface-subtle rounded-xl mr-4"></div>
               <div className="flex-1">
-                <div className="h-5 bg-[#F7F9FB] rounded w-2/3 mb-2"></div>
-                <div className="h-4 bg-[#F7F9FB] rounded w-1/3"></div>
+                <div className="h-6 bg-surface-subtle rounded w-2/3 mb-2"></div>
+                <div className="h-4 bg-surface-subtle rounded w-1/3"></div>
               </div>
-              <div className="w-16 h-16 bg-[#F7F9FB] rounded-xl"></div>
             </div>
-            <div className="flex gap-2 mt-4">
-              <div className="h-6 bg-[#F7F9FB] rounded-full w-14"></div>
-              <div className="h-6 bg-[#F7F9FB] rounded-full w-20"></div>
-              <div className="h-6 bg-[#F7F9FB] rounded-full w-24"></div>
+            <div className="flex gap-2 mb-6">
+              <div className="h-8 bg-surface-subtle rounded-pill w-20"></div>
+              <div className="h-8 bg-surface-subtle rounded-pill w-16"></div>
+            </div>
+            <div className="grid grid-cols-3 gap-2 sm:gap-4">
+              {[1, 2, 3].map((i) => (
+                <div key={i} className="bg-surface-subtle rounded-radius-sm p-2 sm:p-4">
+                  <div className="h-4 bg-surface-subtle rounded mb-2"></div>
+                  <div className="h-8 bg-surface-subtle rounded"></div>
+                </div>
+              ))}
             </div>
           </div>
         </div>
       );
     }
 
+    // Text color variants for #1 card (inverted)
+    const isRankOne = rank === 1;
+    const textPrimary = isRankOne ? 'text-white' : 'text-primary';
+    const textSecondary = isRankOne ? 'text-neutral-300' : 'text-secondary';
+    const textMuted = isRankOne ? 'text-neutral-400' : 'text-muted';
+
     return (
       <>
         <div
           ref={cardRef}
           className={`
-            bg-[#FFFFFF]
-            hover:shadow-md
-            rounded-2xl
+            rounded-radius-xl
             transition-all duration-200 ease-out
             cursor-pointer
-            border border-[#DCE3EA]
-            hover:border-[#C5CFD9]
+            border-0
             ${getRankStyle(rank)}
-            ${focusVisible ? 'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#3F7AE0] focus-visible:ring-offset-2' : ''}
+            ${focusVisible ? 'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-primary focus-visible:ring-offset-2' : ''}
           `}
           role="button"
           aria-labelledby={`browser-${browser.name}-title`}
@@ -168,19 +157,14 @@ const BrowserCard = React.memo(
         >
           {getRankBadge(rank)}
 
-          <div className="p-5">
+          <div className="p-6">
             <div className="flex items-center gap-4">
-              {/* Rank cluster - 64px width */}
-              <div className="w-16 shrink-0 flex items-center justify-center">
-                <span className="text-3xl font-bold text-[#33404D]">#{rank}</span>
-              </div>
-
               {/* Browser identity cluster */}
               <div className="group shrink-0">
                 <div
-                  className={`w-14 h-14 rounded-xl bg-[#F7F9FB] flex items-center justify-center transition-all duration-300 ${
-                    imageLoaded ? 'bg-transparent' : ''
-                  }`}
+                  className={`w-14 h-14 rounded-xl flex items-center justify-center transition-all duration-300 ${
+                    isRankOne ? 'bg-neutral-800' : 'bg-surface-subtle'
+                  } ${imageLoaded ? 'bg-transparent' : ''}`}
                 >
                   <Image
                     src={browser.logo}
@@ -190,6 +174,7 @@ const BrowserCard = React.memo(
                     className="object-contain w-10 h-10 group-hover:scale-110 transition-transform duration-300"
                     onLoad={() => setImageLoaded(true)}
                     priority={rank <= 3}
+                    style={isRankOne ? { filter: 'brightness(0) invert(1)' } : {}}
                   />
                 </div>
               </div>
@@ -198,31 +183,40 @@ const BrowserCard = React.memo(
               <div className="flex-1 min-w-0">
                 <h3
                   id={`browser-${browser.name}-title`}
-                  className="text-lg font-bold text-[#121A23] leading-tight truncate"
+                  className={`text-lg font-bold leading-tight truncate ${textPrimary}`}
                 >
                   {browser.name}
                 </h3>
-                <p className="text-sm text-[#33404D] mt-0.5">{platformEngine}</p>
+                <p className={`text-sm mt-0.5 ${textSecondary}`}>{platformEngine}</p>
               </div>
 
-              {/* Score cluster - aligned right, mono-enabled */}
+              {/* Score cluster - aligned right */}
               <div className="text-right shrink-0">
                 <span
-                  className="text-3xl font-bold tabular-nums leading-none"
-                  style={{ color: scoreColor }}
+                  className="text-5xl font-bold tabular-nums leading-none"
+                  style={{ color: isHighScore ? '#D4A800' : scoreColor }}
                 >
                   {score.toFixed(1)}
                 </span>
-                <p className="text-xs text-[#647181] mt-1">Speedometer 3.1</p>
+                {/* Progress bar */}
+                <div className="mt-2 w-24 h-0.5 bg-border-subtle rounded-full overflow-hidden">
+                  <div
+                    className="h-full rounded-full transition-all duration-300"
+                    style={{
+                      width: `${progressWidth}%`,
+                      backgroundColor: isHighScore ? '#D4A800' : scoreColor,
+                    }}
+                  />
+                </div>
               </div>
 
               {/* Trend cluster */}
               {scoreDifference !== null && (
                 <div className="w-16 shrink-0 text-center">
                   <span
-                    className="inline-flex items-center gap-1 px-2 py-1 rounded-full text-xs font-semibold"
+                    className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-semibold"
                     style={{
-                      backgroundColor: `${getTrendColor(scoreDifference)}15`,
+                      backgroundColor: `${getTrendColor(scoreDifference)}20`,
                       color: getTrendColor(scoreDifference),
                     }}
                   >
@@ -239,7 +233,11 @@ const BrowserCard = React.memo(
                     .toLowerCase()
                     .replace(/\s+/g, '-')
                     .replace(/[^a-z0-9-]/g, '')}`}
-                  className="flex items-center justify-center w-10 h-10 rounded-lg border border-[#DCE3EA] text-[#33404D] hover:bg-[#F7F9FB] hover:border-[#C5CFD9] transition-colors"
+                  className={`flex items-center justify-center w-10 h-10 rounded-lg border transition-colors ${
+                    isRankOne
+                      ? 'border-neutral-700 text-neutral-300 hover:bg-neutral-800 hover:border-neutral-600'
+                      : 'border-border-subtle text-secondary hover:bg-surface-subtle hover:border-border-strong'
+                  }`}
                   onClick={(e) => e.stopPropagation()}
                   aria-label={`View ${browser.name} details`}
                 >
@@ -256,17 +254,23 @@ const BrowserCard = React.memo(
             </div>
 
             {/* Metadata cluster */}
-            <div className="flex flex-wrap gap-2 mt-4 ml-20">
-              <span className="inline-flex items-center px-2.5 py-1 rounded-lg text-xs font-medium bg-[#F7F9FB] text-[#33404D] border border-[#DCE3EA]">
+            <div className="flex flex-wrap gap-2 mt-4 ml-18">
+              <span className={`inline-flex items-center px-3 py-1 rounded-pill text-xs font-medium ${
+                isRankOne ? 'bg-neutral-800 text-neutral-300' : 'bg-surface-subtle text-secondary border border-border-subtle'
+              }`}>
                 v{latestVersion.version}
               </span>
               <span
-                className={`inline-flex items-center px-2.5 py-1 rounded-lg text-xs font-medium ${getEngineColor(platformEngine)}`}
+                className={`inline-flex items-center px-3 py-1 rounded-pill text-xs font-medium ${
+                  isRankOne ? 'bg-neutral-800 text-neutral-300' : getEngineColor(platformEngine)
+                }`}
               >
                 {platformEngine}
               </span>
               {latestVersion.date && (
-                <span className="inline-flex items-center px-2.5 py-1 rounded-lg text-xs font-medium bg-[#F7F9FB] text-[#647181] border border-[#DCE3EA]">
+                <span className={`inline-flex items-center px-3 py-1 rounded-pill text-xs font-medium ${
+                  isRankOne ? 'bg-neutral-800 text-neutral-300' : 'bg-surface-subtle text-muted border border-border-subtle'
+                }`}>
                   {new Date(latestVersion.date).toLocaleDateString('en-US', {
                     month: 'short',
                     day: 'numeric',
@@ -276,9 +280,9 @@ const BrowserCard = React.memo(
               )}
               {scoreDifference !== null && (
                 <span
-                  className="inline-flex items-center px-2.5 py-1 rounded-lg text-xs font-medium"
+                  className="inline-flex items-center px-3 py-1 rounded-pill text-xs font-medium"
                   style={{
-                    backgroundColor: `${getTrendColor(scoreDifference)}15`,
+                    backgroundColor: `${getTrendColor(scoreDifference)}20`,
                     color: getTrendColor(scoreDifference),
                   }}
                 >

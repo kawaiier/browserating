@@ -130,7 +130,7 @@ export default function Footer() {
                 <button
                   key={currency}
                   onClick={() => handleCopy(address, currency)}
-                  className="font-mono text-xs text-secondary hover:text-accent-primary transition-colors py-1.5 px-3 rounded hover:bg-white focus:outline-none focus:ring-2 focus:ring-accent-primary focus:ring-offset-1 text-left w-full"
+                  className="font-mono text-xs text-secondary hover:text-accent-primary transition-colors py-2 px-4 rounded-pill bg-bg-surface-subtle dark:bg-neutral-700 hover:bg-accent-primary/10 dark:hover:bg-accent-primary/20 border border-border-subtle dark:border-neutral-600 focus:outline-none focus:ring-2 focus:ring-accent-primary focus:ring-offset-1 text-left w-full"
                   aria-label={`Copy ${currency} donation address`}
                 >
                   <span className="font-semibold text-muted">{currency}:</span>{' '}

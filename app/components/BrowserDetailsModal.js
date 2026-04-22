@@ -81,7 +81,7 @@ const BrowserDetailsModal = ({ browser, selectedPlatform, onClose }) => {
         aria-labelledby="no-data-title"
       >
         <div
-          className="bg-bg-surface dark:bg-neutral-800 rounded-2xl shadow-lg p-8 max-w-md w-full transform transition-all duration-300 scale-95 animate-[scale-in_0.3s_ease-out_forwards]"
+          className="bg-bg-surface dark:bg-neutral-800 rounded-radius-xl shadow-lg p-8 max-w-md w-full transform transition-all duration-300 scale-95 animate-[scale-in_0.3s_ease-out_forwards]"
           onClick={(e) => e.stopPropagation()}
         >
           <div className="text-center">
@@ -149,12 +149,12 @@ const BrowserDetailsModal = ({ browser, selectedPlatform, onClose }) => {
       {
         label: 'Speedometer 3.1 Score',
         data: sortedData.map((data) => data.scores.speedometer3),
-        backgroundColor: chartType === 'bar' ? 'rgba(36, 88, 201, 0.8)' : 'transparent',
-        borderColor: '#2458C9',
+        backgroundColor: chartType === 'bar' ? 'rgba(212, 168, 0, 0.8)' : 'transparent',
+        borderColor: '#D4A800',
         borderWidth: chartType === 'line' ? 3 : 1,
         fill: chartType === 'line',
         tension: 0.4,
-        pointBackgroundColor: '#2458C9',
+        pointBackgroundColor: '#D4A800',
         pointBorderColor: '#fff',
         pointBorderWidth: 2,
         pointRadius: chartType === 'line' ? 6 : 0,
@@ -173,7 +173,7 @@ const BrowserDetailsModal = ({ browser, selectedPlatform, onClose }) => {
     scales: {
       x: {
         grid: {
-          color: 'rgba(36, 88, 201, 0.1)',
+          color: 'rgba(212, 168, 0, 0.1)',
           borderColor: 'rgba(36, 88, 201, 0.2)',
         },
         ticks: {
@@ -185,7 +185,7 @@ const BrowserDetailsModal = ({ browser, selectedPlatform, onClose }) => {
       y: {
         beginAtZero: false,
         grid: {
-          color: 'rgba(36, 88, 201, 0.1)',
+          color: 'rgba(212, 168, 0, 0.1)',
           borderColor: 'rgba(36, 88, 201, 0.2)',
         },
         ticks: {
@@ -202,7 +202,7 @@ const BrowserDetailsModal = ({ browser, selectedPlatform, onClose }) => {
         backgroundColor: 'rgba(0, 0, 0, 0.8)',
         titleColor: '#fff',
         bodyColor: '#fff',
-        borderColor: '#2458C9',
+        borderColor: '#D4A800',
         borderWidth: 1,
         cornerRadius: 8,
         displayColors: false,
@@ -233,7 +233,7 @@ const BrowserDetailsModal = ({ browser, selectedPlatform, onClose }) => {
     >
       <div
         ref={modalRef}
-        className="bg-bg-surface dark:bg-neutral-800 rounded-2xl shadow-lg w-full max-w-4xl max-h-[90vh] overflow-hidden animate-[scale-in_0.3s_ease-out_forwards] flex flex-col"
+        className="bg-bg-surface dark:bg-neutral-800 rounded-radius-xl shadow-lg w-full max-w-4xl max-h-[90vh] overflow-hidden animate-[scale-in_0.3s_ease-out_forwards] flex flex-col"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
@@ -267,7 +267,7 @@ const BrowserDetailsModal = ({ browser, selectedPlatform, onClose }) => {
                   >
                     {platformEngine} Engine
                   </span>
-                  <span className="px-3 py-1.5 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-lg text-sm font-medium">
+                  <span className="px-3 py-1.5 bg-bg-surface-subtle dark:bg-neutral-700 text-text-secondary dark:text-neutral-300 rounded-radius-md text-sm font-medium">
                     v{latestVersion.version}
                   </span>
                   {trend.trend !== 'stable' && (
