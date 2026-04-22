@@ -226,6 +226,7 @@ export default function BrowserRankingList({ initialBrowsers = [] }) {
   const [retryCount, setRetryCount] = useState(0);
   const [viewMode, setViewMode] = useLocalStorage('viewMode', 'grid');
   const [sortBy, setSortBy] = useLocalStorage('sortBy', 'score');
+  const [engineDropdownOpen, setEngineDropdownOpen] = useState(false);
 
   const fetchBrowsers = useCallback(async () => {
     if (initialBrowsers.length > 0 && retryCount === 0) {
@@ -444,7 +445,7 @@ export default function BrowserRankingList({ initialBrowsers = [] }) {
     return (
       <div className="relative">
         <button
-          onClick={() => document.getElementById('engine-dropdown')?.classList.toggle('hidden')}
+          onClick={() => setEngineDropdownOpen((prev) => !prev)}
           className="flex items-center gap-2 h-9 px-4 bg-surface border border-border-subtle rounded-radius-md text-sm text-secondary hover:bg-surface-subtle transition-colors focus:outline-none focus:ring-2 focus:ring-accent-primary focus:ring-offset-1"
         >
           Engine: {selectedEngine === 'All' ? 'All' : selectedEngine}
@@ -452,27 +453,26 @@ export default function BrowserRankingList({ initialBrowsers = [] }) {
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
           </svg>
         </button>
-        <div
-          id="engine-dropdown"
-          className="hidden absolute left-0 mt-1 w-48 bg-surface border border-border-subtle rounded-radius-md shadow-md z-10"
-        >
-          {engines.map((engine) => (
-            <button
-              key={engine}
-              onClick={() => {
-                handleEngineFilter(engine);
-                document.getElementById('engine-dropdown')?.classList.add('hidden');
-              }}
-              className={`w-full text-left px-4 py-2 text-sm hover:bg-surface-subtle transition-colors first:rounded-t-radius-md last:rounded-b-radius-md ${
-                selectedEngine === engine
-                  ? 'bg-selected text-accent-primary font-medium'
-                  : 'text-secondary'
-              }`}
-            >
-              {engine === 'All' ? 'All Engines' : `${engine} Engine`}
-            </button>
-          ))}
-        </div>
+        {engineDropdownOpen && (
+          <div className="absolute left-0 mt-1 w-48 bg-surface border border-border-subtle rounded-radius-md shadow-md z-10">
+            {engines.map((engine) => (
+              <button
+                key={engine}
+                onClick={() => {
+                  handleEngineFilter(engine);
+                  setEngineDropdownOpen(false);
+                }}
+                className={`w-full text-left px-4 py-2 text-sm hover:bg-surface-subtle transition-colors first:rounded-t-radius-md last:rounded-b-radius-md ${
+                  selectedEngine === engine
+                    ? 'bg-selected text-accent-primary font-medium'
+                    : 'text-secondary'
+                }`}
+              >
+                {engine === 'All' ? 'All Engines' : `${engine} Engine`}
+              </button>
+            ))}
+          </div>
+        )}
       </div>
     );
   };
@@ -577,7 +577,7 @@ export default function BrowserRankingList({ initialBrowsers = [] }) {
   return (
     <section className="p-6 lg:px-10 max-w-7xl mx-auto" aria-label="Browser Rankings" id="rankings">
       <div className="mb-8">
-        <h2 className="text-3xl font-bold text-primary mb-2">Browser Performance Rankings</h2>
+        <h2 className="text-3xl font-bold text-primary mb-2">Rankings by Platform</h2>
         <p className="text-muted">
           Compare browser performance across different platforms using Speedometer 3.1 benchmark
         </p>

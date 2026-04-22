@@ -5,15 +5,13 @@ import { useEffect, useState } from 'react';
 import DarkModeToggle from './DarkModeToggle';
 import Link from 'next/link';
 
-export default function Header({ lastModified }) {
+const MAX_SCORE = 60;
+
+export default function Header({ lastModified, topScore = 0 }) {
   const [scrolled, setScrolled] = useState(false);
 
-  const platforms = [
-    { name: 'macOS', icon: '🍎' },
-    { name: 'Windows', icon: '🪟' },
-    { name: 'Android', icon: '🤖' },
-    { name: 'iPad', icon: '📱' },
-  ];
+  const circumference = 2 * Math.PI * 52;
+  const dashOffset = circumference * (1 - topScore / MAX_SCORE);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -132,20 +130,10 @@ export default function Header({ lastModified }) {
                 </div>
               </div>
 
-              {/* Platform Showcase */}
-              <div className="mb-8">
-                <div className="flex flex-wrap gap-2">
-                  {platforms.map((platform) => (
-                    <span
-                      key={platform.name}
-                      className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium text-secondary bg-surface border border-subtle rounded-radius-md"
-                    >
-                      <span>{platform.icon}</span>
-                      {platform.name}
-                    </span>
-                  ))}
-                </div>
-              </div>
+              {/* Platform Note */}
+              <p className="text-sm text-muted mb-8">
+                Data available for macOS ARM, macOS Intel, Windows, Android, and iPad.
+              </p>
 
               {/* Action Row */}
               <div className="flex flex-wrap gap-3 mb-8">
@@ -229,15 +217,15 @@ export default function Header({ lastModified }) {
                         stroke="#D4A800"
                         strokeWidth="8"
                         strokeLinecap="round"
-                        strokeDasharray="326.73"
-                        strokeDashoffset="45.74"
+                        strokeDasharray={circumference.toFixed(2)}
+                        strokeDashoffset={dashOffset.toFixed(2)}
                         className="drop-shadow-sm"
                       />
                     </svg>
                     {/* Score in center */}
                     <div className="absolute inset-0 flex flex-col items-center justify-center">
-                      <span className="text-4xl font-extrabold text-neutral-900">47.5</span>
-                      <span className="text-xs text-muted">Speedometer 3.1</span>
+                      <span className="text-4xl font-extrabold text-neutral-900">{topScore > 0 ? topScore.toFixed(1) : '—'}</span>
+                      <span className="text-xs text-muted">Speedometer 3.1 · macOS ARM</span>
                     </div>
                   </div>
                 </div>

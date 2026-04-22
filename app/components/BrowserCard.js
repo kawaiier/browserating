@@ -5,10 +5,10 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 const getScoreColor = (score) => {
-  if (score >= 40) return '#D4A800'; // amber for high scores
-  if (score >= 30) return '#B89200'; // warm good
-  if (score >= 20) return '#A76A00'; // warm fair
-  return '#C83A2E'; // warm red for poor
+  if (score >= 40) return 'var(--color-score-excellent)';
+  if (score >= 30) return 'var(--color-score-good)';
+  if (score >= 20) return 'var(--color-score-fair)';
+  return 'var(--color-score-poor)';
 };
 
 const getTrendColor = (diff) => {
@@ -94,7 +94,6 @@ const BrowserCard = React.memo(
     const handleCardInteraction = (e) => {
       if (e.type === 'click' || (e.type === 'keydown' && (e.key === 'Enter' || e.key === ' '))) {
         if (e.type === 'keydown') e.preventDefault();
-        cardRef.current?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
         setShowModal(true);
       }
     };
@@ -194,7 +193,7 @@ const BrowserCard = React.memo(
               <div className="text-right shrink-0">
                 <span
                   className="text-5xl font-bold tabular-nums leading-none"
-                  style={{ color: isHighScore ? '#D4A800' : scoreColor }}
+                  style={{ color: scoreColor }}
                 >
                   {score.toFixed(1)}
                 </span>
@@ -204,7 +203,7 @@ const BrowserCard = React.memo(
                     className="h-full rounded-full transition-all duration-300"
                     style={{
                       width: `${progressWidth}%`,
-                      backgroundColor: isHighScore ? '#D4A800' : scoreColor,
+                      backgroundColor: scoreColor,
                     }}
                   />
                 </div>
@@ -254,7 +253,7 @@ const BrowserCard = React.memo(
             </div>
 
             {/* Metadata cluster */}
-            <div className="flex flex-wrap gap-2 mt-4 ml-18">
+            <div className="flex flex-wrap gap-2 mt-4 ml-[72px]">
               <span className={`inline-flex items-center px-3 py-1 rounded-pill text-xs font-medium ${
                 isRankOne ? 'bg-neutral-800 text-neutral-300' : 'bg-surface-subtle text-secondary border border-border-subtle'
               }`}>
@@ -276,18 +275,6 @@ const BrowserCard = React.memo(
                     day: 'numeric',
                     year: 'numeric',
                   })}
-                </span>
-              )}
-              {scoreDifference !== null && (
-                <span
-                  className="inline-flex items-center px-3 py-1 rounded-pill text-xs font-medium"
-                  style={{
-                    backgroundColor: `${getTrendColor(scoreDifference)}20`,
-                    color: getTrendColor(scoreDifference),
-                  }}
-                >
-                  {scoreDifference > 0 ? '+' : ''}
-                  {scoreDifference.toFixed(1)} pts
                 </span>
               )}
             </div>

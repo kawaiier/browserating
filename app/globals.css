@@ -114,7 +114,7 @@
     --color-neutral-900: #fafaf8;
     --color-neutral-950: #ffffff;
 
-    --bg-canvas: var(--color-neutral-950);
+    --bg-canvas: var(--color-neutral-25);
     --bg-surface: var(--color-neutral-900);
     --bg-surface-subtle: var(--color-neutral-800);
     --bg-surface-elevated: var(--color-neutral-800);
