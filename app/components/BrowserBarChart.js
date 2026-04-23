@@ -51,13 +51,11 @@ export default function BrowserBarChart({ browsers, platform, getEngineColor }) 
     if (score >= maxScore * 0.9)
       return {
         label: 'Excellent',
-        color: 'text-green-600 dark:text-green-400',
+        color: 'text-score-excellent',
       };
-    if (score >= maxScore * 0.7)
-      return { label: 'Good', color: 'text-blue-600 dark:text-blue-400' };
-    if (score >= maxScore * 0.5)
-      return { label: 'Fair', color: 'text-yellow-600 dark:text-yellow-400' };
-    return { label: 'Poor', color: 'text-red-600 dark:text-red-400' };
+    if (score >= maxScore * 0.7) return { label: 'Good', color: 'text-score-good' };
+    if (score >= maxScore * 0.5) return { label: 'Fair', color: 'text-score-fair' };
+    return { label: 'Poor', color: 'text-score-poor' };
   };
 
   const handleBarClick = (itemName) => {
@@ -92,9 +90,9 @@ export default function BrowserBarChart({ browsers, platform, getEngineColor }) 
 
   if (chartData.length === 0) {
     return (
-      <div className="bg-white dark:bg-gray-800 rounded-2xl border border-gray-200 dark:border-gray-700 p-8">
+      <div className="bg-white dark:bg-neutral-800 rounded-radius-lg border border-border-subtle dark:border-neutral-700 p-8">
         <div className="text-center" role="status" aria-live="polite">
-          <div className="w-16 h-16 mx-auto mb-4 bg-gray-100 dark:bg-gray-700 rounded-full flex items-center justify-center">
+          <div className="w-16 h-16 mx-auto mb-4 bg-bg-surface-subtle dark:bg-neutral-700 rounded-pill flex items-center justify-center">
             <svg
               className="w-8 h-8 text-gray-400"
               fill="none"
@@ -109,10 +107,10 @@ export default function BrowserBarChart({ browsers, platform, getEngineColor }) 
               />
             </svg>
           </div>
-          <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
+          <h3 className="text-lg font-semibold text-text-primary dark:text-white mb-2">
             No Performance Data
           </h3>
-          <p className="text-gray-500 dark:text-gray-400">
+          <p className="text-text-muted dark:text-neutral-400">
             No performance data available for the selected platform and filters.
           </p>
         </div>
@@ -131,15 +129,15 @@ export default function BrowserBarChart({ browsers, platform, getEngineColor }) 
   const platformName = platformNames[platform] || platform;
 
   return (
-    <div className="bg-white dark:bg-gray-800 rounded-2xl border border-gray-200 dark:border-gray-700 overflow-hidden">
+    <div className="bg-white dark:bg-neutral-800 rounded-radius-lg border border-border-subtle dark:border-neutral-700 overflow-hidden">
       {/* Header */}
-      <div className="p-4 sm:p-6 border-b border-gray-200 dark:border-gray-700">
+      <div className="p-4 sm:p-6 border-b border-border-subtle dark:border-neutral-700">
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
           <div>
-            <h3 className="text-xl font-bold text-gray-900 dark:text-white">
+            <h3 className="text-xl font-bold text-text-primary dark:text-white">
               Performance Comparison
             </h3>
-            <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
+            <p className="text-sm text-text-secondary dark:text-neutral-400 mt-1">
               Speedometer 3.1 scores on {platformName} • {chartData.length} browsers
             </p>
           </div>
@@ -149,7 +147,7 @@ export default function BrowserBarChart({ browsers, platform, getEngineColor }) 
             <div className="flex items-center gap-2">
               <label
                 htmlFor="sort-select"
-                className="text-sm font-medium text-gray-700 dark:text-gray-300"
+                className="text-sm font-medium text-text-secondary dark:text-neutral-300"
               >
                 Sort:
               </label>
@@ -157,7 +155,7 @@ export default function BrowserBarChart({ browsers, platform, getEngineColor }) 
                 id="sort-select"
                 value={sortOrder}
                 onChange={(e) => setSortOrder(e.target.value)}
-                className="text-sm border border-gray-300 dark:border-gray-600 rounded-lg px-3 py-1.5 bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-purple-500"
+                className="text-sm border border-border-subtle dark:border-neutral-600 rounded-lg px-3 py-1.5 bg-bg-surface dark:bg-neutral-700 text-text-primary dark:text-white focus:outline-none focus:ring-2 focus:ring-focus-ring"
               >
                 <option value="desc">Highest First</option>
                 <option value="asc">Lowest First</option>
@@ -168,7 +166,7 @@ export default function BrowserBarChart({ browsers, platform, getEngineColor }) 
             {selectedBars.length > 0 && (
               <button
                 onClick={() => setSelectedBars([])}
-                className="text-sm px-3 py-1.5 text-purple-600 hover:text-purple-700 dark:text-purple-400 dark:hover:text-purple-300 font-medium"
+                className="text-sm px-3 py-1.5 text-accent-primary hover:text-accent-primary-hover font-medium"
               >
                 Clear Selection ({selectedBars.length})
               </button>
@@ -179,20 +177,20 @@ export default function BrowserBarChart({ browsers, platform, getEngineColor }) 
         {/* Legend */}
         <div className="mt-4 flex flex-wrap gap-4 text-sm">
           <div className="flex items-center gap-2">
-            <div className="w-3 h-3 bg-green-500 rounded"></div>
-            <span className="text-gray-600 dark:text-gray-400">Excellent (90-100%)</span>
+            <div className="w-3 h-3 bg-score-excellent rounded"></div>
+            <span className="text-text-secondary dark:text-gray-400">Excellent (90-100%)</span>
           </div>
           <div className="flex items-center gap-2">
-            <div className="w-3 h-3 bg-blue-500 rounded"></div>
-            <span className="text-gray-600 dark:text-gray-400">Good (70-89%)</span>
+            <div className="w-3 h-3 bg-score-good rounded"></div>
+            <span className="text-text-secondary dark:text-gray-400">Good (70-89%)</span>
           </div>
           <div className="flex items-center gap-2">
-            <div className="w-3 h-3 bg-yellow-500 rounded"></div>
-            <span className="text-gray-600 dark:text-gray-400">Fair (50-69%)</span>
+            <div className="w-3 h-3 bg-score-fair rounded"></div>
+            <span className="text-text-secondary dark:text-gray-400">Fair (50-69%)</span>
           </div>
           <div className="flex items-center gap-2">
-            <div className="w-3 h-3 bg-red-500 rounded"></div>
-            <span className="text-gray-600 dark:text-gray-400">Poor (&lt;50%)</span>
+            <div className="w-3 h-3 bg-score-poor rounded"></div>
+            <span className="text-text-secondary dark:text-gray-400">Poor (&lt;50%)</span>
           </div>
         </div>
       </div>
@@ -202,7 +200,7 @@ export default function BrowserBarChart({ browsers, platform, getEngineColor }) 
         <div className="relative">
           <div
             ref={chartRef}
-            className="overflow-x-auto scrollbar-thin scrollbar-thumb-gray-300 dark:scrollbar-thumb-gray-600 scrollbar-track-gray-100 dark:scrollbar-track-gray-800"
+            className="overflow-x-auto scrollbar-thin scrollbar-thumb-neutral-300 dark:scrollbar-thumb-neutral-600 scrollbar-track-neutral-100 dark:scrollbar-track-neutral-800"
             tabIndex="0"
             role="region"
             aria-label={`Interactive browser performance chart for ${platformName}. Use arrow keys to navigate, Enter or Space to select bars.`}
@@ -246,7 +244,7 @@ export default function BrowserBarChart({ browsers, platform, getEngineColor }) 
                   >
                     {/* Rank and Score */}
                     <div className="text-center mb-2">
-                      <div className="text-xs text-gray-500 dark:text-gray-400 mb-1">
+                      <div className="text-xs text-text-muted dark:text-neutral-400 mb-1">
                         #{index + 1}
                       </div>
                       <div className={`text-sm font-bold ${performance.color}`}>
@@ -255,9 +253,7 @@ export default function BrowserBarChart({ browsers, platform, getEngineColor }) 
                       {item.trend !== 0 && (
                         <div
                           className={`text-xs ${
-                            item.trend > 0
-                              ? 'text-green-600 dark:text-green-400'
-                              : 'text-red-600 dark:text-red-400'
+                            item.trend > 0 ? 'text-trend-up' : 'text-trend-down'
                           }`}
                         >
                           {item.trend > 0 ? '↗' : '↘'} {Math.abs(item.trend).toFixed(1)}%
@@ -274,7 +270,7 @@ export default function BrowserBarChart({ browsers, platform, getEngineColor }) 
                       <div
                         className={`relative transition-all duration-300 rounded-t-xl ${
                           isSelected
-                            ? 'ring-4 ring-purple-500 ring-offset-2 dark:ring-offset-gray-800'
+                            ? 'ring-4 ring-accent-primary ring-offset-2 dark:ring-offset-neutral-800'
                             : ''
                         } ${isHovered ? 'transform scale-105' : ''}`}
                         style={{
@@ -297,18 +293,18 @@ export default function BrowserBarChart({ browsers, platform, getEngineColor }) 
                           <div
                             className={`absolute top-1 right-1 w-2 h-2 rounded-full ${
                               item.score >= maxScore * 0.9
-                                ? 'bg-green-400'
+                                ? 'bg-score-excellent'
                                 : item.score >= maxScore * 0.7
-                                  ? 'bg-blue-400'
+                                  ? 'bg-score-good'
                                   : item.score >= maxScore * 0.5
-                                    ? 'bg-yellow-400'
-                                    : 'bg-red-400'
+                                    ? 'bg-score-fair'
+                                    : 'bg-score-poor'
                             }`}
                           ></div>
 
                           {/* Hover tooltip */}
                           {(isHovered || isSelected) && (
-                            <div className="absolute -top-20 left-1/2 transform -translate-x-1/2 bg-gray-900 dark:bg-gray-100 text-white dark:text-gray-900 text-xs rounded-lg px-3 py-2 whitespace-nowrap shadow-lg z-10">
+                            <div className="absolute -top-20 left-1/2 transform -translate-x-1/2 bg-text-primary dark:bg-neutral-100 text-white dark:text-text-primary text-xs rounded-radius-md px-3 py-2 whitespace-nowrap shadow-lg z-10">
                               <div className="font-semibold">{item.name}</div>
                               <div>Score: {scoreFormatted}</div>
                               <div>Engine: {item.engine}</div>
@@ -316,7 +312,7 @@ export default function BrowserBarChart({ browsers, platform, getEngineColor }) 
                               {item.adblockScore && (
                                 <div>Adblock: {item.adblockScore.toFixed(0)}%</div>
                               )}
-                              <div className="absolute top-full left-1/2 transform -translate-x-1/2 border-4 border-transparent border-t-gray-900 dark:border-t-gray-100"></div>
+                              <div className="absolute top-full left-1/2 transform -translate-x-1/2 border-4 border-transparent border-t-text-primary dark:border-t-neutral-100"></div>
                             </div>
                           )}
                         </div>
@@ -326,8 +322,8 @@ export default function BrowserBarChart({ browsers, platform, getEngineColor }) 
                     {/* Browser name and engine */}
                     <div className="mt-3 text-center">
                       <div
-                        className={`text-sm font-medium text-gray-900 dark:text-white break-words leading-tight ${
-                          isSelected ? 'text-purple-700 dark:text-purple-300' : ''
+                        className={`text-sm font-medium text-text-primary dark:text-white break-words leading-tight ${
+                          isSelected ? 'text-accent-primary' : ''
                         }`}
                         title={item.name}
                       >
@@ -355,7 +351,7 @@ export default function BrowserBarChart({ browsers, platform, getEngineColor }) 
 
         {/* Chart Instructions */}
         <div className="mt-4 text-center">
-          <p className="text-xs text-gray-500 dark:text-gray-400">
+          <p className="text-xs text-text-muted dark:text-neutral-400">
             Click or tap bars to select • Hover for details •
             <span className="hidden sm:inline"> Scroll horizontally to view all browsers</span>
             <span className="sm:hidden"> Swipe to scroll</span>
@@ -365,17 +361,17 @@ export default function BrowserBarChart({ browsers, platform, getEngineColor }) 
 
       {/* Selected Browser Comparison */}
       {selectedBars.length > 1 && (
-        <div className="border-t border-gray-200 dark:border-gray-700 p-4 sm:p-6">
-          <h4 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
+        <div className="border-t border-border-subtle dark:border-neutral-700 p-4 sm:p-6">
+          <h4 className="text-lg font-semibold text-text-primary dark:text-white mb-4">
             Comparison ({selectedBars.length} selected)
           </h4>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {chartData
               .filter((item) => selectedBars.includes(item.name))
               .map((item) => (
-                <div key={item.name} className="bg-gray-50 dark:bg-gray-700/50 rounded-lg p-4">
+                <div key={item.name} className="bg-bg-surface-subtle dark:bg-neutral-700/50 rounded-radius-md p-4">
                   <div className="flex items-center justify-between mb-2">
-                    <span className="font-medium text-gray-900 dark:text-white">{item.name}</span>
+                    <span className="font-medium text-text-primary dark:text-white">{item.name}</span>
                     <button
                       onClick={() => handleBarClick(item.name)}
                       className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300"

@@ -11,7 +11,7 @@ export default function About() {
       id: 'macos-silicon',
       title: 'macOS (Apple Silicon)',
       icon: '🍎',
-      gradient: 'from-blue-500 to-purple-500',
+      gradient: 'from-amber-500 to-yellow-500',
       specs: {
         os: 'macOS Tahoe 26.3',
         device: '14-inch MacBook Pro (2023)',
@@ -24,7 +24,7 @@ export default function About() {
       id: 'macos-intel',
       title: 'macOS (Intel)',
       icon: '💻',
-      gradient: 'from-gray-500 to-blue-500',
+      gradient: 'from-neutral-500 to-amber-500',
       specs: {
         os: 'macOS Ventura 13.6.9',
         device: '15-inch MacBook Pro (2019)',
@@ -37,7 +37,7 @@ export default function About() {
       id: 'windows',
       title: 'Windows',
       icon: '🪟',
-      gradient: 'from-blue-600 to-cyan-500',
+      gradient: 'from-amber-600 to-orange-500',
       specs: {
         os: 'Windows 10 Pro',
         device: 'Lenovo Ideapad Gaming 3',
@@ -50,7 +50,7 @@ export default function About() {
       id: 'android',
       title: 'Android',
       icon: '🤖',
-      gradient: 'from-green-500 to-emerald-500',
+      gradient: 'from-amber-500 to-orange-500',
       specs: {
         os: 'Nothing OS 2.6 (Android 14)',
         device: 'Nothing Phone (2a)',
@@ -63,7 +63,7 @@ export default function About() {
       id: 'ipad',
       title: 'iPad',
       icon: '📱',
-      gradient: 'from-purple-500 to-pink-500',
+      gradient: 'from-amber-500 to-orange-500',
       specs: {
         os: 'iPadOS 18.5',
         device: 'iPad Mini 7th Generation',
@@ -109,7 +109,7 @@ export default function About() {
       good: '40+',
       average: '25-40',
       poor: '<25',
-      color: 'text-blue-600 dark:text-blue-400',
+      color: 'text-amber-600 dark:text-amber-400',
     },
     {
       metric: 'RAM Usage',
@@ -127,7 +127,7 @@ export default function About() {
       good: '80-100%',
       average: '50-80%',
       poor: '<50%',
-      color: 'text-purple-600 dark:text-purple-400',
+      color: 'text-amber-700 dark:text-amber-400',
     },
   ];
 
@@ -147,11 +147,11 @@ export default function About() {
       <div className="text-center mb-12">
         <h2
           id="about-heading"
-          className="text-3xl md:text-4xl font-bold mb-4 bg-gradient-to-r from-purple-600 via-blue-600 to-indigo-600 bg-clip-text text-transparent"
+          className="text-3xl md:text-4xl font-bold mb-4 bg-gradient-to-r from-amber-600 via-orange-600 to-indigo-600 bg-clip-text text-transparent"
         >
           Testing Methodology & Systems
         </h2>
-        <p className="text-lg text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
+        <p className="text-lg text-text-secondary dark:text-neutral-400 max-w-3xl mx-auto">
           Transparent, consistent, and thorough testing across multiple platforms to give you
           reliable browser performance insights you can trust.
         </p>
@@ -163,10 +163,10 @@ export default function About() {
           <button
             key={section.id}
             onClick={() => setActiveSection(section.id)}
-            className={`flex items-center gap-2 px-6 py-3 rounded-xl font-medium transition-all duration-300 ${
+            className={`flex items-center gap-2 px-6 py-3 rounded-radius-md font-medium transition-all duration-300 ${
               activeSection === section.id
-                ? 'bg-gradient-to-r from-purple-600 to-blue-600 text-white shadow-lg scale-105'
-                : 'bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700'
+                ? 'bg-gradient-to-r from-amber-600 to-orange-500 text-white shadow-lg scale-105'
+                : 'bg-bg-surface-subtle dark:bg-neutral-800 text-text-secondary dark:text-neutral-300 hover:bg-border-subtle dark:hover:bg-neutral-700'
             }`}
           >
             <span className="text-lg">{section.icon}</span>
@@ -176,16 +176,16 @@ export default function About() {
       </div>
 
       {/* Content Sections */}
-      <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl border border-gray-200 dark:border-gray-700 overflow-hidden">
+      <div className="bg-white dark:bg-gray-800 rounded-radius-lg shadow-xl border border-gray-200 dark:border-gray-700 overflow-hidden">
         {/* Testing Methodology */}
         {activeSection === 'methodology' && (
           <div className="p-4 sm:p-8">
             <div className="grid gap-8">
               {testingSteps.map((step, index) => (
                 <div key={index} className="group">
-                  <div className="flex flex-col items-center sm:flex-row sm:items-start gap-4 p-6 bg-gradient-to-r from-gray-50 to-white dark:from-gray-700 dark:to-gray-800 rounded-xl border border-gray-200 dark:border-gray-600 hover:shadow-lg transition-all duration-300">
+                  <div className="flex flex-col items-center sm:flex-row sm:items-start gap-4 p-6 bg-gradient-to-r from-neutral-50 to-white dark:from-gray-700 dark:to-gray-800 rounded-radius-md border border-gray-200 dark:border-gray-600 hover:shadow-lg transition-all duration-300">
                     <div className="flex-shrink-0">
-                      <div className="w-12 h-12 bg-gradient-to-br from-purple-500 to-blue-500 rounded-xl flex items-center justify-center text-white text-xl font-bold shadow-lg">
+                      <div className="w-12 h-12 bg-gradient-to-br from-purple-500 to-blue-500 rounded-radius-md flex items-center justify-center text-white text-xl font-bold shadow-lg">
                         {step.icon}
                       </div>
                     </div>
@@ -193,14 +193,14 @@ export default function About() {
                       <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
                         {step.title}
                       </h3>
-                      <p className="text-gray-600 dark:text-gray-400 mb-3 leading-relaxed">
+                      <p className="text-text-secondary dark:text-neutral-400 mb-3 leading-relaxed">
                         {step.description}
                       </p>
                       <details className="group-details">
-                        <summary className="text-purple-600 dark:text-purple-400 hover:text-purple-700 dark:hover:text-purple-300 cursor-pointer font-medium">
+                        <summary className="text-amber-700 dark:text-amber-400 hover:text-purple-700 dark:hover:text-purple-300 cursor-pointer font-medium">
                           Technical Details →
                         </summary>
-                        <p className="mt-3 text-sm text-gray-600 dark:text-gray-400 bg-gray-50 dark:bg-gray-700 p-4 rounded-lg">
+                        <p className="mt-3 text-sm text-text-secondary dark:text-neutral-400 bg-neutral-50 dark:bg-gray-700 p-4 rounded-lg">
                           {step.details}
                         </p>
                       </details>
@@ -211,7 +211,7 @@ export default function About() {
             </div>
 
             {/* Key Points */}
-            <div className="mt-8 bg-gradient-to-br from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 rounded-xl p-6 border border-blue-200 dark:border-blue-800">
+            <div className="mt-8 bg-gradient-to-br from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 rounded-radius-md p-6 border border-blue-200 dark:border-blue-800">
               <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
                 <span className="text-2xl">✨</span>
                 Why Our Testing Matters
@@ -219,19 +219,19 @@ export default function About() {
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
                 <div className="flex items-start gap-2">
                   <span className="text-green-500 mt-1">✓</span>
-                  <span className="text-gray-700 dark:text-gray-300">
+                  <span className="text-text-secondary dark:text-neutral-300">
                     Consistent testing environment across all browsers
                   </span>
                 </div>
                 <div className="flex items-start gap-2">
                   <span className="text-green-500 mt-1">✓</span>
-                  <span className="text-gray-700 dark:text-gray-300">
+                  <span className="text-text-secondary dark:text-neutral-300">
                     Statistical accuracy through multiple test runs
                   </span>
                 </div>
                 <div className="flex items-start gap-2">
                   <span className="text-green-500 mt-1">✓</span>
-                  <span className="text-gray-700 dark:text-gray-300">
+                  <span className="text-text-secondary dark:text-neutral-300">
                     Real-world scenarios and websites
                   </span>
                 </div>
@@ -252,15 +252,15 @@ export default function About() {
                   }`}
                   onClick={() => setExpandedSystem(expandedSystem === system.id ? null : system.id)}
                 >
-                  <div className={`bg-gradient-to-br ${system.gradient} p-[1px] rounded-xl`}>
-                    <div className="bg-white dark:bg-gray-800 rounded-xl p-6 h-full">
+                  <div className={`bg-gradient-to-br ${system.gradient} p-[1px] rounded-radius-md`}>
+                    <div className="bg-white dark:bg-gray-800 rounded-radius-md p-6 h-full">
                       <div className="flex items-center gap-4 mb-4">
                         <span className="text-3xl">{system.icon}</span>
                         <div>
                           <h3 className="text-xl font-bold text-gray-900 dark:text-white">
                             {system.title}
                           </h3>
-                          <p className="text-gray-600 dark:text-gray-400 text-sm">
+                          <p className="text-text-secondary dark:text-neutral-400 text-sm">
                             Click to {expandedSystem === system.id ? 'collapse' : 'expand'} details
                           </p>
                         </div>
@@ -268,7 +268,7 @@ export default function About() {
 
                       <div className="space-y-3">
                         <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-0.5 sm:gap-4">
-                          <span className="text-gray-600 dark:text-gray-400 shrink-0">
+                          <span className="text-text-secondary dark:text-neutral-400 shrink-0">
                             Operating System:
                           </span>
                           <span className="font-medium text-gray-900 dark:text-white sm:text-right">
@@ -276,7 +276,7 @@ export default function About() {
                           </span>
                         </div>
                         <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-0.5 sm:gap-4">
-                          <span className="text-gray-600 dark:text-gray-400 shrink-0">Device:</span>
+                          <span className="text-text-secondary dark:text-neutral-400 shrink-0">Device:</span>
                           <span className="font-medium text-gray-900 dark:text-white sm:text-right">
                             {system.specs.device}
                           </span>
@@ -285,7 +285,7 @@ export default function About() {
                         {expandedSystem === system.id && (
                           <div className="mt-4 pt-4 border-t border-gray-200 dark:border-gray-700 space-y-3">
                             <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-0.5 sm:gap-4">
-                              <span className="text-gray-600 dark:text-gray-400 shrink-0">
+                              <span className="text-text-secondary dark:text-neutral-400 shrink-0">
                                 Processor:
                               </span>
                               <span className="font-medium text-gray-900 dark:text-white sm:text-right">
@@ -293,7 +293,7 @@ export default function About() {
                               </span>
                             </div>
                             <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-0.5 sm:gap-4">
-                              <span className="text-gray-600 dark:text-gray-400 shrink-0">
+                              <span className="text-text-secondary dark:text-neutral-400 shrink-0">
                                 Memory:
                               </span>
                               <span className="font-medium text-gray-900 dark:text-white sm:text-right">
@@ -302,7 +302,7 @@ export default function About() {
                             </div>
 
                             <div className="mt-4">
-                              <h4 className="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
+                              <h4 className="text-sm font-semibold text-text-secondary dark:text-neutral-300 mb-2">
                                 Key Features:
                               </h4>
                               <div className="flex flex-wrap gap-2">
@@ -325,7 +325,7 @@ export default function About() {
               ))}
             </div>
 
-            <div className="mt-8 bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 rounded-xl p-6">
+            <div className="mt-8 bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 rounded-radius-md p-6">
               <div className="flex items-start gap-3">
                 <span className="text-2xl">⚠️</span>
                 <div>
@@ -348,13 +348,13 @@ export default function About() {
         {activeSection === 'scores' && (
           <div className="p-4 sm:p-8">
             <div className="mb-6">
-              <div className="bg-gradient-to-r from-purple-100 to-blue-100 dark:from-purple-900/30 dark:to-blue-900/30 rounded-xl p-6 border border-purple-200 dark:border-purple-700">
+              <div className="bg-gradient-to-r from-purple-100 to-blue-100 dark:from-purple-900/30 dark:to-blue-900/30 rounded-radius-md p-6 border border-purple-200 dark:border-purple-700">
                 <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3 flex items-center gap-2">
                   <span className="text-2xl">🎯</span>
                   Understanding Performance Metrics
                 </h3>
-                <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
-                  <strong className="text-purple-600 dark:text-purple-400">
+                <p className="text-text-secondary dark:text-neutral-300 leading-relaxed">
+                  <strong className="text-amber-700 dark:text-amber-400">
                     Higher Speedometer scores = Faster browser performance.
                   </strong>
                   Our comprehensive testing evaluates multiple aspects of browser performance to
@@ -367,11 +367,11 @@ export default function About() {
               {scoreGuide.map((metric, index) => (
                 <div
                   key={index}
-                  className="bg-gray-50 dark:bg-gray-700 rounded-xl p-6 border border-gray-200 dark:border-gray-600"
+                  className="bg-neutral-50 dark:bg-gray-700 rounded-radius-md p-6 border border-gray-200 dark:border-gray-600"
                 >
                   <div className="flex flex-col items-center sm:flex-row sm:items-start gap-4">
                     <div
-                      className={`w-12 h-12 rounded-xl flex items-center justify-center ${metric.color} bg-current/10 flex-shrink-0`}
+                      className={`w-12 h-12 rounded-radius-md flex items-center justify-center ${metric.color} bg-current/10 flex-shrink-0`}
                     >
                       <span className="text-xl font-bold">
                         {index === 0 ? '⚡' : index === 1 ? '🧠' : '🛡️'}
@@ -381,32 +381,32 @@ export default function About() {
                       <h4 className={`text-lg font-semibold mb-2 ${metric.color}`}>
                         {metric.metric}
                       </h4>
-                      <p className="text-gray-600 dark:text-gray-400 mb-4">{metric.description}</p>
+                      <p className="text-text-secondary dark:text-neutral-400 mb-4">{metric.description}</p>
 
                       <div className="grid grid-cols-1 sm:grid-cols-4 gap-4 text-sm">
                         <div>
-                          <span className="font-medium text-gray-700 dark:text-gray-300">
+                          <span className="font-medium text-text-secondary dark:text-neutral-300">
                             Scale:
                           </span>
-                          <div className="text-gray-600 dark:text-gray-400">{metric.scale}</div>
+                          <div className="text-text-secondary dark:text-neutral-400">{metric.scale}</div>
                         </div>
                         <div>
                           <span className="font-medium text-green-600 dark:text-green-400">
                             Excellent:
                           </span>
-                          <div className="text-gray-600 dark:text-gray-400">{metric.good}</div>
+                          <div className="text-text-secondary dark:text-neutral-400">{metric.good}</div>
                         </div>
                         <div>
                           <span className="font-medium text-yellow-600 dark:text-yellow-400">
                             Average:
                           </span>
-                          <div className="text-gray-600 dark:text-gray-400">{metric.average}</div>
+                          <div className="text-text-secondary dark:text-neutral-400">{metric.average}</div>
                         </div>
                         <div>
                           <span className="font-medium text-red-600 dark:text-red-400">
                             Needs Improvement:
                           </span>
-                          <div className="text-gray-600 dark:text-gray-400">{metric.poor}</div>
+                          <div className="text-text-secondary dark:text-neutral-400">{metric.poor}</div>
                         </div>
                       </div>
                     </div>
@@ -415,12 +415,12 @@ export default function About() {
               ))}
             </div>
 
-            <div className="mt-8 bg-gradient-to-r from-green-50 to-blue-50 dark:from-green-900/20 dark:to-blue-900/20 rounded-xl p-6 border border-green-200 dark:border-green-800">
+            <div className="mt-8 bg-gradient-to-r from-green-50 to-blue-50 dark:from-green-900/20 dark:to-blue-900/20 rounded-radius-md p-6 border border-green-200 dark:border-green-800">
               <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
                 <span className="text-2xl">💡</span>
                 Pro Tips for Interpreting Results
               </h3>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-gray-700 dark:text-gray-300">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-text-secondary dark:text-neutral-300">
                 <div className="flex items-start gap-2">
                   <span className="text-blue-500 mt-1">→</span>
                   <span>

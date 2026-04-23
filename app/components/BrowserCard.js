@@ -1,284 +1,190 @@
-import React, { useEffect, useRef, useState } from 'react';
-
-import BrowserDetailsModal from './BrowserDetailsModal';
+import React, { useState, useMemo } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import BrowserDetailsModal from './BrowserDetailsModal';
 
-const BrowserCard = React.memo(
-  ({ browser, getEngineColor, rank, selectedPlatform, isLoading = false }) => {
-    const [showModal, setShowModal] = useState(false);
-    const [imageLoaded, setImageLoaded] = useState(false);
-    const [focusVisible, setFocusVisible] = useState(false);
-    const cardRef = useRef(null);
+// --- Utilities & Constants ---
+const getScoreColor = (score) => {
+  if (score >= 40) return 'var(--color-score-excellent)';
+  if (score >= 30) return 'var(--color-score-good)';
+  if (score >= 20) return 'var(--color-score-fair)';
+  return 'var(--color-score-poor)';
+};
 
-    const platformData = browser[selectedPlatform];
+const getTrendColor = (diff) => {
+  if (diff > 0) return '#D4A800'; // Design token: --color-trend-up
+  if (diff < 0) return '#C83A2E'; // Design token: --color-trend-down
+  return '#9A9080';
+};
 
-    useEffect(() => {
-      const handleKeyDown = (e) => {
-        if (e.key === 'Tab') setFocusVisible(true);
-      };
-      const handleMouseDown = () => setFocusVisible(false);
+const formatDate = (dateString) => 
+  new Intl.DateTimeFormat('en-US', { month: 'short', day: 'numeric', year: 'numeric' }).format(new Date(dateString));
 
-      document.addEventListener('keydown', handleKeyDown);
-      document.addEventListener('mousedown', handleMouseDown);
-
-      return () => {
-        document.removeEventListener('keydown', handleKeyDown);
-        document.removeEventListener('mousedown', handleMouseDown);
-      };
-    }, []);
-
-    if (!platformData || !platformData.versions || platformData.versions.length === 0) {
-      return null;
-    }
-
-    const latestVersion = platformData.versions[0];
-    const prevSpeedometer3Score =
-      platformData.versions.length > 1 ? platformData.versions[1].scores.speedometer3 : null;
-
-    const platformEngine = platformData.engine;
-
-    const getRankStyle = (rank) => {
-      const base = 'relative overflow-hidden';
-      switch (rank) {
-        case 1:
-          return `${base} ring-2 ring-yellow-400/70 shadow-lg shadow-yellow-400/10`;
-        case 2:
-          return `${base} ring-2 ring-gray-300/70 shadow-lg shadow-gray-300/10`;
-        case 3:
-          return `${base} ring-2 ring-amber-600/70 shadow-lg shadow-amber-600/10`;
-        default:
-          return base;
-      }
-    };
-
-    const getRankBadge = (rank) => {
-      if (rank > 3) return null;
-
-      const badges = {
-        1: { text: '🏆 #1', color: 'bg-yellow-400/90 text-yellow-900' },
-        2: { text: '🥈 #2', color: 'bg-gray-300/90 text-gray-800' },
-        3: { text: '🥉 #3', color: 'bg-amber-500/90 text-amber-900' },
-      };
-
-      const badge = badges[rank];
-      return (
-        <div
-          className={`absolute top-3 right-3 px-2.5 py-0.5 rounded-full text-xs font-bold tracking-wide ${badge.color} shadow-sm z-10`}
-        >
-          {badge.text}
-        </div>
-      );
-    };
-
-    const scoreDifference = prevSpeedometer3Score
-      ? latestVersion.scores.speedometer3 - prevSpeedometer3Score
-      : null;
-
-    const scoreChangeText = scoreDifference
-      ? `${scoreDifference > 0 ? 'Increased' : 'Decreased'} by ${Math.abs(scoreDifference).toFixed(
-          2
-        )} points from previous version`
-      : '';
-
-    const handleCardInteraction = (e) => {
-      if (e.type === 'click' || (e.type === 'keydown' && (e.key === 'Enter' || e.key === ' '))) {
-        if (e.type === 'keydown') e.preventDefault();
-        cardRef.current?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-        setShowModal(true);
-      }
-    };
-
-    const getPerformanceLevel = (score) => {
-      if (score >= 40)
-        return { level: 'Excellent', color: 'text-emerald-600 dark:text-emerald-400' };
-      if (score >= 30) return { level: 'Good', color: 'text-sky-600 dark:text-sky-400' };
-      if (score >= 20) return { level: 'Fair', color: 'text-amber-600 dark:text-amber-400' };
-      return { level: 'Poor', color: 'text-rose-600 dark:text-rose-400' };
-    };
-
-    const performance = getPerformanceLevel(latestVersion.scores.speedometer3);
-
-    if (isLoading) {
-      return (
-        <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-sm overflow-hidden animate-pulse">
-          <div className="p-4 sm:p-5">
-            <div className="flex items-center mb-4 gap-3">
-              <div className="w-10 h-10 bg-gray-200 dark:bg-gray-700 rounded-xl shrink-0"></div>
-              <div className="flex-1">
-                <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-2/3 mb-2"></div>
-                <div className="h-3 bg-gray-200 dark:bg-gray-700 rounded w-1/3"></div>
-              </div>
-            </div>
-            <div className="flex gap-2 mb-4">
-              <div className="h-5 bg-gray-200 dark:bg-gray-700 rounded-full w-14"></div>
-              <div className="h-5 bg-gray-200 dark:bg-gray-700 rounded-full w-20"></div>
-            </div>
-            <div className="h-24 bg-gray-200 dark:bg-gray-700 rounded-xl"></div>
-          </div>
-        </div>
-      );
-    }
-
-    return (
-      <>
-        <div
-          ref={cardRef}
-          className={`
-            bg-white dark:bg-gray-800/90
-            shadow-sm hover:shadow-md
-            rounded-2xl
-            transition-all duration-300 ease-out
-            active:scale-[0.98]
-            sm:hover:scale-[1.02] sm:hover:-translate-y-0.5
-            cursor-pointer
-            border border-gray-100 dark:border-gray-700/60
-            hover:border-gray-200 dark:hover:border-gray-600
-            ${getRankStyle(rank)}
-            ${focusVisible ? 'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-gray-900' : ''}
-          `}
-          role="button"
-          aria-labelledby={`browser-${browser.name}-title`}
-          aria-describedby={`browser-${browser.name}-desc`}
-          onClick={handleCardInteraction}
-          onKeyDown={handleCardInteraction}
-          tabIndex="0"
-        >
-          {getRankBadge(rank)}
-
-          <div className="p-4 sm:p-5">
-            {/* Header */}
-            <header className="flex items-center gap-3 mb-4 mt-2">
-              <div className="group shrink-0">
-                <div
-                  className={`w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-gray-50 dark:bg-gray-700/60 flex items-center justify-center transition-all duration-300 ${
-                    imageLoaded ? 'bg-transparent dark:bg-transparent' : ''
-                  }`}
-                >
-                  <Image
-                    src={browser.logo}
-                    alt={`${browser.name} logo`}
-                    width={40}
-                    height={40}
-                    className="object-contain dark:brightness-90 group-hover:scale-110 transition-transform duration-300 w-7 h-7 sm:w-8 sm:h-8"
-                    onLoad={() => setImageLoaded(true)}
-                    priority={rank <= 3}
-                  />
-                </div>
-              </div>
-
-              <div className="flex-1 min-w-0">
-                <h3
-                  id={`browser-${browser.name}-title`}
-                  className="text-base sm:text-lg font-bold text-gray-900 dark:text-white leading-tight truncate"
-                >
-                  {browser.name}
-                </h3>
-                <div className="flex items-center gap-1.5 mt-0.5">
-                  <span className={`text-xs font-semibold ${performance.color}`}>
-                    {performance.level}
-                  </span>
-                  <span className="text-gray-300 dark:text-gray-600 text-xs">·</span>
-                  <span className="text-xs text-gray-400 dark:text-gray-500">#{rank}</span>
-                </div>
-              </div>
-
-              {browser.website && (
-                <a
-                  href={browser.website}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="shrink-0 flex items-center justify-center w-9 h-9 text-gray-300 dark:text-gray-600 hover:text-gray-500 dark:hover:text-gray-400 transition-colors rounded-lg"
-                  onClick={(e) => e.stopPropagation()}
-                  aria-label={`Visit ${browser.name} website`}
-                >
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
-                    />
-                  </svg>
-                </a>
-              )}
-            </header>
-
-            {/* Metadata */}
-            <div className="flex flex-wrap gap-1.5 mb-4">
-              <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 dark:bg-gray-700/80 text-gray-500 dark:text-gray-400">
-                v{latestVersion.version}
-              </span>
-              <span
-                className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${getEngineColor(platformEngine)}`}
-              >
-                {platformEngine}
-              </span>
-              {latestVersion.date && (
-                <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 dark:bg-gray-700/80 text-gray-500 dark:text-gray-400">
-                  {new Date(latestVersion.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
-                </span>
-              )}
-            </div>
-
-            {/* Score Block */}
-            <div
-              id={`browser-${browser.name}-desc`}
-              className="bg-gray-50/80 dark:bg-gray-700/30 rounded-xl px-4 py-4 flex flex-col items-center gap-1.5"
-            >
-              <span className="text-[9px] font-semibold text-gray-400 dark:text-gray-500 uppercase tracking-[0.15em]">
-                Speedometer 3.1
-              </span>
-              <span
-                className={`text-4xl sm:text-5xl font-extrabold tabular-nums leading-none ${performance.color}`}
-              >
-                {latestVersion.scores.speedometer3.toFixed(1)}
-              </span>
-              {scoreDifference !== null && (
-                <span
-                  aria-label={scoreChangeText}
-                  className={`inline-flex items-center gap-0.5 px-2 py-0.5 rounded-full text-[11px] font-semibold ${
-                    scoreDifference > 0
-                      ? 'bg-emerald-50 dark:bg-emerald-900/20 text-emerald-700 dark:text-emerald-400'
-                      : scoreDifference < 0
-                        ? 'bg-rose-50 dark:bg-rose-900/20 text-rose-700 dark:text-rose-400'
-                        : 'bg-gray-100 dark:bg-gray-700 text-gray-500 dark:text-gray-400'
-                  }`}
-                >
-                  {scoreDifference > 0 ? '↗ ' : scoreDifference < 0 ? '↘ ' : '→ '}
-                  {Math.abs(scoreDifference).toFixed(1)} pts
-                </span>
-              )}
-            </div>
-
-            {/* Footer actions */}
-            <div className="mt-3 flex items-center justify-between">
-              <span className="hidden sm:block text-[10px] text-gray-300 dark:text-gray-600">
-                Tap for history
-              </span>
-              <Link
-                href={`/browsers/${browser.name.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')}`}
-                className="ml-auto text-[11px] text-purple-500 dark:text-purple-400 hover:text-purple-700 dark:hover:text-purple-300 hover:underline"
-                onClick={(e) => e.stopPropagation()}
-              >
-                Full details →
-              </Link>
-            </div>
-          </div>
-        </div>
-
-        {showModal && (
-          <BrowserDetailsModal
-            browser={browser}
-            selectedPlatform={selectedPlatform}
-            onClose={() => setShowModal(false)}
-          />
-        )}
-      </>
-    );
-  }
+// --- Sub-components ---
+const BrowserCardSkeleton = () => (
+  <div className="bg-surface rounded-radius-xl shadow-sm overflow-hidden animate-pulse p-7">
+    <div className="flex items-center gap-4 mb-6">
+      <div className="w-16 h-16 bg-surface-subtle rounded-xl mr-4" />
+      <div className="flex-1">
+        <div className="h-6 bg-surface-subtle rounded w-2/3 mb-2" />
+        <div className="h-4 bg-surface-subtle rounded w-1/3" />
+      </div>
+    </div>
+    <div className="grid grid-cols-3 gap-4">
+      {[1, 2, 3].map((i) => <div key={i} className="h-10 bg-surface-subtle rounded" />)}
+    </div>
+  </div>
 );
 
-BrowserCard.displayName = 'BrowserCard';
+const BrowserCard = React.memo(({ browser, getEngineColor, rank, selectedPlatform, isLoading = false }) => {
+  const [showModal, setShowModal] = useState(false);
+  const [imageLoaded, setImageLoaded] = useState(false);
+  const [imageError, setImageError] = useState(false);
 
+  // Data Derivation
+  const platformData = browser?.[selectedPlatform];
+  const versions = platformData?.versions || [];
+  const latestVersion = versions[0];
+  const score = latestVersion?.scores?.speedometer3 ?? 0;
+  
+  // Memoized Values
+  const scoreColor = useMemo(() => getScoreColor(score), [score]);
+  const progressWidth = useMemo(() => Math.min((score / 60) * 100, 100), [score]);
+  const scoreDifference = useMemo(() => {
+    const prevScore = versions[1]?.scores?.speedometer3;
+    return prevScore ? score - prevScore : null;
+  }, [score, versions]);
+
+  const slug = useMemo(() => 
+    browser.name.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, ''), 
+  [browser.name]);
+
+  if (isLoading) return <BrowserCardSkeleton />;
+  if (!platformData || versions.length === 0) return null;
+
+  const isRankOne = rank === 1;
+
+  // Configuration for specialized rank styles
+  const theme = {
+    container: isRankOne ? 'bg-[#1A1A18] text-white shadow-md' : 'bg-surface shadow-sm border-border-subtle',
+    textSecondary: isRankOne ? 'text-neutral-300' : 'text-secondary',
+    badge: isRankOne ? 'bg-neutral-800 text-neutral-300' : 'bg-surface-subtle text-secondary border-border-subtle',
+    cta: isRankOne ? 'border-neutral-700 text-neutral-300 hover:bg-neutral-800' : 'border-border-subtle text-secondary hover:bg-surface-subtle'
+  };
+
+  const handleInteraction = (e) => {
+    // If user clicks the Link or a child of the Link, do not open the modal
+    if (e.target.closest('a')) return;
+    
+    if (e.type === 'click' || (e.key === 'Enter' || e.key === ' ')) {
+      if (e.type === 'keydown') e.preventDefault();
+      setShowModal(true);
+    }
+  };
+
+  return (
+    <>
+      <div
+        role="button"
+        tabIndex="0"
+        onClick={handleInteraction}
+        onKeyDown={handleInteraction}
+        className={`
+          relative p-6 rounded-radius-xl transition-all duration-200 cursor-pointer overflow-hidden
+          focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-primary focus-visible:ring-offset-2
+          ${theme.container} ${rank > 1 && rank <= 3 ? 'ring-2 ring-[#F5C400]/60' : ''}
+        `}
+        aria-label={`View ${browser.name} details. Rank #${rank}, Score ${score.toFixed(1)}`}
+      >
+        {rank <= 3 && (
+          <div className="absolute top-3 right-3 bg-[#1A1A18] text-white rounded-full px-3 py-1 text-xs font-semibold z-10">
+            #{rank}
+          </div>
+        )}
+
+        <div className="flex items-center gap-4">
+          {/* Browser Logo */}
+          <div className={`w-14 h-14 rounded-xl flex items-center justify-center shrink-0 ${isRankOne ? 'bg-neutral-800' : 'bg-surface-subtle'}`}>
+            <Image
+              src={imageError ? '/fallback-browser-icon.svg' : browser.logo}
+              alt=""
+              width={40}
+              height={40}
+              onLoad={() => setImageLoaded(true)}
+              onError={() => setImageError(true)}
+              priority={rank <= 3}
+              className={`object-contain transition-opacity duration-300 ${imageLoaded ? 'opacity-100' : 'opacity-0'}`}
+              style={isRankOne ? { filter: 'brightness(0) invert(1)' } : {}}
+            />
+          </div>
+
+          <div className="flex-1 min-w-0">
+            <h3 className="text-lg font-bold truncate">{browser.name}</h3>
+            <p className={`text-sm ${theme.textSecondary}`}>{platformData.engine}</p>
+          </div>
+
+          {/* Score Cluster */}
+          <div className="text-right shrink-0">
+            <span className="text-5xl font-bold tabular-nums" style={{ color: scoreColor }}>
+              {score.toFixed(1)}
+            </span>
+            <div className="mt-2 w-24 h-1 bg-black/10 rounded-full overflow-hidden">
+              <div 
+                className="h-full transition-all duration-500" 
+                style={{ width: `${progressWidth}%`, backgroundColor: scoreColor }} 
+              />
+            </div>
+          </div>
+
+          {/* Trend Tag */}
+          {scoreDifference !== null && (
+            <div 
+              className="px-2.5 py-1 rounded-full text-xs font-bold"
+              style={{ backgroundColor: `${getTrendColor(scoreDifference)}20`, color: getTrendColor(scoreDifference) }}
+            >
+              {scoreDifference > 0 ? '↑' : scoreDifference < 0 ? '↓' : '→'} {Math.abs(scoreDifference).toFixed(1)}
+            </div>
+          )}
+
+          {/* Chevron Link */}
+          <Link
+            href={`/browsers/${slug}`}
+            className={`w-10 h-10 rounded-lg border flex items-center justify-center transition-colors ${theme.cta}`}
+            aria-label={`View historical data for ${browser.name}`}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+            </svg>
+          </Link>
+        </div>
+
+        {/* Metadata Badges */}
+        <div className="flex flex-wrap gap-2 mt-4 ml-[72px]">
+          <span className={`px-3 py-1 rounded-full text-xs font-medium ${theme.badge}`}>
+            v{latestVersion.version}
+          </span>
+          <span className={`px-3 py-1 rounded-full text-xs font-medium ${isRankOne ? theme.badge : getEngineColor(platformData.engine)}`}>
+            {platformData.engine}
+          </span>
+          {latestVersion.date && (
+            <span className={`px-3 py-1 rounded-full text-xs font-medium ${theme.badge}`}>
+              {formatDate(latestVersion.date)}
+            </span>
+          )}
+        </div>
+      </div>
+
+      {showModal && (
+        <BrowserDetailsModal
+          browser={browser}
+          selectedPlatform={selectedPlatform}
+          onClose={() => setShowModal(false)}
+        />
+      )}
+    </>
+  );
+});
+
+BrowserCard.displayName = 'BrowserCard';
 export default BrowserCard;

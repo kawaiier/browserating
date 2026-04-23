@@ -150,7 +150,7 @@ export default function RootLayout({ children }) {
           }}
         />
       </head>
-      <body className={inter.className}>
+      <body className={`${inter.className} bg-canvas`}>
         {children}
         <Analytics />
         <StickyAnnouncement />

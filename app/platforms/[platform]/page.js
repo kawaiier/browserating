@@ -55,7 +55,7 @@ export default async function PlatformPage({ params }) {
         <div className="min-h-screen bg-white dark:bg-gray-900 transition-colors duration-200">
           <a
             href="#main-content"
-            className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:bg-purple-600 hover:bg-purple-700 focus:text-white focus:shadow-xl focus:rounded-lg focus:font-semibold focus:transition-all focus:duration-200 focus:outline-none focus:ring-4 focus:ring-purple-500/50"
+            className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:bg-accent-primary hover:bg-purple-700 focus:text-white focus:shadow-xl focus:rounded-lg focus:font-semibold focus:transition-all focus:duration-200 focus:outline-none focus:ring-4 focus:ring-purple-500/50"
           >
             Skip to main content
           </a>
@@ -63,13 +63,13 @@ export default async function PlatformPage({ params }) {
           <main id="main-content" className="container mx-auto px-4 py-8 scroll-mt-4" tabIndex={-1}>
             <article className="max-w-4xl mx-auto">
               <nav className="mb-6">
-                <Link href="/" className="text-purple-600 hover:underline">
+                <Link href="/" className="text-accent-primary hover:underline">
                   ← Back to Rankings
                 </Link>
               </nav>
 
               <header className="mb-8">
-                <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">
+                <h1 className="text-4xl font-bold text-text-primary dark:text-white mb-4">
                   Best Browsers for {platformLabel} in 2026
                 </h1>
                 <p className="text-lg text-gray-600 dark:text-gray-400">
@@ -78,7 +78,7 @@ export default async function PlatformPage({ params }) {
               </header>
 
               <section>
-                <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
+                <h2 className="text-2xl font-bold text-text-primary dark:text-white mb-4">
                   Browser Performance Rankings
                 </h2>
                 <div className="grid gap-4">
@@ -96,7 +96,7 @@ export default async function PlatformPage({ params }) {
                       >
                         <div className="text-2xl font-bold text-gray-400">#{index + 1}</div>
                         <div className="flex-1">
-                          <h3 className="font-semibold text-gray-900 dark:text-white">
+                          <h3 className="font-semibold text-text-primary dark:text-white">
                             {browser.name}
                           </h3>
                           <div className="text-sm text-gray-600 dark:text-gray-400">
@@ -105,7 +105,7 @@ export default async function PlatformPage({ params }) {
                         </div>
                         <Link
                           href={`/browsers/${slug}`}
-                          className="text-purple-600 hover:underline"
+                          className="text-accent-primary hover:underline"
                         >
                           View Details →
                         </Link>

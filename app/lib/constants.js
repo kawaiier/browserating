@@ -21,17 +21,17 @@ export const platformIcons = {
 
 export const engineColors = {
   Blink:
-    'bg-blue-100 dark:bg-sky-900/50 text-blue-800 dark:text-blue-100 hover:bg-blue-200 dark:hover:bg-sky-800 border border-blue-200 dark:border-sky-700',
+    'bg-blue-500/10 dark:bg-blue-500/20 text-blue-600 dark:text-blue-400 hover:bg-blue-500/20 dark:hover:bg-blue-500/30 border border-blue-500/30 dark:border-blue-500/40',
   Gecko:
-    'bg-green-100 dark:bg-emerald-900/50 text-green-800 dark:text-green-100 hover:bg-green-200 dark:hover:bg-emerald-800 border border-green-200 dark:border-emerald-700',
+    'bg-green-500/10 dark:bg-green-500/20 text-green-600 dark:text-green-400 hover:bg-green-500/20 dark:hover:bg-green-500/30 border border-green-500/30 dark:border-green-500/40',
   WebKit:
-    'bg-orange-100 dark:bg-amber-900/50 text-orange-800 dark:text-orange-100 hover:bg-orange-200 dark:hover:bg-amber-800 border border-orange-200 dark:border-amber-700',
-  All: 'bg-gray-100 dark:bg-gray-700/50 text-gray-800 dark:text-gray-100 hover:bg-gray-200 dark:hover:bg-gray-600 border border-gray-200 dark:border-gray-600',
+    'bg-orange-500/10 dark:bg-orange-500/20 text-orange-600 dark:text-orange-400 hover:bg-orange-500/20 dark:hover:bg-orange-500/30 border border-orange-500/30 dark:border-orange-500/40',
+  All: 'bg-gray-500/10 dark:bg-gray-500/20 text-gray-600 dark:text-gray-400 hover:bg-gray-500/20 dark:hover:bg-gray-500/30 border border-gray-500/30 dark:border-gray-500/40',
 };
 
 export const getEngineColor = (engine) => {
   return (
     engineColors[engine] ||
-    'bg-gray-100 dark:bg-gray-700/50 text-gray-800 dark:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-600 border border-gray-200 dark:border-gray-600'
+    'bg-gray-500/10 dark:bg-gray-500/20 text-gray-600 dark:text-gray-400 hover:bg-gray-500/20 dark:hover:bg-gray-500/30 border border-gray-500/30 dark:border-gray-500/40'
   );
 };
