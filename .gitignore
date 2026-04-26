@@ -65,3 +65,7 @@ desktop.ini
 docs/plans/
 .swarm/
 .opencode/
+.agents/
+.kilo/
+.claude/
+skills-lock.json
