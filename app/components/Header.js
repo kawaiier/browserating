@@ -322,7 +322,7 @@ export default function Header({ lastModified }) {
                     dateTime="2026-03-22"
                     className="text-sm font-mono font-semibold text-purple-700 dark:text-purple-300"
                   >
-                    ~ March 22, 2026
+                    ~ May 23, 2026
                   </time>
                 </div>
               </div>
