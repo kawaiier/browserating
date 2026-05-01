@@ -21,7 +21,7 @@
     "react-dom": "^19.2.5"
   },
   "devDependencies": {
-    "@commitlint/config-conventional": "^20.5.0",
+    "@commitlint/config-conventional": "^20.5.3",
     "@eslint/compat": "^2.0.5",
     "@tailwindcss/postcss": "^4.2.3",
     "eslint": "^10.2.1",
