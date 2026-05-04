@@ -24,7 +24,7 @@
     "@commitlint/config-conventional": "^20.5.0",
     "@eslint/compat": "^2.0.5",
     "@tailwindcss/postcss": "^4.2.3",
-    "eslint": "^10.2.1",
+    "eslint": "^10.3.0",
     "eslint-config-next": "^16.2.4",
     "husky": "^9.1.7",
     "lint-staged": "^16.4.0",
