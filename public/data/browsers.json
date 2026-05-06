@@ -383,5 +383,11 @@
     "logo": "/images/browser-logos/beam.png",
     "website": "https://www.beambrowser.app/",
     "description": "Beam is a browser focused on clean, minimal design and fast browsing. Aimed at users who want a modern, uncluttered browser experience on macOS without the feature bloat of mainstream alternatives."
+  },
+  {
+    "name": "Ungoogled Chromium",
+    "logo": "/images/browser-logos/ungoogled-chromium.png",
+    "website": "https://github.com/ungoogled-software/ungoogled-chromium",
+    "description": "Ungoogled Chromium is a lightweight Chromium fork that removes all Google-specific features, telemetry, and web service dependencies. It provides a privacy-focused browsing experience without Google tracking, while maintaining compatibility with Chrome extensions and the Chromium ecosystem. Available for Windows, macOS, and Linux, it is aimed at users who want Chromium's performance without any Google integration."
   }
 ]
