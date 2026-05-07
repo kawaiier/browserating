@@ -18,7 +18,7 @@
     "next": "^16.2.4",
     "react": "^19.2.5",
     "react-chartjs-2": "^5.3.1",
-    "react-dom": "^19.2.5"
+    "react-dom": "^19.2.6"
   },
   "devDependencies": {
     "@commitlint/config-conventional": "^20.5.0",
