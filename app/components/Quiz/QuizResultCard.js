@@ -11,14 +11,23 @@ export default function QuizResultCard({ browser, size = 'runner-up' }) {
 
   return (
     <div
-      className={`rounded-2xl border bg-white dark:bg-gray-800 transition-all duration-200 ${
-        isHero
-          ? 'border-purple-200 dark:border-purple-700 shadow-xl shadow-purple-100/50 dark:shadow-purple-900/20 p-6 sm:p-8'
-          : 'border-gray-200 dark:border-gray-700 shadow-md p-4 sm:p-6'
-      }`}
+      className="rounded-lg transition-all duration-200"
+      style={{
+        backgroundColor: 'var(--surface-raised)',
+        border: isHero ? '1px solid var(--color-brand)' : '1px solid var(--border-subtle)',
+        padding: isHero ? '2rem' : '1.5rem',
+        boxShadow: isHero ? 'var(--shadow-overlay)' : 'var(--shadow-raised)',
+      }}
     >
       {browser.discontinued && (
-        <div className="mb-4 flex items-start gap-2 bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-700 text-amber-800 dark:text-amber-300 text-xs sm:text-sm rounded-lg px-3 py-2">
+        <div
+          className="mb-4 flex items-start gap-2 text-xs sm:text-sm rounded-lg px-3 py-2"
+          style={{
+            backgroundColor: 'var(--color-warning-subtle)',
+            border: '1px solid var(--color-warning)',
+            color: 'var(--color-warning)',
+          }}
+        >
           <svg
             className="w-4 h-4 flex-shrink-0 mt-0.5"
             fill="none"
@@ -44,29 +53,35 @@ export default function QuizResultCard({ browser, size = 'runner-up' }) {
               alt={browser.name}
               width={isHero ? 80 : 48}
               height={isHero ? 80 : 48}
-              className="w-full h-full rounded-xl shadow-sm"
+              className="w-full h-full rounded-lg"
             />
           ) : (
-            <div className="w-full h-full rounded-xl bg-gray-200 dark:bg-gray-700" />
+            <div
+              className="w-full h-full rounded-lg"
+              style={{ backgroundColor: 'var(--surface-sunken)' }}
+            />
           )}
         </div>
 
         <div className="flex-1 min-w-0">
           <div className="flex items-center gap-2 flex-wrap">
             <h2
-              className={`font-bold text-gray-900 dark:text-white ${
-                isHero ? 'text-2xl sm:text-3xl' : 'text-lg'
-              }`}
+              className="font-bold"
+              style={{
+                color: 'var(--text-default)',
+                fontSize: isHero ? '1.5rem' : '1.125rem',
+              }}
             >
               {browser.name}
             </h2>
             {hasMatchPercentage && (
               <span
-                className={`inline-flex items-center font-bold rounded-full px-2 py-0.5 ${
-                  isHero
-                    ? 'text-sm bg-purple-100 dark:bg-purple-900/40 text-purple-700 dark:text-purple-300'
-                    : 'text-xs bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300'
-                }`}
+                className="inline-flex items-center font-bold rounded-full px-2 py-0.5"
+                style={{
+                  fontSize: isHero ? '0.875rem' : '0.75rem',
+                  backgroundColor: isHero ? 'var(--color-brand-subtle)' : 'var(--surface-sunken)',
+                  color: isHero ? 'var(--text-brand)' : 'var(--text-default)',
+                }}
               >
                 {browser.matchPercentage}% match
               </span>
@@ -75,15 +90,17 @@ export default function QuizResultCard({ browser, size = 'runner-up' }) {
 
           {browser.tagline && (
             <p
-              className={`mt-1 text-gray-600 dark:text-gray-400 ${
-                isHero ? 'text-base' : 'text-sm'
-              }`}
+              className="mt-1"
+              style={{
+                color: 'var(--text-subtle)',
+                fontSize: isHero ? '1rem' : '0.875rem',
+              }}
             >
               {browser.tagline}
             </p>
           )}
           {isHero && browser.bestFor && (
-            <p className="mt-2 text-sm text-purple-700 dark:text-purple-300 font-medium">
+            <p className="mt-2 text-sm font-medium" style={{ color: 'var(--text-brand)' }}>
               Best for: {browser.bestFor}
             </p>
           )}
@@ -93,9 +110,10 @@ export default function QuizResultCard({ browser, size = 'runner-up' }) {
       {isHero && browser.highlights && browser.highlights.length > 0 && (
         <ul className="mt-5 space-y-2" role="list">
           {browser.highlights.map((h, i) => (
-            <li key={i} className="flex items-start gap-2 text-sm text-gray-700 dark:text-gray-300">
+            <li key={i} className="flex items-start gap-2 text-sm" style={{ color: 'var(--text-subtle)' }}>
               <svg
-                className="w-4 h-4 text-purple-500 flex-shrink-0 mt-0.5"
+                className="w-4 h-4 flex-shrink-0 mt-0.5"
+                style={{ color: 'var(--color-brand)' }}
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -117,7 +135,8 @@ export default function QuizResultCard({ browser, size = 'runner-up' }) {
         <div className="mt-3">
           <button
             onClick={() => setExpandedHighlights((v) => !v)}
-            className="text-xs text-purple-600 dark:text-purple-400 hover:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-purple-500 rounded"
+            className="text-xs hover:underline rounded"
+            style={{ color: 'var(--text-brand)' }}
           >
             {expandedHighlights ? 'Hide details' : 'Why this one?'}
           </button>
@@ -126,10 +145,12 @@ export default function QuizResultCard({ browser, size = 'runner-up' }) {
               {browser.highlights.map((h, i) => (
                 <li
                   key={i}
-                  className="flex items-start gap-2 text-xs text-gray-600 dark:text-gray-400"
+                  className="flex items-start gap-2 text-xs"
+                  style={{ color: 'var(--text-subtle)' }}
                 >
                   <svg
-                    className="w-3.5 h-3.5 text-purple-500 flex-shrink-0 mt-0.5"
+                    className="w-3.5 h-3.5 flex-shrink-0 mt-0.5"
+                    style={{ color: 'var(--color-brand)' }}
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -156,7 +177,17 @@ export default function QuizResultCard({ browser, size = 'runner-up' }) {
               href={browser.website}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white font-semibold px-5 py-2.5 rounded-xl shadow hover:shadow-md transition-all duration-200 text-sm"
+              className="inline-flex items-center gap-2 font-semibold px-5 py-2.5 rounded-md transition-all duration-200 text-sm"
+              style={{
+                backgroundColor: 'var(--color-brand)',
+                color: 'var(--text-inverse)',
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.backgroundColor = 'var(--color-brand-bold)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.backgroundColor = 'var(--color-brand)';
+              }}
             >
               Visit Website
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -171,7 +202,17 @@ export default function QuizResultCard({ browser, size = 'runner-up' }) {
           )}
           <Link
             href="/#rankings"
-            className="inline-flex items-center gap-2 bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-300 font-medium px-5 py-2.5 rounded-xl transition-all duration-200 text-sm"
+            className="inline-flex items-center gap-2 font-medium px-5 py-2.5 rounded-md transition-all duration-200 text-sm"
+            style={{
+              backgroundColor: 'var(--surface-sunken)',
+              color: 'var(--text-default)',
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.backgroundColor = 'var(--surface-hovered)';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.backgroundColor = 'var(--surface-sunken)';
+            }}
           >
             View Rankings
           </Link>

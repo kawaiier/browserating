@@ -2,6 +2,7 @@ import { getComparisonData, generateComparisonSlugs } from '@/app/lib/getCompari
 import { notFound } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
+import { ArrowLeft, ArrowRight } from 'lucide-react';
 import { getDataLastModified } from '@/app/lib/getDataLastModified';
 import DarkModeProvider from '@/app/components/DarkModeProvider';
 import ErrorBoundary from '@/app/components/ErrorBoundary';
@@ -54,34 +55,53 @@ export default async function ComparePage({ params }) {
   return (
     <ErrorBoundary>
       <DarkModeProvider>
-        <div className="min-h-screen bg-white dark:bg-gray-900 transition-colors duration-200">
+        <div
+          className="min-h-screen transition-colors duration-200"
+          style={{ backgroundColor: 'var(--surface-default)' }}
+        >
           <a
             href="#main-content"
-            className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:bg-purple-600 hover:bg-purple-700 focus:text-white focus:shadow-xl focus:rounded-lg focus:font-semibold focus:transition-all focus:duration-200 focus:outline-none focus:ring-4 focus:ring-purple-500/50"
+            className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:text-white focus:shadow-xl focus:rounded-lg focus:font-semibold focus:transition-all focus:duration-200 focus:outline-none"
+            style={{ backgroundColor: 'var(--color-brand)' }}
           >
             Skip to main content
           </a>
           <Header lastModified={lastModified} />
-          <main id="main-content" className="container mx-auto px-4 py-8 scroll-mt-4" tabIndex={-1}>
+          <main
+            id="main-content"
+            className="container mx-auto px-4 py-8 scroll-mt-4"
+            tabIndex={-1}
+          >
             <article className="max-w-4xl mx-auto">
               <nav className="mb-6">
-                <Link href="/" className="text-purple-600 hover:underline">
-                  ← Back to Full Rankings
+                <Link
+                  href="/"
+                  className="hover:underline"
+                  style={{ color: 'var(--text-brand)' }}
+                >
+                  <ArrowLeft className="inline w-4 h-4" aria-hidden="true" /> Back to Full Rankings
                 </Link>
               </nav>
 
               <header className="mb-8">
-                <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">
+                <h1 className="text-4xl font-bold mb-4" style={{ color: 'var(--text-default)' }}>
                   {browserA.name} vs {browserB.name}
                 </h1>
-                <p className="text-lg text-gray-600 dark:text-gray-400">
+                <p className="text-lg" style={{ color: 'var(--text-subtle)' }}>
                   Detailed performance comparison
                 </p>
               </header>
 
               <section className="mb-8">
                 <div className="grid md:grid-cols-2 gap-6">
-                  <div className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow border border-gray-200 dark:border-gray-700">
+                  <div
+                    className="rounded-lg p-6"
+                    style={{
+                      backgroundColor: 'var(--surface-raised)',
+                      border: '1px solid var(--border-subtle)',
+                      boxShadow: 'var(--shadow-raised)',
+                    }}
+                  >
                     <div className="flex items-center gap-4 mb-4">
                       <div className="relative w-12 h-12">
                         <Image
@@ -91,13 +111,20 @@ export default async function ComparePage({ params }) {
                           className="object-contain"
                         />
                       </div>
-                      <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
+                      <h2 className="text-2xl font-bold" style={{ color: 'var(--text-default)' }}>
                         {browserA.name}
                       </h2>
                     </div>
                   </div>
 
-                  <div className="bg-white dark:bg-gray-800 rounded-lg p-6 shadow border border-gray-200 dark:border-gray-700">
+                  <div
+                    className="rounded-lg p-6"
+                    style={{
+                      backgroundColor: 'var(--surface-raised)',
+                      border: '1px solid var(--border-subtle)',
+                      boxShadow: 'var(--shadow-raised)',
+                    }}
+                  >
                     <div className="flex items-center gap-4 mb-4">
                       <div className="relative w-12 h-12">
                         <Image
@@ -107,7 +134,7 @@ export default async function ComparePage({ params }) {
                           className="object-contain"
                         />
                       </div>
-                      <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
+                      <h2 className="text-2xl font-bold" style={{ color: 'var(--text-default)' }}>
                         {browserB.name}
                       </h2>
                     </div>
@@ -116,18 +143,29 @@ export default async function ComparePage({ params }) {
               </section>
 
               <section>
-                <h2 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">
+                <h2 className="text-2xl font-bold mb-4" style={{ color: 'var(--text-default)' }}>
                   Performance Comparison
                 </h2>
                 <div className="overflow-x-auto">
                   <table className="w-full">
                     <thead>
-                      <tr className="border-b border-gray-200 dark:border-gray-700">
-                        <th className="text-left py-2 text-gray-900 dark:text-white">Platform</th>
-                        <th className="text-right py-2 text-gray-900 dark:text-white">
+                      <tr style={{ borderBottom: '1px solid var(--border-default)' }}>
+                        <th
+                          className="text-left py-2"
+                          style={{ color: 'var(--text-default)' }}
+                        >
+                          Platform
+                        </th>
+                        <th
+                          className="text-right py-2"
+                          style={{ color: 'var(--text-default)' }}
+                        >
                           {browserA.name}
                         </th>
-                        <th className="text-right py-2 text-gray-900 dark:text-white">
+                        <th
+                          className="text-right py-2"
+                          style={{ color: 'var(--text-default)' }}
+                        >
                           {browserB.name}
                         </th>
                       </tr>
@@ -144,22 +182,32 @@ export default async function ComparePage({ params }) {
                         return (
                           <tr
                             key={platform}
-                            className="border-b border-gray-200 dark:border-gray-700"
+                            style={{ borderBottom: '1px solid var(--border-subtle)' }}
                           >
-                            <td className="py-2 font-medium text-gray-900 dark:text-white">
+                            <td className="py-2 font-medium" style={{ color: 'var(--text-default)' }}>
                               {platformLabels[platform]}
                             </td>
                             <td
-                              className={`text-right py-2 text-gray-900 dark:text-white ${
-                                scoreA > scoreB ? 'text-green-600 font-bold' : ''
-                              }`}
+                              className="text-right py-2"
+                              style={{
+                                color:
+                                  scoreA > scoreB
+                                    ? 'var(--color-success)'
+                                    : 'var(--text-default)',
+                                fontWeight: scoreA > scoreB ? 'bold' : 'normal',
+                              }}
                             >
                               {scoreA?.toFixed(2) || 'N/A'}
                             </td>
                             <td
-                              className={`text-right py-2 text-gray-900 dark:text-white ${
-                                scoreB > scoreA ? 'text-green-600 font-bold' : ''
-                              }`}
+                              className="text-right py-2"
+                              style={{
+                                color:
+                                  scoreB > scoreA
+                                    ? 'var(--color-success)'
+                                    : 'var(--text-default)',
+                                fontWeight: scoreB > scoreA ? 'bold' : 'normal',
+                              }}
                             >
                               {scoreB?.toFixed(2) || 'N/A'}
                             </td>

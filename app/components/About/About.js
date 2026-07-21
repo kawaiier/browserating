@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { Apple, AppWindow, ArrowRight, BarChart3, Bot, Brain, Check, FlaskConical, Laptop, Lightbulb, Shield, Sparkles, Tablet, Target, TriangleAlert, Zap } from 'lucide-react';
 
 export default function About() {
   const [activeSection, setActiveSection] = useState('methodology');
@@ -10,7 +11,7 @@ export default function About() {
     {
       id: 'macos-silicon',
       title: 'macOS (Apple Silicon)',
-      icon: '🍎',
+      icon: Apple,
       gradient: 'from-blue-500 to-purple-500',
       specs: {
         os: 'macOS Tahoe 26.4.1',
@@ -23,7 +24,7 @@ export default function About() {
     {
       id: 'macos-intel',
       title: 'macOS (Intel)',
-      icon: '💻',
+      icon: Laptop,
       gradient: 'from-gray-500 to-blue-500',
       specs: {
         os: 'macOS Ventura 13.6.9',
@@ -36,7 +37,7 @@ export default function About() {
     {
       id: 'windows',
       title: 'Windows',
-      icon: '🪟',
+      icon: AppWindow,
       gradient: 'from-blue-600 to-cyan-500',
       specs: {
         os: 'Windows 10 Pro',
@@ -49,7 +50,7 @@ export default function About() {
     {
       id: 'android',
       title: 'Android',
-      icon: '🤖',
+      icon: Bot,
       gradient: 'from-green-500 to-emerald-500',
       specs: {
         os: 'Nothing OS 2.6 (Android 14)',
@@ -62,7 +63,7 @@ export default function About() {
     {
       id: 'ipad',
       title: 'iPad',
-      icon: '📱',
+      icon: Tablet,
       gradient: 'from-purple-500 to-pink-500',
       specs: {
         os: 'iPadOS 18.5',
@@ -76,7 +77,7 @@ export default function About() {
 
   const testingSteps = [
     {
-      icon: '⚡',
+      icon: Zap,
       title: 'Speedometer 3.1 Benchmark',
       description:
         'Five tests conducted per browser, eliminating best and worst results, averaging the middle three for accuracy.',
@@ -84,7 +85,7 @@ export default function About() {
         'The benchmark tests a wide range of JavaScript frameworks and technologies, including TodoMVC implementations (using vanilla JavaScript, Web Components, React, Angular, Vue, jQuery, Preact, Svelte, and Lit), code and rich text editors (CodeMirror, TipTap), and charting libraries (observable-plot, chartjs, React-Stockcharts-SVG, Perf-Dashboard). It also includes workloads that mimic browsing a typical news site, testing how well a browser handles large DOM and CSSOM changes during navigation.',
     },
     {
-      icon: '🧠',
+      icon: Brain,
       title: 'Memory Usage Analysis',
       description:
         'Cumulative RAM consumption measured across seven diverse websites including IGN, ESPN, Figma, and Reddit.',
@@ -92,7 +93,7 @@ export default function About() {
         'Memory tracking via Activity Monitor provides real-world usage patterns rather than theoretical limits. All processes RAM usage is summed up to get the total RAM usage.',
     },
     {
-      icon: '🛡️',
+      icon: Shield,
       title: 'Ad-Blocking Effectiveness',
       description:
         'Comprehensive testing using AdBlock Tester to evaluate built-in and extension-based blocking capabilities.',
@@ -109,7 +110,7 @@ export default function About() {
       good: '40+',
       average: '25-40',
       poor: '<25',
-      color: 'text-blue-600 dark:text-blue-400',
+      color: 'var(--color-information)',
     },
     {
       metric: 'RAM Usage',
@@ -118,7 +119,7 @@ export default function About() {
       good: '<500MB',
       average: '500-1000MB',
       poor: '>1000MB',
-      color: 'text-green-600 dark:text-green-400',
+      color: 'var(--color-success)',
     },
     {
       metric: 'Ad Blocking',
@@ -127,14 +128,14 @@ export default function About() {
       good: '80-100%',
       average: '50-80%',
       poor: '<50%',
-      color: 'text-purple-600 dark:text-purple-400',
+      color: 'var(--color-brand)',
     },
   ];
 
   const sections = [
-    { id: 'methodology', label: 'Testing Methodology', icon: '🔬' },
-    { id: 'systems', label: 'Test Systems', icon: '💻' },
-    { id: 'scores', label: 'Score Guide', icon: '📊' },
+    { id: 'methodology', label: 'Testing Methodology', icon: FlaskConical },
+    { id: 'systems', label: 'Test Systems', icon: Laptop },
+    { id: 'scores', label: 'Score Guide', icon: BarChart3 },
   ];
 
   return (
@@ -147,11 +148,12 @@ export default function About() {
       <div className="text-center mb-12">
         <h2
           id="about-heading"
-          className="text-3xl md:text-4xl font-bold mb-4 bg-gradient-to-r from-purple-600 via-blue-600 to-indigo-600 bg-clip-text text-transparent"
+          className="text-3xl md:text-4xl font-bold mb-4"
+          style={{ color: 'var(--text-brand)' }}
         >
           Testing Methodology & Systems
         </h2>
-        <p className="text-lg text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
+        <p className="text-lg max-w-3xl mx-auto" style={{ color: 'var(--text-subtle)' }}>
           Transparent, consistent, and thorough testing across multiple platforms to give you
           reliable browser performance insights you can trust.
         </p>
@@ -163,44 +165,86 @@ export default function About() {
           <button
             key={section.id}
             onClick={() => setActiveSection(section.id)}
-            className={`flex items-center gap-2 px-6 py-3 rounded-xl font-medium transition-all duration-300 ${
-              activeSection === section.id
-                ? 'bg-gradient-to-r from-purple-600 to-blue-600 text-white shadow-lg scale-105'
-                : 'bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700'
-            }`}
+            className="flex items-center gap-2 px-6 py-3 rounded-md font-medium transition-all duration-300"
+            style={{
+              backgroundColor:
+                activeSection === section.id ? 'var(--color-brand)' : 'var(--surface-sunken)',
+              color:
+                activeSection === section.id ? 'var(--text-inverse)' : 'var(--text-default)',
+            }}
+            onMouseEnter={(e) => {
+              if (activeSection !== section.id) {
+                e.currentTarget.style.backgroundColor = 'var(--surface-hovered)';
+              }
+            }}
+            onMouseLeave={(e) => {
+              if (activeSection !== section.id) {
+                e.currentTarget.style.backgroundColor = 'var(--surface-sunken)';
+              }
+            }}
           >
-            <span className="text-lg">{section.icon}</span>
+            <span className="text-lg"><section.icon className="w-5 h-5" aria-hidden="true" /></span>
             {section.label}
           </button>
         ))}
       </div>
 
       {/* Content Sections */}
-      <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl border border-gray-200 dark:border-gray-700 overflow-hidden">
+      <div
+        className="rounded-lg overflow-hidden"
+        style={{
+          backgroundColor: 'var(--surface-raised)',
+          border: '1px solid var(--border-subtle)',
+        }}
+      >
         {/* Testing Methodology */}
         {activeSection === 'methodology' && (
           <div className="p-4 sm:p-8">
             <div className="grid gap-8">
               {testingSteps.map((step, index) => (
                 <div key={index} className="group">
-                  <div className="flex flex-col items-center sm:flex-row sm:items-start gap-4 p-6 bg-gradient-to-r from-gray-50 to-white dark:from-gray-700 dark:to-gray-800 rounded-xl border border-gray-200 dark:border-gray-600 hover:shadow-lg transition-all duration-300">
+                  <div
+                    className="flex flex-col items-center sm:flex-row sm:items-start gap-4 p-6 rounded-lg transition-all duration-300"
+                    style={{
+                      backgroundColor: 'var(--surface-sunken)',
+                      border: '1px solid var(--border-subtle)',
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.boxShadow = 'var(--shadow-overlay)';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.boxShadow = 'none';
+                    }}
+                  >
                     <div className="flex-shrink-0">
-                      <div className="w-12 h-12 bg-gradient-to-br from-purple-500 to-blue-500 rounded-xl flex items-center justify-center text-white text-xl font-bold shadow-lg">
-                        {step.icon}
+                      <div
+                        className="w-12 h-12 rounded-lg flex items-center justify-center text-white text-xl font-bold"
+                        style={{ backgroundColor: 'var(--color-brand)' }}
+                      >
+                        <step.icon className="w-5 h-5" aria-hidden="true" />
                       </div>
                     </div>
                     <div className="flex-1 text-center sm:text-left">
-                      <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
+                      <h3 className="text-xl font-semibold mb-2" style={{ color: 'var(--text-default)' }}>
                         {step.title}
                       </h3>
-                      <p className="text-gray-600 dark:text-gray-400 mb-3 leading-relaxed">
+                      <p className="mb-3 leading-relaxed" style={{ color: 'var(--text-subtle)' }}>
                         {step.description}
                       </p>
                       <details className="group-details">
-                        <summary className="text-purple-600 dark:text-purple-400 hover:text-purple-700 dark:hover:text-purple-300 cursor-pointer font-medium">
-                          Technical Details →
+                        <summary
+                          className="cursor-pointer font-medium"
+                          style={{ color: 'var(--text-brand)' }}
+                        >
+                          Technical Details <ArrowRight className="inline w-3.5 h-3.5" aria-hidden="true" />
                         </summary>
-                        <p className="mt-3 text-sm text-gray-600 dark:text-gray-400 bg-gray-50 dark:bg-gray-700 p-4 rounded-lg">
+                        <p
+                          className="mt-3 text-sm rounded-lg p-4"
+                          style={{
+                            backgroundColor: 'var(--surface-sunken)',
+                            color: 'var(--text-subtle)',
+                          }}
+                        >
                           {step.details}
                         </p>
                       </details>
@@ -211,27 +255,33 @@ export default function About() {
             </div>
 
             {/* Key Points */}
-            <div className="mt-8 bg-gradient-to-br from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 rounded-xl p-6 border border-blue-200 dark:border-blue-800">
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
-                <span className="text-2xl">✨</span>
+            <div
+              className="mt-8 rounded-lg p-6"
+              style={{
+                backgroundColor: 'var(--color-information-subtle)',
+                border: '1px solid var(--color-information-subtle)',
+              }}
+            >
+              <h3 className="text-lg font-semibold mb-4 flex items-center gap-2" style={{ color: 'var(--text-default)' }}>
+                <Sparkles className="w-6 h-6" aria-hidden="true" />
                 Why Our Testing Matters
               </h3>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
                 <div className="flex items-start gap-2">
-                  <span className="text-green-500 mt-1">✓</span>
-                  <span className="text-gray-700 dark:text-gray-300">
+                  <Check className="mt-1 w-4 h-4" style={{ color: 'var(--color-success)' }} aria-hidden="true" />
+                  <span style={{ color: 'var(--text-subtle)' }}>
                     Consistent testing environment across all browsers
                   </span>
                 </div>
                 <div className="flex items-start gap-2">
-                  <span className="text-green-500 mt-1">✓</span>
-                  <span className="text-gray-700 dark:text-gray-300">
+                  <Check className="mt-1 w-4 h-4" style={{ color: 'var(--color-success)' }} aria-hidden="true" />
+                  <span style={{ color: 'var(--text-subtle)' }}>
                     Statistical accuracy through multiple test runs
                   </span>
                 </div>
                 <div className="flex items-start gap-2">
-                  <span className="text-green-500 mt-1">✓</span>
-                  <span className="text-gray-700 dark:text-gray-300">
+                  <Check className="mt-1 w-4 h-4" style={{ color: 'var(--color-success)' }} aria-hidden="true" />
+                  <span style={{ color: 'var(--text-subtle)' }}>
                     Real-world scenarios and websites
                   </span>
                 </div>
@@ -252,87 +302,103 @@ export default function About() {
                   }`}
                   onClick={() => setExpandedSystem(expandedSystem === system.id ? null : system.id)}
                 >
-                  <div className={`bg-gradient-to-br ${system.gradient} p-[1px] rounded-xl`}>
-                    <div className="bg-white dark:bg-gray-800 rounded-xl p-6 h-full">
-                      <div className="flex items-center gap-4 mb-4">
-                        <span className="text-3xl">{system.icon}</span>
-                        <div>
-                          <h3 className="text-xl font-bold text-gray-900 dark:text-white">
-                            {system.title}
-                          </h3>
-                          <p className="text-gray-600 dark:text-gray-400 text-sm">
-                            Click to {expandedSystem === system.id ? 'collapse' : 'expand'} details
-                          </p>
-                        </div>
+                  <div
+                    className="rounded-lg p-6 h-full"
+                    style={{
+                      backgroundColor: 'var(--surface-raised)',
+                      border: '1px solid var(--border-subtle)',
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.borderColor = 'var(--border-default)';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.borderColor = 'var(--border-subtle)';
+                    }}
+                  >
+                    <div className="flex items-center gap-4 mb-4">
+                      <system.icon className="w-8 h-8" aria-hidden="true" />
+                      <div>
+                        <h3 className="text-xl font-bold" style={{ color: 'var(--text-default)' }}>
+                          {system.title}
+                        </h3>
+                        <p className="text-sm" style={{ color: 'var(--text-subtle)' }}>
+                          Click to {expandedSystem === system.id ? 'collapse' : 'expand'} details
+                        </p>
+                      </div>
+                    </div>
+
+                    <div className="space-y-3">
+                      <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-0.5 sm:gap-4">
+                        <span className="shrink-0" style={{ color: 'var(--text-subtle)' }}>
+                          Operating System:
+                        </span>
+                        <span className="font-medium sm:text-right" style={{ color: 'var(--text-default)' }}>
+                          {system.specs.os}
+                        </span>
+                      </div>
+                      <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-0.5 sm:gap-4">
+                        <span style={{ color: 'var(--text-subtle)' }}>Device:</span>
+                        <span className="font-medium sm:text-right" style={{ color: 'var(--text-default)' }}>
+                          {system.specs.device}
+                        </span>
                       </div>
 
-                      <div className="space-y-3">
-                        <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-0.5 sm:gap-4">
-                          <span className="text-gray-600 dark:text-gray-400 shrink-0">
-                            Operating System:
-                          </span>
-                          <span className="font-medium text-gray-900 dark:text-white sm:text-right">
-                            {system.specs.os}
-                          </span>
-                        </div>
-                        <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-0.5 sm:gap-4">
-                          <span className="text-gray-600 dark:text-gray-400 shrink-0">Device:</span>
-                          <span className="font-medium text-gray-900 dark:text-white sm:text-right">
-                            {system.specs.device}
-                          </span>
-                        </div>
+                      {expandedSystem === system.id && (
+                        <div
+                          className="mt-4 pt-4 space-y-3"
+                          style={{ borderTop: '1px solid var(--border-subtle)' }}
+                        >
+                          <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-0.5 sm:gap-4">
+                            <span style={{ color: 'var(--text-subtle)' }}>Processor:</span>
+                            <span className="font-medium sm:text-right" style={{ color: 'var(--text-default)' }}>
+                              {system.specs.processor}
+                            </span>
+                          </div>
+                          <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-0.5 sm:gap-4">
+                            <span style={{ color: 'var(--text-subtle)' }}>Memory:</span>
+                            <span className="font-medium sm:text-right" style={{ color: 'var(--text-default)' }}>
+                              {system.specs.memory}
+                            </span>
+                          </div>
 
-                        {expandedSystem === system.id && (
-                          <div className="mt-4 pt-4 border-t border-gray-200 dark:border-gray-700 space-y-3">
-                            <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-0.5 sm:gap-4">
-                              <span className="text-gray-600 dark:text-gray-400 shrink-0">
-                                Processor:
-                              </span>
-                              <span className="font-medium text-gray-900 dark:text-white sm:text-right">
-                                {system.specs.processor}
-                              </span>
-                            </div>
-                            <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-0.5 sm:gap-4">
-                              <span className="text-gray-600 dark:text-gray-400 shrink-0">
-                                Memory:
-                              </span>
-                              <span className="font-medium text-gray-900 dark:text-white sm:text-right">
-                                {system.specs.memory}
-                              </span>
-                            </div>
-
-                            <div className="mt-4">
-                              <h4 className="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
-                                Key Features:
-                              </h4>
-                              <div className="flex flex-wrap gap-2">
-                                {system.specs.highlights.map((highlight, index) => (
-                                  <span
-                                    key={index}
-                                    className={`px-3 py-1 text-xs font-medium rounded-full bg-gradient-to-r ${system.gradient} text-white`}
-                                  >
-                                    {highlight}
-                                  </span>
-                                ))}
-                              </div>
+                          <div className="mt-4">
+                            <h4 className="text-sm font-semibold mb-2" style={{ color: 'var(--text-default)' }}>
+                              Key Features:
+                            </h4>
+                            <div className="flex flex-wrap gap-2">
+                              {system.specs.highlights.map((highlight, index) => (
+                                <span
+                                  key={index}
+                                  className="px-3 py-1 text-xs font-medium rounded-full text-white"
+                                  style={{ backgroundColor: 'var(--color-brand)' }}
+                                >
+                                  {highlight}
+                                </span>
+                              ))}
                             </div>
                           </div>
-                        )}
-                      </div>
+                        </div>
+                      )}
                     </div>
                   </div>
                 </div>
               ))}
             </div>
 
-            <div className="mt-8 bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 rounded-xl p-6">
+            <div
+              className="mt-8 rounded-lg p-6"
+              style={{
+                backgroundColor: 'var(--color-warning-subtle)',
+                border: '1px solid var(--color-warning)',
+              }}
+            >
               <div className="flex items-start gap-3">
-                <span className="text-2xl">⚠️</span>
+                <TriangleAlert className="w-6 h-6" aria-hidden="true" />
                 <div>
-                  <h3 className="font-semibold text-amber-800 dark:text-amber-200 mb-2">
+                  <h3 className="font-semibold mb-2" style={{ color: 'var(--color-warning)' }}>
                     Important Testing Notes
                   </h3>
-                  <p className="text-amber-700 dark:text-amber-300 text-sm leading-relaxed">
+                  <p className="text-sm leading-relaxed" style={{ color: 'var(--color-warning)' }}>
                     Performance results may vary based on your specific hardware configuration,
                     operating system version, installed extensions, and system load. These tests
                     represent controlled conditions and should be used as relative comparisons
@@ -348,15 +414,21 @@ export default function About() {
         {activeSection === 'scores' && (
           <div className="p-4 sm:p-8">
             <div className="mb-6">
-              <div className="bg-gradient-to-r from-purple-100 to-blue-100 dark:from-purple-900/30 dark:to-blue-900/30 rounded-xl p-6 border border-purple-200 dark:border-purple-700">
-                <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3 flex items-center gap-2">
-                  <span className="text-2xl">🎯</span>
+              <div
+                className="rounded-lg p-6"
+                style={{
+                  backgroundColor: 'var(--color-brand-subtle)',
+                  border: '1px solid var(--color-brand-subtle)',
+                }}
+              >
+                <h3 className="text-xl font-bold mb-3 flex items-center gap-2" style={{ color: 'var(--text-default)' }}>
+                  <Target className="w-6 h-6" aria-hidden="true" />
                   Understanding Performance Metrics
                 </h3>
-                <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
-                  <strong className="text-purple-600 dark:text-purple-400">
+                <p className="leading-relaxed" style={{ color: 'var(--text-subtle)' }}>
+                  <strong style={{ color: 'var(--text-brand)' }}>
                     Higher Speedometer scores = Faster browser performance.
-                  </strong>
+                  </strong>{' '}
                   Our comprehensive testing evaluates multiple aspects of browser performance to
                   give you a complete picture.
                 </p>
@@ -367,46 +439,57 @@ export default function About() {
               {scoreGuide.map((metric, index) => (
                 <div
                   key={index}
-                  className="bg-gray-50 dark:bg-gray-700 rounded-xl p-6 border border-gray-200 dark:border-gray-600"
+                  className="rounded-lg p-6"
+                  style={{
+                    backgroundColor: 'var(--surface-sunken)',
+                    border: '1px solid var(--border-subtle)',
+                  }}
                 >
                   <div className="flex flex-col items-center sm:flex-row sm:items-start gap-4">
                     <div
-                      className={`w-12 h-12 rounded-xl flex items-center justify-center ${metric.color} bg-current/10 flex-shrink-0`}
+                      className="w-12 h-12 rounded-lg flex items-center justify-center flex-shrink-0"
+                      style={{ backgroundColor: `${metric.color}20`, color: metric.color }}
                     >
                       <span className="text-xl font-bold">
-                        {index === 0 ? '⚡' : index === 1 ? '🧠' : '🛡️'}
+                        {index === 0 ? (
+                          <Zap className="w-5 h-5" aria-hidden="true" />
+                        ) : index === 1 ? (
+                          <Brain className="w-5 h-5" aria-hidden="true" />
+                        ) : (
+                          <Shield className="w-5 h-5" aria-hidden="true" />
+                        )}
                       </span>
                     </div>
                     <div className="flex-1 text-center sm:text-left">
-                      <h4 className={`text-lg font-semibold mb-2 ${metric.color}`}>
+                      <h4 className="text-lg font-semibold mb-2" style={{ color: metric.color }}>
                         {metric.metric}
                       </h4>
-                      <p className="text-gray-600 dark:text-gray-400 mb-4">{metric.description}</p>
+                      <p className="mb-4" style={{ color: 'var(--text-subtle)' }}>{metric.description}</p>
 
                       <div className="grid grid-cols-1 sm:grid-cols-4 gap-4 text-sm">
                         <div>
-                          <span className="font-medium text-gray-700 dark:text-gray-300">
+                          <span className="font-medium" style={{ color: 'var(--text-default)' }}>
                             Scale:
                           </span>
-                          <div className="text-gray-600 dark:text-gray-400">{metric.scale}</div>
+                          <div style={{ color: 'var(--text-subtle)' }}>{metric.scale}</div>
                         </div>
                         <div>
-                          <span className="font-medium text-green-600 dark:text-green-400">
+                          <span className="font-medium" style={{ color: 'var(--color-success)' }}>
                             Excellent:
                           </span>
-                          <div className="text-gray-600 dark:text-gray-400">{metric.good}</div>
+                          <div style={{ color: 'var(--text-subtle)' }}>{metric.good}</div>
                         </div>
                         <div>
-                          <span className="font-medium text-yellow-600 dark:text-yellow-400">
+                          <span className="font-medium" style={{ color: 'var(--color-score-fair)' }}>
                             Average:
                           </span>
-                          <div className="text-gray-600 dark:text-gray-400">{metric.average}</div>
+                          <div style={{ color: 'var(--text-subtle)' }}>{metric.average}</div>
                         </div>
                         <div>
-                          <span className="font-medium text-red-600 dark:text-red-400">
+                          <span className="font-medium" style={{ color: 'var(--color-danger)' }}>
                             Needs Improvement:
                           </span>
-                          <div className="text-gray-600 dark:text-gray-400">{metric.poor}</div>
+                          <div style={{ color: 'var(--text-subtle)' }}>{metric.poor}</div>
                         </div>
                       </div>
                     </div>
@@ -415,31 +498,37 @@ export default function About() {
               ))}
             </div>
 
-            <div className="mt-8 bg-gradient-to-r from-green-50 to-blue-50 dark:from-green-900/20 dark:to-blue-900/20 rounded-xl p-6 border border-green-200 dark:border-green-800">
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
-                <span className="text-2xl">💡</span>
+            <div
+              className="mt-8 rounded-lg p-6"
+              style={{
+                backgroundColor: 'var(--color-success-subtle)',
+                border: '1px solid var(--color-success-subtle)',
+              }}
+            >
+              <h3 className="text-lg font-semibold mb-4 flex items-center gap-2" style={{ color: 'var(--text-default)' }}>
+                <Lightbulb className="w-6 h-6" aria-hidden="true" />
                 Pro Tips for Interpreting Results
               </h3>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-gray-700 dark:text-gray-300">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
                 <div className="flex items-start gap-2">
-                  <span className="text-blue-500 mt-1">→</span>
-                  <span>
+                  <ArrowRight className="mt-1 w-4 h-4" style={{ color: 'var(--color-information)' }} aria-hidden="true" />
+                  <span style={{ color: 'var(--text-subtle)' }}>
                     Focus on consistent performance across metrics rather than just peak scores
                   </span>
                 </div>
                 <div className="flex items-start gap-2">
-                  <span className="text-blue-500 mt-1">→</span>
-                  <span>
+                  <ArrowRight className="mt-1 w-4 h-4" style={{ color: 'var(--color-information)' }} aria-hidden="true" />
+                  <span style={{ color: 'var(--text-subtle)' }}>
                     Consider your specific use case: gaming, productivity, or general browsing
                   </span>
                 </div>
                 <div className="flex items-start gap-2">
-                  <span className="text-blue-500 mt-1">→</span>
-                  <span>Balance performance with features that matter to you</span>
+                  <ArrowRight className="mt-1 w-4 h-4" style={{ color: 'var(--color-information)' }} aria-hidden="true" />
+                  <span style={{ color: 'var(--text-subtle)' }}>Balance performance with features that matter to you</span>
                 </div>
                 <div className="flex items-start gap-2">
-                  <span className="text-blue-500 mt-1">→</span>
-                  <span>Remember that browser updates can significantly impact performance</span>
+                  <ArrowRight className="mt-1 w-4 h-4" style={{ color: 'var(--color-information)' }} aria-hidden="true" />
+                  <span style={{ color: 'var(--text-subtle)' }}>Remember that browser updates can significantly impact performance</span>
                 </div>
               </div>
             </div>

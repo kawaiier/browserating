@@ -27,14 +27,24 @@ export default function QuizResults({ results, userTraits, onRetake, isShared })
       <style>{fadeInUpKeyframes}</style>
       {isShared && (
         <div className="mb-8 text-center">
-          <p className="text-gray-600 dark:text-gray-400 mb-4">
+          <p className="mb-4" style={{ color: 'var(--text-subtle)' }}>
             This is the quiz result for{' '}
-            <strong className="text-gray-900 dark:text-white">{hero.name}</strong>. Want to find
+            <strong style={{ color: 'var(--text-default)' }}>{hero.name}</strong>. Want to find
             your own match?
           </p>
           <button
             onClick={onRetake}
-            className="inline-flex items-center gap-2 bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white font-semibold px-8 py-3 rounded-xl shadow hover:shadow-md transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-amber-400/50"
+            className="inline-flex items-center gap-2 font-semibold px-8 py-3 rounded-md transition-all duration-300"
+            style={{
+              backgroundColor: 'var(--color-brand)',
+              color: 'var(--text-inverse)',
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.backgroundColor = 'var(--color-brand-bold)';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.backgroundColor = 'var(--color-brand)';
+            }}
           >
             Take the Quiz
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -50,7 +60,10 @@ export default function QuizResults({ results, userTraits, onRetake, isShared })
       )}
 
       {!isShared && (
-        <p className="text-center text-sm font-medium text-purple-600 dark:text-purple-400 mb-3 uppercase tracking-wider">
+        <p
+          className="text-center text-sm font-medium mb-3 uppercase tracking-wider"
+          style={{ color: 'var(--text-brand)' }}
+        >
           Your best match
         </p>
       )}
@@ -70,7 +83,7 @@ export default function QuizResults({ results, userTraits, onRetake, isShared })
 
       {!isShared && runnerUps.length > 0 && (
         <div className="mt-8">
-          <h3 className="text-base font-semibold text-gray-700 dark:text-gray-300 mb-3">
+          <h3 className="text-base font-semibold mb-3" style={{ color: 'var(--text-default)' }}>
             Also worth considering
           </h3>
           <div className="flex flex-col gap-4">
@@ -97,7 +110,17 @@ export default function QuizResults({ results, userTraits, onRetake, isShared })
         <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
           <button
             onClick={onRetake}
-            className="inline-flex items-center gap-2 bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-300 font-medium px-5 py-2.5 rounded-xl transition-all duration-200 text-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-purple-500"
+            className="inline-flex items-center gap-2 font-medium px-5 py-2.5 rounded-md transition-all duration-200 text-sm"
+            style={{
+              backgroundColor: 'var(--surface-sunken)',
+              color: 'var(--text-default)',
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.backgroundColor = 'var(--surface-hovered)';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.backgroundColor = 'var(--surface-sunken)';
+            }}
           >
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path
@@ -111,7 +134,17 @@ export default function QuizResults({ results, userTraits, onRetake, isShared })
           </button>
           <Link
             href="/#rankings"
-            className="inline-flex items-center gap-2 bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-300 font-medium px-5 py-2.5 rounded-xl transition-all duration-200 text-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-purple-500"
+            className="inline-flex items-center gap-2 font-medium px-5 py-2.5 rounded-md transition-all duration-200 text-sm"
+            style={{
+              backgroundColor: 'var(--surface-sunken)',
+              color: 'var(--text-default)',
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.backgroundColor = 'var(--surface-hovered)';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.backgroundColor = 'var(--surface-sunken)';
+            }}
           >
             View All Rankings
           </Link>

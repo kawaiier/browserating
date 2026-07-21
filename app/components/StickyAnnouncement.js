@@ -6,40 +6,34 @@ const announcements = [
   {
     id: 1,
     content: (
-      <p className="text-sm md:text-base">
-        Subscribe to <span className="font-bold">/r/aiBrowsing</span> — A place for discussing
+      <p className="body-small">
+        Subscribe to <span className="font-semibold">/r/aiBrowsing</span> — A place for discussing
         browsers and extensions that incorporate AI features
       </p>
     ),
     buttonText: 'Subscribe',
     buttonUrl: 'https://www.reddit.com/r/aiBrowsing/',
-    gradient: 'from-orange-500 to-red-500',
-    buttonClass: 'bg-orange-600 hover:bg-orange-700 text-white',
   },
   {
     id: 2,
     content: (
-      <p className="text-sm md:text-base">
-        Follow me on <span className="font-bold">X</span> for the latest updates and more
+      <p className="body-small">
+        Follow me on <span className="font-semibold">X</span> for the latest updates and more
       </p>
     ),
     buttonText: 'Follow',
     buttonUrl: 'https://x.com/kawaiier101',
-    gradient: 'from-black to-blue-500',
-    buttonClass: 'bg-black hover:bg-blue-700 text-white',
   },
   {
     id: 3,
     content: (
-      <p className="text-sm md:text-base">
-        Join our <span className="font-bold">Telegram</span> community to discuss browsers and
+      <p className="body-small">
+        Join our <span className="font-semibold">Telegram</span> community to discuss browsers and
         extensions
       </p>
     ),
     buttonText: 'Join',
     buttonUrl: 'https://t.me/thebrowsershq',
-    gradient: 'from-blue-400 to-cyan-400',
-    buttonClass: 'bg-blue-500 hover:bg-cyan-500 text-white',
   },
 ];
 
@@ -83,24 +77,55 @@ const StickyAnnouncement = () => {
 
   return (
     <div
-      className={`fixed bottom-0 left-0 right-0 bg-gradient-to-r ${currentAnnouncement.gradient} text-white p-3 sm:p-4 flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-0 sm:justify-between shadow-md z-50`}
+      className="fixed bottom-0 left-0 right-0 flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-0 sm:justify-between"
+      style={{
+        backgroundColor: 'var(--color-brand-subtle)',
+        color: 'var(--text-default)',
+        padding: 'var(--space-150) var(--space-200)',
+        zIndex: 'var(--z-flag)',
+        boxShadow: 'var(--shadow-overlay)',
+      }}
     >
       {currentAnnouncement.content}
-      <div className="flex items-center space-x-4 self-end sm:self-auto shrink-0">
+      <div className="flex items-center gap-3 self-end sm:self-auto shrink-0">
         <a
           href={currentAnnouncement.buttonUrl}
           target={currentAnnouncement.buttonUrl.startsWith('http') ? '_blank' : '_self'}
           rel={currentAnnouncement.buttonUrl.startsWith('http') ? 'noopener noreferrer' : ''}
-          className={`${currentAnnouncement.buttonClass} font-semibold py-2 px-4 rounded text-sm md:text-base transition duration-150 ease-in-out`}
+          className="body-small font-semibold px-4 py-2 btn-atlantic transition-colors"
+          style={{
+            backgroundColor: 'var(--color-brand)',
+            color: 'var(--text-inverse)',
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.backgroundColor = 'var(--color-brand-bold)';
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.backgroundColor = 'var(--color-brand)';
+          }}
         >
           {currentAnnouncement.buttonText}
         </a>
         <button
           onClick={handleDismiss}
-          className="text-white hover:text-gray-200 text-xl font-bold leading-none flex items-center justify-center h-6 w-6 rounded-full focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-50"
+          className="flex items-center justify-center w-6 h-6 rounded-md transition-colors"
+          style={{ color: 'var(--text-subtle)' }}
           aria-label="Dismiss announcement"
+          onMouseEnter={(e) => {
+            e.currentTarget.style.backgroundColor = 'var(--surface-hovered)';
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.backgroundColor = 'transparent';
+          }}
         >
-          &times;
+          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M6 18L18 6M6 6l12 12"
+            />
+          </svg>
         </button>
       </div>
     </div>

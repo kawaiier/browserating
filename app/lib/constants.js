@@ -3,6 +3,8 @@
  * Extracted to avoid duplication between BrowserRankingList, BrowserDetailsModal, etc.
  */
 
+import { AppWindow, Apple, Bot, Laptop, Tablet } from 'lucide-react';
+
 export const platformNames = {
   'macos-arm': 'macOS ARM',
   'macos-intel': 'macOS Intel',
@@ -12,11 +14,11 @@ export const platformNames = {
 };
 
 export const platformIcons = {
-  'macos-arm': '🍎',
-  'macos-intel': '💻',
-  windows: '🪟',
-  android: '🤖',
-  ipad: '📱',
+  'macos-arm': Apple,
+  'macos-intel': Laptop,
+  windows: AppWindow,
+  android: Bot,
+  ipad: Tablet,
 };
 
 export const engineColors = {
