@@ -1,11 +1,8 @@
 import './globals.css';
 
 import { Analytics } from '@vercel/analytics/next';
-import { Inter } from 'next/font/google';
 import Script from 'next/script';
 import StickyAnnouncement from './components/StickyAnnouncement';
-
-const inter = Inter({ subsets: ['latin'] });
 
 const RENDER_DATE = new Date().toISOString().split('T')[0];
 
@@ -56,7 +53,7 @@ export default function RootLayout({ children }) {
     <html lang="en" suppressHydrationWarning>
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta name="theme-color" content="#7853E0" />
+        <meta name="theme-color" content="#0052CC" />
         <script
           dangerouslySetInnerHTML={{
             __html: `
@@ -150,7 +147,7 @@ export default function RootLayout({ children }) {
           }}
         />
       </head>
-      <body className={inter.className}>
+      <body>
         {children}
         <Analytics />
         <StickyAnnouncement />
