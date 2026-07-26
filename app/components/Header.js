@@ -319,10 +319,10 @@ export default function Header({ lastModified }) {
                     Next update:
                   </span>
                   <time
-                    dateTime="2026-03-22"
+                    dateTime="2026-08-22"
                     className="text-sm font-mono font-semibold text-purple-700 dark:text-purple-300"
                   >
-                    ~ May 23, 2026
+                    ~ August 22, 2026
                   </time>
                 </div>
               </div>
