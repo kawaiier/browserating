@@ -37,8 +37,17 @@ export default function QuizTraitChart({ userTraits, browserProfile }) {
   };
 
   return (
-    <div className="bg-gray-50 dark:bg-gray-800/50 rounded-2xl p-4 sm:p-6 border border-gray-200 dark:border-gray-700">
-      <h3 className="text-sm font-semibold text-gray-600 dark:text-gray-400 text-center mb-4 uppercase tracking-wider">
+    <div
+      className="rounded-lg p-4 sm:p-6"
+      style={{
+        backgroundColor: 'var(--surface-sunken)',
+        border: '1px solid var(--border-subtle)',
+      }}
+    >
+      <h3
+        className="text-sm font-semibold text-center mb-4 uppercase tracking-wider"
+        style={{ color: 'var(--text-subtle)' }}
+      >
         Your Priorities vs {browserProfile.name}
       </h3>
       <div className="max-w-sm mx-auto">

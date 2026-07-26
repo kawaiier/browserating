@@ -43,23 +43,40 @@ export default function QuizIntro({ browserProfiles, onStart }) {
                   alt={browser.name}
                   width={40}
                   height={40}
-                  className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl shadow-md"
+                  className="w-10 h-10 sm:w-12 sm:h-12 rounded-lg"
+                  style={{ boxShadow: 'var(--shadow-raised)' }}
                 />
               ) : (
-                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-gray-200 dark:bg-gray-700 shadow-md" />
+                <div
+                  className="w-10 h-10 sm:w-12 sm:h-12 rounded-lg"
+                  style={{ backgroundColor: 'var(--surface-sunken)' }}
+                />
               )}
             </div>
           ))}
         </div>
 
-        <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4 leading-tight">
+        <h1
+          className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 leading-tight"
+          style={{ color: 'var(--text-default)' }}
+        >
           {QUIZ_INTRO_COPY.headline}
-          <span className="ml-3 inline-flex items-center px-3 py-1 rounded-full text-sm font-semibold bg-gradient-to-r from-amber-100 to-orange-100 text-amber-800 dark:from-amber-900/30 dark:to-orange-900/30 dark:text-amber-300 border border-amber-200 dark:border-amber-800/50">
+          <span
+            className="ml-3 inline-flex items-center px-3 py-1 rounded-full text-sm font-semibold"
+            style={{
+              backgroundColor: 'var(--color-warning-subtle)',
+              color: 'var(--color-warning)',
+              border: '1px solid var(--color-warning)',
+            }}
+          >
             Beta
           </span>
         </h1>
 
-        <p className="text-lg text-gray-600 dark:text-gray-400 mb-8 max-w-xl mx-auto leading-relaxed">
+        <p
+          className="text-lg mb-8 max-w-xl mx-auto leading-relaxed"
+          style={{ color: 'var(--text-subtle)' }}
+        >
           {QUIZ_INTRO_COPY.subheadline}
         </p>
 
@@ -70,9 +87,13 @@ export default function QuizIntro({ browserProfiles, onStart }) {
           {QUIZ_INTRO_COPY.bullets.map((bullet, i) => (
             <li
               key={i}
-              className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400 font-medium"
+              className="flex items-center gap-2 text-sm font-medium"
+              style={{ color: 'var(--text-subtle)' }}
             >
-              <span className="w-1.5 h-1.5 rounded-full bg-purple-500 flex-shrink-0" />
+              <span
+                className="w-1.5 h-1.5 rounded-full flex-shrink-0"
+                style={{ backgroundColor: 'var(--color-brand)' }}
+              />
               {bullet.text}
             </li>
           ))}
@@ -80,7 +101,19 @@ export default function QuizIntro({ browserProfiles, onStart }) {
 
         <button
           onClick={onStart}
-          className="inline-flex items-center gap-2 bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white font-semibold px-10 py-4 rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 text-lg focus:outline-none focus:ring-4 focus:ring-amber-400/50"
+          className="inline-flex items-center gap-2 font-semibold px-10 py-4 rounded-md transition-all duration-300 text-lg"
+          style={{
+            backgroundColor: 'var(--color-brand)',
+            color: 'var(--text-inverse)',
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.backgroundColor = 'var(--color-brand-bold)';
+            e.currentTarget.style.transform = 'scale(1.05)';
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.backgroundColor = 'var(--color-brand)';
+            e.currentTarget.style.transform = 'scale(1)';
+          }}
         >
           {QUIZ_INTRO_COPY.cta}
           <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">

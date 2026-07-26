@@ -3,6 +3,7 @@ import { getBrowsersServer } from '@/app/lib/getBrowsersServer';
 import { notFound } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
+import { ArrowLeft, ArrowRight } from 'lucide-react';
 import { getDataLastModified } from '@/app/lib/getDataLastModified';
 import DarkModeProvider from '@/app/components/DarkModeProvider';
 import ErrorBoundary from '@/app/components/ErrorBoundary';
@@ -25,7 +26,9 @@ export async function generateMetadata({ params }) {
 
   return {
     title: `${browser.name} Browser Performance - Speedometer 3.1 Benchmarks`,
-    description: browser.description || `${browser.name} browser benchmarks across platforms. Compare Speedometer 3.1 scores, RAM usage, and performance metrics.`,
+    description:
+      browser.description ||
+      `${browser.name} browser benchmarks across platforms. Compare Speedometer 3.1 scores, RAM usage, and performance metrics.`,
     alternates: {
       canonical: `https://browserating.com/browsers/${slug}`,
     },
@@ -68,15 +71,23 @@ export default async function BrowserPage({ params }) {
   return (
     <ErrorBoundary>
       <DarkModeProvider>
-        <div className="min-h-screen bg-white dark:bg-gray-900 transition-colors duration-200">
+        <div
+          className="min-h-screen transition-colors duration-200"
+          style={{ backgroundColor: 'var(--surface-default)' }}
+        >
           <a
             href="#main-content"
-            className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:bg-purple-600 hover:bg-purple-700 focus:text-white focus:shadow-xl focus:rounded-lg focus:font-semibold focus:transition-all focus:duration-200 focus:outline-none focus:ring-4 focus:ring-purple-500/50"
+            className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:text-white focus:shadow-xl focus:rounded-lg focus:font-semibold focus:transition-all focus:duration-200 focus:outline-none"
+            style={{ backgroundColor: 'var(--color-brand)' }}
           >
             Skip to main content
           </a>
           <Header lastModified={lastModified} />
-          <main id="main-content" className="container mx-auto px-4 py-8 scroll-mt-4" tabIndex={-1}>
+          <main
+            id="main-content"
+            className="container mx-auto px-4 py-8 scroll-mt-4"
+            tabIndex={-1}
+          >
             <script
               type="application/ld+json"
               dangerouslySetInnerHTML={{
@@ -84,7 +95,9 @@ export default async function BrowserPage({ params }) {
                   '@context': 'https://schema.org',
                   '@type': 'Product',
                   name: browser.name,
-                  description: browser.description || `${browser.name} browser performance benchmarks`,
+                  description:
+                    browser.description ||
+                    `${browser.name} browser performance benchmarks`,
                   brand: {
                     '@type': 'Brand',
                     name: browser.name,
@@ -94,8 +107,12 @@ export default async function BrowserPage({ params }) {
             />
 
             <nav className="mb-6">
-              <Link href="/" className="text-purple-600 hover:underline">
-                ← Back to Rankings
+              <Link
+                href="/"
+                className="hover:underline"
+                style={{ color: 'var(--text-brand)' }}
+              >
+                <ArrowLeft className="inline w-4 h-4" aria-hidden="true" /> Back to Rankings
               </Link>
             </nav>
 
@@ -110,7 +127,7 @@ export default async function BrowserPage({ params }) {
                   />
                 </div>
                 <div>
-                  <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-2">
+                  <h1 className="text-4xl font-bold mb-2" style={{ color: 'var(--text-default)' }}>
                     {browser.name} Browser
                   </h1>
                   {browser.website && (
@@ -118,9 +135,10 @@ export default async function BrowserPage({ params }) {
                       href={browser.website}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-purple-600 hover:underline"
+                      className="hover:underline"
+                      style={{ color: 'var(--text-brand)' }}
                     >
-                      Visit Website →
+                      Visit Website <ArrowRight className="inline w-4 h-4" aria-hidden="true" />
                     </a>
                   )}
                 </div>
@@ -128,14 +146,14 @@ export default async function BrowserPage({ params }) {
 
               {browser.description && (
                 <section className="mb-8">
-                  <p className="text-gray-700 dark:text-gray-300 text-lg leading-relaxed">
+                  <p className="text-lg leading-relaxed" style={{ color: 'var(--text-subtle)' }}>
                     {browser.description}
                   </p>
                 </section>
               )}
 
               <section className="mb-8">
-                <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
+                <h2 className="text-2xl font-bold mb-4" style={{ color: 'var(--text-default)' }}>
                   Performance Benchmarks
                 </h2>
                 <div className="grid gap-4">
@@ -148,27 +166,35 @@ export default async function BrowserPage({ params }) {
                     return (
                       <div
                         key={platform}
-                        className="bg-white dark:bg-gray-800 rounded-lg p-4 shadow border border-gray-200 dark:border-gray-700"
+                        className="rounded-lg p-4"
+                        style={{
+                          backgroundColor: 'var(--surface-raised)',
+                          border: '1px solid var(--border-subtle)',
+                          boxShadow: 'var(--shadow-raised)',
+                        }}
                       >
-                        <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
+                        <h3 className="text-lg font-semibold mb-2" style={{ color: 'var(--text-default)' }}>
                           {platformLabels[platform]}
                         </h3>
                         <div className="grid grid-cols-3 gap-4 text-sm">
                           <div>
-                            <div className="text-gray-600 dark:text-gray-400">Speedometer 3.1</div>
-                            <div className="text-xl font-bold text-purple-600">
+                            <div style={{ color: 'var(--text-subtle)' }}>Speedometer 3.1</div>
+                            <div className="text-xl font-bold" style={{ color: 'var(--text-brand)' }}>
                               {latestVersion?.scores?.speedometer3?.toFixed(2) || 'N/A'}
                             </div>
                           </div>
                           <div>
-                            <div className="text-gray-600 dark:text-gray-400">RAM Usage</div>
-                            <div className="text-xl font-bold text-blue-600">
+                            <div style={{ color: 'var(--text-subtle)' }}>RAM Usage</div>
+                            <div
+                              className="text-xl font-bold"
+                              style={{ color: 'var(--color-information)' }}
+                            >
                               {latestVersion?.scores?.ram || 'N/A'}
                             </div>
                           </div>
                           <div>
-                            <div className="text-gray-600 dark:text-gray-400">Engine</div>
-                            <div className="text-xl font-bold text-gray-900 dark:text-white">
+                            <div style={{ color: 'var(--text-subtle)' }}>Engine</div>
+                            <div className="text-xl font-bold" style={{ color: 'var(--text-default)' }}>
                               {data.engine || 'N/A'}
                             </div>
                           </div>

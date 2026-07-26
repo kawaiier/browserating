@@ -3,88 +3,64 @@
 import React from 'react';
 import { useDarkMode } from './DarkModeProvider';
 
-const STARS = [
-  { top: 10, left: 20, delay: 0, key: 'star-0' },
-  { top: 25, left: 70, delay: 300, key: 'star-1' },
-  { top: 60, left: 15, delay: 700, key: 'star-2' },
-  { top: 75, left: 80, delay: 1100, key: 'star-3' },
-  { top: 40, left: 45, delay: 500, key: 'star-4' },
-  { top: 85, left: 55, delay: 900, key: 'star-5' },
-];
-
 export default function DarkModeToggle() {
   const { darkMode, toggleDarkMode } = useDarkMode();
 
   return (
     <button
       onClick={toggleDarkMode}
-      className="relative p-2 w-12 h-12 rounded-full bg-gradient-to-b from-blue-50 to-blue-100 
-            dark:from-gray-700 dark:to-gray-800 hover:from-blue-100 hover:to-blue-200 
-            dark:hover:from-gray-600 dark:hover:to-gray-700
-            shadow-md transition-all duration-300 ease-in-out transform hover:scale-110
-            focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 dark:focus:ring-purple-400"
+      className="relative p-2 w-10 h-10 rounded-md transition-all"
+      style={{
+        backgroundColor: 'var(--surface-sunken)',
+        border: '1px solid var(--border-subtle)',
+        color: 'var(--text-subtle)',
+      }}
       aria-label={darkMode ? 'Switch to light mode' : 'Switch to dark mode'}
       aria-pressed={darkMode}
       title={darkMode ? 'Switch to light mode' : 'Switch to dark mode'}
+      onMouseEnter={(e) => {
+        e.currentTarget.style.backgroundColor = 'var(--surface-hovered)';
+        e.currentTarget.style.borderColor = 'var(--border-default)';
+      }}
+      onMouseLeave={(e) => {
+        e.currentTarget.style.backgroundColor = 'var(--surface-sunken)';
+        e.currentTarget.style.borderColor = 'var(--border-subtle)';
+      }}
     >
-      <div className="relative w-full h-full">
-        {/* Sun */}
-        <div
-          className={`absolute inset-0 transform transition-transform duration-500 
-                ${darkMode ? 'scale-0 rotate-90' : 'scale-100 rotate-0'}`}
-          aria-hidden="true"
-        >
-          {/* Main sun circle */}
-          <div className="absolute inset-[3px] bg-yellow-400 rounded-full" />
-
-          {/* Sun rays */}
-          {[...Array(12)].map((_, i) => (
-            <div
-              key={`ray-${i}`}
-              className="absolute w-[2px] h-[7px] bg-yellow-400 rounded"
-              style={{
-                top: 'calc(50% - 3px)', // Adjust based on ray size
-                left: 'calc(50% - 1px)', // Adjust based on ray size
-                transform: `rotate(${i * 30}deg) translate(8px, 8px)`, // Adjust translate values
-              }}
+      <div className="relative w-full h-full flex items-center justify-center">
+        {darkMode ? (
+          // Sun icon for light mode
+          <svg
+            className="w-5 h-5"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"
             />
-          ))}
-        </div>
-
-        {/* Moon */}
-        <div
-          className={`absolute inset-0 transform transition-transform duration-500
-                ${darkMode ? 'scale-100 rotate-0' : 'scale-0 -rotate-90'}`}
-          aria-hidden="true"
-        >
-          {/* Main moon circle */}
-          <div className="absolute inset-0 bg-slate-200 rounded-full" />
-
-          {/* Moon craters */}
-          <div className="absolute top-2 left-2 w-2 h-2 bg-slate-400 rounded-full opacity-75" />
-          <div className="absolute top-4 right-3 w-1.5 h-1.5 bg-slate-400 rounded-full opacity-75" />
-          <div className="absolute bottom-2 right-2 w-2.5 h-2.5 bg-slate-400 rounded-full opacity-75" />
-        </div>
-
-        {/* Stars (visible in dark mode) */}
-        <div
-          className={`absolute inset-0 transition-opacity duration-500 ${
-            darkMode ? 'opacity-100' : 'opacity-0'
-          }`}
-          aria-hidden="true"
-        >
-          {STARS.map((star) => (
-            <div
-              key={star.key}
-              className="absolute w-0.5 h-0.5 bg-white rounded-full animate-twinkle"
-              style={{
-                top: `${star.top}%`,
-                left: `${star.left}%`,
-                animationDelay: `${star.delay}ms`,
-              }}
+          </svg>
+        ) : (
+          // Moon icon for dark mode
+          <svg
+            className="w-5 h-5"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"
             />
-          ))}
-        </div>
+          </svg>
+        )}
       </div>
     </button>
   );

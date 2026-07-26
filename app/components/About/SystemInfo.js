@@ -1,13 +1,26 @@
 export default function SystemInfo({ title, details }) {
   return (
-    <details className="group border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
+    <details
+      className="group rounded-lg overflow-hidden"
+      style={{
+        border: '1px solid var(--border-subtle)',
+      }}
+    >
       <summary
-        className="dark:text-gray-300 text-gray-700 p-4 cursor-pointer flex items-center justify-between hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+        className="p-4 cursor-pointer flex items-center justify-between transition-colors"
+        style={{ color: 'var(--text-default)' }}
         aria-expanded="false"
+        onMouseEnter={(e) => {
+          e.currentTarget.style.backgroundColor = 'var(--surface-hovered)';
+        }}
+        onMouseLeave={(e) => {
+          e.currentTarget.style.backgroundColor = 'transparent';
+        }}
       >
         <span className="font-medium">{title}</span>
         <svg
           className="w-5 h-5 transform group-open:rotate-180 transition-transform duration-200"
+          style={{ color: 'var(--text-subtle)' }}
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"
@@ -21,7 +34,13 @@ export default function SystemInfo({ title, details }) {
           />
         </svg>
       </summary>
-      <div className="p-4 pt-2 border-t border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800">
+      <div
+        className="p-4 pt-2"
+        style={{
+          borderTop: '1px solid var(--border-subtle)',
+          backgroundColor: 'var(--surface-sunken)',
+        }}
+      >
         {details}
       </div>
     </details>

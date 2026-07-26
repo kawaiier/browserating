@@ -3,6 +3,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import BrowserDetailsModal from './BrowserDetailsModal';
 import Image from 'next/image';
 import Link from 'next/link';
+import { ArrowRight, TrendingDown, TrendingUp } from 'lucide-react';
 
 const BrowserCard = React.memo(
   ({ browser, getEngineColor, rank, selectedPlatform, isLoading = false }) => {
@@ -42,11 +43,11 @@ const BrowserCard = React.memo(
       const base = 'relative overflow-hidden';
       switch (rank) {
         case 1:
-          return `${base} ring-2 ring-yellow-400/70 shadow-lg shadow-yellow-400/10`;
+          return `${base}`;
         case 2:
-          return `${base} ring-2 ring-gray-300/70 shadow-lg shadow-gray-300/10`;
+          return `${base}`;
         case 3:
-          return `${base} ring-2 ring-amber-600/70 shadow-lg shadow-amber-600/10`;
+          return `${base}`;
         default:
           return base;
       }
@@ -56,15 +57,19 @@ const BrowserCard = React.memo(
       if (rank > 3) return null;
 
       const badges = {
-        1: { text: '🏆 #1', color: 'bg-yellow-400/90 text-yellow-900' },
-        2: { text: '🥈 #2', color: 'bg-gray-300/90 text-gray-800' },
-        3: { text: '🥉 #3', color: 'bg-amber-500/90 text-amber-900' },
+        1: { text: '#1', color: 'var(--color-warning)', textColor: '#000' },
+        2: { text: '#2', color: 'var(--color-neutral-400)', textColor: '#000' },
+        3: { text: '#3', color: 'var(--color-neutral-500)', textColor: '#fff' },
       };
 
       const badge = badges[rank];
       return (
         <div
-          className={`absolute top-3 right-3 px-2.5 py-0.5 rounded-full text-xs font-bold tracking-wide ${badge.color} shadow-sm z-10`}
+          className="absolute top-3 right-3 px-2 py-1 rounded-full text-xs font-bold"
+          style={{
+            backgroundColor: badge.color,
+            color: badge.textColor,
+          }}
         >
           {badge.text}
         </div>
@@ -84,37 +89,60 @@ const BrowserCard = React.memo(
     const handleCardInteraction = (e) => {
       if (e.type === 'click' || (e.type === 'keydown' && (e.key === 'Enter' || e.key === ' '))) {
         if (e.type === 'keydown') e.preventDefault();
-        cardRef.current?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
         setShowModal(true);
       }
     };
 
     const getPerformanceLevel = (score) => {
       if (score >= 40)
-        return { level: 'Excellent', color: 'text-emerald-600 dark:text-emerald-400' };
-      if (score >= 30) return { level: 'Good', color: 'text-sky-600 dark:text-sky-400' };
-      if (score >= 20) return { level: 'Fair', color: 'text-amber-600 dark:text-amber-400' };
-      return { level: 'Poor', color: 'text-rose-600 dark:text-rose-400' };
+        return { level: 'Excellent', color: 'var(--color-score-excellent)' };
+      if (score >= 30) return { level: 'Good', color: 'var(--color-score-good)' };
+      if (score >= 20) return { level: 'Fair', color: 'var(--color-score-fair)' };
+      return { level: 'Poor', color: 'var(--color-score-poor)' };
     };
 
     const performance = getPerformanceLevel(latestVersion.scores.speedometer3);
 
     if (isLoading) {
       return (
-        <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-sm overflow-hidden animate-pulse">
-          <div className="p-4 sm:p-5">
+        <div
+          className="rounded-lg overflow-hidden animate-pulse browser-card-accent"
+          style={{
+            backgroundColor: 'var(--surface-raised)',
+            boxShadow: 'var(--shadow-raised)',
+          }}
+        >
+          <div style={{ padding: 'var(--space-200)' }}>
             <div className="flex items-center mb-4 gap-3">
-              <div className="w-10 h-10 bg-gray-200 dark:bg-gray-700 rounded-xl shrink-0"></div>
+              <div
+                className="w-10 h-10 rounded-md shrink-0"
+                style={{ backgroundColor: 'var(--surface-sunken)' }}
+              ></div>
               <div className="flex-1">
-                <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-2/3 mb-2"></div>
-                <div className="h-3 bg-gray-200 dark:bg-gray-700 rounded w-1/3"></div>
+                <div
+                  className="h-4 rounded w-2/3 mb-2"
+                  style={{ backgroundColor: 'var(--surface-sunken)' }}
+                ></div>
+                <div
+                  className="h-3 rounded w-1/3"
+                  style={{ backgroundColor: 'var(--surface-sunken)' }}
+                ></div>
               </div>
             </div>
             <div className="flex gap-2 mb-4">
-              <div className="h-5 bg-gray-200 dark:bg-gray-700 rounded-full w-14"></div>
-              <div className="h-5 bg-gray-200 dark:bg-gray-700 rounded-full w-20"></div>
+              <div
+                className="h-5 rounded-full w-14"
+                style={{ backgroundColor: 'var(--surface-sunken)' }}
+              ></div>
+              <div
+                className="h-5 rounded-full w-20"
+                style={{ backgroundColor: 'var(--surface-sunken)' }}
+              ></div>
             </div>
-            <div className="h-24 bg-gray-200 dark:bg-gray-700 rounded-xl"></div>
+            <div
+              className="h-24 rounded-lg"
+              style={{ backgroundColor: 'var(--surface-sunken)' }}
+            ></div>
           </div>
         </div>
       );
@@ -125,42 +153,48 @@ const BrowserCard = React.memo(
         <div
           ref={cardRef}
           className={`
-            bg-white dark:bg-gray-800/90
-            shadow-sm hover:shadow-md
-            rounded-2xl
-            transition-all duration-300 ease-out
-            active:scale-[0.98]
-            sm:hover:scale-[1.02] sm:hover:-translate-y-0.5
+            rounded-lg
+            transition-all
             cursor-pointer
-            border border-gray-100 dark:border-gray-700/60
-            hover:border-gray-200 dark:hover:border-gray-600
+            browser-card-accent
             ${getRankStyle(rank)}
-            ${focusVisible ? 'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-gray-900' : ''}
           `}
+          style={{
+            backgroundColor: 'var(--surface-raised)',
+            boxShadow: 'var(--shadow-raised)',
+            border: '1px solid var(--border-subtle)',
+          }}
           role="button"
           aria-labelledby={`browser-${browser.name}-title`}
           aria-describedby={`browser-${browser.name}-desc`}
           onClick={handleCardInteraction}
           onKeyDown={handleCardInteraction}
           tabIndex="0"
+          onMouseEnter={(e) => {
+            e.currentTarget.style.boxShadow = 'var(--shadow-overlay)';
+            e.currentTarget.style.borderColor = 'var(--border-default)';
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.boxShadow = 'var(--shadow-raised)';
+            e.currentTarget.style.borderColor = 'var(--border-subtle)';
+          }}
         >
           {getRankBadge(rank)}
 
-          <div className="p-4 sm:p-5">
+          <div style={{ padding: 'var(--space-200)' }}>
             {/* Header */}
-            <header className="flex items-center gap-3 mb-4 mt-2">
+            <header className="flex items-center gap-3 mb-4">
               <div className="group shrink-0">
                 <div
-                  className={`w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-gray-50 dark:bg-gray-700/60 flex items-center justify-center transition-all duration-300 ${
-                    imageLoaded ? 'bg-transparent dark:bg-transparent' : ''
-                  }`}
+                  className="w-10 h-10 rounded-md flex items-center justify-center"
+                  style={{ backgroundColor: 'var(--surface-sunken)' }}
                 >
                   <Image
                     src={browser.logo}
                     alt={`${browser.name} logo`}
                     width={40}
                     height={40}
-                    className="object-contain dark:brightness-90 group-hover:scale-110 transition-transform duration-300 w-7 h-7 sm:w-8 sm:h-8"
+                    className="object-contain w-8 h-8"
                     onLoad={() => setImageLoaded(true)}
                     priority={rank <= 3}
                   />
@@ -170,16 +204,19 @@ const BrowserCard = React.memo(
               <div className="flex-1 min-w-0">
                 <h3
                   id={`browser-${browser.name}-title`}
-                  className="text-base sm:text-lg font-bold text-gray-900 dark:text-white leading-tight truncate"
+                  className="heading-small truncate"
+                  style={{ color: 'var(--text-default)' }}
                 >
                   {browser.name}
                 </h3>
-                <div className="flex items-center gap-1.5 mt-0.5">
-                  <span className={`text-xs font-semibold ${performance.color}`}>
+                <div className="flex items-center gap-2 mt-1">
+                  <span className="body-small font-medium" style={{ color: performance.color }}>
                     {performance.level}
                   </span>
-                  <span className="text-gray-300 dark:text-gray-600 text-xs">·</span>
-                  <span className="text-xs text-gray-400 dark:text-gray-500">#{rank}</span>
+                  <span style={{ color: 'var(--text-subtlest)' }}>·</span>
+                  <span className="body-small" style={{ color: 'var(--text-subtle)' }}>
+                    #{rank}
+                  </span>
                 </div>
               </div>
 
@@ -188,9 +225,18 @@ const BrowserCard = React.memo(
                   href={browser.website}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="shrink-0 flex items-center justify-center w-9 h-9 text-gray-300 dark:text-gray-600 hover:text-gray-500 dark:hover:text-gray-400 transition-colors rounded-lg"
+                  className="shrink-0 flex items-center justify-center w-8 h-8 rounded-md transition-colors"
+                  style={{ color: 'var(--text-subtlest)' }}
                   onClick={(e) => e.stopPropagation()}
                   aria-label={`Visit ${browser.name} website`}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.backgroundColor = 'var(--surface-hovered)';
+                    e.currentTarget.style.color = 'var(--text-subtle)';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.backgroundColor = 'transparent';
+                    e.currentTarget.style.color = 'var(--text-subtlest)';
+                  }}
                 >
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path
@@ -205,18 +251,34 @@ const BrowserCard = React.memo(
             </header>
 
             {/* Metadata */}
-            <div className="flex flex-wrap gap-1.5 mb-4">
-              <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 dark:bg-gray-700/80 text-gray-500 dark:text-gray-400">
+            <div className="flex flex-wrap gap-2 mb-4">
+              <span
+                className="inline-flex items-center px-2 py-0.5 rounded-full body-small font-medium"
+                style={{
+                  backgroundColor: 'var(--surface-sunken)',
+                  color: 'var(--text-subtle)',
+                }}
+              >
                 v{latestVersion.version}
               </span>
               <span
-                className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${getEngineColor(platformEngine)}`}
+                className={`inline-flex items-center px-2 py-0.5 rounded-full body-small font-medium ${getEngineColor(platformEngine)}`}
               >
                 {platformEngine}
               </span>
               {latestVersion.date && (
-                <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 dark:bg-gray-700/80 text-gray-500 dark:text-gray-400">
-                  {new Date(latestVersion.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
+                <span
+                  className="inline-flex items-center px-2 py-0.5 rounded-full body-small font-medium"
+                  style={{
+                    backgroundColor: 'var(--surface-sunken)',
+                    color: 'var(--text-subtle)',
+                  }}
+                >
+                  {new Date(latestVersion.date).toLocaleDateString('en-US', {
+                    month: 'short',
+                    day: 'numeric',
+                    year: 'numeric',
+                  })}
                 </span>
               )}
             </div>
@@ -224,28 +286,50 @@ const BrowserCard = React.memo(
             {/* Score Block */}
             <div
               id={`browser-${browser.name}-desc`}
-              className="bg-gray-50/80 dark:bg-gray-700/30 rounded-xl px-4 py-4 flex flex-col items-center gap-1.5"
+              className="rounded-lg flex flex-col items-center gap-2"
+              style={{
+                backgroundColor: 'var(--surface-sunken)',
+                padding: 'var(--space-200)',
+              }}
             >
-              <span className="text-[9px] font-semibold text-gray-400 dark:text-gray-500 uppercase tracking-[0.15em]">
+              <span
+                className="body-small font-semibold uppercase tracking-wide"
+                style={{ color: 'var(--text-subtlest)', fontSize: '10px' }}
+              >
                 Speedometer 3.1
               </span>
               <span
-                className={`text-4xl sm:text-5xl font-extrabold tabular-nums leading-none ${performance.color}`}
+                className="metric-large leading-none score-glow"
+                style={{ color: performance.color }}
               >
                 {latestVersion.scores.speedometer3.toFixed(1)}
               </span>
               {scoreDifference !== null && (
                 <span
                   aria-label={scoreChangeText}
-                  className={`inline-flex items-center gap-0.5 px-2 py-0.5 rounded-full text-[11px] font-semibold ${
-                    scoreDifference > 0
-                      ? 'bg-emerald-50 dark:bg-emerald-900/20 text-emerald-700 dark:text-emerald-400'
-                      : scoreDifference < 0
-                        ? 'bg-rose-50 dark:bg-rose-900/20 text-rose-700 dark:text-rose-400'
-                        : 'bg-gray-100 dark:bg-gray-700 text-gray-500 dark:text-gray-400'
-                  }`}
+                  className="inline-flex items-center gap-1 px-2 py-1 rounded-full body-small font-semibold"
+                  style={{
+                    backgroundColor:
+                      scoreDifference > 0
+                        ? 'var(--color-success-subtle)'
+                        : scoreDifference < 0
+                          ? 'var(--color-danger-subtle)'
+                          : 'var(--surface-sunken)',
+                    color:
+                      scoreDifference > 0
+                        ? 'var(--color-success)'
+                        : scoreDifference < 0
+                          ? 'var(--color-danger)'
+                          : 'var(--text-subtle)',
+                  }}
                 >
-                  {scoreDifference > 0 ? '↗ ' : scoreDifference < 0 ? '↘ ' : '→ '}
+                  {scoreDifference > 0 ? (
+                    <TrendingUp className="inline w-3.5 h-3.5" aria-hidden="true" />
+                  ) : scoreDifference < 0 ? (
+                    <TrendingDown className="inline w-3.5 h-3.5" aria-hidden="true" />
+                  ) : (
+                    <ArrowRight className="inline w-3.5 h-3.5" aria-hidden="true" />
+                  )}{' '}
                   {Math.abs(scoreDifference).toFixed(1)} pts
                 </span>
               )}
@@ -253,15 +337,16 @@ const BrowserCard = React.memo(
 
             {/* Footer actions */}
             <div className="mt-3 flex items-center justify-between">
-              <span className="hidden sm:block text-[10px] text-gray-300 dark:text-gray-600">
+              <span className="body-small" style={{ color: 'var(--text-subtlest)', fontSize: '10px' }}>
                 Tap for history
               </span>
               <Link
                 href={`/browsers/${browser.name.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')}`}
-                className="ml-auto text-[11px] text-purple-500 dark:text-purple-400 hover:text-purple-700 dark:hover:text-purple-300 hover:underline"
+                className="body-small font-medium hover:underline"
+                style={{ color: 'var(--text-brand)' }}
                 onClick={(e) => e.stopPropagation()}
               >
-                Full details →
+                Full details <ArrowRight className="inline w-3.5 h-3.5" aria-hidden="true" />
               </Link>
             </div>
           </div>

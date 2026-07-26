@@ -70,40 +70,60 @@ export default function QuizOption({ option, isSelected, onClick }) {
       onClick={() => onClick(option.id)}
       aria-label={`${option.label}: ${option.description}`}
       aria-pressed={isSelected}
-      className={`group relative w-full text-left px-4 py-4 sm:px-5 sm:py-5 rounded-xl border-2 transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-purple-500 focus-visible:ring-offset-2 ${
-        isSelected
-          ? 'border-purple-500 bg-purple-50 dark:bg-purple-900/20 scale-[1.02] shadow-md shadow-purple-100 dark:shadow-purple-900/20'
-          : 'border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 hover:border-purple-300 dark:hover:border-purple-700 hover:shadow-md hover:-translate-y-0.5'
-      }`}
+      className="group relative w-full text-left px-4 py-4 sm:px-5 sm:py-5 rounded-md border-2 transition-all duration-200"
+      style={{
+        borderColor: isSelected ? 'var(--color-brand)' : 'var(--border-subtle)',
+        backgroundColor: isSelected ? 'var(--color-brand-subtle)' : 'var(--surface-raised)',
+        transform: isSelected ? 'scale(1.02)' : 'scale(1)',
+      }}
+      onMouseEnter={(e) => {
+        if (!isSelected) {
+          e.currentTarget.style.borderColor = 'var(--border-default)';
+          e.currentTarget.style.transform = 'translateY(-2px)';
+          e.currentTarget.style.boxShadow = 'var(--shadow-overlay)';
+        }
+      }}
+      onMouseLeave={(e) => {
+        if (!isSelected) {
+          e.currentTarget.style.borderColor = 'var(--border-subtle)';
+          e.currentTarget.style.transform = 'scale(1)';
+          e.currentTarget.style.boxShadow = 'none';
+        }
+      }}
     >
       <div className="flex items-start gap-3">
         <span
-          className={`flex-shrink-0 w-9 h-9 rounded-lg flex items-center justify-center transition-colors duration-200 ${
-            isSelected
-              ? 'bg-purple-500 text-white'
-              : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-400 group-hover:bg-purple-100 dark:group-hover:bg-purple-900/30 group-hover:text-purple-600 dark:group-hover:text-purple-400'
-          }`}
+          className="flex-shrink-0 w-9 h-9 rounded-md flex items-center justify-center transition-colors duration-200"
+          style={{
+            backgroundColor: isSelected ? 'var(--color-brand)' : 'var(--surface-sunken)',
+            color: isSelected ? 'var(--text-inverse)' : 'var(--text-subtle)',
+          }}
         >
           <Icon name={option.icon} />
         </span>
         <div className="flex-1 min-w-0">
           <div
-            className={`font-semibold text-sm sm:text-base leading-snug ${
-              isSelected ? 'text-purple-700 dark:text-purple-300' : 'text-gray-900 dark:text-white'
-            }`}
+            className="font-semibold text-sm sm:text-base leading-snug"
+            style={{
+              color: isSelected ? 'var(--text-brand)' : 'var(--text-default)',
+            }}
           >
             {option.label}
           </div>
           {option.description && (
-            <div className="text-xs sm:text-sm text-gray-500 dark:text-gray-400 mt-0.5 leading-snug">
+            <div className="text-xs sm:text-sm mt-0.5 leading-snug" style={{ color: 'var(--text-subtle)' }}>
               {option.description}
             </div>
           )}
         </div>
         {isSelected && (
-          <span className="flex-shrink-0 w-5 h-5 bg-purple-500 rounded-full flex items-center justify-center">
+          <span
+            className="flex-shrink-0 w-5 h-5 rounded-full flex items-center justify-center"
+            style={{ backgroundColor: 'var(--color-brand)' }}
+          >
             <svg
-              className="w-3 h-3 text-white"
+              className="w-3 h-3"
+              style={{ color: 'var(--text-inverse)' }}
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
