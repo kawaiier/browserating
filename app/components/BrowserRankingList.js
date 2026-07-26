@@ -7,7 +7,7 @@ import { getBrowsers } from '../lib/getBrowsers';
 import { engineColors, getEngineColor, platformNames, platformIcons } from '../lib/constants';
 import { useLocalStorage } from '../hooks/useLocalStorage';
 
-const NEW_PLATFORMS = ['macos-arm', 'ipad', 'windows'];
+const NEW_PLATFORMS = ['macos-arm'];
 const OUTDATED_PLATFORMS = ['android', 'macos-intel'];
 
 // Skeleton Loader

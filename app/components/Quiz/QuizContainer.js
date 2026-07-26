@@ -36,21 +36,6 @@ export default function QuizContainer({ browserProfiles, questions, sharedResult
   const computingTimer = useRef(null);
 
   useEffect(() => {
-    if (sharedProfile) return;
-    try {
-      const saved = localStorage.getItem(LS_KEY);
-      if (saved) {
-        const parsed = JSON.parse(saved);
-        if (parsed && Array.isArray(parsed.topResults) && parsed.topResults.length > 0) {
-          // eslint-disable-next-line react-hooks/set-state-in-effect -- restoring saved result from localStorage on mount
-          setResults(parsed);
-          setStep(STEP_RESULTS);
-        }
-      }
-    } catch {}
-  }, [sharedProfile]);
-
-  useEffect(() => {
     return () => {
       if (computingTimer.current) clearTimeout(computingTimer.current);
     };
