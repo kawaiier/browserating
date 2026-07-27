@@ -35,21 +35,6 @@ export default function QuizContainer({ browserProfiles, questions, sharedResult
   const [computing, setComputing] = useState(false);
   const computingTimer = useRef(null);
 
-  // Restore last result from localStorage on non-shared visits
-  useEffect(() => {
-    if (sharedProfile) return;
-    try {
-      const saved = localStorage.getItem(LS_KEY);
-      if (saved) {
-        const parsed = JSON.parse(saved);
-        if (parsed && Array.isArray(parsed.topResults) && parsed.topResults.length > 0) {
-          setResults(parsed); // eslint-disable-line react-hooks/set-state-in-effect
-          setStep(STEP_RESULTS);
-        }
-      }
-    } catch {}
-  }, [sharedProfile]);
-
   useEffect(() => {
     return () => {
       if (computingTimer.current) clearTimeout(computingTimer.current);
@@ -152,15 +137,20 @@ function ComputingScreen() {
           {[0, 1, 2].map((i) => (
             <div
               key={i}
-              className="w-3 h-3 bg-purple-500 rounded-full animate-bounce"
-              style={{ animationDelay: `${i * 150}ms` }}
+              className="w-3 h-3 rounded-full animate-bounce"
+              style={{
+                backgroundColor: 'var(--color-brand)',
+                animationDelay: `${i * 150}ms`,
+              }}
             />
           ))}
         </div>
-        <p className="text-lg font-medium text-gray-700 dark:text-gray-300">
+        <p className="text-lg font-medium" style={{ color: 'var(--text-default)' }}>
           Finding your perfect browser…
         </p>
-        <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">Analyzing your preferences</p>
+        <p className="text-sm mt-1" style={{ color: 'var(--text-subtle)' }}>
+          Analyzing your preferences
+        </p>
       </div>
     </div>
   );

@@ -2,41 +2,55 @@
 
 import { useCallback, useEffect, useMemo, useState } from 'react';
 
-import BrowserBarChart from './BrowserBarChart';
 import BrowserCard from './BrowserCard';
 import { getBrowsers } from '../lib/getBrowsers';
 import { engineColors, getEngineColor, platformNames, platformIcons } from '../lib/constants';
 import { useLocalStorage } from '../hooks/useLocalStorage';
 
-const NEW_PLATFORMS = ['macos-arm', 'ipad', 'windows'];
+const NEW_PLATFORMS = ['macos-arm'];
 const OUTDATED_PLATFORMS = ['android', 'macos-intel'];
 
-// Enhanced Skeleton Loader
+// Skeleton Loader
 const SkeletonLoader = ({ index }) => (
   <div
-    className="animate-pulse bg-white dark:bg-gray-800 rounded-xl shadow-lg border border-gray-200 dark:border-gray-700 overflow-hidden"
-    style={{ animationDelay: `${index * 100}ms` }}
+    className="animate-pulse rounded-lg overflow-hidden"
+    style={{
+      backgroundColor: 'var(--surface-raised)',
+      boxShadow: 'var(--shadow-raised)',
+      animationDelay: `${index * 100}ms`,
+    }}
   >
-    <div className="p-6">
-      <div className="flex items-center mb-6">
-        <div className="w-14 h-14 bg-gray-200 dark:bg-gray-700 rounded-xl mr-4"></div>
+    <div style={{ padding: 'var(--space-200)' }}>
+      <div className="flex items-center mb-4 gap-3">
+        <div
+          className="w-10 h-10 rounded-md shrink-0"
+          style={{ backgroundColor: 'var(--surface-sunken)' }}
+        ></div>
         <div className="flex-1">
-          <div className="h-6 bg-gray-200 dark:bg-gray-700 rounded mb-2 w-3/4"></div>
-          <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-1/2"></div>
+          <div
+            className="h-4 rounded mb-2 w-3/4"
+            style={{ backgroundColor: 'var(--surface-sunken)' }}
+          ></div>
+          <div
+            className="h-3 rounded w-1/2"
+            style={{ backgroundColor: 'var(--surface-sunken)' }}
+          ></div>
         </div>
       </div>
-      <div className="flex gap-2 mb-6">
-        <div className="h-8 bg-gray-200 dark:bg-gray-700 rounded-full w-20"></div>
-        <div className="h-8 bg-gray-200 dark:bg-gray-700 rounded-full w-16"></div>
+      <div className="flex gap-2 mb-4">
+        <div
+          className="h-5 rounded-full w-14"
+          style={{ backgroundColor: 'var(--surface-sunken)' }}
+        ></div>
+        <div
+          className="h-5 rounded-full w-20"
+          style={{ backgroundColor: 'var(--surface-sunken)' }}
+        ></div>
       </div>
-      <div className="grid grid-cols-3 gap-2 sm:gap-4">
-        {[1, 2, 3].map((i) => (
-          <div key={i} className="bg-gray-50 dark:bg-gray-700/50 rounded-lg p-2 sm:p-4">
-            <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded mb-2"></div>
-            <div className="h-8 bg-gray-200 dark:bg-gray-700 rounded"></div>
-          </div>
-        ))}
-      </div>
+      <div
+        className="h-24 rounded-lg"
+        style={{ backgroundColor: 'var(--surface-sunken)' }}
+      ></div>
     </div>
   </div>
 );
@@ -44,8 +58,11 @@ const SkeletonLoader = ({ index }) => (
 // Search Component
 const SearchBar = ({ searchTerm, onSearchChange, totalBrowsers, filteredCount }) => (
   <div className="relative mb-6">
-    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-      <svg className="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <div
+      className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"
+      style={{ color: 'var(--text-subtlest)' }}
+    >
+      <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path
           strokeLinecap="round"
           strokeLinejoin="round"
@@ -59,14 +76,28 @@ const SearchBar = ({ searchTerm, onSearchChange, totalBrowsers, filteredCount })
       placeholder="Search browsers..."
       value={searchTerm}
       onChange={(e) => onSearchChange(e.target.value)}
-      className="block w-full pl-10 pr-3 py-3 border border-gray-300 dark:border-gray-600 rounded-xl leading-5 bg-white dark:bg-gray-800 placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:placeholder-gray-400 focus:ring-2 focus:ring-purple-500 focus:border-transparent text-gray-900 dark:text-white transition-all duration-200"
+      className="block w-full pl-10 pr-3 py-2 rounded-md body-default transition-all"
+      style={{
+        backgroundColor: 'var(--surface-sunken)',
+        border: '1px solid var(--border-default)',
+        color: 'var(--text-default)',
+      }}
       aria-label="Search browsers"
+      onFocus={(e) => {
+        e.currentTarget.style.borderColor = 'var(--border-focused)';
+        e.currentTarget.style.boxShadow = '0 0 0 1px var(--border-focused)';
+      }}
+      onBlur={(e) => {
+        e.currentTarget.style.borderColor = 'var(--border-default)';
+        e.currentTarget.style.boxShadow = 'none';
+      }}
     />
     {searchTerm && (
-      <div className="absolute inset-y-0 right-0 pr-3 flex items-center">
-        <span className="text-sm text-gray-500 dark:text-gray-400">
-          {filteredCount} of {totalBrowsers}
-        </span>
+      <div
+        className="absolute inset-y-0 right-0 pr-3 flex items-center body-small"
+        style={{ color: 'var(--text-subtle)' }}
+      >
+        {filteredCount} of {totalBrowsers}
       </div>
     )}
   </div>
@@ -97,30 +128,37 @@ const StatsBar = ({ browsers, selectedPlatform }) => {
   if (!stats) return null;
 
   return (
-    <div className="mb-6 p-4 bg-gradient-to-r from-purple-50 to-blue-50 dark:from-purple-900/20 dark:to-blue-900/20 rounded-xl border border-purple-200 dark:border-purple-700/50">
-      <div className="flex flex-wrap items-center justify-between gap-4 text-sm">
-        <div className="flex items-center gap-6">
-          <div className="text-gray-700 dark:text-gray-300">
-            <span className="font-semibold text-purple-700 dark:text-purple-300">
-              {stats.total}
-            </span>{' '}
-            browsers tested
-          </div>
-          <div className="text-gray-700 dark:text-gray-300">
-            <span className="font-semibold text-blue-700 dark:text-blue-300">{stats.engines}</span>{' '}
-            engines
-          </div>
+    <div
+      className="mb-6 rounded-lg flex flex-wrap items-center justify-between gap-4"
+      style={{
+        backgroundColor: 'var(--color-brand-subtle)',
+        border: '1px solid var(--color-brand-subtle)',
+        padding: 'var(--space-150) var(--space-200)',
+      }}
+    >
+      <div className="flex items-center gap-6">
+        <div className="body-default" style={{ color: 'var(--text-default)' }}>
+          <span className="font-semibold" style={{ color: 'var(--text-brand)' }}>
+            {stats.total}
+          </span>{' '}
+          browsers tested
         </div>
-        <div className="flex items-center gap-6">
-          <div className="text-gray-700 dark:text-gray-300">
-            Avg: <span className="font-semibold">{stats.avgScore}</span>
-          </div>
-          <div className="text-gray-700 dark:text-gray-300">
-            Range: <span className="font-semibold">{stats.minScore}</span> -{' '}
-            <span className="font-semibold text-green-700 dark:text-green-300">
-              {stats.maxScore}
-            </span>
-          </div>
+        <div className="body-default" style={{ color: 'var(--text-default)' }}>
+          <span className="font-semibold" style={{ color: 'var(--text-brand)' }}>
+            {stats.engines}
+          </span>{' '}
+          engines
+        </div>
+      </div>
+      <div className="flex items-center gap-6">
+        <div className="body-default" style={{ color: 'var(--text-default)' }}>
+          Avg: <span className="font-semibold">{stats.avgScore}</span>
+        </div>
+        <div className="body-default" style={{ color: 'var(--text-default)' }}>
+          Range: <span className="font-semibold">{stats.minScore}</span> -{' '}
+          <span className="font-semibold" style={{ color: 'var(--color-success)' }}>
+            {stats.maxScore}
+          </span>
         </div>
       </div>
     </div>
@@ -239,11 +277,14 @@ export default function BrowserRankingList({ initialBrowsers = [] }) {
 
   const renderPlatformButtons = () => (
     <div className="mb-6">
-      <h3 className="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-3 uppercase tracking-wide">
+      <h3
+        className="heading-xsmall mb-3 uppercase tracking-wide"
+        style={{ color: 'var(--text-subtle)' }}
+      >
         Select Platform
       </h3>
       <div
-        className="flex flex-wrap gap-x-3 gap-y-5"
+        className="flex flex-wrap gap-2"
         role="radiogroup"
         aria-label="Select platform"
       >
@@ -251,23 +292,42 @@ export default function BrowserRankingList({ initialBrowsers = [] }) {
           <button
             key={platform}
             onClick={() => handlePlatformChange(platform)}
-            className={`group relative px-4 py-3 rounded-xl text-sm font-medium transition-all duration-200 focus:outline-none focus:ring-4 focus:ring-purple-500/50
-            ${
-              selectedPlatform === platform
-                ? 'bg-purple-100 dark:bg-purple-900/30 text-purple-800 dark:text-purple-200 ring-2 ring-purple-500 shadow-lg scale-105'
-                : 'bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600 hover:scale-102'
-            }`}
+            className="group relative px-4 py-2 rounded-md body-default font-medium transition-all"
+            style={{
+              backgroundColor:
+                selectedPlatform === platform ? 'var(--color-brand)' : 'var(--surface-sunken)',
+              color:
+                selectedPlatform === platform ? 'var(--text-inverse)' : 'var(--text-default)',
+              border: `1px solid ${selectedPlatform === platform ? 'var(--color-brand)' : 'var(--border-subtle)'}`,
+            }}
             role="radio"
             aria-checked={selectedPlatform === platform}
+            onMouseEnter={(e) => {
+              if (selectedPlatform !== platform) {
+                e.currentTarget.style.backgroundColor = 'var(--surface-hovered)';
+              }
+            }}
+            onMouseLeave={(e) => {
+              if (selectedPlatform !== platform) {
+                e.currentTarget.style.backgroundColor = 'var(--surface-sunken)';
+              }
+            }}
           >
             <span className="flex items-center gap-2">
-              <span className="text-lg">{platformIcons[platform]}</span>
+              {(() => {
+                const PlatformIcon = platformIcons[platform];
+                return PlatformIcon ? <PlatformIcon className="w-4 h-4" aria-hidden="true" /> : null;
+              })()}
               {platformNames[platform]}
             </span>
 
             {NEW_PLATFORMS.includes(platform) && (
               <span
-                className="absolute -top-2 -right-2 bg-gradient-to-r from-purple-600 to-blue-600 text-white text-xs px-2 py-1 rounded-full font-bold animate-pulse shadow-lg"
+                className="absolute -top-2 -right-2 text-xs px-1.5 py-0.5 rounded-full font-bold"
+                style={{
+                  backgroundColor: 'var(--color-success)',
+                  color: 'var(--text-inverse)',
+                }}
                 aria-label="Recently updated"
               >
                 NEW
@@ -276,7 +336,11 @@ export default function BrowserRankingList({ initialBrowsers = [] }) {
 
             {OUTDATED_PLATFORMS.includes(platform) && (
               <span
-                className="absolute -top-2 -right-2 bg-gray-400 dark:bg-gray-600 text-gray-800 dark:text-gray-200 text-xs px-2 py-1 rounded-full font-bold shadow-lg"
+                className="absolute -top-2 -right-2 text-xs px-1.5 py-0.5 rounded-full font-bold"
+                style={{
+                  backgroundColor: 'var(--color-warning)',
+                  color: '#000',
+                }}
                 aria-label="Potentially outdated data"
               >
                 OUTDATED
@@ -290,24 +354,37 @@ export default function BrowserRankingList({ initialBrowsers = [] }) {
 
   const renderEngineButtons = () => (
     <div className="mb-6">
-      <h3 className="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-3 uppercase tracking-wide">
+      <h3
+        className="heading-xsmall mb-3 uppercase tracking-wide"
+        style={{ color: 'var(--text-subtle)' }}
+      >
         Filter by Engine
       </h3>
-      <div className="flex flex-wrap gap-3" role="radiogroup" aria-label="Filter by engine">
+      <div className="flex flex-wrap gap-2" role="radiogroup" aria-label="Filter by engine">
         {engines.map((engine) => (
           <button
             key={engine}
             onClick={() => handleEngineFilter(engine)}
-            className={`px-4 py-2 rounded-xl text-sm font-medium transition-all duration-200 focus:outline-none focus:ring-4 focus:ring-purple-500/50 ${getEngineColor(
-              engine
-            )}
-            ${
-              selectedEngine === engine
-                ? 'ring-2 ring-offset-2 ring-purple-500 shadow-lg scale-105'
-                : 'hover:scale-102'
-            }`}
+            className="px-3 py-1.5 rounded-md body-small font-medium transition-all"
+            style={{
+              backgroundColor:
+                selectedEngine === engine ? 'var(--color-brand)' : 'var(--surface-sunken)',
+              color:
+                selectedEngine === engine ? 'var(--text-inverse)' : 'var(--text-default)',
+              border: `1px solid ${selectedEngine === engine ? 'var(--color-brand)' : 'var(--border-subtle)'}`,
+            }}
             role="radio"
             aria-checked={selectedEngine === engine}
+            onMouseEnter={(e) => {
+              if (selectedEngine !== engine) {
+                e.currentTarget.style.backgroundColor = 'var(--surface-hovered)';
+              }
+            }}
+            onMouseLeave={(e) => {
+              if (selectedEngine !== engine) {
+                e.currentTarget.style.backgroundColor = 'var(--surface-sunken)';
+              }
+            }}
           >
             {engine === 'All' ? 'All Engines' : `${engine} Engine`}
           </button>
@@ -317,42 +394,45 @@ export default function BrowserRankingList({ initialBrowsers = [] }) {
   );
 
   const renderViewModeToggle = () => (
-    <div className="flex items-center gap-2 mb-6">
-      <span className="text-sm font-medium text-gray-700 dark:text-gray-300">View:</span>
-      <div className="flex bg-gray-100 dark:bg-gray-700 rounded-lg p-1">
+    <div className="flex items-center gap-2">
+      <span className="body-small font-medium" style={{ color: 'var(--text-subtle)' }}>
+        View:
+      </span>
+      <div
+        className="flex rounded-md p-0.5"
+        style={{ backgroundColor: 'var(--surface-sunken)' }}
+      >
         <button
           onClick={() => setViewMode('grid')}
-          className={`px-3 py-1.5 rounded-md text-sm font-medium transition-all duration-200 ${
-            viewMode === 'grid'
-              ? 'bg-white dark:bg-gray-600 text-gray-900 dark:text-white shadow-sm'
-              : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white'
-          }`}
+          className="px-3 py-1 rounded-sm body-small font-medium transition-all flex items-center gap-1.5"
+          style={{
+            backgroundColor: viewMode === 'grid' ? 'var(--surface-raised)' : 'transparent',
+            color: viewMode === 'grid' ? 'var(--text-default)' : 'var(--text-subtle)',
+            boxShadow: viewMode === 'grid' ? 'var(--shadow-raised)' : 'none',
+          }}
         >
-          <span className="flex items-center gap-2">
-            <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-              <path d="M5 3a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2V5a2 2 0 00-2-2H5zM5 11a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2v-2a2 2 0 00-2-2H5zM11 5a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V5zM11 13a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
-            </svg>
-            Grid
-          </span>
+          <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20">
+            <path d="M5 3a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2V5a2 2 0 00-2-2H5zM5 11a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2v-2a2 2 0 00-2-2H5zM11 5a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V5zM11 13a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
+          </svg>
+          Grid
         </button>
         <button
           onClick={() => setViewMode('list')}
-          className={`px-3 py-1.5 rounded-md text-sm font-medium transition-all duration-200 ${
-            viewMode === 'list'
-              ? 'bg-white dark:bg-gray-600 text-gray-900 dark:text-white shadow-sm'
-              : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white'
-          }`}
+          className="px-3 py-1 rounded-sm body-small font-medium transition-all flex items-center gap-1.5"
+          style={{
+            backgroundColor: viewMode === 'list' ? 'var(--surface-raised)' : 'transparent',
+            color: viewMode === 'list' ? 'var(--text-default)' : 'var(--text-subtle)',
+            boxShadow: viewMode === 'list' ? 'var(--shadow-raised)' : 'none',
+          }}
         >
-          <span className="flex items-center gap-2">
-            <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-              <path
-                fillRule="evenodd"
-                d="M3 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
-                clipRule="evenodd"
-              />
-            </svg>
-            List
-          </span>
+          <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20">
+            <path
+              fillRule="evenodd"
+              d="M3 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
+              clipRule="evenodd"
+            />
+          </svg>
+          List
         </button>
       </div>
     </div>
@@ -360,19 +440,25 @@ export default function BrowserRankingList({ initialBrowsers = [] }) {
 
   if (isLoading) {
     return (
-      <section className="p-6 lg:px-10 max-w-7xl mx-auto" aria-label="Browser Rankings">
+      <section
+        className="max-w-7xl mx-auto"
+        style={{ padding: 'var(--space-300)' }}
+        aria-label="Browser Rankings"
+      >
         <div className="mb-8">
-          <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
-            Browser Rankings
+          <h2 className="heading-large mb-2" style={{ color: 'var(--text-default)' }}>
+            Rankings by Platform
           </h2>
-          <p className="text-gray-600 dark:text-gray-400">Loading performance data...</p>
+          <p className="body-default" style={{ color: 'var(--text-subtle)' }}>
+            Loading performance data...
+          </p>
         </div>
 
         {renderPlatformButtons()}
         {renderEngineButtons()}
 
         <div
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"
           aria-live="polite"
           aria-busy="true"
         >
@@ -389,11 +475,19 @@ export default function BrowserRankingList({ initialBrowsers = [] }) {
 
   if (error) {
     return (
-      <section className="p-6 lg:px-10 max-w-7xl mx-auto" aria-label="Error Loading Data">
-        <div className="text-center py-12">
-          <div className="w-16 h-16 mx-auto mb-4 bg-red-100 dark:bg-red-900/30 rounded-full flex items-center justify-center">
+      <section
+        className="max-w-7xl mx-auto"
+        style={{ padding: 'var(--space-300)' }}
+        aria-label="Error Loading Data"
+      >
+        <div className="text-center" style={{ padding: 'var(--space-600) 0' }}>
+          <div
+            className="w-12 h-12 mx-auto mb-4 rounded-full flex items-center justify-center"
+            style={{ backgroundColor: 'var(--color-danger-subtle)' }}
+          >
             <svg
-              className="w-8 h-8 text-red-600 dark:text-red-400"
+              className="w-6 h-6"
+              style={{ color: 'var(--color-danger)' }}
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -406,16 +500,26 @@ export default function BrowserRankingList({ initialBrowsers = [] }) {
               />
             </svg>
           </div>
-          <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
+          <h2 className="heading-medium mb-2" style={{ color: 'var(--text-default)' }}>
             Unable to Load Data
           </h2>
-          <p className="text-red-600 dark:text-red-400 mb-6" role="alert">
+          <p className="body-default mb-6" style={{ color: 'var(--color-danger)' }} role="alert">
             {error}
           </p>
           <button
             onClick={handleRetry}
             disabled={isLoading}
-            className="px-6 py-3 bg-purple-600 hover:bg-purple-700 disabled:bg-purple-400 text-white rounded-xl font-medium transition-colors focus:outline-none focus:ring-4 focus:ring-purple-500/50"
+            className="px-4 py-2 rounded-md body-default font-medium transition-colors"
+            style={{
+              backgroundColor: 'var(--color-brand)',
+              color: 'var(--text-inverse)',
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.backgroundColor = 'var(--color-brand-bold)';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.backgroundColor = 'var(--color-brand)';
+            }}
           >
             {isLoading ? 'Retrying...' : `Retry ${retryCount > 0 ? `(${retryCount})` : ''}`}
           </button>
@@ -425,12 +529,17 @@ export default function BrowserRankingList({ initialBrowsers = [] }) {
   }
 
   return (
-    <section className="p-6 lg:px-10 max-w-7xl mx-auto" aria-label="Browser Rankings" id="rankings">
+    <section
+      className="max-w-7xl mx-auto"
+      style={{ padding: 'var(--space-300)' }}
+      aria-label="Browser Rankings"
+      id="rankings"
+    >
       <div className="mb-8">
-        <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
-          Browser Performance Rankings
+        <h2 className="heading-large mb-2" style={{ color: 'var(--text-default)' }}>
+          Rankings by Platform
         </h2>
-        <p className="text-gray-600 dark:text-gray-400">
+        <p className="body-default" style={{ color: 'var(--text-subtle)' }}>
           Compare browser performance across different platforms using Speedometer 3.1 benchmark
         </p>
       </div>
@@ -447,8 +556,11 @@ export default function BrowserRankingList({ initialBrowsers = [] }) {
 
       <StatsBar browsers={sortedBrowsers} selectedPlatform={selectedPlatform} />
 
-      <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2 mb-6">
-        <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
+      <div
+        className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2 mb-6"
+        style={{ paddingBottom: 'var(--space-150)', borderBottom: '1px solid var(--border-subtle)' }}
+      >
+        <h3 className="heading-small" style={{ color: 'var(--text-default)' }}>
           {filteredAndSearchedBrowsers.length === 0
             ? 'No browsers found'
             : `${filteredAndSearchedBrowsers.length} ${
@@ -461,15 +573,19 @@ export default function BrowserRankingList({ initialBrowsers = [] }) {
       {/* Browser Cards */}
       <div
         className={`${
-          viewMode === 'grid' ? 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6' : 'space-y-4'
+          viewMode === 'grid' ? 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4' : 'space-y-3'
         } mb-12`}
         aria-live="polite"
       >
         {filteredAndSearchedBrowsers.length === 0 ? (
-          <div className="col-span-full text-center py-12">
-            <div className="w-16 h-16 mx-auto mb-4 bg-gray-100 dark:bg-gray-700 rounded-full flex items-center justify-center">
+          <div className="col-span-full text-center" style={{ padding: 'var(--space-600) 0' }}>
+            <div
+              className="w-12 h-12 mx-auto mb-4 rounded-full flex items-center justify-center"
+              style={{ backgroundColor: 'var(--surface-sunken)' }}
+            >
               <svg
-                className="w-8 h-8 text-gray-400"
+                className="w-6 h-6"
+                style={{ color: 'var(--text-subtlest)' }}
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -482,10 +598,10 @@ export default function BrowserRankingList({ initialBrowsers = [] }) {
                 />
               </svg>
             </div>
-            <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
+            <h3 className="heading-small mb-2" style={{ color: 'var(--text-default)' }}>
               No browsers found
             </h3>
-            <p className="text-gray-600 dark:text-gray-400 mb-4">
+            <p className="body-default mb-4" style={{ color: 'var(--text-subtle)' }}>
               {searchTerm
                 ? `No browsers match "${searchTerm}" with the selected filters.`
                 : 'No browsers match the selected filters.'}
@@ -496,7 +612,8 @@ export default function BrowserRankingList({ initialBrowsers = [] }) {
                   setSearchTerm('');
                   setSelectedEngine('All');
                 }}
-                className="px-4 py-2 text-purple-600 hover:text-purple-700 dark:text-purple-400 dark:hover:text-purple-300 font-medium"
+                className="body-default font-medium"
+                style={{ color: 'var(--text-brand)' }}
               >
                 Clear filters
               </button>
@@ -515,17 +632,6 @@ export default function BrowserRankingList({ initialBrowsers = [] }) {
           ))
         )}
       </div>
-
-      {/* Chart Section */}
-      {filteredAndSearchedBrowsers.length > 0 && (
-        <div className="mt-12">
-          <BrowserBarChart
-            browsers={filteredAndSearchedBrowsers}
-            platform={selectedPlatform}
-            getEngineColor={getEngineColor}
-          />
-        </div>
-      )}
     </section>
   );
 }

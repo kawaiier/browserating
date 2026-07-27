@@ -389,5 +389,11 @@
     "logo": "/images/browser-logos/ungoogled-chromium.png",
     "website": "https://github.com/ungoogled-software/ungoogled-chromium",
     "description": "Ungoogled Chromium is a lightweight Chromium fork that removes all Google-specific features, telemetry, and web service dependencies. It provides a privacy-focused browsing experience without Google tracking, while maintaining compatibility with Chrome extensions and the Chromium ecosystem. Available for Windows, macOS, and Linux, it is aimed at users who want Chromium's performance without any Google integration."
+  },
+  {
+    "name": "Aside",
+    "logo": "/images/browser-logos/aside.jpg",
+    "website": "https://aside.com/",
+    "description": "Aside is an AI-powered browser built by Aside Computer Inc. (backed by Y Combinator) that centers on an autonomous agent capable of completing real tasks across a user’s logged-in websites — including messages, payments, internal tools, and dashboards. Rather than relying on integrations, the agent operates websites and accounts directly like a human would, and it ranks first on browser-agent benchmarks such as Online-Mind2Web, BU-Bench-V1, and Odyssey. Aside emphasizes privacy and control: tasks, memory, and data stay local on the device, credentials are autofilled without being exposed to the AI, and sensitive actions like payments and posts require human confirmation. Users can bring their own ChatGPT, Claude, or API subscription. Currently available for macOS."
   }
 ]

@@ -66,7 +66,14 @@ export async function generateMetadata({ searchParams }) {
       title: `Your browser match: ${profile.name}`,
       description: `I matched with ${profile.name} on the BrowseRating browser quiz. Find yours at browserating.com/quiz`,
       url: `${BASE_URL}/quiz?r=${r}`,
-      images: [{ url: ogImageUrl, width: 1200, height: 630, alt: `Your browser match: ${profile.name}` }],
+      images: [
+        {
+          url: ogImageUrl,
+          width: 1200,
+          height: 630,
+          alt: `Your browser match: ${profile.name}`,
+        },
+      ],
     },
     twitter: {
       card: 'summary_large_image',
@@ -107,7 +114,10 @@ export default async function QuizPage({ searchParams }) {
   return (
     <ErrorBoundary>
       <DarkModeProvider>
-        <div className="min-h-screen bg-white dark:bg-gray-900 transition-colors duration-200 flex flex-col">
+        <div
+          className="min-h-screen transition-colors duration-200 flex flex-col"
+          style={{ backgroundColor: 'var(--surface-default)' }}
+        >
           <QuizHeader />
           <main className="flex-1 pt-14">
             <QuizContainer

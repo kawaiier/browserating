@@ -43,11 +43,14 @@ export default function QuizQuestion({
       style={{ opacity: 1, transform: 'translateX(0)' }}
     >
       <div className="w-full">
-        <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-2 text-center">
+        <h2
+          className="text-xl sm:text-2xl md:text-3xl font-bold mb-2 text-center"
+          style={{ color: 'var(--text-default)' }}
+        >
           {question.question}
         </h2>
         {question.subtitle && (
-          <p className="text-sm text-gray-500 dark:text-gray-400 text-center mb-6">
+          <p className="text-sm text-center mb-6" style={{ color: 'var(--text-subtle)' }}>
             {question.subtitle}
           </p>
         )}
@@ -81,7 +84,14 @@ export default function QuizQuestion({
           <div className="mt-6 flex justify-center">
             <button
               onClick={onBack}
-              className="text-sm text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 transition-colors duration-200 flex items-center gap-1 focus:outline-none focus-visible:ring-2 focus-visible:ring-purple-500 rounded"
+              className="text-sm transition-colors duration-200 flex items-center gap-1 rounded"
+              style={{ color: 'var(--text-subtle)' }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.color = 'var(--text-default)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.color = 'var(--text-subtle)';
+              }}
             >
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path

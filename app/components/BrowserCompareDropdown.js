@@ -17,13 +17,21 @@ export default function BrowserCompareDropdown({ currentSlug, currentName, brows
 
   return (
     <section className="mb-8">
-      <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
+      <h2 className="text-2xl font-bold mb-4" style={{ color: 'var(--text-default)' }}>
         Compare {currentName} With Another Browser
       </h2>
-      <div className="bg-white dark:bg-gray-800 rounded-lg p-4 shadow border border-gray-200 dark:border-gray-700">
+      <div
+        className="rounded-lg p-4"
+        style={{
+          backgroundColor: 'var(--surface-raised)',
+          border: '1px solid var(--border-subtle)',
+          boxShadow: 'var(--shadow-raised)',
+        }}
+      >
         <label
           htmlFor="compare-select"
-          className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
+          className="block text-sm font-medium mb-2"
+          style={{ color: 'var(--text-default)' }}
         >
           Select a browser to compare against:
         </label>
@@ -31,7 +39,12 @@ export default function BrowserCompareDropdown({ currentSlug, currentName, brows
           id="compare-select"
           value={selected}
           onChange={handleChange}
-          className="w-full rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+          className="w-full rounded-md px-3 py-2 text-sm"
+          style={{
+            backgroundColor: 'var(--surface-sunken)',
+            border: '1px solid var(--border-default)',
+            color: 'var(--text-default)',
+          }}
         >
           <option value="" disabled>
             Choose a browser...

@@ -11,7 +11,8 @@ export default function QuizShareButtons({ browserId, browserName }) {
   const shareUrl = `${BASE_URL}/quiz?r=${browserId}`;
 
   useEffect(() => {
-    setHasNativeShare(!!navigator.share); // eslint-disable-line react-hooks/set-state-in-effect
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- detecting Web Share API support on mount
+    setHasNativeShare(!!navigator.share);
   }, []);
 
   const handleCopy = async () => {
@@ -53,19 +54,40 @@ export default function QuizShareButtons({ browserId, browserName }) {
   };
 
   return (
-    <div className="bg-gray-50 dark:bg-gray-800/50 rounded-2xl p-4 sm:p-5 border border-gray-200 dark:border-gray-700">
-      <p className="text-sm font-semibold text-gray-600 dark:text-gray-400 text-center mb-4 uppercase tracking-wider">
+    <div
+      className="rounded-lg p-4 sm:p-5"
+      style={{
+        backgroundColor: 'var(--surface-sunken)',
+        border: '1px solid var(--border-subtle)',
+      }}
+    >
+      <p
+        className="text-sm font-semibold text-center mb-4 uppercase tracking-wider"
+        style={{ color: 'var(--text-subtle)' }}
+      >
         Share your result
       </p>
       <div className="flex flex-wrap items-center justify-center gap-3">
         <button
           onClick={handleCopy}
-          className="inline-flex items-center gap-2 bg-white dark:bg-gray-700 border border-gray-200 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-300 font-medium px-4 py-2 rounded-xl transition-all duration-200 text-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-purple-500"
+          className="inline-flex items-center gap-2 font-medium px-4 py-2 rounded-md transition-all duration-200 text-sm"
+          style={{
+            backgroundColor: 'var(--surface-raised)',
+            border: '1px solid var(--border-subtle)',
+            color: 'var(--text-default)',
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.backgroundColor = 'var(--surface-hovered)';
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.backgroundColor = 'var(--surface-raised)';
+          }}
         >
           {copied ? (
             <>
               <svg
-                className="w-4 h-4 text-green-500"
+                className="w-4 h-4"
+                style={{ color: 'var(--color-success)' }}
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -96,7 +118,17 @@ export default function QuizShareButtons({ browserId, browserName }) {
 
         <button
           onClick={handleTwitter}
-          className="inline-flex items-center gap-2 bg-black hover:bg-gray-800 text-white font-medium px-4 py-2 rounded-xl transition-all duration-200 text-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-purple-500"
+          className="inline-flex items-center gap-2 font-medium px-4 py-2 rounded-md transition-all duration-200 text-sm"
+          style={{
+            backgroundColor: 'var(--neutral-900)',
+            color: 'var(--text-inverse)',
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.backgroundColor = 'var(--neutral-800)';
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.backgroundColor = 'var(--neutral-900)';
+          }}
         >
           <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
             <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.253 5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
@@ -107,7 +139,18 @@ export default function QuizShareButtons({ browserId, browserName }) {
         {hasNativeShare && (
           <button
             onClick={handleNativeShare}
-            className="inline-flex items-center gap-2 bg-white dark:bg-gray-700 border border-gray-200 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-300 font-medium px-4 py-2 rounded-xl transition-all duration-200 text-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-purple-500"
+            className="inline-flex items-center gap-2 font-medium px-4 py-2 rounded-md transition-all duration-200 text-sm"
+            style={{
+              backgroundColor: 'var(--surface-raised)',
+              border: '1px solid var(--border-subtle)',
+              color: 'var(--text-default)',
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.backgroundColor = 'var(--surface-hovered)';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.backgroundColor = 'var(--surface-raised)';
+            }}
           >
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path

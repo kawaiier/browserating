@@ -101,6 +101,7 @@ export async function GET(request) {
               flexShrink: 0,
             }}
           >
+            {/* eslint-disable-next-line @next/next/no-img-element -- next/image is unsupported inside Satori/ImageResponse rendering */}
             <img
               src={logoDataUrl}
               width={200}

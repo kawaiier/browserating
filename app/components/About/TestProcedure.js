@@ -4,7 +4,8 @@ export default function TestProcedure() {
       <div className="flex items-start">
         <div className="flex-shrink-0 mt-1">
           <svg
-            className="h-5 w-5 text-purple-600 dark:text-purple-400"
+            className="h-5 w-5"
+            style={{ color: 'var(--color-brand)' }}
             fill="currentColor"
             viewBox="0 0 20 20"
           >
@@ -15,19 +16,19 @@ export default function TestProcedure() {
             />
           </svg>
         </div>
-        <p className="ml-3 text-gray-700 dark:text-gray-300 leading-relaxed">
-          For Speedometer benchmark, for each browser{" "}
-          <span className="font-medium text-[#7853E0] dark:text-[#9B7BE8]">
+        <p className="ml-3 leading-relaxed" style={{ color: 'var(--text-subtle)' }}>
+          For Speedometer benchmark, for each browser{' '}
+          <span className="font-medium" style={{ color: 'var(--text-brand)' }}>
             five tests were conducted
           </span>
-          . The{" "}
-          <span className="font-medium text-[#7853E0] dark:text-[#9B7BE8]">
+          . The{' '}
+          <span className="font-medium" style={{ color: 'var(--text-brand)' }}>
             best and worst results were eliminated
           </span>
-          , and the{" "}
-          <span className="font-medium text-[#7853E0] dark:text-[#9B7BE8]">
+          , and the{' '}
+          <span className="font-medium" style={{ color: 'var(--text-brand)' }}>
             average of the remaining three tests was calculated
-          </span>{" "}
+          </span>{' '}
           to determine the final result.
         </p>
       </div>
@@ -35,7 +36,8 @@ export default function TestProcedure() {
       <div className="flex items-start">
         <div className="flex-shrink-0 mt-1">
           <svg
-            className="h-5 w-5 text-purple-600 dark:text-purple-400"
+            className="h-5 w-5"
+            style={{ color: 'var(--color-brand)' }}
             fill="currentColor"
             viewBox="0 0 20 20"
           >
@@ -46,11 +48,11 @@ export default function TestProcedure() {
             />
           </svg>
         </div>
-        <p className="ml-3 text-gray-700 dark:text-gray-300 leading-relaxed">
-          For RAM usage test,{" "}
-          <span className="font-medium text-[#7853E0] dark:text-[#9B7BE8]">
+        <p className="ml-3 leading-relaxed" style={{ color: 'var(--text-subtle)' }}>
+          For RAM usage test,{' '}
+          <span className="font-medium" style={{ color: 'var(--text-brand)' }}>
             the cumulative memory consumption was measured
-          </span>{" "}
+          </span>{' '}
           after sequentially loading seven diverse websites: IGN, ESPN, Figma,
           Britannica, Wired, Bloomberg, and Reddit&apos;s popular page.
           Measurements were taken using Activity Monitor, filtered by each
@@ -61,7 +63,8 @@ export default function TestProcedure() {
       <div className="flex items-start">
         <div className="flex-shrink-0 mt-1">
           <svg
-            className="h-5 w-5 text-purple-600 dark:text-purple-400"
+            className="h-5 w-5"
+            style={{ color: 'var(--color-brand)' }}
             fill="currentColor"
             viewBox="0 0 20 20"
           >
@@ -72,17 +75,18 @@ export default function TestProcedure() {
             />
           </svg>
         </div>
-        <p className="ml-3 text-gray-700 dark:text-gray-300 leading-relaxed">
-          For adblock test,{" "}
+        <p className="ml-3 leading-relaxed" style={{ color: 'var(--text-subtle)' }}>
+          For adblock test,{' '}
           <a
             href="https://adblock-tester.com/"
             target="_blank"
             rel="noopener noreferrer"
-            className="font-medium text-[#7853E0] dark:text-[#9B7BE8] hover:underline focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 rounded"
+            className="font-medium hover:underline"
+            style={{ color: 'var(--text-brand)' }}
             aria-label="Visit AdBlock Tester website (opens in a new tab)"
           >
             AdBlock Tester
-          </a>{" "}
+          </a>{' '}
           website was used.
         </p>
       </div>
