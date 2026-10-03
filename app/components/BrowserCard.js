@@ -4,15 +4,20 @@ import BrowserDetailsModal from './BrowserDetailsModal';
 import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowRight, TrendingDown, TrendingUp } from 'lucide-react';
+import { getEngineVariant, getEngineVariants } from '../lib/getPlatformEngineData';
 
 const BrowserCard = React.memo(
-  ({ browser, getEngineColor, rank, selectedPlatform, isLoading = false }) => {
+  ({ browser, getEngineColor, rank, selectedPlatform, selectedEngine = 'All', isLoading = false }) => {
     const [showModal, setShowModal] = useState(false);
+    const [localEngine, setLocalEngine] = useState(null);
     const [imageLoaded, setImageLoaded] = useState(false);
     const [focusVisible, setFocusVisible] = useState(false);
     const cardRef = useRef(null);
 
     const platformData = browser[selectedPlatform];
+    const engineVariants = getEngineVariants(platformData);
+    const activeEngine = selectedEngine !== 'All' ? selectedEngine : localEngine || engineVariants[0]?.engine;
+    const activeVariant = getEngineVariant(platformData, activeEngine);
 
     useEffect(() => {
       const handleKeyDown = (e) => {
@@ -29,15 +34,15 @@ const BrowserCard = React.memo(
       };
     }, []);
 
-    if (!platformData || !platformData.versions || platformData.versions.length === 0) {
+    if (!platformData || !activeVariant || activeVariant.versions.length === 0) {
       return null;
     }
 
-    const latestVersion = platformData.versions[0];
+    const latestVersion = activeVariant.versions[0];
     const prevSpeedometer3Score =
-      platformData.versions.length > 1 ? platformData.versions[1].scores.speedometer3 : null;
+      activeVariant.versions.length > 1 ? activeVariant.versions[1].scores.speedometer3 : null;
 
-    const platformEngine = platformData.engine;
+    const platformEngine = activeVariant.engine;
 
     const getRankStyle = (rank) => {
       const base = 'relative overflow-hidden';
@@ -283,6 +288,35 @@ const BrowserCard = React.memo(
               )}
             </div>
 
+            {engineVariants.length > 1 && (
+              <div className="flex items-center gap-1 mb-4" role="group" aria-label="Select engine">
+                <span className="body-small mr-1" style={{ color: 'var(--text-subtle)' }}>
+                  Engine:
+                </span>
+                {engineVariants.map((variant) => (
+                  <button
+                    key={variant.engine}
+                    type="button"
+                    className="px-2 py-1 rounded-md body-small font-medium"
+                    style={{
+                      backgroundColor:
+                        activeEngine === variant.engine ? 'var(--color-brand)' : 'var(--surface-sunken)',
+                      color:
+                        activeEngine === variant.engine ? 'var(--text-inverse)' : 'var(--text-subtle)',
+                      border: '1px solid var(--border-subtle)',
+                    }}
+                    aria-pressed={activeEngine === variant.engine}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setLocalEngine(variant.engine);
+                    }}
+                  >
+                    {variant.engine}
+                  </button>
+                ))}
+              </div>
+            )}
+
             {/* Score Block */}
             <div
               id={`browser-${browser.name}-desc`}
@@ -356,6 +390,7 @@ const BrowserCard = React.memo(
           <BrowserDetailsModal
             browser={browser}
             selectedPlatform={selectedPlatform}
+            selectedEngine={activeEngine}
             onClose={() => setShowModal(false)}
           />
         )}
