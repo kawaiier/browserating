@@ -395,5 +395,17 @@
     "logo": "/images/browser-logos/aside.jpg",
     "website": "https://aside.com/",
     "description": "Aside is an AI-powered browser built by Aside Computer Inc. (backed by Y Combinator) that centers on an autonomous agent capable of completing real tasks across a user’s logged-in websites — including messages, payments, internal tools, and dashboards. Rather than relying on integrations, the agent operates websites and accounts directly like a human would, and it ranks first on browser-agent benchmarks such as Online-Mind2Web, BU-Bench-V1, and Odyssey. Aside emphasizes privacy and control: tasks, memory, and data stay local on the device, credentials are autofilled without being exposed to the AI, and sensitive actions like payments and posts require human confirmation. Users can bring their own ChatGPT, Claude, or API subscription. Currently available for macOS."
+  },
+  {
+    "name": "Crest",
+    "logo": "/images/browser-logos/crest.png",
+    "website": "https://crestbrowser.com",
+    "description": "Crest is an independent, Arc-inspired browser for Mac, iPad, and iPhone, built around Spaces with isolated profiles, an adaptive sidebar, and tools such as Split View and link previews. It offers extensive per-Space organization and customization, plus iCloud sync across Apple devices."
+  },
+  {
+    "name": "Search",
+    "logo": "/images/browser-logos/search.png",
+    "website": "https://officecommun.com/search",
+    "description": "Search is a lightweight, open-source WebKit browser for Apple silicon Macs running macOS 14 or later, designed around a minimal interface with tabs and a single address/search field. It includes built-in ad and tracker blocking, reading mode, floating video, private tabs, and separate Spaces for organizing browsing. "
   }
 ]
