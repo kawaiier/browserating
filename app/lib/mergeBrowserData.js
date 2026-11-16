@@ -11,8 +11,20 @@ export function mergeBrowserData(browsers, platformDataMap) {
     const merged = { ...browser };
 
     for (const [platform, data] of Object.entries(platformDataMap)) {
-      const match = data.find((b) => b.name === browser.name);
-      merged[platform] = match ? { versions: match.versions, engine: match.engine } : null;
+      const matches = data.filter((b) => b.name === browser.name);
+      const engineVariants = matches.map((match) => ({
+        engine: match.engine,
+        versions: match.versions,
+      }));
+      const primary = engineVariants[0];
+
+      merged[platform] = primary
+        ? {
+            versions: primary.versions,
+            engine: primary.engine,
+            engineVariants,
+          }
+        : null;
     }
 
     return merged;

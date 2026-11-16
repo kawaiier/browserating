@@ -27,7 +27,7 @@ export const metadata = {
     type: 'website',
     images: [
       {
-        url: 'https://browserating.com/images/og-image.png',
+        url: 'https://browserating.com/images/card-image.png',
         width: 1200,
         height: 630,
         alt: 'BrowseRating - Browser Performance Comparison',
@@ -40,7 +40,7 @@ export const metadata = {
     description:
       'Compare browser performance across macOS, Windows, Android and iPad based on Speedometer 3.1 benchmark results, adblocking quality, and RAM usage.',
     creator: '@kawaiier101',
-    images: ['https://browserating.com/images/og-image.png'],
+    images: ['https://browserating.com/images/card-image.png'],
   },
   robots: {
     index: true,
