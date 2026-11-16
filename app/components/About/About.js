@@ -14,7 +14,7 @@ export default function About() {
       icon: Apple,
       gradient: 'from-blue-500 to-purple-500',
       specs: {
-        os: 'macOS Tahoe 26.5.2',
+        os: 'macOS Golden Gate 27.0.1',
         device: '14-inch MacBook Pro (2023)',
         processor: 'M3 Pro',
         memory: '36 GB RAM',

@@ -395,5 +395,29 @@
     "logo": "/images/browser-logos/aside.jpg",
     "website": "https://aside.com/",
     "description": "Aside is an AI-powered browser built by Aside Computer Inc. (backed by Y Combinator) that centers on an autonomous agent capable of completing real tasks across a user’s logged-in websites — including messages, payments, internal tools, and dashboards. Rather than relying on integrations, the agent operates websites and accounts directly like a human would, and it ranks first on browser-agent benchmarks such as Online-Mind2Web, BU-Bench-V1, and Odyssey. Aside emphasizes privacy and control: tasks, memory, and data stay local on the device, credentials are autofilled without being exposed to the AI, and sensitive actions like payments and posts require human confirmation. Users can bring their own ChatGPT, Claude, or API subscription. Currently available for macOS."
+  },
+  {
+    "name": "Crest",
+    "logo": "/images/browser-logos/crest.png",
+    "website": "https://crestbrowser.com",
+    "description": "Crest is an independent, Arc-inspired browser for Mac, iPad, and iPhone, built around Spaces with isolated profiles, an adaptive sidebar, and tools such as Split View and link previews. It offers extensive per-Space organization and customization, plus iCloud sync across Apple devices."
+  },
+  {
+    "name": "Search",
+    "logo": "/images/browser-logos/search.png",
+    "website": "https://officecommun.com/search",
+    "description": "Search is a lightweight, open-source WebKit browser for Apple silicon Macs running macOS 14 or later, designed around a minimal interface with tabs and a single address/search field. It includes built-in ad and tracker blocking, reading mode, floating video, private tabs, and separate Spaces for organizing browsing. "
+  },
+  {
+    "name": "Ardia",
+    "logo": "/images/browser-logos/ardia.png",
+    "website": "https://ardia.dev/",
+    "description": "Ardia is a free, open-source browser for Mac, built on Chromium, with an Arc-style sidebar for spaces, pinned tabs, and tab organization, plus Dia-inspired polish. It is signed and notarized by Apple, blocks ads and trackers (using uBlock Origin), and includes an importer that brings spaces, pinned tabs, and their names over from Arc. Ardia's CLI lets a user's own Claude Code or Codex agent drive the browser with `ardia browse`, using the user's existing logins, and it does not call a model itself. The project publishes its own benchmarks, claiming lower idle CPU, faster launch, and lower memory use than Dia and Helium, and it reports a single anonymous daily launch count with no persistent ID. Ardia is licensed under GPL-3.0 and requires macOS 14 or later on Apple silicon. Windows and Linux are not yet supported, and an iPhone app is available through TestFlight. The project is not affiliated with Google or The Browser Company, and its site says it is not backed by Y Combinator."
+  },
+  {
+    "name": "Phi",
+    "logo": "/images/browser-logos/phi.png",
+    "website": "https://phibrowser.com/",
+    "description": "Phi is a free, AI-powered browser for Apple silicon Macs running macOS 14 or later, built by Phinomenon, a small independent software house. It uses a Chromium engine with a native Swift/AppKit and SwiftUI macOS client, and it can be switched to a plain browser with all AI features turned off. Its AI agent works inside the same window and session as the user, acting on pages and web apps with a visible record of each action, and it can run scheduled tasks and build reusable skills from workflows the user demonstrates. Memory of browsing is stored on the device as a file the user can read, edit, or wipe, and the AI can run entirely on local models through LM Studio or Ollama, or use Phi Cloud. A local guardrail keeps credentials out of memory. The client source is published on GitHub under Apache 2.0, while the Chromium build, the Phi Framework binary, and the server-side models and pipelines remain proprietary. Phi also offers a Windows technical preview and supports a command-line interface, Playwright compatibility, and MCP access to its memory."
   }
 ]
