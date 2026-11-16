@@ -6,6 +6,7 @@ import BrowserCard from './BrowserCard';
 import { getBrowsers } from '../lib/getBrowsers';
 import { engineColors, getEngineColor, platformNames, platformIcons } from '../lib/constants';
 import { useLocalStorage } from '../hooks/useLocalStorage';
+import { getEngineVariants, getEngineVariant } from '../lib/getPlatformEngineData';
 
 const NEW_PLATFORMS = ['macos-arm'];
 const OUTDATED_PLATFORMS = ['android', 'macos-intel'];
@@ -104,17 +105,22 @@ const SearchBar = ({ searchTerm, onSearchChange, totalBrowsers, filteredCount })
 );
 
 // Statistics Component
-const StatsBar = ({ browsers, selectedPlatform }) => {
+const StatsBar = ({ browsers, selectedPlatform, selectedEngine }) => {
   const stats = useMemo(() => {
     const validBrowsers = browsers.filter((b) => b[selectedPlatform]?.versions?.length > 0);
     if (validBrowsers.length === 0) return null;
 
-    const scores = validBrowsers.map((b) => b[selectedPlatform].versions[0].scores.speedometer3);
+    const scores = validBrowsers
+      .map((b) => getEngineVariant(b[selectedPlatform], selectedEngine)?.versions?.[0]?.scores?.speedometer3)
+      .filter((score) => typeof score === 'number');
+    if (scores.length === 0) return null;
     const avgScore = scores.reduce((a, b) => a + b, 0) / scores.length;
     const maxScore = Math.max(...scores);
     const minScore = Math.min(...scores);
 
-    const engines = [...new Set(validBrowsers.map((b) => b[selectedPlatform].engine))];
+    const engines = [
+      ...new Set(validBrowsers.flatMap((b) => getEngineVariants(b[selectedPlatform]).map((v) => v.engine))),
+    ];
 
     return {
       total: validBrowsers.length,
@@ -123,7 +129,7 @@ const StatsBar = ({ browsers, selectedPlatform }) => {
       minScore: minScore.toFixed(1),
       engines: engines.length,
     };
-  }, [browsers, selectedPlatform]);
+  }, [browsers, selectedPlatform, selectedEngine]);
 
   if (!stats) return null;
 
@@ -198,17 +204,17 @@ export default function BrowserRankingList({ initialBrowsers = [] }) {
     fetchBrowsers();
   }, [fetchBrowsers]);
 
-  const sortBrowsersByPlatform = useCallback((browsers, platform) => {
+  const sortBrowsersByPlatform = useCallback((browsers, platform, engine) => {
     return [...browsers].sort((a, b) => {
-      const aScore = a[platform]?.versions?.[0]?.scores?.speedometer3 || 0;
-      const bScore = b[platform]?.versions?.[0]?.scores?.speedometer3 || 0;
+      const aScore = getEngineVariant(a[platform], engine)?.versions?.[0]?.scores?.speedometer3 || 0;
+      const bScore = getEngineVariant(b[platform], engine)?.versions?.[0]?.scores?.speedometer3 || 0;
       return bScore - aScore;
     });
   }, []);
 
   const sortedBrowsers = useMemo(
-    () => sortBrowsersByPlatform(browsers, selectedPlatform),
-    [browsers, selectedPlatform, sortBrowsersByPlatform]
+    () => sortBrowsersByPlatform(browsers, selectedPlatform, selectedEngine),
+    [browsers, selectedPlatform, selectedEngine, sortBrowsersByPlatform]
   );
 
   const filteredAndSearchedBrowsers = useMemo(() => {
@@ -223,7 +229,7 @@ export default function BrowserRankingList({ initialBrowsers = [] }) {
     if (selectedEngine !== 'All') {
       filtered = filtered.filter((browser) => {
         const platformData = browser[selectedPlatform];
-        return platformData?.engine === selectedEngine;
+        return getEngineVariants(platformData).some((variant) => variant.engine === selectedEngine);
       });
     }
 
@@ -242,7 +248,7 @@ export default function BrowserRankingList({ initialBrowsers = [] }) {
   const engines = useMemo(() => {
     const platformEngines = browsers
       .filter((browser) => browser[selectedPlatform]?.versions?.length > 0)
-      .map((browser) => browser[selectedPlatform].engine)
+      .flatMap((browser) => getEngineVariants(browser[selectedPlatform]).map((variant) => variant.engine))
       .filter(Boolean);
 
     return ['All', ...new Set(platformEngines)];
@@ -554,7 +560,11 @@ export default function BrowserRankingList({ initialBrowsers = [] }) {
         filteredCount={filteredAndSearchedBrowsers.length}
       />
 
-      <StatsBar browsers={sortedBrowsers} selectedPlatform={selectedPlatform} />
+      <StatsBar
+        browsers={sortedBrowsers}
+        selectedPlatform={selectedPlatform}
+        selectedEngine={selectedEngine}
+      />
 
       <div
         className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2 mb-6"
@@ -627,6 +637,7 @@ export default function BrowserRankingList({ initialBrowsers = [] }) {
               getEngineColor={getEngineColor}
               rank={index + 1}
               selectedPlatform={selectedPlatform}
+              selectedEngine={selectedEngine}
               isLoading={false}
             />
           ))
