@@ -2,6 +2,8 @@
 
 import {
   AlertTriangle,
+  Ban,
+  Bot,
   Briefcase,
   Circle,
   Cloud,
@@ -14,6 +16,7 @@ import {
   Ghost,
   LayoutDashboard,
   LayoutTemplate,
+  Meh,
   MinusCircle,
   Package,
   PanelsTopLeft,
@@ -26,6 +29,7 @@ import {
   Terminal,
   ThumbsUp,
   UserX,
+  Wand2,
   Zap,
 } from 'lucide-react';
 
@@ -56,6 +60,10 @@ const ICON_MAP = {
   circle: Circle,
   'panels-top-left': PanelsTopLeft,
   sparkles: Sparkles,
+  bot: Bot,
+  'wand-2': Wand2,
+  meh: Meh,
+  ban: Ban,
 };
 
 function Icon({ name }) {
@@ -111,7 +119,10 @@ export default function QuizOption({ option, isSelected, onClick }) {
             {option.label}
           </div>
           {option.description && (
-            <div className="text-xs sm:text-sm mt-0.5 leading-snug" style={{ color: 'var(--text-subtle)' }}>
+            <div
+              className="text-xs sm:text-sm mt-0.5 leading-snug"
+              style={{ color: 'var(--text-subtle)' }}
+            >
               {option.description}
             </div>
           )}

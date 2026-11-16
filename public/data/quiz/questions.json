@@ -98,7 +98,7 @@
   {
     "id": "q3",
     "question": "How do you feel about customization?",
-    "subtitle": "Be honest \u2014 do you actually change your settings?",
+    "subtitle": "Be honest — do you actually change your settings?",
     "options": [
       {
         "id": "q3a",
@@ -123,7 +123,7 @@
       {
         "id": "q3c",
         "label": "I want control over everything",
-        "description": "Custom CSS, flags, about:config \u2014 all of it",
+        "description": "Custom CSS, flags, about:config — all of it",
         "icon": "terminal",
         "traits": {
           "customization": 3,
@@ -136,12 +136,12 @@
   {
     "id": "q4",
     "question": "What's your relationship with Big Tech?",
-    "subtitle": "How much do you rely on \u2014 or avoid \u2014 major tech platforms?",
+    "subtitle": "How much do you rely on — or avoid — major tech platforms?",
     "options": [
       {
         "id": "q4a",
         "label": "All in",
-        "description": "Google, Apple, or Microsoft \u2014 I'm deep in one ecosystem and I like it",
+        "description": "Google, Apple, or Microsoft — I'm deep in one ecosystem and I like it",
         "icon": "cloud",
         "traits": {
           "ecosystem": 3,
@@ -189,7 +189,7 @@
       {
         "id": "q5a",
         "label": "I don't mind them",
-        "description": "Ads keep the internet free \u2014 fair enough",
+        "description": "Ads keep the internet free — fair enough",
         "icon": "smile",
         "traits": {
           "easeOfUse": 2,
@@ -209,7 +209,7 @@
       {
         "id": "q5c",
         "label": "Block everything by default",
-        "description": "Built-in protection is a must \u2014 no exceptions",
+        "description": "Built-in protection is a must — no exceptions",
         "icon": "shield-check",
         "traits": {
           "privacy": 3,
@@ -231,7 +231,7 @@
   {
     "id": "q6",
     "question": "Do you care if your browser is open source?",
-    "subtitle": "Transparency and community governance \u2014 does it matter to you?",
+    "subtitle": "Transparency and community governance — does it matter to you?",
     "options": [
       {
         "id": "q6a",
@@ -256,7 +256,7 @@
       {
         "id": "q6c",
         "label": "It's a must",
-        "description": "I only trust software I \u2014 or others \u2014 can verify",
+        "description": "I only trust software I — or others — can verify",
         "icon": "code-2",
         "traits": {
           "openSource": 3,
@@ -268,7 +268,7 @@
   {
     "id": "q7",
     "question": "What's your ideal browser's look and feel?",
-    "subtitle": "The vibe question \u2014 trust your gut",
+    "subtitle": "The vibe question — trust your gut",
     "options": [
       {
         "id": "q7a",
@@ -284,7 +284,7 @@
       {
         "id": "q7b",
         "label": "Minimal and zen",
-        "description": "Beautiful, quiet, no clutter \u2014 just the web",
+        "description": "Beautiful, quiet, no clutter — just the web",
         "icon": "circle",
         "traits": {
           "minimalism": 3,
@@ -294,7 +294,7 @@
       {
         "id": "q7c",
         "label": "Feature-packed dashboard",
-        "description": "Sidebar, workspaces, panels, tools \u2014 give it all to me",
+        "description": "Sidebar, workspaces, panels, tools — give it all to me",
         "icon": "panels-top-left",
         "traits": {
           "features": 3,
@@ -310,6 +310,52 @@
         "traits": {
           "innovation": 3,
           "customization": 2
+        }
+      }
+    ]
+  },
+  {
+    "id": "q8",
+    "question": "How do you feel about AI in your browser?",
+    "subtitle": "From built-in assistants to agents that browse for you",
+    "options": [
+      {
+        "id": "q8a",
+        "label": "Bring it on",
+        "description": "I want AI front and center, even acting on my behalf",
+        "icon": "bot",
+        "traits": {
+          "ai": 4,
+          "innovation": 2
+        }
+      },
+      {
+        "id": "q8b",
+        "label": "A handy helper",
+        "description": "Summaries and answers when I ask for them",
+        "icon": "wand-2",
+        "traits": {
+          "ai": 2,
+          "features": 1
+        }
+      },
+      {
+        "id": "q8c",
+        "label": "Not a priority",
+        "description": "Fine if it's there, but I won't use it",
+        "icon": "meh",
+        "traits": {
+          "easeOfUse": 1
+        }
+      },
+      {
+        "id": "q8d",
+        "label": "Keep it out",
+        "description": "No AI, no data sent to chatbots",
+        "icon": "ban",
+        "traits": {
+          "privacy": 2,
+          "minimalism": 1
         }
       }
     ]

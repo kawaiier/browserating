@@ -18,7 +18,7 @@ export async function generateMetadata({ searchParams }) {
     return {
       title: 'Browser Quiz — Find Your Perfect Browser | BrowseRating',
       description:
-        'Answer 7 quick questions and discover which browser is the best match for your needs. Personalized recommendations based on privacy, speed, features, and more.',
+        'Answer 8 quick questions and discover which browser is the best match for your needs. Personalized recommendations based on privacy, speed, features, and more.',
       openGraph: {
         title: 'Find Your Perfect Browser — BrowseRating Quiz',
         description: 'Take our 2-minute quiz to find the browser that fits you best.',
@@ -43,7 +43,7 @@ export async function generateMetadata({ searchParams }) {
     return {
       title: 'Browser Quiz — Find Your Perfect Browser | BrowseRating',
       description:
-        'Answer 7 quick questions and discover which browser is the best match for your needs.',
+        'Answer 8 quick questions and discover which browser is the best match for your needs.',
       openGraph: {
         title: 'Find Your Perfect Browser — BrowseRating Quiz',
         description: 'Take our 2-minute quiz to find the browser that fits you best.',

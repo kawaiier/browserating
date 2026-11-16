@@ -5,7 +5,7 @@
  * browser profiles using cosine similarity, and returns ranked results.
  */
 
-/** The 10 trait keys used throughout the scoring system. */
+/** The 11 trait keys used throughout the scoring system. */
 const TRAIT_KEYS = [
   'privacy',
   'speed',
@@ -17,6 +17,7 @@ const TRAIT_KEYS = [
   'ecosystem',
   'innovation',
   'easeOfUse',
+  'ai',
 ];
 
 /**
