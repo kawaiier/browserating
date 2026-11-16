@@ -2,6 +2,9 @@
   "name": "browserating",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": "24.x"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -14,22 +17,22 @@
   "dependencies": {
     "@vercel/analytics": "^2.0.1",
     "chart.js": "^4.5.1",
-    "lucide-react": "^1.14.0",
+    "lucide-react": "^1.27.0",
     "next": "^16.2.12",
-    "react": "^19.2.6",
+    "react": "^19.2.8",
     "react-chartjs-2": "^5.3.1",
-    "react-dom": "^19.2.6"
+    "react-dom": "^19.2.8"
   },
   "devDependencies": {
-    "@commitlint/config-conventional": "^21.0.0",
-    "@eslint/compat": "^2.0.5",
-    "@tailwindcss/postcss": "^4.2.3",
+    "@commitlint/config-conventional": "^21.2.0",
+    "@eslint/compat": "^2.1.0",
+    "@tailwindcss/postcss": "^4.3.3",
     "eslint": "^10.3.0",
-    "eslint-config-next": "^16.2.4",
+    "eslint-config-next": "^16.2.12",
     "husky": "^9.1.7",
     "lint-staged": "^17.0.4",
-    "postcss": "^8.5.18",
-    "prettier": "^3.8.3",
+    "postcss": "^8.5.23",
+    "prettier": "^3.9.6",
     "tailwindcss": "^4.3.3"
   },
   "resolutions": {

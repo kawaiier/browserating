@@ -17,6 +17,7 @@ import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import { BarChart3, LineChart, Target, TrendingDown, TrendingUp } from 'lucide-react';
 import { getEngineColor, platformNames } from '../lib/constants';
+import { getEngineVariant, getEngineVariants } from '../lib/getPlatformEngineData';
 
 ChartJS.register(
   CategoryScale,
@@ -29,14 +30,17 @@ ChartJS.register(
   BarElement
 );
 
-const BrowserDetailsModal = ({ browser, selectedPlatform, onClose }) => {
+const BrowserDetailsModal = ({ browser, selectedPlatform, selectedEngine, onClose }) => {
   const [activeTab, setActiveTab] = useState('overview');
+  const [modalEngine, setModalEngine] = useState(selectedEngine);
   const [chartType, setChartType] = useState('bar');
   const modalRef = useRef(null);
   const closeButtonRef = useRef(null);
   const firstFocusableRef = useRef(null);
 
   const platformData = browser[selectedPlatform];
+  const engineVariants = getEngineVariants(platformData);
+  const activeVariant = getEngineVariant(platformData, modalEngine);
 
   // Focus management
   useEffect(() => {
@@ -147,9 +151,9 @@ const BrowserDetailsModal = ({ browser, selectedPlatform, onClose }) => {
     );
   }
 
-  const latestVersion = platformData.versions[0];
-  const sortedData = [...platformData.versions].reverse();
-  const platformEngine = platformData.engine;
+  const latestVersion = activeVariant.versions[0];
+  const sortedData = [...activeVariant.versions].reverse();
+  const platformEngine = activeVariant.engine;
 
   const getPerformanceTrend = () => {
     if (sortedData.length < 2) return { trend: 'stable', change: 0 };
@@ -301,6 +305,34 @@ const BrowserDetailsModal = ({ browser, selectedPlatform, onClose }) => {
                 <p id="modal-description" className="mt-1" style={{ color: 'var(--text-subtle)' }}>
                   Performance analysis on {platformName}
                 </p>
+                {engineVariants.length > 1 && (
+                  <div className="flex items-center gap-1 mt-2" role="group" aria-label="Select engine">
+                    <span className="text-sm mr-1" style={{ color: 'var(--text-subtle)' }}>
+                      Engine:
+                    </span>
+                    {engineVariants.map((variant) => (
+                      <button
+                        key={variant.engine}
+                        type="button"
+                        className="px-2 py-1 rounded-md text-sm font-medium"
+                        style={{
+                          backgroundColor:
+                            modalEngine === variant.engine
+                              ? 'var(--color-brand)'
+                              : 'var(--surface-sunken)',
+                          color:
+                            modalEngine === variant.engine
+                              ? 'var(--text-inverse)'
+                              : 'var(--text-subtle)',
+                        }}
+                        aria-pressed={modalEngine === variant.engine}
+                        onClick={() => setModalEngine(variant.engine)}
+                      >
+                        {variant.engine}
+                      </button>
+                    ))}
+                  </div>
+                )}
                 <div className="flex flex-wrap items-center gap-2 sm:gap-3 mt-2 sm:mt-3">
                   <span
                     className={`px-3 py-1.5 rounded-md text-sm font-medium ${getEngineColor(
@@ -540,7 +572,7 @@ const BrowserDetailsModal = ({ browser, selectedPlatform, onClose }) => {
                 Version History
               </h2>
               <div className="space-y-4">
-                {platformData.versions.map((version, index) => (
+                {activeVariant.versions.map((version, index) => (
                   <div
                     key={version.version}
                     className="rounded-lg p-6 transition-colors"
@@ -638,7 +670,7 @@ const BrowserDetailsModal = ({ browser, selectedPlatform, onClose }) => {
                     </tr>
                   </thead>
                   <tbody>
-                    {platformData.versions.map((version, index) => (
+                    {activeVariant.versions.map((version, index) => (
                       <tr
                         key={version.version}
                         style={{ borderBottom: '1px solid var(--border-subtle)' }}

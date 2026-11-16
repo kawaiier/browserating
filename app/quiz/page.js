@@ -12,7 +12,7 @@ export async function generateMetadata({ searchParams }) {
   const r = params?.r ?? null;
 
   const BASE_URL = 'https://browserating.com';
-  const ogImageBase = `${BASE_URL}/api/og/quiz`;
+  const ogImageBase = `${BASE_URL}/images/card-image.png`;
 
   if (!r) {
     return {
@@ -57,7 +57,7 @@ export async function generateMetadata({ searchParams }) {
     };
   }
 
-  const ogImageUrl = `${ogImageBase}?r=${r}`;
+  const ogImageUrl = ogImageBase;
 
   return {
     title: `Your browser match: ${profile.name} | BrowseRating`,

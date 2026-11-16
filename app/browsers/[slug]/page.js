@@ -35,6 +35,14 @@ export async function generateMetadata({ params }) {
     openGraph: {
       title: `${browser.name} Browser Performance`,
       description: `See ${browser.name}'s Speedometer 3.1 benchmark scores across platforms.`,
+      images: [
+        {
+          url: 'https://browserating.com/images/card-image.png',
+          width: 1200,
+          height: 630,
+          alt: 'BrowseRating - Browser Performance Comparison',
+        },
+      ],
     },
   };
 }
