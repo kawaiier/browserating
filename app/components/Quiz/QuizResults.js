@@ -15,12 +15,19 @@ const fadeInUpKeyframes = `
 }
 `;
 
+function formatBrowserNames(browsers) {
+  const names = browsers.map((browser) => browser.name);
+  if (names.length < 2) return names[0];
+  if (names.length === 2) return `${names[0]} and ${names[1]}`;
+  return `${names.slice(0, -1).join(', ')}, and ${names[names.length - 1]}`;
+}
+
 export default function QuizResults({ results, userTraits, onRetake, isShared }) {
-  const { topResults } = results;
+  const { topResults, discontinuedResults = [] } = results;
   const hero = topResults[0];
   const runnerUps = topResults.slice(1, 3);
 
-  if (!hero) return null;
+  if (!hero && !(isShared && discontinuedResults.length > 0)) return null;
 
   return (
     <div className="px-4 sm:px-6 py-10 max-w-2xl mx-auto w-full">
@@ -28,9 +35,15 @@ export default function QuizResults({ results, userTraits, onRetake, isShared })
       {isShared && (
         <div className="mb-8 text-center">
           <p className="mb-4" style={{ color: 'var(--text-subtle)' }}>
-            This is the quiz result for{' '}
-            <strong style={{ color: 'var(--text-default)' }}>{hero.name}</strong>. Want to find
-            your own match?
+            {hero ? (
+              <>
+                This is the quiz result for{' '}
+                <strong style={{ color: 'var(--text-default)' }}>{hero.name}</strong>. Want to find
+                your own match?
+              </>
+            ) : (
+              'Want to find your own current browser match?'
+            )}
           </p>
           <button
             onClick={onRetake}
@@ -68,14 +81,24 @@ export default function QuizResults({ results, userTraits, onRetake, isShared })
         </p>
       )}
 
-      <div
-        className="quiz-fade-in-up"
-        style={{ animation: 'fadeInUp 500ms ease-out both' }}
-      >
-        <QuizResultCard browser={hero} size="hero" />
-      </div>
+      {hero && (
+        <div className="quiz-fade-in-up" style={{ animation: 'fadeInUp 500ms ease-out both' }}>
+          <QuizResultCard browser={hero} size="hero" />
+        </div>
+      )}
 
-      {!isShared && userTraits && (
+      {discontinuedResults.length > 0 && (
+        <p
+          role="note"
+          className="mt-4 text-center text-xs sm:text-sm"
+          style={{ color: 'var(--text-subtle)' }}
+        >
+          You might have liked {formatBrowserNames(discontinuedResults)}, but{' '}
+          {discontinuedResults.length === 1 ? 'it’s' : 'they’re'} discontinued.
+        </p>
+      )}
+
+      {!isShared && userTraits && hero && (
         <div className="mt-8" style={{ animationDelay: '200ms', animationFillMode: 'both' }}>
           <QuizTraitChart userTraits={userTraits} browserProfile={hero} />
         </div>
@@ -91,7 +114,10 @@ export default function QuizResults({ results, userTraits, onRetake, isShared })
               <div
                 key={browser.id}
                 className="quiz-fade-in-up"
-                style={{ animation: 'fadeInUp 500ms ease-out both', animationDelay: `${(i + 1) * 150 + 200}ms` }}
+                style={{
+                  animation: 'fadeInUp 500ms ease-out both',
+                  animationDelay: `${(i + 1) * 150 + 200}ms`,
+                }}
               >
                 <QuizResultCard browser={browser} size="runner-up" />
               </div>

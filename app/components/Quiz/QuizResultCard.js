@@ -110,7 +110,11 @@ export default function QuizResultCard({ browser, size = 'runner-up' }) {
       {isHero && browser.highlights && browser.highlights.length > 0 && (
         <ul className="mt-5 space-y-2" role="list">
           {browser.highlights.map((h, i) => (
-            <li key={i} className="flex items-start gap-2 text-sm" style={{ color: 'var(--text-subtle)' }}>
+            <li
+              key={i}
+              className="flex items-start gap-2 text-sm"
+              style={{ color: 'var(--text-subtle)' }}
+            >
               <svg
                 className="w-4 h-4 flex-shrink-0 mt-0.5"
                 style={{ color: 'var(--color-brand)' }}
@@ -172,7 +176,7 @@ export default function QuizResultCard({ browser, size = 'runner-up' }) {
 
       {isHero && (
         <div className="mt-6 flex flex-wrap gap-3">
-          {browser.website && (
+          {browser.website && !browser.discontinued && (
             <a
               href={browser.website}
               target="_blank"

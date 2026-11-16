@@ -36,6 +36,21 @@ test('platform filtering excludes unsupported browsers before ranking', () => {
   ]);
 });
 
+test('rankBrowsers excludes discontinued profiles', () => {
+  const discontinued = {
+    ...profiles[0],
+    id: 'discontinued',
+    discontinued: true,
+  };
+
+  const ranked = rankBrowsers({ privacy: 1 }, [profiles[0], discontinued], ['windows']);
+
+  assert.deepEqual(
+    ranked.map((browser) => browser.id),
+    ['windows-only']
+  );
+});
+
 test('a Mac selection matches either supported Mac architecture', () => {
   const ranked = rankBrowsers({ privacy: 1 }, profiles, ['macos-arm', 'macos-intel']);
 
@@ -59,6 +74,61 @@ test('computeResults supports multi-select as a union of selected platforms', ()
     results.topResults.some((browser) => browser.id === 'mac-intel-only'),
     false
   );
+});
+
+test('computeResults excludes discontinued browsers but notes one that would rank in the top three', () => {
+  const makeProfile = (id, discontinued = false) => ({
+    id,
+    name: id,
+    platforms: ['windows'],
+    traits: { privacy: 10 },
+    discontinued,
+  });
+  const browserProfiles = [
+    makeProfile('discontinued', true),
+    makeProfile('active-1'),
+    makeProfile('active-2'),
+    makeProfile('active-3'),
+  ];
+
+  const results = computeResults([['windows'], 'q1a'], questions, browserProfiles);
+
+  assert.deepEqual(
+    results.topResults.map((browser) => browser.id),
+    ['active-1', 'active-2', 'active-3']
+  );
+  assert.deepEqual(
+    results.rankedBrowsers.map((browser) => browser.id),
+    ['active-1', 'active-2', 'active-3']
+  );
+  assert.deepEqual(
+    results.discontinuedResults.map((browser) => browser.id),
+    ['discontinued']
+  );
+});
+
+test('computeResults only notes discontinued browsers that would rank in the top three', () => {
+  const makeProfile = (id, discontinued = false) => ({
+    id,
+    name: id,
+    platforms: ['windows'],
+    traits: { privacy: 10 },
+    discontinued,
+  });
+  const browserProfiles = [
+    makeProfile('active-1'),
+    makeProfile('active-2'),
+    makeProfile('active-3'),
+    makeProfile('discontinued', true),
+  ];
+
+  const results = computeResults([['windows'], 'q1a'], questions, browserProfiles);
+
+  assert.deepEqual(
+    results.topResults.map((browser) => browser.id),
+    ['active-1', 'active-2', 'active-3']
+  );
+  assert.deepEqual(results.discontinuedResults, []);
 });
 
 test('no selected platform produces no eligible recommendations', () => {

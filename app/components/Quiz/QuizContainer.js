@@ -22,7 +22,8 @@ export default function QuizContainer({ browserProfiles, questions, sharedResult
   const [results, setResults] = useState(() => {
     if (sharedProfile) {
       return {
-        topResults: [{ ...sharedProfile, matchPercentage: null }],
+        topResults: sharedProfile.discontinued ? [] : [{ ...sharedProfile, matchPercentage: null }],
+        discontinuedResults: sharedProfile.discontinued ? [sharedProfile] : [],
         userTraits: null,
         rankedBrowsers: [],
         isShared: true,

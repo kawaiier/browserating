@@ -5,6 +5,8 @@
  * browser profiles using cosine similarity, and returns ranked results.
  */
 
+const TOP_RESULT_COUNT = 3;
+
 /** The 11 trait keys used throughout the scoring system. */
 const TRAIT_KEYS = [
   'privacy',
@@ -123,18 +125,10 @@ export function cosineSimilarity(vecA, vecB) {
 }
 
 /**
- * Rank browser profiles against the user's trait vector.
- *
- * Each browser receives an added `matchPercentage` field (0–100).
- * The returned array is sorted descending by match percentage.
- *
- * @param {Object<string, number>} userTraits - Raw user trait totals from `computeUserTraits`.
- * @param {Array<Object & {traits: Object<string, number>, platforms?: string[]}>} browserProfiles
- *   Array from browser-profiles.json; each entry must have a `.traits` object.
- * @param {string[]} selectedPlatforms - Platforms a browser must support to be eligible.
- * @returns {Array<Object & {matchPercentage: number}>} Eligible browsers sorted best-match-first.
+ * Score profiles that support at least one selected platform.
+ * Each result receives a `matchPercentage` field and the list is sorted best-match-first.
  */
-export function rankBrowsers(userTraits, browserProfiles, selectedPlatforms = []) {
+function rankEligibleBrowsers(userTraits, browserProfiles, selectedPlatforms) {
   const normalizedUser = normalizeTraits(userTraits);
   const selectedPlatformSet = new Set(selectedPlatforms);
   const eligibleProfiles = browserProfiles.filter(
@@ -157,13 +151,29 @@ export function rankBrowsers(userTraits, browserProfiles, selectedPlatforms = []
 }
 
 /**
+ * Rank active browser profiles against the user's trait vector.
+ * Discontinued profiles are excluded from the returned ranking.
+ *
+ * @param {Object<string, number>} userTraits - Raw user trait totals from `computeUserTraits`.
+ * @param {Array<Object & {traits: Object<string, number>, platforms?: string[]}>} browserProfiles
+ *   Array from browser-profiles.json; each entry must have a `.traits` object.
+ * @param {string[]} selectedPlatforms - Platforms a browser must support to be eligible.
+ * @returns {Array<Object & {matchPercentage: number}>} Eligible active browsers sorted best-match-first.
+ */
+export function rankBrowsers(userTraits, browserProfiles, selectedPlatforms = []) {
+  return rankEligibleBrowsers(userTraits, browserProfiles, selectedPlatforms).filter(
+    (browser) => !browser.discontinued
+  );
+}
+
+/**
  * Return the top N results from a ranked browser list.
  *
  * @param {Array<Object & {matchPercentage: number}>} rankedBrowsers - Output of `rankBrowsers`.
  * @param {number} [count=3] - How many results to return.
  * @returns {Array<Object & {matchPercentage: number}>} The top `count` browsers.
  */
-export function getTopResults(rankedBrowsers, count = 3) {
+export function getTopResults(rankedBrowsers, count = TOP_RESULT_COUNT) {
   return rankedBrowsers.slice(0, count);
 }
 
@@ -173,13 +183,23 @@ export function getTopResults(rankedBrowsers, count = 3) {
  * @param {Array<string|string[]>} answers - Selected option IDs, with arrays for multi-select questions.
  * @param {Array} questions - Questions array from questions.json.
  * @param {Array} browserProfiles - Browser profiles array from browser-profiles.json.
- * @returns {{ topResults: Array, userTraits: Object<string, number>, rankedBrowsers: Array, selectedPlatforms: string[] }}
+ * @returns {{
+ *   topResults: Array,
+ *   userTraits: Object<string, number>,
+ *   rankedBrowsers: Array,
+ *   selectedPlatforms: string[],
+ *   discontinuedResults: Array
+ * }}
  */
 export function computeResults(answers, questions, browserProfiles) {
   const userTraits = computeUserTraits(answers, questions);
   const selectedPlatforms = getSelectedPlatforms(answers, questions);
-  const rankedBrowsers = rankBrowsers(userTraits, browserProfiles, selectedPlatforms);
-  const topResults = getTopResults(rankedBrowsers, 3);
+  const allRankedBrowsers = rankEligibleBrowsers(userTraits, browserProfiles, selectedPlatforms);
+  const rankedBrowsers = allRankedBrowsers.filter((browser) => !browser.discontinued);
+  const topResults = getTopResults(rankedBrowsers, TOP_RESULT_COUNT);
+  const discontinuedResults = allRankedBrowsers
+    .slice(0, TOP_RESULT_COUNT)
+    .filter((browser) => browser.discontinued);
 
-  return { topResults, userTraits, rankedBrowsers, selectedPlatforms };
+  return { topResults, userTraits, rankedBrowsers, selectedPlatforms, discontinuedResults };
 }
