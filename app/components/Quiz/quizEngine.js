@@ -23,7 +23,7 @@ const TRAIT_KEYS = [
 /**
  * Accumulate trait scores from the user's selected answers.
  *
- * @param {string[]} answers - Array of option IDs selected by the user (e.g. ["q1a", "q2c"]).
+ * @param {Array<string|string[]>} answers - Selected option IDs, with arrays for multi-select questions.
  * @param {Array<{id: string, options: Array<{id: string, traits: Object}>}>} questions
  *   The full questions array from questions.json.
  * @returns {Object<string, number>} Trait totals, e.g. `{ privacy: 6, speed: 3, ... }`.
@@ -32,6 +32,8 @@ export function computeUserTraits(answers, questions) {
   const traits = Object.fromEntries(TRAIT_KEYS.map((k) => [k, 0]));
 
   for (const answerId of answers) {
+    if (Array.isArray(answerId)) continue;
+
     for (const question of questions) {
       const option = question.options.find((o) => o.id === answerId);
       if (option) {
@@ -46,6 +48,30 @@ export function computeUserTraits(answers, questions) {
   }
 
   return traits;
+}
+
+/**
+ * Get the platform IDs selected in multiple-choice platform questions.
+ *
+ * @param {Array<string|string[]>} answers - Selected option IDs, including arrays for multi-select questions.
+ * @param {Array} questions - Questions array from questions.json.
+ * @returns {string[]} Selected platform IDs, such as `windows` or `macos-arm`.
+ */
+export function getSelectedPlatforms(answers, questions) {
+  const selectedPlatforms = new Set();
+
+  questions.forEach((question, index) => {
+    if (question.selectionMode !== 'multiple' || !Array.isArray(answers[index])) return;
+
+    for (const answerId of answers[index]) {
+      const option = question.options.find((candidate) => candidate.id === answerId);
+      for (const platform of option?.platforms ?? []) {
+        selectedPlatforms.add(platform);
+      }
+    }
+  });
+
+  return Array.from(selectedPlatforms);
 }
 
 /**
@@ -103,14 +129,21 @@ export function cosineSimilarity(vecA, vecB) {
  * The returned array is sorted descending by match percentage.
  *
  * @param {Object<string, number>} userTraits - Raw user trait totals from `computeUserTraits`.
- * @param {Array<Object & {traits: Object<string, number>}>} browserProfiles
+ * @param {Array<Object & {traits: Object<string, number>, platforms?: string[]}>} browserProfiles
  *   Array from browser-profiles.json; each entry must have a `.traits` object.
- * @returns {Array<Object & {matchPercentage: number}>} Browsers sorted best-match-first.
+ * @param {string[]} selectedPlatforms - Platforms a browser must support to be eligible.
+ * @returns {Array<Object & {matchPercentage: number}>} Eligible browsers sorted best-match-first.
  */
-export function rankBrowsers(userTraits, browserProfiles) {
+export function rankBrowsers(userTraits, browserProfiles, selectedPlatforms = []) {
   const normalizedUser = normalizeTraits(userTraits);
+  const selectedPlatformSet = new Set(selectedPlatforms);
+  const eligibleProfiles = browserProfiles.filter(
+    (browser) =>
+      Array.isArray(browser.platforms) &&
+      browser.platforms.some((platform) => selectedPlatformSet.has(platform))
+  );
 
-  const ranked = browserProfiles.map((browser) => {
+  const ranked = eligibleProfiles.map((browser) => {
     const normalizedBrowser = normalizeTraits(browser.traits);
     const similarity = cosineSimilarity(normalizedUser, normalizedBrowser);
     const matchPercentage = Math.round(similarity * 100);
@@ -137,15 +170,16 @@ export function getTopResults(rankedBrowsers, count = 3) {
 /**
  * Convenience function: compute full quiz results in one call.
  *
- * @param {string[]} answers - Option IDs selected by the user.
+ * @param {Array<string|string[]>} answers - Selected option IDs, with arrays for multi-select questions.
  * @param {Array} questions - Questions array from questions.json.
  * @param {Array} browserProfiles - Browser profiles array from browser-profiles.json.
- * @returns {{ topResults: Array, userTraits: Object<string, number>, rankedBrowsers: Array }}
+ * @returns {{ topResults: Array, userTraits: Object<string, number>, rankedBrowsers: Array, selectedPlatforms: string[] }}
  */
 export function computeResults(answers, questions, browserProfiles) {
   const userTraits = computeUserTraits(answers, questions);
-  const rankedBrowsers = rankBrowsers(userTraits, browserProfiles);
+  const selectedPlatforms = getSelectedPlatforms(answers, questions);
+  const rankedBrowsers = rankBrowsers(userTraits, browserProfiles, selectedPlatforms);
   const topResults = getTopResults(rankedBrowsers, 3);
 
-  return { topResults, userTraits, rankedBrowsers };
+  return { topResults, userTraits, rankedBrowsers, selectedPlatforms };
 }

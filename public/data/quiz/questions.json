@@ -1,5 +1,48 @@
 [
   {
+    "id": "platforms",
+    "selectionMode": "multiple",
+    "question": "Which device are you choosing for?",
+    "subtitle": "Select all devices you want recommendations for. Matches will be available on at least one selected device.",
+    "options": [
+      {
+        "id": "platform-windows",
+        "label": "Windows",
+        "description": "A Windows PC or laptop",
+        "icon": "layout",
+        "platforms": ["windows"]
+      },
+      {
+        "id": "platform-mac",
+        "label": "Mac",
+        "description": "A Mac desktop or laptop",
+        "icon": "sparkles",
+        "platforms": ["macos-arm", "macos-intel"]
+      },
+      {
+        "id": "platform-linux",
+        "label": "Linux",
+        "description": "A Linux desktop or laptop",
+        "icon": "terminal",
+        "platforms": ["linux"]
+      },
+      {
+        "id": "platform-android",
+        "label": "Android",
+        "description": "An Android phone or tablet",
+        "icon": "cloud",
+        "platforms": ["android"]
+      },
+      {
+        "id": "platform-ios",
+        "label": "iPhone & iPad",
+        "description": "An iPhone or iPad",
+        "icon": "circle",
+        "platforms": ["ipad"]
+      }
+    ]
+  },
+  {
     "id": "q1",
     "question": "What matters most in a browser?",
     "subtitle": "Pick the one thing you can't compromise on",

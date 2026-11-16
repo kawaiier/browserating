@@ -9,7 +9,6 @@ import QuizResults from './QuizResults';
 import { computeResults } from './quizEngine';
 
 const STEP_INTRO = 0;
-const STEP_RESULTS = 8;
 const COMPUTING_DELAY = 1200;
 const LS_KEY = 'brating_quiz_last_result';
 
@@ -18,7 +17,7 @@ export default function QuizContainer({ browserProfiles, questions, sharedResult
   const sharedProfile = normalizedSharedResultId
     ? browserProfiles.find((b) => b.id === normalizedSharedResultId)
     : null;
-  const [step, setStep] = useState(sharedProfile ? STEP_RESULTS : STEP_INTRO);
+  const [step, setStep] = useState(sharedProfile ? questions.length : STEP_INTRO);
   const [answers, setAnswers] = useState([]);
   const [results, setResults] = useState(() => {
     if (sharedProfile) {
@@ -46,34 +45,64 @@ export default function QuizContainer({ browserProfiles, questions, sharedResult
     setStep(1);
   }, []);
 
-  const handleAnswer = useCallback(
-    (optionId) => {
-      const currentQuestion = step - 1;
-      const newAnswers = [...answers];
-      newAnswers[currentQuestion] = optionId;
-      setAnswers(newAnswers);
+  const completeQuiz = useCallback(
+    (finalAnswers) => {
+      setComputing(true);
+      computingTimer.current = setTimeout(() => {
+        const computed = computeResults(finalAnswers, questions, browserProfiles);
+        try {
+          localStorage.setItem(LS_KEY, JSON.stringify(computed));
+        } catch {}
+        setResults(computed);
+        setComputing(false);
+        setDirection('forward');
+        setStep(questions.length);
+      }, COMPUTING_DELAY);
+    },
+    [questions, browserProfiles]
+  );
 
-      const nextStep = step + 1;
-
+  const advanceFrom = useCallback(
+    (currentStep, nextAnswers) => {
+      const nextStep = currentStep + 1;
       if (nextStep > questions.length) {
-        setComputing(true);
-        computingTimer.current = setTimeout(() => {
-          const computed = computeResults(newAnswers, questions, browserProfiles);
-          try {
-            localStorage.setItem(LS_KEY, JSON.stringify(computed));
-          } catch {}
-          setResults(computed);
-          setComputing(false);
-          setDirection('forward');
-          setStep(STEP_RESULTS);
-        }, COMPUTING_DELAY);
+        completeQuiz(nextAnswers);
       } else {
         setDirection('forward');
         setTimeout(() => setStep(nextStep), 500);
       }
     },
-    [step, answers, questions, browserProfiles]
+    [questions.length, completeQuiz]
   );
+
+  const handleAnswer = useCallback(
+    (optionId) => {
+      const currentQuestionIndex = step - 1;
+      const currentQuestion = questions[currentQuestionIndex];
+      const newAnswers = [...answers];
+
+      if (currentQuestion.selectionMode === 'multiple') {
+        const selectedOptions = Array.isArray(newAnswers[currentQuestionIndex])
+          ? newAnswers[currentQuestionIndex]
+          : [];
+        newAnswers[currentQuestionIndex] = selectedOptions.includes(optionId)
+          ? selectedOptions.filter((selectedId) => selectedId !== optionId)
+          : [...selectedOptions, optionId];
+        setAnswers(newAnswers);
+        return;
+      }
+
+      newAnswers[currentQuestionIndex] = optionId;
+      setAnswers(newAnswers);
+      advanceFrom(step, newAnswers);
+    },
+    [step, answers, questions, advanceFrom]
+  );
+
+  const handleContinue = useCallback(() => {
+    if (!Array.isArray(answers[step - 1]) || answers[step - 1].length === 0) return;
+    advanceFrom(step, answers);
+  }, [step, answers, advanceFrom]);
 
   const handleBack = useCallback(() => {
     if (step <= 1) return;
@@ -92,14 +121,20 @@ export default function QuizContainer({ browserProfiles, questions, sharedResult
   }, []);
 
   if (step === STEP_INTRO) {
-    return <QuizIntro browserProfiles={browserProfiles} onStart={handleStart} />;
+    return (
+      <QuizIntro
+        browserProfiles={browserProfiles}
+        questionCount={questions.length}
+        onStart={handleStart}
+      />
+    );
   }
 
   if (computing) {
     return <ComputingScreen />;
   }
 
-  if (step === STEP_RESULTS && results) {
+  if (step === questions.length && results) {
     return (
       <QuizResults
         results={results}
@@ -111,7 +146,8 @@ export default function QuizContainer({ browserProfiles, questions, sharedResult
   }
 
   const currentQuestion = questions[step - 1];
-  const selectedAnswer = answers[step - 1] ?? null;
+  const selectedAnswer =
+    answers[step - 1] ?? (currentQuestion?.selectionMode === 'multiple' ? [] : null);
 
   return (
     <div className="min-h-[calc(100vh-3.5rem)] flex flex-col">
@@ -120,6 +156,8 @@ export default function QuizContainer({ browserProfiles, questions, sharedResult
         question={currentQuestion}
         selectedAnswer={selectedAnswer}
         onAnswer={handleAnswer}
+        onContinue={handleContinue}
+        canContinue={Array.isArray(selectedAnswer) && selectedAnswer.length > 0}
         onBack={handleBack}
         showBack={step > 1}
         direction={direction}

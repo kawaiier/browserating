@@ -21,7 +21,7 @@
       "Seamless Google account sync across devices",
       "Best-in-class web standards and DevTools"
     ],
-    "platforms": ["windows", "macos-arm", "macos-intel", "android", "ipad"],
+    "platforms": ["windows", "macos-arm", "macos-intel", "linux", "android", "ipad"],
     "bestFor": "Google ecosystem users who want maximum compatibility and extension choice without any friction",
     "discontinued": false,
     "discontinuedNote": null
@@ -48,7 +48,7 @@
       "Enhanced Tracking Protection built-in",
       "Deep customization via userChrome.css and extensions"
     ],
-    "platforms": ["windows", "macos-arm", "macos-intel", "android", "ipad"],
+    "platforms": ["windows", "macos-arm", "macos-intel", "linux", "android", "ipad"],
     "bestFor": "Users who value an open, independent web and want solid privacy without giving up usability",
     "discontinued": false,
     "discontinuedNote": null
@@ -102,7 +102,7 @@
       "Vertical tabs, workspaces, and sleeping tabs built-in",
       "PDF editor, immersive reader, and Collections included"
     ],
-    "platforms": ["windows", "macos-arm", "macos-intel", "android", "ipad"],
+    "platforms": ["windows", "macos-arm", "macos-intel", "linux", "android", "ipad"],
     "bestFor": "Microsoft 365 users and Windows power users who want AI tools and productivity features out of the box",
     "discontinued": false,
     "discontinuedNote": null
@@ -129,7 +129,7 @@
       "Chromium-based with full Chrome extension support",
       "Brave Search, Brave News, and optional Brave Rewards"
     ],
-    "platforms": ["windows", "macos-arm", "macos-intel", "android", "ipad"],
+    "platforms": ["windows", "macos-arm", "macos-intel", "linux", "android", "ipad"],
     "bestFor": "Privacy-conscious users who want Chrome's compatibility without Google's data collection",
     "discontinued": false,
     "discontinuedNote": null
@@ -156,7 +156,7 @@
       "Built-in tab stacking, tiling, and two-level tab bars",
       "Integrated mail client, calendar, feed reader, and notes"
     ],
-    "platforms": ["windows", "macos-arm", "macos-intel", "android", "ipad"],
+    "platforms": ["windows", "macos-arm", "macos-intel", "linux", "android", "ipad"],
     "bestFor": "Power users who want complete control over every pixel of their browser experience",
     "discontinued": false,
     "discontinuedNote": null
@@ -183,7 +183,7 @@
       "Side panel with WhatsApp, Telegram, Instagram, and more",
       "Opera Flow for seamless mobile-desktop sharing"
     ],
-    "platforms": ["windows", "macos-arm", "macos-intel", "android", "ipad"],
+    "platforms": ["windows", "macos-arm", "macos-intel", "linux", "android", "ipad"],
     "bestFor": "Social media enthusiasts who want messaging apps and VPN baked in without installing extra software",
     "discontinued": false,
     "discontinuedNote": null
@@ -264,7 +264,7 @@
       "Built on Firefox with full Gecko privacy protections",
       "Actively developed open source project with a growing community"
     ],
-    "platforms": ["windows", "macos-arm", "macos-intel"],
+    "platforms": ["windows", "macos-arm", "macos-intel", "linux"],
     "bestFor": "Users who want Firefox's privacy and open-source values wrapped in a minimal, modern interface",
     "discontinued": false,
     "discontinuedNote": null
@@ -291,7 +291,7 @@
       "Anti-fingerprinting measures built into every aspect of the browser",
       "Access to .onion sites and censorship-blocked content"
     ],
-    "platforms": ["windows", "macos-arm", "macos-intel", "android"],
+    "platforms": ["windows", "macos-arm", "macos-intel", "linux", "android"],
     "bestFor": "Journalists, activists, and anyone who needs true anonymity and is willing to trade speed for it",
     "discontinued": false,
     "discontinuedNote": null
@@ -318,7 +318,7 @@
       "Zero Mozilla telemetry, crash reporting, or phoning home",
       "Frequent security updates that closely track upstream Firefox"
     ],
-    "platforms": ["windows", "macos-arm", "macos-intel"],
+    "platforms": ["windows", "macos-arm", "macos-intel", "linux"],
     "bestFor": "Privacy purists who want a hardened Firefox without having to configure it themselves",
     "discontinued": false,
     "discontinuedNote": null
@@ -399,7 +399,7 @@
       "Fully open source, developed by a Japanese student team",
       "Deeply customizable toolbar and panel layout"
     ],
-    "platforms": ["windows", "macos-arm", "macos-intel"],
+    "platforms": ["windows", "macos-arm", "macos-intel", "linux"],
     "bestFor": "Firefox power users who want vertical tab management and richer UI controls without extensions",
     "discontinued": false,
     "discontinuedNote": null
@@ -480,7 +480,7 @@
       "Supports modern WebExtensions",
       "Familiar Firefox experience on the Gecko engine"
     ],
-    "platforms": ["windows", "macos-arm", "macos-intel", "android"],
+    "platforms": ["windows", "macos-arm", "macos-intel", "linux", "android"],
     "bestFor": "Firefox fans who want the same experience without Mozilla's usage reporting",
     "discontinued": false,
     "discontinuedNote": null
@@ -1074,7 +1074,7 @@
       "Compatible with Chrome extensions",
       "Chromium performance without Google tracking"
     ],
-    "platforms": ["macos-arm"],
+    "platforms": ["windows", "macos-arm", "macos-intel", "linux"],
     "bestFor": "Users who want Chromium compatibility with no Google involvement",
     "discontinued": false,
     "discontinuedNote": null

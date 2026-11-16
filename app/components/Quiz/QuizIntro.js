@@ -16,7 +16,7 @@ const floatKeyframes = `
 }
 `;
 
-export default function QuizIntro({ browserProfiles, onStart }) {
+export default function QuizIntro({ browserProfiles, questionCount, onStart }) {
   const floatBrowsers = useMemo(
     () => FLOAT_BROWSERS.map((id) => browserProfiles.find((b) => b.id === id)).filter(Boolean),
     [browserProfiles]
@@ -77,14 +77,14 @@ export default function QuizIntro({ browserProfiles, onStart }) {
           className="text-lg mb-8 max-w-xl mx-auto leading-relaxed"
           style={{ color: 'var(--text-subtle)' }}
         >
-          {QUIZ_INTRO_COPY.subheadline}
+          {QUIZ_INTRO_COPY.subheadline(questionCount)}
         </p>
 
         <ul
           className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-6 mb-10"
           role="list"
         >
-          {QUIZ_INTRO_COPY.bullets.map((bullet, i) => (
+          {QUIZ_INTRO_COPY.bullets(questionCount).map((bullet, i) => (
             <li
               key={i}
               className="flex items-center gap-2 text-sm font-medium"

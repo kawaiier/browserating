@@ -209,9 +209,10 @@ export const RADAR_CHART_OPTIONS = {
 // Intro screen copy
 export const QUIZ_INTRO_COPY = {
   headline: "Find Your Perfect Browser",
-  subheadline: "Answer 8 quick questions and we'll match you with the browser that actually fits the way you browse.",
-  bullets: [
-    { icon: "list-checks", text: "8 questions, about 2 minutes" },
+  subheadline: (questionCount) =>
+    `Answer ${questionCount} quick questions and we'll match you with the browser that actually fits the way you browse.`,
+  bullets: (questionCount) => [
+    { icon: "list-checks", text: `${questionCount} questions, about 2 minutes` },
     { icon: "sliders-horizontal", text: "Covers privacy, speed, features, and your browsing style" },
     { icon: "trophy", text: "Get a ranked match with a hero pick and two runner-ups" },
   ],
