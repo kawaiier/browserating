@@ -304,6 +304,9 @@
         "traits": {
           "openSource": 3,
           "privacy": 2
+        },
+        "dealbreakers": {
+          "openSource": { "min": 8 }
         }
       }
     ]
@@ -398,7 +401,11 @@
         "icon": "ban",
         "traits": {
           "privacy": 2,
-          "minimalism": 1
+          "minimalism": 1,
+          "ai": -3
+        },
+        "dealbreakers": {
+          "ai": { "max": 2 }
         }
       }
     ]

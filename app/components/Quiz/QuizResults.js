@@ -27,7 +27,35 @@ export default function QuizResults({ results, userTraits, onRetake, isShared })
   const hero = topResults[0];
   const runnerUps = topResults.slice(1, 3);
 
-  if (!hero && !(isShared && discontinuedResults.length > 0)) return null;
+  if (!hero && !isShared) {
+    return (
+      <div className="px-4 sm:px-6 py-10 max-w-2xl mx-auto w-full text-center">
+        <h2 className="text-xl font-semibold mb-3" style={{ color: 'var(--text-default)' }}>
+          No browser fits every requirement
+        </h2>
+        <p className="mb-8" style={{ color: 'var(--text-subtle)' }}>
+          Your answers rule out every browser we cover for that device. Try retaking the quiz with
+          one fewer hard requirement, such as open source or no AI.
+        </p>
+        <button
+          onClick={onRetake}
+          className="inline-flex items-center gap-2 font-semibold px-8 py-3 rounded-md transition-all duration-300"
+          style={{
+            backgroundColor: 'var(--color-brand)',
+            color: 'var(--text-inverse)',
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.backgroundColor = 'var(--color-brand-bold)';
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.backgroundColor = 'var(--color-brand)';
+          }}
+        >
+          Retake Quiz
+        </button>
+      </div>
+    );
+  }
 
   return (
     <div className="px-4 sm:px-6 py-10 max-w-2xl mx-auto w-full">

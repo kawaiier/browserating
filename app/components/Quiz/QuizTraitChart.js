@@ -13,9 +13,15 @@ import { Radar } from 'react-chartjs-2';
 ChartJS.register(...registerables);
 
 function normalizeToScale(traits) {
-  const total = Object.values(traits).reduce((s, v) => s + v, 0);
+  // Rejected traits have negative weights; the chart shows positive priorities only.
+  const positiveTraits = Object.fromEntries(
+    Object.entries(traits).map(([key, value]) => [key, Math.max(0, value)])
+  );
+  const total = Object.values(positiveTraits).reduce((s, v) => s + v, 0);
   if (total === 0) return Object.fromEntries(Object.keys(traits).map((k) => [k, 0]));
-  const normalized = Object.fromEntries(Object.entries(traits).map(([k, v]) => [k, v / total]));
+  const normalized = Object.fromEntries(
+    Object.entries(positiveTraits).map(([k, v]) => [k, v / total])
+  );
   const maxVal = Math.max(...Object.values(normalized));
   if (maxVal === 0) return normalized;
   return Object.fromEntries(Object.entries(normalized).map(([k, v]) => [k, (v / maxVal) * 10]));

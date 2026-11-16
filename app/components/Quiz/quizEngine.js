@@ -1,8 +1,9 @@
 /**
  * Quiz scoring engine — pure JavaScript, no framework dependencies.
  *
- * Computes user trait vectors from quiz answers, compares them against
- * browser profiles using cosine similarity, and returns ranked results.
+ * Computes weighted user preferences, compares them against browser profiles,
+ * and returns ranked results. Unmentioned traits are neutral; negative weights
+ * represent traits the user explicitly rejects.
  */
 
 const TOP_RESULT_COUNT = 3;
@@ -28,7 +29,7 @@ const TRAIT_KEYS = [
  * @param {Array<string|string[]>} answers - Selected option IDs, with arrays for multi-select questions.
  * @param {Array<{id: string, options: Array<{id: string, traits: Object}>}>} questions
  *   The full questions array from questions.json.
- * @returns {Object<string, number>} Trait totals, e.g. `{ privacy: 6, speed: 3, ... }`.
+ * @returns {Object<string, number>} Signed trait weights, e.g. `{ privacy: 6, ai: -3, ... }`.
  */
 export function computeUserTraits(answers, questions) {
   const traits = Object.fromEntries(TRAIT_KEYS.map((k) => [k, 0]));
@@ -77,91 +78,150 @@ export function getSelectedPlatforms(answers, questions) {
 }
 
 /**
- * Normalize a trait vector so that all values sum to 1.
+ * Collect and combine hard constraints attached to the selected answer options.
+ * Each constraint is a trait range, such as `{ openSource: { min: 8 } }`.
  *
- * @param {Object<string, number>} traits - Raw trait scores.
- * @returns {Object<string, number>} Normalized trait scores (values sum to 1, or all zeros).
+ * @param {Array<string|string[]>} answers - Selected option IDs, indexed by question.
+ * @param {Array} questions - Questions array from questions.json.
+ * @returns {Object<string, {min?: number, max?: number}>} Combined trait constraints.
  */
-export function normalizeTraits(traits) {
-  const total = Object.values(traits).reduce((sum, v) => sum + v, 0);
+export function getSelectedDealbreakers(answers, questions) {
+  const dealbreakers = {};
 
-  if (total === 0) {
-    return Object.fromEntries(Object.keys(traits).map((k) => [k, 0]));
+  questions.forEach((question, index) => {
+    const answer = answers[index];
+    const answerIds = Array.isArray(answer) ? answer : [answer];
+
+    for (const answerId of answerIds) {
+      const option = question.options.find((candidate) => candidate.id === answerId);
+      for (const [trait, constraint] of Object.entries(option?.dealbreakers ?? {})) {
+        const combined = (dealbreakers[trait] ??= {});
+        if (Number.isFinite(constraint.min)) {
+          combined.min = Math.max(combined.min ?? -Infinity, constraint.min);
+        }
+        if (Number.isFinite(constraint.max)) {
+          combined.max = Math.min(combined.max ?? Infinity, constraint.max);
+        }
+      }
+    }
+  });
+
+  return dealbreakers;
+}
+
+function weightedFitScore(userTraits, browserTraits) {
+  let weightedTotal = 0;
+  let totalWeight = 0;
+
+  for (const [trait, weight] of Object.entries(userTraits)) {
+    if (!Number.isFinite(weight) || weight === 0) continue;
+
+    // A missing rating is unknown, so treat it as neutral instead of penalizing it.
+    const rating = Number.isFinite(browserTraits?.[trait]) ? browserTraits[trait] : 5;
+    // Positive weights favor higher ratings; negative weights favor lower ratings.
+    const traitFit = weight > 0 ? rating : 10 - rating;
+    weightedTotal += Math.abs(weight) * traitFit;
+    totalWeight += Math.abs(weight);
   }
 
-  return Object.fromEntries(Object.entries(traits).map(([k, v]) => [k, v / total]));
+  if (totalWeight === 0) return 5;
+  return Math.max(0, Math.min(10, weightedTotal / totalWeight));
+}
+
+function median(values) {
+  const middle = Math.floor(values.length / 2);
+  return values.length % 2 === 0 ? (values[middle - 1] + values[middle]) / 2 : values[middle];
 }
 
 /**
- * Compute the cosine similarity between two trait vectors.
- *
- * @param {Object<string, number>} vecA - First trait vector.
- * @param {Object<string, number>} vecB - Second trait vector.
- * @returns {number} Similarity score between 0 and 1.
+ * Calibrate the displayed percentage across eligible profiles: the median fit
+ * maps to 50%, the best to 100%, and the lowest to 0% (when those scores differ).
  */
-export function cosineSimilarity(vecA, vecB) {
-  const keys = Object.keys(vecA);
+function addCalibratedMatchPercentages(ranked) {
+  if (ranked.length === 0) return ranked;
 
-  let dot = 0;
-  let magA = 0;
-  let magB = 0;
-
-  for (const key of keys) {
-    const a = vecA[key] || 0;
-    const b = vecB[key] || 0;
-    dot += a * b;
-    magA += a * a;
-    magB += b * b;
+  // With one or two candidates, median calibration would spread them to 0% and
+  // 100% even when their fits are nearly identical, so show the absolute fit.
+  if (ranked.length <= 2) {
+    return ranked.map((browser) => ({
+      ...browser,
+      matchPercentage: Math.round(browser.matchScore * 10),
+    }));
   }
 
-  magA = Math.sqrt(magA);
-  magB = Math.sqrt(magB);
+  const scores = ranked.map((browser) => browser.matchScore).sort((a, b) => a - b);
+  const lowest = scores[0];
+  const highest = scores.at(-1);
+  const middle = median(scores);
 
-  if (magA === 0 || magB === 0) {
-    return 0;
-  }
+  return ranked.map((browser) => {
+    let percentage;
+    if (highest === lowest) {
+      percentage = highest * 10;
+    } else if (browser.matchScore >= middle) {
+      percentage =
+        highest === middle ? 100 : 50 + ((browser.matchScore - middle) / (highest - middle)) * 50;
+    } else {
+      percentage =
+        middle === lowest ? 50 : ((browser.matchScore - lowest) / (middle - lowest)) * 50;
+    }
 
-  return dot / (magA * magB);
+    return { ...browser, matchPercentage: Math.round(percentage) };
+  });
+}
+
+function meetsDealbreakers(browser, dealbreakers) {
+  return Object.entries(dealbreakers).every(([trait, constraint]) => {
+    const rating = browser.traits?.[trait];
+    return (
+      Number.isFinite(rating) &&
+      (constraint.min === undefined || rating >= constraint.min) &&
+      (constraint.max === undefined || rating <= constraint.max)
+    );
+  });
 }
 
 /**
- * Score profiles that support at least one selected platform.
- * Each result receives a `matchPercentage` field and the list is sorted best-match-first.
+ * Score profiles that support at least one selected platform and meet every
+ * selected dealbreaker. Unmentioned traits do not affect the weighted fit.
  */
-function rankEligibleBrowsers(userTraits, browserProfiles, selectedPlatforms) {
-  const normalizedUser = normalizeTraits(userTraits);
+function rankEligibleBrowsers(userTraits, browserProfiles, selectedPlatforms, dealbreakers = {}) {
   const selectedPlatformSet = new Set(selectedPlatforms);
   const eligibleProfiles = browserProfiles.filter(
     (browser) =>
       Array.isArray(browser.platforms) &&
-      browser.platforms.some((platform) => selectedPlatformSet.has(platform))
+      browser.platforms.some((platform) => selectedPlatformSet.has(platform)) &&
+      meetsDealbreakers(browser, dealbreakers)
   );
 
-  const ranked = eligibleProfiles.map((browser) => {
-    const normalizedBrowser = normalizeTraits(browser.traits);
-    const similarity = cosineSimilarity(normalizedUser, normalizedBrowser);
-    const matchPercentage = Math.round(similarity * 100);
+  const ranked = eligibleProfiles.map((browser) => ({
+    ...browser,
+    matchScore: weightedFitScore(userTraits, browser.traits),
+  }));
 
-    return { ...browser, matchPercentage };
-  });
+  ranked.sort((a, b) => b.matchScore - a.matchScore);
 
-  ranked.sort((a, b) => b.matchPercentage - a.matchPercentage);
-
-  return ranked;
+  return addCalibratedMatchPercentages(ranked);
 }
 
 /**
  * Rank active browser profiles against the user's trait vector.
  * Discontinued profiles are excluded from the returned ranking.
  *
- * @param {Object<string, number>} userTraits - Raw user trait totals from `computeUserTraits`.
+ * @param {Object<string, number>} userTraits - Signed preference weights from `computeUserTraits`.
  * @param {Array<Object & {traits: Object<string, number>, platforms?: string[]}>} browserProfiles
  *   Array from browser-profiles.json; each entry must have a `.traits` object.
  * @param {string[]} selectedPlatforms - Platforms a browser must support to be eligible.
- * @returns {Array<Object & {matchPercentage: number}>} Eligible active browsers sorted best-match-first.
+ * @param {Object<string, {min?: number, max?: number}>} [dealbreakers={}] - Hard trait constraints.
+ * @returns {Array<Object & {matchScore: number, matchPercentage: number}>} Eligible active browsers sorted best-match-first.
  */
-export function rankBrowsers(userTraits, browserProfiles, selectedPlatforms = []) {
-  return rankEligibleBrowsers(userTraits, browserProfiles, selectedPlatforms).filter(
+export function rankBrowsers(
+  userTraits,
+  browserProfiles,
+  selectedPlatforms = [],
+  dealbreakers = {}
+) {
+  return rankEligibleBrowsers(userTraits, browserProfiles, selectedPlatforms, dealbreakers).filter(
     (browser) => !browser.discontinued
   );
 }
@@ -188,18 +248,32 @@ export function getTopResults(rankedBrowsers, count = TOP_RESULT_COUNT) {
  *   userTraits: Object<string, number>,
  *   rankedBrowsers: Array,
  *   selectedPlatforms: string[],
+ *   dealbreakers: Object<string, {min?: number, max?: number}>,
  *   discontinuedResults: Array
  * }}
  */
 export function computeResults(answers, questions, browserProfiles) {
   const userTraits = computeUserTraits(answers, questions);
   const selectedPlatforms = getSelectedPlatforms(answers, questions);
-  const allRankedBrowsers = rankEligibleBrowsers(userTraits, browserProfiles, selectedPlatforms);
+  const dealbreakers = getSelectedDealbreakers(answers, questions);
+  const allRankedBrowsers = rankEligibleBrowsers(
+    userTraits,
+    browserProfiles,
+    selectedPlatforms,
+    dealbreakers
+  );
   const rankedBrowsers = allRankedBrowsers.filter((browser) => !browser.discontinued);
   const topResults = getTopResults(rankedBrowsers, TOP_RESULT_COUNT);
   const discontinuedResults = allRankedBrowsers
     .slice(0, TOP_RESULT_COUNT)
     .filter((browser) => browser.discontinued);
 
-  return { topResults, userTraits, rankedBrowsers, selectedPlatforms, discontinuedResults };
+  return {
+    topResults,
+    userTraits,
+    rankedBrowsers,
+    selectedPlatforms,
+    dealbreakers,
+    discontinuedResults,
+  };
 }
