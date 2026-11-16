@@ -38,7 +38,7 @@
         "label": "iPhone & iPad",
         "description": "An iPhone or iPad",
         "icon": "circle",
-        "platforms": ["ipad"]
+        "platforms": ["ios", "ipad"]
       }
     ]
   },
@@ -53,7 +53,7 @@
         "description": "I want everything to load instantly",
         "icon": "zap",
         "traits": {
-          "speed": 3,
+          "speed": 4,
           "resourceEfficiency": 2
         }
       },
@@ -63,8 +63,8 @@
         "description": "My data is not for sale",
         "icon": "shield",
         "traits": {
-          "privacy": 3,
-          "openSource": 1
+          "privacy": 4,
+          "openSource": 2
         }
       },
       {
@@ -73,8 +73,8 @@
         "description": "Give me everything built-in",
         "icon": "layout-dashboard",
         "traits": {
-          "features": 3,
-          "customization": 1
+          "features": 4,
+          "customization": 2
         }
       },
       {
@@ -84,7 +84,7 @@
         "icon": "minus-circle",
         "traits": {
           "minimalism": 3,
-          "easeOfUse": 2
+          "easeOfUse": 3
         }
       }
     ]
@@ -100,9 +100,9 @@
         "description": "Docs, meetings, research, work apps",
         "icon": "briefcase",
         "traits": {
-          "features": 2,
-          "customization": 2,
-          "ecosystem": 1
+          "features": 3,
+          "customization": 1,
+          "ecosystem": 2
         }
       },
       {
@@ -111,7 +111,7 @@
         "description": "Streaming, social media, YouTube, gaming news",
         "icon": "gamepad-2",
         "traits": {
-          "speed": 2,
+          "speed": 3,
           "resourceEfficiency": 2,
           "features": 1
         }
@@ -122,7 +122,7 @@
         "description": "Sensitive topics, journalism, staying under the radar",
         "icon": "eye-off",
         "traits": {
-          "privacy": 3,
+          "privacy": 4,
           "openSource": 2
         }
       },
@@ -132,7 +132,7 @@
         "description": "Shopping, news, email, quick searches",
         "icon": "coffee",
         "traits": {
-          "easeOfUse": 3,
+          "easeOfUse": 4,
           "minimalism": 2
         }
       }
@@ -149,8 +149,8 @@
         "description": "Defaults are fine, I just want it to work",
         "icon": "package",
         "traits": {
-          "easeOfUse": 3,
-          "minimalism": 2
+          "easeOfUse": 4,
+          "ecosystem": 2
         }
       },
       {
@@ -159,8 +159,8 @@
         "description": "A few extensions and a nice theme",
         "icon": "sliders-horizontal",
         "traits": {
-          "customization": 1,
-          "features": 1
+          "customization": 3,
+          "features": 3
         }
       },
       {
@@ -169,8 +169,8 @@
         "description": "Custom CSS, flags, about:config — all of it",
         "icon": "terminal",
         "traits": {
-          "customization": 3,
-          "openSource": 2,
+          "customization": 4,
+          "openSource": 1,
           "innovation": 1
         }
       }
@@ -187,7 +187,7 @@
         "description": "Google, Apple, or Microsoft — I'm deep in one ecosystem and I like it",
         "icon": "cloud",
         "traits": {
-          "ecosystem": 3,
+          "ecosystem": 5,
           "easeOfUse": 1
         }
       },
@@ -197,8 +197,8 @@
         "description": "I use their services but I'm not loyal to any one company",
         "icon": "shuffle",
         "traits": {
-          "features": 2,
-          "speed": 1
+          "easeOfUse": 3,
+          "ecosystem": 3
         }
       },
       {
@@ -207,8 +207,8 @@
         "description": "I use them when I have to, but I'd rather not",
         "icon": "alert-triangle",
         "traits": {
-          "privacy": 2,
-          "openSource": 1
+          "privacy": 4,
+          "openSource": 2
         }
       },
       {
@@ -217,8 +217,8 @@
         "description": "I actively avoid Big Tech wherever possible",
         "icon": "user-x",
         "traits": {
-          "privacy": 2,
           "openSource": 3,
+          "privacy": 2,
           "innovation": 1
         }
       }
@@ -235,8 +235,8 @@
         "description": "Ads keep the internet free — fair enough",
         "icon": "smile",
         "traits": {
-          "easeOfUse": 2,
-          "ecosystem": 1
+          "easeOfUse": 3,
+          "ecosystem": 3
         }
       },
       {
@@ -245,8 +245,8 @@
         "description": "An extension is enough, I don't overthink it",
         "icon": "filter",
         "traits": {
-          "privacy": 1,
-          "features": 1
+          "privacy": 3,
+          "easeOfUse": 3
         }
       },
       {
@@ -255,7 +255,7 @@
         "description": "Built-in protection is a must — no exceptions",
         "icon": "shield-check",
         "traits": {
-          "privacy": 3,
+          "privacy": 4,
           "features": 2
         }
       },
@@ -265,8 +265,8 @@
         "description": "Anti-fingerprinting and Tor-level protection, please",
         "icon": "ghost",
         "traits": {
-          "privacy": 4,
-          "openSource": 2
+          "privacy": 5,
+          "openSource": 1
         }
       }
     ]
@@ -282,8 +282,8 @@
         "description": "I just want it to work well",
         "icon": "thumbs-up",
         "traits": {
-          "easeOfUse": 2,
-          "features": 1
+          "easeOfUse": 3,
+          "features": 3
         }
       },
       {
@@ -292,8 +292,8 @@
         "description": "I appreciate transparency, but it's not a dealbreaker",
         "icon": "eye",
         "traits": {
-          "openSource": 1,
-          "privacy": 1
+          "openSource": 3,
+          "privacy": 3
         }
       },
       {
@@ -302,11 +302,13 @@
         "description": "I only trust software I — or others — can verify",
         "icon": "code-2",
         "traits": {
-          "openSource": 3,
+          "openSource": 4,
           "privacy": 2
         },
         "dealbreakers": {
-          "openSource": { "min": 8 }
+          "openSource": {
+            "min": 8
+          }
         }
       }
     ]
@@ -322,9 +324,9 @@
         "description": "Like Chrome, but maybe a little better",
         "icon": "layout",
         "traits": {
-          "easeOfUse": 2,
-          "minimalism": 1,
-          "ecosystem": 1
+          "easeOfUse": 3,
+          "ecosystem": 2,
+          "minimalism": 1
         }
       },
       {
@@ -333,7 +335,7 @@
         "description": "Beautiful, quiet, no clutter — just the web",
         "icon": "circle",
         "traits": {
-          "minimalism": 3,
+          "minimalism": 4,
           "innovation": 2
         }
       },
@@ -344,8 +346,7 @@
         "icon": "panels-top-left",
         "traits": {
           "features": 3,
-          "customization": 2,
-          "innovation": 1
+          "customization": 3
         }
       },
       {
@@ -354,7 +355,7 @@
         "description": "I want something no other browser does",
         "icon": "sparkles",
         "traits": {
-          "innovation": 3,
+          "innovation": 4,
           "customization": 2
         }
       }
@@ -371,8 +372,8 @@
         "description": "I want AI front and center, even acting on my behalf",
         "icon": "bot",
         "traits": {
-          "ai": 4,
-          "innovation": 2
+          "ai": 5,
+          "innovation": 1
         }
       },
       {
@@ -381,8 +382,8 @@
         "description": "Summaries and answers when I ask for them",
         "icon": "wand-2",
         "traits": {
-          "ai": 2,
-          "features": 1
+          "ai": 3,
+          "features": 3
         }
       },
       {
@@ -391,7 +392,8 @@
         "description": "Fine if it's there, but I won't use it",
         "icon": "meh",
         "traits": {
-          "easeOfUse": 1
+          "easeOfUse": 3,
+          "speed": 3
         }
       },
       {
@@ -405,7 +407,9 @@
           "ai": -3
         },
         "dealbreakers": {
-          "ai": { "max": 2 }
+          "ai": {
+            "max": 2
+          }
         }
       }
     ]

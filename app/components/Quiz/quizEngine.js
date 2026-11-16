@@ -3,13 +3,14 @@
  *
  * Computes weighted user preferences, compares them against browser profiles,
  * and returns ranked results. Unmentioned traits are neutral; negative weights
- * represent traits the user explicitly rejects.
+ * represent traits the user explicitly rejects. Only the user's strongest
+ * preferences (see PRIORITY_TRAIT_COUNT) decide the fit.
  */
 
 const TOP_RESULT_COUNT = 3;
 
 /** The 11 trait keys used throughout the scoring system. */
-const TRAIT_KEYS = [
+export const TRAIT_KEYS = [
   'privacy',
   'speed',
   'customization',
@@ -109,13 +110,32 @@ export function getSelectedDealbreakers(answers, questions) {
   return dealbreakers;
 }
 
+/**
+ * Only the user's strongest preferences decide the fit. Counting every minor
+ * preference rewards browsers that are rated well on everything, so all-rounders
+ * would win almost every answer path.
+ */
+const PRIORITY_TRAIT_COUNT = 4;
+
+/**
+ * Pick the user's strongest preferences by absolute weight. Ties keep
+ * TRAIT_KEYS order, so the selection is deterministic.
+ *
+ * @param {Object<string, number>} userTraits - Signed preference weights.
+ * @returns {Array<[string, number]>} Up to PRIORITY_TRAIT_COUNT [trait, weight] pairs.
+ */
+export function getPriorityTraits(userTraits) {
+  return Object.entries(userTraits)
+    .filter(([, weight]) => Number.isFinite(weight) && weight !== 0)
+    .sort((a, b) => Math.abs(b[1]) - Math.abs(a[1]))
+    .slice(0, PRIORITY_TRAIT_COUNT);
+}
+
 function weightedFitScore(userTraits, browserTraits) {
   let weightedTotal = 0;
   let totalWeight = 0;
 
-  for (const [trait, weight] of Object.entries(userTraits)) {
-    if (!Number.isFinite(weight) || weight === 0) continue;
-
+  for (const [trait, weight] of getPriorityTraits(userTraits)) {
     // A missing rating is unknown, so treat it as neutral instead of penalizing it.
     const rating = Number.isFinite(browserTraits?.[trait]) ? browserTraits[trait] : 5;
     // Positive weights favor higher ratings; negative weights favor lower ratings.
@@ -183,9 +203,11 @@ function meetsDealbreakers(browser, dealbreakers) {
 
 /**
  * Score profiles that support at least one selected platform and meet every
- * selected dealbreaker. Unmentioned traits do not affect the weighted fit.
+ * selected dealbreaker, sorted best-fit first. Unmentioned traits do not affect
+ * the weighted fit. Percentages are added later, after discontinued profiles
+ * are removed, so a dead browser can't shift the calibration.
  */
-function rankEligibleBrowsers(userTraits, browserProfiles, selectedPlatforms, dealbreakers = {}) {
+function scoreEligibleBrowsers(userTraits, browserProfiles, selectedPlatforms, dealbreakers = {}) {
   const selectedPlatformSet = new Set(selectedPlatforms);
   const eligibleProfiles = browserProfiles.filter(
     (browser) =>
@@ -201,7 +223,11 @@ function rankEligibleBrowsers(userTraits, browserProfiles, selectedPlatforms, de
 
   ranked.sort((a, b) => b.matchScore - a.matchScore);
 
-  return addCalibratedMatchPercentages(ranked);
+  return ranked;
+}
+
+function rankActiveBrowsers(scoredBrowsers) {
+  return addCalibratedMatchPercentages(scoredBrowsers.filter((browser) => !browser.discontinued));
 }
 
 /**
@@ -221,8 +247,8 @@ export function rankBrowsers(
   selectedPlatforms = [],
   dealbreakers = {}
 ) {
-  return rankEligibleBrowsers(userTraits, browserProfiles, selectedPlatforms, dealbreakers).filter(
-    (browser) => !browser.discontinued
+  return rankActiveBrowsers(
+    scoreEligibleBrowsers(userTraits, browserProfiles, selectedPlatforms, dealbreakers)
   );
 }
 
@@ -256,15 +282,15 @@ export function computeResults(answers, questions, browserProfiles) {
   const userTraits = computeUserTraits(answers, questions);
   const selectedPlatforms = getSelectedPlatforms(answers, questions);
   const dealbreakers = getSelectedDealbreakers(answers, questions);
-  const allRankedBrowsers = rankEligibleBrowsers(
+  const scoredBrowsers = scoreEligibleBrowsers(
     userTraits,
     browserProfiles,
     selectedPlatforms,
     dealbreakers
   );
-  const rankedBrowsers = allRankedBrowsers.filter((browser) => !browser.discontinued);
+  const rankedBrowsers = rankActiveBrowsers(scoredBrowsers);
   const topResults = getTopResults(rankedBrowsers, TOP_RESULT_COUNT);
-  const discontinuedResults = allRankedBrowsers
+  const discontinuedResults = scoredBrowsers
     .slice(0, TOP_RESULT_COUNT)
     .filter((browser) => browser.discontinued);
 

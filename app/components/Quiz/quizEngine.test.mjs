@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import test from 'node:test';
 
-import { computeResults, computeUserTraits, rankBrowsers } from './quizEngine.js';
+import { TRAIT_KEYS, computeResults, computeUserTraits, rankBrowsers } from './quizEngine.js';
 
 const realQuestions = JSON.parse(
   readFileSync(new URL('../../../public/data/quiz/questions.json', import.meta.url), 'utf8')
@@ -266,4 +266,210 @@ test('answers no profile can satisfy produce an empty result set', () => {
   assert.deepEqual(results.topResults, []);
   assert.deepEqual(results.rankedBrowsers, []);
   assert.deepEqual(results.discontinuedResults, []);
+});
+
+const platformQuestion = realQuestions.find((question) => question.selectionMode === 'multiple');
+const platformOptionIds = platformQuestion.options.map((option) => option.id);
+const profileById = Object.fromEntries(realProfiles.map((profile) => [profile.id, profile]));
+
+const topIds = (answers, count = 3) =>
+  computeResults(answers, realQuestions, realProfiles)
+    .topResults.slice(0, count)
+    .map((browser) => browser.id);
+
+test('golden persona: a casual user who is all in on Big Tech gets a mainstream top pick', () => {
+  for (const platform of platformOptionIds) {
+    const answers = [[platform], 'q1d', 'q2d', 'q3a', 'q4a', 'q5a', 'q6a', 'q7a', 'q8c'];
+    const [top] = topIds(answers, 1);
+
+    assert.ok(
+      ['chrome', 'edge', 'safari', 'samsung-internet'].includes(top),
+      `${platform}: got ${top}`
+    );
+  }
+});
+
+test('golden persona: an AI enthusiast gets an AI-first browser in the top three', () => {
+  const personas = [
+    ['q1c', 'q2a', 'q3b', 'q4b', 'q5b', 'q6a', 'q7d', 'q8a'],
+    ['q1d', 'q2a', 'q3a', 'q4a', 'q5a', 'q6a', 'q7d', 'q8a'],
+    ['q1a', 'q2a', 'q3a', 'q4b', 'q5b', 'q6a', 'q7a', 'q8a'],
+  ];
+
+  for (const platform of platformOptionIds) {
+    for (const persona of personas) {
+      const top3 = topIds([[platform], ...persona]);
+      assert.ok(
+        top3.some((id) => profileById[id].traits.ai >= 8),
+        `${platform} ${persona.join(',')}: got ${top3.join(', ')}`
+      );
+    }
+  }
+});
+
+test('golden persona: privacy-first but usable never puts Tor or Mullvad first', () => {
+  const personas = [
+    ['q1b', 'q2c', 'q3a', 'q4d', 'q5c', 'q6b', 'q7a', 'q8c'],
+    ['q1b', 'q2d', 'q3b', 'q4c', 'q5c', 'q6b', 'q7a', 'q8c'],
+  ];
+
+  for (const platform of platformOptionIds) {
+    for (const persona of personas) {
+      const ranked = computeResults(
+        [[platform], ...persona],
+        realQuestions,
+        realProfiles
+      ).rankedBrowsers.map((browser) => browser.id);
+      const torRank = ranked.indexOf('tor-browser');
+
+      assert.ok(
+        !['tor-browser', 'mullvad-browser'].includes(ranked[0]),
+        `${platform}: ${ranked[0]}`
+      );
+      assert.ok(torRank === -1 || ranked.indexOf('brave') < torRank, platform);
+    }
+  }
+});
+
+test('distribution guard: no browser dominates the top pick across all answer paths', () => {
+  const scoredQuestions = realQuestions.filter((question) => question !== platformQuestion);
+  const counts = {};
+  let total = 0;
+
+  const walk = (index, answers) => {
+    if (index === scoredQuestions.length) {
+      const [top] = computeResults(answers, realQuestions, realProfiles).topResults;
+      if (top) {
+        counts[top.id] = (counts[top.id] ?? 0) + 1;
+        total += 1;
+      }
+      return;
+    }
+    for (const option of scoredQuestions[index].options) {
+      walk(index + 1, [...answers, option.id]);
+    }
+  };
+  for (const platform of platformOptionIds) walk(0, [[platform]]);
+
+  const share = (id) => (counts[id] ?? 0) / total;
+  const [leader, leaderCount] = Object.entries(counts).sort((a, b) => b[1] - a[1])[0];
+
+  // The audit's target is about 12 %. Brave's profile is rated at least as high as
+  // most other browsers on 9 of 11 traits, so reaching that target needs the trait
+  // rubric pass (P1-5). Until then, this guards against regressions.
+  assert.ok(leaderCount / total <= 0.4, `${leader} is the top pick in ${share(leader)}`);
+  assert.ok(share('tor-browser') <= 0.12, `Tor is the top pick in ${share('tor-browser')}`);
+});
+
+test('match percentages are calibrated on active browsers only', () => {
+  const candidates = [
+    { id: 'dead', platforms: ['windows'], traits: { privacy: 10 }, discontinued: true },
+    ...[2, 4, 6, 8].map((privacy) => ({
+      id: `active-${privacy}`,
+      platforms: ['windows'],
+      traits: { privacy },
+    })),
+  ];
+  const results = computeResults([['windows'], 'q1a'], questions, candidates);
+
+  assert.equal(results.topResults[0].id, 'active-8');
+  assert.equal(results.topResults[0].matchPercentage, 100);
+  assert.deepEqual(
+    results.discontinuedResults.map((browser) => browser.id),
+    ['dead']
+  );
+});
+
+test('only the strongest preferences decide the fit', () => {
+  const candidates = [
+    {
+      id: 'specialist',
+      platforms: ['windows'],
+      traits: { privacy: 10, speed: 10, features: 10, easeOfUse: 10, ai: 1 },
+    },
+    {
+      id: 'all-rounder',
+      platforms: ['windows'],
+      traits: { privacy: 8, speed: 8, features: 8, easeOfUse: 8, ai: 10 },
+    },
+  ];
+  const userTraits = { privacy: 6, speed: 5, features: 4, easeOfUse: 3, ai: 1 };
+  const ranked = rankBrowsers(userTraits, candidates, ['windows']);
+
+  assert.equal(ranked[0].id, 'specialist');
+  assert.equal(ranked[0].matchScore, 10);
+});
+
+test('data integrity: question options use known traits and equal total weight', () => {
+  const validPlatforms = new Set([
+    'windows',
+    'macos-arm',
+    'macos-intel',
+    'linux',
+    'android',
+    'ios',
+    'ipad',
+  ]);
+  const optionIds = new Set();
+
+  for (const question of realQuestions) {
+    for (const option of question.options) {
+      assert.ok(!optionIds.has(option.id), `duplicate option id ${option.id}`);
+      optionIds.add(option.id);
+
+      if (question === platformQuestion) {
+        assert.ok(
+          option.platforms.every((platform) => validPlatforms.has(platform)),
+          option.id
+        );
+        continue;
+      }
+
+      const weights = Object.entries(option.traits);
+      assert.ok(
+        weights.every(([trait]) => TRAIT_KEYS.includes(trait)),
+        option.id
+      );
+      for (const trait of Object.keys(option.dealbreakers ?? {})) {
+        assert.ok(TRAIT_KEYS.includes(trait), `${option.id} dealbreaker ${trait}`);
+      }
+      const total = weights.reduce((sum, [, weight]) => sum + Math.abs(weight), 0);
+      assert.equal(total, 6, `${option.id} has total weight ${total}`);
+    }
+  }
+});
+
+test('data integrity: browser profiles are complete and consistent', () => {
+  const validPlatforms = new Set([
+    'windows',
+    'macos-arm',
+    'macos-intel',
+    'linux',
+    'android',
+    'ios',
+    'ipad',
+  ]);
+  const ids = new Set();
+
+  for (const profile of realProfiles) {
+    assert.ok(!ids.has(profile.id), `duplicate profile id ${profile.id}`);
+    ids.add(profile.id);
+    assert.deepEqual(Object.keys(profile.traits).sort(), [...TRAIT_KEYS].sort(), profile.id);
+    assert.ok(profile.platforms.length > 0, profile.id);
+    assert.ok(
+      profile.platforms.every((platform) => validPlatforms.has(platform)),
+      profile.id
+    );
+    if (profile.platforms.includes('ipad'))
+      assert.ok(profile.platforms.includes('ios'), profile.id);
+    assert.ok(
+      profile.lastVerified === null || /^\d{4}-\d{2}-\d{2}$/.test(profile.lastVerified),
+      profile.id
+    );
+    if (profile.discontinued) assert.ok(profile.discontinuedNote, profile.id);
+  }
+
+  for (const id of ['mull', 'kiwi', 'chatgpt-atlas', 'arc']) {
+    assert.equal(profileById[id].discontinued, true, id);
+  }
 });
