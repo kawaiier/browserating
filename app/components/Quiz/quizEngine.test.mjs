@@ -266,7 +266,17 @@ test('selected open-source and no-AI answers are enforced as hard dealbreakers',
     )
   );
 
-  const noAiAnswers = [...openSourceAnswers.slice(0, 6), 'q6b', 'q7a', 'q8d'];
+  const noAiAnswers = [
+    ['platform-windows'],
+    'q1b',
+    'q2c',
+    'q3a',
+    'q4c',
+    'q5c',
+    'q6b',
+    'q7a',
+    'q8d',
+  ];
   const noAiResults = computeResults(noAiAnswers, realQuestions, realProfiles);
 
   assert.deepEqual(noAiResults.dealbreakers, { ai: { max: 2 } });
@@ -279,9 +289,40 @@ test('selected open-source and no-AI answers are enforced as hard dealbreakers',
   );
 });
 
-test('only explicit rejections produce negative trait weights', () => {
-  assert.equal(computeUserTraits(['q5a'], realQuestions).privacy, 0);
+test('negative answers lower the corresponding trait weight', () => {
+  assert.equal(computeUserTraits(['q5a'], realQuestions).privacy, -6);
   assert.equal(computeUserTraits(['q8d'], realQuestions).ai, -3);
+});
+
+test('question wording maps to neutral and relevant preferences', () => {
+  const questionsById = Object.fromEntries(
+    realQuestions.map((question) => [question.id, question])
+  );
+  const optionsById = Object.fromEntries(
+    realQuestions.flatMap((question) => question.options.map((option) => [option.id, option]))
+  );
+
+  assert.ok(realQuestions.length >= 8 && realQuestions.length <= 9);
+  assert.equal(optionsById.q2b.label, 'Streaming & social');
+  assert.match(optionsById.q2b.description, /service support.*HD\/4K.*battery life/i);
+  assert.deepEqual(optionsById.q2b.traits, {
+    features: 3,
+    resourceEfficiency: 2,
+    speed: 1,
+  });
+
+  assert.equal(optionsById.q4b.neutral, true);
+  assert.deepEqual(optionsById.q4b.traits, {});
+  assert.ok(
+    Object.values(computeUserTraits(['q4b'], realQuestions)).every((weight) => weight === 0)
+  );
+
+  assert.equal(optionsById.q5a.traits.privacy, -6);
+  assert.equal(questionsById.q6.question, 'Which browser extensions do you rely on?');
+  assert.equal(optionsById.q6a.label, 'I need Chrome Web Store extensions');
+  assert.equal(optionsById.q6c.label, "I don't rely on extensions");
+  assert.equal(optionsById.q7a.label, 'Familiar — like Chrome or Safari');
+  assert.match(optionsById.q7a.description, /recognizable layout/i);
 });
 
 test('small eligible sets keep close scores close instead of 0 and 100', () => {
@@ -319,7 +360,7 @@ const topIds = (answers, count = 3) =>
 
 test('golden persona: a casual Big Tech user gets Chrome, Edge, or Safari in the top three', () => {
   for (const platform of platformOptionIds) {
-    const answers = [[platform], 'q1d', 'q2d', 'q3a', 'q4a', 'q5a', 'q6a', 'q7a', 'q8c'];
+    const answers = [[platform], 'q1d', 'q2d', 'q3a', 'q4a', 'q5a', 'q6c', 'q7a', 'q8c'];
     const top3 = topIds(answers);
 
     assert.ok(
@@ -440,7 +481,7 @@ test('only the strongest preferences decide the fit', () => {
   assert.equal(ranked[0].matchScore, 10);
 });
 
-test('data integrity: options have unique IDs, valid icons, equal weight, and balanced trait coverage', () => {
+test('data integrity: options have unique IDs, valid icons, balanced weights, and trait coverage', () => {
   const validPlatforms = new Set([
     'windows',
     'macos-arm',
@@ -494,7 +535,12 @@ test('data integrity: options have unique IDs, valid icons, equal weight, and ba
         assert.ok(TRAIT_KEYS.includes(trait), `${option.id} dealbreaker ${trait}`);
       }
       const total = weights.reduce((sum, [, weight]) => sum + Math.abs(weight), 0);
-      assert.equal(total, OPTION_WEIGHT_TOTAL, `${option.id} has total weight ${total}`);
+      if (option.neutral) {
+        assert.deepEqual(option.traits, {}, `${option.id} must not influence scoring`);
+        assert.equal(total, 0, `${option.id} is marked neutral but has weight ${total}`);
+      } else {
+        assert.equal(total, OPTION_WEIGHT_TOTAL, `${option.id} has total weight ${total}`);
+      }
     }
   }
 

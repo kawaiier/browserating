@@ -108,13 +108,13 @@
       },
       {
         "id": "q2b",
-        "label": "Gaming & Entertainment",
-        "description": "Streaming, social media, YouTube, gaming news",
-        "icon": "gamepad-2",
+        "label": "Streaming & social",
+        "description": "Streaming services, social media, and YouTube — I care about reliable service support, HD/4K playback, and battery life.",
+        "icon": "cloud",
         "traits": {
-          "speed": 3,
+          "features": 3,
           "resourceEfficiency": 2,
-          "features": 1
+          "speed": 1
         }
       },
       {
@@ -157,7 +157,7 @@
       {
         "id": "q3b",
         "label": "Some tweaks",
-        "description": "A few extensions and a nice theme",
+        "description": "A few settings tweaks and a nice theme",
         "icon": "sliders-horizontal",
         "traits": {
           "customization": 3,
@@ -188,19 +188,17 @@
         "description": "Google, Apple, or Microsoft — I'm deep in one ecosystem and I like it",
         "icon": "cloud",
         "traits": {
-          "ecosystem": 5,
-          "easeOfUse": 1
+          "ecosystem": 4,
+          "easeOfUse": 2
         }
       },
       {
         "id": "q4b",
-        "label": "Convenient, not committed",
-        "description": "I use their services but I'm not loyal to any one company",
+        "label": "No strong preference",
+        "description": "I use major tech services, but I'm not loyal to any one browser ecosystem.",
         "icon": "shuffle",
-        "traits": {
-          "easeOfUse": 3,
-          "ecosystem": 3
-        }
+        "traits": {},
+        "neutral": true
       },
       {
         "id": "q4c",
@@ -214,13 +212,18 @@
       },
       {
         "id": "q4d",
-        "label": "Independent",
-        "description": "I actively avoid Big Tech wherever possible",
+        "label": "Independent, open source only",
+        "description": "I avoid Big Tech where possible, and open source is non-negotiable so the code can be inspected.",
         "icon": "user-x",
         "traits": {
           "openSource": 3,
           "privacy": 2,
           "innovation": 1
+        },
+        "dealbreakers": {
+          "openSource": {
+            "min": 8
+          }
         }
       }
     ]
@@ -233,11 +236,10 @@
       {
         "id": "q5a",
         "label": "I don't mind them",
-        "description": "Ads keep the internet free — fair enough",
+        "description": "Ads and some tracking are an acceptable trade-off; privacy protections aren't a priority for me.",
         "icon": "smile",
         "traits": {
-          "easeOfUse": 3,
-          "ecosystem": 3
+          "privacy": -6
         }
       },
       {
@@ -274,42 +276,40 @@
   },
   {
     "id": "q6",
-    "question": "Do you care if your browser is open source?",
-    "subtitle": "Transparency and community governance — does it matter to you?",
+    "question": "Which browser extensions do you rely on?",
+    "subtitle": "Think about compatibility with the add-ons you use today, especially those from the Chrome Web Store.",
     "options": [
       {
         "id": "q6a",
-        "label": "Not really",
-        "description": "I just want it to work well",
-        "icon": "thumbs-up",
+        "label": "I need Chrome Web Store extensions",
+        "description": "My workflow depends on add-ons from the Chrome Web Store.",
+        "icon": "package",
         "traits": {
-          "easeOfUse": 3,
-          "features": 3
+          "features": 3,
+          "ecosystem": 2,
+          "easeOfUse": 1
         }
       },
       {
         "id": "q6b",
-        "label": "Nice to have",
-        "description": "I appreciate transparency, but it's not a dealbreaker",
-        "icon": "eye",
+        "label": "A few, but I'm flexible",
+        "description": "I use some add-ons, but can switch or do without them.",
+        "icon": "sliders-horizontal",
         "traits": {
-          "openSource": 3,
-          "privacy": 3
+          "features": 2,
+          "customization": 2,
+          "easeOfUse": 2
         }
       },
       {
         "id": "q6c",
-        "label": "It's a must",
-        "description": "I only trust software I — or others — can verify",
-        "icon": "code-2",
+        "label": "I don't rely on extensions",
+        "description": "Built-in browser tools are enough; I don't need a particular add-on store.",
+        "icon": "minus-circle",
         "traits": {
-          "openSource": 4,
-          "privacy": 2
-        },
-        "dealbreakers": {
-          "openSource": {
-            "min": 8
-          }
+          "minimalism": 3,
+          "easeOfUse": 2,
+          "resourceEfficiency": 1
         }
       }
     ]
@@ -321,8 +321,8 @@
     "options": [
       {
         "id": "q7a",
-        "label": "Clean and familiar",
-        "description": "Like Chrome, but maybe a little better",
+        "label": "Familiar — like Chrome or Safari",
+        "description": "A recognizable layout and browsing habits, with no learning curve.",
         "icon": "layout",
         "traits": {
           "easeOfUse": 3,
