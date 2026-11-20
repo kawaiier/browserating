@@ -1,32 +1,17 @@
 import { getBrowsersServer } from './getBrowsersServer';
+import { getBrowserSlug } from './getBrowserSlug';
 
 export async function getBrowserBySlug(slug) {
   const browsers = await getBrowsersServer();
 
-  const browser = browsers.find((b) => {
-    const browserSlug = b.name
-      .toLowerCase()
-      .replace(/\s+/g, '-')
-      .replace(/[^a-z0-9-]/g, '');
-    return browserSlug === slug;
-  });
+  const browser = browsers.find((b) => getBrowserSlug(b.name) === slug);
 
   if (!browser) return null;
 
-  const browserSlug = browser.name
-    .toLowerCase()
-    .replace(/\s+/g, '-')
-    .replace(/[^a-z0-9-]/g, '');
-
-  return { ...browser, slug: browserSlug };
+  return { ...browser, slug: getBrowserSlug(browser.name) };
 }
 
 export async function getAllBrowserSlugs() {
   const browsers = await getBrowsersServer();
-  return browsers.map((b) => ({
-    slug: b.name
-      .toLowerCase()
-      .replace(/\s+/g, '-')
-      .replace(/[^a-z0-9-]/g, ''),
-  }));
+  return browsers.map((browser) => ({ slug: getBrowserSlug(browser.name) }));
 }

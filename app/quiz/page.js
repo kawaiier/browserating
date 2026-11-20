@@ -6,6 +6,7 @@ import ErrorBoundary from '../components/ErrorBoundary';
 import Footer from '../components/Footer';
 import QuizContainer from '../components/Quiz/QuizContainer';
 import QuizHeader from '../components/Quiz/QuizHeader';
+import { getBrowserSlug } from '../lib/getBrowserSlug';
 
 export async function generateMetadata({ searchParams }) {
   const params = await searchParams;
@@ -14,11 +15,16 @@ export async function generateMetadata({ searchParams }) {
   const BASE_URL = 'https://browserating.com';
   const ogImageBase = `${BASE_URL}/images/card-image.png`;
 
+  const questionsRaw = await fs.readFile(
+    path.join(process.cwd(), 'public', 'data', 'quiz', 'questions.json'),
+    'utf8'
+  );
+  const questionCount = JSON.parse(questionsRaw).length;
+
   if (!r) {
     return {
       title: 'Browser Quiz — Find Your Perfect Browser | BrowseRating',
-      description:
-        'Answer 7 quick questions and discover which browser is the best match for your needs. Personalized recommendations based on privacy, speed, features, and more.',
+      description: `Answer ${questionCount} quick questions and discover which browser is the best match for your needs. Personalized recommendations based on privacy, speed, features, and more.`,
       openGraph: {
         title: 'Find Your Perfect Browser — BrowseRating Quiz',
         description: 'Take our 2-minute quiz to find the browser that fits you best.',
@@ -42,8 +48,7 @@ export async function generateMetadata({ searchParams }) {
   if (!profile) {
     return {
       title: 'Browser Quiz — Find Your Perfect Browser | BrowseRating',
-      description:
-        'Answer 7 quick questions and discover which browser is the best match for your needs.',
+      description: `Answer ${questionCount} quick questions and discover which browser is the best match for your needs.`,
       openGraph: {
         title: 'Find Your Perfect Browser — BrowseRating Quiz',
         description: 'Take our 2-minute quiz to find the browser that fits you best.',
@@ -105,6 +110,7 @@ export default async function QuizPage({ searchParams }) {
       ...profile,
       logo: match?.logo ?? null,
       website: match?.website ?? null,
+      slug: match ? getBrowserSlug(match.name) : null,
     };
   });
 

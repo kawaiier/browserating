@@ -7,6 +7,8 @@ export default function QuizQuestion({
   question,
   selectedAnswer,
   onAnswer,
+  onContinue,
+  canContinue,
   onBack,
   showBack,
   direction,
@@ -35,6 +37,8 @@ export default function QuizQuestion({
   }, [stepKey, direction]);
 
   if (!question) return null;
+
+  const isMultiSelect = question.selectionMode === 'multiple';
 
   return (
     <div
@@ -74,36 +78,59 @@ export default function QuizQuestion({
             <QuizOption
               key={option.id}
               option={option}
-              isSelected={selectedAnswer === option.id}
+              isSelected={
+                isMultiSelect ? selectedAnswer.includes(option.id) : selectedAnswer === option.id
+              }
               onClick={onAnswer}
             />
           ))}
         </div>
 
-        {showBack && (
-          <div className="mt-6 flex justify-center">
-            <button
-              onClick={onBack}
-              className="text-sm transition-colors duration-200 flex items-center gap-1 rounded"
-              style={{ color: 'var(--text-subtle)' }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.color = 'var(--text-default)';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.color = 'var(--text-subtle)';
-              }}
-            >
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M15 19l-7-7 7-7"
-                />
-              </svg>
-              Back
-            </button>
+        {(showBack || isMultiSelect) && (
+          <div className="mt-6 flex justify-center items-center gap-4">
+            {showBack && (
+              <button
+                onClick={onBack}
+                className="text-sm transition-colors duration-200 flex items-center gap-1 rounded"
+                style={{ color: 'var(--text-subtle)' }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.color = 'var(--text-default)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.color = 'var(--text-subtle)';
+                }}
+              >
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M15 19l-7-7 7-7"
+                  />
+                </svg>
+                Back
+              </button>
+            )}
+            {isMultiSelect && (
+              <button
+                type="button"
+                onClick={onContinue}
+                disabled={!canContinue}
+                className="px-6 py-2.5 rounded-md font-semibold text-sm transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                style={{
+                  backgroundColor: 'var(--color-brand)',
+                  color: 'var(--text-inverse)',
+                }}
+              >
+                Continue
+              </button>
+            )}
           </div>
+        )}
+        {isMultiSelect && !canContinue && (
+          <p className="mt-2 text-center text-sm" style={{ color: 'var(--text-subtle)' }}>
+            Select at least one device to continue.
+          </p>
         )}
       </div>
     </div>

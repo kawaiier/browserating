@@ -13,23 +13,19 @@
       "resourceEfficiency": 4,
       "ecosystem": 10,
       "innovation": 5,
-      "easeOfUse": 9
+      "easeOfUse": 9,
+      "ai": 6
     },
     "highlights": [
       "Unmatched extension library via Chrome Web Store",
       "Seamless Google account sync across devices",
       "Best-in-class web standards and DevTools"
     ],
-    "platforms": [
-      "windows",
-      "macos-arm",
-      "macos-intel",
-      "android",
-      "ipad"
-    ],
+    "platforms": ["windows", "macos-arm", "macos-intel", "linux", "android", "ipad", "ios"],
     "bestFor": "Google ecosystem users who want maximum compatibility and extension choice without any friction",
     "discontinued": false,
-    "discontinuedNote": null
+    "discontinuedNote": null,
+    "lastVerified": null
   },
   {
     "id": "firefox",
@@ -45,22 +41,19 @@
       "resourceEfficiency": 6,
       "ecosystem": 4,
       "innovation": 6,
-      "easeOfUse": 8
+      "easeOfUse": 8,
+      "ai": 4
     },
     "highlights": [
       "Fully open source with strong community governance",
       "Enhanced Tracking Protection built-in",
       "Deep customization via userChrome.css and extensions"
     ],
-    "platforms": [
-      "windows",
-      "macos-arm",
-      "macos-intel",
-      "android"
-    ],
+    "platforms": ["windows", "macos-arm", "macos-intel", "linux", "android", "ipad", "ios"],
     "bestFor": "Users who value an open, independent web and want solid privacy without giving up usability",
     "discontinued": false,
-    "discontinuedNote": null
+    "discontinuedNote": null,
+    "lastVerified": null
   },
   {
     "id": "safari",
@@ -76,21 +69,19 @@
       "resourceEfficiency": 10,
       "ecosystem": 10,
       "innovation": 4,
-      "easeOfUse": 9
+      "easeOfUse": 9,
+      "ai": 3
     },
     "highlights": [
       "Best battery life of any macOS browser — by a wide margin",
       "Tight iCloud Keychain and Handoff integration",
       "Intelligent Tracking Prevention with on-device ML"
     ],
-    "platforms": [
-      "macos-arm",
-      "macos-intel",
-      "ipad"
-    ],
+    "platforms": ["macos-arm", "macos-intel", "ipad", "ios"],
     "bestFor": "Apple device owners who want the fastest, most battery-efficient experience with zero configuration",
     "discontinued": false,
-    "discontinuedNote": null
+    "discontinuedNote": null,
+    "lastVerified": "2026-11-20"
   },
   {
     "id": "edge",
@@ -106,23 +97,19 @@
       "resourceEfficiency": 5,
       "ecosystem": 9,
       "innovation": 6,
-      "easeOfUse": 8
+      "easeOfUse": 8,
+      "ai": 8
     },
     "highlights": [
       "Built-in Copilot AI sidebar with deep Microsoft 365 integration",
       "Vertical tabs, workspaces, and sleeping tabs built-in",
       "PDF editor, immersive reader, and Collections included"
     ],
-    "platforms": [
-      "windows",
-      "macos-arm",
-      "macos-intel",
-      "android",
-      "ipad"
-    ],
+    "platforms": ["windows", "macos-arm", "macos-intel", "linux", "android", "ipad", "ios"],
     "bestFor": "Microsoft 365 users and Windows power users who want AI tools and productivity features out of the box",
     "discontinued": false,
-    "discontinuedNote": null
+    "discontinuedNote": null,
+    "lastVerified": null
   },
   {
     "id": "brave",
@@ -138,23 +125,19 @@
       "resourceEfficiency": 7,
       "ecosystem": 4,
       "innovation": 7,
-      "easeOfUse": 8
+      "easeOfUse": 8,
+      "ai": 6
     },
     "highlights": [
       "Built-in ad and tracker blocking — no extension needed",
       "Chromium-based with full Chrome extension support",
       "Brave Search, Brave News, and optional Brave Rewards"
     ],
-    "platforms": [
-      "windows",
-      "macos-arm",
-      "macos-intel",
-      "android",
-      "ipad"
-    ],
+    "platforms": ["windows", "macos-arm", "macos-intel", "linux", "android", "ipad", "ios"],
     "bestFor": "Privacy-conscious users who want Chrome's compatibility without Google's data collection",
     "discontinued": false,
-    "discontinuedNote": null
+    "discontinuedNote": null,
+    "lastVerified": null
   },
   {
     "id": "vivaldi",
@@ -170,22 +153,19 @@
       "resourceEfficiency": 5,
       "ecosystem": 4,
       "innovation": 8,
-      "easeOfUse": 4
+      "easeOfUse": 4,
+      "ai": 2
     },
     "highlights": [
       "Unmatched UI customization: themes, layouts, toolbar placement",
       "Built-in tab stacking, tiling, and two-level tab bars",
       "Integrated mail client, calendar, feed reader, and notes"
     ],
-    "platforms": [
-      "windows",
-      "macos-arm",
-      "macos-intel",
-      "android"
-    ],
+    "platforms": ["windows", "macos-arm", "macos-intel", "linux", "android", "ipad", "ios"],
     "bestFor": "Power users who want complete control over every pixel of their browser experience",
     "discontinued": false,
-    "discontinuedNote": null
+    "discontinuedNote": null,
+    "lastVerified": null
   },
   {
     "id": "opera",
@@ -201,22 +181,19 @@
       "resourceEfficiency": 5,
       "ecosystem": 5,
       "innovation": 6,
-      "easeOfUse": 7
+      "easeOfUse": 7,
+      "ai": 7
     },
     "highlights": [
       "Free built-in VPN with unlimited bandwidth",
       "Side panel with WhatsApp, Telegram, Instagram, and more",
       "Opera Flow for seamless mobile-desktop sharing"
     ],
-    "platforms": [
-      "windows",
-      "macos-arm",
-      "macos-intel",
-      "android"
-    ],
+    "platforms": ["windows", "macos-arm", "macos-intel", "linux", "android", "ipad", "ios"],
     "bestFor": "Social media enthusiasts who want messaging apps and VPN baked in without installing extra software",
     "discontinued": false,
-    "discontinuedNote": null
+    "discontinuedNote": null,
+    "lastVerified": null
   },
   {
     "id": "opera-gx",
@@ -232,27 +209,24 @@
       "resourceEfficiency": 7,
       "ecosystem": 4,
       "innovation": 8,
-      "easeOfUse": 7
+      "easeOfUse": 7,
+      "ai": 6
     },
     "highlights": [
       "GX Control to hard-limit CPU and RAM usage per browser",
       "Twitch, Discord, and gaming news integrated in the sidebar",
       "Customizable RGB color themes and GX sound effects"
     ],
-    "platforms": [
-      "windows",
-      "macos-arm",
-      "macos-intel",
-      "android"
-    ],
+    "platforms": ["windows", "macos-arm", "macos-intel", "android"],
     "bestFor": "Gamers who want their browser to look and feel like a gaming peripheral and not hog system resources mid-match",
     "discontinued": false,
-    "discontinuedNote": null
+    "discontinuedNote": null,
+    "lastVerified": null
   },
   {
     "id": "arc",
     "name": "Arc Browser",
-    "tagline": "A total rethink of what a browser can be — spaces, Boosts, and no tab bar",
+    "tagline": "A space-based browser with Boosts; feature development has ended and it is scheduled to sunset in December 2026",
     "traits": {
       "privacy": 5,
       "speed": 7,
@@ -263,21 +237,19 @@
       "resourceEfficiency": 5,
       "ecosystem": 6,
       "innovation": 10,
-      "easeOfUse": 5
+      "easeOfUse": 5,
+      "ai": 6
     },
     "highlights": [
       "Spaces and Profiles to separate work, personal, and projects",
       "Boosts to restyle or add custom JS to any website",
-      "Command Bar replaces the address bar with a smarter, faster workflow"
+      "In maintenance mode with basic updates only; Arc stops working on December 22, 2026"
     ],
-    "platforms": [
-      "windows",
-      "macos-arm",
-      "macos-intel"
-    ],
-    "bestFor": "Design-minded creatives and knowledge workers who want a browser that feels genuinely different",
+    "platforms": ["windows", "macos-arm", "macos-intel"],
+    "bestFor": "Historical profile only; Arc is scheduled to stop working on December 22, 2026",
     "discontinued": true,
-    "discontinuedNote": "Active development has ended — Arc may receive limited support going forward."
+    "discontinuedNote": "The Browser Company ended new feature development. Arc for macOS and Windows remains available with basic updates until December 22, 2026, when it will stop working and accounts will be deactivated.",
+    "lastVerified": "2026-11-20"
   },
   {
     "id": "zen",
@@ -293,21 +265,19 @@
       "resourceEfficiency": 7,
       "ecosystem": 3,
       "innovation": 8,
-      "easeOfUse": 7
+      "easeOfUse": 7,
+      "ai": 2
     },
     "highlights": [
       "Sidebar-first UI with vertical tabs and workspace separation",
       "Built on Firefox with full Gecko privacy protections",
       "Actively developed open source project with a growing community"
     ],
-    "platforms": [
-      "windows",
-      "macos-arm",
-      "macos-intel"
-    ],
+    "platforms": ["windows", "macos-arm", "macos-intel", "linux"],
     "bestFor": "Users who want Firefox's privacy and open-source values wrapped in a minimal, modern interface",
     "discontinued": false,
-    "discontinuedNote": null
+    "discontinuedNote": null,
+    "lastVerified": null
   },
   {
     "id": "tor-browser",
@@ -323,22 +293,19 @@
       "resourceEfficiency": 5,
       "ecosystem": 1,
       "innovation": 5,
-      "easeOfUse": 5
+      "easeOfUse": 5,
+      "ai": 1
     },
     "highlights": [
       "Routes all traffic through the Tor onion network by default",
       "Anti-fingerprinting measures built into every aspect of the browser",
       "Access to .onion sites and censorship-blocked content"
     ],
-    "platforms": [
-      "windows",
-      "macos-arm",
-      "macos-intel",
-      "android"
-    ],
+    "platforms": ["windows", "macos-arm", "macos-intel", "linux", "android"],
     "bestFor": "Journalists, activists, and anyone who needs true anonymity and is willing to trade speed for it",
     "discontinued": false,
-    "discontinuedNote": null
+    "discontinuedNote": null,
+    "lastVerified": null
   },
   {
     "id": "librewolf",
@@ -354,21 +321,19 @@
       "resourceEfficiency": 6,
       "ecosystem": 2,
       "innovation": 4,
-      "easeOfUse": 5
+      "easeOfUse": 5,
+      "ai": 1
     },
     "highlights": [
       "Ships with uBlock Origin pre-installed and strict filtering defaults",
       "Zero Mozilla telemetry, crash reporting, or phoning home",
       "Frequent security updates that closely track upstream Firefox"
     ],
-    "platforms": [
-      "windows",
-      "macos-arm",
-      "macos-intel"
-    ],
+    "platforms": ["windows", "macos-arm", "macos-intel", "linux"],
     "bestFor": "Privacy purists who want a hardened Firefox without having to configure it themselves",
     "discontinued": false,
-    "discontinuedNote": null
+    "discontinuedNote": null,
+    "lastVerified": null
   },
   {
     "id": "duckduckgo",
@@ -384,23 +349,19 @@
       "resourceEfficiency": 7,
       "ecosystem": 3,
       "innovation": 5,
-      "easeOfUse": 10
+      "easeOfUse": 10,
+      "ai": 4
     },
     "highlights": [
       "Fire Button instantly wipes tabs, cookies, and browsing data",
       "Duck Player provides a clean, tracker-free YouTube experience",
       "Privacy Grade on every site so you always know what's being blocked"
     ],
-    "platforms": [
-      "windows",
-      "macos-arm",
-      "macos-intel",
-      "android",
-      "ipad"
-    ],
+    "platforms": ["windows", "macos-arm", "macos-intel", "android", "ipad", "ios"],
     "bestFor": "Non-technical users who want real privacy protections with zero configuration and no learning curve",
     "discontinued": false,
-    "discontinuedNote": null
+    "discontinuedNote": null,
+    "lastVerified": null
   },
   {
     "id": "orion",
@@ -416,21 +377,19 @@
       "resourceEfficiency": 9,
       "ecosystem": 7,
       "innovation": 8,
-      "easeOfUse": 7
+      "easeOfUse": 7,
+      "ai": 2
     },
     "highlights": [
       "Runs Chrome and Firefox extensions natively on WebKit",
       "Built by Kagi — zero telemetry, no ads, user-funded",
       "Exceptional battery life and performance on Apple Silicon"
     ],
-    "platforms": [
-      "macos-arm",
-      "macos-intel",
-      "ipad"
-    ],
+    "platforms": ["macos-arm", "macos-intel", "ipad", "ios"],
     "bestFor": "Mac users who want Safari's efficiency with Chrome's extension library and none of Apple's compromises",
     "discontinued": false,
-    "discontinuedNote": null
+    "discontinuedNote": null,
+    "lastVerified": null
   },
   {
     "id": "floorp",
@@ -446,21 +405,19 @@
       "resourceEfficiency": 6,
       "ecosystem": 3,
       "innovation": 7,
-      "easeOfUse": 5
+      "easeOfUse": 5,
+      "ai": 2
     },
     "highlights": [
       "Vertical tabs and sidebar workspaces built into the UI",
       "Fully open source, developed by a Japanese student team",
       "Deeply customizable toolbar and panel layout"
     ],
-    "platforms": [
-      "windows",
-      "macos-arm",
-      "macos-intel"
-    ],
+    "platforms": ["windows", "macos-arm", "macos-intel", "linux"],
     "bestFor": "Firefox power users who want vertical tab management and richer UI controls without extensions",
     "discontinued": false,
-    "discontinuedNote": null
+    "discontinuedNote": null,
+    "lastVerified": null
   },
   {
     "id": "mullvad-browser",
@@ -476,21 +433,19 @@
       "resourceEfficiency": 6,
       "ecosystem": 1,
       "innovation": 6,
-      "easeOfUse": 6
+      "easeOfUse": 6,
+      "ai": 1
     },
     "highlights": [
       "Fingerprint resistance baked into every browser setting by design",
       "Developed in collaboration with the Tor Project",
       "No account needed, no sync, minimal attack surface"
     ],
-    "platforms": [
-      "windows",
-      "macos-arm",
-      "macos-intel"
-    ],
+    "platforms": ["windows", "macos-arm", "macos-intel"],
     "bestFor": "Privacy-first users who want Tor-level fingerprint protection without routing through the Tor network",
     "discontinued": false,
-    "discontinuedNote": null
+    "discontinuedNote": null,
+    "lastVerified": null
   },
   {
     "id": "thorium",
@@ -506,20 +461,1022 @@
       "resourceEfficiency": 6,
       "ecosystem": 7,
       "innovation": 5,
-      "easeOfUse": 7
+      "easeOfUse": 7,
+      "ai": 1
     },
     "highlights": [
       "Recompiled with AVX2/SSE4 optimizations for measurable Speedometer gains",
       "Chrome-compatible with most extensions and sites",
       "Strips some Google telemetry compared to stock Chromium"
     ],
-    "platforms": [
-      "windows",
-      "macos-arm",
-      "macos-intel"
-    ],
+    "platforms": ["windows", "macos-arm", "macos-intel", "android"],
     "bestFor": "Speed enthusiasts on desktop who want to squeeze every point out of their hardware's benchmark potential",
     "discontinued": false,
-    "discontinuedNote": null
+    "discontinuedNote": null,
+    "lastVerified": null
+  },
+  {
+    "id": "waterfox",
+    "name": "Waterfox",
+    "tagline": "A Firefox fork without the telemetry and sponsored content",
+    "traits": {
+      "privacy": 7,
+      "speed": 7,
+      "customization": 8,
+      "minimalism": 5,
+      "features": 6,
+      "openSource": 9,
+      "resourceEfficiency": 6,
+      "ecosystem": 3,
+      "innovation": 4,
+      "easeOfUse": 8,
+      "ai": 1
+    },
+    "highlights": [
+      "Removes telemetry, data collection and sponsored content",
+      "Supports modern WebExtensions",
+      "Familiar Firefox experience on the Gecko engine"
+    ],
+    "platforms": ["windows", "macos-arm", "macos-intel", "linux", "android"],
+    "bestFor": "Firefox fans who want the same experience without Mozilla's usage reporting",
+    "discontinued": false,
+    "discontinuedNote": null,
+    "lastVerified": null
+  },
+  {
+    "id": "yandex-browser",
+    "name": "Yandex Browser",
+    "tagline": "A Chromium browser woven into Yandex's services",
+    "traits": {
+      "privacy": 3,
+      "speed": 7,
+      "customization": 5,
+      "minimalism": 5,
+      "features": 8,
+      "openSource": 3,
+      "resourceEfficiency": 4,
+      "ecosystem": 6,
+      "innovation": 6,
+      "easeOfUse": 8,
+      "ai": 6
+    },
+    "highlights": [
+      "Integrated Yandex search, translation and voice search",
+      "Protect layer scans for malware and unsafe connections",
+      "Turbo mode speeds up loading on slow connections"
+    ],
+    "platforms": ["windows", "macos-arm", "macos-intel", "android"],
+    "bestFor": "Users in the Yandex ecosystem who want built-in translation, voice search and security scanning",
+    "discontinued": false,
+    "discontinuedNote": null,
+    "lastVerified": null
+  },
+  {
+    "id": "ardia",
+    "name": "Ardia",
+    "tagline": "A free, open-source Arc-style browser built for Mac",
+    "traits": {
+      "privacy": 6,
+      "speed": 7,
+      "customization": 7,
+      "minimalism": 6,
+      "features": 7,
+      "openSource": 8,
+      "resourceEfficiency": 5,
+      "ecosystem": 3,
+      "innovation": 7,
+      "easeOfUse": 7,
+      "ai": 3
+    },
+    "highlights": [
+      "Arc-style sidebar with spaces and pinned tabs",
+      "Blocks ads and trackers using uBlock Origin",
+      "Imports spaces and pinned tabs from Arc"
+    ],
+    "platforms": ["macos-arm"],
+    "bestFor": "Arc users who want a free, open-source Chromium replacement with an agent-friendly CLI",
+    "discontinued": false,
+    "discontinuedNote": null,
+    "lastVerified": null
+  },
+  {
+    "id": "aside",
+    "name": "Aside",
+    "tagline": "An AI browser whose agent works across your logged-in sites",
+    "traits": {
+      "privacy": 3,
+      "speed": 6,
+      "customization": 5,
+      "minimalism": 5,
+      "features": 8,
+      "openSource": 2,
+      "resourceEfficiency": 5,
+      "ecosystem": 2,
+      "innovation": 9,
+      "easeOfUse": 6,
+      "ai": 10
+    },
+    "highlights": [
+      "Autonomous agent completes real tasks on your accounts",
+      "Operates websites directly instead of relying on integrations",
+      "Ranks first on browser-agent benchmarks"
+    ],
+    "platforms": ["windows", "macos-arm", "macos-intel"],
+    "bestFor": "People who want to hand real multi-site tasks to an AI agent",
+    "discontinued": false,
+    "discontinuedNote": null,
+    "lastVerified": "2026-11-20"
+  },
+  {
+    "id": "axonium",
+    "name": "Axonium",
+    "tagline": "A French browser built around digital sovereignty",
+    "traits": {
+      "privacy": 7,
+      "speed": 6,
+      "customization": 4,
+      "minimalism": 6,
+      "features": 5,
+      "openSource": 3,
+      "resourceEfficiency": 7,
+      "ecosystem": 2,
+      "innovation": 5,
+      "easeOfUse": 7,
+      "ai": 2
+    },
+    "highlights": [
+      "Privacy-respecting browsing alternative",
+      "Built in France with European digital independence in mind",
+      "WebKit-based for efficient native performance"
+    ],
+    "platforms": ["macos-arm"],
+    "bestFor": "Privacy-minded users who prefer a European-developed browser",
+    "discontinued": false,
+    "discontinuedNote": null,
+    "lastVerified": null
+  },
+  {
+    "id": "browseros",
+    "name": "BrowserOS",
+    "tagline": "An open-source browser built for AI agents to use your logged-in accounts",
+    "traits": {
+      "privacy": 4,
+      "speed": 6,
+      "customization": 6,
+      "minimalism": 4,
+      "features": 8,
+      "openSource": 5,
+      "resourceEfficiency": 4,
+      "ecosystem": 3,
+      "innovation": 8,
+      "easeOfUse": 5,
+      "ai": 8
+    },
+    "highlights": [
+      "AI agents can operate websites through your logged-in browser accounts",
+      "Connects to agent tools such as Claude Code, Codex, and MCP clients",
+      "Open-source desktop app available for macOS, Windows, and Linux"
+    ],
+    "platforms": ["windows", "macos-arm", "macos-intel", "linux"],
+    "bestFor": "People who want AI agents to work on websites through their own browser sessions",
+    "discontinued": false,
+    "discontinuedNote": null,
+    "lastVerified": "2026-11-20"
+  },
+  {
+    "id": "chatgpt-atlas",
+    "name": "ChatGPT Atlas",
+    "tagline": "OpenAI's ChatGPT-integrated browser, retired in August 2026",
+    "traits": {
+      "privacy": 3,
+      "speed": 6,
+      "customization": 4,
+      "minimalism": 6,
+      "features": 8,
+      "openSource": 2,
+      "resourceEfficiency": 5,
+      "ecosystem": 4,
+      "innovation": 9,
+      "easeOfUse": 8,
+      "ai": 10
+    },
+    "highlights": [
+      "Retired on August 9, 2026, and no longer receives updates",
+      "Previously integrated ChatGPT into web browsing",
+      "OpenAI is moving browser-based agentic work into ChatGPT and Codex"
+    ],
+    "platforms": ["macos-arm"],
+    "bestFor": "Historical profile only; Atlas was designed for ChatGPT users who wanted AI in the browser",
+    "discontinued": true,
+    "discontinuedNote": "OpenAI retired Atlas on August 9, 2026; it no longer receives updates. OpenAI is moving browser-based agentic work into ChatGPT and Codex.",
+    "lastVerified": "2026-11-20"
+  },
+  {
+    "id": "comet",
+    "name": "Comet",
+    "tagline": "Perplexity's browser, built around AI answers",
+    "traits": {
+      "privacy": 3,
+      "speed": 7,
+      "customization": 4,
+      "minimalism": 6,
+      "features": 8,
+      "openSource": 2,
+      "resourceEfficiency": 5,
+      "ecosystem": 4,
+      "innovation": 9,
+      "easeOfUse": 8,
+      "ai": 10
+    },
+    "highlights": [
+      "Deep Perplexity AI search integration",
+      "Content summarization and answer generation built in",
+      "AI as a first-class part of browsing"
+    ],
+    "platforms": ["windows", "macos-arm", "macos-intel", "android", "ios"],
+    "bestFor": "Researchers who want AI-powered search and summaries as the default",
+    "discontinued": false,
+    "discontinuedNote": null,
+    "lastVerified": "2026-11-20"
+  },
+  {
+    "id": "crest",
+    "name": "Crest",
+    "tagline": "An independent, Arc-inspired browser with isolated Spaces",
+    "traits": {
+      "privacy": 6,
+      "speed": 7,
+      "customization": 7,
+      "minimalism": 6,
+      "features": 7,
+      "openSource": 3,
+      "resourceEfficiency": 6,
+      "ecosystem": 5,
+      "innovation": 6,
+      "easeOfUse": 8,
+      "ai": 2
+    },
+    "highlights": [
+      "Spaces with isolated profiles and an adaptive sidebar",
+      "Split View and link previews",
+      "iCloud sync across Apple devices"
+    ],
+    "platforms": ["macos-arm"],
+    "bestFor": "Mac users who like Arc's Spaces and want deep per-Space organization",
+    "discontinued": false,
+    "discontinuedNote": null,
+    "lastVerified": null
+  },
+  {
+    "id": "dia",
+    "name": "Dia",
+    "tagline": "The Browser Company's AI-first follow-up to Arc",
+    "traits": {
+      "privacy": 4,
+      "speed": 7,
+      "customization": 5,
+      "minimalism": 6,
+      "features": 8,
+      "openSource": 2,
+      "resourceEfficiency": 5,
+      "ecosystem": 3,
+      "innovation": 9,
+      "easeOfUse": 8,
+      "ai": 9
+    },
+    "highlights": [
+      "Answers questions and summarizes pages in the browser",
+      "AI-assisted browsing from the team behind Arc",
+      "Built by the team behind Arc, now part of Atlassian"
+    ],
+    "platforms": ["windows", "macos-arm"],
+    "bestFor": "Arc fans who want AI assistance built into everyday browsing",
+    "discontinued": false,
+    "discontinuedNote": null,
+    "lastVerified": "2026-11-20"
+  },
+  {
+    "id": "fellou",
+    "name": "Fellou",
+    "tagline": "An agentic browser that runs multi-step web tasks for you",
+    "traits": {
+      "privacy": 3,
+      "speed": 6,
+      "customization": 5,
+      "minimalism": 5,
+      "features": 8,
+      "openSource": 2,
+      "resourceEfficiency": 5,
+      "ecosystem": 2,
+      "innovation": 9,
+      "easeOfUse": 6,
+      "ai": 10
+    },
+    "highlights": [
+      "AI agents fill forms and extract data",
+      "Navigates web apps on your behalf",
+      "Automates repetitive multi-step workflows"
+    ],
+    "platforms": ["macos-arm", "macos-intel"],
+    "bestFor": "Users who want to delegate repetitive or complex web tasks to AI",
+    "discontinued": false,
+    "discontinuedNote": null,
+    "lastVerified": "2026-11-20"
+  },
+  {
+    "id": "helium",
+    "name": "Helium",
+    "tagline": "An open-source, privacy-first Chromium browser with built-in ad and tracker blocking",
+    "traits": {
+      "privacy": 4,
+      "speed": 6,
+      "customization": 5,
+      "minimalism": 6,
+      "features": 7,
+      "openSource": 4,
+      "resourceEfficiency": 5,
+      "ecosystem": 2,
+      "innovation": 8,
+      "easeOfUse": 6,
+      "ai": 1
+    },
+    "highlights": [
+      "Blocks ads, trackers, cookie banners, and third-party cookies by default",
+      "Open-source Chromium browser with extension support",
+      "Available for macOS, Windows, and Linux; currently in beta"
+    ],
+    "platforms": ["windows", "macos-arm", "macos-intel", "linux"],
+    "bestFor": "Users who want a Chromium browser with built-in blocking and privacy controls",
+    "discontinued": false,
+    "discontinuedNote": null,
+    "lastVerified": "2026-11-20"
+  },
+  {
+    "id": "kosmik",
+    "name": "Kosmik",
+    "tagline": "A spatial research workspace with an embedded browser, sunset in May 2026",
+    "traits": {
+      "privacy": 4,
+      "speed": 6,
+      "customization": 6,
+      "minimalism": 5,
+      "features": 7,
+      "openSource": 2,
+      "resourceEfficiency": 5,
+      "ecosystem": 2,
+      "innovation": 8,
+      "easeOfUse": 6,
+      "ai": 4
+    },
+    "highlights": [
+      "Organized web pages, images, notes and media on a free-form canvas",
+      "Included a built-in browser and web-capture tools",
+      "The official site announced a May 31, 2026 sunset"
+    ],
+    "platforms": ["windows", "macos-arm", "macos-intel", "linux"],
+    "bestFor": "Historical profile for designers and researchers who organized web research on visual canvases",
+    "discontinued": true,
+    "discontinuedNote": "Kosmik announced a May 31, 2026 sunset. The announced sunset date has passed, so it is not a current browser recommendation.",
+    "lastVerified": "2026-11-20"
+  },
+  {
+    "id": "neo",
+    "name": "Neo",
+    "tagline": "An AI-powered browser that helps you search and summarize",
+    "traits": {
+      "privacy": 4,
+      "speed": 6,
+      "customization": 4,
+      "minimalism": 6,
+      "features": 7,
+      "openSource": 2,
+      "resourceEfficiency": 5,
+      "ecosystem": 2,
+      "innovation": 8,
+      "easeOfUse": 8,
+      "ai": 9
+    },
+    "highlights": [
+      "AI assistance integrated into browsing",
+      "Built-in tools to search and summarize content",
+      "Interact with web content more efficiently"
+    ],
+    "platforms": ["windows", "macos-arm", "macos-intel", "linux", "android", "ios"],
+    "bestFor": "Users who want Norton's AI browser and security tools across desktop and mobile devices",
+    "discontinued": false,
+    "discontinuedNote": null,
+    "lastVerified": "2026-11-20"
+  },
+  {
+    "id": "nook",
+    "name": "Nook",
+    "tagline": "A minimal browser for calm, distraction-free browsing",
+    "traits": {
+      "privacy": 5,
+      "speed": 7,
+      "customization": 3,
+      "minimalism": 9,
+      "features": 3,
+      "openSource": 3,
+      "resourceEfficiency": 8,
+      "ecosystem": 2,
+      "innovation": 5,
+      "easeOfUse": 8,
+      "ai": 1
+    },
+    "highlights": [
+      "Calm, clutter-free interface",
+      "Fewer tabs and toolbars than mainstream browsers",
+      "WebKit-based for light resource use"
+    ],
+    "platforms": ["macos-arm"],
+    "bestFor": "Users who want the simplest, quietest browsing experience on Mac",
+    "discontinued": false,
+    "discontinuedNote": null,
+    "lastVerified": null
+  },
+  {
+    "id": "ora",
+    "name": "Ora",
+    "tagline": "An open-source, native WebKit browser for macOS",
+    "traits": {
+      "privacy": 4,
+      "speed": 7,
+      "customization": 4,
+      "minimalism": 6,
+      "features": 7,
+      "openSource": 2,
+      "resourceEfficiency": 6,
+      "ecosystem": 2,
+      "innovation": 8,
+      "easeOfUse": 8,
+      "ai": 1
+    },
+    "highlights": [
+      "Native macOS interface built with SwiftUI and AppKit",
+      "WebKit-based browser with a spatial sidebar and tab management",
+      "Open source and in active development, but not yet ready for daily use"
+    ],
+    "platforms": ["macos-arm"],
+    "bestFor": "Mac users who want to try an early-stage, open-source WebKit browser",
+    "discontinued": false,
+    "discontinuedNote": null,
+    "lastVerified": "2026-11-20"
+  },
+  {
+    "id": "phi",
+    "name": "Phi",
+    "tagline": "A free AI browser with a native macOS client",
+    "traits": {
+      "privacy": 4,
+      "speed": 7,
+      "customization": 5,
+      "minimalism": 6,
+      "features": 7,
+      "openSource": 2,
+      "resourceEfficiency": 6,
+      "ecosystem": 2,
+      "innovation": 8,
+      "easeOfUse": 8,
+      "ai": 8
+    },
+    "highlights": [
+      "AI agent works in the same window and session as you",
+      "Can be switched to a plain browser with AI turned off",
+      "Native Swift/AppKit and SwiftUI client on Chromium"
+    ],
+    "platforms": ["macos-arm"],
+    "bestFor": "Mac users who want an AI-assisted, Chromium-based browser with a native interface",
+    "discontinued": false,
+    "discontinuedNote": null,
+    "lastVerified": "2026-11-20"
+  },
+  {
+    "id": "search",
+    "name": "Search",
+    "tagline": "A lightweight, open-source WebKit browser for Apple silicon",
+    "traits": {
+      "privacy": 7,
+      "speed": 8,
+      "customization": 3,
+      "minimalism": 9,
+      "features": 4,
+      "openSource": 9,
+      "resourceEfficiency": 9,
+      "ecosystem": 2,
+      "innovation": 4,
+      "easeOfUse": 8,
+      "ai": 1
+    },
+    "highlights": [
+      "Minimal interface with one address and search field",
+      "Built-in ad and tracker blocking",
+      "Reading mode, floating video and separate Spaces"
+    ],
+    "platforms": ["macos-arm"],
+    "bestFor": "Apple silicon Mac users who want a minimal, open-source browser",
+    "discontinued": false,
+    "discontinuedNote": null,
+    "lastVerified": null
+  },
+  {
+    "id": "shift",
+    "name": "Shift",
+    "tagline": "A multi-account browser for people juggling many inboxes",
+    "traits": {
+      "privacy": 3,
+      "speed": 6,
+      "customization": 6,
+      "minimalism": 4,
+      "features": 8,
+      "openSource": 2,
+      "resourceEfficiency": 4,
+      "ecosystem": 3,
+      "innovation": 5,
+      "easeOfUse": 6,
+      "ai": 3
+    },
+    "highlights": [
+      "Unified sidebar for Gmail, Outlook and other services",
+      "Switch accounts without logging in and out",
+      "Built for managing multiple work identities"
+    ],
+    "platforms": ["macos-arm"],
+    "bestFor": "Professionals and teams juggling multiple accounts or clients",
+    "discontinued": false,
+    "discontinuedNote": null,
+    "lastVerified": null
+  },
+  {
+    "id": "sigma-os",
+    "name": "Sigma OS",
+    "tagline": "A browser that groups tabs and web apps into workspaces",
+    "traits": {
+      "privacy": 4,
+      "speed": 7,
+      "customization": 6,
+      "minimalism": 5,
+      "features": 8,
+      "openSource": 2,
+      "resourceEfficiency": 5,
+      "ecosystem": 3,
+      "innovation": 7,
+      "easeOfUse": 7,
+      "ai": 4
+    },
+    "highlights": [
+      "Multi-app workspaces combining tabs and web apps",
+      "Keeps related tools together visually",
+      "Aimed at managing multiple projects or clients"
+    ],
+    "platforms": ["macos-arm", "macos-intel"],
+    "bestFor": "Professionals who organize work into project-based workspaces",
+    "discontinued": false,
+    "discontinuedNote": null,
+    "lastVerified": null
+  },
+  {
+    "id": "strawberry",
+    "name": "Strawberry",
+    "tagline": "A minimal, native-feeling browser for macOS",
+    "traits": {
+      "privacy": 5,
+      "speed": 7,
+      "customization": 3,
+      "minimalism": 8,
+      "features": 3,
+      "openSource": 3,
+      "resourceEfficiency": 7,
+      "ecosystem": 2,
+      "innovation": 5,
+      "easeOfUse": 8,
+      "ai": 1
+    },
+    "highlights": [
+      "Simple, native-feeling interface",
+      "Lightweight alternative to mainstream browsers",
+      "No unnecessary features or UI complexity"
+    ],
+    "platforms": ["macos-arm"],
+    "bestFor": "Mac users who want a lightweight, no-fuss alternative",
+    "discontinued": false,
+    "discontinuedNote": null,
+    "lastVerified": null
+  },
+  {
+    "id": "deta-surf",
+    "name": "Deta Surf",
+    "tagline": "An open-source AI notebook for organizing files and web pages",
+    "traits": {
+      "privacy": 5,
+      "speed": 6,
+      "customization": 5,
+      "minimalism": 5,
+      "features": 7,
+      "openSource": 7,
+      "resourceEfficiency": 5,
+      "ecosystem": 2,
+      "innovation": 8,
+      "easeOfUse": 6,
+      "ai": 8
+    },
+    "highlights": [
+      "Organizes files and web pages in an intelligent notebook",
+      "Uses AI to help search research and generate notes",
+      "Open-source desktop app available for macOS, Windows, and Linux"
+    ],
+    "platforms": ["windows", "macos-arm", "macos-intel", "linux"],
+    "bestFor": "Historical browser entry; the current Surf app is an open-source AI notebook, not a general-purpose browser",
+    "discontinued": true,
+    "discontinuedNote": "Deta Surf has evolved into an open-source AI notebook; the current product is not a standalone general-purpose browser.",
+    "lastVerified": "2026-11-20"
+  },
+  {
+    "id": "ungoogled-chromium",
+    "name": "Ungoogled Chromium",
+    "tagline": "Chromium with every trace of Google removed",
+    "traits": {
+      "privacy": 8,
+      "speed": 7,
+      "customization": 5,
+      "minimalism": 7,
+      "features": 5,
+      "openSource": 9,
+      "resourceEfficiency": 5,
+      "ecosystem": 3,
+      "innovation": 3,
+      "easeOfUse": 6,
+      "ai": 1
+    },
+    "highlights": [
+      "Removes Google-specific features, telemetry and web service dependencies",
+      "Compatible with Chrome extensions",
+      "Chromium performance without Google tracking"
+    ],
+    "platforms": ["windows", "macos-arm", "macos-intel", "linux"],
+    "bestFor": "Users who want Chromium compatibility with no Google involvement",
+    "discontinued": false,
+    "discontinuedNote": null,
+    "lastVerified": "2026-11-20"
+  },
+  {
+    "id": "cromite",
+    "name": "Cromite",
+    "tagline": "A privacy-hardened Chromium for Android, successor to Bromite",
+    "traits": {
+      "privacy": 8,
+      "speed": 7,
+      "customization": 5,
+      "minimalism": 7,
+      "features": 6,
+      "openSource": 9,
+      "resourceEfficiency": 6,
+      "ecosystem": 2,
+      "innovation": 5,
+      "easeOfUse": 6,
+      "ai": 1
+    },
+    "highlights": [
+      "Built-in ad blocker",
+      "Anti-fingerprinting patches and extra hardening",
+      "Distributed through its own F-Droid repository"
+    ],
+    "platforms": ["android"],
+    "bestFor": "Android users who want a privacy-focused Chromium-based browser",
+    "discontinued": false,
+    "discontinuedNote": null,
+    "lastVerified": null
+  },
+  {
+    "id": "ghostery",
+    "name": "Ghostery",
+    "tagline": "Ghostery Private Browser (formerly Dawn), now discontinued",
+    "traits": {
+      "privacy": 8,
+      "speed": 6,
+      "customization": 4,
+      "minimalism": 6,
+      "features": 6,
+      "openSource": 6,
+      "resourceEfficiency": 6,
+      "ecosystem": 3,
+      "innovation": 6,
+      "easeOfUse": 8,
+      "ai": 2
+    },
+    "highlights": [
+      "The former mobile browser bundled Ghostery's tracker blocking",
+      "Available on Android and iOS/iPadOS before being sunset",
+      "Ghostery directs desktop users to Firefox with its browser extension"
+    ],
+    "platforms": ["android", "ipad", "ios"],
+    "bestFor": "Historical profile only; Ghostery recommends Firefox + Ghostery on Android and Safari + Ghostery on iOS/iPadOS",
+    "discontinued": true,
+    "discontinuedNote": "Ghostery sunset its Private Browser (formerly Dawn). The standalone browser no longer receives updates; Ghostery offers its tracker-blocking extension for supported browsers instead.",
+    "lastVerified": "2026-11-20"
+  },
+  {
+    "id": "icaraven",
+    "name": "Icaraven",
+    "tagline": "A community Firefox fork that opens up more add-ons on Android",
+    "traits": {
+      "privacy": 6,
+      "speed": 6,
+      "customization": 8,
+      "minimalism": 5,
+      "features": 6,
+      "openSource": 10,
+      "resourceEfficiency": 5,
+      "ecosystem": 2,
+      "innovation": 4,
+      "easeOfUse": 6,
+      "ai": 1
+    },
+    "highlights": [
+      "Supports a wider range of extensions than official Firefox Android",
+      "Install desktop Firefox add-ons on Android",
+      "Community-maintained open-source project on GitHub"
+    ],
+    "platforms": ["android"],
+    "bestFor": "Android users who want desktop Firefox add-ons on their phone",
+    "discontinued": false,
+    "discontinuedNote": null,
+    "lastVerified": null
+  },
+  {
+    "id": "kito",
+    "name": "Kito",
+    "tagline": "A fast, lightweight Android browser with ad filtering",
+    "traits": {
+      "privacy": 5,
+      "speed": 8,
+      "customization": 2,
+      "minimalism": 9,
+      "features": 3,
+      "openSource": 3,
+      "resourceEfficiency": 9,
+      "ecosystem": 2,
+      "innovation": 3,
+      "easeOfUse": 8,
+      "ai": 1
+    },
+    "highlights": [
+      "Minimal interface with basic browsing",
+      "Basic ad filtering",
+      "Low resource consumption"
+    ],
+    "platforms": ["android"],
+    "bestFor": "Android users who want a fast, unobtrusive browser",
+    "discontinued": false,
+    "discontinuedNote": null,
+    "lastVerified": null
+  },
+  {
+    "id": "kiwi",
+    "name": "Kiwi",
+    "tagline": "Former Android browser known for supporting desktop Chrome extensions",
+    "traits": {
+      "privacy": 4,
+      "speed": 7,
+      "customization": 8,
+      "minimalism": 5,
+      "features": 7,
+      "openSource": 6,
+      "resourceEfficiency": 5,
+      "ecosystem": 3,
+      "innovation": 6,
+      "easeOfUse": 7,
+      "ai": 1
+    },
+    "highlights": [
+      "Supported desktop Chrome extensions on Android",
+      "Included a built-in ad blocker and night mode",
+      "Offered a bottom address bar option"
+    ],
+    "platforms": ["android"],
+    "bestFor": "Historical profile for Android users who wanted desktop Chrome extensions on mobile",
+    "discontinued": true,
+    "discontinuedNote": "Kiwi was archived and stopped receiving maintenance after January 2025. Its extension code was integrated into Microsoft Edge Canary.",
+    "lastVerified": "2026-11-20"
+  },
+  {
+    "id": "mull",
+    "name": "Mull",
+    "tagline": "Discontinued privacy-hardened Firefox fork for Android",
+    "traits": {
+      "privacy": 9,
+      "speed": 6,
+      "customization": 5,
+      "minimalism": 6,
+      "features": 5,
+      "openSource": 10,
+      "resourceEfficiency": 6,
+      "ecosystem": 2,
+      "innovation": 3,
+      "easeOfUse": 7,
+      "ai": 1
+    },
+    "highlights": [
+      "Stripped telemetry from Mozilla's Fenix codebase",
+      "Shipped with stricter privacy settings by default than Firefox",
+      "Was distributed through F-Droid"
+    ],
+    "platforms": ["android"],
+    "bestFor": "Historical profile only; Mull was a privacy-hardened Firefox fork for Android",
+    "discontinued": true,
+    "discontinuedNote": "The Mull-Fenix repository was archived on December 23, 2024; Mull no longer receives updates.",
+    "lastVerified": "2026-11-20"
+  },
+  {
+    "id": "opera-mini",
+    "name": "Opera Mini",
+    "tagline": "A lightweight Android browser that compresses pages to save data",
+    "traits": {
+      "privacy": 4,
+      "speed": 7,
+      "customization": 2,
+      "minimalism": 8,
+      "features": 4,
+      "openSource": 2,
+      "resourceEfficiency": 10,
+      "ecosystem": 3,
+      "innovation": 4,
+      "easeOfUse": 9,
+      "ai": 2
+    },
+    "highlights": [
+      "Compresses pages through Opera's servers",
+      "Significantly reduces data usage",
+      "Works well on entry-level devices"
+    ],
+    "platforms": ["android"],
+    "bestFor": "Users in low-bandwidth or limited-data environments",
+    "discontinued": false,
+    "discontinuedNote": null,
+    "lastVerified": null
+  },
+  {
+    "id": "quetta",
+    "name": "Quetta",
+    "tagline": "A privacy-focused Android browser with built-in blocking",
+    "traits": {
+      "privacy": 8,
+      "speed": 7,
+      "customization": 3,
+      "minimalism": 7,
+      "features": 5,
+      "openSource": 3,
+      "resourceEfficiency": 6,
+      "ecosystem": 2,
+      "innovation": 4,
+      "easeOfUse": 8,
+      "ai": 2
+    },
+    "highlights": [
+      "Built-in ad and tracker blocking",
+      "Clean, straightforward interface",
+      "No extensions or configuration needed"
+    ],
+    "platforms": ["android"],
+    "bestFor": "Android users who want simple privacy without setup",
+    "discontinued": false,
+    "discontinuedNote": null,
+    "lastVerified": null
+  },
+  {
+    "id": "samsung-internet",
+    "name": "Samsung Internet",
+    "tagline": "The Chromium browser built into Samsung phones",
+    "traits": {
+      "privacy": 6,
+      "speed": 7,
+      "customization": 6,
+      "minimalism": 5,
+      "features": 8,
+      "openSource": 2,
+      "resourceEfficiency": 6,
+      "ecosystem": 7,
+      "innovation": 5,
+      "easeOfUse": 9,
+      "ai": 6
+    },
+    "highlights": [
+      "Content blocker extension system",
+      "Secure Folder integration and DeX desktop mode",
+      "Secret Mode and tracker blocking"
+    ],
+    "platforms": ["android"],
+    "bestFor": "Samsung device owners who want a feature-rich, well-integrated browser",
+    "discontinued": false,
+    "discontinuedNote": null,
+    "lastVerified": null
+  },
+  {
+    "id": "soul",
+    "name": "Soul",
+    "tagline": "A minimalist Android browser built for focused reading",
+    "traits": {
+      "privacy": 5,
+      "speed": 7,
+      "customization": 2,
+      "minimalism": 10,
+      "features": 2,
+      "openSource": 3,
+      "resourceEfficiency": 8,
+      "ecosystem": 2,
+      "innovation": 3,
+      "easeOfUse": 9,
+      "ai": 1
+    },
+    "highlights": [
+      "Stripped-back interface with minimal UI chrome",
+      "Content-first reading and browsing",
+      "Distraction-free design"
+    ],
+    "platforms": ["android"],
+    "bestFor": "Android users who prefer simplicity over a long feature list",
+    "discontinued": false,
+    "discontinuedNote": null,
+    "lastVerified": null
+  },
+  {
+    "id": "via",
+    "name": "Via",
+    "tagline": "An extremely small, no-frills Android browser",
+    "traits": {
+      "privacy": 5,
+      "speed": 8,
+      "customization": 3,
+      "minimalism": 9,
+      "features": 3,
+      "openSource": 3,
+      "resourceEfficiency": 10,
+      "ecosystem": 2,
+      "innovation": 3,
+      "easeOfUse": 8,
+      "ai": 1
+    },
+    "highlights": [
+      "Extremely small installation size",
+      "Basic ad filtering",
+      "Simple tab management without overhead"
+    ],
+    "platforms": ["android"],
+    "bestFor": "Android users who want a fast, minimal browser",
+    "discontinued": false,
+    "discontinuedNote": null,
+    "lastVerified": null
+  },
+  {
+    "id": "aloha",
+    "name": "Aloha Browser",
+    "tagline": "A private browser with a free VPN, media player and encrypted storage",
+    "traits": {
+      "privacy": 7,
+      "speed": 6,
+      "customization": 3,
+      "minimalism": 4,
+      "features": 7,
+      "openSource": 2,
+      "resourceEfficiency": 5,
+      "ecosystem": 3,
+      "innovation": 5,
+      "easeOfUse": 8,
+      "ai": 2
+    },
+    "highlights": [
+      "Built-in free VPN",
+      "Media player and private file storage",
+      "Stream and download content privately"
+    ],
+    "platforms": ["ipad", "ios"],
+    "bestFor": "iPad users who want VPN, privacy and media features in one app",
+    "discontinued": false,
+    "discontinuedNote": null,
+    "lastVerified": null
+  },
+  {
+    "id": "beam",
+    "name": "Beam",
+    "tagline": "A clean, fast browser without the feature bloat",
+    "traits": {
+      "privacy": 5,
+      "speed": 7,
+      "customization": 3,
+      "minimalism": 8,
+      "features": 4,
+      "openSource": 3,
+      "resourceEfficiency": 7,
+      "ecosystem": 2,
+      "innovation": 4,
+      "easeOfUse": 8,
+      "ai": 1
+    },
+    "highlights": ["Clean, minimal design", "Fast browsing", "Modern, uncluttered experience"],
+    "platforms": ["ipad", "ios"],
+    "bestFor": "Users who want a modern, uncluttered alternative to mainstream browsers",
+    "discontinued": false,
+    "discontinuedNote": null,
+    "lastVerified": null
   }
 ]

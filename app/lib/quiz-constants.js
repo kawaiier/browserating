@@ -23,7 +23,7 @@ export const TRAIT_META = {
   },
   speed: {
     label: "Speed",
-    description: "Raw browsing and JavaScript performance based on Speedometer benchmarks",
+    description: "Qualitative browsing-speed estimate, not based on Speedometer benchmarks.",
     icon: "zap",
     color: {
       light: "#f59e0b", // amber-500
@@ -34,7 +34,7 @@ export const TRAIT_META = {
   },
   resourceEfficiency: {
     label: "Resource Efficiency",
-    description: "How light the browser is on RAM, CPU, and battery",
+    description: "Qualitative estimate, not standardized RAM, CPU, or battery testing.",
     icon: "battery-charging",
     color: {
       light: "#f97316", // orange-500
@@ -98,6 +98,17 @@ export const TRAIT_META = {
       chartFill: "rgba(20, 184, 166, 0.15)",
     },
   },
+  ai: {
+    label: "AI Integration",
+    description: "How deeply AI assistants and agents are built into the browser",
+    icon: "bot",
+    color: {
+      light: "#6366f1", // indigo-500
+      dark: "#818cf8",  // indigo-400
+      chart: "rgba(99, 102, 241, 0.8)",
+      chartFill: "rgba(99, 102, 241, 0.15)",
+    },
+  },
   ecosystem: {
     label: "Ecosystem Integration",
     description: "How well the browser fits into your existing OS and service ecosystem",
@@ -122,6 +133,7 @@ export const TRAIT_ORDER = [
   "customization",
   "features",
   "innovation",
+  "ai",
   "ecosystem",
 ];
 
@@ -197,9 +209,10 @@ export const RADAR_CHART_OPTIONS = {
 // Intro screen copy
 export const QUIZ_INTRO_COPY = {
   headline: "Find Your Perfect Browser",
-  subheadline: "Answer 7 quick questions and we'll match you with the browser that actually fits the way you browse.",
-  bullets: [
-    { icon: "list-checks", text: "7 questions, about 2 minutes" },
+  subheadline: (questionCount) =>
+    `Answer ${questionCount} quick questions and we'll match you with the browser that actually fits the way you browse.`,
+  bullets: (questionCount) => [
+    { icon: "list-checks", text: `${questionCount} questions, about 2 minutes` },
     { icon: "sliders-horizontal", text: "Covers privacy, speed, features, and your browsing style" },
     { icon: "trophy", text: "Get a ranked match with a hero pick and two runner-ups" },
   ],

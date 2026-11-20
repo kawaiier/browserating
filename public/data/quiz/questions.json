@@ -1,5 +1,48 @@
 [
   {
+    "id": "platforms",
+    "selectionMode": "multiple",
+    "question": "Which device are you choosing for?",
+    "subtitle": "Select all devices you want recommendations for. Matches will be available on at least one selected device.",
+    "options": [
+      {
+        "id": "platform-windows",
+        "label": "Windows",
+        "description": "A Windows PC or laptop",
+        "icon": "layout",
+        "platforms": ["windows"]
+      },
+      {
+        "id": "platform-mac",
+        "label": "Mac",
+        "description": "A Mac desktop or laptop",
+        "icon": "sparkles",
+        "platforms": ["macos-arm", "macos-intel"]
+      },
+      {
+        "id": "platform-linux",
+        "label": "Linux",
+        "description": "A Linux desktop or laptop",
+        "icon": "terminal",
+        "platforms": ["linux"]
+      },
+      {
+        "id": "platform-android",
+        "label": "Android",
+        "description": "An Android phone or tablet",
+        "icon": "cloud",
+        "platforms": ["android"]
+      },
+      {
+        "id": "platform-ios",
+        "label": "iPhone & iPad",
+        "description": "An iPhone or iPad",
+        "icon": "circle",
+        "platforms": ["ios", "ipad"]
+      }
+    ]
+  },
+  {
     "id": "q1",
     "question": "What matters most in a browser?",
     "subtitle": "Pick the one thing you can't compromise on",
@@ -10,7 +53,7 @@
         "description": "I want everything to load instantly",
         "icon": "zap",
         "traits": {
-          "speed": 3,
+          "speed": 4,
           "resourceEfficiency": 2
         }
       },
@@ -20,8 +63,8 @@
         "description": "My data is not for sale",
         "icon": "shield",
         "traits": {
-          "privacy": 3,
-          "openSource": 1
+          "privacy": 4,
+          "openSource": 2
         }
       },
       {
@@ -30,8 +73,9 @@
         "description": "Give me everything built-in",
         "icon": "layout-dashboard",
         "traits": {
-          "features": 3,
-          "customization": 1
+          "features": 2,
+          "customization": 2,
+          "ai": 2
         }
       },
       {
@@ -41,7 +85,7 @@
         "icon": "minus-circle",
         "traits": {
           "minimalism": 3,
-          "easeOfUse": 2
+          "easeOfUse": 3
         }
       }
     ]
@@ -57,9 +101,9 @@
         "description": "Docs, meetings, research, work apps",
         "icon": "briefcase",
         "traits": {
-          "features": 2,
-          "customization": 2,
-          "ecosystem": 1
+          "features": 3,
+          "customization": 1,
+          "ecosystem": 2
         }
       },
       {
@@ -68,7 +112,7 @@
         "description": "Streaming, social media, YouTube, gaming news",
         "icon": "gamepad-2",
         "traits": {
-          "speed": 2,
+          "speed": 3,
           "resourceEfficiency": 2,
           "features": 1
         }
@@ -79,7 +123,7 @@
         "description": "Sensitive topics, journalism, staying under the radar",
         "icon": "eye-off",
         "traits": {
-          "privacy": 3,
+          "privacy": 4,
           "openSource": 2
         }
       },
@@ -89,7 +133,7 @@
         "description": "Shopping, news, email, quick searches",
         "icon": "coffee",
         "traits": {
-          "easeOfUse": 3,
+          "easeOfUse": 4,
           "minimalism": 2
         }
       }
@@ -98,7 +142,7 @@
   {
     "id": "q3",
     "question": "How do you feel about customization?",
-    "subtitle": "Be honest \u2014 do you actually change your settings?",
+    "subtitle": "Be honest — do you actually change your settings?",
     "options": [
       {
         "id": "q3a",
@@ -106,8 +150,8 @@
         "description": "Defaults are fine, I just want it to work",
         "icon": "package",
         "traits": {
-          "easeOfUse": 3,
-          "minimalism": 2
+          "easeOfUse": 4,
+          "ecosystem": 2
         }
       },
       {
@@ -116,19 +160,19 @@
         "description": "A few extensions and a nice theme",
         "icon": "sliders-horizontal",
         "traits": {
-          "customization": 1,
-          "features": 1
+          "customization": 3,
+          "features": 3
         }
       },
       {
         "id": "q3c",
         "label": "I want control over everything",
-        "description": "Custom CSS, flags, about:config \u2014 all of it",
+        "description": "Custom CSS, flags, about:config — all of it",
         "icon": "terminal",
         "traits": {
           "customization": 3,
-          "openSource": 2,
-          "innovation": 1
+          "openSource": 1,
+          "innovation": 2
         }
       }
     ]
@@ -136,15 +180,15 @@
   {
     "id": "q4",
     "question": "What's your relationship with Big Tech?",
-    "subtitle": "How much do you rely on \u2014 or avoid \u2014 major tech platforms?",
+    "subtitle": "How much do you rely on — or avoid — major tech platforms?",
     "options": [
       {
         "id": "q4a",
         "label": "All in",
-        "description": "Google, Apple, or Microsoft \u2014 I'm deep in one ecosystem and I like it",
+        "description": "Google, Apple, or Microsoft — I'm deep in one ecosystem and I like it",
         "icon": "cloud",
         "traits": {
-          "ecosystem": 3,
+          "ecosystem": 5,
           "easeOfUse": 1
         }
       },
@@ -154,8 +198,8 @@
         "description": "I use their services but I'm not loyal to any one company",
         "icon": "shuffle",
         "traits": {
-          "features": 2,
-          "speed": 1
+          "easeOfUse": 3,
+          "ecosystem": 3
         }
       },
       {
@@ -164,8 +208,8 @@
         "description": "I use them when I have to, but I'd rather not",
         "icon": "alert-triangle",
         "traits": {
-          "privacy": 2,
-          "openSource": 1
+          "privacy": 4,
+          "openSource": 2
         }
       },
       {
@@ -174,8 +218,8 @@
         "description": "I actively avoid Big Tech wherever possible",
         "icon": "user-x",
         "traits": {
-          "privacy": 2,
           "openSource": 3,
+          "privacy": 2,
           "innovation": 1
         }
       }
@@ -189,11 +233,11 @@
       {
         "id": "q5a",
         "label": "I don't mind them",
-        "description": "Ads keep the internet free \u2014 fair enough",
+        "description": "Ads keep the internet free — fair enough",
         "icon": "smile",
         "traits": {
-          "easeOfUse": 2,
-          "ecosystem": 1
+          "easeOfUse": 3,
+          "ecosystem": 3
         }
       },
       {
@@ -202,17 +246,17 @@
         "description": "An extension is enough, I don't overthink it",
         "icon": "filter",
         "traits": {
-          "privacy": 1,
-          "features": 1
+          "privacy": 3,
+          "easeOfUse": 3
         }
       },
       {
         "id": "q5c",
         "label": "Block everything by default",
-        "description": "Built-in protection is a must \u2014 no exceptions",
+        "description": "Built-in protection is a must — no exceptions",
         "icon": "shield-check",
         "traits": {
-          "privacy": 3,
+          "privacy": 4,
           "features": 2
         }
       },
@@ -222,8 +266,8 @@
         "description": "Anti-fingerprinting and Tor-level protection, please",
         "icon": "ghost",
         "traits": {
-          "privacy": 4,
-          "openSource": 2
+          "privacy": 5,
+          "openSource": 1
         }
       }
     ]
@@ -231,7 +275,7 @@
   {
     "id": "q6",
     "question": "Do you care if your browser is open source?",
-    "subtitle": "Transparency and community governance \u2014 does it matter to you?",
+    "subtitle": "Transparency and community governance — does it matter to you?",
     "options": [
       {
         "id": "q6a",
@@ -239,8 +283,8 @@
         "description": "I just want it to work well",
         "icon": "thumbs-up",
         "traits": {
-          "easeOfUse": 2,
-          "features": 1
+          "easeOfUse": 3,
+          "features": 3
         }
       },
       {
@@ -249,18 +293,23 @@
         "description": "I appreciate transparency, but it's not a dealbreaker",
         "icon": "eye",
         "traits": {
-          "openSource": 1,
-          "privacy": 1
+          "openSource": 3,
+          "privacy": 3
         }
       },
       {
         "id": "q6c",
         "label": "It's a must",
-        "description": "I only trust software I \u2014 or others \u2014 can verify",
+        "description": "I only trust software I — or others — can verify",
         "icon": "code-2",
         "traits": {
-          "openSource": 3,
+          "openSource": 4,
           "privacy": 2
+        },
+        "dealbreakers": {
+          "openSource": {
+            "min": 8
+          }
         }
       }
     ]
@@ -268,7 +317,7 @@
   {
     "id": "q7",
     "question": "What's your ideal browser's look and feel?",
-    "subtitle": "The vibe question \u2014 trust your gut",
+    "subtitle": "The vibe question — trust your gut",
     "options": [
       {
         "id": "q7a",
@@ -276,30 +325,29 @@
         "description": "Like Chrome, but maybe a little better",
         "icon": "layout",
         "traits": {
-          "easeOfUse": 2,
-          "minimalism": 1,
-          "ecosystem": 1
+          "easeOfUse": 3,
+          "ecosystem": 2,
+          "minimalism": 1
         }
       },
       {
         "id": "q7b",
         "label": "Minimal and zen",
-        "description": "Beautiful, quiet, no clutter \u2014 just the web",
+        "description": "Beautiful, quiet, no clutter — just the web",
         "icon": "circle",
         "traits": {
-          "minimalism": 3,
+          "minimalism": 4,
           "innovation": 2
         }
       },
       {
         "id": "q7c",
         "label": "Feature-packed dashboard",
-        "description": "Sidebar, workspaces, panels, tools \u2014 give it all to me",
+        "description": "Sidebar, workspaces, panels, tools — give it all to me",
         "icon": "panels-top-left",
         "traits": {
           "features": 3,
-          "customization": 2,
-          "innovation": 1
+          "customization": 3
         }
       },
       {
@@ -308,8 +356,61 @@
         "description": "I want something no other browser does",
         "icon": "sparkles",
         "traits": {
-          "innovation": 3,
+          "innovation": 4,
           "customization": 2
+        }
+      }
+    ]
+  },
+  {
+    "id": "q8",
+    "question": "How do you feel about AI in your browser?",
+    "subtitle": "From built-in assistants to agents that browse for you",
+    "options": [
+      {
+        "id": "q8a",
+        "label": "Bring it on",
+        "description": "I want AI front and center, even acting on my behalf",
+        "icon": "bot",
+        "traits": {
+          "ai": 4,
+          "innovation": 2
+        }
+      },
+      {
+        "id": "q8b",
+        "label": "A handy helper",
+        "description": "Summaries and answers when I ask for them",
+        "icon": "wand-2",
+        "traits": {
+          "ai": 3,
+          "features": 3
+        }
+      },
+      {
+        "id": "q8c",
+        "label": "Not a priority",
+        "description": "Fine if it's there, but I won't use it",
+        "icon": "meh",
+        "traits": {
+          "easeOfUse": 3,
+          "speed": 3
+        }
+      },
+      {
+        "id": "q8d",
+        "label": "Keep it out",
+        "description": "No AI, no data sent to chatbots",
+        "icon": "ban",
+        "traits": {
+          "privacy": 2,
+          "minimalism": 1,
+          "ai": -3
+        },
+        "dealbreakers": {
+          "ai": {
+            "max": 2
+          }
         }
       }
     ]

@@ -1,62 +1,6 @@
 'use client';
 
-import {
-  AlertTriangle,
-  Briefcase,
-  Circle,
-  Cloud,
-  Code2,
-  Coffee,
-  Eye,
-  EyeOff,
-  Filter,
-  Gamepad2,
-  Ghost,
-  LayoutDashboard,
-  LayoutTemplate,
-  MinusCircle,
-  Package,
-  PanelsTopLeft,
-  Shield,
-  ShieldCheck,
-  Shuffle,
-  SlidersHorizontal,
-  Smile,
-  Sparkles,
-  Terminal,
-  ThumbsUp,
-  UserX,
-  Zap,
-} from 'lucide-react';
-
-const ICON_MAP = {
-  zap: Zap,
-  shield: Shield,
-  'layout-dashboard': LayoutDashboard,
-  'minus-circle': MinusCircle,
-  briefcase: Briefcase,
-  'gamepad-2': Gamepad2,
-  'eye-off': EyeOff,
-  coffee: Coffee,
-  package: Package,
-  'sliders-horizontal': SlidersHorizontal,
-  terminal: Terminal,
-  cloud: Cloud,
-  shuffle: Shuffle,
-  'alert-triangle': AlertTriangle,
-  'user-x': UserX,
-  smile: Smile,
-  filter: Filter,
-  'shield-check': ShieldCheck,
-  ghost: Ghost,
-  'thumbs-up': ThumbsUp,
-  eye: Eye,
-  'code-2': Code2,
-  layout: LayoutTemplate,
-  circle: Circle,
-  'panels-top-left': PanelsTopLeft,
-  sparkles: Sparkles,
-};
+import { ICON_MAP } from './quizOptionIcons.js';
 
 function Icon({ name }) {
   const Component = ICON_MAP[name];
@@ -111,7 +55,10 @@ export default function QuizOption({ option, isSelected, onClick }) {
             {option.label}
           </div>
           {option.description && (
-            <div className="text-xs sm:text-sm mt-0.5 leading-snug" style={{ color: 'var(--text-subtle)' }}>
+            <div
+              className="text-xs sm:text-sm mt-0.5 leading-snug"
+              style={{ color: 'var(--text-subtle)' }}
+            >
               {option.description}
             </div>
           )}
