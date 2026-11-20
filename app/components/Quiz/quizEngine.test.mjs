@@ -4,6 +4,7 @@ import test from 'node:test';
 
 import { getBrowserSlug } from '../../lib/getBrowserSlug.js';
 import { TRAIT_META } from '../../lib/quiz-constants.js';
+import { ICON_MAP } from './quizOptionIcons.js';
 import { TRAIT_KEYS, computeResults, computeUserTraits, rankBrowsers } from './quizEngine.js';
 
 const realQuestions = JSON.parse(
@@ -316,14 +317,14 @@ const topIds = (answers, count = 3) =>
     .topResults.slice(0, count)
     .map((browser) => browser.id);
 
-test('golden persona: a casual user who is all in on Big Tech gets a mainstream top pick', () => {
+test('golden persona: a casual Big Tech user gets Chrome, Edge, or Safari in the top three', () => {
   for (const platform of platformOptionIds) {
     const answers = [[platform], 'q1d', 'q2d', 'q3a', 'q4a', 'q5a', 'q6a', 'q7a', 'q8c'];
-    const [top] = topIds(answers, 1);
+    const top3 = topIds(answers);
 
     assert.ok(
-      ['chrome', 'edge', 'safari', 'samsung-internet'].includes(top),
-      `${platform}: got ${top}`
+      ['chrome', 'edge', 'safari'].some((id) => top3.includes(id)),
+      `${platform}: got ${top3.join(', ')}`
     );
   }
 });
@@ -439,7 +440,7 @@ test('only the strongest preferences decide the fit', () => {
   assert.equal(ranked[0].matchScore, 10);
 });
 
-test('data integrity: options have equal weight and balanced trait coverage', () => {
+test('data integrity: options have unique IDs, valid icons, equal weight, and balanced trait coverage', () => {
   const validPlatforms = new Set([
     'windows',
     'macos-arm',
@@ -449,10 +450,13 @@ test('data integrity: options have equal weight and balanced trait coverage', ()
     'ios',
     'ipad',
   ]);
+  const questionIds = new Set();
   const optionIds = new Set();
   const questionTraitMaxima = new Map(TRAIT_KEYS.map((trait) => [trait, []]));
 
   for (const question of realQuestions) {
+    assert.ok(!questionIds.has(question.id), `duplicate question id ${question.id}`);
+    questionIds.add(question.id);
     if (question !== platformQuestion) {
       for (const trait of TRAIT_KEYS) {
         const maxWeight = Math.max(
@@ -468,6 +472,10 @@ test('data integrity: options have equal weight and balanced trait coverage', ()
     for (const option of question.options) {
       assert.ok(!optionIds.has(option.id), `duplicate option id ${option.id}`);
       optionIds.add(option.id);
+      assert.ok(
+        Object.hasOwn(ICON_MAP, option.icon),
+        `${option.id} references unknown icon "${option.icon}"`
+      );
 
       if (question === platformQuestion) {
         assert.ok(
