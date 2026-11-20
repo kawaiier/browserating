@@ -214,7 +214,7 @@ export const QUIZ_INTRO_COPY = {
   bullets: (questionCount) => [
     { icon: "list-checks", text: `${questionCount} questions, about 2 minutes` },
     { icon: "sliders-horizontal", text: "Covers privacy, speed, features, and your browsing style" },
-    { icon: "trophy", text: "Get a ranked match with a hero pick and two runner-ups" },
+    { icon: "trophy", text: "See your top browser match and two alternatives" },
   ],
   cta: "Start the Quiz",
 };

@@ -19,12 +19,12 @@ export async function generateMetadata({ searchParams }) {
     path.join(process.cwd(), 'public', 'data', 'quiz', 'questions.json'),
     'utf8'
   );
-  const questionCount = JSON.parse(questionsRaw).length;
+  const questions = JSON.parse(questionsRaw);
 
   if (!r) {
     return {
       title: 'Browser Quiz — Find Your Perfect Browser | BrowseRating',
-      description: `Answer ${questionCount} quick questions and discover which browser is the best match for your needs. Personalized recommendations based on privacy, speed, features, and more.`,
+      description: `Answer ${questions.length} quick questions and discover which browser is the best match for your needs. Personalized recommendations based on privacy, speed, features, and more.`,
       openGraph: {
         title: 'Find Your Perfect Browser — BrowseRating Quiz',
         description: 'Take our 2-minute quiz to find the browser that fits you best.',
@@ -48,7 +48,7 @@ export async function generateMetadata({ searchParams }) {
   if (!profile) {
     return {
       title: 'Browser Quiz — Find Your Perfect Browser | BrowseRating',
-      description: `Answer ${questionCount} quick questions and discover which browser is the best match for your needs.`,
+      description: `Answer ${questions.length} quick questions and discover which browser is the best match for your needs.`,
       openGraph: {
         title: 'Find Your Perfect Browser — BrowseRating Quiz',
         description: 'Take our 2-minute quiz to find the browser that fits you best.',

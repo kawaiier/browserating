@@ -822,7 +822,7 @@
   {
     "id": "aside",
     "name": "Aside",
-    "tagline": "An AI browser whose agent works across your logged-in sites",
+    "tagline": "Browser with an AI agent that operates websites through logged-in accounts",
     "traits": {
       "privacy": 3,
       "speed": 6,
@@ -855,7 +855,7 @@
       "Ranks first on browser-agent benchmarks"
     ],
     "platforms": ["windows", "macos-arm", "macos-intel"],
-    "bestFor": "People who want to hand real multi-site tasks to an AI agent",
+    "bestFor": "Tasks that involve actions across multiple logged-in websites",
     "discontinued": false,
     "discontinuedNote": null,
     "lastVerified": "2026-11-20"
@@ -904,7 +904,7 @@
   {
     "id": "browseros",
     "name": "BrowserOS",
-    "tagline": "An open-source browser built for AI agents to use your logged-in accounts",
+    "tagline": "Open-source desktop browser with integrations for AI agents to interact with websites through logged-in sessions",
     "traits": {
       "privacy": 4,
       "speed": 6,
@@ -937,7 +937,7 @@
       "Open-source desktop app available for macOS, Windows, and Linux"
     ],
     "platforms": ["windows", "macos-arm", "macos-intel", "linux"],
-    "bestFor": "People who want AI agents to work on websites through their own browser sessions",
+    "bestFor": "Connecting agent tools to websites through a logged-in browser session",
     "discontinued": false,
     "discontinuedNote": null,
     "lastVerified": "2026-11-20"
@@ -986,7 +986,7 @@
   {
     "id": "comet",
     "name": "Comet",
-    "tagline": "Perplexity's browser, built around AI answers",
+    "tagline": "Browser with Perplexity search integration, page summaries, and generated answers",
     "traits": {
       "privacy": 3,
       "speed": 7,
@@ -1019,7 +1019,7 @@
       "AI as a first-class part of browsing"
     ],
     "platforms": ["windows", "macos-arm", "macos-intel", "android", "ios"],
-    "bestFor": "Researchers who want AI-powered search and summaries as the default",
+    "bestFor": "Using Perplexity search, page summaries, and generated answers while browsing",
     "discontinued": false,
     "discontinuedNote": null,
     "lastVerified": "2026-11-20"
@@ -1068,7 +1068,7 @@
   {
     "id": "dia",
     "name": "Dia",
-    "tagline": "The Browser Company's AI-first follow-up to Arc",
+    "tagline": "Browser with in-page question answering and summarization",
     "traits": {
       "privacy": 4,
       "speed": 7,
@@ -1101,7 +1101,7 @@
       "Built by the team behind Arc, now part of Atlassian"
     ],
     "platforms": ["windows", "macos-arm"],
-    "bestFor": "Arc fans who want AI assistance built into everyday browsing",
+    "bestFor": "Using in-browser question answering and page summaries",
     "discontinued": false,
     "discontinuedNote": null,
     "lastVerified": "2026-11-20"
@@ -1109,7 +1109,7 @@
   {
     "id": "fellou",
     "name": "Fellou",
-    "tagline": "An agentic browser that runs multi-step web tasks for you",
+    "tagline": "Browser with an AI agent for form filling, data extraction, and multi-step web tasks",
     "traits": {
       "privacy": 3,
       "speed": 6,
@@ -1142,7 +1142,7 @@
       "Automates repetitive multi-step workflows"
     ],
     "platforms": ["macos-arm", "macos-intel"],
-    "bestFor": "Users who want to delegate repetitive or complex web tasks to AI",
+    "bestFor": "Tasks involving form filling, data extraction, or repetitive multi-step workflows",
     "discontinued": false,
     "discontinuedNote": null,
     "lastVerified": "2026-11-20"
@@ -1232,7 +1232,7 @@
   {
     "id": "neo",
     "name": "Neo",
-    "tagline": "An AI-powered browser that helps you search and summarize",
+    "tagline": "Browser with built-in AI tools for searching and summarizing content",
     "traits": {
       "privacy": 4,
       "speed": 6,
@@ -1265,7 +1265,7 @@
       "Interact with web content more efficiently"
     ],
     "platforms": ["windows", "macos-arm", "macos-intel", "linux", "android", "ios"],
-    "bestFor": "Users who want Norton's AI browser and security tools across desktop and mobile devices",
+    "bestFor": "Using built-in search and summarization tools on desktop or mobile",
     "discontinued": false,
     "discontinuedNote": null,
     "lastVerified": "2026-11-20"
@@ -1355,7 +1355,7 @@
   {
     "id": "phi",
     "name": "Phi",
-    "tagline": "A free AI browser with a native macOS client",
+    "tagline": "Native macOS Chromium browser with an optional AI agent",
     "traits": {
       "privacy": 4,
       "speed": 7,
@@ -1388,7 +1388,7 @@
       "Native Swift/AppKit and SwiftUI client on Chromium"
     ],
     "platforms": ["macos-arm"],
-    "bestFor": "Mac users who want an AI-assisted, Chromium-based browser with a native interface",
+    "bestFor": "Using an optional AI agent alongside browsing on macOS",
     "discontinued": false,
     "discontinuedNote": null,
     "lastVerified": "2026-11-20"
