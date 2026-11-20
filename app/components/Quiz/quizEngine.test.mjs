@@ -2,6 +2,8 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import test from 'node:test';
 
+import { getBrowserSlug } from '../../lib/getBrowserSlug.js';
+import { TRAIT_META } from '../../lib/quiz-constants.js';
 import { TRAIT_KEYS, computeResults, computeUserTraits, rankBrowsers } from './quizEngine.js';
 
 const realQuestions = JSON.parse(
@@ -9,6 +11,9 @@ const realQuestions = JSON.parse(
 );
 const realProfiles = JSON.parse(
   readFileSync(new URL('../../../public/data/quiz/browser-profiles.json', import.meta.url), 'utf8')
+);
+const siteBrowsers = JSON.parse(
+  readFileSync(new URL('../../../public/data/browsers.json', import.meta.url), 'utf8')
 );
 
 const questions = [
@@ -529,4 +534,28 @@ test('data integrity: browser profiles are complete and consistent', () => {
   for (const id of ['mull', 'kiwi', 'chatgpt-atlas', 'arc']) {
     assert.equal(profileById[id].discontinued, true, id);
   }
+});
+
+test('speed and resource-efficiency copy does not imply benchmark measurements', () => {
+  assert.match(TRAIT_META.speed.description, /qualitative/i);
+  assert.match(TRAIT_META.speed.description, /not based on Speedometer/i);
+  assert.match(TRAIT_META.resourceEfficiency.description, /qualitative estimate/i);
+  assert.match(TRAIT_META.resourceEfficiency.description, /not standardized/i);
+});
+
+test('quiz profiles resolve to site browser slugs by name, not by quiz ID', () => {
+  const siteBrowsersByName = new Map(
+    siteBrowsers.map((browser) => [browser.name.toLowerCase(), browser])
+  );
+
+  for (const profile of realProfiles) {
+    const siteBrowser = siteBrowsersByName.get(profile.name.toLowerCase());
+    assert.ok(siteBrowser, `no site browser matches ${profile.name}`);
+    assert.equal(getBrowserSlug(siteBrowser.name), getBrowserSlug(profile.name), profile.id);
+  }
+
+  assert.equal(getBrowserSlug(siteBrowsersByName.get('google chrome').name), 'google-chrome');
+  assert.equal(getBrowserSlug(siteBrowsersByName.get('zen browser').name), 'zen-browser');
+  assert.notEqual(profileById.chrome.id, getBrowserSlug(profileById.chrome.name));
+  assert.notEqual(profileById.zen.id, getBrowserSlug(profileById.zen.name));
 });

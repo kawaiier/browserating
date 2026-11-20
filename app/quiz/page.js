@@ -6,6 +6,7 @@ import ErrorBoundary from '../components/ErrorBoundary';
 import Footer from '../components/Footer';
 import QuizContainer from '../components/Quiz/QuizContainer';
 import QuizHeader from '../components/Quiz/QuizHeader';
+import { getBrowserSlug } from '../lib/getBrowserSlug';
 
 export async function generateMetadata({ searchParams }) {
   const params = await searchParams;
@@ -109,6 +110,7 @@ export default async function QuizPage({ searchParams }) {
       ...profile,
       logo: match?.logo ?? null,
       website: match?.website ?? null,
+      slug: match ? getBrowserSlug(match.name) : null,
     };
   });
 

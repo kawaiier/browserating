@@ -23,7 +23,7 @@ export const TRAIT_META = {
   },
   speed: {
     label: "Speed",
-    description: "Raw browsing and JavaScript performance based on Speedometer benchmarks",
+    description: "Qualitative browsing-speed estimate, not based on Speedometer benchmarks.",
     icon: "zap",
     color: {
       light: "#f59e0b", // amber-500
@@ -34,7 +34,7 @@ export const TRAIT_META = {
   },
   resourceEfficiency: {
     label: "Resource Efficiency",
-    description: "How light the browser is on RAM, CPU, and battery",
+    description: "Qualitative estimate, not standardized RAM, CPU, or battery testing.",
     icon: "battery-charging",
     color: {
       light: "#f97316", // orange-500

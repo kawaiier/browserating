@@ -72,7 +72,16 @@ export default function QuizResultCard({ browser, size = 'runner-up' }) {
                 fontSize: isHero ? '1.5rem' : '1.125rem',
               }}
             >
-              {browser.name}
+              {browser.slug ? (
+                <Link
+                  href={`/browsers/${browser.slug}`}
+                  className="hover:underline focus-visible:underline"
+                >
+                  {browser.name}
+                </Link>
+              ) : (
+                browser.name
+              )}
             </h2>
             {hasMatchPercentage && (
               <span
