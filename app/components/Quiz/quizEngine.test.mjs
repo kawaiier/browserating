@@ -85,18 +85,18 @@ test('computeResults supports multi-select as a union of selected platforms', ()
 });
 
 test('computeResults excludes discontinued browsers but notes one that would rank in the top three', () => {
-  const makeProfile = (id, discontinued = false) => ({
+  const makeProfile = (id, discontinued = false, privacy = 10) => ({
     id,
     name: id,
     platforms: ['windows'],
-    traits: { privacy: 10 },
+    traits: { privacy },
     discontinued,
   });
   const browserProfiles = [
     makeProfile('discontinued', true),
-    makeProfile('active-1'),
-    makeProfile('active-2'),
-    makeProfile('active-3'),
+    makeProfile('active-1', false, 9),
+    makeProfile('active-2', false, 9),
+    makeProfile('active-3', false, 9),
   ];
 
   const results = computeResults([['windows'], 'q1a'], questions, browserProfiles);
@@ -161,6 +161,38 @@ test('traits the user did not mention are neutral', () => {
   assert.equal(ranked[0].matchScore, ranked[1].matchScore);
   assert.equal(ranked[0].matchPercentage, ranked[1].matchPercentage);
   assert.equal(ranked[0].matchPercentage, 80);
+});
+
+test('raw match scores order candidates even when displayed percentages round to a tie', () => {
+  const ranked = rankBrowsers(
+    { privacy: 1 },
+    [
+      { id: 'chrome', platforms: ['windows'], traits: { privacy: 8.01 } },
+      { id: 'higher-fit', platforms: ['windows'], traits: { privacy: 8.04 } },
+    ],
+    ['windows']
+  );
+
+  assert.deepEqual(
+    ranked.map((browser) => browser.id),
+    ['higher-fit', 'chrome']
+  );
+  assert.ok(ranked[0].matchScore > ranked[1].matchScore);
+  assert.equal(ranked[0].matchPercentage, ranked[1].matchPercentage);
+});
+
+test('exact match-score ties use mainstream priority, then browser ID, not profile order', () => {
+  const candidates = ['zeta', 'firefox', 'chrome', 'safari', 'alpha'].map((id) => ({
+    id,
+    platforms: ['windows'],
+    traits: { privacy: 8 },
+  }));
+  const ranked = rankBrowsers({ privacy: 1 }, candidates, ['windows']);
+
+  assert.deepEqual(
+    ranked.map((browser) => browser.id),
+    ['chrome', 'safari', 'firefox', 'alpha', 'zeta']
+  );
 });
 
 test('negative weights penalize traits the user explicitly rejects', () => {

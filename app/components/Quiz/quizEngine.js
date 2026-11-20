@@ -9,6 +9,37 @@
 
 const TOP_RESULT_COUNT = 3;
 
+/**
+ * Fallback order for exact match-score ties. This only favors familiar,
+ * mainstream browsers when the quiz finds an identical fit; other profiles use
+ * their IDs as a deterministic fallback instead of inheriting JSON order.
+ */
+const MAINSTREAM_TIE_BREAK_ORDER = [
+  'chrome',
+  'safari',
+  'edge',
+  'firefox',
+  'samsung-internet',
+  'opera',
+  'brave',
+];
+const MAINSTREAM_TIE_BREAK_PRIORITY = new Map(
+  MAINSTREAM_TIE_BREAK_ORDER.map((id, index) => [id, index])
+);
+
+function compareTieBreakPriority(a, b) {
+  const aPriority = MAINSTREAM_TIE_BREAK_PRIORITY.get(a.id);
+  const bPriority = MAINSTREAM_TIE_BREAK_PRIORITY.get(b.id);
+
+  if (aPriority !== bPriority) {
+    if (aPriority === undefined) return 1;
+    if (bPriority === undefined) return -1;
+    return aPriority - bPriority;
+  }
+
+  return a.id < b.id ? -1 : a.id > b.id ? 1 : 0;
+}
+
 /** The 11 trait keys used throughout the scoring system. */
 export const TRAIT_KEYS = [
   'privacy',
@@ -221,7 +252,8 @@ function scoreEligibleBrowsers(userTraits, browserProfiles, selectedPlatforms, d
     matchScore: weightedFitScore(userTraits, browser.traits),
   }));
 
-  ranked.sort((a, b) => b.matchScore - a.matchScore);
+  // Sort on the unrounded fit first; percentages are presentation-only.
+  ranked.sort((a, b) => b.matchScore - a.matchScore || compareTieBreakPriority(a, b));
 
   return ranked;
 }
