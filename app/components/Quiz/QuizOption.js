@@ -14,26 +14,11 @@ export default function QuizOption({ option, isSelected, onClick }) {
       onClick={() => onClick(option.id)}
       aria-label={`${option.label}: ${option.description}`}
       aria-pressed={isSelected}
-      className="group relative w-full text-left px-4 py-4 sm:px-5 sm:py-5 rounded-md border-2 transition-all duration-200"
-      style={{
-        borderColor: isSelected ? 'var(--color-brand)' : 'var(--border-subtle)',
-        backgroundColor: isSelected ? 'var(--color-brand-subtle)' : 'var(--surface-raised)',
-        transform: isSelected ? 'scale(1.02)' : 'scale(1)',
-      }}
-      onMouseEnter={(e) => {
-        if (!isSelected) {
-          e.currentTarget.style.borderColor = 'var(--border-default)';
-          e.currentTarget.style.transform = 'translateY(-2px)';
-          e.currentTarget.style.boxShadow = 'var(--shadow-overlay)';
-        }
-      }}
-      onMouseLeave={(e) => {
-        if (!isSelected) {
-          e.currentTarget.style.borderColor = 'var(--border-subtle)';
-          e.currentTarget.style.transform = 'scale(1)';
-          e.currentTarget.style.boxShadow = 'none';
-        }
-      }}
+      className={`group relative w-full rounded-md border-2 px-4 py-4 text-left transition-all duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-(--border-focused) sm:px-5 sm:py-5 ${
+        isSelected
+          ? 'scale-[1.02] border-(--color-brand) bg-(--color-brand-subtle)'
+          : 'border-(--border-subtle) bg-(--surface-raised) hover:-translate-y-0.5 hover:border-(--border-default) hover:shadow-(--shadow-overlay)'
+      }`}
     >
       <div className="flex items-start gap-3">
         <span

@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import QuizResultCard from './QuizResultCard';
 import QuizShareButtons from './QuizShareButtons';
-import QuizTraitChart from './QuizTraitChart';
+import QuizPriorityBars from './QuizPriorityBars';
 import { TRAIT_META } from '../../lib/quiz-constants';
 import { getPriorityTraits } from './quizEngine';
 import { SKIP_ANSWER } from './quizState';
@@ -176,28 +176,14 @@ export default function QuizResults({
         {!isShared && (
           <button
             onClick={onChangeAnswers}
-            className="inline-flex items-center gap-2 font-semibold px-6 py-3 mr-3 rounded-md"
-            style={{
-              backgroundColor: 'var(--surface-sunken)',
-              color: 'var(--text-default)',
-            }}
+            className="mr-3 inline-flex items-center gap-2 rounded-md bg-(--surface-sunken) px-6 py-3 font-semibold text-(--text-default) transition-colors hover:bg-(--surface-hovered) focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-(--border-focused)"
           >
             Change answers
           </button>
         )}
         <button
           onClick={onRetake}
-          className="inline-flex items-center gap-2 font-semibold px-8 py-3 rounded-md transition-all duration-300"
-          style={{
-            backgroundColor: 'var(--color-brand)',
-            color: 'var(--text-inverse)',
-          }}
-          onMouseEnter={(e) => {
-            e.currentTarget.style.backgroundColor = 'var(--color-brand-bold)';
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.backgroundColor = 'var(--color-brand)';
-          }}
+          className="inline-flex items-center gap-2 rounded-md bg-(--color-brand) px-8 py-3 font-semibold text-(--text-inverse) transition-colors duration-300 hover:bg-(--color-brand-bold) focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-(--border-focused)"
         >
           {isShared ? 'Take the Quiz' : 'Retake Quiz'}
         </button>
@@ -223,17 +209,7 @@ export default function QuizResults({
           </p>
           <button
             onClick={onRetake}
-            className="inline-flex items-center gap-2 font-semibold px-8 py-3 rounded-md transition-all duration-300"
-            style={{
-              backgroundColor: 'var(--color-brand)',
-              color: 'var(--text-inverse)',
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.backgroundColor = 'var(--color-brand-bold)';
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.backgroundColor = 'var(--color-brand)';
-            }}
+            className="inline-flex items-center gap-2 rounded-md bg-(--color-brand) px-8 py-3 font-semibold text-(--text-inverse) transition-colors duration-300 hover:bg-(--color-brand-bold) focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-(--border-focused)"
           >
             Take the Quiz
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -285,7 +261,7 @@ export default function QuizResults({
 
       {showDetailedResults && userTraits && hero && (
         <div className="mt-8" style={{ animationDelay: '200ms', animationFillMode: 'both' }}>
-          <QuizTraitChart
+          <QuizPriorityBars
             userTraits={userTraits}
             browserProfile={hero}
             userLabel={isShared ? 'Shared Answers' : 'Your Priorities'}
@@ -418,11 +394,7 @@ export default function QuizResults({
         <div className="mt-6 text-center">
           <Link
             href={compareHref}
-            className="inline-flex items-center gap-2 font-medium px-5 py-2.5 rounded-md transition-all duration-200 text-sm"
-            style={{
-              backgroundColor: 'var(--surface-sunken)',
-              color: 'var(--text-default)',
-            }}
+            className="inline-flex items-center gap-2 rounded-md bg-(--surface-sunken) px-5 py-2.5 text-sm font-medium text-(--text-default) transition-colors duration-200 hover:bg-(--surface-hovered) focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-(--border-focused)"
           >
             Compare {hero.name} vs {runnerUps[0].name}
           </Link>
@@ -439,33 +411,13 @@ export default function QuizResults({
         <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
           <button
             onClick={onChangeAnswers}
-            className="inline-flex items-center gap-2 font-medium px-5 py-2.5 rounded-md transition-all duration-200 text-sm"
-            style={{
-              backgroundColor: 'var(--surface-sunken)',
-              color: 'var(--text-default)',
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.backgroundColor = 'var(--surface-hovered)';
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.backgroundColor = 'var(--surface-sunken)';
-            }}
+            className="inline-flex items-center gap-2 rounded-md bg-(--surface-sunken) px-5 py-2.5 text-sm font-medium text-(--text-default) transition-colors duration-200 hover:bg-(--surface-hovered) focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-(--border-focused)"
           >
             Change answers
           </button>
           <button
             onClick={onRetake}
-            className="inline-flex items-center gap-2 font-medium px-5 py-2.5 rounded-md transition-all duration-200 text-sm"
-            style={{
-              backgroundColor: 'var(--surface-sunken)',
-              color: 'var(--text-default)',
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.backgroundColor = 'var(--surface-hovered)';
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.backgroundColor = 'var(--surface-sunken)';
-            }}
+            className="inline-flex items-center gap-2 rounded-md bg-(--surface-sunken) px-5 py-2.5 text-sm font-medium text-(--text-default) transition-colors duration-200 hover:bg-(--surface-hovered) focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-(--border-focused)"
           >
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path
@@ -479,17 +431,7 @@ export default function QuizResults({
           </button>
           <Link
             href="/#rankings"
-            className="inline-flex items-center gap-2 font-medium px-5 py-2.5 rounded-md transition-all duration-200 text-sm"
-            style={{
-              backgroundColor: 'var(--surface-sunken)',
-              color: 'var(--text-default)',
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.backgroundColor = 'var(--surface-hovered)';
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.backgroundColor = 'var(--surface-sunken)';
-            }}
+            className="inline-flex items-center gap-2 rounded-md bg-(--surface-sunken) px-5 py-2.5 text-sm font-medium text-(--text-default) transition-colors duration-200 hover:bg-(--surface-hovered) focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-(--border-focused)"
           >
             View All Rankings
           </Link>

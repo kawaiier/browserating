@@ -117,19 +117,7 @@ export default function QuizIntro({ browserProfiles, questionCount, onStart }) {
 
         <button
           onClick={onStart}
-          className="inline-flex items-center gap-2 font-semibold px-10 py-4 rounded-md transition-all duration-300 text-lg"
-          style={{
-            backgroundColor: 'var(--color-brand)',
-            color: 'var(--text-inverse)',
-          }}
-          onMouseEnter={(e) => {
-            e.currentTarget.style.backgroundColor = 'var(--color-brand-bold)';
-            e.currentTarget.style.transform = 'scale(1.05)';
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.backgroundColor = 'var(--color-brand)';
-            e.currentTarget.style.transform = 'scale(1)';
-          }}
+          className="inline-flex items-center gap-2 rounded-md bg-(--color-brand) px-10 py-4 text-lg font-semibold text-(--text-inverse) transition-all duration-300 hover:scale-105 hover:bg-(--color-brand-bold) focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-(--border-focused)"
         >
           {QUIZ_INTRO_COPY.cta}
           <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">

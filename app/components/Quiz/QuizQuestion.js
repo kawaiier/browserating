@@ -93,14 +93,7 @@ export default function QuizQuestion({
             <button
               type="button"
               onClick={onBack}
-              className="text-sm transition-colors duration-200 flex items-center gap-1 rounded"
-              style={{ color: 'var(--text-subtle)' }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.color = 'var(--text-default)';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.color = 'var(--text-subtle)';
-              }}
+              className="flex items-center gap-1 rounded text-sm text-(--text-subtle) transition-colors duration-200 hover:text-(--text-default) focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-(--border-focused)"
             >
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path
@@ -118,11 +111,7 @@ export default function QuizQuestion({
               type="button"
               onClick={onContinue}
               disabled={!canContinue}
-              className="px-6 py-2.5 rounded-md font-semibold text-sm transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-              style={{
-                backgroundColor: 'var(--color-brand)',
-                color: 'var(--text-inverse)',
-              }}
+              className="rounded-md bg-(--color-brand) px-6 py-2.5 text-sm font-semibold text-(--text-inverse) transition-colors hover:bg-(--color-brand-bold) focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-(--border-focused) disabled:cursor-not-allowed disabled:opacity-50"
             >
               {isMultiSelect ? 'Continue' : 'Next'}
             </button>
@@ -130,12 +119,7 @@ export default function QuizQuestion({
           <button
             type="button"
             onClick={onSkip}
-            className="px-4 py-2.5 rounded-md border text-sm font-medium transition-colors"
-            style={{
-              backgroundColor: 'var(--surface-raised)',
-              borderColor: 'var(--border-subtle)',
-              color: 'var(--text-subtle)',
-            }}
+            className="rounded-md border border-(--border-subtle) bg-(--surface-raised) px-4 py-2.5 text-sm font-medium text-(--text-subtle) transition-colors hover:bg-(--surface-hovered) focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-(--border-focused)"
           >
             Skip / no preference
           </button>

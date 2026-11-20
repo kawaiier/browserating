@@ -73,18 +73,7 @@ export default function QuizShareButtons({ browserId, browserName, answers }) {
       <div className="flex flex-wrap items-center justify-center gap-3">
         <button
           onClick={handleCopy}
-          className="inline-flex items-center gap-2 font-medium px-4 py-2 rounded-md transition-all duration-200 text-sm"
-          style={{
-            backgroundColor: 'var(--surface-raised)',
-            border: '1px solid var(--border-subtle)',
-            color: 'var(--text-default)',
-          }}
-          onMouseEnter={(e) => {
-            e.currentTarget.style.backgroundColor = 'var(--surface-hovered)';
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.backgroundColor = 'var(--surface-raised)';
-          }}
+          className="inline-flex items-center gap-2 rounded-md border border-(--border-subtle) bg-(--surface-raised) px-4 py-2 text-sm font-medium text-(--text-default) transition-colors duration-200 hover:bg-(--surface-hovered) focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-(--border-focused)"
         >
           {copied ? (
             <>
@@ -121,17 +110,7 @@ export default function QuizShareButtons({ browserId, browserName, answers }) {
 
         <button
           onClick={handleTwitter}
-          className="inline-flex items-center gap-2 font-medium px-4 py-2 rounded-md transition-all duration-200 text-sm"
-          style={{
-            backgroundColor: 'var(--neutral-900)',
-            color: 'var(--text-inverse)',
-          }}
-          onMouseEnter={(e) => {
-            e.currentTarget.style.backgroundColor = 'var(--neutral-800)';
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.backgroundColor = 'var(--neutral-900)';
-          }}
+          className="inline-flex items-center gap-2 rounded-md bg-(--color-neutral-900) px-4 py-2 text-sm font-medium text-(--color-neutral-0) transition-colors duration-200 hover:bg-(--color-neutral-800) focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-(--border-focused)"
         >
           <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
             <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.253 5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
@@ -142,18 +121,7 @@ export default function QuizShareButtons({ browserId, browserName, answers }) {
         {hasNativeShare && (
           <button
             onClick={handleNativeShare}
-            className="inline-flex items-center gap-2 font-medium px-4 py-2 rounded-md transition-all duration-200 text-sm"
-            style={{
-              backgroundColor: 'var(--surface-raised)',
-              border: '1px solid var(--border-subtle)',
-              color: 'var(--text-default)',
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.backgroundColor = 'var(--surface-hovered)';
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.backgroundColor = 'var(--surface-raised)';
-            }}
+            className="inline-flex items-center gap-2 rounded-md border border-(--border-subtle) bg-(--surface-raised) px-4 py-2 text-sm font-medium text-(--text-default) transition-colors duration-200 hover:bg-(--surface-hovered) focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-(--border-focused)"
           >
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path
