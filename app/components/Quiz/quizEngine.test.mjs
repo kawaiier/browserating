@@ -525,6 +525,24 @@ test('data integrity: browser profiles are complete and consistent', () => {
     assert.ok(!ids.has(profile.id), `duplicate profile id ${profile.id}`);
     ids.add(profile.id);
     assert.deepEqual(Object.keys(profile.traits).sort(), [...TRAIT_KEYS].sort(), profile.id);
+    assert.deepEqual(
+      Object.keys(profile.traitRationales ?? {}).sort(),
+      [...TRAIT_KEYS].sort(),
+      `${profile.id} rationale keys`
+    );
+    for (const trait of TRAIT_KEYS) {
+      const rating = profile.traits[trait];
+      assert.ok(Number.isInteger(rating) && rating >= 0 && rating <= 10, `${profile.id}.${trait}`);
+      assert.equal(
+        typeof profile.traitRationales[trait],
+        'string',
+        `${profile.id}.${trait} rationale`
+      );
+      assert.ok(
+        profile.traitRationales[trait].trim().length >= 20,
+        `${profile.id}.${trait} rationale is too short`
+      );
+    }
     assert.ok(profile.platforms.length > 0, profile.id);
     assert.ok(
       profile.platforms.every((platform) => validPlatforms.has(platform)),
@@ -538,6 +556,11 @@ test('data integrity: browser profiles are complete and consistent', () => {
     );
     if (profile.discontinued) assert.ok(profile.discontinuedNote, profile.id);
   }
+
+  assert.equal(profileById.thorium.traits.openSource, 9);
+  assert.equal(profileById.thorium.traits.ecosystem, 3);
+  assert.match(profileById.thorium.traitRationales.openSource, /Chromium fork/i);
+  assert.match(profileById.thorium.traitRationales.ecosystem, /no account sync/i);
 
   for (const id of ['mull', 'kiwi', 'chatgpt-atlas', 'arc']) {
     assert.equal(profileById[id].discontinued, true, id);

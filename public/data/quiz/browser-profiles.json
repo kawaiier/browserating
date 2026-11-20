@@ -16,6 +16,19 @@
       "easeOfUse": 9,
       "ai": 6
     },
+            "traitRationales": {
+      "privacy": "The profile does not cite evidence for default privacy protections or data practices; 3/10 is provisional, not proof the capability is absent.",
+      "speed": "No source-linked, platform-matched benchmark is attached; this is a qualitative estimate, not a Speedometer result.",
+      "customization": "Profile evidence: “Unmatched extension library via Chrome Web Store”. Extension support is only one part of the customization score.",
+      "minimalism": "The profile does not cite evidence about the default interface; 5/10 is a qualitative estimate, not a measured comparison.",
+      "features": "Profile-listed capabilities: “Seamless Google account sync across devices”; “Best-in-class web standards and DevTools”. Verify these ship in the browser; extensions and roadmap items are not counted.",
+      "openSource": "Chrome uses the open-source Chromium base, but this score rates the full browser product, including Google-specific browser code and services.",
+      "resourceEfficiency": "No matched-workload RAM/CPU/battery results are attached; 4/10 is a qualitative estimate for the listed platforms.",
+      "ecosystem": "Profile evidence: “Seamless Google account sync across devices”. Platform availability alone does not count as ecosystem integration.",
+      "innovation": "The profile does not cite evidence for a distinct, shipped browsing workflow; 5/10 is a qualitative estimate, not a measured comparison.",
+      "easeOfUse": "The profile does not cite evidence from first-run experience or usability testing for this high 9/10 rating; verify it before treating the score as established.",
+      "ai": "The profile does not cite evidence for shipped first-party AI features; 6/10 is a qualitative estimate, not a measured comparison."
+    },
     "highlights": [
       "Unmatched extension library via Chrome Web Store",
       "Seamless Google account sync across devices",
@@ -43,6 +56,19 @@
       "innovation": 6,
       "easeOfUse": 8,
       "ai": 4
+    },
+            "traitRationales": {
+      "privacy": "Profile evidence: “Enhanced Tracking Protection built-in”. This describes listed protections, not an anonymity guarantee.",
+      "speed": "No source-linked, platform-matched benchmark is attached; this is a qualitative estimate, not a Speedometer result.",
+      "customization": "Profile evidence: “Deep customization via userChrome.css and extensions”. Extension support is only one part of the customization score.",
+      "minimalism": "The profile does not cite evidence about the default interface; 5/10 is a qualitative estimate, not a measured comparison.",
+      "features": "Profile-listed capabilities: “Enhanced Tracking Protection built-in”. Verify these ship in the browser; extensions and roadmap items are not counted.",
+      "openSource": "Profile evidence: “Fully open source with strong community governance”. This evaluates the browser project itself, not just its underlying engine.",
+      "resourceEfficiency": "No matched-workload RAM/CPU/battery results are attached; 6/10 is a qualitative estimate for the listed platforms.",
+      "ecosystem": "The profile does not cite evidence for first-party account, sync, or OS integrations; 4/10 is a qualitative estimate, not a measured comparison.",
+      "innovation": "The profile does not cite evidence for a distinct, shipped browsing workflow; 6/10 is a qualitative estimate, not a measured comparison.",
+      "easeOfUse": "The profile does not cite evidence from first-run experience or usability testing for this high 8/10 rating; verify it before treating the score as established.",
+      "ai": "The profile does not cite evidence for shipped first-party AI features; 4/10 is a qualitative estimate, not a measured comparison."
     },
     "highlights": [
       "Fully open source with strong community governance",
@@ -72,6 +98,19 @@
       "easeOfUse": 9,
       "ai": 3
     },
+            "traitRationales": {
+      "privacy": "Profile evidence: “Intelligent Tracking Prevention with on-device ML”. This describes listed protections, not an anonymity guarantee.",
+      "speed": "No source-linked, platform-matched benchmark is attached; this is a qualitative estimate, not a Speedometer result.",
+      "customization": "The profile does not cite evidence for UI, settings, or extension controls; 3/10 is provisional, not proof the capability is absent.",
+      "minimalism": "The profile does not cite evidence about the default interface for this high 8/10 rating; verify it before treating the score as established.",
+      "features": "Profile-listed capabilities: “Tight iCloud Keychain and Handoff integration”. Verify these ship in the browser; extensions and roadmap items are not counted.",
+      "openSource": "Safari’s browser-specific app is proprietary; open-source WebKit components do not make the full browser open source.",
+      "resourceEfficiency": "The rating is scoped to Safari’s listed Apple platforms; the profile cites wide-margin macOS battery life, but has no matched RAM/CPU/battery test series.",
+      "ecosystem": "Profile evidence: “Tight iCloud Keychain and Handoff integration”. Platform availability alone does not count as ecosystem integration.",
+      "innovation": "The profile does not cite evidence for a distinct, shipped browsing workflow; 4/10 is a qualitative estimate, not a measured comparison.",
+      "easeOfUse": "The profile does not cite evidence from first-run experience or usability testing for this high 9/10 rating; verify it before treating the score as established.",
+      "ai": "The profile does not cite evidence for shipped first-party AI features; 3/10 is provisional, not proof the capability is absent."
+    },
     "highlights": [
       "Best battery life of any macOS browser — by a wide margin",
       "Tight iCloud Keychain and Handoff integration",
@@ -99,6 +138,19 @@
       "innovation": 6,
       "easeOfUse": 8,
       "ai": 8
+    },
+            "traitRationales": {
+      "privacy": "The profile does not cite evidence for default privacy protections or data practices; 5/10 is a qualitative estimate, not a measured comparison.",
+      "speed": "No source-linked, platform-matched benchmark is attached; this is a qualitative estimate, not a Speedometer result.",
+      "customization": "The profile does not cite evidence for UI, settings, or extension controls; 6/10 is a qualitative estimate, not a measured comparison.",
+      "minimalism": "The profile does not cite evidence about the default interface; 4/10 is a qualitative estimate, not a measured comparison.",
+      "features": "Profile-listed capabilities: “Built-in Copilot AI sidebar with deep Microsoft 365 integration”; “Vertical tabs, workspaces, and sleeping tabs built-in”. Verify these ship in the browser; extensions and roadmap items are not counted.",
+      "openSource": "The profile does not cite evidence for the browser project’s own source and license; 3/10 is provisional, not proof the capability is absent.",
+      "resourceEfficiency": "No matched-workload RAM/CPU/battery results are attached; 5/10 is a qualitative estimate for the listed platforms.",
+      "ecosystem": "Profile evidence: “Built-in Copilot AI sidebar with deep Microsoft 365 integration”. Platform availability alone does not count as ecosystem integration.",
+      "innovation": "Profile evidence: “Built-in Copilot AI sidebar with deep Microsoft 365 integration”; “Vertical tabs, workspaces, and sleeping tabs built-in”. Only shipped workflows count; announcements alone do not.",
+      "easeOfUse": "The profile does not cite evidence from first-run experience or usability testing for this high 8/10 rating; verify it before treating the score as established.",
+      "ai": "Profile evidence: “Built-in Copilot AI sidebar with deep Microsoft 365 integration”. Only first-party features count, not extensions or roadmap claims."
     },
     "highlights": [
       "Built-in Copilot AI sidebar with deep Microsoft 365 integration",
@@ -128,6 +180,19 @@
       "easeOfUse": 8,
       "ai": 6
     },
+            "traitRationales": {
+      "privacy": "Profile evidence: “Built-in ad and tracker blocking — no extension needed”. This describes listed protections, not an anonymity guarantee.",
+      "speed": "No source-linked, platform-matched benchmark is attached; this is a qualitative estimate, not a Speedometer result.",
+      "customization": "Profile evidence: “Built-in ad and tracker blocking — no extension needed”; “Chromium-based with full Chrome extension support”. Extension support is only one part of the customization score.",
+      "minimalism": "The profile does not cite evidence about the default interface; 6/10 is a qualitative estimate, not a measured comparison.",
+      "features": "Profile-listed capabilities: “Brave Search, Brave News, and optional Brave Rewards”. Verify these ship in the browser; extensions and roadmap items are not counted.",
+      "openSource": "The profile does not cite evidence for the browser project’s own source and license for this high 9/10 rating; verify it before treating the score as established.",
+      "resourceEfficiency": "No matched-workload RAM/CPU/battery results are attached; 7/10 is a qualitative estimate for the listed platforms.",
+      "ecosystem": "The profile does not cite evidence for first-party account, sync, or OS integrations; 4/10 is a qualitative estimate, not a measured comparison.",
+      "innovation": "The profile does not cite evidence for a distinct, shipped browsing workflow; 7/10 is a qualitative estimate, not a measured comparison.",
+      "easeOfUse": "The profile does not cite evidence from first-run experience or usability testing for this high 8/10 rating; verify it before treating the score as established.",
+      "ai": "The profile does not cite evidence for shipped first-party AI features; 6/10 is a qualitative estimate, not a measured comparison."
+    },
     "highlights": [
       "Built-in ad and tracker blocking — no extension needed",
       "Chromium-based with full Chrome extension support",
@@ -155,6 +220,19 @@
       "innovation": 8,
       "easeOfUse": 4,
       "ai": 2
+    },
+            "traitRationales": {
+      "privacy": "The profile does not cite evidence for default privacy protections or data practices; 7/10 is a qualitative estimate, not a measured comparison.",
+      "speed": "No source-linked, platform-matched benchmark is attached; this is a qualitative estimate, not a Speedometer result.",
+      "customization": "Profile evidence: “Unmatched UI customization: themes, layouts, toolbar placement”; “Built-in tab stacking, tiling, and two-level tab bars”. Extension support is only one part of the customization score.",
+      "minimalism": "The profile does not cite evidence about the default interface; 2/10 is provisional, not proof the capability is absent.",
+      "features": "Profile-listed capabilities: “Built-in tab stacking, tiling, and two-level tab bars”; “Integrated mail client, calendar, feed reader, and notes”. Verify these ship in the browser; extensions and roadmap items are not counted.",
+      "openSource": "The profile does not cite evidence for the browser project’s own source and license; 5/10 is a qualitative estimate, not a measured comparison.",
+      "resourceEfficiency": "No matched-workload RAM/CPU/battery results are attached; 5/10 is a qualitative estimate for the listed platforms.",
+      "ecosystem": "Profile evidence: “Integrated mail client, calendar, feed reader, and notes”. Platform availability alone does not count as ecosystem integration.",
+      "innovation": "The profile does not cite evidence for a distinct, shipped browsing workflow for this high 8/10 rating; verify it before treating the score as established.",
+      "easeOfUse": "The profile does not cite evidence from first-run experience or usability testing; 4/10 is a qualitative estimate, not a measured comparison.",
+      "ai": "The profile does not cite evidence for shipped first-party AI features; 2/10 is provisional, not proof the capability is absent."
     },
     "highlights": [
       "Unmatched UI customization: themes, layouts, toolbar placement",
@@ -184,6 +262,19 @@
       "easeOfUse": 7,
       "ai": 7
     },
+            "traitRationales": {
+      "privacy": "The profile does not cite evidence for default privacy protections or data practices; 5/10 is a qualitative estimate, not a measured comparison.",
+      "speed": "No source-linked, platform-matched benchmark is attached; this is a qualitative estimate, not a Speedometer result.",
+      "customization": "The profile does not cite evidence for UI, settings, or extension controls; 5/10 is a qualitative estimate, not a measured comparison.",
+      "minimalism": "The profile does not cite evidence about the default interface; 4/10 is a qualitative estimate, not a measured comparison.",
+      "features": "Profile-listed capabilities: “Free built-in VPN with unlimited bandwidth”; “Opera Flow for seamless mobile-desktop sharing”. Verify these ship in the browser; extensions and roadmap items are not counted.",
+      "openSource": "The profile does not cite evidence for the browser project’s own source and license; 2/10 is provisional, not proof the capability is absent.",
+      "resourceEfficiency": "No matched-workload RAM/CPU/battery results are attached; 5/10 is a qualitative estimate for the listed platforms.",
+      "ecosystem": "Profile evidence: “Side panel with WhatsApp, Telegram, Instagram, and more”; “Opera Flow for seamless mobile-desktop sharing”. Platform availability alone does not count as ecosystem integration.",
+      "innovation": "The profile does not cite evidence for a distinct, shipped browsing workflow; 6/10 is a qualitative estimate, not a measured comparison.",
+      "easeOfUse": "The profile does not cite evidence from first-run experience or usability testing; 7/10 is a qualitative estimate, not a measured comparison.",
+      "ai": "The profile does not cite evidence for shipped first-party AI features; 7/10 is a qualitative estimate, not a measured comparison."
+    },
     "highlights": [
       "Free built-in VPN with unlimited bandwidth",
       "Side panel with WhatsApp, Telegram, Instagram, and more",
@@ -211,6 +302,19 @@
       "innovation": 8,
       "easeOfUse": 7,
       "ai": 6
+    },
+            "traitRationales": {
+      "privacy": "The profile does not cite evidence for default privacy protections or data practices; 4/10 is a qualitative estimate, not a measured comparison.",
+      "speed": "No source-linked, platform-matched benchmark is attached; this is a qualitative estimate, not a Speedometer result.",
+      "customization": "Profile evidence: “Customizable RGB color themes and GX sound effects”. Extension support is only one part of the customization score.",
+      "minimalism": "The profile does not cite evidence about the default interface; 2/10 is provisional, not proof the capability is absent.",
+      "features": "Profile-listed capabilities: “Twitch, Discord, and gaming news integrated in the sidebar”. Verify these ship in the browser; extensions and roadmap items are not counted.",
+      "openSource": "The profile does not cite evidence for the browser project’s own source and license; 2/10 is provisional, not proof the capability is absent.",
+      "resourceEfficiency": "Profile claim: “GX Control to hard-limit CPU and RAM usage per browser”. This is platform-scoped and not a standardized matched-workload RAM/CPU/battery test.",
+      "ecosystem": "Profile evidence: “Twitch, Discord, and gaming news integrated in the sidebar”. Platform availability alone does not count as ecosystem integration.",
+      "innovation": "The profile does not cite evidence for a distinct, shipped browsing workflow for this high 8/10 rating; verify it before treating the score as established.",
+      "easeOfUse": "The profile does not cite evidence from first-run experience or usability testing; 7/10 is a qualitative estimate, not a measured comparison.",
+      "ai": "The profile does not cite evidence for shipped first-party AI features; 6/10 is a qualitative estimate, not a measured comparison."
     },
     "highlights": [
       "GX Control to hard-limit CPU and RAM usage per browser",
@@ -240,6 +344,19 @@
       "easeOfUse": 5,
       "ai": 6
     },
+            "traitRationales": {
+      "privacy": "The profile does not cite evidence for default privacy protections or data practices; 5/10 is a qualitative estimate, not a measured comparison.",
+      "speed": "No source-linked, platform-matched benchmark is attached; this is a qualitative estimate, not a Speedometer result.",
+      "customization": "Profile evidence: “Boosts to restyle or add custom JS to any website”. Extension support is only one part of the customization score.",
+      "minimalism": "The profile does not cite evidence about the default interface; 7/10 is a qualitative estimate, not a measured comparison.",
+      "features": "Profile-listed capabilities: “Spaces and Profiles to separate work, personal, and projects”; “Boosts to restyle or add custom JS to any website”. Verify these ship in the browser; extensions and roadmap items are not counted.",
+      "openSource": "The profile does not cite evidence for the browser project’s own source and license; 2/10 is provisional, not proof the capability is absent.",
+      "resourceEfficiency": "No matched-workload RAM/CPU/battery results are attached; 5/10 is a qualitative estimate for the listed platforms.",
+      "ecosystem": "The profile does not cite evidence for first-party account, sync, or OS integrations; 6/10 is a qualitative estimate, not a measured comparison.",
+      "innovation": "Profile evidence: “Spaces and Profiles to separate work, personal, and projects”; “Boosts to restyle or add custom JS to any website”. Only shipped workflows count; announcements alone do not.",
+      "easeOfUse": "Profile evidence: “In maintenance mode with basic updates only; Arc stops working on December 22, 2026”. This is not a usability-test result.",
+      "ai": "The profile does not cite evidence for shipped first-party AI features; 6/10 is a qualitative estimate, not a measured comparison."
+    },
     "highlights": [
       "Spaces and Profiles to separate work, personal, and projects",
       "Boosts to restyle or add custom JS to any website",
@@ -267,6 +384,19 @@
       "innovation": 8,
       "easeOfUse": 7,
       "ai": 2
+    },
+            "traitRationales": {
+      "privacy": "Profile evidence: “Built on Firefox with full Gecko privacy protections”. This describes listed protections, not an anonymity guarantee.",
+      "speed": "No source-linked, platform-matched benchmark is attached; this is a qualitative estimate, not a Speedometer result.",
+      "customization": "The profile does not cite evidence for UI, settings, or extension controls; 7/10 is a qualitative estimate, not a measured comparison.",
+      "minimalism": "The profile does not cite evidence about the default interface for this high 9/10 rating; verify it before treating the score as established.",
+      "features": "Profile-listed capabilities: “Sidebar-first UI with vertical tabs and workspace separation”; “Built on Firefox with full Gecko privacy protections”. Verify these ship in the browser; extensions and roadmap items are not counted.",
+      "openSource": "Profile evidence: “Actively developed open source project with a growing community”. This evaluates the browser project itself, not just its underlying engine.",
+      "resourceEfficiency": "No matched-workload RAM/CPU/battery results are attached; 7/10 is a qualitative estimate for the listed platforms.",
+      "ecosystem": "The profile does not cite evidence for first-party account, sync, or OS integrations; 3/10 is provisional, not proof the capability is absent.",
+      "innovation": "Profile evidence: “Sidebar-first UI with vertical tabs and workspace separation”. Only shipped workflows count; announcements alone do not.",
+      "easeOfUse": "The profile does not cite evidence from first-run experience or usability testing; 7/10 is a qualitative estimate, not a measured comparison.",
+      "ai": "The profile does not cite evidence for shipped first-party AI features; 2/10 is provisional, not proof the capability is absent."
     },
     "highlights": [
       "Sidebar-first UI with vertical tabs and workspace separation",
@@ -296,6 +426,19 @@
       "easeOfUse": 5,
       "ai": 1
     },
+            "traitRationales": {
+      "privacy": "Profile evidence: “Anti-fingerprinting measures built into every aspect of the browser”. This describes listed protections, not an anonymity guarantee.",
+      "speed": "No source-linked, platform-matched benchmark is attached; this is a qualitative estimate, not a Speedometer result.",
+      "customization": "The profile does not cite evidence for UI, settings, or extension controls; 2/10 is provisional, not proof the capability is absent.",
+      "minimalism": "The profile does not cite evidence about the default interface; 6/10 is a qualitative estimate, not a measured comparison.",
+      "features": "Profile-listed capabilities: “Anti-fingerprinting measures built into every aspect of the browser”. Verify these ship in the browser; extensions and roadmap items are not counted.",
+      "openSource": "The profile does not cite evidence for the browser project’s own source and license for this high 10/10 rating; verify it before treating the score as established.",
+      "resourceEfficiency": "No matched-workload RAM/CPU/battery results are attached; 5/10 is a qualitative estimate for the listed platforms.",
+      "ecosystem": "The profile does not cite evidence for first-party account, sync, or OS integrations; 1/10 is provisional, not proof the capability is absent.",
+      "innovation": "The profile does not cite evidence for a distinct, shipped browsing workflow; 5/10 is a qualitative estimate, not a measured comparison.",
+      "easeOfUse": "The profile does not cite evidence from first-run experience or usability testing; 5/10 is a qualitative estimate, not a measured comparison.",
+      "ai": "The profile does not cite evidence for shipped first-party AI features; 1/10 is provisional, not proof the capability is absent."
+    },
     "highlights": [
       "Routes all traffic through the Tor onion network by default",
       "Anti-fingerprinting measures built into every aspect of the browser",
@@ -323,6 +466,19 @@
       "innovation": 4,
       "easeOfUse": 5,
       "ai": 1
+    },
+            "traitRationales": {
+      "privacy": "Profile evidence: “Zero Mozilla telemetry, crash reporting, or phoning home”. This describes listed protections, not an anonymity guarantee.",
+      "speed": "No source-linked, platform-matched benchmark is attached; this is a qualitative estimate, not a Speedometer result.",
+      "customization": "The profile does not cite evidence for UI, settings, or extension controls; 7/10 is a qualitative estimate, not a measured comparison.",
+      "minimalism": "The profile does not cite evidence about the default interface; 5/10 is a qualitative estimate, not a measured comparison.",
+      "features": "Profile-listed capabilities: “Ships with uBlock Origin pre-installed and strict filtering defaults”; “Frequent security updates that closely track upstream Firefox”. Verify these ship in the browser; extensions and roadmap items are not counted.",
+      "openSource": "The profile does not cite evidence for the browser project’s own source and license for this high 10/10 rating; verify it before treating the score as established.",
+      "resourceEfficiency": "No matched-workload RAM/CPU/battery results are attached; 6/10 is a qualitative estimate for the listed platforms.",
+      "ecosystem": "The profile does not cite evidence for first-party account, sync, or OS integrations; 2/10 is provisional, not proof the capability is absent.",
+      "innovation": "The profile does not cite evidence for a distinct, shipped browsing workflow; 4/10 is a qualitative estimate, not a measured comparison.",
+      "easeOfUse": "The profile does not cite evidence from first-run experience or usability testing; 5/10 is a qualitative estimate, not a measured comparison.",
+      "ai": "The profile does not cite evidence for shipped first-party AI features; 1/10 is provisional, not proof the capability is absent."
     },
     "highlights": [
       "Ships with uBlock Origin pre-installed and strict filtering defaults",
@@ -352,6 +508,19 @@
       "easeOfUse": 10,
       "ai": 4
     },
+            "traitRationales": {
+      "privacy": "Profile evidence: “Fire Button instantly wipes tabs, cookies, and browsing data”; “Duck Player provides a clean, tracker-free YouTube experience”. This describes listed protections, not an anonymity guarantee.",
+      "speed": "No source-linked, platform-matched benchmark is attached; this is a qualitative estimate, not a Speedometer result.",
+      "customization": "The profile does not cite evidence for UI, settings, or extension controls; 3/10 is provisional, not proof the capability is absent.",
+      "minimalism": "The profile does not cite evidence about the default interface for this high 8/10 rating; verify it before treating the score as established.",
+      "features": "Profile-listed capabilities: “Fire Button instantly wipes tabs, cookies, and browsing data”; “Duck Player provides a clean, tracker-free YouTube experience”. Verify these ship in the browser; extensions and roadmap items are not counted.",
+      "openSource": "The profile does not cite evidence for the browser project’s own source and license; 5/10 is a qualitative estimate, not a measured comparison.",
+      "resourceEfficiency": "No matched-workload RAM/CPU/battery results are attached; 7/10 is a qualitative estimate for the listed platforms.",
+      "ecosystem": "The profile does not cite evidence for first-party account, sync, or OS integrations; 3/10 is provisional, not proof the capability is absent.",
+      "innovation": "The profile does not cite evidence for a distinct, shipped browsing workflow; 5/10 is a qualitative estimate, not a measured comparison.",
+      "easeOfUse": "The profile does not cite evidence from first-run experience or usability testing for this high 10/10 rating; verify it before treating the score as established.",
+      "ai": "The profile does not cite evidence for shipped first-party AI features; 4/10 is a qualitative estimate, not a measured comparison."
+    },
     "highlights": [
       "Fire Button instantly wipes tabs, cookies, and browsing data",
       "Duck Player provides a clean, tracker-free YouTube experience",
@@ -379,6 +548,19 @@
       "innovation": 8,
       "easeOfUse": 7,
       "ai": 2
+    },
+            "traitRationales": {
+      "privacy": "Profile evidence: “Built by Kagi — zero telemetry, no ads, user-funded”. This describes listed protections, not an anonymity guarantee.",
+      "speed": "Profile claim: “Exceptional battery life and performance on Apple Silicon”. No source-linked, platform-matched test is attached, so 8/10 remains qualitative.",
+      "customization": "Profile evidence: “Runs Chrome and Firefox extensions natively on WebKit”. Extension support is only one part of the customization score.",
+      "minimalism": "The profile does not cite evidence about the default interface; 7/10 is a qualitative estimate, not a measured comparison.",
+      "features": "The profile does not cite evidence for shipped first-party built-in tools; 6/10 is a qualitative estimate, not a measured comparison.",
+      "openSource": "The profile does not cite evidence for the browser project’s own source and license; 5/10 is a qualitative estimate, not a measured comparison.",
+      "resourceEfficiency": "Profile claim: “Exceptional battery life and performance on Apple Silicon”. This is platform-scoped and not a standardized matched-workload RAM/CPU/battery test.",
+      "ecosystem": "The profile does not cite evidence for first-party account, sync, or OS integrations; 7/10 is a qualitative estimate, not a measured comparison.",
+      "innovation": "The profile does not cite evidence for a distinct, shipped browsing workflow for this high 8/10 rating; verify it before treating the score as established.",
+      "easeOfUse": "The profile does not cite evidence from first-run experience or usability testing; 7/10 is a qualitative estimate, not a measured comparison.",
+      "ai": "The profile does not cite evidence for shipped first-party AI features; 2/10 is provisional, not proof the capability is absent."
     },
     "highlights": [
       "Runs Chrome and Firefox extensions natively on WebKit",
@@ -408,6 +590,19 @@
       "easeOfUse": 5,
       "ai": 2
     },
+            "traitRationales": {
+      "privacy": "The profile does not cite evidence for default privacy protections or data practices for this high 8/10 rating; verify it before treating the score as established.",
+      "speed": "No source-linked, platform-matched benchmark is attached; this is a qualitative estimate, not a Speedometer result.",
+      "customization": "Profile evidence: “Deeply customizable toolbar and panel layout”. Extension support is only one part of the customization score.",
+      "minimalism": "The profile does not cite evidence about the default interface; 4/10 is a qualitative estimate, not a measured comparison.",
+      "features": "Profile-listed capabilities: “Vertical tabs and sidebar workspaces built into the UI”. Verify these ship in the browser; extensions and roadmap items are not counted.",
+      "openSource": "Profile evidence: “Fully open source, developed by a Japanese student team”. This evaluates the browser project itself, not just its underlying engine.",
+      "resourceEfficiency": "No matched-workload RAM/CPU/battery results are attached; 6/10 is a qualitative estimate for the listed platforms.",
+      "ecosystem": "The profile does not cite evidence for first-party account, sync, or OS integrations; 3/10 is provisional, not proof the capability is absent.",
+      "innovation": "Profile evidence: “Vertical tabs and sidebar workspaces built into the UI”. Only shipped workflows count; announcements alone do not.",
+      "easeOfUse": "The profile does not cite evidence from first-run experience or usability testing; 5/10 is a qualitative estimate, not a measured comparison.",
+      "ai": "The profile does not cite evidence for shipped first-party AI features; 2/10 is provisional, not proof the capability is absent."
+    },
     "highlights": [
       "Vertical tabs and sidebar workspaces built into the UI",
       "Fully open source, developed by a Japanese student team",
@@ -436,6 +631,19 @@
       "easeOfUse": 6,
       "ai": 1
     },
+            "traitRationales": {
+      "privacy": "Profile evidence: “Fingerprint resistance baked into every browser setting by design”. This describes listed protections, not an anonymity guarantee.",
+      "speed": "No source-linked, platform-matched benchmark is attached; this is a qualitative estimate, not a Speedometer result.",
+      "customization": "The profile does not cite evidence for UI, settings, or extension controls; 2/10 is provisional, not proof the capability is absent.",
+      "minimalism": "Profile evidence: “No account needed, no sync, minimal attack surface”. This describes the default UI rather than the full feature set.",
+      "features": "Profile-listed capabilities: “No account needed, no sync, minimal attack surface”. Verify these ship in the browser; extensions and roadmap items are not counted.",
+      "openSource": "The profile does not cite evidence for the browser project’s own source and license for this high 10/10 rating; verify it before treating the score as established.",
+      "resourceEfficiency": "No matched-workload RAM/CPU/battery results are attached; 6/10 is a qualitative estimate for the listed platforms.",
+      "ecosystem": "Profile evidence: “No account needed, no sync, minimal attack surface”. Platform availability alone does not count as ecosystem integration.",
+      "innovation": "The profile does not cite evidence for a distinct, shipped browsing workflow; 6/10 is a qualitative estimate, not a measured comparison.",
+      "easeOfUse": "The profile does not cite evidence from first-run experience or usability testing; 6/10 is a qualitative estimate, not a measured comparison.",
+      "ai": "The profile does not cite evidence for shipped first-party AI features; 1/10 is provisional, not proof the capability is absent."
+    },
     "highlights": [
       "Fingerprint resistance baked into every browser setting by design",
       "Developed in collaboration with the Tor Project",
@@ -457,16 +665,29 @@
       "customization": 6,
       "minimalism": 5,
       "features": 5,
-      "openSource": 7,
+      "openSource": 9,
       "resourceEfficiency": 6,
-      "ecosystem": 7,
+      "ecosystem": 3,
       "innovation": 5,
       "easeOfUse": 7,
       "ai": 1
     },
+            "traitRationales": {
+      "privacy": "Profile evidence: “Strips some Google telemetry compared to stock Chromium”. This describes listed protections, not an anonymity guarantee.",
+      "speed": "Profile claim: “Recompiled with AVX2/SSE4 optimizations for measurable Speedometer gains”. No source-linked, platform-matched test is attached, so 10/10 remains qualitative.",
+      "customization": "Profile evidence: “Open-source Chromium fork, compatible with most Chrome extensions and sites”. Extension support is only one part of the customization score.",
+      "minimalism": "The profile does not cite evidence about the default interface; 5/10 is a qualitative estimate, not a measured comparison.",
+      "features": "The profile does not cite evidence for shipped first-party built-in tools; 5/10 is a qualitative estimate, not a measured comparison.",
+      "openSource": "Thorium is an open-source Chromium fork; this rating evaluates Thorium’s own code and license, not merely the upstream engine.",
+      "resourceEfficiency": "No matched-workload RAM/CPU/battery results are attached; 6/10 is a qualitative estimate for the listed platforms.",
+      "ecosystem": "Chrome extension compatibility adds choice, but the profile lists no account sync or distinctive first-party service ecosystem.",
+      "innovation": "The profile does not cite evidence for a distinct, shipped browsing workflow; 5/10 is a qualitative estimate, not a measured comparison.",
+      "easeOfUse": "The profile does not cite evidence from first-run experience or usability testing; 7/10 is a qualitative estimate, not a measured comparison.",
+      "ai": "The profile does not cite evidence for shipped first-party AI features; 1/10 is provisional, not proof the capability is absent."
+    },
     "highlights": [
       "Recompiled with AVX2/SSE4 optimizations for measurable Speedometer gains",
-      "Chrome-compatible with most extensions and sites",
+      "Open-source Chromium fork, compatible with most Chrome extensions and sites",
       "Strips some Google telemetry compared to stock Chromium"
     ],
     "platforms": ["windows", "macos-arm", "macos-intel", "android"],
@@ -491,6 +712,19 @@
       "innovation": 4,
       "easeOfUse": 8,
       "ai": 1
+    },
+            "traitRationales": {
+      "privacy": "Profile evidence: “Removes telemetry, data collection and sponsored content”. This describes listed protections, not an anonymity guarantee.",
+      "speed": "No source-linked, platform-matched benchmark is attached; this is a qualitative estimate, not a Speedometer result.",
+      "customization": "Profile evidence: “Supports modern WebExtensions”. Extension support is only one part of the customization score.",
+      "minimalism": "The profile does not cite evidence about the default interface; 5/10 is a qualitative estimate, not a measured comparison.",
+      "features": "The profile does not cite evidence for shipped first-party built-in tools; 6/10 is a qualitative estimate, not a measured comparison.",
+      "openSource": "The profile does not cite evidence for the browser project’s own source and license for this high 9/10 rating; verify it before treating the score as established.",
+      "resourceEfficiency": "No matched-workload RAM/CPU/battery results are attached; 6/10 is a qualitative estimate for the listed platforms.",
+      "ecosystem": "The profile does not cite evidence for first-party account, sync, or OS integrations; 3/10 is provisional, not proof the capability is absent.",
+      "innovation": "The profile does not cite evidence for a distinct, shipped browsing workflow; 4/10 is a qualitative estimate, not a measured comparison.",
+      "easeOfUse": "Profile evidence: “Familiar Firefox experience on the Gecko engine”. This is not a usability-test result.",
+      "ai": "The profile does not cite evidence for shipped first-party AI features; 1/10 is provisional, not proof the capability is absent."
     },
     "highlights": [
       "Removes telemetry, data collection and sponsored content",
@@ -520,6 +754,19 @@
       "easeOfUse": 8,
       "ai": 6
     },
+            "traitRationales": {
+      "privacy": "The profile does not cite evidence for default privacy protections or data practices; 3/10 is provisional, not proof the capability is absent.",
+      "speed": "Profile claim: “Turbo mode speeds up loading on slow connections”. No source-linked, platform-matched test is attached, so 7/10 remains qualitative.",
+      "customization": "The profile does not cite evidence for UI, settings, or extension controls; 5/10 is a qualitative estimate, not a measured comparison.",
+      "minimalism": "The profile does not cite evidence about the default interface; 5/10 is a qualitative estimate, not a measured comparison.",
+      "features": "Profile-listed capabilities: “Integrated Yandex search, translation and voice search”. Verify these ship in the browser; extensions and roadmap items are not counted.",
+      "openSource": "The profile does not cite evidence for the browser project’s own source and license; 3/10 is provisional, not proof the capability is absent.",
+      "resourceEfficiency": "No matched-workload RAM/CPU/battery results are attached; 4/10 is a qualitative estimate for the listed platforms.",
+      "ecosystem": "Profile evidence: “Integrated Yandex search, translation and voice search”. Platform availability alone does not count as ecosystem integration.",
+      "innovation": "The profile does not cite evidence for a distinct, shipped browsing workflow; 6/10 is a qualitative estimate, not a measured comparison.",
+      "easeOfUse": "The profile does not cite evidence from first-run experience or usability testing for this high 8/10 rating; verify it before treating the score as established.",
+      "ai": "The profile does not cite evidence for shipped first-party AI features; 6/10 is a qualitative estimate, not a measured comparison."
+    },
     "highlights": [
       "Integrated Yandex search, translation and voice search",
       "Protect layer scans for malware and unsafe connections",
@@ -547,6 +794,19 @@
       "innovation": 7,
       "easeOfUse": 7,
       "ai": 3
+    },
+            "traitRationales": {
+      "privacy": "Profile evidence: “Blocks ads and trackers using uBlock Origin”. This describes listed protections, not an anonymity guarantee.",
+      "speed": "No source-linked, platform-matched benchmark is attached; this is a qualitative estimate, not a Speedometer result.",
+      "customization": "The profile does not cite evidence for UI, settings, or extension controls; 7/10 is a qualitative estimate, not a measured comparison.",
+      "minimalism": "The profile does not cite evidence about the default interface; 6/10 is a qualitative estimate, not a measured comparison.",
+      "features": "Profile-listed capabilities: “Arc-style sidebar with spaces and pinned tabs”; “Imports spaces and pinned tabs from Arc”. Verify these ship in the browser; extensions and roadmap items are not counted.",
+      "openSource": "The profile does not cite evidence for the browser project’s own source and license for this high 8/10 rating; verify it before treating the score as established.",
+      "resourceEfficiency": "No matched-workload RAM/CPU/battery results are attached; 5/10 is a qualitative estimate for the listed platforms.",
+      "ecosystem": "The profile does not cite evidence for first-party account, sync, or OS integrations; 3/10 is provisional, not proof the capability is absent.",
+      "innovation": "Profile evidence: “Arc-style sidebar with spaces and pinned tabs”; “Imports spaces and pinned tabs from Arc”. Only shipped workflows count; announcements alone do not.",
+      "easeOfUse": "The profile does not cite evidence from first-run experience or usability testing; 7/10 is a qualitative estimate, not a measured comparison.",
+      "ai": "The profile does not cite evidence for shipped first-party AI features; 3/10 is provisional, not proof the capability is absent."
     },
     "highlights": [
       "Arc-style sidebar with spaces and pinned tabs",
@@ -576,6 +836,19 @@
       "easeOfUse": 6,
       "ai": 10
     },
+            "traitRationales": {
+      "privacy": "The profile does not cite evidence for default privacy protections or data practices; 3/10 is provisional, not proof the capability is absent.",
+      "speed": "No source-linked, platform-matched benchmark is attached; this is a qualitative estimate, not a Speedometer result.",
+      "customization": "The profile does not cite evidence for UI, settings, or extension controls; 5/10 is a qualitative estimate, not a measured comparison.",
+      "minimalism": "The profile does not cite evidence about the default interface; 5/10 is a qualitative estimate, not a measured comparison.",
+      "features": "The profile does not cite evidence for shipped first-party built-in tools for this high 8/10 rating; verify it before treating the score as established.",
+      "openSource": "The profile does not cite evidence for the browser project’s own source and license; 2/10 is provisional, not proof the capability is absent.",
+      "resourceEfficiency": "No matched-workload RAM/CPU/battery results are attached; 5/10 is a qualitative estimate for the listed platforms.",
+      "ecosystem": "The profile does not cite evidence for first-party account, sync, or OS integrations; 2/10 is provisional, not proof the capability is absent.",
+      "innovation": "Profile evidence: “Autonomous agent completes real tasks on your accounts”; “Ranks first on browser-agent benchmarks”. Only shipped workflows count; announcements alone do not.",
+      "easeOfUse": "The profile does not cite evidence from first-run experience or usability testing; 6/10 is a qualitative estimate, not a measured comparison.",
+      "ai": "Profile evidence: “Autonomous agent completes real tasks on your accounts”; “Ranks first on browser-agent benchmarks”. Only first-party features count, not extensions or roadmap claims."
+    },
     "highlights": [
       "Autonomous agent completes real tasks on your accounts",
       "Operates websites directly instead of relying on integrations",
@@ -603,6 +876,19 @@
       "innovation": 5,
       "easeOfUse": 7,
       "ai": 2
+    },
+            "traitRationales": {
+      "privacy": "Profile evidence: “Privacy-respecting browsing alternative”. This describes listed protections, not an anonymity guarantee.",
+      "speed": "Profile claim: “WebKit-based for efficient native performance”. No source-linked, platform-matched test is attached, so 6/10 remains qualitative.",
+      "customization": "The profile does not cite evidence for UI, settings, or extension controls; 4/10 is a qualitative estimate, not a measured comparison.",
+      "minimalism": "The profile does not cite evidence about the default interface; 6/10 is a qualitative estimate, not a measured comparison.",
+      "features": "Profile-listed capabilities: “Built in France with European digital independence in mind”. Verify these ship in the browser; extensions and roadmap items are not counted.",
+      "openSource": "The profile does not cite evidence for the browser project’s own source and license; 3/10 is provisional, not proof the capability is absent.",
+      "resourceEfficiency": "Profile claim: “WebKit-based for efficient native performance”. This is platform-scoped and not a standardized matched-workload RAM/CPU/battery test.",
+      "ecosystem": "The profile does not cite evidence for first-party account, sync, or OS integrations; 2/10 is provisional, not proof the capability is absent.",
+      "innovation": "The profile does not cite evidence for a distinct, shipped browsing workflow; 5/10 is a qualitative estimate, not a measured comparison.",
+      "easeOfUse": "The profile does not cite evidence from first-run experience or usability testing; 7/10 is a qualitative estimate, not a measured comparison.",
+      "ai": "The profile does not cite evidence for shipped first-party AI features; 2/10 is provisional, not proof the capability is absent."
     },
     "highlights": [
       "Privacy-respecting browsing alternative",
@@ -632,6 +918,19 @@
       "easeOfUse": 5,
       "ai": 8
     },
+            "traitRationales": {
+      "privacy": "The profile does not cite evidence for default privacy protections or data practices; 4/10 is a qualitative estimate, not a measured comparison.",
+      "speed": "No source-linked, platform-matched benchmark is attached; this is a qualitative estimate, not a Speedometer result.",
+      "customization": "The profile does not cite evidence for UI, settings, or extension controls; 6/10 is a qualitative estimate, not a measured comparison.",
+      "minimalism": "The profile does not cite evidence about the default interface; 4/10 is a qualitative estimate, not a measured comparison.",
+      "features": "Profile-listed capabilities: “Connects to agent tools such as Claude Code, Codex, and MCP clients”. Verify these ship in the browser; extensions and roadmap items are not counted.",
+      "openSource": "Profile evidence: “Open-source desktop app available for macOS, Windows, and Linux”. This evaluates the browser project itself, not just its underlying engine.",
+      "resourceEfficiency": "No matched-workload RAM/CPU/battery results are attached; 4/10 is a qualitative estimate for the listed platforms.",
+      "ecosystem": "The profile does not cite evidence for first-party account, sync, or OS integrations; 3/10 is provisional, not proof the capability is absent.",
+      "innovation": "Profile evidence: “AI agents can operate websites through your logged-in browser accounts”; “Connects to agent tools such as Claude Code, Codex, and MCP clients”. Only shipped workflows count; announcements alone do not.",
+      "easeOfUse": "The profile does not cite evidence from first-run experience or usability testing; 5/10 is a qualitative estimate, not a measured comparison.",
+      "ai": "Profile evidence: “AI agents can operate websites through your logged-in browser accounts”; “Connects to agent tools such as Claude Code, Codex, and MCP clients”. Only first-party features count, not extensions or roadmap claims."
+    },
     "highlights": [
       "AI agents can operate websites through your logged-in browser accounts",
       "Connects to agent tools such as Claude Code, Codex, and MCP clients",
@@ -659,6 +958,19 @@
       "innovation": 9,
       "easeOfUse": 8,
       "ai": 10
+    },
+            "traitRationales": {
+      "privacy": "The profile does not cite evidence for default privacy protections or data practices; 3/10 is provisional, not proof the capability is absent.",
+      "speed": "No source-linked, platform-matched benchmark is attached; this is a qualitative estimate, not a Speedometer result.",
+      "customization": "The profile does not cite evidence for UI, settings, or extension controls; 4/10 is a qualitative estimate, not a measured comparison.",
+      "minimalism": "The profile does not cite evidence about the default interface; 6/10 is a qualitative estimate, not a measured comparison.",
+      "features": "Profile-listed capabilities: “Previously integrated ChatGPT into web browsing”. Verify these ship in the browser; extensions and roadmap items are not counted.",
+      "openSource": "The profile does not cite evidence for the browser project’s own source and license; 2/10 is provisional, not proof the capability is absent.",
+      "resourceEfficiency": "No matched-workload RAM/CPU/battery results are attached; 5/10 is a qualitative estimate for the listed platforms.",
+      "ecosystem": "The profile does not cite evidence for first-party account, sync, or OS integrations; 4/10 is a qualitative estimate, not a measured comparison.",
+      "innovation": "Profile evidence: “OpenAI is moving browser-based agentic work into ChatGPT and Codex”. Only shipped workflows count; announcements alone do not.",
+      "easeOfUse": "The profile does not cite evidence from first-run experience or usability testing for this high 8/10 rating; verify it before treating the score as established.",
+      "ai": "Profile evidence: “Previously integrated ChatGPT into web browsing”; “OpenAI is moving browser-based agentic work into ChatGPT and Codex”. Only first-party features count, not extensions or roadmap claims."
     },
     "highlights": [
       "Retired on August 9, 2026, and no longer receives updates",
@@ -688,6 +1000,19 @@
       "easeOfUse": 8,
       "ai": 10
     },
+            "traitRationales": {
+      "privacy": "The profile does not cite evidence for default privacy protections or data practices; 3/10 is provisional, not proof the capability is absent.",
+      "speed": "No source-linked, platform-matched benchmark is attached; this is a qualitative estimate, not a Speedometer result.",
+      "customization": "The profile does not cite evidence for UI, settings, or extension controls; 4/10 is a qualitative estimate, not a measured comparison.",
+      "minimalism": "The profile does not cite evidence about the default interface; 6/10 is a qualitative estimate, not a measured comparison.",
+      "features": "Profile-listed capabilities: “Deep Perplexity AI search integration”; “Content summarization and answer generation built in”. Verify these ship in the browser; extensions and roadmap items are not counted.",
+      "openSource": "The profile does not cite evidence for the browser project’s own source and license; 2/10 is provisional, not proof the capability is absent.",
+      "resourceEfficiency": "No matched-workload RAM/CPU/battery results are attached; 5/10 is a qualitative estimate for the listed platforms.",
+      "ecosystem": "The profile does not cite evidence for first-party account, sync, or OS integrations; 4/10 is a qualitative estimate, not a measured comparison.",
+      "innovation": "Profile evidence: “Deep Perplexity AI search integration”; “AI as a first-class part of browsing”. Only shipped workflows count; announcements alone do not.",
+      "easeOfUse": "The profile does not cite evidence from first-run experience or usability testing for this high 8/10 rating; verify it before treating the score as established.",
+      "ai": "Profile evidence: “Deep Perplexity AI search integration”; “Content summarization and answer generation built in”. Only first-party features count, not extensions or roadmap claims."
+    },
     "highlights": [
       "Deep Perplexity AI search integration",
       "Content summarization and answer generation built in",
@@ -715,6 +1040,19 @@
       "innovation": 6,
       "easeOfUse": 8,
       "ai": 2
+    },
+            "traitRationales": {
+      "privacy": "The profile does not cite evidence for default privacy protections or data practices; 6/10 is a qualitative estimate, not a measured comparison.",
+      "speed": "No source-linked, platform-matched benchmark is attached; this is a qualitative estimate, not a Speedometer result.",
+      "customization": "The profile does not cite evidence for UI, settings, or extension controls; 7/10 is a qualitative estimate, not a measured comparison.",
+      "minimalism": "The profile does not cite evidence about the default interface; 6/10 is a qualitative estimate, not a measured comparison.",
+      "features": "Profile-listed capabilities: “Spaces with isolated profiles and an adaptive sidebar”; “iCloud sync across Apple devices”. Verify these ship in the browser; extensions and roadmap items are not counted.",
+      "openSource": "The profile does not cite evidence for the browser project’s own source and license; 3/10 is provisional, not proof the capability is absent.",
+      "resourceEfficiency": "No matched-workload RAM/CPU/battery results are attached; 6/10 is a qualitative estimate for the listed platforms.",
+      "ecosystem": "Profile evidence: “iCloud sync across Apple devices”. Platform availability alone does not count as ecosystem integration.",
+      "innovation": "Profile evidence: “Spaces with isolated profiles and an adaptive sidebar”; “Split View and link previews”. Only shipped workflows count; announcements alone do not.",
+      "easeOfUse": "The profile does not cite evidence from first-run experience or usability testing for this high 8/10 rating; verify it before treating the score as established.",
+      "ai": "The profile does not cite evidence for shipped first-party AI features; 2/10 is provisional, not proof the capability is absent."
     },
     "highlights": [
       "Spaces with isolated profiles and an adaptive sidebar",
@@ -744,6 +1082,19 @@
       "easeOfUse": 8,
       "ai": 9
     },
+            "traitRationales": {
+      "privacy": "The profile does not cite evidence for default privacy protections or data practices; 4/10 is a qualitative estimate, not a measured comparison.",
+      "speed": "No source-linked, platform-matched benchmark is attached; this is a qualitative estimate, not a Speedometer result.",
+      "customization": "The profile does not cite evidence for UI, settings, or extension controls; 5/10 is a qualitative estimate, not a measured comparison.",
+      "minimalism": "The profile does not cite evidence about the default interface; 6/10 is a qualitative estimate, not a measured comparison.",
+      "features": "The profile does not cite evidence for shipped first-party built-in tools for this high 8/10 rating; verify it before treating the score as established.",
+      "openSource": "The profile does not cite evidence for the browser project’s own source and license; 2/10 is provisional, not proof the capability is absent.",
+      "resourceEfficiency": "No matched-workload RAM/CPU/battery results are attached; 5/10 is a qualitative estimate for the listed platforms.",
+      "ecosystem": "The profile does not cite evidence for first-party account, sync, or OS integrations; 3/10 is provisional, not proof the capability is absent.",
+      "innovation": "Profile evidence: “AI-assisted browsing from the team behind Arc”. Only shipped workflows count; announcements alone do not.",
+      "easeOfUse": "The profile does not cite evidence from first-run experience or usability testing for this high 8/10 rating; verify it before treating the score as established.",
+      "ai": "Profile evidence: “Answers questions and summarizes pages in the browser”; “AI-assisted browsing from the team behind Arc”. Only first-party features count, not extensions or roadmap claims."
+    },
     "highlights": [
       "Answers questions and summarizes pages in the browser",
       "AI-assisted browsing from the team behind Arc",
@@ -771,6 +1122,19 @@
       "innovation": 9,
       "easeOfUse": 6,
       "ai": 10
+    },
+            "traitRationales": {
+      "privacy": "The profile does not cite evidence for default privacy protections or data practices; 3/10 is provisional, not proof the capability is absent.",
+      "speed": "No source-linked, platform-matched benchmark is attached; this is a qualitative estimate, not a Speedometer result.",
+      "customization": "The profile does not cite evidence for UI, settings, or extension controls; 5/10 is a qualitative estimate, not a measured comparison.",
+      "minimalism": "The profile does not cite evidence about the default interface; 5/10 is a qualitative estimate, not a measured comparison.",
+      "features": "Profile-listed capabilities: “Automates repetitive multi-step workflows”. Verify these ship in the browser; extensions and roadmap items are not counted.",
+      "openSource": "The profile does not cite evidence for the browser project’s own source and license; 2/10 is provisional, not proof the capability is absent.",
+      "resourceEfficiency": "No matched-workload RAM/CPU/battery results are attached; 5/10 is a qualitative estimate for the listed platforms.",
+      "ecosystem": "The profile does not cite evidence for first-party account, sync, or OS integrations; 2/10 is provisional, not proof the capability is absent.",
+      "innovation": "Profile evidence: “AI agents fill forms and extract data”; “Automates repetitive multi-step workflows”. Only shipped workflows count; announcements alone do not.",
+      "easeOfUse": "The profile does not cite evidence from first-run experience or usability testing; 6/10 is a qualitative estimate, not a measured comparison.",
+      "ai": "Profile evidence: “AI agents fill forms and extract data”. Only first-party features count, not extensions or roadmap claims."
     },
     "highlights": [
       "AI agents fill forms and extract data",
@@ -800,6 +1164,19 @@
       "easeOfUse": 6,
       "ai": 1
     },
+            "traitRationales": {
+      "privacy": "Profile evidence: “Blocks ads, trackers, cookie banners, and third-party cookies by default”. This describes listed protections, not an anonymity guarantee.",
+      "speed": "No source-linked, platform-matched benchmark is attached; this is a qualitative estimate, not a Speedometer result.",
+      "customization": "Profile evidence: “Open-source Chromium browser with extension support”. Extension support is only one part of the customization score.",
+      "minimalism": "The profile does not cite evidence about the default interface; 6/10 is a qualitative estimate, not a measured comparison.",
+      "features": "The profile does not cite evidence for shipped first-party built-in tools; 7/10 is a qualitative estimate, not a measured comparison.",
+      "openSource": "Profile evidence: “Open-source Chromium browser with extension support”. This evaluates the browser project itself, not just its underlying engine.",
+      "resourceEfficiency": "No matched-workload RAM/CPU/battery results are attached; 5/10 is a qualitative estimate for the listed platforms.",
+      "ecosystem": "The profile does not cite evidence for first-party account, sync, or OS integrations; 2/10 is provisional, not proof the capability is absent.",
+      "innovation": "The profile does not cite evidence for a distinct, shipped browsing workflow for this high 8/10 rating; verify it before treating the score as established.",
+      "easeOfUse": "The profile does not cite evidence from first-run experience or usability testing; 6/10 is a qualitative estimate, not a measured comparison.",
+      "ai": "The profile does not cite evidence for shipped first-party AI features; 1/10 is provisional, not proof the capability is absent."
+    },
     "highlights": [
       "Blocks ads, trackers, cookie banners, and third-party cookies by default",
       "Open-source Chromium browser with extension support",
@@ -827,6 +1204,19 @@
       "innovation": 8,
       "easeOfUse": 6,
       "ai": 4
+    },
+            "traitRationales": {
+      "privacy": "The profile does not cite evidence for default privacy protections or data practices; 4/10 is a qualitative estimate, not a measured comparison.",
+      "speed": "No source-linked, platform-matched benchmark is attached; this is a qualitative estimate, not a Speedometer result.",
+      "customization": "The profile does not cite evidence for UI, settings, or extension controls; 6/10 is a qualitative estimate, not a measured comparison.",
+      "minimalism": "The profile does not cite evidence about the default interface; 5/10 is a qualitative estimate, not a measured comparison.",
+      "features": "Profile-listed capabilities: “Organized web pages, images, notes and media on a free-form canvas”; “Included a built-in browser and web-capture tools”. Verify these ship in the browser; extensions and roadmap items are not counted.",
+      "openSource": "The profile does not cite evidence for the browser project’s own source and license; 2/10 is provisional, not proof the capability is absent.",
+      "resourceEfficiency": "No matched-workload RAM/CPU/battery results are attached; 5/10 is a qualitative estimate for the listed platforms.",
+      "ecosystem": "The profile does not cite evidence for first-party account, sync, or OS integrations; 2/10 is provisional, not proof the capability is absent.",
+      "innovation": "Profile evidence: “Organized web pages, images, notes and media on a free-form canvas”. Only shipped workflows count; announcements alone do not.",
+      "easeOfUse": "The profile does not cite evidence from first-run experience or usability testing; 6/10 is a qualitative estimate, not a measured comparison.",
+      "ai": "The profile does not cite evidence for shipped first-party AI features; 4/10 is a qualitative estimate, not a measured comparison."
     },
     "highlights": [
       "Organized web pages, images, notes and media on a free-form canvas",
@@ -856,6 +1246,19 @@
       "easeOfUse": 8,
       "ai": 9
     },
+            "traitRationales": {
+      "privacy": "The profile does not cite evidence for default privacy protections or data practices; 4/10 is a qualitative estimate, not a measured comparison.",
+      "speed": "No source-linked, platform-matched benchmark is attached; this is a qualitative estimate, not a Speedometer result.",
+      "customization": "The profile does not cite evidence for UI, settings, or extension controls; 4/10 is a qualitative estimate, not a measured comparison.",
+      "minimalism": "The profile does not cite evidence about the default interface; 6/10 is a qualitative estimate, not a measured comparison.",
+      "features": "Profile-listed capabilities: “AI assistance integrated into browsing”; “Built-in tools to search and summarize content”. Verify these ship in the browser; extensions and roadmap items are not counted.",
+      "openSource": "The profile does not cite evidence for the browser project’s own source and license; 2/10 is provisional, not proof the capability is absent.",
+      "resourceEfficiency": "Profile claim: “Interact with web content more efficiently”. This is platform-scoped and not a standardized matched-workload RAM/CPU/battery test.",
+      "ecosystem": "The profile does not cite evidence for first-party account, sync, or OS integrations; 2/10 is provisional, not proof the capability is absent.",
+      "innovation": "Profile evidence: “AI assistance integrated into browsing”. Only shipped workflows count; announcements alone do not.",
+      "easeOfUse": "The profile does not cite evidence from first-run experience or usability testing for this high 8/10 rating; verify it before treating the score as established.",
+      "ai": "Profile evidence: “AI assistance integrated into browsing”; “Built-in tools to search and summarize content”. Only first-party features count, not extensions or roadmap claims."
+    },
     "highlights": [
       "AI assistance integrated into browsing",
       "Built-in tools to search and summarize content",
@@ -883,6 +1286,19 @@
       "innovation": 5,
       "easeOfUse": 8,
       "ai": 1
+    },
+            "traitRationales": {
+      "privacy": "The profile does not cite evidence for default privacy protections or data practices; 5/10 is a qualitative estimate, not a measured comparison.",
+      "speed": "No source-linked, platform-matched benchmark is attached; this is a qualitative estimate, not a Speedometer result.",
+      "customization": "The profile does not cite evidence for UI, settings, or extension controls; 3/10 is provisional, not proof the capability is absent.",
+      "minimalism": "Profile evidence: “Calm, clutter-free interface”; “Fewer tabs and toolbars than mainstream browsers”. This describes the default UI rather than the full feature set.",
+      "features": "Profile-listed capabilities: “Fewer tabs and toolbars than mainstream browsers”. Verify these ship in the browser; extensions and roadmap items are not counted.",
+      "openSource": "The profile does not cite evidence for the browser project’s own source and license; 3/10 is provisional, not proof the capability is absent.",
+      "resourceEfficiency": "Profile claim: “WebKit-based for light resource use”. This is platform-scoped and not a standardized matched-workload RAM/CPU/battery test.",
+      "ecosystem": "The profile does not cite evidence for first-party account, sync, or OS integrations; 2/10 is provisional, not proof the capability is absent.",
+      "innovation": "The profile does not cite evidence for a distinct, shipped browsing workflow; 5/10 is a qualitative estimate, not a measured comparison.",
+      "easeOfUse": "The profile does not cite evidence from first-run experience or usability testing for this high 8/10 rating; verify it before treating the score as established.",
+      "ai": "The profile does not cite evidence for shipped first-party AI features; 1/10 is provisional, not proof the capability is absent."
     },
     "highlights": [
       "Calm, clutter-free interface",
@@ -912,6 +1328,19 @@
       "easeOfUse": 8,
       "ai": 1
     },
+            "traitRationales": {
+      "privacy": "The profile does not cite evidence for default privacy protections or data practices; 4/10 is a qualitative estimate, not a measured comparison.",
+      "speed": "No source-linked, platform-matched benchmark is attached; this is a qualitative estimate, not a Speedometer result.",
+      "customization": "The profile does not cite evidence for UI, settings, or extension controls; 4/10 is a qualitative estimate, not a measured comparison.",
+      "minimalism": "The profile does not cite evidence about the default interface; 6/10 is a qualitative estimate, not a measured comparison.",
+      "features": "Profile-listed capabilities: “WebKit-based browser with a spatial sidebar and tab management”. Verify these ship in the browser; extensions and roadmap items are not counted.",
+      "openSource": "Profile evidence: “Open source and in active development, but not yet ready for daily use”. This evaluates the browser project itself, not just its underlying engine.",
+      "resourceEfficiency": "No matched-workload RAM/CPU/battery results are attached; 6/10 is a qualitative estimate for the listed platforms.",
+      "ecosystem": "The profile does not cite evidence for first-party account, sync, or OS integrations; 2/10 is provisional, not proof the capability is absent.",
+      "innovation": "Profile evidence: “WebKit-based browser with a spatial sidebar and tab management”. Only shipped workflows count; announcements alone do not.",
+      "easeOfUse": "The profile does not cite evidence from first-run experience or usability testing for this high 8/10 rating; verify it before treating the score as established.",
+      "ai": "The profile does not cite evidence for shipped first-party AI features; 1/10 is provisional, not proof the capability is absent."
+    },
     "highlights": [
       "Native macOS interface built with SwiftUI and AppKit",
       "WebKit-based browser with a spatial sidebar and tab management",
@@ -939,6 +1368,19 @@
       "innovation": 8,
       "easeOfUse": 8,
       "ai": 8
+    },
+            "traitRationales": {
+      "privacy": "The profile does not cite evidence for default privacy protections or data practices; 4/10 is a qualitative estimate, not a measured comparison.",
+      "speed": "No source-linked, platform-matched benchmark is attached; this is a qualitative estimate, not a Speedometer result.",
+      "customization": "The profile does not cite evidence for UI, settings, or extension controls; 5/10 is a qualitative estimate, not a measured comparison.",
+      "minimalism": "The profile does not cite evidence about the default interface; 6/10 is a qualitative estimate, not a measured comparison.",
+      "features": "The profile does not cite evidence for shipped first-party built-in tools; 7/10 is a qualitative estimate, not a measured comparison.",
+      "openSource": "The profile does not cite evidence for the browser project’s own source and license; 2/10 is provisional, not proof the capability is absent.",
+      "resourceEfficiency": "No matched-workload RAM/CPU/battery results are attached; 6/10 is a qualitative estimate for the listed platforms.",
+      "ecosystem": "The profile does not cite evidence for first-party account, sync, or OS integrations; 2/10 is provisional, not proof the capability is absent.",
+      "innovation": "Profile evidence: “AI agent works in the same window and session as you”; “Can be switched to a plain browser with AI turned off”. Only shipped workflows count; announcements alone do not.",
+      "easeOfUse": "The profile does not cite evidence from first-run experience or usability testing for this high 8/10 rating; verify it before treating the score as established.",
+      "ai": "Profile evidence: “AI agent works in the same window and session as you”; “Can be switched to a plain browser with AI turned off”. Only first-party features count, not extensions or roadmap claims."
     },
     "highlights": [
       "AI agent works in the same window and session as you",
@@ -968,6 +1410,19 @@
       "easeOfUse": 8,
       "ai": 1
     },
+            "traitRationales": {
+      "privacy": "Profile evidence: “Built-in ad and tracker blocking”. This describes listed protections, not an anonymity guarantee.",
+      "speed": "No source-linked, platform-matched benchmark is attached; this is a qualitative estimate, not a Speedometer result.",
+      "customization": "The profile does not cite evidence for UI, settings, or extension controls; 3/10 is provisional, not proof the capability is absent.",
+      "minimalism": "Profile evidence: “Minimal interface with one address and search field”. This describes the default UI rather than the full feature set.",
+      "features": "Profile-listed capabilities: “Minimal interface with one address and search field”; “Built-in ad and tracker blocking”. Verify these ship in the browser; extensions and roadmap items are not counted.",
+      "openSource": "The profile does not cite evidence for the browser project’s own source and license for this high 9/10 rating; verify it before treating the score as established.",
+      "resourceEfficiency": "No matched-workload RAM/CPU/battery results are attached; 9/10 is a qualitative estimate for the listed platforms.",
+      "ecosystem": "The profile does not cite evidence for first-party account, sync, or OS integrations; 2/10 is provisional, not proof the capability is absent.",
+      "innovation": "Profile evidence: “Reading mode, floating video and separate Spaces”. Only shipped workflows count; announcements alone do not.",
+      "easeOfUse": "The profile does not cite evidence from first-run experience or usability testing for this high 8/10 rating; verify it before treating the score as established.",
+      "ai": "The profile does not cite evidence for shipped first-party AI features; 1/10 is provisional, not proof the capability is absent."
+    },
     "highlights": [
       "Minimal interface with one address and search field",
       "Built-in ad and tracker blocking",
@@ -995,6 +1450,19 @@
       "innovation": 5,
       "easeOfUse": 6,
       "ai": 3
+    },
+            "traitRationales": {
+      "privacy": "The profile does not cite evidence for default privacy protections or data practices; 3/10 is provisional, not proof the capability is absent.",
+      "speed": "No source-linked, platform-matched benchmark is attached; this is a qualitative estimate, not a Speedometer result.",
+      "customization": "The profile does not cite evidence for UI, settings, or extension controls; 6/10 is a qualitative estimate, not a measured comparison.",
+      "minimalism": "The profile does not cite evidence about the default interface; 4/10 is a qualitative estimate, not a measured comparison.",
+      "features": "Profile-listed capabilities: “Unified sidebar for Gmail, Outlook and other services”. Verify these ship in the browser; extensions and roadmap items are not counted.",
+      "openSource": "The profile does not cite evidence for the browser project’s own source and license; 2/10 is provisional, not proof the capability is absent.",
+      "resourceEfficiency": "No matched-workload RAM/CPU/battery results are attached; 4/10 is a qualitative estimate for the listed platforms.",
+      "ecosystem": "Profile evidence: “Built for managing multiple work identities”. Platform availability alone does not count as ecosystem integration.",
+      "innovation": "The profile does not cite evidence for a distinct, shipped browsing workflow; 5/10 is a qualitative estimate, not a measured comparison.",
+      "easeOfUse": "The profile does not cite evidence from first-run experience or usability testing; 6/10 is a qualitative estimate, not a measured comparison.",
+      "ai": "The profile does not cite evidence for shipped first-party AI features; 3/10 is provisional, not proof the capability is absent."
     },
     "highlights": [
       "Unified sidebar for Gmail, Outlook and other services",
@@ -1024,6 +1492,19 @@
       "easeOfUse": 7,
       "ai": 4
     },
+            "traitRationales": {
+      "privacy": "The profile does not cite evidence for default privacy protections or data practices; 4/10 is a qualitative estimate, not a measured comparison.",
+      "speed": "No source-linked, platform-matched benchmark is attached; this is a qualitative estimate, not a Speedometer result.",
+      "customization": "The profile does not cite evidence for UI, settings, or extension controls; 6/10 is a qualitative estimate, not a measured comparison.",
+      "minimalism": "The profile does not cite evidence about the default interface; 5/10 is a qualitative estimate, not a measured comparison.",
+      "features": "Profile-listed capabilities: “Multi-app workspaces combining tabs and web apps”; “Keeps related tools together visually”. Verify these ship in the browser; extensions and roadmap items are not counted.",
+      "openSource": "The profile does not cite evidence for the browser project’s own source and license; 2/10 is provisional, not proof the capability is absent.",
+      "resourceEfficiency": "No matched-workload RAM/CPU/battery results are attached; 5/10 is a qualitative estimate for the listed platforms.",
+      "ecosystem": "The profile does not cite evidence for first-party account, sync, or OS integrations; 3/10 is provisional, not proof the capability is absent.",
+      "innovation": "Profile evidence: “Multi-app workspaces combining tabs and web apps”. Only shipped workflows count; announcements alone do not.",
+      "easeOfUse": "The profile does not cite evidence from first-run experience or usability testing; 7/10 is a qualitative estimate, not a measured comparison.",
+      "ai": "The profile does not cite evidence for shipped first-party AI features; 4/10 is a qualitative estimate, not a measured comparison."
+    },
     "highlights": [
       "Multi-app workspaces combining tabs and web apps",
       "Keeps related tools together visually",
@@ -1051,6 +1532,19 @@
       "innovation": 5,
       "easeOfUse": 8,
       "ai": 1
+    },
+            "traitRationales": {
+      "privacy": "The profile does not cite evidence for default privacy protections or data practices; 5/10 is a qualitative estimate, not a measured comparison.",
+      "speed": "No source-linked, platform-matched benchmark is attached; this is a qualitative estimate, not a Speedometer result.",
+      "customization": "The profile does not cite evidence for UI, settings, or extension controls; 3/10 is provisional, not proof the capability is absent.",
+      "minimalism": "Profile evidence: “Simple, native-feeling interface”. This describes the default UI rather than the full feature set.",
+      "features": "Profile-listed capabilities: “Lightweight alternative to mainstream browsers”. Verify these ship in the browser; extensions and roadmap items are not counted.",
+      "openSource": "The profile does not cite evidence for the browser project’s own source and license; 3/10 is provisional, not proof the capability is absent.",
+      "resourceEfficiency": "Profile claim: “Lightweight alternative to mainstream browsers”. This is platform-scoped and not a standardized matched-workload RAM/CPU/battery test.",
+      "ecosystem": "The profile does not cite evidence for first-party account, sync, or OS integrations; 2/10 is provisional, not proof the capability is absent.",
+      "innovation": "The profile does not cite evidence for a distinct, shipped browsing workflow; 5/10 is a qualitative estimate, not a measured comparison.",
+      "easeOfUse": "Profile evidence: “Simple, native-feeling interface”. This is not a usability-test result.",
+      "ai": "The profile does not cite evidence for shipped first-party AI features; 1/10 is provisional, not proof the capability is absent."
     },
     "highlights": [
       "Simple, native-feeling interface",
@@ -1080,6 +1574,19 @@
       "easeOfUse": 6,
       "ai": 8
     },
+            "traitRationales": {
+      "privacy": "The profile does not cite evidence for default privacy protections or data practices; 5/10 is a qualitative estimate, not a measured comparison.",
+      "speed": "No source-linked, platform-matched benchmark is attached; this is a qualitative estimate, not a Speedometer result.",
+      "customization": "The profile does not cite evidence for UI, settings, or extension controls; 5/10 is a qualitative estimate, not a measured comparison.",
+      "minimalism": "The profile does not cite evidence about the default interface; 5/10 is a qualitative estimate, not a measured comparison.",
+      "features": "Profile-listed capabilities: “Uses AI to help search research and generate notes”. Verify these ship in the browser; extensions and roadmap items are not counted.",
+      "openSource": "Profile evidence: “Open-source desktop app available for macOS, Windows, and Linux”. This evaluates the browser project itself, not just its underlying engine.",
+      "resourceEfficiency": "No matched-workload RAM/CPU/battery results are attached; 5/10 is a qualitative estimate for the listed platforms.",
+      "ecosystem": "The profile does not cite evidence for first-party account, sync, or OS integrations; 2/10 is provisional, not proof the capability is absent.",
+      "innovation": "Profile evidence: “Uses AI to help search research and generate notes”. Only shipped workflows count; announcements alone do not.",
+      "easeOfUse": "The profile does not cite evidence from first-run experience or usability testing; 6/10 is a qualitative estimate, not a measured comparison.",
+      "ai": "Profile evidence: “Uses AI to help search research and generate notes”. Only first-party features count, not extensions or roadmap claims."
+    },
     "highlights": [
       "Organizes files and web pages in an intelligent notebook",
       "Uses AI to help search research and generate notes",
@@ -1107,6 +1614,19 @@
       "innovation": 3,
       "easeOfUse": 6,
       "ai": 1
+    },
+            "traitRationales": {
+      "privacy": "Profile evidence: “Removes Google-specific features, telemetry and web service dependencies”; “Chromium performance without Google tracking”. This describes listed protections, not an anonymity guarantee.",
+      "speed": "Profile claim: “Chromium performance without Google tracking”. No source-linked, platform-matched test is attached, so 7/10 remains qualitative.",
+      "customization": "Profile evidence: “Compatible with Chrome extensions”. Extension support is only one part of the customization score.",
+      "minimalism": "The profile does not cite evidence about the default interface; 7/10 is a qualitative estimate, not a measured comparison.",
+      "features": "The profile does not cite evidence for shipped first-party built-in tools; 5/10 is a qualitative estimate, not a measured comparison.",
+      "openSource": "The profile does not cite evidence for the browser project’s own source and license for this high 9/10 rating; verify it before treating the score as established.",
+      "resourceEfficiency": "No matched-workload RAM/CPU/battery results are attached; 5/10 is a qualitative estimate for the listed platforms.",
+      "ecosystem": "The profile does not cite evidence for first-party account, sync, or OS integrations; 3/10 is provisional, not proof the capability is absent.",
+      "innovation": "The profile does not cite evidence for a distinct, shipped browsing workflow; 3/10 is provisional, not proof the capability is absent.",
+      "easeOfUse": "The profile does not cite evidence from first-run experience or usability testing; 6/10 is a qualitative estimate, not a measured comparison.",
+      "ai": "The profile does not cite evidence for shipped first-party AI features; 1/10 is provisional, not proof the capability is absent."
     },
     "highlights": [
       "Removes Google-specific features, telemetry and web service dependencies",
@@ -1136,6 +1656,19 @@
       "easeOfUse": 6,
       "ai": 1
     },
+            "traitRationales": {
+      "privacy": "Profile evidence: “Built-in ad blocker”; “Anti-fingerprinting patches and extra hardening”. This describes listed protections, not an anonymity guarantee.",
+      "speed": "No source-linked, platform-matched benchmark is attached; this is a qualitative estimate, not a Speedometer result.",
+      "customization": "The profile does not cite evidence for UI, settings, or extension controls; 5/10 is a qualitative estimate, not a measured comparison.",
+      "minimalism": "The profile does not cite evidence about the default interface; 7/10 is a qualitative estimate, not a measured comparison.",
+      "features": "Profile-listed capabilities: “Built-in ad blocker”. Verify these ship in the browser; extensions and roadmap items are not counted.",
+      "openSource": "The profile does not cite evidence for the browser project’s own source and license for this high 9/10 rating; verify it before treating the score as established.",
+      "resourceEfficiency": "No matched-workload RAM/CPU/battery results are attached; 6/10 is a qualitative estimate for the listed platforms.",
+      "ecosystem": "The profile does not cite evidence for first-party account, sync, or OS integrations; 2/10 is provisional, not proof the capability is absent.",
+      "innovation": "The profile does not cite evidence for a distinct, shipped browsing workflow; 5/10 is a qualitative estimate, not a measured comparison.",
+      "easeOfUse": "The profile does not cite evidence from first-run experience or usability testing; 6/10 is a qualitative estimate, not a measured comparison.",
+      "ai": "The profile does not cite evidence for shipped first-party AI features; 1/10 is provisional, not proof the capability is absent."
+    },
     "highlights": [
       "Built-in ad blocker",
       "Anti-fingerprinting patches and extra hardening",
@@ -1163,6 +1696,19 @@
       "innovation": 6,
       "easeOfUse": 8,
       "ai": 2
+    },
+            "traitRationales": {
+      "privacy": "Profile evidence: “The former mobile browser bundled Ghostery's tracker blocking”. This describes listed protections, not an anonymity guarantee.",
+      "speed": "No source-linked, platform-matched benchmark is attached; this is a qualitative estimate, not a Speedometer result.",
+      "customization": "Profile evidence: “Ghostery directs desktop users to Firefox with its browser extension”. Extension support is only one part of the customization score.",
+      "minimalism": "The profile does not cite evidence about the default interface; 6/10 is a qualitative estimate, not a measured comparison.",
+      "features": "The profile does not cite evidence for shipped first-party built-in tools; 6/10 is a qualitative estimate, not a measured comparison.",
+      "openSource": "The profile does not cite evidence for the browser project’s own source and license; 6/10 is a qualitative estimate, not a measured comparison.",
+      "resourceEfficiency": "No matched-workload RAM/CPU/battery results are attached; 6/10 is a qualitative estimate for the listed platforms.",
+      "ecosystem": "The profile does not cite evidence for first-party account, sync, or OS integrations; 3/10 is provisional, not proof the capability is absent.",
+      "innovation": "The profile does not cite evidence for a distinct, shipped browsing workflow; 6/10 is a qualitative estimate, not a measured comparison.",
+      "easeOfUse": "The profile does not cite evidence from first-run experience or usability testing for this high 8/10 rating; verify it before treating the score as established.",
+      "ai": "The profile does not cite evidence for shipped first-party AI features; 2/10 is provisional, not proof the capability is absent."
     },
     "highlights": [
       "The former mobile browser bundled Ghostery's tracker blocking",
@@ -1192,6 +1738,19 @@
       "easeOfUse": 6,
       "ai": 1
     },
+            "traitRationales": {
+      "privacy": "The profile does not cite evidence for default privacy protections or data practices; 6/10 is a qualitative estimate, not a measured comparison.",
+      "speed": "No source-linked, platform-matched benchmark is attached; this is a qualitative estimate, not a Speedometer result.",
+      "customization": "Profile evidence: “Supports a wider range of extensions than official Firefox Android”. Extension support is only one part of the customization score.",
+      "minimalism": "The profile does not cite evidence about the default interface; 5/10 is a qualitative estimate, not a measured comparison.",
+      "features": "The profile does not cite evidence for shipped first-party built-in tools; 6/10 is a qualitative estimate, not a measured comparison.",
+      "openSource": "Profile evidence: “Community-maintained open-source project on GitHub”. This evaluates the browser project itself, not just its underlying engine.",
+      "resourceEfficiency": "No matched-workload RAM/CPU/battery results are attached; 5/10 is a qualitative estimate for the listed platforms.",
+      "ecosystem": "The profile does not cite evidence for first-party account, sync, or OS integrations; 2/10 is provisional, not proof the capability is absent.",
+      "innovation": "The profile does not cite evidence for a distinct, shipped browsing workflow; 4/10 is a qualitative estimate, not a measured comparison.",
+      "easeOfUse": "The profile does not cite evidence from first-run experience or usability testing; 6/10 is a qualitative estimate, not a measured comparison.",
+      "ai": "The profile does not cite evidence for shipped first-party AI features; 1/10 is provisional, not proof the capability is absent."
+    },
     "highlights": [
       "Supports a wider range of extensions than official Firefox Android",
       "Install desktop Firefox add-ons on Android",
@@ -1219,6 +1778,19 @@
       "innovation": 3,
       "easeOfUse": 8,
       "ai": 1
+    },
+            "traitRationales": {
+      "privacy": "The profile does not cite evidence for default privacy protections or data practices; 5/10 is a qualitative estimate, not a measured comparison.",
+      "speed": "No source-linked, platform-matched benchmark is attached; this is a qualitative estimate, not a Speedometer result.",
+      "customization": "The profile does not cite evidence for UI, settings, or extension controls; 2/10 is provisional, not proof the capability is absent.",
+      "minimalism": "Profile evidence: “Minimal interface with basic browsing”. This describes the default UI rather than the full feature set.",
+      "features": "The profile does not cite evidence for shipped first-party built-in tools; 3/10 is provisional, not proof the capability is absent.",
+      "openSource": "The profile does not cite evidence for the browser project’s own source and license; 3/10 is provisional, not proof the capability is absent.",
+      "resourceEfficiency": "Profile claim: “Low resource consumption”. This is platform-scoped and not a standardized matched-workload RAM/CPU/battery test.",
+      "ecosystem": "The profile does not cite evidence for first-party account, sync, or OS integrations; 2/10 is provisional, not proof the capability is absent.",
+      "innovation": "The profile does not cite evidence for a distinct, shipped browsing workflow; 3/10 is provisional, not proof the capability is absent.",
+      "easeOfUse": "Profile evidence: “Minimal interface with basic browsing”; “Basic ad filtering”. This is not a usability-test result.",
+      "ai": "The profile does not cite evidence for shipped first-party AI features; 1/10 is provisional, not proof the capability is absent."
     },
     "highlights": [
       "Minimal interface with basic browsing",
@@ -1248,6 +1820,19 @@
       "easeOfUse": 7,
       "ai": 1
     },
+            "traitRationales": {
+      "privacy": "Profile evidence: “Included a built-in ad blocker and night mode”. This describes listed protections, not an anonymity guarantee.",
+      "speed": "No source-linked, platform-matched benchmark is attached; this is a qualitative estimate, not a Speedometer result.",
+      "customization": "Profile evidence: “Supported desktop Chrome extensions on Android”. Extension support is only one part of the customization score.",
+      "minimalism": "The profile does not cite evidence about the default interface; 5/10 is a qualitative estimate, not a measured comparison.",
+      "features": "Profile-listed capabilities: “Included a built-in ad blocker and night mode”. Verify these ship in the browser; extensions and roadmap items are not counted.",
+      "openSource": "The profile does not cite evidence for the browser project’s own source and license; 6/10 is a qualitative estimate, not a measured comparison.",
+      "resourceEfficiency": "No matched-workload RAM/CPU/battery results are attached; 5/10 is a qualitative estimate for the listed platforms.",
+      "ecosystem": "The profile does not cite evidence for first-party account, sync, or OS integrations; 3/10 is provisional, not proof the capability is absent.",
+      "innovation": "The profile does not cite evidence for a distinct, shipped browsing workflow; 6/10 is a qualitative estimate, not a measured comparison.",
+      "easeOfUse": "The profile does not cite evidence from first-run experience or usability testing; 7/10 is a qualitative estimate, not a measured comparison.",
+      "ai": "The profile does not cite evidence for shipped first-party AI features; 1/10 is provisional, not proof the capability is absent."
+    },
     "highlights": [
       "Supported desktop Chrome extensions on Android",
       "Included a built-in ad blocker and night mode",
@@ -1275,6 +1860,19 @@
       "innovation": 3,
       "easeOfUse": 7,
       "ai": 1
+    },
+            "traitRationales": {
+      "privacy": "Profile evidence: “Stripped telemetry from Mozilla's Fenix codebase”; “Shipped with stricter privacy settings by default than Firefox”. This describes listed protections, not an anonymity guarantee.",
+      "speed": "No source-linked, platform-matched benchmark is attached; this is a qualitative estimate, not a Speedometer result.",
+      "customization": "Profile evidence: “Shipped with stricter privacy settings by default than Firefox”. Extension support is only one part of the customization score.",
+      "minimalism": "Profile evidence: “Stripped telemetry from Mozilla's Fenix codebase”. This describes the default UI rather than the full feature set.",
+      "features": "The profile does not cite evidence for shipped first-party built-in tools; 5/10 is a qualitative estimate, not a measured comparison.",
+      "openSource": "The profile does not cite evidence for the browser project’s own source and license for this high 10/10 rating; verify it before treating the score as established.",
+      "resourceEfficiency": "No matched-workload RAM/CPU/battery results are attached; 6/10 is a qualitative estimate for the listed platforms.",
+      "ecosystem": "The profile does not cite evidence for first-party account, sync, or OS integrations; 2/10 is provisional, not proof the capability is absent.",
+      "innovation": "The profile does not cite evidence for a distinct, shipped browsing workflow; 3/10 is provisional, not proof the capability is absent.",
+      "easeOfUse": "The profile does not cite evidence from first-run experience or usability testing; 7/10 is a qualitative estimate, not a measured comparison.",
+      "ai": "The profile does not cite evidence for shipped first-party AI features; 1/10 is provisional, not proof the capability is absent."
     },
     "highlights": [
       "Stripped telemetry from Mozilla's Fenix codebase",
@@ -1304,6 +1902,19 @@
       "easeOfUse": 9,
       "ai": 2
     },
+            "traitRationales": {
+      "privacy": "The profile does not cite evidence for default privacy protections or data practices; 4/10 is a qualitative estimate, not a measured comparison.",
+      "speed": "No source-linked, platform-matched benchmark is attached; this is a qualitative estimate, not a Speedometer result.",
+      "customization": "The profile does not cite evidence for UI, settings, or extension controls; 2/10 is provisional, not proof the capability is absent.",
+      "minimalism": "The profile does not cite evidence about the default interface for this high 8/10 rating; verify it before treating the score as established.",
+      "features": "The profile does not cite evidence for shipped first-party built-in tools; 4/10 is a qualitative estimate, not a measured comparison.",
+      "openSource": "The profile does not cite evidence for the browser project’s own source and license; 2/10 is provisional, not proof the capability is absent.",
+      "resourceEfficiency": "Profile claim: “Compresses pages through Opera's servers”. This is platform-scoped and not a standardized matched-workload RAM/CPU/battery test.",
+      "ecosystem": "The profile does not cite evidence for first-party account, sync, or OS integrations; 3/10 is provisional, not proof the capability is absent.",
+      "innovation": "The profile does not cite evidence for a distinct, shipped browsing workflow; 4/10 is a qualitative estimate, not a measured comparison.",
+      "easeOfUse": "The profile does not cite evidence from first-run experience or usability testing for this high 9/10 rating; verify it before treating the score as established.",
+      "ai": "The profile does not cite evidence for shipped first-party AI features; 2/10 is provisional, not proof the capability is absent."
+    },
     "highlights": [
       "Compresses pages through Opera's servers",
       "Significantly reduces data usage",
@@ -1331,6 +1942,19 @@
       "innovation": 4,
       "easeOfUse": 8,
       "ai": 2
+    },
+            "traitRationales": {
+      "privacy": "Profile evidence: “Built-in ad and tracker blocking”. This describes listed protections, not an anonymity guarantee.",
+      "speed": "No source-linked, platform-matched benchmark is attached; this is a qualitative estimate, not a Speedometer result.",
+      "customization": "Profile evidence: “No extensions or configuration needed”. Extension support is only one part of the customization score.",
+      "minimalism": "The profile does not cite evidence about the default interface; 7/10 is a qualitative estimate, not a measured comparison.",
+      "features": "Profile-listed capabilities: “Built-in ad and tracker blocking”. Verify these ship in the browser; extensions and roadmap items are not counted.",
+      "openSource": "The profile does not cite evidence for the browser project’s own source and license; 3/10 is provisional, not proof the capability is absent.",
+      "resourceEfficiency": "No matched-workload RAM/CPU/battery results are attached; 6/10 is a qualitative estimate for the listed platforms.",
+      "ecosystem": "The profile does not cite evidence for first-party account, sync, or OS integrations; 2/10 is provisional, not proof the capability is absent.",
+      "innovation": "The profile does not cite evidence for a distinct, shipped browsing workflow; 4/10 is a qualitative estimate, not a measured comparison.",
+      "easeOfUse": "Profile evidence: “Clean, straightforward interface”; “No extensions or configuration needed”. This is not a usability-test result.",
+      "ai": "The profile does not cite evidence for shipped first-party AI features; 2/10 is provisional, not proof the capability is absent."
     },
     "highlights": [
       "Built-in ad and tracker blocking",
@@ -1360,6 +1984,19 @@
       "easeOfUse": 9,
       "ai": 6
     },
+            "traitRationales": {
+      "privacy": "Profile evidence: “Secret Mode and tracker blocking”. This describes listed protections, not an anonymity guarantee.",
+      "speed": "No source-linked, platform-matched benchmark is attached; this is a qualitative estimate, not a Speedometer result.",
+      "customization": "Profile evidence: “Content blocker extension system”. Extension support is only one part of the customization score.",
+      "minimalism": "The profile does not cite evidence about the default interface; 5/10 is a qualitative estimate, not a measured comparison.",
+      "features": "Profile-listed capabilities: “Secure Folder integration and DeX desktop mode”. Verify these ship in the browser; extensions and roadmap items are not counted.",
+      "openSource": "The profile does not cite evidence for the browser project’s own source and license; 2/10 is provisional, not proof the capability is absent.",
+      "resourceEfficiency": "No matched-workload RAM/CPU/battery results are attached; 6/10 is a qualitative estimate for the listed platforms.",
+      "ecosystem": "Secure Folder and DeX are Samsung-specific integrations; the profile does not document a broad cross-platform account ecosystem.",
+      "innovation": "The profile does not cite evidence for a distinct, shipped browsing workflow; 5/10 is a qualitative estimate, not a measured comparison.",
+      "easeOfUse": "The profile does not cite evidence from first-run experience or usability testing for this high 9/10 rating; verify it before treating the score as established.",
+      "ai": "The profile does not cite evidence for shipped first-party AI features; 6/10 is a qualitative estimate, not a measured comparison."
+    },
     "highlights": [
       "Content blocker extension system",
       "Secure Folder integration and DeX desktop mode",
@@ -1387,6 +2024,19 @@
       "innovation": 3,
       "easeOfUse": 9,
       "ai": 1
+    },
+            "traitRationales": {
+      "privacy": "The profile does not cite evidence for default privacy protections or data practices; 5/10 is a qualitative estimate, not a measured comparison.",
+      "speed": "No source-linked, platform-matched benchmark is attached; this is a qualitative estimate, not a Speedometer result.",
+      "customization": "The profile does not cite evidence for UI, settings, or extension controls; 2/10 is provisional, not proof the capability is absent.",
+      "minimalism": "Profile evidence: “Stripped-back interface with minimal UI chrome”; “Content-first reading and browsing”. This describes the default UI rather than the full feature set.",
+      "features": "The profile does not cite evidence for shipped first-party built-in tools; 2/10 is provisional, not proof the capability is absent.",
+      "openSource": "The profile does not cite evidence for the browser project’s own source and license; 3/10 is provisional, not proof the capability is absent.",
+      "resourceEfficiency": "No matched-workload RAM/CPU/battery results are attached; 8/10 is a qualitative estimate for the listed platforms.",
+      "ecosystem": "The profile does not cite evidence for first-party account, sync, or OS integrations; 2/10 is provisional, not proof the capability is absent.",
+      "innovation": "The profile does not cite evidence for a distinct, shipped browsing workflow; 3/10 is provisional, not proof the capability is absent.",
+      "easeOfUse": "Profile evidence: “Content-first reading and browsing”. This is not a usability-test result.",
+      "ai": "The profile does not cite evidence for shipped first-party AI features; 1/10 is provisional, not proof the capability is absent."
     },
     "highlights": [
       "Stripped-back interface with minimal UI chrome",
@@ -1416,6 +2066,19 @@
       "easeOfUse": 8,
       "ai": 1
     },
+            "traitRationales": {
+      "privacy": "The profile does not cite evidence for default privacy protections or data practices; 5/10 is a qualitative estimate, not a measured comparison.",
+      "speed": "No source-linked, platform-matched benchmark is attached; this is a qualitative estimate, not a Speedometer result.",
+      "customization": "The profile does not cite evidence for UI, settings, or extension controls; 3/10 is provisional, not proof the capability is absent.",
+      "minimalism": "The profile does not cite evidence about the default interface for this high 9/10 rating; verify it before treating the score as established.",
+      "features": "Profile-listed capabilities: “Simple tab management without overhead”. Verify these ship in the browser; extensions and roadmap items are not counted.",
+      "openSource": "The profile does not cite evidence for the browser project’s own source and license; 3/10 is provisional, not proof the capability is absent.",
+      "resourceEfficiency": "Profile claim: “Extremely small installation size”. This is platform-scoped and not a standardized matched-workload RAM/CPU/battery test.",
+      "ecosystem": "The profile does not cite evidence for first-party account, sync, or OS integrations; 2/10 is provisional, not proof the capability is absent.",
+      "innovation": "The profile does not cite evidence for a distinct, shipped browsing workflow; 3/10 is provisional, not proof the capability is absent.",
+      "easeOfUse": "Profile evidence: “Basic ad filtering”; “Simple tab management without overhead”. This is not a usability-test result.",
+      "ai": "The profile does not cite evidence for shipped first-party AI features; 1/10 is provisional, not proof the capability is absent."
+    },
     "highlights": [
       "Extremely small installation size",
       "Basic ad filtering",
@@ -1444,6 +2107,19 @@
       "easeOfUse": 8,
       "ai": 2
     },
+            "traitRationales": {
+      "privacy": "The profile does not cite evidence for default privacy protections or data practices; 7/10 is a qualitative estimate, not a measured comparison.",
+      "speed": "Profile claim: “Stream and download content privately”. No source-linked, platform-matched test is attached, so 6/10 remains qualitative.",
+      "customization": "The profile does not cite evidence for UI, settings, or extension controls; 3/10 is provisional, not proof the capability is absent.",
+      "minimalism": "The profile does not cite evidence about the default interface; 4/10 is a qualitative estimate, not a measured comparison.",
+      "features": "Profile-listed capabilities: “Built-in free VPN”; “Media player and private file storage”. Verify these ship in the browser; extensions and roadmap items are not counted.",
+      "openSource": "The profile does not cite evidence for the browser project’s own source and license; 2/10 is provisional, not proof the capability is absent.",
+      "resourceEfficiency": "No matched-workload RAM/CPU/battery results are attached; 5/10 is a qualitative estimate for the listed platforms.",
+      "ecosystem": "The profile does not cite evidence for first-party account, sync, or OS integrations; 3/10 is provisional, not proof the capability is absent.",
+      "innovation": "The profile does not cite evidence for a distinct, shipped browsing workflow; 5/10 is a qualitative estimate, not a measured comparison.",
+      "easeOfUse": "The profile does not cite evidence from first-run experience or usability testing for this high 8/10 rating; verify it before treating the score as established.",
+      "ai": "The profile does not cite evidence for shipped first-party AI features; 2/10 is provisional, not proof the capability is absent."
+    },
     "highlights": [
       "Built-in free VPN",
       "Media player and private file storage",
@@ -1471,6 +2147,19 @@
       "innovation": 4,
       "easeOfUse": 8,
       "ai": 1
+    },
+            "traitRationales": {
+      "privacy": "The profile does not cite evidence for default privacy protections or data practices; 5/10 is a qualitative estimate, not a measured comparison.",
+      "speed": "Profile claim: “Fast browsing”. No source-linked, platform-matched test is attached, so 7/10 remains qualitative.",
+      "customization": "The profile does not cite evidence for UI, settings, or extension controls; 3/10 is provisional, not proof the capability is absent.",
+      "minimalism": "Profile evidence: “Clean, minimal design”; “Modern, uncluttered experience”. This describes the default UI rather than the full feature set.",
+      "features": "The profile does not cite evidence for shipped first-party built-in tools; 4/10 is a qualitative estimate, not a measured comparison.",
+      "openSource": "The profile does not cite evidence for the browser project’s own source and license; 3/10 is provisional, not proof the capability is absent.",
+      "resourceEfficiency": "No matched-workload RAM/CPU/battery results are attached; 7/10 is a qualitative estimate for the listed platforms.",
+      "ecosystem": "The profile does not cite evidence for first-party account, sync, or OS integrations; 2/10 is provisional, not proof the capability is absent.",
+      "innovation": "The profile does not cite evidence for a distinct, shipped browsing workflow; 4/10 is a qualitative estimate, not a measured comparison.",
+      "easeOfUse": "The profile does not cite evidence from first-run experience or usability testing for this high 8/10 rating; verify it before treating the score as established.",
+      "ai": "The profile does not cite evidence for shipped first-party AI features; 1/10 is provisional, not proof the capability is absent."
     },
     "highlights": ["Clean, minimal design", "Fast browsing", "Modern, uncluttered experience"],
     "platforms": ["ipad", "ios"],

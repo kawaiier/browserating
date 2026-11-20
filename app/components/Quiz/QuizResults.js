@@ -3,6 +3,8 @@
 import QuizResultCard from './QuizResultCard';
 import QuizShareButtons from './QuizShareButtons';
 import QuizTraitChart from './QuizTraitChart';
+import { TRAIT_META } from '../../lib/quiz-constants';
+import { getPriorityTraits } from './quizEngine';
 import Link from 'next/link';
 
 const fadeInUpKeyframes = `
@@ -26,6 +28,19 @@ export default function QuizResults({ results, userTraits, onRetake, isShared })
   const { topResults, discontinuedResults = [] } = results;
   const hero = topResults[0];
   const runnerUps = topResults.slice(1, 3);
+  const matchRationales =
+    !isShared && userTraits && hero
+      ? getPriorityTraits(userTraits)
+          .map(([trait, weight]) => ({
+            trait,
+            label: TRAIT_META[trait]?.label ?? trait,
+            weight,
+            score: hero.traits?.[trait],
+            rationale: hero.traitRationales?.[trait],
+          }))
+          .filter((item) => Number.isFinite(item.score) && item.rationale)
+          .slice(0, 3)
+      : [];
 
   if (!hero && !isShared) {
     return (
@@ -130,6 +145,38 @@ export default function QuizResults({ results, userTraits, onRetake, isShared })
         <div className="mt-8" style={{ animationDelay: '200ms', animationFillMode: 'both' }}>
           <QuizTraitChart userTraits={userTraits} browserProfile={hero} />
         </div>
+      )}
+
+      {matchRationales.length > 0 && (
+        <section
+          className="mt-6 rounded-lg p-4 sm:p-6"
+          style={{
+            backgroundColor: 'var(--surface-sunken)',
+            border: '1px solid var(--border-subtle)',
+          }}
+          aria-labelledby="quiz-match-reasons-heading"
+        >
+          <h3
+            id="quiz-match-reasons-heading"
+            className="text-sm font-semibold mb-4 uppercase tracking-wider"
+            style={{ color: 'var(--text-subtle)' }}
+          >
+            Why it matches
+          </h3>
+          <ul className="space-y-4">
+            {matchRationales.map(({ trait, label, weight, score, rationale }) => (
+              <li key={trait}>
+                <p className="text-sm font-semibold" style={{ color: 'var(--text-default)' }}>
+                  Because you {weight < 0 ? 'prefer less' : 'prioritized'} {label.toLowerCase()},
+                  this browser scores {score}/10.
+                </p>
+                <p className="mt-1 text-sm" style={{ color: 'var(--text-subtle)' }}>
+                  {rationale}
+                </p>
+              </li>
+            ))}
+          </ul>
+        </section>
       )}
 
       {!isShared && runnerUps.length > 0 && (
