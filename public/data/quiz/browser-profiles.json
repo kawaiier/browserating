@@ -81,7 +81,7 @@
     "bestFor": "Apple device owners who want the fastest, most battery-efficient experience with zero configuration",
     "discontinued": false,
     "discontinuedNote": null,
-    "lastVerified": null
+    "lastVerified": "2026-11-20"
   },
   {
     "id": "edge",
@@ -226,7 +226,7 @@
   {
     "id": "arc",
     "name": "Arc Browser",
-    "tagline": "A total rethink of what a browser can be — spaces, Boosts, and no tab bar",
+    "tagline": "A space-based browser with Boosts; feature development has ended and it is scheduled to sunset in December 2026",
     "traits": {
       "privacy": 5,
       "speed": 7,
@@ -243,13 +243,13 @@
     "highlights": [
       "Spaces and Profiles to separate work, personal, and projects",
       "Boosts to restyle or add custom JS to any website",
-      "Command Bar replaces the address bar with a smarter, faster workflow"
+      "In maintenance mode with basic updates only; Arc stops working on December 22, 2026"
     ],
-    "platforms": ["windows", "macos-arm", "macos-intel", "ipad", "ios"],
-    "bestFor": "Design-minded creatives and knowledge workers who want a browser that feels genuinely different",
+    "platforms": ["windows", "macos-arm", "macos-intel"],
+    "bestFor": "Historical profile only; Arc is scheduled to stop working on December 22, 2026",
     "discontinued": true,
-    "discontinuedNote": "Active development has ended — Arc may receive limited support going forward.",
-    "lastVerified": null
+    "discontinuedNote": "The Browser Company ended new feature development. Arc for macOS and Windows remains available with basic updates until December 22, 2026, when it will stop working and accounts will be deactivated.",
+    "lastVerified": "2026-11-20"
   },
   {
     "id": "zen",
@@ -581,11 +581,11 @@
       "Operates websites directly instead of relying on integrations",
       "Ranks first on browser-agent benchmarks"
     ],
-    "platforms": ["macos-arm"],
+    "platforms": ["windows", "macos-arm", "macos-intel"],
     "bestFor": "People who want to hand real multi-site tasks to an AI agent",
     "discontinued": false,
     "discontinuedNote": null,
-    "lastVerified": null
+    "lastVerified": "2026-11-20"
   },
   {
     "id": "axonium",
@@ -618,7 +618,7 @@
   {
     "id": "browseros",
     "name": "BrowserOS",
-    "tagline": "A browser that tries to be your whole workspace",
+    "tagline": "An open-source browser built for AI agents to use your logged-in accounts",
     "traits": {
       "privacy": 4,
       "speed": 6,
@@ -633,20 +633,20 @@
       "ai": 8
     },
     "highlights": [
-      "Runs web apps and workflows in one environment",
-      "Aims to replace traditional desktop apps",
-      "Operating-system-like workspace inside the browser"
+      "AI agents can operate websites through your logged-in browser accounts",
+      "Connects to agent tools such as Claude Code, Codex, and MCP clients",
+      "Open-source desktop app available for macOS, Windows, and Linux"
     ],
-    "platforms": ["macos-arm"],
-    "bestFor": "Power users who want to run their digital work entirely inside the browser",
+    "platforms": ["windows", "macos-arm", "macos-intel", "linux"],
+    "bestFor": "People who want AI agents to work on websites through their own browser sessions",
     "discontinued": false,
     "discontinuedNote": null,
-    "lastVerified": null
+    "lastVerified": "2026-11-20"
   },
   {
     "id": "chatgpt-atlas",
     "name": "ChatGPT Atlas",
-    "tagline": "OpenAI's browser with ChatGPT built into every page",
+    "tagline": "OpenAI's ChatGPT-integrated browser, retired in August 2026",
     "traits": {
       "privacy": 3,
       "speed": 6,
@@ -661,15 +661,15 @@
       "ai": 10
     },
     "highlights": [
-      "ChatGPT integrated as a core part of browsing",
-      "AI search, summaries and task completion in-page",
-      "Conversational interaction with web content"
+      "Retired on August 9, 2026, and no longer receives updates",
+      "Previously integrated ChatGPT into web browsing",
+      "OpenAI is moving browser-based agentic work into ChatGPT and Codex"
     ],
     "platforms": ["macos-arm"],
-    "bestFor": "ChatGPT users who want AI assistance built directly into the browser",
+    "bestFor": "Historical profile only; Atlas was designed for ChatGPT users who wanted AI in the browser",
     "discontinued": true,
-    "discontinuedNote": "OpenAI shut down ChatGPT Atlas in August 2026 and moved its features into the ChatGPT desktop app.",
-    "lastVerified": "2026-11-16"
+    "discontinuedNote": "OpenAI retired Atlas on August 9, 2026; it no longer receives updates. OpenAI is moving browser-based agentic work into ChatGPT and Codex.",
+    "lastVerified": "2026-11-20"
   },
   {
     "id": "comet",
@@ -693,11 +693,11 @@
       "Content summarization and answer generation built in",
       "AI as a first-class part of browsing"
     ],
-    "platforms": ["windows", "macos-arm", "android", "ios"],
+    "platforms": ["windows", "macos-arm", "macos-intel", "android", "ios"],
     "bestFor": "Researchers who want AI-powered search and summaries as the default",
     "discontinued": false,
     "discontinuedNote": null,
-    "lastVerified": "2026-11-16"
+    "lastVerified": "2026-11-20"
   },
   {
     "id": "crest",
@@ -753,7 +753,7 @@
     "bestFor": "Arc fans who want AI assistance built into everyday browsing",
     "discontinued": false,
     "discontinuedNote": null,
-    "lastVerified": "2026-11-16"
+    "lastVerified": "2026-11-20"
   },
   {
     "id": "fellou",
@@ -777,16 +777,16 @@
       "Navigates web apps on your behalf",
       "Automates repetitive multi-step workflows"
     ],
-    "platforms": ["macos-arm"],
+    "platforms": ["macos-arm", "macos-intel"],
     "bestFor": "Users who want to delegate repetitive or complex web tasks to AI",
-    "discontinued": true,
-    "discontinuedNote": "Fellou has been discontinued and is no longer actively developed.",
-    "lastVerified": null
+    "discontinued": false,
+    "discontinuedNote": null,
+    "lastVerified": "2026-11-20"
   },
   {
     "id": "helium",
     "name": "Helium",
-    "tagline": "An AI-powered browser focused on agentic automation",
+    "tagline": "An open-source, privacy-first Chromium browser with built-in ad and tracker blocking",
     "traits": {
       "privacy": 4,
       "speed": 6,
@@ -798,23 +798,23 @@
       "ecosystem": 2,
       "innovation": 8,
       "easeOfUse": 6,
-      "ai": 9
+      "ai": 1
     },
     "highlights": [
-      "AI takes actions on the web for you",
-      "Automated browsing and task execution",
-      "Suited to workflow automation and AI research"
+      "Blocks ads, trackers, cookie banners, and third-party cookies by default",
+      "Open-source Chromium browser with extension support",
+      "Available for macOS, Windows, and Linux; currently in beta"
     ],
-    "platforms": ["macos-arm"],
-    "bestFor": "People who want AI to browse and act on their behalf",
+    "platforms": ["windows", "macos-arm", "macos-intel", "linux"],
+    "bestFor": "Users who want a Chromium browser with built-in blocking and privacy controls",
     "discontinued": false,
     "discontinuedNote": null,
-    "lastVerified": null
+    "lastVerified": "2026-11-20"
   },
   {
     "id": "kosmik",
     "name": "Kosmik",
-    "tagline": "A spatial browser for visual research and creative work",
+    "tagline": "A spatial research workspace with an embedded browser, sunset in May 2026",
     "traits": {
       "privacy": 4,
       "speed": 6,
@@ -829,15 +829,15 @@
       "ai": 4
     },
     "highlights": [
-      "Free-form visual canvas instead of linear tabs",
-      "Arrange pages, images, notes and media together",
-      "Built for visual thinkers"
+      "Organized web pages, images, notes and media on a free-form canvas",
+      "Included a built-in browser and web-capture tools",
+      "The official site announced a May 31, 2026 sunset"
     ],
-    "platforms": ["macos-arm"],
-    "bestFor": "Designers and researchers who think and organize visually",
+    "platforms": ["windows", "macos-arm", "macos-intel", "linux"],
+    "bestFor": "Historical profile for designers and researchers who organized web research on visual canvases",
     "discontinued": true,
-    "discontinuedNote": "Kosmik has been discontinued and is no longer actively developed.",
-    "lastVerified": null
+    "discontinuedNote": "Kosmik announced a May 31, 2026 sunset. The announced sunset date has passed, so it is not a current browser recommendation.",
+    "lastVerified": "2026-11-20"
   },
   {
     "id": "neo",
@@ -861,11 +861,11 @@
       "Built-in tools to search and summarize content",
       "Interact with web content more efficiently"
     ],
-    "platforms": ["macos-arm"],
-    "bestFor": "Users who want AI help for everyday searching and reading",
+    "platforms": ["windows", "macos-arm", "macos-intel", "linux", "android", "ios"],
+    "bestFor": "Users who want Norton's AI browser and security tools across desktop and mobile devices",
     "discontinued": false,
     "discontinuedNote": null,
-    "lastVerified": null
+    "lastVerified": "2026-11-20"
   },
   {
     "id": "nook",
@@ -898,7 +898,7 @@
   {
     "id": "ora",
     "name": "Ora",
-    "tagline": "A browser with built-in AI tools for research and productivity",
+    "tagline": "An open-source, native WebKit browser for macOS",
     "traits": {
       "privacy": 4,
       "speed": 7,
@@ -910,18 +910,18 @@
       "ecosystem": 2,
       "innovation": 8,
       "easeOfUse": 8,
-      "ai": 8
+      "ai": 1
     },
     "highlights": [
-      "Integrated AI tools in the browsing interface",
-      "Less switching between browser and AI apps",
-      "WebKit-based for native performance"
+      "Native macOS interface built with SwiftUI and AppKit",
+      "WebKit-based browser with a spatial sidebar and tab management",
+      "Open source and in active development, but not yet ready for daily use"
     ],
     "platforms": ["macos-arm"],
-    "bestFor": "Researchers who want AI tools inside their browser",
+    "bestFor": "Mac users who want to try an early-stage, open-source WebKit browser",
     "discontinued": false,
     "discontinuedNote": null,
-    "lastVerified": null
+    "lastVerified": "2026-11-20"
   },
   {
     "id": "phi",
@@ -946,10 +946,10 @@
       "Native Swift/AppKit and SwiftUI client on Chromium"
     ],
     "platforms": ["macos-arm"],
-    "bestFor": "Mac users who want an optional AI agent with a native feel",
+    "bestFor": "Mac users who want an AI-assisted, Chromium-based browser with a native interface",
     "discontinued": false,
     "discontinuedNote": null,
-    "lastVerified": null
+    "lastVerified": "2026-11-20"
   },
   {
     "id": "search",
@@ -1066,7 +1066,7 @@
   {
     "id": "deta-surf",
     "name": "Deta Surf",
-    "tagline": "A personal browser that helps you resurface what you saved",
+    "tagline": "An open-source AI notebook for organizing files and web pages",
     "traits": {
       "privacy": 5,
       "speed": 6,
@@ -1081,15 +1081,15 @@
       "ai": 8
     },
     "highlights": [
-      "Annotate, organize and search saved pages",
-      "AI-powered search across history and saved content",
-      "Built to connect information from across the web"
+      "Organizes files and web pages in an intelligent notebook",
+      "Uses AI to help search research and generate notes",
+      "Open-source desktop app available for macOS, Windows, and Linux"
     ],
-    "platforms": ["macos-arm"],
-    "bestFor": "Researchers and knowledge workers who revisit and connect saved content",
+    "platforms": ["windows", "macos-arm", "macos-intel", "linux"],
+    "bestFor": "Historical browser entry; the current Surf app is an open-source AI notebook, not a general-purpose browser",
     "discontinued": true,
-    "discontinuedNote": "Deta Surf has been discontinued and is no longer actively developed.",
-    "lastVerified": null
+    "discontinuedNote": "Deta Surf has evolved into an open-source AI notebook; the current product is not a standalone general-purpose browser.",
+    "lastVerified": "2026-11-20"
   },
   {
     "id": "ungoogled-chromium",
@@ -1117,7 +1117,7 @@
     "bestFor": "Users who want Chromium compatibility with no Google involvement",
     "discontinued": false,
     "discontinuedNote": null,
-    "lastVerified": null
+    "lastVerified": "2026-11-20"
   },
   {
     "id": "cromite",
@@ -1150,7 +1150,7 @@
   {
     "id": "ghostery",
     "name": "Ghostery",
-    "tagline": "A Firefox-based private browser with tracker blocking built in",
+    "tagline": "Ghostery Private Browser (formerly Dawn), now discontinued",
     "traits": {
       "privacy": 8,
       "speed": 6,
@@ -1165,15 +1165,15 @@
       "ai": 2
     },
     "highlights": [
-      "Ghostery's tracker intelligence built into the browser",
-      "Blocks ads, trackers and invasive scripts out of the box",
-      "No extra setup required"
+      "The former mobile browser bundled Ghostery's tracker blocking",
+      "Available on Android and iOS/iPadOS before being sunset",
+      "Ghostery directs desktop users to Firefox with its browser extension"
     ],
-    "platforms": ["android"],
-    "bestFor": "Users who want strong tracker blocking without installing anything extra",
-    "discontinued": false,
-    "discontinuedNote": null,
-    "lastVerified": null
+    "platforms": ["android", "ipad", "ios"],
+    "bestFor": "Historical profile only; Ghostery recommends Firefox + Ghostery on Android and Safari + Ghostery on iOS/iPadOS",
+    "discontinued": true,
+    "discontinuedNote": "Ghostery sunset its Private Browser (formerly Dawn). The standalone browser no longer receives updates; Ghostery offers its tracker-blocking extension for supported browsers instead.",
+    "lastVerified": "2026-11-20"
   },
   {
     "id": "icaraven",
@@ -1234,7 +1234,7 @@
   {
     "id": "kiwi",
     "name": "Kiwi",
-    "tagline": "The Android browser that supports desktop Chrome extensions",
+    "tagline": "Former Android browser known for supporting desktop Chrome extensions",
     "traits": {
       "privacy": 4,
       "speed": 7,
@@ -1249,20 +1249,20 @@
       "ai": 1
     },
     "highlights": [
-      "Supports desktop Chrome extensions on Android",
-      "Built-in ad blocker and night mode",
-      "Bottom address bar option"
+      "Supported desktop Chrome extensions on Android",
+      "Included a built-in ad blocker and night mode",
+      "Offered a bottom address bar option"
     ],
     "platforms": ["android"],
-    "bestFor": "Android users who rely on extensions like password managers and content blockers",
+    "bestFor": "Historical profile for Android users who wanted desktop Chrome extensions on mobile",
     "discontinued": true,
-    "discontinuedNote": "Kiwi was archived in January 2025 and no longer receives updates. Its extension support moved into Microsoft Edge for Android.",
-    "lastVerified": "2026-11-16"
+    "discontinuedNote": "Kiwi was archived and stopped receiving maintenance after January 2025. Its extension code was integrated into Microsoft Edge Canary.",
+    "lastVerified": "2026-11-20"
   },
   {
     "id": "mull",
     "name": "Mull",
-    "tagline": "A privacy-hardened Firefox fork for Android, via F-Droid",
+    "tagline": "Discontinued privacy-hardened Firefox fork for Android",
     "traits": {
       "privacy": 9,
       "speed": 6,
@@ -1277,15 +1277,15 @@
       "ai": 1
     },
     "highlights": [
-      "Strips telemetry from Mozilla's Fenix codebase",
-      "Stricter privacy settings by default than Firefox",
-      "Distributed through F-Droid"
+      "Stripped telemetry from Mozilla's Fenix codebase",
+      "Shipped with stricter privacy settings by default than Firefox",
+      "Was distributed through F-Droid"
     ],
     "platforms": ["android"],
-    "bestFor": "Android users who want Firefox without Mozilla data collection",
+    "bestFor": "Historical profile only; Mull was a privacy-hardened Firefox fork for Android",
     "discontinued": true,
-    "discontinuedNote": "Mull stopped receiving updates when DivestOS shut down in December 2024. IronFox is a community fork.",
-    "lastVerified": "2026-11-16"
+    "discontinuedNote": "The Mull-Fenix repository was archived on December 23, 2024; Mull no longer receives updates.",
+    "lastVerified": "2026-11-20"
   },
   {
     "id": "opera-mini",
