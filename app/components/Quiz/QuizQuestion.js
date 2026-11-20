@@ -8,7 +8,9 @@ export default function QuizQuestion({
   selectedAnswer,
   onAnswer,
   onContinue,
+  onSkip,
   canContinue,
+  isReviewing,
   onBack,
   showBack,
   direction,
@@ -86,50 +88,61 @@ export default function QuizQuestion({
           ))}
         </div>
 
-        {(showBack || isMultiSelect) && (
-          <div className="mt-6 flex justify-center items-center gap-4">
-            {showBack && (
-              <button
-                onClick={onBack}
-                className="text-sm transition-colors duration-200 flex items-center gap-1 rounded"
-                style={{ color: 'var(--text-subtle)' }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.color = 'var(--text-default)';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.color = 'var(--text-subtle)';
-                }}
-              >
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M15 19l-7-7 7-7"
-                  />
-                </svg>
-                Back
-              </button>
-            )}
-            {isMultiSelect && (
-              <button
-                type="button"
-                onClick={onContinue}
-                disabled={!canContinue}
-                className="px-6 py-2.5 rounded-md font-semibold text-sm transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-                style={{
-                  backgroundColor: 'var(--color-brand)',
-                  color: 'var(--text-inverse)',
-                }}
-              >
-                Continue
-              </button>
-            )}
-          </div>
-        )}
+        <div className="mt-6 flex flex-wrap justify-center items-center gap-3">
+          {showBack && (
+            <button
+              type="button"
+              onClick={onBack}
+              className="text-sm transition-colors duration-200 flex items-center gap-1 rounded"
+              style={{ color: 'var(--text-subtle)' }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.color = 'var(--text-default)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.color = 'var(--text-subtle)';
+              }}
+            >
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M15 19l-7-7 7-7"
+                />
+              </svg>
+              Back
+            </button>
+          )}
+          {(isMultiSelect || isReviewing) && (
+            <button
+              type="button"
+              onClick={onContinue}
+              disabled={!canContinue}
+              className="px-6 py-2.5 rounded-md font-semibold text-sm transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+              style={{
+                backgroundColor: 'var(--color-brand)',
+                color: 'var(--text-inverse)',
+              }}
+            >
+              {isMultiSelect ? 'Continue' : 'Next'}
+            </button>
+          )}
+          <button
+            type="button"
+            onClick={onSkip}
+            className="px-4 py-2.5 rounded-md border text-sm font-medium transition-colors"
+            style={{
+              backgroundColor: 'var(--surface-raised)',
+              borderColor: 'var(--border-subtle)',
+              color: 'var(--text-subtle)',
+            }}
+          >
+            Skip / no preference
+          </button>
+        </div>
         {isMultiSelect && !canContinue && (
           <p className="mt-2 text-center text-sm" style={{ color: 'var(--text-subtle)' }}>
-            Select at least one device to continue.
+            Select at least one device or choose no preference to continue.
           </p>
         )}
       </div>

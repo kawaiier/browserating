@@ -120,7 +120,7 @@ export async function GET(request) {
           }}
         >
           <div style={{ fontSize: '28px', color: '#c4b5fd', fontWeight: 400 }}>
-            Your browser match:
+            Someone matched with
           </div>
           <div
             style={{ fontSize: '80px', fontWeight: 700, color: '#ffffff', lineHeight: 1 }}
@@ -128,7 +128,7 @@ export async function GET(request) {
             {profile.name}
           </div>
           <div style={{ fontSize: '26px', color: '#a78bfa', marginTop: '16px' }}>
-            Find yours at browserating.com/quiz
+            What&apos;s yours? Take the quiz at browserating.com/quiz
           </div>
         </div>
       </div>

@@ -27,7 +27,11 @@ function normalizeToScale(traits) {
   return Object.fromEntries(Object.entries(normalized).map(([k, v]) => [k, (v / maxVal) * 10]));
 }
 
-export default function QuizTraitChart({ userTraits, browserProfile }) {
+export default function QuizTraitChart({
+  userTraits,
+  browserProfile,
+  userLabel = 'Your Priorities',
+}) {
   const labels = TRAIT_ORDER.map((key) => TRAIT_META[key]?.label ?? key);
 
   const userScaled = normalizeToScale(userTraits);
@@ -37,7 +41,7 @@ export default function QuizTraitChart({ userTraits, browserProfile }) {
   const data = {
     labels,
     datasets: [
-      { ...USER_DATASET_STYLE, data: userData },
+      { ...USER_DATASET_STYLE, label: userLabel, data: userData },
       { ...BROWSER_DATASET_STYLE, label: browserProfile.name, data: browserData },
     ],
   };
@@ -54,7 +58,7 @@ export default function QuizTraitChart({ userTraits, browserProfile }) {
         className="text-sm font-semibold text-center mb-4 uppercase tracking-wider"
         style={{ color: 'var(--text-subtle)' }}
       >
-        Your Priorities vs {browserProfile.name}
+        {userLabel} vs {browserProfile.name}
       </h3>
       <div className="max-w-sm mx-auto">
         <Radar data={data} options={RADAR_CHART_OPTIONS} />

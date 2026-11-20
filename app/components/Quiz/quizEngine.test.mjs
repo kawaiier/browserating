@@ -3,8 +3,9 @@ import { readFileSync } from 'node:fs';
 import test from 'node:test';
 
 import { getBrowserSlug } from '../../lib/getBrowserSlug.js';
-import { TRAIT_META } from '../../lib/quiz-constants.js';
+import { QUIZ_INTRO_COPY, TRAIT_META } from '../../lib/quiz-constants.js';
 import { ICON_MAP } from './quizOptionIcons.js';
+import { SKIP_ANSWER } from './quizState.js';
 import { TRAIT_KEYS, computeResults, computeUserTraits, rankBrowsers } from './quizEngine.js';
 
 const realQuestions = JSON.parse(
@@ -145,8 +146,29 @@ test('computeResults only notes discontinued browsers that would rank in the top
   assert.deepEqual(results.discontinuedResults, []);
 });
 
-test('no selected platform produces no eligible recommendations', () => {
-  assert.deepEqual(rankBrowsers({ privacy: 1 }, profiles), []);
+test('no platform preference leaves platform filtering unset', () => {
+  const ranked = rankBrowsers({ privacy: 1 }, profiles);
+  const results = computeResults([[], 'q1a'], questions, profiles);
+
+  assert.deepEqual(
+    ranked.map((browser) => browser.id).sort(),
+    profiles.map((browser) => browser.id).sort()
+  );
+  assert.deepEqual(results.selectedPlatforms, []);
+  assert.deepEqual(
+    results.rankedBrowsers.map((browser) => browser.id).sort(),
+    profiles.map((browser) => browser.id).sort()
+  );
+});
+
+test('skipping questions adds no trait weights or platform filter', () => {
+  const skippedAnswers = Array(realQuestions.length).fill(SKIP_ANSWER);
+  const traits = computeUserTraits(skippedAnswers, realQuestions);
+  const results = computeResults(skippedAnswers, realQuestions, realProfiles);
+
+  assert.ok(Object.values(traits).every((weight) => weight === 0));
+  assert.deepEqual(results.selectedPlatforms, []);
+  assert.ok(results.topResults.length > 0);
 });
 
 test('traits the user did not mention are neutral', () => {
@@ -479,6 +501,12 @@ test('only the strongest preferences decide the fit', () => {
 
   assert.equal(ranked[0].id, 'specialist');
   assert.equal(ranked[0].matchScore, 10);
+});
+
+test('intro bullets use icons available to the UI', () => {
+  for (const bullet of QUIZ_INTRO_COPY.bullets(realQuestions.length)) {
+    assert.ok(Object.hasOwn(ICON_MAP, bullet.icon), `unknown intro icon "${bullet.icon}"`);
+  }
 });
 
 test('data integrity: options have unique IDs, valid icons, balanced weights, and trait coverage', () => {

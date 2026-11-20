@@ -7,6 +7,7 @@ import Footer from '../components/Footer';
 import QuizContainer from '../components/Quiz/QuizContainer';
 import QuizHeader from '../components/Quiz/QuizHeader';
 import { getBrowserSlug } from '../lib/getBrowserSlug';
+import { parseQuizUrlState } from '../components/Quiz/quizState';
 
 export async function generateMetadata({ searchParams }) {
   const params = await searchParams;
@@ -62,28 +63,30 @@ export async function generateMetadata({ searchParams }) {
     };
   }
 
-  const ogImageUrl = ogImageBase;
+  const ogImageUrl = `${BASE_URL}/api/og/quiz?r=${encodeURIComponent(r)}`;
+  const sharedTitle = `Someone matched with ${profile.name} — what's yours?`;
+  const sharedDescription = `Someone matched with ${profile.name} in the BrowseRating browser quiz. Take the quiz to find your own browser match.`;
 
   return {
-    title: `Your browser match: ${profile.name} | BrowseRating`,
-    description: `I matched with ${profile.name} on the BrowseRating browser quiz. Find your perfect browser!`,
+    title: `${sharedTitle} | BrowseRating`,
+    description: sharedDescription,
     openGraph: {
-      title: `Your browser match: ${profile.name}`,
-      description: `I matched with ${profile.name} on the BrowseRating browser quiz. Find yours at browserating.com/quiz`,
-      url: `${BASE_URL}/quiz?r=${r}`,
+      title: sharedTitle,
+      description: sharedDescription,
+      url: `${BASE_URL}/quiz?r=${encodeURIComponent(r)}`,
       images: [
         {
           url: ogImageUrl,
           width: 1200,
           height: 630,
-          alt: `Your browser match: ${profile.name}`,
+          alt: sharedTitle,
         },
       ],
     },
     twitter: {
       card: 'summary_large_image',
-      title: `Your browser match: ${profile.name}`,
-      description: `I matched with ${profile.name}! Find your perfect browser at browserating.com/quiz`,
+      title: sharedTitle,
+      description: sharedDescription,
       images: [ogImageUrl],
     },
   };
@@ -101,6 +104,8 @@ export default async function QuizPage({ searchParams }) {
   const profiles = JSON.parse(profilesRaw);
   const questions = JSON.parse(questionsRaw);
   const browsers = JSON.parse(browsersRaw);
+  const initialQuizState = parseQuizUrlState(await searchParams, questions);
+  const sharedResultId = initialQuizState.sharedResultId;
 
   const browsersMap = new Map(browsers.map((b) => [b.name.toLowerCase(), b]));
 
@@ -113,9 +118,6 @@ export default async function QuizPage({ searchParams }) {
       slug: match ? getBrowserSlug(match.name) : null,
     };
   });
-
-  const params = await searchParams;
-  const sharedResultId = params?.r ?? null;
 
   return (
     <ErrorBoundary>
@@ -130,6 +132,7 @@ export default async function QuizPage({ searchParams }) {
               browserProfiles={browserProfiles}
               questions={questions}
               sharedResultId={sharedResultId}
+              initialQuizState={initialQuizState}
             />
           </main>
           <Footer />

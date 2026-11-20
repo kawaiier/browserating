@@ -14,6 +14,7 @@ import {
   Ghost,
   LayoutDashboard,
   LayoutTemplate,
+  ListChecks,
   Meh,
   MinusCircle,
   Package,
@@ -26,12 +27,15 @@ import {
   Sparkles,
   Terminal,
   ThumbsUp,
+  Trophy,
   UserX,
   Wand2,
   Zap,
 } from 'lucide-react';
 
 export const ICON_MAP = {
+  'list-checks': ListChecks,
+  trophy: Trophy,
   zap: Zap,
   shield: Shield,
   'layout-dashboard': LayoutDashboard,

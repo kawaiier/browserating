@@ -3,8 +3,9 @@
 import { QUIZ_INTRO_COPY } from '../../lib/quiz-constants';
 import Image from 'next/image';
 import { useMemo } from 'react';
+import { ICON_MAP } from './quizOptionIcons.js';
 
-const FLOAT_BROWSERS = ['brave', 'firefox', 'chrome', 'zen-browser', 'arc'];
+const FLOAT_BROWSERS = ['brave', 'firefox', 'chrome', 'zen', 'arc'];
 
 const floatKeyframes = `
 @keyframes floatY {
@@ -15,6 +16,31 @@ const floatKeyframes = `
   .quiz-float { animation: none !important; }
 }
 `;
+
+function IntroBullet({ bullet }) {
+  const Icon = ICON_MAP[bullet.icon];
+
+  return (
+    <li
+      className="flex items-center gap-2 text-sm font-medium"
+      style={{ color: 'var(--text-subtle)' }}
+    >
+      {Icon ? (
+        <Icon
+          className="w-4 h-4 flex-shrink-0"
+          style={{ color: 'var(--color-brand)' }}
+          aria-hidden="true"
+        />
+      ) : (
+        <span
+          className="w-1.5 h-1.5 rounded-full flex-shrink-0"
+          style={{ backgroundColor: 'var(--color-brand)' }}
+        />
+      )}
+      {bullet.text}
+    </li>
+  );
+}
 
 export default function QuizIntro({ browserProfiles, questionCount, onStart }) {
   const floatBrowsers = useMemo(
@@ -84,18 +110,8 @@ export default function QuizIntro({ browserProfiles, questionCount, onStart }) {
           className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-6 mb-10"
           role="list"
         >
-          {QUIZ_INTRO_COPY.bullets(questionCount).map((bullet, i) => (
-            <li
-              key={i}
-              className="flex items-center gap-2 text-sm font-medium"
-              style={{ color: 'var(--text-subtle)' }}
-            >
-              <span
-                className="w-1.5 h-1.5 rounded-full flex-shrink-0"
-                style={{ backgroundColor: 'var(--color-brand)' }}
-              />
-              {bullet.text}
-            </li>
+          {QUIZ_INTRO_COPY.bullets(questionCount).map((bullet) => (
+            <IntroBullet key={bullet.icon} bullet={bullet} />
           ))}
         </ul>
 

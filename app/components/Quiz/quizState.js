@@ -1,0 +1,99 @@
+export const SKIP_ANSWER = '__quiz_no_preference__';
+
+export function createEmptyAnswers(questions) {
+  return questions.map(() => null);
+}
+
+export function serializeQuizAnswers(answers) {
+  return JSON.stringify(Array.isArray(answers) ? answers : []);
+}
+
+export function parseQuizAnswers(serializedAnswers, questions) {
+  if (typeof serializedAnswers !== 'string') return null;
+
+  let parsedAnswers;
+  try {
+    parsedAnswers = JSON.parse(serializedAnswers);
+  } catch {
+    return null;
+  }
+  if (!Array.isArray(parsedAnswers)) return null;
+
+  const answers = createEmptyAnswers(questions);
+
+  questions.forEach((question, index) => {
+    const answer = parsedAnswers[index];
+    if (answer === SKIP_ANSWER) {
+      answers[index] = SKIP_ANSWER;
+      return;
+    }
+    if (answer === null || answer === undefined) return;
+
+    const optionIds = new Set(question.options.map((option) => option.id));
+    if (question.selectionMode === 'multiple') {
+      if (Array.isArray(answer)) {
+        answers[index] = [
+          ...new Set(answer.filter((id) => typeof id === 'string' && optionIds.has(id))),
+        ];
+      }
+      return;
+    }
+
+    if (typeof answer === 'string' && optionIds.has(answer)) {
+      answers[index] = answer;
+    }
+  });
+
+  return answers;
+}
+
+function getSearchParam(searchParams, key) {
+  if (typeof searchParams?.get === 'function') {
+    return searchParams.get(key);
+  }
+
+  const value = searchParams?.[key];
+  return Array.isArray(value)
+    ? value[0] == null
+      ? null
+      : String(value[0])
+    : value == null
+      ? null
+      : String(value);
+}
+
+export function parseQuizUrlState(searchParams, questions) {
+  const sharedResultId = getSearchParam(searchParams, 'r');
+  const encodedAnswers = getSearchParam(searchParams, 'a');
+  const parsedAnswers = parseQuizAnswers(encodedAnswers, questions);
+
+  if (sharedResultId) {
+    return {
+      sharedResultId,
+      step: questions.length + 1,
+      answers: parsedAnswers ?? createEmptyAnswers(questions),
+      hasSharedAnswers: parsedAnswers !== null,
+      hasQuizState: false,
+    };
+  }
+
+  const rawStep = getSearchParam(searchParams, 'step');
+  const step = rawStep === null ? NaN : Number(rawStep);
+  if (!Number.isInteger(step) || step < 1 || step > questions.length + 1) {
+    return {
+      sharedResultId: null,
+      step: 0,
+      answers: createEmptyAnswers(questions),
+      hasSharedAnswers: false,
+      hasQuizState: false,
+    };
+  }
+
+  return {
+    sharedResultId: null,
+    step,
+    answers: parsedAnswers ?? createEmptyAnswers(questions),
+    hasSharedAnswers: false,
+    hasQuizState: true,
+  };
+}

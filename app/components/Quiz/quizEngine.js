@@ -233,17 +233,20 @@ function meetsDealbreakers(browser, dealbreakers) {
 }
 
 /**
- * Score profiles that support at least one selected platform and meet every
- * selected dealbreaker, sorted best-fit first. Unmentioned traits do not affect
- * the weighted fit. Percentages are added later, after discontinued profiles
- * are removed, so a dead browser can't shift the calibration.
+ * Score profiles that support at least one selected platform (when a platform
+ * is selected) and meet every selected dealbreaker, sorted best-fit first. An
+ * empty platform selection means no device preference. Unmentioned traits do
+ * not affect the weighted fit. Percentages are added later, after discontinued
+ * profiles are removed, so a dead browser can't shift the calibration.
  */
 function scoreEligibleBrowsers(userTraits, browserProfiles, selectedPlatforms, dealbreakers = {}) {
   const selectedPlatformSet = new Set(selectedPlatforms);
   const eligibleProfiles = browserProfiles.filter(
     (browser) =>
       Array.isArray(browser.platforms) &&
-      browser.platforms.some((platform) => selectedPlatformSet.has(platform)) &&
+      browser.platforms.length > 0 &&
+      (selectedPlatformSet.size === 0 ||
+        browser.platforms.some((platform) => selectedPlatformSet.has(platform))) &&
       meetsDealbreakers(browser, dealbreakers)
   );
 
@@ -269,7 +272,7 @@ function rankActiveBrowsers(scoredBrowsers) {
  * @param {Object<string, number>} userTraits - Signed preference weights from `computeUserTraits`.
  * @param {Array<Object & {traits: Object<string, number>, platforms?: string[]}>} browserProfiles
  *   Array from browser-profiles.json; each entry must have a `.traits` object.
- * @param {string[]} selectedPlatforms - Platforms a browser must support to be eligible.
+ * @param {string[]} selectedPlatforms - Platforms a browser must support; an empty list leaves the platform unfiltered.
  * @param {Object<string, {min?: number, max?: number}>} [dealbreakers={}] - Hard trait constraints.
  * @returns {Array<Object & {matchScore: number, matchPercentage: number}>} Eligible active browsers sorted best-match-first.
  */

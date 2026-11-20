@@ -2,13 +2,16 @@
 
 import { SHARE_COPY } from '../../lib/quiz-constants';
 import { useEffect, useState } from 'react';
+import { serializeQuizAnswers } from './quizState';
 
 const BASE_URL = 'https://browserating.com';
 
-export default function QuizShareButtons({ browserId, browserName }) {
+export default function QuizShareButtons({ browserId, browserName, answers }) {
   const [copied, setCopied] = useState(false);
   const [hasNativeShare, setHasNativeShare] = useState(false);
-  const shareUrl = `${BASE_URL}/quiz?r=${browserId}`;
+  const shareParams = new URLSearchParams({ r: browserId });
+  if (Array.isArray(answers)) shareParams.set('a', serializeQuizAnswers(answers));
+  const shareUrl = `${BASE_URL}/quiz?${shareParams.toString()}`;
 
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect -- detecting Web Share API support on mount
