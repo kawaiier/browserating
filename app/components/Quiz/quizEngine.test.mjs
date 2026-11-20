@@ -271,6 +271,8 @@ test('answers no profile can satisfy produce an empty result set', () => {
 const platformQuestion = realQuestions.find((question) => question.selectionMode === 'multiple');
 const platformOptionIds = platformQuestion.options.map((option) => option.id);
 const profileById = Object.fromEntries(realProfiles.map((profile) => [profile.id, profile]));
+const OPTION_WEIGHT_TOTAL = 6;
+const MAX_QUESTION_WEIGHT_GAP = 2; // Two points on the 0–6 option-weight scale.
 
 const topIds = (answers, count = 3) =>
   computeResults(answers, realQuestions, realProfiles)
@@ -400,7 +402,7 @@ test('only the strongest preferences decide the fit', () => {
   assert.equal(ranked[0].matchScore, 10);
 });
 
-test('data integrity: question options use known traits and equal total weight', () => {
+test('data integrity: options have equal weight and balanced trait coverage', () => {
   const validPlatforms = new Set([
     'windows',
     'macos-arm',
@@ -411,8 +413,21 @@ test('data integrity: question options use known traits and equal total weight',
     'ipad',
   ]);
   const optionIds = new Set();
+  const questionTraitMaxima = new Map(TRAIT_KEYS.map((trait) => [trait, []]));
 
   for (const question of realQuestions) {
+    if (question !== platformQuestion) {
+      for (const trait of TRAIT_KEYS) {
+        const maxWeight = Math.max(
+          0,
+          ...question.options.map((candidate) => Math.abs(candidate.traits?.[trait] ?? 0))
+        );
+        if (maxWeight > 0) {
+          questionTraitMaxima.get(trait).push({ questionId: question.id, maxWeight });
+        }
+      }
+    }
+
     for (const option of question.options) {
       assert.ok(!optionIds.has(option.id), `duplicate option id ${option.id}`);
       optionIds.add(option.id);
@@ -434,8 +449,18 @@ test('data integrity: question options use known traits and equal total weight',
         assert.ok(TRAIT_KEYS.includes(trait), `${option.id} dealbreaker ${trait}`);
       }
       const total = weights.reduce((sum, [, weight]) => sum + Math.abs(weight), 0);
-      assert.equal(total, 6, `${option.id} has total weight ${total}`);
+      assert.equal(total, OPTION_WEIGHT_TOTAL, `${option.id} has total weight ${total}`);
     }
+  }
+
+  for (const trait of TRAIT_KEYS) {
+    const maxima = questionTraitMaxima.get(trait).sort((a, b) => b.maxWeight - a.maxWeight);
+    assert.ok(maxima.length >= 2, `${trait} is weighted in fewer than two questions`);
+    assert.ok(
+      maxima[0].maxWeight - maxima[1].maxWeight <= MAX_QUESTION_WEIGHT_GAP,
+      `${trait} maxima are not similar: ${maxima[0].questionId}=${maxima[0].maxWeight}, ` +
+        `${maxima[1].questionId}=${maxima[1].maxWeight}`
+    );
   }
 });
 

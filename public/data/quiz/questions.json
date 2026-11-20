@@ -73,8 +73,9 @@
         "description": "Give me everything built-in",
         "icon": "layout-dashboard",
         "traits": {
-          "features": 4,
-          "customization": 2
+          "features": 2,
+          "customization": 2,
+          "ai": 2
         }
       },
       {
@@ -169,9 +170,9 @@
         "description": "Custom CSS, flags, about:config — all of it",
         "icon": "terminal",
         "traits": {
-          "customization": 4,
+          "customization": 3,
           "openSource": 1,
-          "innovation": 1
+          "innovation": 2
         }
       }
     ]
@@ -372,8 +373,8 @@
         "description": "I want AI front and center, even acting on my behalf",
         "icon": "bot",
         "traits": {
-          "ai": 5,
-          "innovation": 1
+          "ai": 4,
+          "innovation": 2
         }
       },
       {
