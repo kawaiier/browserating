@@ -118,7 +118,6 @@ export function parseQuizUrlState(searchParams, questions, fallbackSharedResultI
       step: questions.length + 1,
       answers: parsedAnswers ?? createEmptyAnswers(questions),
       hasSharedAnswers: parsedAnswers !== null,
-      hasQuizState: false,
     };
   }
 
@@ -130,7 +129,6 @@ export function parseQuizUrlState(searchParams, questions, fallbackSharedResultI
       step: 0,
       answers: createEmptyAnswers(questions),
       hasSharedAnswers: false,
-      hasQuizState: false,
     };
   }
 
@@ -139,6 +137,5 @@ export function parseQuizUrlState(searchParams, questions, fallbackSharedResultI
     step,
     answers: parsedAnswers ?? createEmptyAnswers(questions),
     hasSharedAnswers: false,
-    hasQuizState: true,
   };
 }

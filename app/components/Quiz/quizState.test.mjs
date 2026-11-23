@@ -86,7 +86,6 @@ test('quiz URL state restores the step and positional answers', () => {
     step: 3,
     answers,
     hasSharedAnswers: false,
-    hasQuizState: true,
   });
 });
 
