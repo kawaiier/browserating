@@ -7,16 +7,6 @@ import { ICON_MAP } from './quizOptionIcons.js';
 
 const FLOAT_BROWSERS = ['brave', 'firefox', 'chrome', 'zen', 'arc'];
 
-const floatKeyframes = `
-@keyframes floatY {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-12px); }
-}
-@media (prefers-reduced-motion: reduce) {
-  .quiz-float { animation: none !important; }
-}
-`;
-
 function IntroBullet({ bullet }) {
   const Icon = ICON_MAP[bullet.icon];
 
@@ -50,8 +40,6 @@ export default function QuizIntro({ browserProfiles, questionCount, onStart }) {
 
   return (
     <div className="min-h-[calc(100vh-3.5rem)] flex flex-col items-center justify-center px-4 py-12">
-      <style>{floatKeyframes}</style>
-
       <div className="w-full max-w-2xl mx-auto text-center">
         <div className="flex justify-center items-end gap-4 sm:gap-6 mb-10 h-20" aria-hidden="true">
           {floatBrowsers.map((browser, i) => (
@@ -59,7 +47,6 @@ export default function QuizIntro({ browserProfiles, questionCount, onStart }) {
               key={browser.id}
               className={`quiz-float${i >= 3 ? ' hidden sm:block' : ''}`}
               style={{
-                animation: `floatY 3s ease-in-out infinite`,
                 animationDelay: `${i * 0.3}s`,
               }}
             >

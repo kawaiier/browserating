@@ -99,8 +99,8 @@ function getSearchParam(searchParams, key) {
       : String(value);
 }
 
-export function parseQuizUrlState(searchParams, questions) {
-  const sharedResultId = getSearchParam(searchParams, 'r');
+export function parseQuizUrlState(searchParams, questions, fallbackSharedResultId = null) {
+  const sharedResultId = getSearchParam(searchParams, 'r') ?? fallbackSharedResultId;
   const encodedAnswers = getSearchParam(searchParams, 'a');
   const parsedAnswers = parseQuizAnswers(encodedAnswers, questions);
 

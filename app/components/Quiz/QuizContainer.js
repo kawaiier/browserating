@@ -7,6 +7,7 @@ import QuizProgress from './QuizProgress';
 import QuizQuestion from './QuizQuestion';
 import QuizResults from './QuizResults';
 import { computeResults } from './quizEngine';
+import { mergeQuizProfileDetails } from './quizProfileDetails';
 import {
   createEmptyAnswers,
   createQuizFlowState,
@@ -24,6 +25,7 @@ function createSharedResults(profile, answers, questions, browserProfiles, hasSh
       ...computeResults(answers, questions, browserProfiles),
       isShared: true,
       hasSharedAnswers: true,
+      profileDetailsLoaded: false,
     };
   }
 
@@ -36,6 +38,7 @@ function createSharedResults(profile, answers, questions, browserProfiles, hasSh
     dealbreakers: {},
     isShared: true,
     hasSharedAnswers: false,
+    profileDetailsLoaded: profile.traitRationales !== undefined,
   };
 }
 
@@ -76,51 +79,26 @@ function hasAnswer(answer) {
   return answer !== null && answer !== undefined;
 }
 
-function createInitialResults(
-  sharedProfile,
-  initialQuizState,
-  initialAnswers,
-  questions,
-  browserProfiles
-) {
-  if (sharedProfile) {
-    return createSharedResults(
-      sharedProfile,
-      initialAnswers,
-      questions,
-      browserProfiles,
-      initialQuizState?.hasSharedAnswers ?? false
-    );
-  }
-
-  if (initialQuizState?.step === questions.length + 1) {
-    return {
-      ...computeResults(initialAnswers, questions, browserProfiles),
-      isShared: false,
-      hasSharedAnswers: false,
-    };
-  }
-
-  return null;
+function createInitialResults(sharedProfile, initialAnswers, questions, browserProfiles) {
+  if (!sharedProfile) return null;
+  return createSharedResults(sharedProfile, initialAnswers, questions, browserProfiles, false);
 }
 
 export default function QuizContainer({
   browserProfiles,
   questions,
   sharedResultId,
-  initialQuizState,
+  sharedProfile: initialSharedProfile,
 }) {
   const normalizedSharedResultId =
-    (initialQuizState?.sharedResultId ?? sharedResultId)?.toLowerCase() ?? null;
-  const sharedProfile = normalizedSharedResultId
-    ? browserProfiles.find((browser) => browser.id === normalizedSharedResultId)
-    : null;
-  const initialAnswers = initialQuizState?.answers ?? createEmptyAnswers(questions);
-  const initialStep = sharedProfile
-    ? questions.length + 1
-    : initialQuizState?.sharedResultId
-      ? 0
-      : (initialQuizState?.step ?? 0);
+    (sharedResultId ?? initialSharedProfile?.id)?.toLowerCase() ?? null;
+  const sharedProfile =
+    initialSharedProfile ??
+    (normalizedSharedResultId
+      ? browserProfiles.find((browser) => browser.id === normalizedSharedResultId)
+      : null);
+  const initialAnswers = createEmptyAnswers(questions);
+  const initialStep = sharedProfile ? questions.length + 1 : 0;
 
   const [flow, dispatch] = useReducer(
     quizFlowReducer,
@@ -130,13 +108,7 @@ export default function QuizContainer({
   const resultHeadingRef = useRef(null);
   const [answers, setAnswers] = useState(initialAnswers);
   const [results, setResults] = useState(() =>
-    createInitialResults(
-      sharedProfile,
-      initialQuizState,
-      initialAnswers,
-      questions,
-      browserProfiles
-    )
+    createInitialResults(sharedProfile, initialAnswers, questions, browserProfiles)
   );
   const advanceTimer = useRef(null);
   const computingTimer = useRef(null);
@@ -173,7 +145,11 @@ export default function QuizContainer({
     clearAdvanceTimer();
     clearComputingTimer();
 
-    const restoredState = parseQuizUrlState(new URLSearchParams(window.location.search), questions);
+    const restoredState = parseQuizUrlState(
+      new URLSearchParams(window.location.search),
+      questions,
+      normalizedSharedResultId
+    );
     const restoredAnswers = restoredState.answers;
     setAnswers(restoredAnswers);
 
@@ -205,6 +181,7 @@ export default function QuizContainer({
             ...computeResults(restoredAnswers, questions, browserProfiles),
             isShared: false,
             hasSharedAnswers: false,
+            profileDetailsLoaded: false,
           }
         : null
     );
@@ -212,12 +189,51 @@ export default function QuizContainer({
       type: 'restore',
       state: createQuizFlowState(restoredState.step, questions, restoredAnswers, 'back'),
     });
-  }, [browserProfiles, clearAdvanceTimer, clearComputingTimer, questions]);
+  }, [
+    browserProfiles,
+    clearAdvanceTimer,
+    clearComputingTimer,
+    normalizedSharedResultId,
+    questions,
+  ]);
 
   useEffect(() => {
     window.addEventListener('popstate', handleHistoryPop);
     return () => window.removeEventListener('popstate', handleHistoryPop);
   }, [handleHistoryPop]);
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    if (params.has('r') || params.has('step') || params.has('a')) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect -- hydrate URL state after static HTML matches the server render
+      handleHistoryPop();
+    }
+  }, [handleHistoryPop]);
+
+  useEffect(() => {
+    if (!results || results.profileDetailsLoaded || results.topResults.length === 0) return;
+
+    const url = new URL('/api/quiz/profiles', window.location.origin);
+    results.topResults.forEach(({ id }) => url.searchParams.append('id', id));
+    let isCurrent = true;
+
+    fetch(url)
+      .then((response) => {
+        if (!response.ok) throw new Error('Failed to load quiz profile details');
+        return response.json();
+      })
+      .then((details) => {
+        if (!isCurrent || !Array.isArray(details)) return;
+        setResults((current) =>
+          current === results ? mergeQuizProfileDetails(results, details) : current
+        );
+      })
+      .catch(() => {});
+
+    return () => {
+      isCurrent = false;
+    };
+  }, [results]);
 
   const handleStart = useCallback(() => {
     clearAdvanceTimer();
@@ -240,6 +256,7 @@ export default function QuizContainer({
           ...computeResults(finalAnswers, questions, browserProfiles),
           isShared: false,
           hasSharedAnswers: false,
+          profileDetailsLoaded: false,
         };
         writeQuizUrl(questions.length + 1, finalAnswers, {
           previousStep: questions.length,

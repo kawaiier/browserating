@@ -8,8 +8,8 @@ test('share URLs use the current origin and preserve shared answers', () => {
   const url = new URL(createQuizShareUrl('brave', answers, 'https://preview.example'));
 
   assert.equal(url.origin, 'https://preview.example');
-  assert.equal(url.pathname, '/quiz');
-  assert.equal(url.searchParams.get('r'), 'brave');
+  assert.equal(url.pathname, '/quiz/result/brave');
+  assert.equal(url.searchParams.has('r'), false);
   assert.deepEqual(JSON.parse(url.searchParams.get('a')), answers);
 });
 

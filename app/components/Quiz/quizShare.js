@@ -1,8 +1,7 @@
 import { serializeQuizAnswers } from './quizState.js';
 
 export function createQuizShareUrl(browserId, answers, origin) {
-  const url = new URL('/quiz', origin);
-  url.searchParams.set('r', browserId);
+  const url = new URL(`/quiz/result/${encodeURIComponent(browserId)}`, origin);
   if (Array.isArray(answers)) url.searchParams.set('a', serializeQuizAnswers(answers));
   return url.toString();
 }

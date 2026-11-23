@@ -8,16 +8,6 @@ import { TRAIT_META } from '../../lib/quiz-constants';
 import { getPriorityTraits } from './quizEngine';
 import { SKIP_ANSWER } from './quizState';
 
-const fadeInUpKeyframes = `
-@keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(16px); }
-  to   { opacity: 1; transform: translateY(0);    }
-}
-@media (prefers-reduced-motion: reduce) {
-  .quiz-fade-in-up { animation: none !important; opacity: 1 !important; transform: none !important; }
-}
-`;
-
 const PLATFORM_LABELS = {
   windows: 'Windows',
   'macos-arm': 'Apple silicon Mac',
@@ -187,19 +177,28 @@ export default function QuizResults({
             Change answers
           </button>
         )}
-        <button
-          onClick={onRetake}
-          className="inline-flex items-center gap-2 rounded-md bg-(--color-brand) px-8 py-3 font-semibold text-(--text-inverse) transition-colors duration-300 hover:bg-(--color-brand-bold) focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-(--border-focused)"
-        >
-          {isShared ? 'Take the Quiz' : 'Retake Quiz'}
-        </button>
+        {isShared ? (
+          <Link
+            href="/quiz"
+            onClick={onRetake}
+            className="inline-flex items-center gap-2 rounded-md bg-(--color-brand) px-8 py-3 font-semibold text-(--text-inverse) transition-colors duration-300 hover:bg-(--color-brand-bold) focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-(--border-focused)"
+          >
+            Take the Quiz
+          </Link>
+        ) : (
+          <button
+            onClick={onRetake}
+            className="inline-flex items-center gap-2 rounded-md bg-(--color-brand) px-8 py-3 font-semibold text-(--text-inverse) transition-colors duration-300 hover:bg-(--color-brand-bold) focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-(--border-focused)"
+          >
+            Retake Quiz
+          </button>
+        )}
       </div>
     );
   }
 
   return (
     <div className="px-4 sm:px-6 py-10 max-w-2xl mx-auto w-full">
-      <style>{fadeInUpKeyframes}</style>
       <h1
         ref={resultHeadingRef}
         tabIndex={-1}
@@ -221,7 +220,8 @@ export default function QuizResults({
               'Someone tried the browser quiz. What would your match be?'
             )}
           </p>
-          <button
+          <Link
+            href="/quiz"
             onClick={onRetake}
             className="inline-flex items-center gap-2 rounded-md bg-(--color-brand) px-8 py-3 font-semibold text-(--text-inverse) transition-colors duration-300 hover:bg-(--color-brand-bold) focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-(--border-focused)"
           >
@@ -234,7 +234,7 @@ export default function QuizResults({
                 d="M13 7l5 5m0 0l-5 5m5-5H6"
               />
             </svg>
-          </button>
+          </Link>
         </div>
       )}
 
@@ -248,7 +248,7 @@ export default function QuizResults({
       )}
 
       {hero && (
-        <div className="quiz-fade-in-up" style={{ animation: 'fadeInUp 500ms ease-out both' }}>
+        <div className="quiz-fade-in-up">
           <QuizResultCard browser={hero} size="hero" />
         </div>
       )}
@@ -392,10 +392,7 @@ export default function QuizResults({
               <div
                 key={browser.id}
                 className="quiz-fade-in-up"
-                style={{
-                  animation: 'fadeInUp 500ms ease-out both',
-                  animationDelay: `${(i + 1) * 150 + 200}ms`,
-                }}
+                style={{ animationDelay: `${(i + 1) * 150 + 200}ms` }}
               >
                 <QuizResultCard browser={browser} size="runner-up" headingLevel={3} />
               </div>

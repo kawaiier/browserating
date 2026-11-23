@@ -103,6 +103,20 @@ test('shared result URLs can carry validated answers', () => {
   assert.deepEqual(state.answers, answers);
 });
 
+test('static shared-result routes use the path ID when the query has no r value', () => {
+  const answers = [['windows'], 'q1b', null];
+  const state = parseQuizUrlState(
+    new URLSearchParams({ a: serializeQuizAnswers(answers) }),
+    questions,
+    'brave'
+  );
+
+  assert.equal(state.sharedResultId, 'brave');
+  assert.equal(state.step, questions.length + 1);
+  assert.equal(state.hasSharedAnswers, true);
+  assert.deepEqual(state.answers, answers);
+});
+
 test('invalid answer IDs are discarded and malformed answer data is ignored', () => {
   assert.deepEqual(parseQuizAnswers(JSON.stringify([['windows', 'unknown'], 'bad']), questions), [
     ['windows'],
