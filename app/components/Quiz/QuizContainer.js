@@ -1,6 +1,6 @@
 'use client';
 
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useReducer, useRef, useState } from 'react';
 
 import QuizIntro from './QuizIntro';
 import QuizProgress from './QuizProgress';
@@ -9,12 +9,12 @@ import QuizResults from './QuizResults';
 import { computeResults } from './quizEngine';
 import {
   createEmptyAnswers,
+  createQuizFlowState,
   parseQuizUrlState,
+  quizFlowReducer,
   serializeQuizAnswers,
   SKIP_ANSWER,
 } from './quizState';
-
-const STEP_INTRO = 0;
 const AUTO_ADVANCE_DELAY = 500;
 const COMPUTING_DELAY = 400;
 
@@ -119,11 +119,14 @@ export default function QuizContainer({
   const initialStep = sharedProfile
     ? questions.length + 1
     : initialQuizState?.sharedResultId
-      ? STEP_INTRO
-      : (initialQuizState?.step ?? STEP_INTRO);
+      ? 0
+      : (initialQuizState?.step ?? 0);
 
-  const [step, setStep] = useState(initialStep);
-  const previousStepRef = useRef(step);
+  const [flow, dispatch] = useReducer(
+    quizFlowReducer,
+    createQuizFlowState(initialStep, questions, initialAnswers)
+  );
+  const previousPhaseRef = useRef(flow.phase);
   const resultHeadingRef = useRef(null);
   const [answers, setAnswers] = useState(initialAnswers);
   const [results, setResults] = useState(() =>
@@ -135,23 +138,15 @@ export default function QuizContainer({
       browserProfiles
     )
   );
-  const [direction, setDirection] = useState('forward');
-  const [computing, setComputing] = useState(false);
-  const [reviewing, setReviewing] = useState(
-    () =>
-      initialStep > STEP_INTRO &&
-      initialStep <= questions.length &&
-      hasAnswer(initialAnswers[initialStep - 1])
-  );
   const advanceTimer = useRef(null);
   const computingTimer = useRef(null);
 
   useEffect(() => {
-    if (step !== previousStepRef.current && step === questions.length + 1) {
+    if (previousPhaseRef.current !== flow.phase && flow.phase === 'results') {
       resultHeadingRef.current?.focus();
     }
-    previousStepRef.current = step;
-  }, [questions.length, step]);
+    previousPhaseRef.current = flow.phase;
+  }, [flow.phase]);
 
   const clearAdvanceTimer = useCallback(() => {
     if (advanceTimer.current) {
@@ -177,20 +172,16 @@ export default function QuizContainer({
   const handleHistoryPop = useCallback(() => {
     clearAdvanceTimer();
     clearComputingTimer();
-    setComputing(false);
-    setDirection('back');
 
     const restoredState = parseQuizUrlState(new URLSearchParams(window.location.search), questions);
     const restoredAnswers = restoredState.answers;
+    setAnswers(restoredAnswers);
 
     if (restoredState.sharedResultId) {
       const profile = browserProfiles.find(
         (browser) => browser.id === restoredState.sharedResultId.toLowerCase()
       );
-      setAnswers(restoredAnswers);
-      setReviewing(false);
       if (profile) {
-        setStep(questions.length + 1);
         setResults(
           createSharedResults(
             profile,
@@ -200,20 +191,14 @@ export default function QuizContainer({
             restoredState.hasSharedAnswers
           )
         );
+        dispatch({ type: 'results' });
       } else {
-        setStep(STEP_INTRO);
         setResults(null);
+        dispatch({ type: 'intro' });
       }
       return;
     }
 
-    setAnswers(restoredAnswers);
-    setStep(restoredState.step);
-    setReviewing(
-      restoredState.step > STEP_INTRO &&
-        restoredState.step <= questions.length &&
-        hasAnswer(restoredAnswers[restoredState.step - 1])
-    );
     setResults(
       restoredState.step === questions.length + 1
         ? {
@@ -223,6 +208,10 @@ export default function QuizContainer({
           }
         : null
     );
+    dispatch({
+      type: 'restore',
+      state: createQuizFlowState(restoredState.step, questions, restoredAnswers, 'back'),
+    });
   }, [browserProfiles, clearAdvanceTimer, clearComputingTimer, questions]);
 
   useEffect(() => {
@@ -236,18 +225,15 @@ export default function QuizContainer({
     const freshAnswers = createEmptyAnswers(questions);
     setAnswers(freshAnswers);
     setResults(null);
-    setComputing(false);
-    setReviewing(false);
-    setDirection('forward');
-    setStep(1);
-    writeQuizUrl(1, freshAnswers, { previousStep: STEP_INTRO });
+    dispatch({ type: 'start' });
+    writeQuizUrl(1, freshAnswers, { previousStep: 0 });
   }, [clearAdvanceTimer, clearComputingTimer, questions]);
 
   const completeQuiz = useCallback(
     (finalAnswers) => {
       clearAdvanceTimer();
       clearComputingTimer();
-      setComputing(true);
+      dispatch({ type: 'computing' });
       computingTimer.current = setTimeout(() => {
         computingTimer.current = null;
         const computed = {
@@ -259,10 +245,7 @@ export default function QuizContainer({
           previousStep: questions.length,
         });
         setResults(computed);
-        setComputing(false);
-        setReviewing(false);
-        setDirection('forward');
-        setStep(questions.length + 1);
+        dispatch({ type: 'results' });
       }, COMPUTING_DELAY);
     },
     [browserProfiles, clearAdvanceTimer, clearComputingTimer, questions]
@@ -280,9 +263,12 @@ export default function QuizContainer({
         }
 
         writeQuizUrl(nextStep, nextAnswers, { previousStep: currentStep });
-        setDirection('forward');
-        setReviewing(hasAnswer(nextAnswers[nextStep - 1]));
-        setStep(nextStep);
+        dispatch({
+          type: 'question',
+          index: nextStep - 1,
+          reviewing: hasAnswer(nextAnswers[nextStep - 1]),
+          direction: 'forward',
+        });
       };
 
       if (delay > 0) {
@@ -296,7 +282,9 @@ export default function QuizContainer({
 
   const handleAnswer = useCallback(
     (optionId) => {
-      const currentQuestionIndex = step - 1;
+      if (flow.phase !== 'question') return;
+      const currentQuestionIndex = flow.index;
+      const currentStep = currentQuestionIndex + 1;
       const currentQuestion = questions[currentQuestionIndex];
       if (!currentQuestion) return;
 
@@ -311,73 +299,83 @@ export default function QuizContainer({
           ? selectedOptions.filter((selectedId) => selectedId !== optionId)
           : [...selectedOptions, optionId];
         setAnswers(newAnswers);
-        writeQuizUrl(step, newAnswers, { replace: true });
+        writeQuizUrl(currentStep, newAnswers, { replace: true });
         return;
       }
 
       newAnswers[currentQuestionIndex] = optionId;
       setAnswers(newAnswers);
-      writeQuizUrl(step, newAnswers, { replace: true });
-      if (!reviewing) advanceFrom(step, newAnswers, AUTO_ADVANCE_DELAY);
+      writeQuizUrl(currentStep, newAnswers, { replace: true });
+      if (!flow.reviewing) advanceFrom(currentStep, newAnswers, AUTO_ADVANCE_DELAY);
     },
-    [advanceFrom, answers, clearAdvanceTimer, questions, reviewing, step]
+    [advanceFrom, answers, clearAdvanceTimer, flow.index, flow.phase, flow.reviewing, questions]
   );
 
   const handleSkip = useCallback(() => {
-    const currentQuestionIndex = step - 1;
+    if (flow.phase !== 'question') return;
+    const currentQuestionIndex = flow.index;
+    const currentStep = currentQuestionIndex + 1;
     if (!questions[currentQuestionIndex]) return;
 
     clearAdvanceTimer();
     const skippedAnswers = [...answers];
     skippedAnswers[currentQuestionIndex] = SKIP_ANSWER;
     setAnswers(skippedAnswers);
-    writeQuizUrl(step, skippedAnswers, { replace: true });
-    advanceFrom(step, skippedAnswers);
-  }, [advanceFrom, answers, clearAdvanceTimer, questions, step]);
+    writeQuizUrl(currentStep, skippedAnswers, { replace: true });
+    advanceFrom(currentStep, skippedAnswers);
+  }, [advanceFrom, answers, clearAdvanceTimer, flow.index, flow.phase, questions]);
 
   const handleContinue = useCallback(() => {
-    const currentQuestion = questions[step - 1];
-    const answer = answers[step - 1];
+    if (flow.phase !== 'question') return;
+    const currentStep = flow.index + 1;
+    const currentQuestion = questions[flow.index];
+    const answer = answers[flow.index];
     if (!currentQuestion) return;
 
     const canContinue =
       currentQuestion.selectionMode === 'multiple'
         ? Array.isArray(answer) && answer.length > 0
         : typeof answer === 'string' && answer !== SKIP_ANSWER;
-    if (canContinue) advanceFrom(step, answers);
-  }, [advanceFrom, answers, questions, step]);
+    if (canContinue) advanceFrom(currentStep, answers);
+  }, [advanceFrom, answers, flow.index, flow.phase, questions]);
 
   const handleBack = useCallback(() => {
-    if (step <= 1) return;
+    if (flow.phase !== 'question') return;
+    const currentStep = flow.index + 1;
+    if (currentStep <= 1) return;
     clearAdvanceTimer();
     clearComputingTimer();
-    setComputing(false);
-    setDirection('back');
 
     const currentQuizState = window.history.state?.quizState;
-    if (currentQuizState?.step === step && currentQuizState.previousStep === step - 1) {
+    if (
+      currentQuizState?.step === currentStep &&
+      currentQuizState.previousStep === currentStep - 1
+    ) {
       window.history.back();
       return;
     }
 
-    const previousStep = step - 1;
-    setStep(previousStep);
+    const previousStep = currentStep - 1;
     setResults(null);
-    setReviewing(hasAnswer(answers[previousStep - 1]));
+    dispatch({
+      type: 'question',
+      index: previousStep - 1,
+      reviewing: hasAnswer(answers[previousStep - 1]),
+      direction: 'back',
+    });
     writeQuizUrl(previousStep, answers, { replace: true });
-  }, [answers, clearAdvanceTimer, clearComputingTimer, step]);
+  }, [answers, clearAdvanceTimer, clearComputingTimer, flow.index, flow.phase]);
 
   const handleChangeAnswers = useCallback(() => {
+    if (flow.phase !== 'results') return;
     clearAdvanceTimer();
     clearComputingTimer();
-    setComputing(false);
-    setDirection('back');
 
     const lastQuestionStep = questions.length;
+    const resultStep = questions.length + 1;
     const currentQuizState = window.history.state?.quizState;
     if (
-      step === questions.length + 1 &&
-      currentQuizState?.step === step &&
+      currentQuizState?.step === resultStep &&
       currentQuizState.previousStep === lastQuestionStep
     ) {
       window.history.back();
@@ -385,12 +383,14 @@ export default function QuizContainer({
     }
 
     setResults(null);
-    setStep(lastQuestionStep);
-    setReviewing(hasAnswer(answers[lastQuestionStep - 1]));
-    writeQuizUrl(lastQuestionStep, answers, {
-      replace: true,
+    dispatch({
+      type: 'question',
+      index: lastQuestionStep - 1,
+      reviewing: hasAnswer(answers[lastQuestionStep - 1]),
+      direction: 'back',
     });
-  }, [answers, clearAdvanceTimer, clearComputingTimer, questions.length, step]);
+    writeQuizUrl(lastQuestionStep, answers, { replace: true });
+  }, [answers, clearAdvanceTimer, clearComputingTimer, flow.phase, questions.length]);
 
   const handleRetake = useCallback(() => {
     clearAdvanceTimer();
@@ -398,14 +398,11 @@ export default function QuizContainer({
     const freshAnswers = createEmptyAnswers(questions);
     setAnswers(freshAnswers);
     setResults(null);
-    setComputing(false);
-    setReviewing(false);
-    setDirection('forward');
-    setStep(STEP_INTRO);
+    dispatch({ type: 'intro' });
     clearQuizUrl();
   }, [clearAdvanceTimer, clearComputingTimer, questions]);
 
-  if (step === STEP_INTRO) {
+  if (flow.phase === 'intro') {
     return (
       <QuizIntro
         browserProfiles={browserProfiles}
@@ -415,11 +412,11 @@ export default function QuizContainer({
     );
   }
 
-  if (computing) {
+  if (flow.phase === 'computing') {
     return <ComputingScreen />;
   }
 
-  if (step === questions.length + 1 && results) {
+  if (flow.phase === 'results' && results) {
     return (
       <QuizResults
         results={results}
@@ -434,10 +431,11 @@ export default function QuizContainer({
     );
   }
 
-  const currentQuestion = questions[step - 1];
+  const currentQuestion = questions[flow.index];
   if (!currentQuestion) return null;
 
-  const storedAnswer = answers[step - 1];
+  const currentStep = flow.index + 1;
+  const storedAnswer = answers[flow.index];
   const selectedAnswer =
     currentQuestion.selectionMode === 'multiple'
       ? Array.isArray(storedAnswer)
@@ -453,7 +451,7 @@ export default function QuizContainer({
 
   return (
     <div className="min-h-[calc(100vh-3.5rem)] flex flex-col">
-      <QuizProgress currentStep={step} totalSteps={questions.length} />
+      <QuizProgress currentStep={currentStep} totalSteps={questions.length} />
       <QuizQuestion
         question={currentQuestion}
         selectedAnswer={selectedAnswer}
@@ -461,11 +459,11 @@ export default function QuizContainer({
         onContinue={handleContinue}
         onSkip={handleSkip}
         canContinue={canContinue}
-        isReviewing={reviewing}
+        isReviewing={flow.reviewing}
         onBack={handleBack}
-        showBack={step > 1}
-        direction={direction}
-        stepKey={step}
+        showBack={flow.index > 0}
+        direction={flow.direction}
+        stepKey={currentStep}
       />
     </div>
   );

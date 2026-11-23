@@ -1,3 +1,7 @@
+import { TRAIT_KEYS } from '../../lib/quiz-constants.js';
+
+export { TRAIT_KEYS };
+
 /**
  * Quiz scoring engine — pure JavaScript, no framework dependencies.
  *
@@ -40,21 +44,6 @@ function compareTieBreakPriority(a, b) {
   return a.id < b.id ? -1 : a.id > b.id ? 1 : 0;
 }
 
-/** The 11 trait keys used throughout the scoring system. */
-export const TRAIT_KEYS = [
-  'privacy',
-  'speed',
-  'customization',
-  'minimalism',
-  'features',
-  'openSource',
-  'resourceEfficiency',
-  'ecosystem',
-  'innovation',
-  'easeOfUse',
-  'ai',
-];
-
 /**
  * Accumulate trait scores from the user's selected answers.
  *
@@ -65,20 +54,19 @@ export const TRAIT_KEYS = [
  */
 export function computeUserTraits(answers, questions) {
   const traits = Object.fromEntries(TRAIT_KEYS.map((k) => [k, 0]));
+  const optionTraitsById = new Map();
+
+  for (const question of questions) {
+    for (const option of question.options) {
+      if (!optionTraitsById.has(option.id)) optionTraitsById.set(option.id, option.traits);
+    }
+  }
 
   for (const answerId of answers) {
-    if (Array.isArray(answerId)) continue;
+    if (Array.isArray(answerId) || !optionTraitsById.has(answerId)) continue;
 
-    for (const question of questions) {
-      const option = question.options.find((o) => o.id === answerId);
-      if (option) {
-        for (const [key, value] of Object.entries(option.traits)) {
-          if (key in traits) {
-            traits[key] += value;
-          }
-        }
-        break;
-      }
+    for (const [key, value] of Object.entries(optionTraitsById.get(answerId))) {
+      if (key in traits) traits[key] += value;
     }
   }
 

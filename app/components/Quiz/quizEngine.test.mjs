@@ -9,10 +9,10 @@ import { SKIP_ANSWER } from './quizState.js';
 import { TRAIT_KEYS, computeResults, computeUserTraits, rankBrowsers } from './quizEngine.js';
 
 const realQuestions = JSON.parse(
-  readFileSync(new URL('../../../public/data/quiz/questions.json', import.meta.url), 'utf8')
+  readFileSync(new URL('../../data/quiz/questions.json', import.meta.url), 'utf8')
 );
 const realProfiles = JSON.parse(
-  readFileSync(new URL('../../../public/data/quiz/browser-profiles.json', import.meta.url), 'utf8')
+  readFileSync(new URL('../../data/quiz/browser-profiles.json', import.meta.url), 'utf8')
 );
 const siteBrowsers = JSON.parse(
   readFileSync(new URL('../../../public/data/browsers.json', import.meta.url), 'utf8')
@@ -311,6 +311,27 @@ test('selected open-source and no-AI answers are enforced as hard dealbreakers',
   );
 });
 
+test('computeUserTraits ignores unknown and multi-select answers and keeps the first duplicate ID', () => {
+  const duplicateQuestions = [
+    {
+      options: [
+        { id: 'duplicate', traits: { privacy: 2 } },
+        { id: 'duplicate', traits: { privacy: 9 } },
+        { id: 'single', traits: { ai: 3 } },
+      ],
+    },
+    { options: [{ id: 'duplicate', traits: { privacy: 5 } }] },
+  ];
+
+  const traits = computeUserTraits(
+    ['duplicate', 'duplicate', 'unknown', ['single']],
+    duplicateQuestions
+  );
+
+  assert.equal(traits.privacy, 4);
+  assert.equal(traits.ai, 0);
+});
+
 test('negative answers lower the corresponding trait weight', () => {
   assert.equal(computeUserTraits(['q5a'], realQuestions).privacy, -6);
   assert.equal(computeUserTraits(['q8d'], realQuestions).ai, -3);
@@ -507,6 +528,10 @@ test('intro bullets use icons available to the UI', () => {
   for (const bullet of QUIZ_INTRO_COPY.bullets(realQuestions.length)) {
     assert.ok(Object.hasOwn(ICON_MAP, bullet.icon), `unknown intro icon "${bullet.icon}"`);
   }
+});
+
+test('trait metadata defines the canonical ordered trait keys', () => {
+  assert.deepEqual(TRAIT_KEYS, Object.keys(TRAIT_META));
 });
 
 test('data integrity: options have unique IDs, valid icons, balanced weights, and trait coverage', () => {

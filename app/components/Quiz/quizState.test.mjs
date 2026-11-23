@@ -3,9 +3,11 @@ import test from 'node:test';
 
 import {
   createEmptyAnswers,
+  createQuizFlowState,
   parseQuizAnswers,
   parseQuizUrlState,
   serializeQuizAnswers,
+  quizFlowReducer,
   SKIP_ANSWER,
 } from './quizState.js';
 
@@ -21,6 +23,50 @@ const questions = [
     options: [{ id: 'q2a' }, { id: 'q2b' }],
   },
 ];
+
+test('quiz URL steps map to discriminated intro, question, and results phases', () => {
+  const answers = [null, 'q1a', null];
+
+  assert.deepEqual(createQuizFlowState(0, questions, answers), { phase: 'intro' });
+  assert.deepEqual(createQuizFlowState(2, questions, answers), {
+    phase: 'question',
+    index: 1,
+    direction: 'forward',
+    reviewing: true,
+  });
+  assert.deepEqual(createQuizFlowState(questions.length + 1, questions, answers), {
+    phase: 'results',
+  });
+});
+
+test('quiz flow reducer transitions through question, computing, and results phases', () => {
+  const firstQuestion = quizFlowReducer({ phase: 'intro' }, { type: 'start' });
+  assert.deepEqual(firstQuestion, {
+    phase: 'question',
+    index: 0,
+    direction: 'forward',
+    reviewing: false,
+  });
+
+  const reviewedQuestion = quizFlowReducer(firstQuestion, {
+    type: 'question',
+    index: 1,
+    direction: 'back',
+    reviewing: true,
+  });
+  assert.deepEqual(reviewedQuestion, {
+    phase: 'question',
+    index: 1,
+    direction: 'back',
+    reviewing: true,
+  });
+  assert.deepEqual(quizFlowReducer(reviewedQuestion, { type: 'computing' }), {
+    phase: 'computing',
+  });
+  assert.deepEqual(quizFlowReducer({ phase: 'computing' }, { type: 'results' }), {
+    phase: 'results',
+  });
+});
 
 test('quiz answers serialize and restore multi-select choices and skipped questions', () => {
   const answers = [['windows', 'mac'], 'q1b', SKIP_ANSWER];

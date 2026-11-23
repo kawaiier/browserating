@@ -4,6 +4,43 @@ export function createEmptyAnswers(questions) {
   return questions.map(() => null);
 }
 
+export function createQuizFlowState(step, questions, answers, direction = 'forward') {
+  if (step === 0) return { phase: 'intro' };
+  if (step === questions.length + 1) return { phase: 'results' };
+
+  const answer = answers[step - 1];
+  return {
+    phase: 'question',
+    index: step - 1,
+    direction,
+    reviewing: answer !== null && answer !== undefined,
+  };
+}
+
+export function quizFlowReducer(state, action) {
+  switch (action.type) {
+    case 'start':
+      return { phase: 'question', index: 0, direction: 'forward', reviewing: false };
+    case 'question':
+      return {
+        phase: 'question',
+        index: action.index,
+        direction: action.direction,
+        reviewing: action.reviewing,
+      };
+    case 'computing':
+      return { phase: 'computing' };
+    case 'results':
+      return { phase: 'results' };
+    case 'intro':
+      return { phase: 'intro' };
+    case 'restore':
+      return action.state;
+    default:
+      return state;
+  }
+}
+
 export function serializeQuizAnswers(answers) {
   return JSON.stringify(Array.isArray(answers) ? answers : []);
 }

@@ -1,45 +1,43 @@
 'use client';
 
 import { SHARE_COPY } from '../../lib/quiz-constants';
-import { useEffect, useState } from 'react';
-import { serializeQuizAnswers } from './quizState';
-
-const BASE_URL = 'https://browserating.com';
+import { useEffect, useRef, useState } from 'react';
+import { copyTextToClipboard, createQuizShareUrl } from './quizShare';
 
 export default function QuizShareButtons({ browserId, browserName, answers }) {
-  const [copied, setCopied] = useState(false);
+  const [copyStatus, setCopyStatus] = useState('idle');
+  const [manualCopyUrl, setManualCopyUrl] = useState('');
   const [hasNativeShare, setHasNativeShare] = useState(false);
-  const shareParams = new URLSearchParams({ r: browserId });
-  if (Array.isArray(answers)) shareParams.set('a', serializeQuizAnswers(answers));
-  const shareUrl = `${BASE_URL}/quiz?${shareParams.toString()}`;
+  const copyStatusTimer = useRef(null);
+  const getShareUrl = () => createQuizShareUrl(browserId, answers, window.location.origin);
 
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect -- detecting Web Share API support on mount
     setHasNativeShare(!!navigator.share);
   }, []);
 
+  useEffect(() => () => clearTimeout(copyStatusTimer.current), []);
+
   const handleCopy = async () => {
+    const shareUrl = getShareUrl();
+    clearTimeout(copyStatusTimer.current);
+    setCopyStatus('idle');
+    setManualCopyUrl('');
     try {
-      await navigator.clipboard.writeText(shareUrl);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
+      await copyTextToClipboard(shareUrl);
+      setCopyStatus('copied');
+      copyStatusTimer.current = setTimeout(() => setCopyStatus('idle'), 2000);
     } catch {
-      const el = document.createElement('textarea');
-      el.value = shareUrl;
-      document.body.appendChild(el);
-      el.select();
-      document.execCommand('copy');
-      document.body.removeChild(el);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
+      setCopyStatus('failed');
+      setManualCopyUrl(shareUrl);
     }
   };
 
   const handleTwitter = () => {
     const text = encodeURIComponent(SHARE_COPY.twitter(browserName));
-    const url = encodeURIComponent(shareUrl);
+    const url = encodeURIComponent(getShareUrl());
     window.open(
-      `https://twitter.com/intent/tweet?text=${text}&url=${url}`,
+      `https://x.com/intent/post?text=${text}&url=${url}`,
       '_blank',
       'noopener,noreferrer'
     );
@@ -47,6 +45,7 @@ export default function QuizShareButtons({ browserId, browserName, answers }) {
 
   const handleNativeShare = async () => {
     if (!navigator.share) return;
+    const shareUrl = getShareUrl();
     try {
       await navigator.share({
         title: SHARE_COPY.nativeShareTitle,
@@ -75,7 +74,7 @@ export default function QuizShareButtons({ browserId, browserName, answers }) {
           onClick={handleCopy}
           className="inline-flex items-center gap-2 rounded-md border border-(--border-subtle) bg-(--surface-raised) px-4 py-2 text-sm font-medium text-(--text-default) transition-colors duration-200 hover:bg-(--surface-hovered) focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-(--border-focused)"
         >
-          {copied ? (
+          {copyStatus === 'copied' ? (
             <>
               <svg
                 className="w-4 h-4"
@@ -103,7 +102,7 @@ export default function QuizShareButtons({ browserId, browserName, answers }) {
                   d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"
                 />
               </svg>
-              {SHARE_COPY.copyLabel}
+              {copyStatus === 'failed' ? SHARE_COPY.copyErrorLabel : SHARE_COPY.copyLabel}
             </>
           )}
         </button>
@@ -135,6 +134,25 @@ export default function QuizShareButtons({ browserId, browserName, answers }) {
           </button>
         )}
       </div>
+      {copyStatus === 'failed' && (
+        <div
+          role="alert"
+          className="mt-4 text-center text-sm"
+          style={{ color: 'var(--text-subtle)' }}
+        >
+          <label className="block">
+            <span className="mb-2 block">{SHARE_COPY.copyFailure}</span>
+            <input
+              type="url"
+              readOnly
+              value={manualCopyUrl}
+              aria-label="Share link to copy manually"
+              onFocus={(event) => event.currentTarget.select()}
+              className="w-full rounded-md border border-(--border-subtle) bg-(--surface-raised) px-3 py-2 text-left text-(--text-default)"
+            />
+          </label>
+        </div>
+      )}
     </div>
   );
 }

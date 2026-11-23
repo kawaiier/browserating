@@ -4,57 +4,59 @@ export const TRAIT_META = {
     description: 'How well the browser protects you from tracking and data collection',
     icon: 'shield',
   },
-  openSource: {
-    label: 'Open Source',
-    description: "Whether the browser's code is publicly auditable and community-governed",
-    icon: 'code-2',
-  },
   speed: {
     label: 'Speed',
     description: 'Qualitative browsing-speed estimate, not based on Speedometer benchmarks.',
     icon: 'zap',
-  },
-  resourceEfficiency: {
-    label: 'Resource Efficiency',
-    description: 'Qualitative estimate, not standardized RAM, CPU, or battery testing.',
-    icon: 'battery-charging',
-  },
-  minimalism: {
-    label: 'Minimalism',
-    description: "How clean and distraction-free the browser's interface is",
-    icon: 'circle',
-  },
-  easeOfUse: {
-    label: 'Ease of Use',
-    description: 'How beginner-friendly and low-friction the browser is out of the box',
-    icon: 'smile',
   },
   customization: {
     label: 'Customization',
     description: 'How deeply you can configure the UI, shortcuts, and behavior',
     icon: 'sliders-horizontal',
   },
+  minimalism: {
+    label: 'Minimalism',
+    description: "How clean and distraction-free the browser's interface is",
+    icon: 'circle',
+  },
   features: {
     label: 'Built-in Features',
     description: 'How much comes included — VPN, ad blocker, sidebar, AI, sync, and more',
     icon: 'layout-dashboard',
   },
-  innovation: {
-    label: 'Innovation',
-    description: 'How much the browser rethinks or reinvents the browsing experience',
-    icon: 'sparkles',
+  openSource: {
+    label: 'Open Source',
+    description: "Whether the browser's code is publicly auditable and community-governed",
+    icon: 'code-2',
   },
-  ai: {
-    label: 'AI Integration',
-    description: 'How deeply AI assistants and agents are built into the browser',
-    icon: 'bot',
+  resourceEfficiency: {
+    label: 'Resource Efficiency',
+    description: 'Qualitative estimate, not standardized RAM, CPU, or battery testing.',
+    icon: 'battery-charging',
   },
   ecosystem: {
     label: 'Ecosystem Integration',
     description: 'How well the browser fits into your existing OS and service ecosystem',
     icon: 'cloud',
   },
+  innovation: {
+    label: 'Innovation',
+    description: 'How much the browser rethinks or reinvents the browsing experience',
+    icon: 'sparkles',
+  },
+  easeOfUse: {
+    label: 'Ease of Use',
+    description: 'How beginner-friendly and low-friction the browser is out of the box',
+    icon: 'smile',
+  },
+  ai: {
+    label: 'AI Integration',
+    description: 'How deeply AI assistants and agents are built into the browser',
+    icon: 'bot',
+  },
 };
+
+export const TRAIT_KEYS = Object.keys(TRAIT_META);
 
 // Intro screen copy
 export const QUIZ_INTRO_COPY = {
@@ -77,7 +79,8 @@ export const SHARE_COPY = {
   twitter: (browserName) => `My browser match is ${browserName}! 🎯 Find your perfect browser:`,
   copySuccess: 'Link copied!',
   copyLabel: 'Copy link',
+  copyErrorLabel: 'Copy failed',
+  copyFailure: "Couldn't copy the link. Select it below to copy it manually.",
   nativeShareTitle: 'My Browser Match',
-  nativeShareText: (browserName) =>
-    `I matched with ${browserName}! Find your perfect browser at browserating.com/quiz`,
+  nativeShareText: (browserName) => `I matched with ${browserName}! Find your perfect browser:`,
 };

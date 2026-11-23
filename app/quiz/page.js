@@ -1,26 +1,23 @@
-import { promises as fs } from 'fs';
-import path from 'path';
-
 import DarkModeProvider from '../components/DarkModeProvider';
 import ErrorBoundary from '../components/ErrorBoundary';
 import Footer from '../components/Footer';
 import QuizContainer from '../components/Quiz/QuizContainer';
 import QuizHeader from '../components/Quiz/QuizHeader';
 import { getBrowserSlug } from '../lib/getBrowserSlug';
+import { getQuizData } from '../lib/getQuizData.js';
 import { parseQuizUrlState } from '../components/Quiz/quizState';
 
 export async function generateMetadata({ searchParams }) {
   const params = await searchParams;
   const r = params?.r ?? null;
 
-  const BASE_URL = 'https://browserating.com';
+  const BASE_URL = (process.env.NEXT_PUBLIC_SITE_URL || 'https://browserating.com').replace(
+    /\/$/,
+    ''
+  );
   const ogImageBase = `${BASE_URL}/images/card-image.png`;
 
-  const questionsRaw = await fs.readFile(
-    path.join(process.cwd(), 'public', 'data', 'quiz', 'questions.json'),
-    'utf8'
-  );
-  const questions = JSON.parse(questionsRaw);
+  const { questions, profiles } = await getQuizData();
 
   if (!r) {
     return {
@@ -39,11 +36,6 @@ export async function generateMetadata({ searchParams }) {
     };
   }
 
-  const profilesRaw = await fs.readFile(
-    path.join(process.cwd(), 'public', 'data', 'quiz', 'browser-profiles.json'),
-    'utf8'
-  );
-  const profiles = JSON.parse(profilesRaw);
   const profile = profiles.find((p) => p.id === r.toLowerCase());
 
   if (!profile) {
@@ -93,17 +85,7 @@ export async function generateMetadata({ searchParams }) {
 }
 
 export default async function QuizPage({ searchParams }) {
-  const dataDir = path.join(process.cwd(), 'public', 'data');
-
-  const [profilesRaw, questionsRaw, browsersRaw] = await Promise.all([
-    fs.readFile(path.join(dataDir, 'quiz', 'browser-profiles.json'), 'utf8'),
-    fs.readFile(path.join(dataDir, 'quiz', 'questions.json'), 'utf8'),
-    fs.readFile(path.join(dataDir, 'browsers.json'), 'utf8'),
-  ]);
-
-  const profiles = JSON.parse(profilesRaw);
-  const questions = JSON.parse(questionsRaw);
-  const browsers = JSON.parse(browsersRaw);
+  const { profiles, questions, browsers } = await getQuizData();
   const initialQuizState = parseQuizUrlState(await searchParams, questions);
   const sharedResultId = initialQuizState.sharedResultId;
 
