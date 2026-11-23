@@ -14,10 +14,11 @@ function getBrowserInitials(name) {
   return words[0]?.slice(0, 2).toUpperCase() ?? '?';
 }
 
-export default function QuizResultCard({ browser, size = 'runner-up' }) {
+export default function QuizResultCard({ browser, size = 'runner-up', headingLevel = 2 }) {
   const [expandedHighlights, setExpandedHighlights] = useState(false);
   const isHero = size === 'hero';
   const hasMatchPercentage = Number.isFinite(browser.matchPercentage);
+  const BrowserHeading = headingLevel === 3 ? 'h3' : 'h2';
 
   return (
     <div
@@ -77,7 +78,7 @@ export default function QuizResultCard({ browser, size = 'runner-up' }) {
 
         <div className="flex-1 min-w-0">
           <div className="flex items-center gap-2 flex-wrap">
-            <h2
+            <BrowserHeading
               className="font-bold"
               style={{
                 color: 'var(--text-default)',
@@ -94,7 +95,7 @@ export default function QuizResultCard({ browser, size = 'runner-up' }) {
               ) : (
                 browser.name
               )}
-            </h2>
+            </BrowserHeading>
             {hasMatchPercentage && (
               <span
                 className="inline-flex items-center font-bold rounded-full px-2 py-0.5"

@@ -17,7 +17,12 @@ export default function QuizQuestion({
   stepKey,
 }) {
   const containerRef = useRef(null);
+  const headingRef = useRef(null);
   const hasMountedRef = useRef(false);
+
+  useEffect(() => {
+    headingRef.current?.focus();
+  }, [stepKey]);
 
   useEffect(() => {
     if (!hasMountedRef.current) {
@@ -25,7 +30,7 @@ export default function QuizQuestion({
       return;
     }
     const el = containerRef.current;
-    if (!el) return;
+    if (!el || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     el.style.transition = 'none';
     el.style.opacity = '0';
     el.style.transform = direction === 'back' ? 'translateX(-30px)' : 'translateX(30px)';
@@ -50,6 +55,9 @@ export default function QuizQuestion({
     >
       <div className="w-full">
         <h2
+          ref={headingRef}
+          id={`quiz-question-${question.id}`}
+          tabIndex={-1}
           className="text-xl sm:text-2xl md:text-3xl font-bold mb-2 text-center"
           style={{ color: 'var(--text-default)' }}
         >
@@ -63,29 +71,40 @@ export default function QuizQuestion({
 
         <div
           className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-6"
+          role={isMultiSelect ? 'group' : 'radiogroup'}
+          aria-labelledby={`quiz-question-${question.id}`}
           onKeyDown={(e) => {
             const buttons = e.currentTarget.querySelectorAll('button');
             const idx = Array.from(buttons).indexOf(document.activeElement);
             if (idx === -1) return;
             if (e.key === 'ArrowDown' || e.key === 'ArrowRight') {
               e.preventDefault();
-              buttons[(idx + 1) % buttons.length].focus();
+              const nextOption = buttons[(idx + 1) % buttons.length];
+              nextOption.focus();
+              if (!isMultiSelect) nextOption.click();
             } else if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') {
               e.preventDefault();
-              buttons[(idx - 1 + buttons.length) % buttons.length].focus();
+              const previousOption = buttons[(idx - 1 + buttons.length) % buttons.length];
+              previousOption.focus();
+              if (!isMultiSelect) previousOption.click();
             }
           }}
         >
-          {question.options.map((option) => (
-            <QuizOption
-              key={option.id}
-              option={option}
-              isSelected={
-                isMultiSelect ? selectedAnswer.includes(option.id) : selectedAnswer === option.id
-              }
-              onClick={onAnswer}
-            />
-          ))}
+          {question.options.map((option, index) => {
+            const isSelected = isMultiSelect
+              ? selectedAnswer.includes(option.id)
+              : selectedAnswer === option.id;
+            return (
+              <QuizOption
+                key={option.id}
+                option={option}
+                isSelected={isSelected}
+                selectionMode={isMultiSelect ? 'multiple' : 'single'}
+                tabIndex={isMultiSelect || isSelected || (!selectedAnswer && index === 0) ? 0 : -1}
+                onClick={onAnswer}
+              />
+            );
+          })}
         </div>
 
         <div className="mt-6 flex flex-wrap justify-center items-center gap-3">

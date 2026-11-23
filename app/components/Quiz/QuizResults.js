@@ -141,6 +141,7 @@ export default function QuizResults({
   onChangeAnswers,
   onRetake,
   isShared,
+  resultHeadingRef,
 }) {
   const { topResults, discontinuedResults = [] } = results;
   const hero = topResults[0];
@@ -165,9 +166,14 @@ export default function QuizResults({
   if (!hero && (!isShared || results.hasSharedAnswers)) {
     return (
       <div className="px-4 sm:px-6 py-10 max-w-2xl mx-auto w-full text-center">
-        <h2 className="text-xl font-semibold mb-3" style={{ color: 'var(--text-default)' }}>
+        <h1
+          ref={resultHeadingRef}
+          tabIndex={-1}
+          className="text-xl font-semibold mb-3"
+          style={{ color: 'var(--text-default)' }}
+        >
           No browser fits every requirement
-        </h2>
+        </h1>
         <p className="mb-8" style={{ color: 'var(--text-subtle)' }}>
           {isShared
             ? 'The shared answers do not match any browser that meets the selected device and feature requirements.'
@@ -194,6 +200,14 @@ export default function QuizResults({
   return (
     <div className="px-4 sm:px-6 py-10 max-w-2xl mx-auto w-full">
       <style>{fadeInUpKeyframes}</style>
+      <h1
+        ref={resultHeadingRef}
+        tabIndex={-1}
+        className="mb-6 text-center text-2xl font-bold sm:text-3xl"
+        style={{ color: 'var(--text-default)' }}
+      >
+        {isShared ? 'A shared browser match' : 'Your browser matches'}
+      </h1>
       {isShared && (
         <div className="mb-8 text-center">
           <p className="mb-4" style={{ color: 'var(--text-subtle)' }}>
@@ -278,13 +292,13 @@ export default function QuizResults({
           }}
           aria-labelledby="quiz-match-reasons-heading"
         >
-          <h3
+          <h2
             id="quiz-match-reasons-heading"
             className="text-sm font-semibold mb-4 uppercase tracking-wider"
             style={{ color: 'var(--text-subtle)' }}
           >
             Why it matches
-          </h3>
+          </h2>
           <ul className="space-y-4">
             {matchRationales.map(({ trait, label, weight, score, rationale, answerLabels }) => (
               <li key={trait}>
@@ -313,13 +327,13 @@ export default function QuizResults({
           }}
           aria-labelledby="quiz-tradeoffs-heading"
         >
-          <h3
+          <h2
             id="quiz-tradeoffs-heading"
             className="text-sm font-semibold mb-4 uppercase tracking-wider"
             style={{ color: 'var(--text-subtle)' }}
           >
             Trade-offs to consider
-          </h3>
+          </h2>
           <ul className="space-y-3">
             {tradeoffs.map(({ id, message, rationale }) => (
               <li key={id}>
@@ -346,13 +360,13 @@ export default function QuizResults({
           }}
           aria-labelledby="quiz-shared-answers-heading"
         >
-          <h3
+          <h2
             id="quiz-shared-answers-heading"
             className="text-sm font-semibold mb-4 uppercase tracking-wider"
             style={{ color: 'var(--text-subtle)' }}
           >
             Answers included in this result
-          </h3>
+          </h2>
           <dl className="space-y-3">
             {questions.map((question, index) => (
               <div key={question.id}>
@@ -370,9 +384,9 @@ export default function QuizResults({
 
       {showDetailedResults && runnerUps.length > 0 && (
         <div className="mt-8">
-          <h3 className="text-base font-semibold mb-3" style={{ color: 'var(--text-default)' }}>
+          <h2 className="text-base font-semibold mb-3" style={{ color: 'var(--text-default)' }}>
             Also worth considering
-          </h3>
+          </h2>
           <div className="flex flex-col gap-4">
             {runnerUps.map((browser, i) => (
               <div
@@ -383,7 +397,7 @@ export default function QuizResults({
                   animationDelay: `${(i + 1) * 150 + 200}ms`,
                 }}
               >
-                <QuizResultCard browser={browser} size="runner-up" />
+                <QuizResultCard browser={browser} size="runner-up" headingLevel={3} />
               </div>
             ))}
           </div>

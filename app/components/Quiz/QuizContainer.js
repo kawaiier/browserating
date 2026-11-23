@@ -123,6 +123,8 @@ export default function QuizContainer({
       : (initialQuizState?.step ?? STEP_INTRO);
 
   const [step, setStep] = useState(initialStep);
+  const previousStepRef = useRef(step);
+  const resultHeadingRef = useRef(null);
   const [answers, setAnswers] = useState(initialAnswers);
   const [results, setResults] = useState(() =>
     createInitialResults(
@@ -143,6 +145,13 @@ export default function QuizContainer({
   );
   const advanceTimer = useRef(null);
   const computingTimer = useRef(null);
+
+  useEffect(() => {
+    if (step !== previousStepRef.current && step === questions.length + 1) {
+      resultHeadingRef.current?.focus();
+    }
+    previousStepRef.current = step;
+  }, [questions.length, step]);
 
   const clearAdvanceTimer = useCallback(() => {
     if (advanceTimer.current) {
@@ -420,6 +429,7 @@ export default function QuizContainer({
         onChangeAnswers={handleChangeAnswers}
         onRetake={handleRetake}
         isShared={results.isShared}
+        resultHeadingRef={resultHeadingRef}
       />
     );
   }
@@ -463,13 +473,18 @@ export default function QuizContainer({
 
 function ComputingScreen() {
   return (
-    <div className="min-h-[calc(100vh-3.5rem)] flex items-center justify-center">
+    <div
+      className="min-h-[calc(100vh-3.5rem)] flex items-center justify-center"
+      role="status"
+      aria-live="polite"
+      aria-atomic="true"
+    >
       <div className="text-center">
         <div className="flex items-center justify-center gap-2 mb-4">
           {[0, 1, 2].map((i) => (
             <div
               key={i}
-              className="w-3 h-3 rounded-full animate-bounce"
+              className="w-3 h-3 rounded-full animate-bounce motion-reduce:animate-none"
               style={{
                 backgroundColor: 'var(--color-brand)',
                 animationDelay: `${i * 150}ms`,

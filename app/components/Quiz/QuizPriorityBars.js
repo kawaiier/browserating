@@ -22,12 +22,12 @@ export default function QuizPriorityBars({
       className="rounded-lg border border-(--border-subtle) bg-(--surface-sunken) p-4 sm:p-6"
       aria-labelledby="quiz-priority-bars-heading"
     >
-      <h3
+      <h2
         id="quiz-priority-bars-heading"
         className="mb-2 text-center text-sm font-semibold uppercase tracking-wider text-(--text-subtle)"
       >
         {browserProfile.name}: ratings for {userLabel.toLowerCase()}
-      </h3>
+      </h2>
       <p className="mb-5 text-center text-sm text-(--text-subtle)">
         Preferences are ordered strongest first. Bars show the browser’s rating for each trait on a
         0–10 scale.

@@ -8,12 +8,14 @@ function Icon({ name }) {
   return <Component className="w-5 h-5" aria-hidden="true" />;
 }
 
-export default function QuizOption({ option, isSelected, onClick }) {
+export default function QuizOption({ option, isSelected, selectionMode, tabIndex, onClick }) {
   return (
     <button
       onClick={() => onClick(option.id)}
-      aria-label={`${option.label}: ${option.description}`}
-      aria-pressed={isSelected}
+      aria-label={option.description ? `${option.label}: ${option.description}` : option.label}
+      role={selectionMode === 'multiple' ? 'checkbox' : 'radio'}
+      aria-checked={isSelected}
+      tabIndex={tabIndex}
       className={`group relative w-full rounded-md border-2 px-4 py-4 text-left transition-all duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-(--border-focused) sm:px-5 sm:py-5 ${
         isSelected
           ? 'scale-[1.02] border-(--color-brand) bg-(--color-brand-subtle)'
