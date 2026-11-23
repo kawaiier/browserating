@@ -1,6 +1,7 @@
 'use client';
 
 import { useCallback, useEffect, useReducer, useRef, useState } from 'react';
+import { track } from '@vercel/analytics/react';
 
 import QuizIntro from './QuizIntro';
 import QuizProgress from './QuizProgress';
@@ -236,6 +237,7 @@ export default function QuizContainer({
   }, [results]);
 
   const handleStart = useCallback(() => {
+    track('quiz_start');
     clearAdvanceTimer();
     clearComputingTimer();
     const freshAnswers = createEmptyAnswers(questions);
@@ -258,6 +260,11 @@ export default function QuizContainer({
           hasSharedAnswers: false,
           profileDetailsLoaded: false,
         };
+        track('quiz_complete', {
+          top_1_id: computed.topResults[0]?.id ?? null,
+          top_2_id: computed.topResults[1]?.id ?? null,
+          top_3_id: computed.topResults[2]?.id ?? null,
+        });
         writeQuizUrl(questions.length + 1, finalAnswers, {
           previousStep: questions.length,
         });
@@ -312,15 +319,22 @@ export default function QuizContainer({
         const selectedOptions = Array.isArray(newAnswers[currentQuestionIndex])
           ? newAnswers[currentQuestionIndex]
           : [];
-        newAnswers[currentQuestionIndex] = selectedOptions.includes(optionId)
-          ? selectedOptions.filter((selectedId) => selectedId !== optionId)
-          : [...selectedOptions, optionId];
+        const selected = !selectedOptions.includes(optionId);
+        newAnswers[currentQuestionIndex] = selected
+          ? [...selectedOptions, optionId]
+          : selectedOptions.filter((selectedId) => selectedId !== optionId);
+        track('quiz_answer', {
+          question_id: currentQuestion.id,
+          option_id: optionId,
+          selected,
+        });
         setAnswers(newAnswers);
         writeQuizUrl(currentStep, newAnswers, { replace: true });
         return;
       }
 
       newAnswers[currentQuestionIndex] = optionId;
+      track('quiz_answer', { question_id: currentQuestion.id, option_id: optionId, selected: true });
       setAnswers(newAnswers);
       writeQuizUrl(currentStep, newAnswers, { replace: true });
       if (!flow.reviewing) advanceFrom(currentStep, newAnswers, AUTO_ADVANCE_DELAY);
@@ -332,9 +346,11 @@ export default function QuizContainer({
     if (flow.phase !== 'question') return;
     const currentQuestionIndex = flow.index;
     const currentStep = currentQuestionIndex + 1;
-    if (!questions[currentQuestionIndex]) return;
+    const currentQuestion = questions[currentQuestionIndex];
+    if (!currentQuestion) return;
 
     clearAdvanceTimer();
+    track('quiz_answer', { question_id: currentQuestion.id, option_id: 'skip', selected: true });
     const skippedAnswers = [...answers];
     skippedAnswers[currentQuestionIndex] = SKIP_ANSWER;
     setAnswers(skippedAnswers);
@@ -410,6 +426,7 @@ export default function QuizContainer({
   }, [answers, clearAdvanceTimer, clearComputingTimer, flow.phase, questions.length]);
 
   const handleRetake = useCallback(() => {
+    if (results && !results.isShared) track('quiz_retake');
     clearAdvanceTimer();
     clearComputingTimer();
     const freshAnswers = createEmptyAnswers(questions);
@@ -417,7 +434,7 @@ export default function QuizContainer({
     setResults(null);
     dispatch({ type: 'intro' });
     clearQuizUrl();
-  }, [clearAdvanceTimer, clearComputingTimer, questions]);
+  }, [clearAdvanceTimer, clearComputingTimer, questions, results]);
 
   if (flow.phase === 'intro') {
     return (

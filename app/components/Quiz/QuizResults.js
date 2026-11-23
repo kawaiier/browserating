@@ -202,11 +202,14 @@ export default function QuizResults({
       <h1
         ref={resultHeadingRef}
         tabIndex={-1}
-        className="mb-6 text-center text-2xl font-bold sm:text-3xl"
+        className="mb-2 text-center text-2xl font-bold sm:text-3xl"
         style={{ color: 'var(--text-default)' }}
       >
         {isShared ? 'A shared browser match' : 'Your browser matches'}
       </h1>
+      <p className="mb-6 text-center text-sm" style={{ color: 'var(--text-subtle)' }}>
+        Recommendations are not sponsored.
+      </p>
       {isShared && (
         <div className="mb-8 text-center">
           <p className="mb-4" style={{ color: 'var(--text-subtle)' }}>

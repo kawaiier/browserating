@@ -46,6 +46,12 @@ export default async function sitemap() {
     ...platformPages,
     ...comparisonPages,
     {
+      url: `${baseUrl}/quiz`,
+      lastModified: dataLastModified,
+      changeFrequency: 'weekly',
+      priority: 0.8,
+    },
+    {
       url: `${baseUrl}/privacy`,
       lastModified: '2024-11-27',
       changeFrequency: 'monthly',

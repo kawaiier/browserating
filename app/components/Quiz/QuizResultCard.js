@@ -1,5 +1,6 @@
 'use client';
 
+import { track } from '@vercel/analytics/react';
 import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -212,6 +213,7 @@ export default function QuizResultCard({ browser, size = 'runner-up', headingLev
           {browser.website && !browser.discontinued && (
             <a
               href={browser.website}
+              onClick={() => track('quiz_outbound_click', { browser_id: browser.id })}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 rounded-md bg-(--color-brand) px-5 py-2.5 text-sm font-semibold text-(--text-inverse) transition-colors duration-200 hover:bg-(--color-brand-bold) focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-(--border-focused)"

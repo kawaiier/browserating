@@ -1,5 +1,6 @@
 'use client';
 
+import { track } from '@vercel/analytics/react';
 import { SHARE_COPY } from '../../lib/quiz-constants';
 import { useEffect, useRef, useState } from 'react';
 import { copyTextToClipboard, createQuizShareUrl } from './quizShare';
@@ -25,6 +26,7 @@ export default function QuizShareButtons({ browserId, browserName, answers }) {
     setManualCopyUrl('');
     try {
       await copyTextToClipboard(shareUrl);
+      track('quiz_share', { channel: 'copy' });
       setCopyStatus('copied');
       copyStatusTimer.current = setTimeout(() => setCopyStatus('idle'), 2000);
     } catch {
@@ -34,6 +36,7 @@ export default function QuizShareButtons({ browserId, browserName, answers }) {
   };
 
   const handleTwitter = () => {
+    track('quiz_share', { channel: 'x' });
     const text = encodeURIComponent(SHARE_COPY.twitter(browserName));
     const url = encodeURIComponent(getShareUrl());
     window.open(
@@ -52,6 +55,7 @@ export default function QuizShareButtons({ browserId, browserName, answers }) {
         text: SHARE_COPY.nativeShareText(browserName),
         url: shareUrl,
       });
+      track('quiz_share', { channel: 'native' });
     } catch {}
   };
 

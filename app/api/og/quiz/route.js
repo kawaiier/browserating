@@ -82,9 +82,10 @@ export async function GET(request) {
           height: '630px',
           display: 'flex',
           alignItems: 'center',
+          justifyContent: logoDataUrl ? 'flex-start' : 'center',
           background: 'linear-gradient(135deg, #1e1b4b 0%, #312e81 50%, #4c1d95 100%)',
           padding: '60px',
-          gap: '60px',
+          gap: logoDataUrl ? '60px' : '0',
         }}
       >
         {logoDataUrl && (
@@ -112,6 +113,8 @@ export async function GET(request) {
           style={{
             display: 'flex',
             flexDirection: 'column',
+            alignItems: logoDataUrl ? 'flex-start' : 'center',
+            textAlign: logoDataUrl ? 'left' : 'center',
             gap: '12px',
             flex: 1,
           }}
