@@ -174,6 +174,7 @@ export default function QuizResultCard({ browser, size = 'runner-up', headingLev
         <div className="mt-3">
           <button
             onClick={() => setExpandedHighlights((v) => !v)}
+            aria-expanded={expandedHighlights}
             className="rounded text-xs text-(--text-brand) hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-(--border-focused)"
           >
             {expandedHighlights ? 'Hide details' : 'Why this one?'}
