@@ -49,7 +49,7 @@ function fallbackCard(origin) {
         <div style={{ fontSize: '64px', fontWeight: 700, color: '#ffffff' }}>
           Find Your Perfect Browser
         </div>
-        <div style={{ fontSize: '28px', color: '#c4b5fd' }}>{origin}/quiz</div>
+        <div style={{ fontSize: '28px', color: '#c4b5fd' }}>{`${origin}/quiz`}</div>
       </div>
     ),
     SIZE
@@ -128,7 +128,7 @@ export async function GET(request) {
             {profile.name}
           </div>
           <div style={{ fontSize: '26px', color: '#a78bfa', marginTop: '16px' }}>
-            What&apos;s yours? Take the quiz at {origin}/quiz
+            {`What's yours? Take the quiz at ${origin}/quiz`}
           </div>
         </div>
       </div>

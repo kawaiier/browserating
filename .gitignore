@@ -38,6 +38,7 @@ next-env.d.ts
 .env
 .cursor/
 .todo/
+.tasks/
 
 # IDE / Editor
 .vscode/
