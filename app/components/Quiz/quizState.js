@@ -45,7 +45,7 @@ export function serializeQuizAnswers(answers) {
   return JSON.stringify(Array.isArray(answers) ? answers : []);
 }
 
-export function parseQuizAnswers(serializedAnswers, questions) {
+export function parseQuizAnswers(serializedAnswers, questions, requireComplete = false) {
   if (typeof serializedAnswers !== 'string') return null;
 
   let parsedAnswers;
@@ -57,6 +57,7 @@ export function parseQuizAnswers(serializedAnswers, questions) {
   if (!Array.isArray(parsedAnswers)) return null;
 
   const answers = createEmptyAnswers(questions);
+  let complete = parsedAnswers.length === questions.length;
 
   questions.forEach((question, index) => {
     const answer = parsedAnswers[index];
@@ -64,24 +65,31 @@ export function parseQuizAnswers(serializedAnswers, questions) {
       answers[index] = SKIP_ANSWER;
       return;
     }
-    if (answer === null || answer === undefined) return;
+    if (answer === null || answer === undefined) {
+      complete = false;
+      return;
+    }
 
     const optionIds = new Set(question.options.map((option) => option.id));
     if (question.selectionMode === 'multiple') {
       if (Array.isArray(answer)) {
-        answers[index] = [
-          ...new Set(answer.filter((id) => typeof id === 'string' && optionIds.has(id))),
-        ];
+        const validAnswers = answer.filter((id) => typeof id === 'string' && optionIds.has(id));
+        if (validAnswers.length === 0 || validAnswers.length !== answer.length) complete = false;
+        answers[index] = [...new Set(validAnswers)];
+      } else {
+        complete = false;
       }
       return;
     }
 
     if (typeof answer === 'string' && optionIds.has(answer)) {
       answers[index] = answer;
+    } else {
+      complete = false;
     }
   });
 
-  return answers;
+  return requireComplete && !complete ? null : answers;
 }
 
 function getSearchParam(searchParams, key) {
@@ -102,7 +110,7 @@ function getSearchParam(searchParams, key) {
 export function parseQuizUrlState(searchParams, questions, fallbackSharedResultId = null) {
   const sharedResultId = getSearchParam(searchParams, 'r') ?? fallbackSharedResultId;
   const encodedAnswers = getSearchParam(searchParams, 'a');
-  const parsedAnswers = parseQuizAnswers(encodedAnswers, questions);
+  const parsedAnswers = parseQuizAnswers(encodedAnswers, questions, Boolean(sharedResultId));
 
   if (sharedResultId) {
     return {
