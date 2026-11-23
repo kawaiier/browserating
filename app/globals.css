@@ -302,6 +302,47 @@ textarea:focus-visible,
   animation: pulse-subtle 2s ease-in-out infinite;
 }
 
+@keyframes quiz-float-y {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-12px);
+  }
+}
+
+.quiz-float {
+  animation: quiz-float-y 3s ease-in-out infinite;
+}
+
+@keyframes quiz-fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.quiz-fade-in-up {
+  animation: quiz-fade-in-up 500ms ease-out both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .quiz-float {
+    animation: none !important;
+  }
+
+  .quiz-fade-in-up {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
 /* ─── UTILITY CLASSES ─── */
 .surface-default {
   background-color: var(--surface-default);

@@ -14,7 +14,11 @@ export default function QuizHeader() {
       }}
     >
       <div className="flex items-center justify-between w-full max-w-5xl mx-auto">
-        <Link href="/" aria-label="BrowseRating Home" className="flex items-center">
+        <Link
+          href="/"
+          aria-label="BrowseRating Home"
+          className="flex items-center rounded focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-(--border-focused)"
+        >
           <Image
             src="/images/logo.png"
             alt="BrowseRating"
@@ -27,14 +31,7 @@ export default function QuizHeader() {
         <div className="flex items-center gap-3 sm:gap-4">
           <Link
             href="/#rankings"
-            className="text-sm font-medium transition-colors duration-200 flex items-center gap-1"
-            style={{ color: 'var(--text-subtle)' }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.color = 'var(--text-default)';
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.color = 'var(--text-subtle)';
-            }}
+            className="flex items-center gap-1 rounded text-sm font-medium text-(--text-subtle) transition-colors duration-200 hover:text-(--text-default) focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-(--border-focused)"
           >
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path

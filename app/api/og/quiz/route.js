@@ -1,24 +1,22 @@
 import { promises as fs } from 'fs';
 import path from 'path';
 import { ImageResponse } from 'next/og';
+import { getQuizData } from '../../../lib/getQuizData.js';
 
 export const runtime = 'nodejs';
 
 const SIZE = { width: 1200, height: 630 };
 
-let _cache = null;
-async function getData() {
-  if (_cache) return _cache;
-  const dataDir = path.join(process.cwd(), 'public', 'data');
-  const [profilesRaw, browsersRaw] = await Promise.all([
-    fs.readFile(path.join(dataDir, 'quiz', 'browser-profiles.json'), 'utf8'),
-    fs.readFile(path.join(dataDir, 'browsers.json'), 'utf8'),
-  ]);
-  _cache = {
-    profiles: JSON.parse(profilesRaw),
-    browsers: JSON.parse(browsersRaw),
-  };
-  return _cache;
+// Route handlers are outside React's Server Component cache scope.
+let dataPromise;
+function getData() {
+  if (!dataPromise) {
+    dataPromise = getQuizData().catch((error) => {
+      dataPromise = null;
+      throw error;
+    });
+  }
+  return dataPromise;
 }
 
 async function getLogoDataUrl(logoPath) {
@@ -33,7 +31,7 @@ async function getLogoDataUrl(logoPath) {
   }
 }
 
-function fallbackCard() {
+function fallbackCard(origin) {
   return new ImageResponse(
     (
       <div
@@ -51,9 +49,7 @@ function fallbackCard() {
         <div style={{ fontSize: '64px', fontWeight: 700, color: '#ffffff' }}>
           Find Your Perfect Browser
         </div>
-        <div style={{ fontSize: '28px', color: '#c4b5fd' }}>
-          browserating.com/quiz
-        </div>
+        <div style={{ fontSize: '28px', color: '#c4b5fd' }}>{origin}/quiz</div>
       </div>
     ),
     SIZE
@@ -61,20 +57,21 @@ function fallbackCard() {
 }
 
 export async function GET(request) {
+  const origin = request.nextUrl.origin;
   let profile, logoDataUrl;
   try {
     const r = request.nextUrl.searchParams.get('r');
     const { profiles, browsers } = await getData();
 
     profile = r ? profiles.find((p) => p.id === r.toLowerCase()) : null;
-    if (!profile) return fallbackCard();
+    if (!profile) return fallbackCard(origin);
 
     const browserEntry = browsers.find(
       (b) => b.name.toLowerCase() === profile.name.toLowerCase()
     );
     logoDataUrl = await getLogoDataUrl(browserEntry?.logo ?? null);
   } catch {
-    return fallbackCard();
+    return fallbackCard(origin);
   }
 
   return new ImageResponse(
@@ -85,9 +82,10 @@ export async function GET(request) {
           height: '630px',
           display: 'flex',
           alignItems: 'center',
+          justifyContent: logoDataUrl ? 'flex-start' : 'center',
           background: 'linear-gradient(135deg, #1e1b4b 0%, #312e81 50%, #4c1d95 100%)',
           padding: '60px',
-          gap: '60px',
+          gap: logoDataUrl ? '60px' : '0',
         }}
       >
         {logoDataUrl && (
@@ -115,12 +113,14 @@ export async function GET(request) {
           style={{
             display: 'flex',
             flexDirection: 'column',
+            alignItems: logoDataUrl ? 'flex-start' : 'center',
+            textAlign: logoDataUrl ? 'left' : 'center',
             gap: '12px',
             flex: 1,
           }}
         >
           <div style={{ fontSize: '28px', color: '#c4b5fd', fontWeight: 400 }}>
-            Your browser match:
+            Someone matched with
           </div>
           <div
             style={{ fontSize: '80px', fontWeight: 700, color: '#ffffff', lineHeight: 1 }}
@@ -128,7 +128,7 @@ export async function GET(request) {
             {profile.name}
           </div>
           <div style={{ fontSize: '26px', color: '#a78bfa', marginTop: '16px' }}>
-            Find yours at browserating.com/quiz
+            What&apos;s yours? Take the quiz at {origin}/quiz
           </div>
         </div>
       </div>

@@ -1,42 +1,46 @@
 'use client';
 
+import { track } from '@vercel/analytics/react';
 import { SHARE_COPY } from '../../lib/quiz-constants';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import { copyTextToClipboard, createQuizShareUrl } from './quizShare';
 
-const BASE_URL = 'https://browserating.com';
-
-export default function QuizShareButtons({ browserId, browserName }) {
-  const [copied, setCopied] = useState(false);
+export default function QuizShareButtons({ browserId, browserName, answers }) {
+  const [copyStatus, setCopyStatus] = useState('idle');
+  const [manualCopyUrl, setManualCopyUrl] = useState('');
   const [hasNativeShare, setHasNativeShare] = useState(false);
-  const shareUrl = `${BASE_URL}/quiz?r=${browserId}`;
+  const copyStatusTimer = useRef(null);
+  const getShareUrl = () => createQuizShareUrl(browserId, answers, window.location.origin);
 
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect -- detecting Web Share API support on mount
     setHasNativeShare(!!navigator.share);
   }, []);
 
+  useEffect(() => () => clearTimeout(copyStatusTimer.current), []);
+
   const handleCopy = async () => {
+    const shareUrl = getShareUrl();
+    clearTimeout(copyStatusTimer.current);
+    setCopyStatus('idle');
+    setManualCopyUrl('');
     try {
-      await navigator.clipboard.writeText(shareUrl);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
+      await copyTextToClipboard(shareUrl);
+      track('quiz_share', { channel: 'copy' });
+      setCopyStatus('copied');
+      copyStatusTimer.current = setTimeout(() => setCopyStatus('idle'), 2000);
     } catch {
-      const el = document.createElement('textarea');
-      el.value = shareUrl;
-      document.body.appendChild(el);
-      el.select();
-      document.execCommand('copy');
-      document.body.removeChild(el);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
+      setCopyStatus('failed');
+      setManualCopyUrl(shareUrl);
     }
   };
 
   const handleTwitter = () => {
+    track('quiz_share', { channel: 'x' });
     const text = encodeURIComponent(SHARE_COPY.twitter(browserName));
-    const url = encodeURIComponent(shareUrl);
+    const url = encodeURIComponent(getShareUrl());
     window.open(
-      `https://twitter.com/intent/tweet?text=${text}&url=${url}`,
+      `https://x.com/intent/post?text=${text}&url=${url}`,
       '_blank',
       'noopener,noreferrer'
     );
@@ -44,12 +48,14 @@ export default function QuizShareButtons({ browserId, browserName }) {
 
   const handleNativeShare = async () => {
     if (!navigator.share) return;
+    const shareUrl = getShareUrl();
     try {
       await navigator.share({
         title: SHARE_COPY.nativeShareTitle,
         text: SHARE_COPY.nativeShareText(browserName),
         url: shareUrl,
       });
+      track('quiz_share', { channel: 'native' });
     } catch {}
   };
 
@@ -70,20 +76,9 @@ export default function QuizShareButtons({ browserId, browserName }) {
       <div className="flex flex-wrap items-center justify-center gap-3">
         <button
           onClick={handleCopy}
-          className="inline-flex items-center gap-2 font-medium px-4 py-2 rounded-md transition-all duration-200 text-sm"
-          style={{
-            backgroundColor: 'var(--surface-raised)',
-            border: '1px solid var(--border-subtle)',
-            color: 'var(--text-default)',
-          }}
-          onMouseEnter={(e) => {
-            e.currentTarget.style.backgroundColor = 'var(--surface-hovered)';
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.backgroundColor = 'var(--surface-raised)';
-          }}
+          className="inline-flex items-center gap-2 rounded-md border border-(--border-subtle) bg-(--surface-raised) px-4 py-2 text-sm font-medium text-(--text-default) transition-colors duration-200 hover:bg-(--surface-hovered) focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-(--border-focused)"
         >
-          {copied ? (
+          {copyStatus === 'copied' ? (
             <>
               <svg
                 className="w-4 h-4"
@@ -111,24 +106,14 @@ export default function QuizShareButtons({ browserId, browserName }) {
                   d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"
                 />
               </svg>
-              {SHARE_COPY.copyLabel}
+              {copyStatus === 'failed' ? SHARE_COPY.copyErrorLabel : SHARE_COPY.copyLabel}
             </>
           )}
         </button>
 
         <button
           onClick={handleTwitter}
-          className="inline-flex items-center gap-2 font-medium px-4 py-2 rounded-md transition-all duration-200 text-sm"
-          style={{
-            backgroundColor: 'var(--neutral-900)',
-            color: 'var(--text-inverse)',
-          }}
-          onMouseEnter={(e) => {
-            e.currentTarget.style.backgroundColor = 'var(--neutral-800)';
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.backgroundColor = 'var(--neutral-900)';
-          }}
+          className="inline-flex items-center gap-2 rounded-md bg-(--color-neutral-900) px-4 py-2 text-sm font-medium text-(--color-neutral-0) transition-colors duration-200 hover:bg-(--color-neutral-800) focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-(--border-focused)"
         >
           <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
             <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.253 5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
@@ -139,18 +124,7 @@ export default function QuizShareButtons({ browserId, browserName }) {
         {hasNativeShare && (
           <button
             onClick={handleNativeShare}
-            className="inline-flex items-center gap-2 font-medium px-4 py-2 rounded-md transition-all duration-200 text-sm"
-            style={{
-              backgroundColor: 'var(--surface-raised)',
-              border: '1px solid var(--border-subtle)',
-              color: 'var(--text-default)',
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.backgroundColor = 'var(--surface-hovered)';
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.backgroundColor = 'var(--surface-raised)';
-            }}
+            className="inline-flex items-center gap-2 rounded-md border border-(--border-subtle) bg-(--surface-raised) px-4 py-2 text-sm font-medium text-(--text-default) transition-colors duration-200 hover:bg-(--surface-hovered) focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-(--border-focused)"
           >
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path
@@ -164,6 +138,25 @@ export default function QuizShareButtons({ browserId, browserName }) {
           </button>
         )}
       </div>
+      {copyStatus === 'failed' && (
+        <div
+          role="alert"
+          className="mt-4 text-center text-sm"
+          style={{ color: 'var(--text-subtle)' }}
+        >
+          <label className="block">
+            <span className="mb-2 block">{SHARE_COPY.copyFailure}</span>
+            <input
+              type="url"
+              readOnly
+              value={manualCopyUrl}
+              aria-label="Share link to copy manually"
+              onFocus={(event) => event.currentTarget.select()}
+              className="w-full rounded-md border border-(--border-subtle) bg-(--surface-raised) px-3 py-2 text-left text-(--text-default)"
+            />
+          </label>
+        </div>
+      )}
     </div>
   );
 }

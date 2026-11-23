@@ -3,20 +3,36 @@
 import { QUIZ_INTRO_COPY } from '../../lib/quiz-constants';
 import Image from 'next/image';
 import { useMemo } from 'react';
+import { ICON_MAP } from './quizOptionIcons.js';
 
-const FLOAT_BROWSERS = ['brave', 'firefox', 'chrome', 'zen-browser', 'arc'];
+const FLOAT_BROWSERS = ['brave', 'firefox', 'chrome', 'zen', 'arc'];
 
-const floatKeyframes = `
-@keyframes floatY {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-12px); }
+function IntroBullet({ bullet }) {
+  const Icon = ICON_MAP[bullet.icon];
+
+  return (
+    <li
+      className="flex items-center gap-2 text-sm font-medium"
+      style={{ color: 'var(--text-subtle)' }}
+    >
+      {Icon ? (
+        <Icon
+          className="w-4 h-4 flex-shrink-0"
+          style={{ color: 'var(--color-brand)' }}
+          aria-hidden="true"
+        />
+      ) : (
+        <span
+          className="w-1.5 h-1.5 rounded-full flex-shrink-0"
+          style={{ backgroundColor: 'var(--color-brand)' }}
+        />
+      )}
+      {bullet.text}
+    </li>
+  );
 }
-@media (prefers-reduced-motion: reduce) {
-  .quiz-float { animation: none !important; }
-}
-`;
 
-export default function QuizIntro({ browserProfiles, onStart }) {
+export default function QuizIntro({ browserProfiles, questionCount, onStart }) {
   const floatBrowsers = useMemo(
     () => FLOAT_BROWSERS.map((id) => browserProfiles.find((b) => b.id === id)).filter(Boolean),
     [browserProfiles]
@@ -24,8 +40,6 @@ export default function QuizIntro({ browserProfiles, onStart }) {
 
   return (
     <div className="min-h-[calc(100vh-3.5rem)] flex flex-col items-center justify-center px-4 py-12">
-      <style>{floatKeyframes}</style>
-
       <div className="w-full max-w-2xl mx-auto text-center">
         <div className="flex justify-center items-end gap-4 sm:gap-6 mb-10 h-20" aria-hidden="true">
           {floatBrowsers.map((browser, i) => (
@@ -33,7 +47,6 @@ export default function QuizIntro({ browserProfiles, onStart }) {
               key={browser.id}
               className={`quiz-float${i >= 3 ? ' hidden sm:block' : ''}`}
               style={{
-                animation: `floatY 3s ease-in-out infinite`,
                 animationDelay: `${i * 0.3}s`,
               }}
             >
@@ -77,43 +90,21 @@ export default function QuizIntro({ browserProfiles, onStart }) {
           className="text-lg mb-8 max-w-xl mx-auto leading-relaxed"
           style={{ color: 'var(--text-subtle)' }}
         >
-          {QUIZ_INTRO_COPY.subheadline}
+          {QUIZ_INTRO_COPY.subheadline(questionCount)}
         </p>
 
         <ul
           className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-6 mb-10"
           role="list"
         >
-          {QUIZ_INTRO_COPY.bullets.map((bullet, i) => (
-            <li
-              key={i}
-              className="flex items-center gap-2 text-sm font-medium"
-              style={{ color: 'var(--text-subtle)' }}
-            >
-              <span
-                className="w-1.5 h-1.5 rounded-full flex-shrink-0"
-                style={{ backgroundColor: 'var(--color-brand)' }}
-              />
-              {bullet.text}
-            </li>
+          {QUIZ_INTRO_COPY.bullets(questionCount).map((bullet) => (
+            <IntroBullet key={bullet.icon} bullet={bullet} />
           ))}
         </ul>
 
         <button
           onClick={onStart}
-          className="inline-flex items-center gap-2 font-semibold px-10 py-4 rounded-md transition-all duration-300 text-lg"
-          style={{
-            backgroundColor: 'var(--color-brand)',
-            color: 'var(--text-inverse)',
-          }}
-          onMouseEnter={(e) => {
-            e.currentTarget.style.backgroundColor = 'var(--color-brand-bold)';
-            e.currentTarget.style.transform = 'scale(1.05)';
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.backgroundColor = 'var(--color-brand)';
-            e.currentTarget.style.transform = 'scale(1)';
-          }}
+          className="inline-flex items-center gap-2 rounded-md bg-(--color-brand) px-10 py-4 text-lg font-semibold text-(--text-inverse) transition-all duration-300 hover:scale-105 hover:bg-(--color-brand-bold) focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-(--border-focused)"
         >
           {QUIZ_INTRO_COPY.cta}
           <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">

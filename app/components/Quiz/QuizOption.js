@@ -1,62 +1,6 @@
 'use client';
 
-import {
-  AlertTriangle,
-  Briefcase,
-  Circle,
-  Cloud,
-  Code2,
-  Coffee,
-  Eye,
-  EyeOff,
-  Filter,
-  Gamepad2,
-  Ghost,
-  LayoutDashboard,
-  LayoutTemplate,
-  MinusCircle,
-  Package,
-  PanelsTopLeft,
-  Shield,
-  ShieldCheck,
-  Shuffle,
-  SlidersHorizontal,
-  Smile,
-  Sparkles,
-  Terminal,
-  ThumbsUp,
-  UserX,
-  Zap,
-} from 'lucide-react';
-
-const ICON_MAP = {
-  zap: Zap,
-  shield: Shield,
-  'layout-dashboard': LayoutDashboard,
-  'minus-circle': MinusCircle,
-  briefcase: Briefcase,
-  'gamepad-2': Gamepad2,
-  'eye-off': EyeOff,
-  coffee: Coffee,
-  package: Package,
-  'sliders-horizontal': SlidersHorizontal,
-  terminal: Terminal,
-  cloud: Cloud,
-  shuffle: Shuffle,
-  'alert-triangle': AlertTriangle,
-  'user-x': UserX,
-  smile: Smile,
-  filter: Filter,
-  'shield-check': ShieldCheck,
-  ghost: Ghost,
-  'thumbs-up': ThumbsUp,
-  eye: Eye,
-  'code-2': Code2,
-  layout: LayoutTemplate,
-  circle: Circle,
-  'panels-top-left': PanelsTopLeft,
-  sparkles: Sparkles,
-};
+import { ICON_MAP } from './quizOptionIcons.js';
 
 function Icon({ name }) {
   const Component = ICON_MAP[name];
@@ -64,32 +8,19 @@ function Icon({ name }) {
   return <Component className="w-5 h-5" aria-hidden="true" />;
 }
 
-export default function QuizOption({ option, isSelected, onClick }) {
+export default function QuizOption({ option, isSelected, selectionMode, tabIndex, onClick }) {
   return (
     <button
       onClick={() => onClick(option.id)}
-      aria-label={`${option.label}: ${option.description}`}
-      aria-pressed={isSelected}
-      className="group relative w-full text-left px-4 py-4 sm:px-5 sm:py-5 rounded-md border-2 transition-all duration-200"
-      style={{
-        borderColor: isSelected ? 'var(--color-brand)' : 'var(--border-subtle)',
-        backgroundColor: isSelected ? 'var(--color-brand-subtle)' : 'var(--surface-raised)',
-        transform: isSelected ? 'scale(1.02)' : 'scale(1)',
-      }}
-      onMouseEnter={(e) => {
-        if (!isSelected) {
-          e.currentTarget.style.borderColor = 'var(--border-default)';
-          e.currentTarget.style.transform = 'translateY(-2px)';
-          e.currentTarget.style.boxShadow = 'var(--shadow-overlay)';
-        }
-      }}
-      onMouseLeave={(e) => {
-        if (!isSelected) {
-          e.currentTarget.style.borderColor = 'var(--border-subtle)';
-          e.currentTarget.style.transform = 'scale(1)';
-          e.currentTarget.style.boxShadow = 'none';
-        }
-      }}
+      aria-label={option.description ? `${option.label}: ${option.description}` : option.label}
+      role={selectionMode === 'multiple' ? 'checkbox' : 'radio'}
+      aria-checked={isSelected}
+      tabIndex={tabIndex}
+      className={`group relative w-full rounded-md border-2 px-4 py-4 text-left transition-all duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-(--border-focused) sm:px-5 sm:py-5 ${
+        isSelected
+          ? 'scale-[1.02] border-(--color-brand) bg-(--color-brand-subtle)'
+          : 'border-(--border-subtle) bg-(--surface-raised) hover:-translate-y-0.5 hover:border-(--border-default) hover:shadow-(--shadow-overlay)'
+      }`}
     >
       <div className="flex items-start gap-3">
         <span
@@ -111,7 +42,10 @@ export default function QuizOption({ option, isSelected, onClick }) {
             {option.label}
           </div>
           {option.description && (
-            <div className="text-xs sm:text-sm mt-0.5 leading-snug" style={{ color: 'var(--text-subtle)' }}>
+            <div
+              className="text-xs sm:text-sm mt-0.5 leading-snug"
+              style={{ color: 'var(--text-subtle)' }}
+            >
               {option.description}
             </div>
           )}

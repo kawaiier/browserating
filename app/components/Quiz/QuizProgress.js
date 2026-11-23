@@ -14,6 +14,7 @@ export default function QuizProgress({ currentStep, totalSteps }) {
       <div
         className="flex gap-1.5"
         role="progressbar"
+        aria-label="Quiz progress"
         aria-valuenow={currentStep}
         aria-valuemin={1}
         aria-valuemax={totalSteps}
@@ -23,8 +24,7 @@ export default function QuizProgress({ currentStep, totalSteps }) {
             key={i}
             className="h-1.5 flex-1 rounded-full transition-all duration-300"
             style={{
-              backgroundColor:
-                i < currentStep ? 'var(--color-brand)' : 'var(--surface-sunken)',
+              backgroundColor: i < currentStep ? 'var(--color-brand)' : 'var(--surface-sunken)',
             }}
           />
         ))}
