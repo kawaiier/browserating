@@ -1,5 +1,5 @@
 import { getComparisonData, generateComparisonSlugs } from '@/app/lib/getComparisonData';
-import { notFound } from 'next/navigation';
+import { notFound, permanentRedirect } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
@@ -26,22 +26,44 @@ export async function generateMetadata({ params }) {
     title: `${data.browserA.name} vs ${data.browserB.name} - Browser Performance Comparison`,
     description: `Compare ${data.browserA.name} and ${data.browserB.name} performance. Speedometer 3.1 benchmarks, RAM usage, and more.`,
     alternates: {
-      canonical: `https://browserating.com/compare/${slug}`,
+      canonical: `https://browserating.com/compare/${[...parts].sort().join('-vs-')}`,
     },
   };
 }
 
-export default async function ComparePage({ params }) {
+export default async function ComparePage({ params, searchParams }) {
   const { slug } = await params;
-  const [data, lastModified] = await Promise.all([
-    slug.split('-vs-').length === 2 ? getComparisonData(...slug.split('-vs-')) : null,
-    getDataLastModified(),
-  ]);
+  const query = await searchParams;
+  const parts = slug.split('-vs-');
+  const initial = parts.length === 2 ? await getComparisonData(...parts) : null;
+  if (!initial) notFound();
 
-  if (!data) {
-    notFound();
+  const sorted = [...parts].sort();
+  if (parts[0] !== sorted[0]) {
+    const params = new URLSearchParams();
+    for (const [key, value] of Object.entries(query || {})) {
+      if (typeof value === 'string' && key !== 'order') params.set(key, value);
+    }
+    if (query?.order !== 'reverse') params.set('order', 'reverse');
+    const suffix = params.toString();
+    permanentRedirect(`/compare/${sorted.join('-vs-')}${suffix ? `?${suffix}` : ''}`);
   }
 
+  const ordered = query?.order === 'reverse' ? [...sorted].reverse() : sorted;
+  const base = ordered[0] === parts[0] ? initial : await getComparisonData(...ordered);
+  const engines = {};
+  for (const platform of base.platforms) {
+    for (const [index, side] of ['a', 'b'].entries()) {
+      const value = query?.[`engine.${ordered[index]}.${platform.id}`];
+      if (typeof value === 'string' && platform[side].engines.includes(value)) {
+        (engines[ordered[index]] ||= {})[platform.id] = value;
+      }
+    }
+  }
+  const [data, lastModified] = await Promise.all([
+    getComparisonData(...ordered, engines),
+    getDataLastModified(),
+  ]);
   const { browserA, browserB } = data;
 
 
