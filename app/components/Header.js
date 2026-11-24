@@ -5,7 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useDarkMode } from './DarkModeProvider';
 
-export default function Header({ lastModified }) {
+export default function Header({ lastModified, compact = false }) {
   const { darkMode, toggleDarkMode } = useDarkMode();
 
   const lastModifiedFormatted = lastModified
@@ -15,6 +15,38 @@ export default function Header({ lastModified }) {
         day: 'numeric',
       })
     : null;
+
+  if (compact) {
+    return (
+      <header className="surface-default border-b" style={{ borderColor: 'var(--border-subtle)' }}>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex flex-wrap items-center justify-between gap-4">
+          <Link href="/" aria-label="BrowseRating Home" className="shrink-0">
+            <Image
+              src="/images/logo.png"
+              alt=""
+              width={150}
+              height={40}
+              className="h-10 w-auto"
+              priority
+            />
+          </Link>
+          <nav aria-label="Site navigation" className="flex flex-wrap items-center gap-4">
+            <Link href="/#rankings" className="underline" style={{ color: 'var(--text-default)' }}>
+              View rankings
+            </Link>
+            <Link
+              href="/#methodology"
+              className="underline"
+              style={{ color: 'var(--text-default)' }}
+            >
+              Methodology
+            </Link>
+            <DarkModeToggle darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
+          </nav>
+        </div>
+      </header>
+    );
+  }
 
   return (
     <header
@@ -62,10 +94,16 @@ export default function Header({ lastModified }) {
               </Link>
             </div>
 
-            <h1 className="heading-xlarge sm:heading-xxlarge" style={{ color: 'var(--text-default)' }}>
+            <h1
+              className="heading-xlarge sm:heading-xxlarge"
+              style={{ color: 'var(--text-default)' }}
+            >
               Browser Performance Rankings
             </h1>
-            <p className="body-large mt-3" style={{ color: 'var(--text-subtle)', maxWidth: '600px' }}>
+            <p
+              className="body-large mt-3"
+              style={{ color: 'var(--text-subtle)', maxWidth: '600px' }}
+            >
               Compare browser performance across macOS, Windows, Android, and iPad using
               industry-standard Speedometer 3.1 benchmarks.
             </p>
@@ -81,10 +119,7 @@ export default function Header({ lastModified }) {
                 Browsers Tested
               </div>
             </div>
-            <div
-              className="w-px"
-              style={{ backgroundColor: 'var(--border-subtle)' }}
-            ></div>
+            <div className="w-px" style={{ backgroundColor: 'var(--border-subtle)' }}></div>
             <div className="text-center">
               <div className="metric-medium" style={{ color: 'var(--text-brand)' }}>
                 5
@@ -93,10 +128,7 @@ export default function Header({ lastModified }) {
                 Platforms
               </div>
             </div>
-            <div
-              className="w-px"
-              style={{ backgroundColor: 'var(--border-subtle)' }}
-            ></div>
+            <div className="w-px" style={{ backgroundColor: 'var(--border-subtle)' }}></div>
             <div className="text-center">
               <div className="metric-medium" style={{ color: 'var(--text-brand)' }}>
                 Monthly
@@ -109,9 +141,12 @@ export default function Header({ lastModified }) {
         </div>
 
         {/* Call to Action */}
-        <div className="flex flex-wrap gap-3 mt-8 pt-8" style={{ borderTop: '1px solid var(--border-subtle)' }}>
-          <a
-            href="#rankings"
+        <div
+          className="flex flex-wrap gap-3 mt-8 pt-8"
+          style={{ borderTop: '1px solid var(--border-subtle)' }}
+        >
+          <Link
+            href="/#rankings"
             className="inline-flex items-center gap-2 px-4 py-2 btn-atlantic font-medium transition-all"
             style={{
               backgroundColor: 'var(--color-brand)',
@@ -134,7 +169,7 @@ export default function Header({ lastModified }) {
                 d="M19 9l-7 7-7-7"
               />
             </svg>
-          </a>
+          </Link>
 
           <Link
             href="/quiz"
@@ -164,8 +199,8 @@ export default function Header({ lastModified }) {
             </span>
           </Link>
 
-          <a
-            href="#methodology"
+          <Link
+            href="/#methodology"
             className="inline-flex items-center gap-2 px-4 py-2 btn-atlantic font-medium transition-all"
             style={{
               backgroundColor: 'transparent',
@@ -190,7 +225,7 @@ export default function Header({ lastModified }) {
               />
             </svg>
             <span>Learn More</span>
-          </a>
+          </Link>
         </div>
       </div>
     </header>

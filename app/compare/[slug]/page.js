@@ -9,7 +9,6 @@ import {
 import { notFound, permanentRedirect } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
-import { ArrowLeft, ArrowRight } from 'lucide-react';
 import { getDataLastModified } from '@/app/lib/getDataLastModified';
 import DarkModeProvider from '@/app/components/DarkModeProvider';
 import ErrorBoundary from '@/app/components/ErrorBoundary';
@@ -178,13 +177,21 @@ export default async function ComparePage({ params, searchParams }) {
           >
             Skip to main content
           </a>
-          <Header lastModified={lastModified} />
+          <Header lastModified={lastModified} compact />
           <main id="main-content" className="container mx-auto px-4 py-8 scroll-mt-4" tabIndex={-1}>
             <article className="max-w-4xl mx-auto">
-              <nav className="mb-6">
-                <Link href="/" className="hover:underline" style={{ color: 'var(--text-brand)' }}>
-                  <ArrowLeft className="inline w-4 h-4" aria-hidden="true" /> Back to Full Rankings
+              <nav aria-label="Breadcrumb" className="mb-4">
+                <Link
+                  href="/#rankings"
+                  className="underline"
+                  style={{ color: 'var(--text-default)' }}
+                >
+                  Home / Rankings
                 </Link>
+                <span aria-hidden="true"> / </span>
+                <span>
+                  Compare {browserA.name} and {browserB.name}
+                </span>
               </nav>
 
               <header className="mb-8">
@@ -192,79 +199,10 @@ export default async function ComparePage({ params, searchParams }) {
                   {browserA.name} vs {browserB.name}
                 </h1>
                 <p className="text-lg" style={{ color: 'var(--text-subtle)' }}>
-                  Detailed performance comparison
+                  Compare recorded Speedometer 3.1 results by platform.
                 </p>
               </header>
 
-              <section className="mb-8">
-                <div className="grid md:grid-cols-2 gap-6">
-                  <div
-                    className="rounded-lg p-6"
-                    style={{
-                      backgroundColor: 'var(--surface-raised)',
-                      border: '1px solid var(--border-subtle)',
-                      boxShadow: 'var(--shadow-raised)',
-                    }}
-                  >
-                    <div className="flex items-center gap-4 mb-4">
-                      <div className="relative w-12 h-12">
-                        <Image
-                          src={browserA.logo}
-                          alt={`${browserA.name} logo`}
-                          fill
-                          className="object-contain"
-                        />
-                      </div>
-                      <h2 className="text-2xl font-bold" style={{ color: 'var(--text-default)' }}>
-                        {browserA.name}
-                      </h2>
-                    </div>
-                  </div>
-
-                  <div
-                    className="rounded-lg p-6"
-                    style={{
-                      backgroundColor: 'var(--surface-raised)',
-                      border: '1px solid var(--border-subtle)',
-                      boxShadow: 'var(--shadow-raised)',
-                    }}
-                  >
-                    <div className="flex items-center gap-4 mb-4">
-                      <div className="relative w-12 h-12">
-                        <Image
-                          src={browserB.logo}
-                          alt={`${browserB.name} logo`}
-                          fill
-                          className="object-contain"
-                        />
-                      </div>
-                      <h2 className="text-2xl font-bold" style={{ color: 'var(--text-default)' }}>
-                        {browserB.name}
-                      </h2>
-                    </div>
-                  </div>
-                </div>
-              </section>
-
-              <BrowserCompareDropdown
-                currentSlug={browserA.slug}
-                currentName={browserA.name}
-                browsers={optionsFor(browserA)}
-              />
-              <BrowserCompareDropdown
-                currentSlug={browserB.slug}
-                currentName={browserB.name}
-                browsers={optionsFor(browserB)}
-              />
-              <p className="mb-4" style={{ color: 'var(--text-subtle)' }}>
-                <Link href={`/browsers/${browserA.slug}`} className="underline">
-                  {browserA.name} details
-                </Link>
-                {' · '}
-                <Link href={`/browsers/${browserB.slug}`} className="underline">
-                  {browserB.name} details
-                </Link>
-              </p>
               <section>
                 <ComparisonFocus />
                 <h2 className="text-2xl font-bold mb-4" style={{ color: 'var(--text-default)' }}>
@@ -341,9 +279,21 @@ export default async function ComparePage({ params, searchParams }) {
                         const name = `engine.${browser.slug}.${selected.id}`;
                         return (
                           <div key={browser.slug}>
-                            <p className="font-semibold">
-                              {browser.name}: {label(observation)}
-                            </p>
+                            <Link
+                              href={`/browsers/${browser.slug}`}
+                              className="inline-flex items-center gap-2 font-semibold underline"
+                              style={{ color: 'var(--text-default)' }}
+                            >
+                              <Image
+                                src={browser.logo}
+                                alt=""
+                                width={32}
+                                height={32}
+                                className="object-contain"
+                              />
+                              {browser.name}
+                            </Link>
+                            <p className="font-semibold mt-2">{label(observation)}</p>
                             {observation.engines.length > 1 ? (
                               <form
                                 method="get"
@@ -390,6 +340,27 @@ export default async function ComparePage({ params, searchParams }) {
                       })}
                     </div>
                   </section>
+                )}
+                {!selected && (
+                  <div className="mb-6 flex flex-wrap gap-6">
+                    {[browserA, browserB].map((browser) => (
+                      <Link
+                        key={browser.slug}
+                        href={`/browsers/${browser.slug}`}
+                        className="inline-flex items-center gap-2 font-semibold underline"
+                        style={{ color: 'var(--text-default)' }}
+                      >
+                        <Image
+                          src={browser.logo}
+                          alt=""
+                          width={32}
+                          height={32}
+                          className="object-contain"
+                        />
+                        {browser.name}
+                      </Link>
+                    ))}
+                  </div>
                 )}
                 <p className="mb-4" style={{ color: 'var(--text-subtle)' }}>
                   Speedometer 3.1 — higher is better. Dates are when each measurement was tested;
@@ -488,6 +459,18 @@ export default async function ComparePage({ params, searchParams }) {
                   </div>
                 )}
               </section>
+              <div className="mt-8">
+                <BrowserCompareDropdown
+                  currentSlug={browserA.slug}
+                  currentName={browserA.name}
+                  browsers={optionsFor(browserA)}
+                />
+                <BrowserCompareDropdown
+                  currentSlug={browserB.slug}
+                  currentName={browserB.name}
+                  browsers={optionsFor(browserB)}
+                />
+              </div>
             </article>
           </main>
           <Footer />
