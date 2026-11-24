@@ -1,8 +1,12 @@
-import { platformNames } from './constants.js';
+import { platformNames } from './platformDefinitions.js';
 import { getBrowserSlug } from './getBrowserSlug.js';
 import { getEngineVariants } from './getPlatformEngineData.js';
 
-export const comparisonMetric = { id: 'speedometer3', name: 'Speedometer 3.1', direction: 'higher' };
+export const comparisonMetric = {
+  id: 'speedometer3',
+  name: 'Speedometer 3.1',
+  direction: 'higher',
+};
 
 export function getComparisonObservation(browser, platform, engine) {
   if (!browser) return { state: 'missing-browser', engines: [] };
@@ -18,7 +22,8 @@ export function getComparisonObservation(browser, platform, engine) {
   if (!record) return { ...base, state: 'missing-version' };
   const score = record.scores?.speedometer3;
   if (score == null) return { ...base, state: 'missing-metric' };
-  if (typeof score !== 'number' || !Number.isFinite(score) || score <= 0) return { ...base, state: 'invalid-metric' };
+  if (typeof score !== 'number' || !Number.isFinite(score) || score <= 0)
+    return { ...base, state: 'invalid-metric' };
   return { ...base, state: 'available', score };
 }
 
@@ -29,9 +34,27 @@ export function deriveComparison(browsers, slugA, slugB, engines = {}) {
   const platforms = Object.entries(platformNames).map(([id, label]) => {
     const a = getComparisonObservation(browserA, id, engines[slugA]?.[id]);
     const b = getComparisonObservation(browserB, id, engines[slugB]?.[id]);
-    const outcome = a.state !== 'available' || b.state !== 'available' ? 'unavailable' : a.score === b.score ? 'tie' : a.score > b.score ? 'a' : 'b';
-    return { id, label, a, b, outcome, limitations: ['Hardware and benchmark provenance may be undocumented.'] };
+    const outcome =
+      a.state !== 'available' || b.state !== 'available'
+        ? 'unavailable'
+        : a.score === b.score
+          ? 'tie'
+          : a.score > b.score
+            ? 'a'
+            : 'b';
+    return { id, label, a, b, outcome };
   });
-  const identity = ({ name, logo, website, description }) => ({ name, logo, website, description });
-  return { browserA: identity(browserA), browserB: identity(browserB), metric: comparisonMetric, platforms };
+  const identity = ({ name, logo, website, description }) => ({
+    slug: getBrowserSlug(name),
+    name,
+    logo,
+    website,
+    description,
+  });
+  return {
+    browserA: identity(browserA),
+    browserB: identity(browserB),
+    metric: comparisonMetric,
+    platforms,
+  };
 }

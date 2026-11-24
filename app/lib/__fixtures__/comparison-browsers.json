@@ -1,0 +1,272 @@
+{
+  "generatedFrom": "public/data snapshot 2026-11-24 (first two versions per record)",
+  "catalog": [
+    {
+      "name": "Crest",
+      "logo": "/images/browser-logos/crest.png",
+      "website": "https://crestbrowser.com"
+    },
+    {
+      "name": "Firefox",
+      "logo": "/images/browser-logos/firefox.png",
+      "website": "https://www.mozilla.org/firefox/"
+    },
+    {
+      "name": "Floorp",
+      "logo": "/images/browser-logos/floorp.png",
+      "website": "https://floorp.app/en"
+    },
+    {
+      "name": "Firefox Beta",
+      "logo": "/images/browser-logos/firefox-beta.png",
+      "website": "https://www.mozilla.org/en-US/firefox/channel/desktop/#beta"
+    },
+    {
+      "name": "Deta Surf",
+      "logo": "/images/browser-logos/deta-surf.png",
+      "website": "https://deta.surf/"
+    },
+    {
+      "name": "Web",
+      "logo": "/images/browser-logos/web.png",
+      "website": "https://github.com/nuance-dev/Web"
+    }
+  ],
+  "platforms": {
+    "android": [
+      {
+        "name": "Firefox",
+        "engine": "Gecko",
+        "versions": [
+          {
+            "version": "138.0.4",
+            "date": "2025-05-29",
+            "scores": {
+              "speedometer3": 5.04
+            }
+          },
+          {
+            "version": "130.0",
+            "date": "2024-09-18",
+            "scores": {
+              "speedometer3": 5.79
+            }
+          }
+        ]
+      },
+      {
+        "name": "Firefox Beta",
+        "engine": "Gecko",
+        "versions": [
+          {
+            "version": "131.0b5",
+            "date": "2024-09-18",
+            "scores": {
+              "speedometer3": 5.87
+            }
+          }
+        ]
+      }
+    ],
+    "ipad": [
+      {
+        "name": "Firefox",
+        "engine": "WebKit",
+        "versions": [
+          {
+            "version": "148.0",
+            "date": "2026-02-23",
+            "scores": {
+              "speedometer3": 27.33
+            }
+          },
+          {
+            "version": "138.2",
+            "date": "2025-05-23",
+            "scores": {
+              "speedometer3": 27.87
+            }
+          }
+        ]
+      }
+    ],
+    "macos-arm": [
+      {
+        "name": "Crest",
+        "engine": "Blink",
+        "versions": [
+          {
+            "version": "0.9.44",
+            "scores": {
+              "speedometer3": 44.88,
+              "adblock": null
+            },
+            "date": "2026-11-15"
+          },
+          {
+            "version": "0.7.0",
+            "scores": {
+              "speedometer3": 45.98,
+              "adblock": null
+            },
+            "date": "2026-10-03"
+          }
+        ]
+      },
+      {
+        "name": "Crest",
+        "engine": "WebKit",
+        "versions": [
+          {
+            "version": "0.9.44",
+            "scores": {
+              "speedometer3": 36.77,
+              "adblock": null
+            },
+            "date": "2026-11-15"
+          },
+          {
+            "version": "0.7.0",
+            "scores": {
+              "speedometer3": 43.43,
+              "adblock": null
+            },
+            "date": "2026-10-03"
+          }
+        ]
+      },
+      {
+        "name": "Firefox",
+        "engine": "Gecko",
+        "versions": [
+          {
+            "version": "160.0",
+            "scores": {
+              "speedometer3": 43.5,
+              "ram": null,
+              "adblock": null
+            },
+            "date": "2026-11-15"
+          },
+          {
+            "version": "157.0",
+            "scores": {
+              "speedometer3": 42.83,
+              "ram": null,
+              "adblock": null
+            },
+            "date": "2026-10-03"
+          }
+        ]
+      },
+      {
+        "name": "Floorp",
+        "engine": "Gecko",
+        "versions": [
+          {
+            "version": "12.21.2",
+            "scores": {
+              "speedometer3": 45.03,
+              "ram": null,
+              "adblock": null
+            },
+            "date": "2026-11-15"
+          },
+          {
+            "version": "12.19.0",
+            "scores": {
+              "speedometer3": 43.83,
+              "ram": null,
+              "adblock": null
+            },
+            "date": "2026-10-03"
+          }
+        ]
+      }
+    ],
+    "macos-intel": [
+      {
+        "name": "Firefox",
+        "engine": "Gecko",
+        "versions": [
+          {
+            "version": "131.0.3",
+            "date": "2024-10-27",
+            "scores": {
+              "speedometer3": 13.5
+            }
+          },
+          {
+            "version": "130.0",
+            "date": "2024-10-27",
+            "scores": {
+              "speedometer3": 13.47
+            }
+          }
+        ]
+      },
+      {
+        "name": "Floorp",
+        "engine": "Gecko",
+        "versions": [
+          {
+            "version": "11.19.1",
+            "date": "2024-10-27",
+            "scores": {
+              "speedometer3": 13.27
+            }
+          },
+          {
+            "version": "11.18.1",
+            "date": "2024-10-27",
+            "scores": {
+              "speedometer3": 13.4
+            }
+          }
+        ]
+      }
+    ],
+    "windows": [
+      {
+        "name": "Firefox",
+        "engine": "Gecko",
+        "versions": [
+          {
+            "version": "148.0",
+            "date": "2026-03-05",
+            "scores": {
+              "speedometer3": 19.18
+            }
+          },
+          {
+            "version": "142.0",
+            "date": "2024-09-18",
+            "scores": {
+              "speedometer3": 17.83
+            }
+          }
+        ]
+      },
+      {
+        "name": "Floorp",
+        "engine": "Gecko",
+        "versions": [
+          {
+            "version": "12.10.4",
+            "date": "2026-03-05",
+            "scores": {
+              "speedometer3": 13.35
+            }
+          },
+          {
+            "version": "11.18.1",
+            "date": "2024-09-18",
+            "scores": {
+              "speedometer3": 15.56
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

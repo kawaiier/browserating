@@ -5,13 +5,7 @@
 
 import { AppWindow, Apple, Bot, Laptop, Tablet } from 'lucide-react';
 
-export const platformNames = {
-  'macos-arm': 'macOS ARM',
-  'macos-intel': 'macOS Intel',
-  windows: 'Windows',
-  android: 'Android',
-  ipad: 'iPad OS',
-};
+export { platformNames } from './platformDefinitions.js';
 
 export const platformIcons = {
   'macos-arm': Apple,

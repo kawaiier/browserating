@@ -7,6 +7,7 @@ import QuizPriorityBars from './QuizPriorityBars';
 import { TRAIT_META } from '../../lib/quiz-constants';
 import { getPriorityTraits } from './quizEngine';
 import { SKIP_ANSWER } from './quizState';
+import { buildCompareUrl } from '../../lib/comparisonUrl';
 
 const PLATFORM_LABELS = {
   windows: 'Windows',
@@ -149,8 +150,8 @@ export default function QuizResults({
     : [];
   const sharedMatch = hero ?? discontinuedResults[0];
   const compareHref =
-    showDetailedResults && hero?.slug && runnerUps[0]?.slug
-      ? `/compare/${hero.slug}-vs-${runnerUps[0].slug}`
+    showDetailedResults && hero?.slug && runnerUps[0]?.slug && hero.slug !== runnerUps[0].slug
+      ? buildCompareUrl({ first: hero.slug, second: runnerUps[0].slug })
       : null;
 
   if (!hero && (!isShared || results.hasSharedAnswers)) {

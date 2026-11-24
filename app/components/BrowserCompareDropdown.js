@@ -2,6 +2,7 @@
 
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
+import { buildCompareUrl } from '@/app/lib/comparisonUrl';
 
 export default function BrowserCompareDropdown({ currentSlug, currentName, browsers }) {
   const router = useRouter();
@@ -11,7 +12,7 @@ export default function BrowserCompareDropdown({ currentSlug, currentName, brows
     const selectedSlug = e.target.value;
     setSelected(selectedSlug);
     if (selectedSlug) {
-      router.push(`/compare/${currentSlug}-vs-${selectedSlug}`);
+      router.push(buildCompareUrl({ first: currentSlug, second: selectedSlug }));
     }
   };
 

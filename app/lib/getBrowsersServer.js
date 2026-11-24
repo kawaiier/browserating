@@ -1,9 +1,12 @@
 import { promises as fs } from 'fs';
 import path from 'path';
+import { cache } from 'react';
 
 import { mergeBrowserData } from './mergeBrowserData';
 
-export async function getBrowsersServer() {
+// cache() dedupes reads within one server request (metadata + page + helpers).
+// Data ships with each deployment, so there is no cross-request cache to invalidate.
+export const getBrowsersServer = cache(async function getBrowsersServer() {
   const dataDir = path.join(process.cwd(), 'public', 'data');
 
   const readFile = async (filename) => {
@@ -29,4 +32,4 @@ export async function getBrowsersServer() {
     windows: windowsData,
     ipad: ipadData,
   });
-}
+});
