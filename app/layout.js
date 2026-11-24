@@ -4,8 +4,6 @@ import { Analytics } from '@vercel/analytics/next';
 import Script from 'next/script';
 import StickyAnnouncement from './components/StickyAnnouncement';
 
-const RENDER_DATE = new Date().toISOString().split('T')[0];
-
 export const metadata = {
   metadataBase: new URL('https://browserating.com'),
   title: 'BrowseRating - Browser Performance for macOS, Windows, Android & iPad',
@@ -54,6 +52,16 @@ export default function RootLayout({ children }) {
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta name="theme-color" content="#0052CC" />
+        {/* Without JavaScript, React cannot swap streamed content in for a loading
+            fallback. Hide route skeletons and reveal the streamed chunks instead. Tailwind's
+            preflight hides [hidden] with !important in @layer base; important declarations in
+            an earlier layer win, so the override lives in the first layer, theme. */}
+        <noscript
+          dangerouslySetInnerHTML={{
+            __html:
+              '<style>[data-route-loading]{display:none!important}@layer theme{div[hidden][id^="S:"]{display:block!important}}</style>',
+          }}
+        />
         <script
           dangerouslySetInnerHTML={{
             __html: `
@@ -105,44 +113,6 @@ export default function RootLayout({ children }) {
                 email: 'kawaiier@tutanota.com',
                 contactType: 'customer support',
               },
-            }),
-          }}
-        />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              '@context': 'https://schema.org',
-              '@type': 'Dataset',
-              name: 'Browser Performance Comparison 2026',
-              description:
-                'Comprehensive performance comparison of web browsers (Chrome, Firefox, Safari, Edge, Brave, etc.) across macOS, Windows, Android and iPad platforms. Metrics include Speedometer 3.1 scores, RAM consumption, and ad-blocking effectiveness.',
-              keywords: [
-                'browser performance',
-                'browser benchmark',
-                'Speedometer 3.1',
-                'browser comparison',
-                'adblocking quality',
-                'RAM usage',
-                'fastest browser 2026',
-                'macOS browsers',
-                'Windows browsers',
-                'Android browsers',
-                'iPad browsers',
-              ],
-              creator: {
-                '@type': 'Person',
-                name: 'Sergei Manvelov',
-                url: 'https://kawaiier.dev',
-              },
-              includedInDataCatalog: {
-                '@type': 'DataCatalog',
-                name: 'BrowseRating Data',
-              },
-              license: 'https://browserating.com/privacy',
-              dateModified: RENDER_DATE,
-              version: '1.2.0',
-              isAccessibleForFree: true,
             }),
           }}
         />

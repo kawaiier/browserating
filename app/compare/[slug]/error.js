@@ -3,7 +3,8 @@
 import { useEffect } from 'react';
 import Link from 'next/link';
 
-export default function ComparisonError({ error, reset }) {
+// `retry` re-fetches the server segment; `reset` would only re-render the failed client tree.
+export default function ComparisonError({ error, retry }) {
   useEffect(() => {
     console.error('Comparison failed:', error);
   }, [error]);
@@ -22,7 +23,7 @@ export default function ComparisonError({ error, reset }) {
         <div className="flex flex-wrap gap-4 items-center">
           <button
             type="button"
-            onClick={reset}
+            onClick={() => retry()}
             className="min-h-[44px] rounded px-4 py-2"
             style={{ backgroundColor: 'var(--color-brand)', color: 'var(--text-inverse)' }}
           >

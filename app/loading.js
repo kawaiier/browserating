@@ -1,6 +1,7 @@
 export default function Loading() {
   return (
     <div
+      data-route-loading
       className="min-h-screen flex items-center justify-center"
       style={{ backgroundColor: 'var(--surface-default)' }}
     >

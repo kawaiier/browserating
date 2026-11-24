@@ -9,6 +9,52 @@ import ErrorBoundary from './components/ErrorBoundary';
 import { getBrowsersServer } from './lib/getBrowsersServer';
 import { getDataLastModified } from './lib/getDataLastModified';
 
+const RENDER_DATE = new Date().toISOString().split('T')[0];
+
+// Describes the full ranking dataset, so it belongs on the homepage only.
+function DatasetJsonLd() {
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{
+        __html: JSON.stringify({
+          '@context': 'https://schema.org',
+          '@type': 'Dataset',
+          name: 'Browser Performance Comparison 2026',
+          description:
+            'Comprehensive performance comparison of web browsers (Chrome, Firefox, Safari, Edge, Brave, etc.) across macOS, Windows, Android and iPad platforms. Metrics include Speedometer 3.1 scores, RAM consumption, and ad-blocking effectiveness.',
+          keywords: [
+            'browser performance',
+            'browser benchmark',
+            'Speedometer 3.1',
+            'browser comparison',
+            'adblocking quality',
+            'RAM usage',
+            'fastest browser 2026',
+            'macOS browsers',
+            'Windows browsers',
+            'Android browsers',
+            'iPad browsers',
+          ],
+          creator: {
+            '@type': 'Person',
+            name: 'Sergei Manvelov',
+            url: 'https://kawaiier.dev',
+          },
+          includedInDataCatalog: {
+            '@type': 'DataCatalog',
+            name: 'BrowseRating Data',
+          },
+          license: 'https://browserating.com/privacy',
+          dateModified: RENDER_DATE,
+          version: '1.2.0',
+          isAccessibleForFree: true,
+        }),
+      }}
+    />
+  );
+}
+
 export default async function Home() {
   const [initialBrowsers, lastModified] = await Promise.all([
     getBrowsersServer(),
@@ -35,6 +81,7 @@ export default async function Home() {
           >
             Skip to main content
           </a>
+          <DatasetJsonLd />
           <Header lastModified={lastModified} />
           <main
             id="main-content"

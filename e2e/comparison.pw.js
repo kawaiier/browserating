@@ -132,3 +132,65 @@ test('hub validates GET submissions and redirects valid pairs', async ({ request
   expect(valid.status()).toBe(307);
   expect(valid.headers().location).toContain('/compare/firefox-vs-google-chrome');
 });
+
+// Holds the comparison's RSC response so the streamed loading boundary stays on screen.
+for (const colorScheme of ['light', 'dark']) {
+  test(`loading state is a named status without fake data, ${colorScheme}`, async ({ page }) => {
+    await page.emulateMedia({ colorScheme });
+    let release;
+    const held = new Promise((resolve) => (release = resolve));
+    await page.route(/\/compare\/[^/?]+-vs-[^/?]+/, async (route) => {
+      const headers = route.request().headers();
+      if (headers.rsc && !headers['next-router-prefetch']) await held;
+      await route.continue();
+    });
+    await page.goto('/compare');
+    // A click before hydration is a full document load, which never shows the boundary.
+    await page.waitForLoadState('networkidle');
+    await page.getByRole('link', { name: / vs / }).first().click();
+    const status = page.getByRole('status').filter({ hasText: 'Loading comparison' });
+    await expect(status).toBeVisible();
+    await expect(status.locator('[aria-hidden="true"]')).toHaveCount(1);
+    expect((await status.innerText()).trim()).toBe('Loading comparison');
+    await audit(page);
+    release();
+    await expect(page.getByRole('heading', { level: 1 })).toContainText(' vs ');
+    await expect(status).toHaveCount(0);
+  });
+}
+
+test('pair social card only for indexable pairs', async ({ request }) => {
+  const indexable = await (await request.get('/compare/crest-vs-firefox')).text();
+  expect(indexable).toContain('/api/og/compare?pair=crest-vs-firefox');
+  expect(indexable).toContain('summary_large_image');
+  const poor = await (await request.get('/compare/firefox-beta-vs-floorp')).text();
+  expect(poor).not.toContain('/api/og/compare');
+  expect(poor).toContain('noindex');
+  for (const pair of ['crest-vs-firefox', 'firefox-beta-vs-floorp', 'nope']) {
+    const image = await request.get(`/api/og/compare?pair=${pair}`);
+    expect(image.status()).toBe(200);
+    expect(image.headers()['content-type']).toBe('image/png');
+  }
+  expect(indexable).not.toContain('"@type":"Dataset"');
+  expect(await (await request.get('/')).text()).toContain('"@type":"Dataset"');
+});
+
+test.describe('without JavaScript', () => {
+  test.use({ javaScriptEnabled: false });
+  test('results, controls and the chooser still work', async ({ page }) => {
+    await page.goto(measured);
+    await expect(page.getByRole('region', { name: 'Selected result for macOS ARM' })).toContainText(
+      '44.88'
+    );
+    await page.getByLabel('Crest engine').selectOption('WebKit');
+    await page.getByRole('button', { name: 'Show engine' }).click();
+    await expect(page.getByRole('region', { name: 'Selected result for macOS ARM' })).toContainText(
+      '36.77'
+    );
+    await page.goto('/compare');
+    await page.getByLabel('First browser').selectOption('firefox');
+    await page.getByLabel('Second browser').selectOption('google-chrome');
+    await page.getByRole('button', { name: 'Compare browsers', exact: true }).click();
+    await expect(page.getByRole('heading', { level: 1 })).toHaveText('Firefox vs Google Chrome');
+  });
+});

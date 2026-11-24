@@ -42,13 +42,35 @@ export async function generateMetadata({ params }) {
   const title = `${data.browserA.name} vs ${data.browserB.name} - Speedometer 3.1 Comparison`;
   const description = `Compare recorded Speedometer 3.1 benchmark results for ${data.browserA.name} and ${data.browserB.name} across platforms.`;
   const url = `https://browserating.com/compare/${canonical.slug}`;
+  const indexable = hasSharedMeasurement(data);
+  // Pair cards show scores, so only pairs with a shared measurement get one.
+  const image = indexable
+    ? {
+        url: `https://browserating.com/api/og/compare?pair=${canonical.slug}`,
+        width: 1200,
+        height: 630,
+        alt: `${data.browserA.name} vs ${data.browserB.name} Speedometer 3.1 results`,
+      }
+    : null;
   return {
     title,
     description,
     alternates: { canonical: url },
-    robots: { index: hasSharedMeasurement(data), follow: true },
-    openGraph: { title, description, url, siteName: 'BrowseRating', type: 'website' },
-    twitter: { card: 'summary', title, description },
+    robots: { index: indexable, follow: true },
+    openGraph: {
+      title,
+      description,
+      url,
+      siteName: 'BrowseRating',
+      type: 'website',
+      ...(image && { images: [image] }),
+    },
+    twitter: {
+      card: image ? 'summary_large_image' : 'summary',
+      title,
+      description,
+      ...(image && { images: [image.url] }),
+    },
   };
 }
 

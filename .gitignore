@@ -74,3 +74,4 @@ skills-lock.json
 # Playwright
 /test-results/
 /playwright-report/
+/e2e/.failure-data/
