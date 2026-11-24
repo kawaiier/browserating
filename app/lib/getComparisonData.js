@@ -1,29 +1,9 @@
 import { getBrowsersServer } from './getBrowsersServer';
+import { deriveComparison } from './comparisonViewModel';
+import { getBrowserSlug } from './getBrowserSlug';
 
-export async function getComparisonData(browserA, browserB) {
-  const browsers = await getBrowsersServer();
-
-  const slugToBrowser = (slug) => {
-    return browsers.find(
-      (b) =>
-        b.name
-          .toLowerCase()
-          .replace(/\s+/g, '-')
-          .replace(/[^a-z0-9-]/g, '') === slug
-    );
-  };
-
-  const browserDataA = slugToBrowser(browserA);
-  const browserDataB = slugToBrowser(browserB);
-
-  if (!browserDataA || !browserDataB) {
-    return null;
-  }
-
-  return {
-    browserA: browserDataA,
-    browserB: browserDataB,
-  };
+export async function getComparisonData(browserA, browserB, engines) {
+  return deriveComparison(await getBrowsersServer(), browserA, browserB, engines);
 }
 
 export async function generateComparisonSlugs() {
@@ -34,14 +14,8 @@ export async function generateComparisonSlugs() {
 
   for (let i = 0; i < popularBrowsers.length; i++) {
     for (let j = i + 1; j < popularBrowsers.length; j++) {
-      const slugA = popularBrowsers[i].name
-        .toLowerCase()
-        .replace(/\s+/g, '-')
-        .replace(/[^a-z0-9-]/g, '');
-      const slugB = popularBrowsers[j].name
-        .toLowerCase()
-        .replace(/\s+/g, '-')
-        .replace(/[^a-z0-9-]/g, '');
+      const slugA = getBrowserSlug(popularBrowsers[i].name);
+      const slugB = getBrowserSlug(popularBrowsers[j].name);
       comparisons.push({
         slug: `${slugA}-vs-${slugB}`,
         browserA: slugA,

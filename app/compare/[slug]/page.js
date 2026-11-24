@@ -34,7 +34,7 @@ export async function generateMetadata({ params }) {
 export default async function ComparePage({ params }) {
   const { slug } = await params;
   const [data, lastModified] = await Promise.all([
-    getComparisonData(slug.split('-vs-')[0], slug.split('-vs-')[1]),
+    slug.split('-vs-').length === 2 ? getComparisonData(...slug.split('-vs-')) : null,
     getDataLastModified(),
   ]);
 
@@ -43,14 +43,7 @@ export default async function ComparePage({ params }) {
   }
 
   const { browserA, browserB } = data;
-  const platforms = ['macos-arm', 'macos-intel', 'windows', 'android', 'ipad'];
-  const platformLabels = {
-    'macos-arm': 'macOS (ARM)',
-    'macos-intel': 'macOS (Intel)',
-    windows: 'Windows',
-    android: 'Android',
-    ipad: 'iPad',
-  };
+
 
   return (
     <ErrorBoundary>
@@ -171,30 +164,27 @@ export default async function ComparePage({ params }) {
                       </tr>
                     </thead>
                     <tbody>
-                      {platforms.map((platform) => {
-                        const dataA = browserA[platform];
-                        const dataB = browserB[platform];
-                        if (!dataA && !dataB) return null;
-
-                        const scoreA = dataA?.versions?.[0]?.scores?.speedometer3;
-                        const scoreB = dataB?.versions?.[0]?.scores?.speedometer3;
+                      {data.platforms.map((platform) => {
+                        if (platform.a.state === 'missing-platform' && platform.b.state === 'missing-platform') return null;
+                        const scoreA = platform.a.score;
+                        const scoreB = platform.b.score;
 
                         return (
                           <tr
-                            key={platform}
+                            key={platform.id}
                             style={{ borderBottom: '1px solid var(--border-subtle)' }}
                           >
                             <td className="py-2 font-medium" style={{ color: 'var(--text-default)' }}>
-                              {platformLabels[platform]}
+                              {platform.label}
                             </td>
                             <td
                               className="text-right py-2"
                               style={{
                                 color:
-                                  scoreA > scoreB
+                                  platform.outcome === 'a'
                                     ? 'var(--color-success)'
                                     : 'var(--text-default)',
-                                fontWeight: scoreA > scoreB ? 'bold' : 'normal',
+                                fontWeight: platform.outcome === 'a' ? 'bold' : 'normal',
                               }}
                             >
                               {scoreA?.toFixed(2) || 'N/A'}
@@ -203,10 +193,10 @@ export default async function ComparePage({ params }) {
                               className="text-right py-2"
                               style={{
                                 color:
-                                  scoreB > scoreA
+                                  platform.outcome === 'b'
                                     ? 'var(--color-success)'
                                     : 'var(--text-default)',
-                                fontWeight: scoreB > scoreA ? 'bold' : 'normal',
+                                fontWeight: platform.outcome === 'b' ? 'bold' : 'normal',
                               }}
                             >
                               {scoreB?.toFixed(2) || 'N/A'}
