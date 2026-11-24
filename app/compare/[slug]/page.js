@@ -138,6 +138,9 @@ export default async function ComparePage({ params, searchParams }) {
   const filterUrl = viewUrl({ sharedOnly: true });
   const committedUrl = viewUrl({ platform: selected?.id });
   const selectedOutcome = selected ? getScoreOutcome(selected.a, selected.b) : null;
+  const selectedMaxScore = selected
+    ? Math.max(0, ...[selected.a, selected.b].map((o) => (o.state === 'available' ? o.score : 0)))
+    : 0;
   const otherShared =
     selectedOutcome?.state === 'unavailable' ? shared.filter((p) => p.id !== selected.id) : [];
   const label = (observation) =>
@@ -419,6 +422,21 @@ export default async function ComparePage({ params, searchParams }) {
                                   {browser.name}
                                 </Link>
                                 <p className="font-semibold mt-2">{label(observation)}</p>
+                                {observation.state === 'available' && (
+                                  <div
+                                    aria-hidden="true"
+                                    className="mt-2 h-3 w-full overflow-hidden rounded-full"
+                                    style={{ backgroundColor: 'var(--border-subtle)' }}
+                                  >
+                                    <div
+                                      className="h-full rounded-full"
+                                      style={{
+                                        width: `${(observation.score / selectedMaxScore) * 100}%`,
+                                        backgroundColor: 'var(--color-brand)',
+                                      }}
+                                    />
+                                  </div>
+                                )}
                                 {observation.engines.length > 1 ? (
                                   <form
                                     method="get"
