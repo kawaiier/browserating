@@ -7,7 +7,9 @@
   },
   "scripts": {
     "dev": "next dev",
+    "prebuild": "npm run validate:data",
     "build": "next build",
+    "validate:data": "node scripts/validate-benchmark-data.mjs",
     "start": "next start",
     "test": "node --test",
     "lint": "eslint .",

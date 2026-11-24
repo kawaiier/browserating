@@ -71,9 +71,12 @@ test('keyboard form validation and submission', async ({ page }) => {
 });
 
 test('empty and one-sided pairs remain useful', async ({ page }) => {
-  await page.goto('/compare/deta-surf-vs-web');
+  await page.goto('/compare/meteor-vs-web');
   await expect(page.getByRole('heading', { name: 'No benchmarks recorded yet' })).toBeVisible();
   await expect(page.getByRole('table')).toHaveCount(0);
+  await page.goto('/compare/deta-surf-vs-web');
+  await expect(page.getByText(/no shared platform measurements/)).toBeVisible();
+  await expect(page.getByRole('table')).toBeVisible();
   await page.goto('/compare/firefox-beta-vs-floorp');
   await expect(page.getByText(/no shared platform measurements/)).toBeVisible();
 });
@@ -81,7 +84,7 @@ test('empty and one-sided pairs remain useful', async ({ page }) => {
 for (const colorScheme of ['light', 'dark']) {
   for (const [name, path] of [
     ['measured', measured],
-    ['empty', '/compare/deta-surf-vs-web'],
+    ['empty', '/compare/meteor-vs-web'],
   ]) {
     test(`accessibility: ${name}, ${colorScheme}`, async ({ page }) => {
       await page.emulateMedia({ colorScheme });
@@ -110,7 +113,7 @@ test('comparison hub offers measured examples and all catalog browsers', async (
   await page.goto('/compare');
   await expect(page.getByRole('heading', { level: 1 })).toHaveText('Compare browser performance');
   await expect(page.getByLabel('First browser').locator('option[value="deta-surf"]')).toContainText(
-    'No benchmarks yet'
+    '1 measured platform'
   );
   await expect(
     page.getByLabel('First browser').locator('option[value="firefox-beta"]')

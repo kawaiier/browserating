@@ -18,6 +18,7 @@ import Image from 'next/image';
 import { BarChart3, LineChart, Target, TrendingDown, TrendingUp } from 'lucide-react';
 import { getEngineColor, platformNames } from '../lib/constants';
 import { getEngineVariant, getEngineVariants } from '../lib/getPlatformEngineData';
+import { getSpeedometerTrend, isFiniteMetric } from '../lib/benchmarkMetrics';
 
 ChartJS.register(
   CategoryScale,
@@ -152,32 +153,18 @@ const BrowserDetailsModal = ({ browser, selectedPlatform, selectedEngine, onClos
   }
 
   const latestVersion = activeVariant.versions[0];
+  const latestScores = latestVersion.scores || {};
+  const latestSpeedometer3 = latestScores.speedometer3;
   const sortedData = [...activeVariant.versions].reverse();
   const platformEngine = activeVariant.engine;
-
-  const getPerformanceTrend = () => {
-    if (sortedData.length < 2) return { trend: 'stable', change: 0 };
-
-    const recent = sortedData.slice(-3).map((d) => d.scores.speedometer3);
-    const older = sortedData.slice(-6, -3).map((d) => d.scores.speedometer3);
-
-    const recentAvg = recent.reduce((a, b) => a + b, 0) / recent.length;
-    const olderAvg = older.length > 0 ? older.reduce((a, b) => a + b, 0) / older.length : recentAvg;
-
-    const change = ((recentAvg - olderAvg) / olderAvg) * 100;
-
-    if (Math.abs(change) < 2) return { trend: 'stable', change: 0 };
-    return { trend: change > 0 ? 'improving' : 'declining', change };
-  };
-
-  const trend = getPerformanceTrend();
+  const trend = getSpeedometerTrend(sortedData);
 
   const chartData = {
     labels: sortedData.map((data) => `v${data.version}`),
     datasets: [
       {
         label: 'Speedometer 3.1 Score',
-        data: sortedData.map((data) => data.scores.speedometer3),
+        data: sortedData.map((data) => data.scores?.speedometer3 ?? null),
         backgroundColor: chartType === 'bar' ? 'rgba(120, 83, 224, 0.8)' : 'transparent',
         borderColor: '#7853E0',
         borderWidth: chartType === 'line' ? 3 : 1,
@@ -237,7 +224,10 @@ const BrowserDetailsModal = ({ browser, selectedPlatform, selectedEngine, onClos
         displayColors: false,
         callbacks: {
           title: (context) => `Version ${sortedData[context[0].dataIndex].version}`,
-          label: (context) => `Score: ${context.parsed.y.toFixed(2)}`,
+          label: (context) =>
+            isFiniteMetric(context.parsed.y)
+              ? `Score: ${context.parsed.y.toFixed(2)}`
+              : 'Score unavailable',
         },
       },
     },
@@ -512,11 +502,11 @@ const BrowserDetailsModal = ({ browser, selectedPlatform, selectedEngine, onClos
                       Speedometer 3.1
                     </div>
                     <div className="text-3xl font-bold" style={{ color: 'var(--text-brand)' }}>
-                      {latestVersion.scores.speedometer3.toFixed(2)}
+                      {isFiniteMetric(latestSpeedometer3) ? latestSpeedometer3.toFixed(2) : '—'}
                     </div>
                   </div>
 
-                  {latestVersion.scores.ram && (
+                  {isFiniteMetric(latestScores.ram) && (
                     <div
                       className="rounded-lg p-6"
                       style={{
@@ -531,14 +521,14 @@ const BrowserDetailsModal = ({ browser, selectedPlatform, selectedEngine, onClos
                         Memory Usage
                       </div>
                       <div className="text-3xl font-bold" style={{ color: 'var(--text-brand)' }}>
-                        {latestVersion.scores.ram >= 1000
-                          ? `${(latestVersion.scores.ram / 1000).toFixed(1)} GB`
-                          : `${latestVersion.scores.ram.toFixed(0)} MB`}
+                        {latestScores.ram >= 1000
+                          ? `${(latestScores.ram / 1000).toFixed(1)} GB`
+                          : `${latestScores.ram.toFixed(0)} MB`}
                       </div>
                     </div>
                   )}
 
-                  {latestVersion.scores.adblock && (
+                  {isFiniteMetric(latestScores.adblock) && (
                     <div
                       className="rounded-lg p-6"
                       style={{
@@ -553,7 +543,7 @@ const BrowserDetailsModal = ({ browser, selectedPlatform, selectedEngine, onClos
                         Ad Blocking
                       </div>
                       <div className="text-3xl font-bold" style={{ color: 'var(--color-success)' }}>
-                        {latestVersion.scores.adblock.toFixed(0)}%
+                        {latestScores.adblock.toFixed(0)}%
                       </div>
                     </div>
                   )}
@@ -617,7 +607,9 @@ const BrowserDetailsModal = ({ browser, selectedPlatform, selectedEngine, onClos
                           className="text-2xl font-bold"
                           style={{ color: 'var(--text-default)' }}
                         >
-                          {version.scores.speedometer3.toFixed(2)}
+                          {isFiniteMetric(version.scores?.speedometer3)
+                            ? version.scores.speedometer3.toFixed(2)
+                            : '—'}
                         </div>
                         <div className="text-sm" style={{ color: 'var(--text-subtle)' }}>
                           Speedometer 3.1
@@ -625,15 +617,16 @@ const BrowserDetailsModal = ({ browser, selectedPlatform, selectedEngine, onClos
                       </div>
                     </div>
 
-                    {(version.scores.ram || version.scores.adblock) && (
+                    {(isFiniteMetric(version.scores?.ram) ||
+                      isFiniteMetric(version.scores?.adblock)) && (
                       <div className="flex flex-wrap gap-x-6 gap-y-1 text-sm">
-                        {version.scores.ram && (
+                        {isFiniteMetric(version.scores?.ram) && (
                           <div style={{ color: 'var(--text-subtle)' }}>
                             <span className="font-medium">Memory:</span>{' '}
                             {version.scores.ram.toFixed(0)} MB
                           </div>
                         )}
-                        {version.scores.adblock && (
+                        {isFiniteMetric(version.scores?.adblock) && (
                           <div style={{ color: 'var(--text-subtle)' }}>
                             <span className="font-medium">Ad Blocking:</span>{' '}
                             {version.scores.adblock.toFixed(0)}%
@@ -723,19 +716,25 @@ const BrowserDetailsModal = ({ browser, selectedPlatform, selectedEngine, onClos
                           className="py-3 px-3 sm:px-4 text-right font-mono"
                           style={{ color: 'var(--text-default)' }}
                         >
-                          {version.scores.speedometer3.toFixed(2)}
+                          {isFiniteMetric(version.scores?.speedometer3)
+                            ? version.scores.speedometer3.toFixed(2)
+                            : '—'}
                         </td>
                         <td
                           className="py-3 px-3 sm:px-4 text-right font-mono"
                           style={{ color: 'var(--text-subtle)' }}
                         >
-                          {version.scores.ram ? `${version.scores.ram.toFixed(0)} MB` : '—'}
+                          {isFiniteMetric(version.scores?.ram)
+                            ? `${version.scores.ram.toFixed(0)} MB`
+                            : '—'}
                         </td>
                         <td
                           className="py-3 px-3 sm:px-4 text-right font-mono"
                           style={{ color: 'var(--text-subtle)' }}
                         >
-                          {version.scores.adblock ? `${version.scores.adblock.toFixed(0)}%` : '—'}
+                          {isFiniteMetric(version.scores?.adblock)
+                            ? `${version.scores.adblock.toFixed(0)}%`
+                            : '—'}
                         </td>
                         <td
                           className="py-3 px-3 sm:px-4 text-right font-mono"

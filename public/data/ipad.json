@@ -86,7 +86,7 @@
     ]
   },
   {
-    "name": "DuckDuckGo",
+    "name": "DuckDuckGo Browser",
     "engine": "WebKit",
     "versions": [
       {

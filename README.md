@@ -126,21 +126,24 @@ Browser performance data is stored in JSON files located in `public/data/`. The 
 2. Modify the data following the existing structure:
    ```json
    {
-     "name": "Chrome",
+     "name": "Google Chrome",
      "engine": "Blink",
      "versions": [
        {
          "version": "120.0.6099.109",
+         "date": "2026-11-15",
          "scores": {
            "speedometer3": 145.2,
-           "ramUsage": 245.8,
+           "ram": 245.8,
            "adblock": 85.3
          }
        }
      ]
    }
    ```
-3. Save the file - publish changes with a new deployment
+   `name` must match an entry in `browsers.json`. Metric fields may be omitted or `null` when unmeasured; RAM is stored as `scores.ram` in MB.
+3. Run `npm run validate:data` and review both the errors and warnings. Missing historical provenance is reported separately and must not be filled with guesses.
+4. Commit and deploy the data update. `npm run build` runs the same validation before rendering; each deployment refreshes comparison pages and the sitemap from the committed data.
 
 ## 🤝 Contributing
 

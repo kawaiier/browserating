@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { ArrowRight, TrendingDown, TrendingUp } from 'lucide-react';
 import { getEngineVariant, getEngineVariants } from '../lib/getPlatformEngineData';
 import { getBrowserSlug } from '../lib/getBrowserSlug';
+import { isFiniteMetric } from '../lib/benchmarkMetrics';
 
 const BrowserCard = React.memo(
   ({
@@ -48,8 +49,8 @@ const BrowserCard = React.memo(
     }
 
     const latestVersion = activeVariant.versions[0];
-    const prevSpeedometer3Score =
-      activeVariant.versions.length > 1 ? activeVariant.versions[1].scores.speedometer3 : null;
+    const latestSpeedometer3 = latestVersion.scores?.speedometer3;
+    const prevSpeedometer3Score = activeVariant.versions[1]?.scores?.speedometer3;
 
     const platformEngine = activeVariant.engine;
 
@@ -90,15 +91,15 @@ const BrowserCard = React.memo(
       );
     };
 
-    const scoreDifference = prevSpeedometer3Score
-      ? latestVersion.scores.speedometer3 - prevSpeedometer3Score
-      : null;
+    const scoreDifference =
+      isFiniteMetric(latestSpeedometer3) && isFiniteMetric(prevSpeedometer3Score)
+        ? latestSpeedometer3 - prevSpeedometer3Score
+        : null;
 
-    const scoreChangeText = scoreDifference
-      ? `${scoreDifference > 0 ? 'Increased' : 'Decreased'} by ${Math.abs(scoreDifference).toFixed(
-          2
-        )} points from previous version`
-      : '';
+    const scoreChangeText =
+      scoreDifference === null
+        ? ''
+        : `${scoreDifference > 0 ? 'Increased' : scoreDifference < 0 ? 'Decreased' : 'Unchanged'} by ${Math.abs(scoreDifference).toFixed(2)} points from previous version`;
 
     const handleCardInteraction = (e) => {
       if (e.type === 'click' || (e.type === 'keydown' && (e.key === 'Enter' || e.key === ' '))) {
@@ -114,7 +115,9 @@ const BrowserCard = React.memo(
       return { level: 'Poor', color: 'var(--color-score-poor)' };
     };
 
-    const performance = getPerformanceLevel(latestVersion.scores.speedometer3);
+    const performance = isFiniteMetric(latestSpeedometer3)
+      ? getPerformanceLevel(latestSpeedometer3)
+      : null;
 
     if (isLoading) {
       return (
@@ -223,8 +226,11 @@ const BrowserCard = React.memo(
                   {browser.name}
                 </h3>
                 <div className="flex items-center gap-2 mt-1">
-                  <span className="body-small font-medium" style={{ color: performance.color }}>
-                    {performance.level}
+                  <span
+                    className="body-small font-medium"
+                    style={{ color: performance?.color || 'var(--text-subtle)' }}
+                  >
+                    {performance?.level || 'No score'}
                   </span>
                   <span style={{ color: 'var(--text-subtlest)' }}>·</span>
                   <span className="body-small" style={{ color: 'var(--text-subtle)' }}>
@@ -346,9 +352,9 @@ const BrowserCard = React.memo(
               </span>
               <span
                 className="metric-large leading-none score-glow"
-                style={{ color: performance.color }}
+                style={{ color: performance?.color || 'var(--text-subtle)' }}
               >
-                {latestVersion.scores.speedometer3.toFixed(1)}
+                {isFiniteMetric(latestSpeedometer3) ? latestSpeedometer3.toFixed(1) : '—'}
               </span>
               {scoreDifference !== null && (
                 <span
