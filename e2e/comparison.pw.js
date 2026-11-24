@@ -194,3 +194,20 @@ test.describe('without JavaScript', () => {
     await expect(page.getByRole('heading', { level: 1 })).toHaveText('Firefox vs Google Chrome');
   });
 });
+
+test('ranking selection carries its platform and engine through the detail chooser', async ({
+  page,
+}) => {
+  await page.goto('/');
+  const crest = page.getByRole('button', { name: 'Crest', exact: true });
+  await crest.getByRole('button', { name: 'WebKit' }).click();
+  await expect(page.getByRole('dialog')).toHaveCount(0);
+  await page.getByRole('link', { name: 'Compare Crest' }).click();
+  await expect(page).toHaveURL(/platform=macos-arm.*engine=WebKit/);
+  await page.getByLabel('Second browser').selectOption('firefox');
+  await page.getByRole('button', { name: 'Compare browsers', exact: true }).click();
+  await expect(page).toHaveURL(/engine\.crest\.macos-arm=WebKit/);
+  await expect(page.getByRole('region', { name: 'Selected result for macOS ARM' })).toContainText(
+    '36.77'
+  );
+});

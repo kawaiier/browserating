@@ -11,6 +11,7 @@ import Header from '@/app/components/Header';
 import Footer from '@/app/components/Footer';
 import BrowserCompareDropdown from '@/app/components/BrowserCompareDropdown';
 import { comparisonOptions } from '@/app/lib/comparisonOptions';
+import { getEngineVariants } from '@/app/lib/getPlatformEngineData';
 
 export async function generateStaticParams() {
   const slugs = await getAllBrowserSlugs();
@@ -48,7 +49,7 @@ export async function generateMetadata({ params }) {
   };
 }
 
-export default async function BrowserPage({ params }) {
+export default async function BrowserPage({ params, searchParams }) {
   const { slug } = await params;
   const [browser, allBrowsers, lastModified] = await Promise.all([
     getBrowserBySlug(slug),
@@ -60,6 +61,7 @@ export default async function BrowserPage({ params }) {
     notFound();
   }
 
+  const query = await searchParams;
   const platforms = ['macos-arm', 'macos-intel', 'windows', 'android', 'ipad'];
   const platformLabels = {
     'macos-arm': 'macOS (Apple Silicon)',
@@ -68,6 +70,18 @@ export default async function BrowserPage({ params }) {
     android: 'Android',
     ipad: 'iPad',
   };
+
+  const platform =
+    typeof query?.platform === 'string' && platforms.includes(query.platform)
+      ? query.platform
+      : undefined;
+  const engine =
+    platform &&
+    typeof query?.engine === 'string' &&
+    getEngineVariants(browser[platform]).some((variant) => variant.engine === query.engine)
+      ? query.engine
+      : undefined;
+  const engines = engine ? { [slug]: { [platform]: engine } } : {};
 
   return (
     <ErrorBoundary>
@@ -206,7 +220,12 @@ export default async function BrowserPage({ params }) {
                 </div>
               </section>
 
-              <BrowserCompareDropdown first={slug} browsers={comparisonOptions(allBrowsers)} />
+              <BrowserCompareDropdown
+                first={slug}
+                browsers={comparisonOptions(allBrowsers)}
+                platform={platform}
+                engines={engines}
+              />
             </article>
           </main>
           <Footer />

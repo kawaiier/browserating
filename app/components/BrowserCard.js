@@ -5,6 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowRight, TrendingDown, TrendingUp } from 'lucide-react';
 import { getEngineVariant, getEngineVariants } from '../lib/getPlatformEngineData';
+import { getBrowserSlug } from '../lib/getBrowserSlug';
 
 const BrowserCard = React.memo(
   ({
@@ -161,7 +162,7 @@ const BrowserCard = React.memo(
     }
 
     return (
-      <>
+      <div>
         <div
           ref={cardRef}
           className={`
@@ -403,6 +404,14 @@ const BrowserCard = React.memo(
           </div>
         </div>
 
+        <Link
+          href={`/browsers/${getBrowserSlug(browser.name)}?${new URLSearchParams({ platform: selectedPlatform, engine: platformEngine })}#compare-browsers`}
+          className="mt-2 inline-flex min-h-[44px] items-center px-2 text-sm font-medium underline"
+          style={{ color: 'var(--text-brand)' }}
+        >
+          Compare {browser.name}
+        </Link>
+
         {showModal && (
           <BrowserDetailsModal
             browser={browser}
@@ -411,7 +420,7 @@ const BrowserCard = React.memo(
             onClose={() => setShowModal(false)}
           />
         )}
-      </>
+      </div>
     );
   }
 );
