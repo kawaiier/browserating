@@ -1,13 +1,14 @@
 {
   "name": "browserating",
   "version": "0.1.0",
+  "packageManager": "bun@1.4.5",
   "private": true,
   "engines": {
     "node": "24.x"
   },
   "scripts": {
     "dev": "next dev",
-    "prebuild": "npm run validate:data",
+    "prebuild": "bun run validate:data",
     "build": "next build",
     "validate:data": "node scripts/validate-benchmark-data.mjs",
     "start": "next start",

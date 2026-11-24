@@ -1,16 +1,16 @@
 # Comparison release verification
 
-Run on Node 24: `npm ci`, `npm test`, `npm run lint`, `npm run format:check`,
-`npm run build`, `npx playwright install chromium firefox webkit`, then
-`npm run test:e2e`. Playwright starts two production servers: port 3100 for the smoke
+Run with Node 24 and Bun: `bun install`, `bun run test`, `bun run lint`, `bun run format:check`,
+`bun run build`, `bunx playwright install chromium firefox webkit`, then
+`bun run test:e2e`. Playwright starts two production servers: port 3100 for the smoke
 suite, and port 3101 with `BENCHMARK_DATA_DIR` pointing at a disposable copy of the data
 for the data-failure spec. CI runs the browser job separately and keeps traces on
 failure.
 
 ## Benchmark data publication
 
-Before publishing edits to `public/data/`, run `npm run validate:data` (also run by
-`npm run build` through `prebuild`). `npm test` validates the live files in CI. The check
+Before publishing edits to `public/data/`, run `bun run validate:data` (also run by
+`bun run build` through `prebuild`). `bun run test` validates the live files in CI. The check
 blocks malformed data and reports ambiguous dates or missing dates separately. It also
 prints the current count of browsers with a valid primary-engine measurement and the
 canonical indexable-pair count; review changes to these coverage figures and verify the
@@ -63,8 +63,8 @@ in [comparison performance](comparison-performance.md).
 
 ## Maintainer release checklist
 
-- [ ] Validate dataset IDs, ordering, engine uniqueness, and schema with `npm run validate:data`; review coverage-count changes.
-- [ ] Run `npm test`, `npm run lint`, `npm run format:check`, and `npm run build`.
+- [ ] Validate dataset IDs, ordering, engine uniqueness, and schema with `bun run validate:data`; review coverage-count changes.
+- [ ] Run `bun run test`, `bun run lint`, `bun run format:check`, and `bun run build`.
 - [ ] Inspect a measured and an empty comparison, canonical URLs/metadata, and the generated sitemap after build.
 - [ ] For comparison UI or shared-header/theme changes, run the applicable Playwright checks; header/theme changes also cover home, browser, platform, and quiz pages.
 - [ ] Deploy the same validated data/build and verify production comparison content and cache policy.

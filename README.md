@@ -36,14 +36,14 @@
 - **Analytics**: Vercel Analytics 1.6.1, counter.dev
 - **Data Storage**: JSON files
 - **Deployment**: Vercel
-- **Development Tools**: ESLint 10, Prettier 3.8.1, Husky 9, lint-staged, commitlint
+- **Development Tools**: Bun, ESLint 10, Prettier 3.8.1, Husky 9, lint-staged, commitlint
 
 ## 📋 Prerequisites
 
 Before running this project, make sure you have:
 
 - **Node.js**: Version 24.x (see `package.json`)
-- **npm**: Bundled with Node.js
+- **Bun**: Package manager ([bun.sh](https://bun.sh))
 - **Git**: For cloning the repository
 
 ## 🛠️ Installation
@@ -58,13 +58,13 @@ Before running this project, make sure you have:
 2. **Install dependencies**:
 
    ```bash
-   npm ci
+   bun install
    ```
 
 3. **Run the development server**:
 
    ```bash
-   npm run dev
+   bun run dev
    ```
 
 4. **Open your browser** and visit [http://localhost:3000](http://localhost:3000) to see the application.
@@ -154,8 +154,8 @@ Browser performance data is stored in JSON files located in `public/data/`. The 
    }
    ```
    `name` must exactly match an entry in `browsers.json`. Use either the legacy top-level `engine`/`versions` shape or `engineVariants`; variant order matters because the first engine is the default. Version labels are opaque. Every new record needs a globally unique, immutable `observationId`; preserve existing IDs. Metrics may be omitted or `null` when unmeasured; RAM is stored as `scores.ram` in MB.
-3. Run `npm run validate:data` and review errors, warnings, and primary-engine/pair coverage counts. Never infer missing provenance.
-4. Commit and deploy the data update. `npm run build` validates before rendering; each deployment refreshes comparison pages and the sitemap together. Follow the [dataset publication and release checklist](docs/comparison-release-verification.md).
+3. Run `bun run validate:data` and review errors, warnings, and primary-engine/pair coverage counts. Never infer missing provenance.
+4. Commit and deploy the data update. `bun run build` validates before rendering; each deployment refreshes comparison pages and the sitemap together. Follow the [dataset publication and release checklist](docs/comparison-release-verification.md).
 
 ### Extending comparison data and behavior
 
@@ -180,7 +180,7 @@ We welcome contributions from the community! Please see our [Contributing Guidel
 1. Fork the repository
 2. Create a feature branch: `git checkout -b feature/amazing-feature`
 3. Make your changes following our coding standards
-4. Run tests: `npm test`
+4. Run tests: `bun run test`
 5. Submit a pull request
 
 ## 📈 Performance & SEO

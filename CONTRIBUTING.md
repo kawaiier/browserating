@@ -23,7 +23,7 @@ Thank you for your interest in contributing to Browserating! This document provi
 
 ### Prerequisites
 
-- Node.js 18+ installed
+- Node.js 24.x installed (see `package.json`)
 - Bun package manager ([bun.sh](https://bun.sh))
 - Git installed
 - Basic knowledge of React and Next.js

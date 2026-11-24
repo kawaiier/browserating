@@ -5,8 +5,8 @@
 version: 2
 
 updates:
-  # 1️⃣ npm ecosystem (reads package.json — Dependabot does not support Bun natively)
-  - package-ecosystem: "npm"
+  # 1️⃣ Bun ecosystem
+  - package-ecosystem: "bun"
     directory: "/"
     schedule:
       interval: "daily"

@@ -23,14 +23,14 @@ export default defineConfig({
   ],
   webServer: [
     {
-      command: 'npm run start -- -p 3100',
+      command: 'bun run start -- -p 3100',
       url: 'http://127.0.0.1:3100',
       reuseExistingServer: !process.env.CI,
       timeout: 120000,
     },
     {
       // Same build, but benchmark data comes from a copy the failure spec can break.
-      command: `rm -rf e2e/.failure-data && cp -R public/data e2e/.failure-data && BENCHMARK_DATA_DIR=e2e/.failure-data npm run start -- -p ${FAILURE_PORT}`,
+      command: `rm -rf e2e/.failure-data && cp -R public/data e2e/.failure-data && BENCHMARK_DATA_DIR=e2e/.failure-data bun run start -- -p ${FAILURE_PORT}`,
       url: `http://127.0.0.1:${FAILURE_PORT}`,
       reuseExistingServer: false,
       timeout: 120000,
