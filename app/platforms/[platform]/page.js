@@ -6,16 +6,11 @@ import { getDataLastModified } from '@/app/lib/getDataLastModified';
 import DarkModeProvider from '@/app/components/DarkModeProvider';
 import ErrorBoundary from '@/app/components/ErrorBoundary';
 import Header from '@/app/components/Header';
+import { platformNames } from '@/app/lib/platformDefinitions';
 import Footer from '@/app/components/Footer';
 
 export async function generateStaticParams() {
-  return [
-    { platform: 'macos-arm' },
-    { platform: 'macos-intel' },
-    { platform: 'windows' },
-    { platform: 'android' },
-    { platform: 'ipad' },
-  ];
+  return Object.keys(platformNames).map((platform) => ({ platform }));
 }
 
 export async function generateMetadata({ params }) {
@@ -64,7 +59,7 @@ export default async function PlatformPage({ params }) {
           >
             Skip to main content
           </a>
-          <Header lastModified={lastModified} />
+          <Header lastModified={lastModified} titleAs="p" />
           <main id="main-content" className="container mx-auto px-4 py-8 scroll-mt-4" tabIndex={-1}>
             <article className="max-w-4xl mx-auto">
               <nav className="mb-6">

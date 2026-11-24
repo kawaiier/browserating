@@ -1,11 +1,10 @@
 import { getBrowsersServer } from './getBrowsersServer';
+import { platformNames, platformTitles } from './platformDefinitions';
 
 export async function getBrowsersByPlatform(platform) {
   const browsers = await getBrowsersServer();
 
-  const validPlatforms = ['macos-arm', 'macos-intel', 'windows', 'android', 'ipad'];
-
-  if (!validPlatforms.includes(platform)) {
+  if (!Object.hasOwn(platformNames, platform)) {
     return null;
   }
 
@@ -21,12 +20,5 @@ export async function getBrowsersByPlatform(platform) {
 }
 
 export function getPlatformLabel(platform) {
-  const labels = {
-    'macos-arm': 'macOS (Apple Silicon)',
-    'macos-intel': 'macOS (Intel)',
-    windows: 'Windows',
-    android: 'Android',
-    ipad: 'iPad',
-  };
-  return labels[platform] || platform;
+  return platformTitles[platform] || platform;
 }

@@ -37,6 +37,7 @@ Comparison policy ownership:
 - `comparisonViewModel.js`: engine/record selection, score validity, outcomes, metric coverage, and exact-date rules for historical selections.
 - `comparisonMetrics.js`: metric definitions and score formatting.
 - `comparisonOptions.js`: chooser availability under selected engines.
+- `platformDefinitions.js`: the only benchmark platform keys and labels — `platformNames` (short, used in comparisons, rankings, and validation) and `platformTitles` (platform ranking page titles).
 - `comparisonIndex.js`: sitemap eligibility using default engines and latest primary-metric coverage, independent of query state.
 - `getComparisonData.js`: server-side composition of the shared model and sitemap slug generation.
 
@@ -72,8 +73,10 @@ The browser suite runs in Chromium, Firefox and WebKit and covers: HTTP normaliz
 404s; metadata, canonical, robots and the per-pair social card; engine and platform
 changes, reload, Back/Forward and swap; keyboard form validation and submission; empty
 and one-sided pairs; axe checks on measured, empty, invalid-input and loading states in
-both themes; 320px reflow; the hub; use without JavaScript; and an operational data
-failure with retry.
+both themes; 320px reflow; the hub; use without JavaScript; an operational data
+failure with retry; and a shared-page check (`e2e/shared-pages.pw.js`) that home,
+browser detail, platform ranking, and quiz pages load with one H1, the site header, and a
+working theme toggle.
 
 For each release, also review measured and empty pairs at 320px and desktop widths in
 light and dark themes, including long names, 200% zoom, forced colors and reduced

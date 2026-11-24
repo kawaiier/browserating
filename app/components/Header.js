@@ -5,7 +5,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useDarkMode } from './DarkModeProvider';
 
-export default function Header({ lastModified, compact = false }) {
+// Pages with their own H1 pass titleAs="p" so the site title is not a second H1.
+export default function Header({ lastModified, compact = false, titleAs: Title = 'h1' }) {
   const { darkMode, toggleDarkMode } = useDarkMode();
 
   const lastModifiedFormatted = lastModified
@@ -97,12 +98,12 @@ export default function Header({ lastModified, compact = false }) {
               </Link>
             </div>
 
-            <h1
+            <Title
               className="heading-xlarge sm:heading-xxlarge"
               style={{ color: 'var(--text-default)' }}
             >
               Browser Performance Rankings
-            </h1>
+            </Title>
             <p
               className="body-large mt-3"
               style={{ color: 'var(--text-subtle)', maxWidth: '600px' }}

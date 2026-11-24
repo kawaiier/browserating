@@ -7,6 +7,17 @@ async function comparisonEvents(page) {
   return page.evaluate(() => JSON.parse(sessionStorage.getItem('comparison-test-events') || '[]'));
 }
 
+// Waits for the option to be parsed: no-JS pages can still be streaming when read.
+async function observationValue(page, label, prefix) {
+  const escaped = prefix.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  const option = page
+    .getByLabel(label)
+    .locator('option')
+    .filter({ hasText: new RegExp(`^${escaped}`) });
+  await expect(option).toHaveCount(1);
+  return option.getAttribute('value');
+}
+
 async function audit(page) {
   const results = await new AxeBuilder({ page })
     .withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'wcag22aa'])
@@ -57,25 +68,17 @@ test('historical observations use stable IDs and require an exact shared date', 
   page,
 }) => {
   await page.goto(measured);
-  const crestObservation = await page
-    .getByLabel('Crest observation')
-    .locator('option')
-    .evaluateAll(
-      (options) =>
-        options.find((option) => option.textContent.startsWith('2026-10-03 — 0.7.0')).value
-    );
+  const crestObservation = await observationValue(page, 'Crest observation', '2026-10-03 — 0.7.0');
   await page.getByLabel('Crest observation').selectOption(crestObservation);
   await page.getByRole('button', { name: 'Compare observations' }).click();
   await expect(page).toHaveURL(/observation\.crest\.macos-arm=obs-/);
   const result = page.getByRole('region', { name: 'Selected result for macOS ARM' });
   await expect(result).toContainText('No matched-date result');
-  const firefoxObservation = await page
-    .getByLabel('Firefox observation')
-    .locator('option')
-    .evaluateAll(
-      (options) =>
-        options.find((option) => option.textContent.startsWith('2026-10-03 — 157.0')).value
-    );
+  const firefoxObservation = await observationValue(
+    page,
+    'Firefox observation',
+    '2026-10-03 — 157.0'
+  );
   await page.getByLabel('Firefox observation').selectOption(firefoxObservation);
   await page.getByRole('button', { name: 'Compare observations' }).click();
   await expect(result).toContainText('45.98');
@@ -261,8 +264,11 @@ for (const colorScheme of ['light', 'dark']) {
 test('small viewport reflows without page-level horizontal overflow', async ({ page }) => {
   await page.setViewportSize({ width: 320, height: 700 });
   await page.goto(measured);
-  expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
   await expect(page.getByRole('region', { name: 'All-platform comparison table' })).toBeVisible();
+  // Measure after streamed content and fonts settle, not mid-render.
+  await expect
+    .poll(() => page.evaluate(() => document.documentElement.scrollWidth <= innerWidth))
+    .toBe(true);
 });
 
 test('comparison hub offers measured examples and all catalog browsers', async ({ page }) => {
@@ -346,20 +352,16 @@ test.describe('without JavaScript', () => {
     await expect(page.getByRole('region', { name: 'Selected result for macOS ARM' })).toContainText(
       '36.77'
     );
-    const crestObservation = await page
-      .getByLabel('Crest observation')
-      .locator('option')
-      .evaluateAll(
-        (options) =>
-          options.find((option) => option.textContent.startsWith('2026-10-03 — 0.7.0')).value
-      );
-    const firefoxObservation = await page
-      .getByLabel('Firefox observation')
-      .locator('option')
-      .evaluateAll(
-        (options) =>
-          options.find((option) => option.textContent.startsWith('2026-10-03 — 157.0')).value
-      );
+    const crestObservation = await observationValue(
+      page,
+      'Crest observation',
+      '2026-10-03 — 0.7.0'
+    );
+    const firefoxObservation = await observationValue(
+      page,
+      'Firefox observation',
+      '2026-10-03 — 157.0'
+    );
     await page.getByLabel('Crest observation').selectOption(crestObservation);
     await page.getByLabel('Firefox observation').selectOption(firefoxObservation);
     await page.getByRole('button', { name: 'Compare observations' }).click();

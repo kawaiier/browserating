@@ -90,7 +90,7 @@ export default async function BrowserPage({ params, searchParams }) {
           >
             Skip to main content
           </a>
-          <Header lastModified={lastModified} />
+          <Header lastModified={lastModified} titleAs="p" />
           <main id="main-content" className="container mx-auto px-4 py-8 scroll-mt-4" tabIndex={-1}>
             <script
               type="application/ld+json"

@@ -672,7 +672,7 @@ export default async function ComparePage({ params, searchParams }) {
                           ].map(([browser, observation]) => {
                             const name = `observation.${browser.slug}.${selected.id}`;
                             return (
-                              <div key={name}>
+                              <div key={name} className="min-w-0 max-w-full">
                                 <label htmlFor={name} className="block font-medium">
                                   {browser.name} observation
                                 </label>
@@ -680,7 +680,7 @@ export default async function ComparePage({ params, searchParams }) {
                                   id={name}
                                   name={name}
                                   defaultValue={observations[browser.slug]?.[selected.id] || ''}
-                                  className="min-h-[44px] max-w-full p-2 rounded"
+                                  className="min-h-[44px] w-full max-w-full p-2 rounded"
                                   style={{
                                     backgroundColor: 'var(--surface-raised)',
                                     color: 'var(--text-default)',
