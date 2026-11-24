@@ -5,6 +5,7 @@ import {
   parsePairSlug,
   parseViewState,
   validateEngines,
+  validateObservations,
 } from '@/app/lib/comparisonUrl';
 import { notFound, permanentRedirect } from 'next/navigation';
 import Image from 'next/image';
@@ -24,6 +25,7 @@ import {
   getMeasurementFreshness,
   getMetricCoverage,
   getScoreOutcome,
+  isExactDateMatch,
 } from '@/app/lib/comparisonViewModel';
 import { comparisonMetrics, formatMetricScore } from '@/app/lib/comparisonMetrics';
 import { comparisonOptions, suggestPartners } from '@/app/lib/comparisonOptions';
@@ -84,16 +86,26 @@ export default async function ComparePage({ params, searchParams }) {
   const query = parseViewState(rawQuery);
   const resolved = await resolvePair(slug);
   if (!resolved) notFound();
-  const { parts, data: initial, canonical } = resolved;
+  const { parts, canonical } = resolved;
+  const requestedEngines = validateEngines(query.engines, resolved.data);
+  const initial = Object.keys(requestedEngines).length
+    ? await getComparisonData(...parts, requestedEngines, query.metric)
+    : resolved.data;
+  const engines = validateEngines(query.engines, initial);
+  const observations = validateObservations(query.observations, initial);
+  const hasHistoricalSelections = Object.values(observations).some(
+    (platforms) => Object.keys(platforms).length > 0
+  );
 
   // A legacy reversed path keeps its visual order; any `order` it carries is ignored.
-  // Only validated engine choices survive the permanent redirect.
+  // Only validated engine and observation choices survive the permanent redirect.
   if (canonical.reversed) {
     permanentRedirect(
       buildCompareUrl({
         first: parts[0],
         second: parts[1],
-        engines: validateEngines(query.engines, initial),
+        engines,
+        observations,
         platform: query.platform,
         metric: query.metric,
       })
@@ -101,41 +113,67 @@ export default async function ComparePage({ params, searchParams }) {
   }
 
   const ordered = query.reverse ? [canonical.second, canonical.first] : parts;
-  const engines = validateEngines(query.engines, initial);
   const [data, lastModified] = await Promise.all([
-    getComparisonData(...ordered, engines, query.metric),
+    getComparisonData(...ordered, engines, query.metric, observations),
     getDataLastModified(),
   ]);
   const { browserA, browserB } = data;
+  const usesHistoricalSelection = (platform) =>
+    Boolean(
+      observations[browserA.slug]?.[platform.id] || observations[browserB.slug]?.[platform.id]
+    );
   const catalog = await getBrowsersServer();
   const shared = data.platforms.filter(
-    (p) => p.a.state === 'available' && p.b.state === 'available'
+    (p) =>
+      p.a.state === 'available' &&
+      p.b.state === 'available' &&
+      (!usesHistoricalSelection(p) || isExactDateMatch(p.a, p.b))
   );
   const onlyShared = query.sharedOnly;
   const options = comparisonOptions(catalog, engines);
   const measured = (side) => data.platforms.some((p) => p[side].state === 'available');
   const noData = !measured('a') && !measured('b');
   const coverage = getMetricCoverage(data.platforms);
-  const partners = shared.length
-    ? []
-    : [browserA, browserB]
-        .map((browser) => ({
-          browser,
-          suggestions: suggestPartners(options, browser.slug, [browserA.slug, browserB.slug]),
-        }))
-        .filter((entry) => entry.suggestions.length > 0);
+  const partners =
+    shared.length || hasHistoricalSelections
+      ? []
+      : [browserA, browserB]
+          .map((browser) => ({
+            browser,
+            suggestions: suggestPartners(options, browser.slug, [browserA.slug, browserB.slug]),
+          }))
+          .filter((entry) => entry.suggestions.length > 0);
   const visible = onlyShared ? shared : data.platforms;
-  const selected = data.platforms.find((p) => p.id === query.platform) || shared[0] || null;
+  const selected =
+    data.platforms.find((p) => p.id === query.platform) ||
+    data.platforms.find(usesHistoricalSelection) ||
+    shared[0] ||
+    null;
   const invalidPlatform = rawQuery?.platform != null && !query.platform;
   const invalidEngine = Object.entries(query.engines).some(([slug, platforms]) =>
     Object.entries(platforms).some(([id, engine]) => engines[slug]?.[id] !== engine)
   );
   const invalidMetric = rawQuery?.metric != null && rawQuery.metric !== query.metric;
+  const parsedObservationKeys = new Set(
+    Object.entries(query.observations).flatMap(([slug, platforms]) =>
+      Object.keys(platforms).map((id) => `observation.${slug}.${id}`)
+    )
+  );
+  const invalidObservation =
+    Object.entries(query.observations).some(([slug, platforms]) =>
+      Object.entries(platforms).some(
+        ([id, observationId]) => observations[slug]?.[id] !== observationId
+      )
+    ) ||
+    Object.keys(rawQuery || {}).some(
+      (key) => key.startsWith('observation.') && !parsedObservationKeys.has(key)
+    );
   const viewUrl = (changes) =>
     buildCompareUrl({
       first: ordered[0],
       second: ordered[1],
       engines,
+      observations,
       platform: query.platform,
       sharedOnly: onlyShared,
       metric: query.metric,
@@ -144,9 +182,16 @@ export default async function ComparePage({ params, searchParams }) {
   const baseUrl = viewUrl({ sharedOnly: false });
   const filterUrl = viewUrl({ sharedOnly: true });
   const committedUrl = viewUrl({ platform: selected?.id });
-  const selectedOutcome = selected
-    ? getScoreOutcome(selected.a, selected.b, true, data.metric)
-    : null;
+  const unmatchedHistoricalDate = (platform) =>
+    usesHistoricalSelection(platform) &&
+    platform.a.state === 'available' &&
+    platform.b.state === 'available' &&
+    !isExactDateMatch(platform.a, platform.b);
+  const scoreOutcome = (platform) =>
+    unmatchedHistoricalDate(platform)
+      ? { state: 'unavailable' }
+      : getScoreOutcome(platform.a, platform.b, true, data.metric);
+  const selectedOutcome = selected ? scoreOutcome(selected) : null;
   const selectedMaxScore = selected
     ? Math.max(0, ...[selected.a, selected.b].map((o) => (o.state === 'available' ? o.score : 0)))
     : 0;
@@ -160,6 +205,7 @@ export default async function ComparePage({ params, searchParams }) {
       'missing-version': 'No recorded version',
       'missing-metric': `${data.metric.name} score not recorded`,
       'invalid-metric': `Invalid ${data.metric.name} score`,
+      'missing-observation': 'Selected observation is unavailable',
     })[observation.state] ||
     (observation.state === 'available' ? formatMetricScore(observation.score, data.metric) : '');
   const evidence = (observation) => {
@@ -168,6 +214,7 @@ export default async function ComparePage({ params, searchParams }) {
     return (
       <div className="mt-1 text-sm font-normal" style={{ color: 'var(--text-subtle)' }}>
         <div>Version: {observation.record.version || 'Not recorded'}</div>
+        <div>Observation ID: {observation.record.observationId || 'Not recorded'}</div>
         <div>Engine: {observation.engine || 'Not recorded'}</div>
         <div>
           {freshness === 'unknown'
@@ -178,33 +225,42 @@ export default async function ComparePage({ params, searchParams }) {
       </div>
     );
   };
-  const hiddenState = (omit) => (
-    <>
-      {query.reverse && <input type="hidden" name="order" value="reverse" />}
-      {data.metric.id !== 'speedometer3' && (
-        <input type="hidden" name="metric" value={data.metric.id} />
-      )}
-      {omit !== 'platform' && selected && (
-        <input type="hidden" name="platform" value={selected.id} />
-      )}
-      {Object.entries(engines).flatMap(([slug, platforms]) =>
-        Object.entries(platforms).map(([id, engine]) => {
-          const name = `engine.${slug}.${id}`;
-          return name === omit ? null : (
-            <input key={name} type="hidden" name={name} value={engine} />
-          );
-        })
-      )}
-      {onlyShared && <input type="hidden" name="shared" value="1" />}
-    </>
-  );
-  const outcomeText = (platform) =>
-    formatScoreOutcome(
-      getScoreOutcome(platform.a, platform.b, true, data.metric),
-      browserA.name,
-      browserB.name,
-      data.metric
+  const hiddenState = (omit) => {
+    const omitted = new Set(Array.isArray(omit) ? omit : [omit]);
+    return (
+      <>
+        {query.reverse && <input type="hidden" name="order" value="reverse" />}
+        {data.metric.id !== 'speedometer3' && (
+          <input type="hidden" name="metric" value={data.metric.id} />
+        )}
+        {!omitted.has('platform') && selected && (
+          <input type="hidden" name="platform" value={selected.id} />
+        )}
+        {Object.entries(engines).flatMap(([slug, platforms]) =>
+          Object.entries(platforms).map(([id, engine]) => {
+            const name = `engine.${slug}.${id}`;
+            return omitted.has(name) ? null : (
+              <input key={name} type="hidden" name={name} value={engine} />
+            );
+          })
+        )}
+        {Object.entries(observations).flatMap(([slug, platforms]) =>
+          Object.entries(platforms).map(([id, observationId]) => {
+            const name = `observation.${slug}.${id}`;
+            return omitted.has(name) ? null : (
+              <input key={name} type="hidden" name={name} value={observationId} />
+            );
+          })
+        )}
+        {onlyShared && <input type="hidden" name="shared" value="1" />}
+      </>
     );
+  };
+  const outcomeText = (platform) => {
+    if (unmatchedHistoricalDate(platform))
+      return 'No matched-date result: choose observations recorded on the same date. Equal dates do not establish matching hardware or setup.';
+    return formatScoreOutcome(scoreOutcome(platform), browserA.name, browserB.name, data.metric);
+  };
 
   return (
     <ErrorBoundary analyticsScope="comparison">
@@ -398,11 +454,13 @@ export default async function ComparePage({ params, searchParams }) {
                   </div>
                 ) : (
                   <>
-                    {(invalidPlatform || invalidEngine) && (
+                    {(invalidPlatform || invalidEngine || invalidObservation) && (
                       <p role="status" className="mb-4" style={{ color: 'var(--text-default)' }}>
                         {invalidPlatform && 'That platform is unavailable; the default is shown. '}
                         {invalidEngine &&
                           'An engine choice was unavailable; the primary engine is shown.'}
+                        {invalidObservation &&
+                          'A historical observation was unavailable for this browser, platform, or engine; the latest record is shown.'}
                       </p>
                     )}
                     <form
@@ -464,6 +522,13 @@ export default async function ComparePage({ params, searchParams }) {
                           {selected.a.engine || 'engine not recorded'}. {browserB.name}:{' '}
                           {selected.b.engine || 'engine not recorded'}. {outcomeText(selected)}
                         </p>
+                        {usesHistoricalSelection(selected) &&
+                          isExactDateMatch(selected.a, selected.b) && (
+                            <p className="mb-2 text-sm" style={{ color: 'var(--text-subtle)' }}>
+                              Matched by exact recorded date ({selected.a.record.date}); hardware
+                              and setup remain undocumented.
+                            </p>
+                          )}
                         {otherShared.length > 0 && (
                           <p className="mb-2">
                             Both browsers have measurements on:{' '}
@@ -567,6 +632,63 @@ export default async function ComparePage({ params, searchParams }) {
                             );
                           })}
                         </div>
+                        <form
+                          method="get"
+                          data-comparison-control
+                          className="mt-5 flex flex-wrap items-end gap-3"
+                        >
+                          {hiddenState([
+                            `observation.${browserA.slug}.${selected.id}`,
+                            `observation.${browserB.slug}.${selected.id}`,
+                          ])}
+                          {[
+                            [browserA, selected.a],
+                            [browserB, selected.b],
+                          ].map(([browser, observation]) => {
+                            const name = `observation.${browser.slug}.${selected.id}`;
+                            return (
+                              <div key={name}>
+                                <label htmlFor={name} className="block font-medium">
+                                  {browser.name} observation
+                                </label>
+                                <select
+                                  id={name}
+                                  name={name}
+                                  defaultValue={observations[browser.slug]?.[selected.id] || ''}
+                                  className="min-h-[44px] max-w-full p-2 rounded"
+                                  style={{
+                                    backgroundColor: 'var(--surface-raised)',
+                                    color: 'var(--text-default)',
+                                    border: '1px solid var(--border-default)',
+                                  }}
+                                >
+                                  <option value="">Latest recorded</option>
+                                  {observation.history.map((record) => (
+                                    <option key={record.observationId} value={record.observationId}>
+                                      {record.date || 'Test date not recorded'} — {record.version} (
+                                      {record.observationId.slice(-8)})
+                                    </option>
+                                  ))}
+                                </select>
+                              </div>
+                            );
+                          })}
+                          <button
+                            type="submit"
+                            className="min-h-[44px] rounded px-3 py-2"
+                            style={{
+                              border: '1px solid currentColor',
+                              color: 'var(--text-default)',
+                            }}
+                          >
+                            Compare observations
+                          </button>
+                          <p className="w-full text-sm" style={{ color: 'var(--text-subtle)' }}>
+                            Historical comparisons require the same recorded test date on both
+                            sides. This exact-date rule does not establish matching hardware or
+                            setup.
+                          </p>
+                        </form>
                       </section>
                     )}
                     {!selected && (
@@ -604,7 +726,9 @@ export default async function ComparePage({ params, searchParams }) {
                       {shared.length} shared platform{' '}
                       {shared.length === 1 ? 'measurement' : 'measurements'}.
                       {shared.length === 0 &&
-                        ' These browsers have no shared platform measurements, so there is no head-to-head result. Missing measurements do not establish platform incompatibility.'}
+                        (hasHistoricalSelections
+                          ? ' The selected observations do not share an exact recorded test date, so there is no matched-date result.'
+                          : ' These browsers have no shared platform measurements, so there is no head-to-head result. Missing measurements do not establish platform incompatibility.')}
                     </p>
                     {partners.length > 0 && data.metric.id === 'speedometer3' && (
                       <div className="mb-4">
@@ -706,12 +830,7 @@ export default async function ComparePage({ params, searchParams }) {
                             </thead>
                             <tbody>
                               {visible.map((platform) => {
-                                const result = getScoreOutcome(
-                                  platform.a,
-                                  platform.b,
-                                  true,
-                                  data.metric
-                                );
+                                const result = scoreOutcome(platform);
                                 return (
                                   <tr
                                     key={platform.id}
@@ -752,12 +871,7 @@ export default async function ComparePage({ params, searchParams }) {
                                       className="align-top py-2 pl-4"
                                       style={{ color: 'var(--text-default)' }}
                                     >
-                                      {formatScoreOutcome(
-                                        result,
-                                        browserA.name,
-                                        browserB.name,
-                                        data.metric
-                                      )}
+                                      {outcomeText(platform)}
                                     </td>
                                   </tr>
                                 );
@@ -777,6 +891,7 @@ export default async function ComparePage({ params, searchParams }) {
                   second={browserB.slug}
                   browsers={options}
                   engines={engines}
+                  observations={observations}
                   platform={query.platform}
                   sharedOnly={onlyShared}
                   metric={query.metric}

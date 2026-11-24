@@ -17,6 +17,7 @@ export function validateBenchmarkData(catalog, platformData) {
   const errors = [];
   const warnings = [];
   let versionRecords = 0;
+  const observationIds = new Set();
   const error = (path, message) => errors.push(`${path}: ${message}`);
   const warning = (path, message) => warnings.push(`${path}: ${message}`);
 
@@ -108,6 +109,16 @@ export function validateBenchmarkData(catalog, platformData) {
         }
         if (typeof version.version !== 'string' || !version.version.trim()) {
           error(`${versionPath}.version`, 'expected a non-empty version string');
+        }
+        if (typeof version.observationId !== 'string' || !version.observationId.trim()) {
+          error(`${versionPath}.observationId`, 'expected a stable non-empty observation ID');
+        } else if (observationIds.has(version.observationId)) {
+          error(
+            `${versionPath}.observationId`,
+            `duplicate observation ID "${version.observationId}"`
+          );
+        } else {
+          observationIds.add(version.observationId);
         }
         if (
           !version.scores ||

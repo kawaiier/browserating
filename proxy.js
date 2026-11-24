@@ -34,10 +34,18 @@ export function proxy(request) {
         }
       );
     }
-    const { engines, platform, sharedOnly, metric } = parseViewState(query);
+    const { engines, observations, platform, sharedOnly, metric } = parseViewState(query);
     return NextResponse.redirect(
       new URL(
-        buildCompareUrl({ first: pair[0], second: pair[1], engines, platform, sharedOnly, metric }),
+        buildCompareUrl({
+          first: pair[0],
+          second: pair[1],
+          engines,
+          observations,
+          platform,
+          sharedOnly,
+          metric,
+        }),
         request.url
       ),
       307

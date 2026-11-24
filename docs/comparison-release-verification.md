@@ -20,13 +20,21 @@ Platform records join to `browsers.json` by exact `name`. Keep each browser/plat
 engine records unique, and review their order deliberately: the first listed engine is
 primary and controls default comparisons and indexable coverage. Keep version records
 newest-first by recorded date; equal or absent dates are reported as ambiguous, never
-ordered by version text. Missing or `null` metrics are unknown (RAM is `scores.ram` in
-MB; ad-block percentages include zero), not fabricated scores.
+ordered by version text. Every record has a globally unique immutable `observationId`
+used by historical comparison URLs. Preserve IDs when editing existing records and assign
+a new unique ID to each new record; never derive identity from version labels, dates, or
+array positions. Version strings are opaque labels and may contain channels or build dates.
+Missing or `null` metrics are unknown (RAM is `scores.ram` in MB; ad-block percentages
+include zero), not fabricated scores.
 
 The current schema has no approved benchmark revision, source, hardware/setup, or method
 reference fields. The validation report keeps this historical provenance gap separate
-from hard errors; do not backfill legacy records with inferred values. Add those fields
-only through a documented migration once their meaning and collection process are agreed.
+from hard errors; do not backfill legacy records with inferred values. Historical pair
+selection uses exact recorded calendar-date equality as its matching rule and withholds a
+head-to-head result when dates differ or are unknown. Equal dates do not establish matched
+hardware or setup. Browser detail history is shown as independent bars; no line trend is
+inferred without compatible provenance. Add setup fields only through a documented
+migration once their meaning and collection process are agreed.
 
 Curated data ships with a deployment. Deploy the successful build so rendered comparison
 content and sitemap coverage refresh together, following the publication policy in

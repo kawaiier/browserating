@@ -16,7 +16,9 @@ const livePlatforms = Object.fromEntries(
   Object.keys(platformNames).map((platform) => [platform, readData(`${platform}.json`)])
 );
 
+let nextObservationId = 0;
 const version = (overrides = {}) => ({
+  observationId: `obs-test-${++nextObservationId}`,
   version: '1.0',
   date: '2026-01-02',
   scores: { speedometer3: 10 },
@@ -78,6 +80,17 @@ test('different engines are allowed and the first-listed engine remains primary'
     merged[0]['macos-arm'].engineVariants.map(({ engine }) => engine),
     ['Blink', 'WebKit']
   );
+});
+
+test('observation IDs are required and globally unique', () => {
+  const missing = validDataset();
+  delete missing.platforms.windows[0].versions[0].observationId;
+  assert.match(errorMessages(missing), /observationId: expected a stable non-empty observation ID/);
+
+  const duplicate = validDataset();
+  duplicate.platforms.android[0].versions[0].observationId =
+    duplicate.platforms.windows[0].versions[0].observationId;
+  assert.match(errorMessages(duplicate), /duplicate observation ID/);
 });
 
 test('version structure and metric-specific rules reject malformed values', () => {

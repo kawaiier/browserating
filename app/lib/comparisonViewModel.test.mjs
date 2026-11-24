@@ -7,12 +7,14 @@ import {
   getComparisonObservation,
   getMeasurementFreshness,
   getMetricCoverage,
+  isExactDateMatch,
   getScoreOutcome,
 } from './comparisonViewModel.js';
 import { mergeBrowserData } from './mergeBrowserData.js';
 import { getComparisonMetric } from './comparisonMetrics.js';
 
 const record = (score, version = 'first') => ({
+  observationId: `obs-${version}-${score}`,
   version,
   date: '2026-01-01',
   scores: { speedometer3: score },
@@ -142,6 +144,60 @@ test('derives identity, coverage, first observation and engine-specific outcome'
   );
   assert.equal(deriveComparison(browsers, 'browser-a', 'browser-a'), null);
   assert.equal(deriveComparison(browsers, 'unknown', 'browser-b'), null);
+});
+
+test('historical selection resolves by stable ID and only compares exact matching dates', () => {
+  const history = [
+    {
+      observationId: 'obs-a-new',
+      version: 'beta (2026-03-02)',
+      date: '2026-03-02',
+      scores: { speedometer3: 12 },
+    },
+    {
+      observationId: 'obs-a-old',
+      version: 'nightly-2026-02-01',
+      date: '2026-02-01',
+      scores: { speedometer3: 10 },
+    },
+  ];
+  const otherHistory = [
+    {
+      observationId: 'obs-b-new',
+      version: 'release channel',
+      date: '2026-03-03',
+      scores: { speedometer3: 15 },
+    },
+    {
+      observationId: 'obs-b-match',
+      version: 'build 02/01',
+      date: '2026-02-01',
+      scores: { speedometer3: 9 },
+    },
+  ];
+  const pair = [
+    { name: 'Browser A', windows: { engine: 'Blink', versions: history } },
+    { name: 'Browser B', windows: { engine: 'Gecko', versions: otherHistory } },
+  ];
+  const unmatched = deriveComparison(pair, 'browser-a', 'browser-b', {}, undefined, {
+    'browser-a': { windows: 'obs-a-old' },
+    'browser-b': { windows: 'obs-b-new' },
+  }).platforms.find(({ id }) => id === 'windows');
+  assert.equal(unmatched.a.record.version, 'nightly-2026-02-01');
+  assert.equal(unmatched.b.record.version, 'release channel');
+  assert.equal(unmatched.outcome, 'unavailable');
+  assert.equal(isExactDateMatch(unmatched.a, unmatched.b), false);
+
+  const matched = deriveComparison(pair, 'browser-a', 'browser-b', {}, undefined, {
+    'browser-a': { windows: 'obs-a-old' },
+    'browser-b': { windows: 'obs-b-match' },
+  }).platforms.find(({ id }) => id === 'windows');
+  assert.equal(isExactDateMatch(matched.a, matched.b), true);
+  assert.equal(matched.outcome, 'a');
+  assert.equal(
+    getComparisonObservation(pair[0], 'windows', undefined, undefined, 'unknown').state,
+    'missing-observation'
+  );
 });
 
 test('distinguishes absent and invalid observations', () => {

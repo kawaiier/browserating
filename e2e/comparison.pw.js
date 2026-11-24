@@ -53,6 +53,53 @@ test('ad-blocking view shows recorded scores and explains unavailable pair data'
   await expect(page.getByText('0 recorded results')).toBeVisible();
 });
 
+test('historical observations use stable IDs and require an exact shared date', async ({
+  page,
+}) => {
+  await page.goto(measured);
+  const crestObservation = await page
+    .getByLabel('Crest observation')
+    .locator('option')
+    .evaluateAll(
+      (options) =>
+        options.find((option) => option.textContent.startsWith('2026-10-03 — 0.7.0')).value
+    );
+  await page.getByLabel('Crest observation').selectOption(crestObservation);
+  await page.getByRole('button', { name: 'Compare observations' }).click();
+  await expect(page).toHaveURL(/observation\.crest\.macos-arm=obs-/);
+  const result = page.getByRole('region', { name: 'Selected result for macOS ARM' });
+  await expect(result).toContainText('No matched-date result');
+  const firefoxObservation = await page
+    .getByLabel('Firefox observation')
+    .locator('option')
+    .evaluateAll(
+      (options) =>
+        options.find((option) => option.textContent.startsWith('2026-10-03 — 157.0')).value
+    );
+  await page.getByLabel('Firefox observation').selectOption(firefoxObservation);
+  await page.getByRole('button', { name: 'Compare observations' }).click();
+  await expect(result).toContainText('45.98');
+  await expect(result).toContainText('42.83');
+  await expect(result).toContainText('higher recorded score');
+  await expect(result).toContainText('Matched by exact recorded date (2026-10-03)');
+  await page.evaluate(() => {
+    Object.defineProperty(navigator, 'clipboard', {
+      configurable: true,
+      value: { writeText: async (text) => (window.copiedHistoricalUrl = text) },
+    });
+  });
+  await page.getByRole('button', { name: 'Copy link' }).click();
+  await expect(
+    page.getByRole('status').filter({ hasText: 'Comparison link copied' })
+  ).toBeVisible();
+  expect(await page.evaluate(() => window.copiedHistoricalUrl)).toContain(
+    'observation.crest.macos-arm=obs-'
+  );
+  expect(await page.evaluate(() => window.copiedHistoricalUrl)).toContain(
+    'observation.firefox.macos-arm=obs-'
+  );
+});
+
 test('engine, platform, reload, history and swaps preserve the committed view', async ({
   page,
 }) => {
@@ -148,7 +195,9 @@ test('comparison analytics record committed actions and distinguish empty covera
     )
     .toBe(true);
   await page.goto('/compare/meteor-vs-web');
-  await expect(page.getByRole('heading', { name: 'No benchmarks recorded yet' })).toBeVisible();
+  await expect(
+    page.getByRole('heading', { name: /No .* results recorded for this pair/ })
+  ).toBeVisible();
   events = await comparisonEvents(page);
   expect(events.some((event) => event[1]?.name === 'comparison_load_failed')).toBe(false);
   expect(
@@ -177,7 +226,9 @@ test('keyboard form validation and submission', async ({ page }) => {
 
 test('empty and one-sided pairs remain useful', async ({ page }) => {
   await page.goto('/compare/meteor-vs-web');
-  await expect(page.getByRole('heading', { name: 'No benchmarks recorded yet' })).toBeVisible();
+  await expect(
+    page.getByRole('heading', { name: /No .* results recorded for this pair/ })
+  ).toBeVisible();
   await expect(page.getByRole('table')).toHaveCount(0);
   await page.goto('/compare/deta-surf-vs-web');
   await expect(page.getByText(/no shared platform measurements/)).toBeVisible();
@@ -295,6 +346,25 @@ test.describe('without JavaScript', () => {
     await expect(page.getByRole('region', { name: 'Selected result for macOS ARM' })).toContainText(
       '36.77'
     );
+    const crestObservation = await page
+      .getByLabel('Crest observation')
+      .locator('option')
+      .evaluateAll(
+        (options) =>
+          options.find((option) => option.textContent.startsWith('2026-10-03 — 0.7.0')).value
+      );
+    const firefoxObservation = await page
+      .getByLabel('Firefox observation')
+      .locator('option')
+      .evaluateAll(
+        (options) =>
+          options.find((option) => option.textContent.startsWith('2026-10-03 — 157.0')).value
+      );
+    await page.getByLabel('Crest observation').selectOption(crestObservation);
+    await page.getByLabel('Firefox observation').selectOption(firefoxObservation);
+    await page.getByRole('button', { name: 'Compare observations' }).click();
+    await expect(page).toHaveURL(/observation\.crest\.macos-arm=obs-/);
+    await expect(page).toHaveURL(/observation\.firefox\.macos-arm=obs-/);
     await page.goto('/compare');
     await page.getByLabel('First browser').selectOption('firefox');
     await page.getByLabel('Second browser').selectOption('google-chrome');

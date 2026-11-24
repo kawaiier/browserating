@@ -1,12 +1,11 @@
 'use client';
 
-import { Bar, Line } from 'react-chartjs-2';
+import { Bar } from 'react-chartjs-2';
 import {
   BarElement,
   CategoryScale,
   Chart as ChartJS,
   Legend,
-  LineElement,
   LinearScale,
   PointElement,
   Title,
@@ -15,26 +14,16 @@ import {
 import { useEffect, useRef, useState } from 'react';
 
 import Image from 'next/image';
-import { BarChart3, LineChart, Target, TrendingDown, TrendingUp } from 'lucide-react';
+import { BarChart3, LineChart, Target } from 'lucide-react';
 import { getEngineColor, platformNames } from '../lib/constants';
 import { getEngineVariant, getEngineVariants } from '../lib/getPlatformEngineData';
-import { getSpeedometerTrend, isFiniteMetric } from '../lib/benchmarkMetrics';
+import { isFiniteMetric } from '../lib/benchmarkMetrics';
 
-ChartJS.register(
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  Title,
-  Tooltip,
-  Legend,
-  BarElement
-);
+ChartJS.register(CategoryScale, LinearScale, PointElement, Title, Tooltip, Legend, BarElement);
 
 const BrowserDetailsModal = ({ browser, selectedPlatform, selectedEngine, onClose }) => {
   const [activeTab, setActiveTab] = useState('overview');
   const [modalEngine, setModalEngine] = useState(selectedEngine);
-  const [chartType, setChartType] = useState('bar');
   const modalRef = useRef(null);
   const closeButtonRef = useRef(null);
   const firstFocusableRef = useRef(null);
@@ -157,7 +146,6 @@ const BrowserDetailsModal = ({ browser, selectedPlatform, selectedEngine, onClos
   const latestSpeedometer3 = latestScores.speedometer3;
   const sortedData = [...activeVariant.versions].reverse();
   const platformEngine = activeVariant.engine;
-  const trend = getSpeedometerTrend(sortedData);
 
   const chartData = {
     labels: sortedData.map((data) => `v${data.version}`),
@@ -165,16 +153,9 @@ const BrowserDetailsModal = ({ browser, selectedPlatform, selectedEngine, onClos
       {
         label: 'Speedometer 3.1 Score',
         data: sortedData.map((data) => data.scores?.speedometer3 ?? null),
-        backgroundColor: chartType === 'bar' ? 'rgba(120, 83, 224, 0.8)' : 'transparent',
+        backgroundColor: 'rgba(120, 83, 224, 0.8)',
         borderColor: '#7853E0',
-        borderWidth: chartType === 'line' ? 3 : 1,
-        fill: chartType === 'line',
-        tension: 0.4,
-        pointBackgroundColor: '#7853E0',
-        pointBorderColor: '#fff',
-        pointBorderWidth: 2,
-        pointRadius: chartType === 'line' ? 6 : 0,
-        pointHoverRadius: 8,
+        borderWidth: 1,
       },
     ],
   };
@@ -344,28 +325,6 @@ const BrowserDetailsModal = ({ browser, selectedPlatform, selectedEngine, onClos
                   >
                     v{latestVersion.version}
                   </span>
-                  {trend.trend !== 'stable' && (
-                    <span
-                      className="px-3 py-1.5 rounded-md text-sm font-medium"
-                      style={{
-                        backgroundColor:
-                          trend.trend === 'improving'
-                            ? 'var(--color-success-subtle)'
-                            : 'var(--color-danger-subtle)',
-                        color:
-                          trend.trend === 'improving'
-                            ? 'var(--color-success)'
-                            : 'var(--color-danger)',
-                      }}
-                    >
-                      {trend.trend === 'improving' ? (
-                        <TrendingUp className="inline w-4 h-4" aria-hidden="true" />
-                      ) : (
-                        <TrendingDown className="inline w-4 h-4" aria-hidden="true" />
-                      )}{' '}
-                      {Math.abs(trend.change).toFixed(1)}%
-                    </span>
-                  )}
                 </div>
               </div>
             </div>
@@ -439,45 +398,19 @@ const BrowserDetailsModal = ({ browser, selectedPlatform, selectedEngine, onClos
               <section>
                 <div className="flex items-center justify-between mb-6">
                   <h2 className="text-xl font-semibold" style={{ color: 'var(--text-default)' }}>
-                    Performance Trend
+                    Recorded scores by version
                   </h2>
-                  <div className="flex items-center gap-2">
-                    <button
-                      onClick={() => setChartType(chartType === 'bar' ? 'line' : 'bar')}
-                      className="px-3 py-1.5 text-sm rounded-md transition-colors"
-                      style={{
-                        backgroundColor: 'var(--surface-sunken)',
-                        color: 'var(--text-default)',
-                      }}
-                      onMouseEnter={(e) => {
-                        e.currentTarget.style.backgroundColor = 'var(--surface-hovered)';
-                      }}
-                      onMouseLeave={(e) => {
-                        e.currentTarget.style.backgroundColor = 'var(--surface-sunken)';
-                      }}
-                    >
-                      {chartType === 'bar' ? (
-                        <>
-                          <LineChart className="inline w-4 h-4 mr-1" aria-hidden="true" /> Line
-                        </>
-                      ) : (
-                        <>
-                          <BarChart3 className="inline w-4 h-4 mr-1" aria-hidden="true" /> Bar
-                        </>
-                      )}
-                    </button>
-                  </div>
                 </div>
                 <div
                   className="rounded-lg p-6"
                   style={{ backgroundColor: 'var(--surface-sunken)' }}
                 >
+                  <p className="mb-3 text-sm" style={{ color: 'var(--text-subtle)' }}>
+                    Hardware, setup, and benchmark revision are not recorded for these observations,
+                    so no continuous trend is inferred.
+                  </p>
                   <div className="h-48 sm:h-64 md:h-80">
-                    {chartType === 'bar' ? (
-                      <Bar data={chartData} options={chartOptions} />
-                    ) : (
-                      <Line data={chartData} options={chartOptions} />
-                    )}
+                    <Bar data={chartData} options={chartOptions} />
                   </div>
                 </div>
               </section>
@@ -560,7 +493,7 @@ const BrowserDetailsModal = ({ browser, selectedPlatform, selectedEngine, onClos
               <div className="space-y-4">
                 {activeVariant.versions.map((version, index) => (
                   <div
-                    key={version.version}
+                    key={version.observationId}
                     className="rounded-lg p-6 transition-colors"
                     style={{
                       backgroundColor: 'var(--surface-sunken)',
@@ -684,7 +617,7 @@ const BrowserDetailsModal = ({ browser, selectedPlatform, selectedEngine, onClos
                   <tbody>
                     {activeVariant.versions.map((version, index) => (
                       <tr
-                        key={version.version}
+                        key={version.observationId}
                         style={{ borderBottom: '1px solid var(--border-subtle)' }}
                         className="transition-colors"
                         onMouseEnter={(e) => {

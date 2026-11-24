@@ -57,29 +57,47 @@ export function getComparisonObservation(
   browser,
   platform,
   engine,
-  metricId = comparisonMetric.id
+  metricId = comparisonMetric.id,
+  observationId
 ) {
   const metric = getComparisonMetric(metricId) || comparisonMetric;
-  if (!browser) return { state: 'missing-browser', engines: [] };
+  if (!browser) return { state: 'missing-browser', engines: [], history: [] };
   const data = browser[platform];
-  if (!data) return { state: 'missing-platform', engines: [] };
+  if (!data) return { state: 'missing-platform', engines: [], history: [] };
   const variants = getEngineVariants(data);
   const engines = variants.map((variant) => variant.engine);
   const selected = engine ? variants.find((variant) => variant.engine === engine) : variants[0];
-  if (engine && !selected) return { state: 'missing-engine', engines };
-  const versions = selected?.versions || data.versions || [];
+  if (engine && !selected) return { state: 'missing-engine', engines, history: [] };
+  const history = selected?.versions || data.versions || [];
   // Optional metrics use their newest non-null record; Speedometer keeps the newest version.
-  const record =
+  const latest =
     metric.id === comparisonMetric.id
-      ? versions[0]
-      : versions.find((version) => version.scores?.[metric.id] != null) || versions[0];
-  const base = { engines, engine: selected?.engine || data.engine || null, record: record || null };
+      ? history[0]
+      : history.find((version) => version.scores?.[metric.id] != null) || history[0];
+  const record = observationId
+    ? history.find((version) => version.observationId === observationId)
+    : latest;
+  const base = {
+    engines,
+    engine: selected?.engine || data.engine || null,
+    record: record || null,
+    history,
+  };
+  if (observationId && !record) return { ...base, state: 'missing-observation' };
   if (!record) return { ...base, state: 'missing-version' };
   const score = record.scores?.[metric.id];
   if (score == null) return { ...base, state: 'missing-metric' };
   if (typeof score !== 'number' || !Number.isFinite(score) || !metric.isValid(score))
     return { ...base, state: 'invalid-metric' };
   return { ...base, state: 'available', score };
+}
+
+export function isExactDateMatch(a, b) {
+  return (
+    typeof a?.record?.date === 'string' &&
+    a.record.date === b?.record?.date &&
+    getMeasurementFreshness(a.record.date) !== 'unknown'
+  );
 }
 
 export function getMetricCoverage(platforms) {
@@ -100,17 +118,31 @@ export function deriveComparison(
   slugA,
   slugB,
   engines = {},
-  metricId = comparisonMetric.id
+  metricId = comparisonMetric.id,
+  observations = {}
 ) {
   const metric = getComparisonMetric(metricId) || comparisonMetric;
   const browserA = browsers.find((browser) => getBrowserSlug(browser.name) === slugA);
   const browserB = browsers.find((browser) => getBrowserSlug(browser.name) === slugB);
   if (!browserA || !browserB || slugA === slugB) return null;
   const platforms = Object.entries(platformNames).map(([id, label]) => {
-    const a = getComparisonObservation(browserA, id, engines[slugA]?.[id], metric.id);
-    const b = getComparisonObservation(browserB, id, engines[slugB]?.[id], metric.id);
+    const a = getComparisonObservation(
+      browserA,
+      id,
+      engines[slugA]?.[id],
+      metric.id,
+      observations[slugA]?.[id]
+    );
+    const b = getComparisonObservation(
+      browserB,
+      id,
+      engines[slugB]?.[id],
+      metric.id,
+      observations[slugB]?.[id]
+    );
+    const historical = Boolean(observations[slugA]?.[id] || observations[slugB]?.[id]);
     const outcome =
-      a.state !== 'available' || b.state !== 'available'
+      a.state !== 'available' || b.state !== 'available' || (historical && !isExactDateMatch(a, b))
         ? 'unavailable'
         : a.score === b.score
           ? 'tie'

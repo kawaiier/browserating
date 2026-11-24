@@ -27,7 +27,7 @@ if (warnings.length) {
   for (const warning of warnings) console.warn(`- ${warning}`);
 }
 console.log(
-  `Historical provenance report: ${versionRecords} version records; no approved revision/source/hardware/setup/method fields are defined. Legacy records are unchanged; this is not a validation error.`
+  `Historical provenance report: ${versionRecords} version records have stable observation IDs; no approved revision/source/hardware/setup/method fields are defined, so matching setup remains unknown.`
 );
 
 if (errors.length) {

@@ -5,6 +5,7 @@ export const PAIR_SEPARATOR = '-vs-';
 import { platformNames } from './platformDefinitions.js';
 import { comparisonMetrics, DEFAULT_COMPARISON_METRIC } from './comparisonMetrics.js';
 const ENGINE_PREFIX = 'engine.';
+const OBSERVATION_PREFIX = 'observation.';
 
 /** Splits a pair slug into two distinct, non-empty browser slugs, or returns null. */
 export function parsePairSlug(slug) {
@@ -28,11 +29,18 @@ export function canonicalPair(a, b) {
  */
 export function parseViewState(query = {}) {
   const engines = {};
+  const observations = {};
   for (const [key, value] of Object.entries(query || {})) {
-    if (typeof value !== 'string' || !key.startsWith(ENGINE_PREFIX)) continue;
-    const [slug, platform, ...rest] = key.slice(ENGINE_PREFIX.length).split('.');
-    if (!slug || !platform || rest.length || !value) continue;
-    (engines[slug] ||= {})[platform] = value;
+    if (typeof value !== 'string' || !value) continue;
+    if (key.startsWith(ENGINE_PREFIX)) {
+      const [slug, platform, ...rest] = key.slice(ENGINE_PREFIX.length).split('.');
+      if (!slug || !platform || rest.length) continue;
+      (engines[slug] ||= {})[platform] = value;
+    } else if (key.startsWith(OBSERVATION_PREFIX)) {
+      const [slug, platform, ...rest] = key.slice(OBSERVATION_PREFIX.length).split('.');
+      if (!slug || !platform || rest.length || !Object.hasOwn(platformNames, platform)) continue;
+      (observations[slug] ||= {})[platform] = value;
+    }
   }
   return {
     reverse: query?.order === 'reverse',
@@ -41,12 +49,32 @@ export function parseViewState(query = {}) {
         ? query.platform
         : null,
     engines,
+    observations,
     sharedOnly: query?.shared === '1',
     metric:
       typeof query?.metric === 'string' && Object.hasOwn(comparisonMetrics, query.metric)
         ? query.metric
         : DEFAULT_COMPARISON_METRIC,
   };
+}
+
+/** Keeps only observation IDs present in the selected browser/platform/engine histories. */
+export function validateObservations(observations, model) {
+  const valid = {};
+  if (!model) return valid;
+  const sides = [
+    [model.browserA.slug, 'a'],
+    [model.browserB.slug, 'b'],
+  ];
+  for (const platform of model.platforms) {
+    for (const [slug, side] of sides) {
+      const id = observations?.[slug]?.[platform.id];
+      if (id && platform[side].history?.some((record) => record.observationId === id)) {
+        (valid[slug] ||= {})[platform.id] = id;
+      }
+    }
+  }
+  return valid;
 }
 
 /** Keeps only engine choices that exist for that browser and platform in the model. */
@@ -77,6 +105,7 @@ export function buildCompareUrl({
   second,
   engines = {},
   platform,
+  observations = {},
   sharedOnly,
   metric = DEFAULT_COMPARISON_METRIC,
 } = {}) {
@@ -85,6 +114,12 @@ export function buildCompareUrl({
   for (const slug of [pair.first, pair.second]) {
     for (const [platformId, engine] of Object.entries(engines[slug] || {})) {
       if (engine) entries.push([`${ENGINE_PREFIX}${slug}.${platformId}`, engine]);
+    }
+  }
+  for (const slug of [pair.first, pair.second]) {
+    for (const [platformId, observationId] of Object.entries(observations[slug] || {})) {
+      if (Object.hasOwn(platformNames, platformId) && observationId)
+        entries.push([`${OBSERVATION_PREFIX}${slug}.${platformId}`, observationId]);
     }
   }
   if (pair.reversed) entries.push(['order', 'reverse']);
@@ -130,11 +165,14 @@ export function resolveCompareRequest(slug, searchParams, knownSlugs) {
   const parts = parsePairSlug(slug);
   if (!parts || !parts.every((part) => knownSlugs.has(part))) return { type: 'not-found' };
   if (!canonicalPair(...parts).reversed) return { type: 'render' };
-  const { engines, platform, sharedOnly, metric } = parseViewState(
+  const { engines, observations, platform, sharedOnly, metric } = parseViewState(
     searchParamsToObject(searchParams)
   );
   const pairEngines = Object.fromEntries(
     parts.filter((s) => engines[s]).map((s) => [s, engines[s]])
+  );
+  const pairObservations = Object.fromEntries(
+    parts.filter((s) => observations[s]).map((s) => [s, observations[s]])
   );
   return {
     type: 'redirect',
@@ -142,6 +180,7 @@ export function resolveCompareRequest(slug, searchParams, knownSlugs) {
       first: parts[0],
       second: parts[1],
       engines: pairEngines,
+      observations: pairObservations,
       platform,
       sharedOnly,
       metric,

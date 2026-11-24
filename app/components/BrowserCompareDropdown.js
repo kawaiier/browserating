@@ -11,6 +11,7 @@ export default function BrowserCompareDropdown({
   first,
   second = '',
   engines = {},
+  observations = {},
   platform,
   sharedOnly = false,
   metric,
@@ -28,6 +29,7 @@ export default function BrowserCompareDropdown({
       first: left,
       second: right,
       engines,
+      observations,
       platform,
       sharedOnly,
       metric,
@@ -128,6 +130,16 @@ export default function BrowserCompareDropdown({
         {sharedOnly && <input type="hidden" name="shared" value="1" />}
         {metric && metric !== 'speedometer3' && (
           <input type="hidden" name="metric" value={metric} />
+        )}
+        {Object.entries(observations).flatMap(([slug, platforms]) =>
+          Object.entries(platforms).map(([id, observationId]) => (
+            <input
+              key={`${slug}.${id}`}
+              type="hidden"
+              name={`observation.${slug}.${id}`}
+              value={observationId}
+            />
+          ))
         )}
         {Object.entries(engines).flatMap(([slug, platforms]) =>
           Object.entries(platforms).map(([id, engine]) => (

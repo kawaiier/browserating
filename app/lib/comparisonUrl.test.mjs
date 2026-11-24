@@ -9,6 +9,7 @@ import {
   parseViewState,
   resolveCompareRequest,
   validateEngines,
+  validateObservations,
 } from './comparisonUrl.js';
 import { getBrowserSlug } from './getBrowserSlug.js';
 
@@ -57,6 +58,8 @@ test('parseViewState ignores repeated keys, malformed engine keys and non-revers
   const state = parseViewState({
     order: 'reverse',
     'engine.crest.macos-arm': 'WebKit',
+    'observation.crest.macos-arm': 'obs-crest-1',
+    'observation.firefox.android': ['obs-fx-1', 'obs-fx-2'],
     'engine.crest.windows': ['Blink', 'WebKit'],
     'engine.crest': 'Blink',
     'engine.crest.macos-arm.extra': 'Blink',
@@ -66,11 +69,55 @@ test('parseViewState ignores repeated keys, malformed engine keys and non-revers
     reverse: true,
     platform: null,
     engines: { crest: { 'macos-arm': 'WebKit' } },
+    observations: { crest: { 'macos-arm': 'obs-crest-1' } },
     sharedOnly: false,
     metric: 'speedometer3',
   });
   assert.equal(parseViewState({ order: 'forward' }).reverse, false);
   assert.equal(parseViewState(undefined).reverse, false);
+});
+
+test('observation IDs are scoped by browser and platform and survive canonical redirects', () => {
+  const model = {
+    browserA: { slug: 'crest' },
+    browserB: { slug: 'firefox' },
+    platforms: [
+      {
+        id: 'macos-arm',
+        a: { history: [{ observationId: 'obs-crest' }] },
+        b: { history: [{ observationId: 'obs-firefox' }] },
+      },
+      { id: 'windows', a: { history: [] }, b: { history: [] } },
+    ],
+  };
+  const selected = validateObservations(
+    {
+      crest: { 'macos-arm': 'obs-crest', windows: 'obs-stale' },
+      firefox: { 'macos-arm': 'obs-crest' },
+    },
+    model
+  );
+  assert.deepEqual(selected, { crest: { 'macos-arm': 'obs-crest' } });
+  assert.equal(
+    buildCompareUrl({
+      first: 'firefox',
+      second: 'crest',
+      observations: selected,
+      platform: 'macos-arm',
+    }),
+    '/compare/crest-vs-firefox?observation.crest.macos-arm=obs-crest&order=reverse&platform=macos-arm'
+  );
+  assert.deepEqual(
+    resolveCompareRequest(
+      'firefox-vs-crest',
+      new URLSearchParams('observation.crest.macos-arm=obs-crest&observation.brave.windows=junk'),
+      new Set(['firefox', 'crest'])
+    ),
+    {
+      type: 'redirect',
+      url: '/compare/crest-vs-firefox?observation.crest.macos-arm=obs-crest&order=reverse',
+    }
+  );
 });
 
 test('platform state is validated and survives canonical redirects and swaps', () => {
