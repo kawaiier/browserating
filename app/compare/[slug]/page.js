@@ -16,6 +16,7 @@ import Header from '@/app/components/Header';
 import Footer from '@/app/components/Footer';
 import BrowserCompareDropdown from '@/app/components/BrowserCompareDropdown';
 import ComparisonFocus from '@/app/components/ComparisonFocus';
+import ComparisonShare from '@/app/components/ComparisonShare';
 import { getBrowsersServer } from '@/app/lib/getBrowsersServer';
 import {
   formatScoreOutcome,
@@ -135,6 +136,7 @@ export default async function ComparePage({ params, searchParams }) {
     });
   const baseUrl = viewUrl({ sharedOnly: false });
   const filterUrl = viewUrl({ sharedOnly: true });
+  const committedUrl = viewUrl({ platform: selected?.id });
   const selectedOutcome = selected ? getScoreOutcome(selected.a, selected.b) : null;
   const otherShared =
     selectedOutcome?.state === 'unavailable' ? shared.filter((p) => p.id !== selected.id) : [];
@@ -232,7 +234,44 @@ export default async function ComparePage({ params, searchParams }) {
                 </p>
               </header>
 
-              <section>
+              <ComparisonShare
+                path={committedUrl}
+                title={`${browserA.name} vs ${browserB.name}`}
+                printDate={new Date().toISOString().slice(0, 10)}
+              />
+              <section className="comparison-print-result">
+                <h2>
+                  {browserA.name} vs {browserB.name}
+                </h2>
+                <p>Metric: Speedometer 3.1 (higher is better)</p>
+                <p>Platform: {selected?.label || 'No platform selected'}</p>
+                {selected ? (
+                  <>
+                    <p>{outcomeText(selected)}</p>
+                    {[
+                      [browserA, selected.a],
+                      [browserB, selected.b],
+                    ].map(([browser, observation]) => (
+                      <div key={browser.slug}>
+                        <h3>{browser.name}</h3>
+                        <p>Score: {label(observation)}</p>
+                        <p>Engine: {observation.engine || 'Not recorded'}</p>
+                        <p>Version: {observation.record?.version || 'Not recorded'}</p>
+                        <p>Test date: {observation.record?.date || 'Not recorded'}</p>
+                      </div>
+                    ))}
+                  </>
+                ) : (
+                  <p>No shared platform measurement is available.</p>
+                )}
+                <p>
+                  Limitations: Scores are recorded measurements, not an overall browser
+                  recommendation. Hardware and setup details are not recorded for individual
+                  measurements; different test dates alone do not establish different setups.
+                  Missing measurements do not establish platform incompatibility.
+                </p>
+              </section>
+              <section className="comparison-screen-result">
                 <ComparisonFocus key={`${ordered.join('-')}-${viewUrl()}`} />
                 <h2 className="text-2xl font-bold mb-4" style={{ color: 'var(--text-default)' }}>
                   Performance Comparison
@@ -619,7 +658,7 @@ export default async function ComparePage({ params, searchParams }) {
                   </>
                 )}
               </section>
-              <div className="mt-8">
+              <div className="comparison-chooser mt-8">
                 <BrowserCompareDropdown
                   key={`${browserA.slug}-${browserB.slug}`}
                   first={browserA.slug}

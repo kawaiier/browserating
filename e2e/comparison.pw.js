@@ -211,3 +211,59 @@ test('ranking selection carries its platform and engine through the detail choos
     '36.77'
   );
 });
+
+test('share uses the committed view, handles failures, and prints evidence', async ({ page }) => {
+  await page.goto(`${measured}&engine.crest.macos-arm=WebKit`);
+  await page.getByLabel('Second browser').selectOption('google-chrome');
+  await page.evaluate(() => {
+    Object.defineProperty(navigator, 'clipboard', {
+      configurable: true,
+      value: {
+        writeText: async (text) => {
+          window.copiedComparison = text;
+        },
+      },
+    });
+  });
+  await page.getByRole('button', { name: 'Copy link' }).click();
+  await expect(
+    page.getByRole('status').filter({ hasText: 'Comparison link copied' })
+  ).toBeVisible();
+  const copied = await page.evaluate(() => window.copiedComparison);
+  expect(copied).toContain('crest-vs-firefox');
+  expect(copied).toContain('platform=macos-arm');
+  expect(copied).toContain('engine.crest.macos-arm=WebKit');
+  expect(copied).not.toContain('google-chrome');
+  await page.evaluate(() => {
+    Object.defineProperty(navigator, 'clipboard', {
+      configurable: true,
+      value: {
+        writeText: async () => {
+          throw new Error('denied');
+        },
+      },
+    });
+  });
+  await page.getByRole('button', { name: 'Copy link' }).click();
+  await expect(page.getByLabel('Comparison URL')).toHaveValue(copied);
+  await expect(page.getByRole('status').filter({ hasText: 'Could not copy' })).toBeVisible();
+  await page.emulateMedia({ media: 'print' });
+  const print = page.locator('.comparison-print-result');
+  await expect(print).toBeVisible();
+  for (const evidence of [
+    'Crest vs Firefox',
+    'Speedometer 3.1',
+    'macOS ARM',
+    '36.77',
+    'WebKit',
+    'Version:',
+    'Test date:',
+    'Limitations:',
+  ]) {
+    await expect(print).toContainText(evidence);
+  }
+  await expect(page.locator('.comparison-print-meta')).toContainText('Source URL:');
+  await expect(page.locator('.comparison-print-meta')).toContainText('Print date:');
+  await expect(page.locator('.comparison-share')).toBeHidden();
+  await expect(page.locator('.comparison-shell > header')).toBeHidden();
+});

@@ -599,3 +599,52 @@ textarea:focus-visible,
   background-color: var(--color-danger);
   box-shadow: 0 1px 3px rgba(222, 53, 11, 0.3);
 }
+
+.comparison-print-result,
+.comparison-print-meta {
+  display: none;
+}
+
+@media print {
+  .comparison-shell > header,
+  .comparison-shell > footer,
+  .comparison-page article > nav,
+  .comparison-page article > header,
+  .comparison-share,
+  .comparison-screen-result,
+  .comparison-chooser {
+    display: none !important;
+  }
+
+  .comparison-shell,
+  .comparison-page {
+    background: white !important;
+    color: black !important;
+    min-height: 0 !important;
+    padding: 0 !important;
+  }
+
+  .comparison-print-result,
+  .comparison-print-meta {
+    display: block;
+    color: black;
+    overflow-wrap: anywhere;
+  }
+
+  .comparison-print-result h2 {
+    font-size: 20pt;
+    font-weight: bold;
+  }
+  .comparison-print-result h3 {
+    font-size: 14pt;
+    font-weight: bold;
+    margin-top: 1em;
+  }
+  .comparison-print-result p,
+  .comparison-print-meta p {
+    margin: 0.4em 0;
+  }
+  .comparison-print-meta {
+    margin-top: 1em;
+  }
+}
