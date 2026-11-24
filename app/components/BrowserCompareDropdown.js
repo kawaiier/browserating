@@ -10,6 +10,7 @@ export default function BrowserCompareDropdown({
   second = '',
   engines = {},
   platform,
+  sharedOnly = false,
 }) {
   const router = useRouter();
   const [a, setA] = useState(first);
@@ -25,7 +26,7 @@ export default function BrowserCompareDropdown({
       // Navigation remains available when storage is blocked.
     }
     startTransition(() =>
-      router.push(buildCompareUrl({ first: left, second: right, engines, platform }))
+      router.push(buildCompareUrl({ first: left, second: right, engines, platform, sharedOnly }))
     );
   };
   const options = (other) =>
@@ -34,12 +35,13 @@ export default function BrowserCompareDropdown({
       const count = counterpart
         ? browser.platforms.filter((id) => counterpart.platforms.includes(id)).length
         : null;
+      const plural = (n, word) => `${n} ${word}${n === 1 ? '' : 's'}`;
       const coverage =
         browser.platforms.length === 0
           ? 'No benchmarks yet'
           : count === null
-            ? `${browser.platforms.length} measured platforms`
-            : `${count} shared measured platforms`;
+            ? plural(browser.platforms.length, 'measured platform')
+            : plural(count, 'shared measured platform');
       return (
         <option key={browser.slug} value={browser.slug}>
           {browser.name} — {coverage}
@@ -54,7 +56,7 @@ export default function BrowserCompareDropdown({
   const buttonStyle = { border: '1px solid currentColor', color: 'var(--text-default)' };
 
   return (
-    <section className="mb-8">
+    <section id="compare-browsers" className="mb-8 scroll-mt-4">
       <h2 className="text-2xl font-bold mb-4" style={{ color: 'var(--text-default)' }}>
         Compare browsers
       </h2>
@@ -90,7 +92,7 @@ export default function BrowserCompareDropdown({
                 required
                 aria-invalid={attempted && invalid ? 'true' : undefined}
                 aria-describedby={attempted && invalid ? 'compare-error' : undefined}
-                className="mt-2 min-h-11 w-full min-w-0 max-w-full rounded-md px-3 py-2"
+                className="mt-2 min-h-[44px] w-full min-w-0 max-w-full rounded-md px-3 py-2"
                 style={selectStyle}
               >
                 <option value="">Choose a browser</option>
@@ -100,6 +102,7 @@ export default function BrowserCompareDropdown({
           ))}
         </div>
         {platform && <input type="hidden" name="platform" value={platform} />}
+        {sharedOnly && <input type="hidden" name="shared" value="1" />}
         {Object.entries(engines).flatMap(([slug, platforms]) =>
           Object.entries(platforms).map(([id, engine]) => (
             <input
@@ -124,7 +127,7 @@ export default function BrowserCompareDropdown({
           <button
             type="submit"
             disabled={pending}
-            className="min-h-11 rounded-md px-4 py-2 font-semibold disabled:opacity-50"
+            className="min-h-[44px] rounded-md px-4 py-2 font-semibold disabled:opacity-50"
             style={buttonStyle}
           >
             Compare browsers
@@ -134,7 +137,7 @@ export default function BrowserCompareDropdown({
               type="button"
               disabled={pending}
               onClick={() => navigate(second, first)}
-              className="min-h-11 rounded-md px-4 py-2 disabled:opacity-50"
+              className="min-h-[44px] rounded-md px-4 py-2 disabled:opacity-50"
               style={buttonStyle}
             >
               Swap browsers
@@ -147,7 +150,7 @@ export default function BrowserCompareDropdown({
               setB(second);
               setAttempted(false);
             }}
-            className="min-h-11 rounded-md px-4 py-2"
+            className="min-h-[44px] rounded-md px-4 py-2"
             style={buttonStyle}
           >
             Reset selection

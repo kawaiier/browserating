@@ -40,6 +40,7 @@ export function parseViewState(query = {}) {
         ? query.platform
         : null,
     engines,
+    sharedOnly: query?.shared === '1',
   };
 }
 
@@ -66,7 +67,7 @@ export function validateEngines(engines, model) {
  * Builds a canonical comparison URL. `first` is the browser shown first; `engines` maps
  * browser slug → platform → engine. Query keys are sorted for deterministic output.
  */
-export function buildCompareUrl({ first, second, engines = {}, platform } = {}) {
+export function buildCompareUrl({ first, second, engines = {}, platform, sharedOnly } = {}) {
   const pair = canonicalPair(first, second);
   const entries = [];
   for (const slug of [pair.first, pair.second]) {
@@ -76,6 +77,7 @@ export function buildCompareUrl({ first, second, engines = {}, platform } = {}) 
   }
   if (pair.reversed) entries.push(['order', 'reverse']);
   if (platform && Object.hasOwn(platformNames, platform)) entries.push(['platform', platform]);
+  if (sharedOnly) entries.push(['shared', '1']);
   entries.sort(([a], [b]) => (a < b ? -1 : a > b ? 1 : 0));
   const query = new URLSearchParams(entries).toString();
   return `/compare/${pair.slug}${query ? `?${query}` : ''}`;
@@ -114,12 +116,18 @@ export function resolveCompareRequest(slug, searchParams, knownSlugs) {
   const parts = parsePairSlug(slug);
   if (!parts || !parts.every((part) => knownSlugs.has(part))) return { type: 'not-found' };
   if (!canonicalPair(...parts).reversed) return { type: 'render' };
-  const { engines, platform } = parseViewState(searchParamsToObject(searchParams));
+  const { engines, platform, sharedOnly } = parseViewState(searchParamsToObject(searchParams));
   const pairEngines = Object.fromEntries(
     parts.filter((s) => engines[s]).map((s) => [s, engines[s]])
   );
   return {
     type: 'redirect',
-    url: buildCompareUrl({ first: parts[0], second: parts[1], engines: pairEngines, platform }),
+    url: buildCompareUrl({
+      first: parts[0],
+      second: parts[1],
+      engines: pairEngines,
+      platform,
+      sharedOnly,
+    }),
   };
 }

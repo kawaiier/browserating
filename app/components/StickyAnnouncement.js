@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 const announcements = [
   {
@@ -43,6 +43,27 @@ const ONE_WEEK_MS = 7 * 24 * 60 * 60 * 1000;
 const StickyAnnouncement = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [currentAnnouncement, setCurrentAnnouncement] = useState(null);
+  const banner = useRef(null);
+
+  // Reserve the banner's height so focused content, including the page's last links, can
+  // scroll above it instead of under it.
+  useEffect(() => {
+    const element = banner.current;
+    if (!isVisible || !element) return undefined;
+    const root = document.documentElement;
+    const update = () => {
+      root.style.scrollPaddingBottom = `${element.offsetHeight}px`;
+      document.body.style.paddingBottom = `${element.offsetHeight}px`;
+    };
+    update();
+    const observer = new ResizeObserver(update);
+    observer.observe(element);
+    return () => {
+      observer.disconnect();
+      root.style.scrollPaddingBottom = '';
+      document.body.style.paddingBottom = '';
+    };
+  }, [isVisible, currentAnnouncement]);
 
   useEffect(() => {
     try {
@@ -77,6 +98,7 @@ const StickyAnnouncement = () => {
 
   return (
     <div
+      ref={banner}
       className="fixed bottom-0 left-0 right-0 flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-0 sm:justify-between"
       style={{
         backgroundColor: 'var(--color-brand-subtle)',
@@ -92,7 +114,7 @@ const StickyAnnouncement = () => {
           href={currentAnnouncement.buttonUrl}
           target={currentAnnouncement.buttonUrl.startsWith('http') ? '_blank' : '_self'}
           rel={currentAnnouncement.buttonUrl.startsWith('http') ? 'noopener noreferrer' : ''}
-          className="body-small font-semibold px-4 py-2 btn-atlantic transition-colors"
+          className="body-small font-semibold px-4 py-2 btn-atlantic transition-colors motion-reduce:transition-none"
           style={{
             backgroundColor: 'var(--color-brand)',
             color: 'var(--text-inverse)',
@@ -108,7 +130,7 @@ const StickyAnnouncement = () => {
         </a>
         <button
           onClick={handleDismiss}
-          className="flex items-center justify-center w-6 h-6 rounded-md transition-colors"
+          className="flex items-center justify-center w-6 h-6 rounded-md transition-colors motion-reduce:transition-none"
           style={{ color: 'var(--text-subtle)' }}
           aria-label="Dismiss announcement"
           onMouseEnter={(e) => {

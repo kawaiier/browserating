@@ -5,7 +5,7 @@ import Image from 'next/image';
 export default function Footer() {
   return (
     <footer
-      className="text-center"
+      className="site-footer text-center"
       style={{
         backgroundColor: 'var(--surface-sunken)',
         borderTop: '1px solid var(--border-subtle)',

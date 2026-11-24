@@ -66,6 +66,7 @@ test('parseViewState ignores repeated keys, malformed engine keys and non-revers
     reverse: true,
     platform: null,
     engines: { crest: { 'macos-arm': 'WebKit' } },
+    sharedOnly: false,
   });
   assert.equal(parseViewState({ order: 'forward' }).reverse, false);
   assert.equal(parseViewState(undefined).reverse, false);
@@ -158,5 +159,25 @@ test('resolveCompareRequest returns 404, redirect or render decisions', () => {
       type: 'redirect',
       url: '/compare/crest-vs-firefox?engine.crest.macos-arm=WebKit&order=reverse',
     }
+  );
+});
+
+test('shared-only filter is a validated key that survives redirects and swaps', () => {
+  assert.equal(parseViewState({ shared: '1' }).sharedOnly, true);
+  assert.equal(parseViewState({ shared: 'yes' }).sharedOnly, false);
+  assert.equal(parseViewState({ shared: ['1', '1'] }).sharedOnly, false);
+  const url = buildCompareUrl({ first: 'firefox', second: 'crest', sharedOnly: true });
+  assert.equal(url, '/compare/crest-vs-firefox?order=reverse&shared=1');
+  assert.equal(
+    buildCompareUrl({ first: 'crest', second: 'firefox', sharedOnly: true }),
+    '/compare/crest-vs-firefox?shared=1'
+  );
+  assert.deepEqual(
+    resolveCompareRequest(
+      'firefox-vs-crest',
+      new URLSearchParams('shared=1&utm=x'),
+      new Set(['firefox', 'crest'])
+    ),
+    { type: 'redirect', url: '/compare/crest-vs-firefox?order=reverse&shared=1' }
   );
 });

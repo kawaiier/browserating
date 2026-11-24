@@ -290,6 +290,18 @@ textarea:focus-visible,
   border-color: #b3bac5 !important;
 }
 
+/* Footer text sits on the sunken surface, where the default subtle and brand tokens fall
+   below 4.5:1 in light mode. */
+.site-footer {
+  --text-subtle: #505f79;
+  --text-brand: #0052cc;
+}
+
+.dark .site-footer {
+  --text-subtle: #b3bac5;
+  --text-brand: #579dff;
+}
+
 @media (forced-colors: active) {
   .comparison-page :focus-visible {
     outline: 2px solid Highlight;
@@ -361,9 +373,10 @@ textarea:focus-visible,
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .comparison-page *,
-  .comparison-page *::before,
-  .comparison-page *::after {
+  .comparison-shell,
+  .comparison-shell *,
+  .comparison-shell *::before,
+  .comparison-shell *::after {
     animation: none !important;
     transition: none !important;
     scroll-behavior: auto !important;
