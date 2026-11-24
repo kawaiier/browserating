@@ -2,6 +2,7 @@
 // No React or Next.js imports, so these helpers run in server, client and `node --test`.
 
 export const PAIR_SEPARATOR = '-vs-';
+import { platformNames } from './platformDefinitions.js';
 const ENGINE_PREFIX = 'engine.';
 
 /** Splits a pair slug into two distinct, non-empty browser slugs, or returns null. */
@@ -32,7 +33,14 @@ export function parseViewState(query = {}) {
     if (!slug || !platform || rest.length || !value) continue;
     (engines[slug] ||= {})[platform] = value;
   }
-  return { reverse: query?.order === 'reverse', engines };
+  return {
+    reverse: query?.order === 'reverse',
+    platform:
+      typeof query?.platform === 'string' && Object.hasOwn(platformNames, query.platform)
+        ? query.platform
+        : null,
+    engines,
+  };
 }
 
 /** Keeps only engine choices that exist for that browser and platform in the model. */
@@ -58,7 +66,7 @@ export function validateEngines(engines, model) {
  * Builds a canonical comparison URL. `first` is the browser shown first; `engines` maps
  * browser slug → platform → engine. Query keys are sorted for deterministic output.
  */
-export function buildCompareUrl({ first, second, engines = {} } = {}) {
+export function buildCompareUrl({ first, second, engines = {}, platform } = {}) {
   const pair = canonicalPair(first, second);
   const entries = [];
   for (const slug of [pair.first, pair.second]) {
@@ -67,6 +75,7 @@ export function buildCompareUrl({ first, second, engines = {} } = {}) {
     }
   }
   if (pair.reversed) entries.push(['order', 'reverse']);
+  if (platform && Object.hasOwn(platformNames, platform)) entries.push(['platform', platform]);
   entries.sort(([a], [b]) => (a < b ? -1 : a > b ? 1 : 0));
   const query = new URLSearchParams(entries).toString();
   return `/compare/${pair.slug}${query ? `?${query}` : ''}`;
@@ -105,12 +114,12 @@ export function resolveCompareRequest(slug, searchParams, knownSlugs) {
   const parts = parsePairSlug(slug);
   if (!parts || !parts.every((part) => knownSlugs.has(part))) return { type: 'not-found' };
   if (!canonicalPair(...parts).reversed) return { type: 'render' };
-  const { engines } = parseViewState(searchParamsToObject(searchParams));
+  const { engines, platform } = parseViewState(searchParamsToObject(searchParams));
   const pairEngines = Object.fromEntries(
     parts.filter((s) => engines[s]).map((s) => [s, engines[s]])
   );
   return {
     type: 'redirect',
-    url: buildCompareUrl({ first: parts[0], second: parts[1], engines: pairEngines }),
+    url: buildCompareUrl({ first: parts[0], second: parts[1], engines: pairEngines, platform }),
   };
 }

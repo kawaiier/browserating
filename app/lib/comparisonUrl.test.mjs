@@ -62,9 +62,35 @@ test('parseViewState ignores repeated keys, malformed engine keys and non-revers
     'engine.crest.macos-arm.extra': 'Blink',
     utm_source: 'x',
   });
-  assert.deepEqual(state, { reverse: true, engines: { crest: { 'macos-arm': 'WebKit' } } });
+  assert.deepEqual(state, {
+    reverse: true,
+    platform: null,
+    engines: { crest: { 'macos-arm': 'WebKit' } },
+  });
   assert.equal(parseViewState({ order: 'forward' }).reverse, false);
   assert.equal(parseViewState(undefined).reverse, false);
+});
+
+test('platform state is validated and survives canonical redirects and swaps', () => {
+  assert.equal(parseViewState({ platform: 'windows' }).platform, 'windows');
+  assert.equal(parseViewState({ platform: 'unknown' }).platform, null);
+  assert.equal(parseViewState({ platform: ['windows', 'android'] }).platform, null);
+  const engines = { crest: { 'macos-arm': 'WebKit' } };
+  assert.equal(
+    buildCompareUrl({ first: 'firefox', second: 'crest', platform: 'macos-arm', engines }),
+    '/compare/crest-vs-firefox?engine.crest.macos-arm=WebKit&order=reverse&platform=macos-arm'
+  );
+  assert.deepEqual(
+    resolveCompareRequest(
+      'firefox-vs-crest',
+      new URLSearchParams('platform=windows'),
+      new Set(['firefox', 'crest'])
+    ),
+    {
+      type: 'redirect',
+      url: '/compare/crest-vs-firefox?order=reverse&platform=windows',
+    }
+  );
 });
 
 test('validateEngines keeps only engines available for that browser and platform', () => {

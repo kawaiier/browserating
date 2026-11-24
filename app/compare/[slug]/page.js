@@ -16,6 +16,7 @@ import ErrorBoundary from '@/app/components/ErrorBoundary';
 import Header from '@/app/components/Header';
 import Footer from '@/app/components/Footer';
 import BrowserCompareDropdown from '@/app/components/BrowserCompareDropdown';
+import ComparisonFocus from '@/app/components/ComparisonFocus';
 import { getBrowsersServer } from '@/app/lib/getBrowsersServer';
 import {
   deriveComparison,
@@ -69,6 +70,7 @@ export default async function ComparePage({ params, searchParams }) {
         first: parts[0],
         second: parts[1],
         engines: validateEngines(query.engines, initial),
+        platform: query.platform,
       })
     );
   }
@@ -86,6 +88,11 @@ export default async function ComparePage({ params, searchParams }) {
   );
   const onlyShared = rawQuery?.shared === '1';
   const visible = onlyShared ? shared : data.platforms;
+  const selected = data.platforms.find((p) => p.id === query.platform) || shared[0] || null;
+  const invalidPlatform = rawQuery?.platform != null && !query.platform;
+  const invalidEngine = Object.entries(query.engines).some(([slug, platforms]) =>
+    Object.entries(platforms).some(([id, engine]) => engines[slug]?.[id] !== engine)
+  );
   const optionsFor = (browser) =>
     catalog
       .filter((candidate) => getBrowserSlug(candidate.name) !== browser.slug)
@@ -103,7 +110,12 @@ export default async function ComparePage({ params, searchParams }) {
           name: `${candidate.name}${measured ? ` — ${count} shared platforms` : ' — No benchmarks yet'}`,
         };
       });
-  const baseUrl = buildCompareUrl({ first: ordered[0], second: ordered[1], engines });
+  const baseUrl = buildCompareUrl({
+    first: ordered[0],
+    second: ordered[1],
+    engines,
+    platform: query.platform,
+  });
   const filterUrl = `${baseUrl}${baseUrl.includes('?') ? '&' : '?'}shared=1`;
   const label = (observation) =>
     ({
@@ -129,6 +141,33 @@ export default async function ComparePage({ params, searchParams }) {
         {freshness === 'older' && <div>Older measurement (over 180 days old)</div>}
       </div>
     );
+  };
+  const hiddenState = (omit) => (
+    <>
+      {query.reverse && <input type="hidden" name="order" value="reverse" />}
+      {omit !== 'platform' && selected && (
+        <input type="hidden" name="platform" value={selected.id} />
+      )}
+      {Object.entries(engines).flatMap(([slug, platforms]) =>
+        Object.entries(platforms).map(([id, engine]) => {
+          const name = `engine.${slug}.${id}`;
+          return name === omit ? null : (
+            <input key={name} type="hidden" name={name} value={engine} />
+          );
+        })
+      )}
+      {onlyShared && <input type="hidden" name="shared" value="1" />}
+    </>
+  );
+  const outcomeText = (platform) => {
+    if (platform.outcome === 'unavailable')
+      return 'No head-to-head result: a score is missing or unavailable.';
+    if (platform.outcome === 'tie') return 'Same recorded score.';
+    if (platform.a.score.toFixed(2) === platform.b.score.toFixed(2)) return 'Same displayed score.';
+    const winner = platform.outcome === 'a' ? browserA : browserB;
+    const high = Math.max(platform.a.score, platform.b.score);
+    const low = Math.min(platform.a.score, platform.b.score);
+    return `${winner.name} has the higher recorded score (${(((high - low) / low) * 100).toFixed(1)}% higher).`;
   };
 
   return (
@@ -233,9 +272,131 @@ export default async function ComparePage({ params, searchParams }) {
                 </Link>
               </p>
               <section>
+                <ComparisonFocus />
                 <h2 className="text-2xl font-bold mb-4" style={{ color: 'var(--text-default)' }}>
                   Performance Comparison
                 </h2>
+                {(invalidPlatform || invalidEngine) && (
+                  <p role="status" className="mb-4" style={{ color: 'var(--text-default)' }}>
+                    {invalidPlatform && 'That platform is unavailable; the default is shown. '}
+                    {invalidEngine &&
+                      'An engine choice was unavailable; the primary engine is shown.'}
+                  </p>
+                )}
+                <form
+                  method="get"
+                  data-comparison-control
+                  className="mb-4 flex flex-wrap items-end gap-3"
+                >
+                  {hiddenState('platform')}
+                  <div>
+                    <label htmlFor="comparison-platform" className="block font-medium">
+                      Platform
+                    </label>
+                    <select
+                      id="comparison-platform"
+                      name="platform"
+                      defaultValue={selected?.id || ''}
+                      className="p-2 rounded"
+                      style={{
+                        backgroundColor: 'var(--surface-raised)',
+                        color: 'var(--text-default)',
+                        border: '1px solid var(--border-default)',
+                      }}
+                    >
+                      {!selected && (
+                        <option value="" disabled>
+                          Choose a platform
+                        </option>
+                      )}
+                      {data.platforms.map((p) => (
+                        <option key={p.id} value={p.id}>
+                          {p.label}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                  <button
+                    type="submit"
+                    className="rounded px-3 py-2"
+                    style={{ backgroundColor: 'var(--color-brand)', color: 'white' }}
+                  >
+                    Show platform
+                  </button>
+                </form>
+                {selected && (
+                  <section
+                    aria-label={`Selected result for ${selected.label}`}
+                    className="mb-6 rounded-lg p-4"
+                    style={{
+                      backgroundColor: 'var(--surface-raised)',
+                      border: '1px solid var(--border-subtle)',
+                    }}
+                  >
+                    <h3 className="text-xl font-bold">{selected.label} — Speedometer 3.1</h3>
+                    <p id="comparison-result" tabIndex={-1} role="status" className="my-2">
+                      {selected.label}. {browserA.name}:{' '}
+                      {selected.a.engine || 'engine not recorded'}. {browserB.name}:{' '}
+                      {selected.b.engine || 'engine not recorded'}. {outcomeText(selected)}
+                    </p>
+                    <div className="grid md:grid-cols-2 gap-4">
+                      {[
+                        [browserA, selected.a],
+                        [browserB, selected.b],
+                      ].map(([browser, observation]) => {
+                        const name = `engine.${browser.slug}.${selected.id}`;
+                        return (
+                          <div key={browser.slug}>
+                            <p className="font-semibold">
+                              {browser.name}: {label(observation)}
+                            </p>
+                            {observation.engines.length > 1 ? (
+                              <form
+                                method="get"
+                                data-comparison-control
+                                className="mt-2 flex flex-wrap items-end gap-2"
+                              >
+                                {hiddenState(name)}
+                                <div>
+                                  <label htmlFor={name} className="block">
+                                    {browser.name} engine
+                                  </label>
+                                  <select
+                                    id={name}
+                                    name={name}
+                                    defaultValue={observation.engine}
+                                    className="p-2 rounded"
+                                    style={{
+                                      backgroundColor: 'var(--surface-raised)',
+                                      color: 'var(--text-default)',
+                                      border: '1px solid var(--border-default)',
+                                    }}
+                                  >
+                                    {observation.engines.map((engine) => (
+                                      <option key={engine} value={engine}>
+                                        {engine}
+                                      </option>
+                                    ))}
+                                  </select>
+                                </div>
+                                <button
+                                  type="submit"
+                                  className="rounded px-3 py-2"
+                                  style={{ backgroundColor: 'var(--color-brand)', color: 'white' }}
+                                >
+                                  Show engine
+                                </button>
+                              </form>
+                            ) : (
+                              <p>Engine: {observation.engine || 'Not recorded'}</p>
+                            )}
+                            {evidence(observation)}
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </section>
+                )}
                 <p className="mb-4" style={{ color: 'var(--text-subtle)' }}>
                   Speedometer 3.1 — higher is better. Dates are when each measurement was tested;
                   older measurements are more than 180 days old. Different dates alone do not
