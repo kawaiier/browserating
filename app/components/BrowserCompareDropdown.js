@@ -30,14 +30,14 @@ export default function BrowserCompareDropdown({ currentSlug, currentName, brows
         }}
       >
         <label
-          htmlFor="compare-select"
+          htmlFor={`compare-select-${currentSlug}`}
           className="block text-sm font-medium mb-2"
           style={{ color: 'var(--text-default)' }}
         >
           Select a browser to compare against:
         </label>
         <select
-          id="compare-select"
+          id={`compare-select-${currentSlug}`}
           value={selected}
           onChange={handleChange}
           className="w-full rounded-md px-3 py-2 text-sm"

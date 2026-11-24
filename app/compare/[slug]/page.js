@@ -15,6 +15,11 @@ import DarkModeProvider from '@/app/components/DarkModeProvider';
 import ErrorBoundary from '@/app/components/ErrorBoundary';
 import Header from '@/app/components/Header';
 import Footer from '@/app/components/Footer';
+import BrowserCompareDropdown from '@/app/components/BrowserCompareDropdown';
+import { getBrowsersServer } from '@/app/lib/getBrowsersServer';
+import { deriveComparison, getComparisonObservation } from '@/app/lib/comparisonViewModel';
+import { getBrowserSlug } from '@/app/lib/getBrowserSlug';
+import { platformNames } from '@/app/lib/platformDefinitions';
 
 export async function generateStaticParams() {
   const comparisons = await generateComparisonSlugs();
@@ -46,7 +51,8 @@ export async function generateMetadata({ params }) {
 
 export default async function ComparePage({ params, searchParams }) {
   const { slug } = await params;
-  const query = parseViewState(await searchParams);
+  const rawQuery = await searchParams;
+  const query = parseViewState(rawQuery);
   const resolved = await resolvePair(slug);
   if (!resolved) notFound();
   const { parts, data: initial, canonical } = resolved;
@@ -70,6 +76,40 @@ export default async function ComparePage({ params, searchParams }) {
     getDataLastModified(),
   ]);
   const { browserA, browserB } = data;
+  const catalog = await getBrowsersServer();
+  const shared = data.platforms.filter(
+    (p) => p.a.state === 'available' && p.b.state === 'available'
+  );
+  const onlyShared = rawQuery?.shared === '1';
+  const visible = onlyShared ? shared : data.platforms;
+  const optionsFor = (browser) =>
+    catalog
+      .filter((candidate) => getBrowserSlug(candidate.name) !== browser.slug)
+      .map((candidate) => {
+        const slug = getBrowserSlug(candidate.name);
+        const comparison = deriveComparison(catalog, browser.slug, slug, engines);
+        const count = comparison.platforms.filter(
+          (p) => p.a.state === 'available' && p.b.state === 'available'
+        ).length;
+        const measured = Object.keys(platformNames).some(
+          (id) => getComparisonObservation(candidate, id).state === 'available'
+        );
+        return {
+          slug,
+          name: `${candidate.name}${measured ? ` — ${count} shared platforms` : ' — No benchmarks yet'}`,
+        };
+      });
+  const baseUrl = buildCompareUrl({ first: ordered[0], second: ordered[1], engines });
+  const filterUrl = `${baseUrl}${baseUrl.includes('?') ? '&' : '?'}shared=1`;
+  const label = (observation) =>
+    ({
+      'missing-browser': 'No browser data',
+      'missing-platform': 'No measurement',
+      'missing-engine': 'No measurement for this engine',
+      'missing-version': 'No recorded version',
+      'missing-metric': 'Speedometer score not recorded',
+      'invalid-metric': 'Invalid Speedometer score',
+    })[observation.state] || observation.score?.toFixed(2);
 
   return (
     <ErrorBoundary>
@@ -153,76 +193,105 @@ export default async function ComparePage({ params, searchParams }) {
                 </div>
               </section>
 
+              <BrowserCompareDropdown
+                currentSlug={browserA.slug}
+                currentName={browserA.name}
+                browsers={optionsFor(browserA)}
+              />
+              <BrowserCompareDropdown
+                currentSlug={browserB.slug}
+                currentName={browserB.name}
+                browsers={optionsFor(browserB)}
+              />
+              <p className="mb-4" style={{ color: 'var(--text-subtle)' }}>
+                <Link href={`/browsers/${browserA.slug}`} className="underline">
+                  {browserA.name} details
+                </Link>
+                {' · '}
+                <Link href={`/browsers/${browserB.slug}`} className="underline">
+                  {browserB.name} details
+                </Link>
+              </p>
               <section>
                 <h2 className="text-2xl font-bold mb-4" style={{ color: 'var(--text-default)' }}>
                   Performance Comparison
                 </h2>
-                <div className="overflow-x-auto">
-                  <table className="w-full">
-                    <thead>
-                      <tr style={{ borderBottom: '1px solid var(--border-default)' }}>
-                        <th className="text-left py-2" style={{ color: 'var(--text-default)' }}>
-                          Platform
-                        </th>
-                        <th className="text-right py-2" style={{ color: 'var(--text-default)' }}>
-                          {browserA.name}
-                        </th>
-                        <th className="text-right py-2" style={{ color: 'var(--text-default)' }}>
-                          {browserB.name}
-                        </th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {data.platforms.map((platform) => {
-                        if (
-                          platform.a.state === 'missing-platform' &&
-                          platform.b.state === 'missing-platform'
-                        )
-                          return null;
-                        const scoreA = platform.a.score;
-                        const scoreB = platform.b.score;
-
-                        return (
-                          <tr
-                            key={platform.id}
-                            style={{ borderBottom: '1px solid var(--border-subtle)' }}
-                          >
-                            <td
-                              className="py-2 font-medium"
-                              style={{ color: 'var(--text-default)' }}
+                <p className="mb-4" style={{ color: 'var(--text-subtle)' }}>
+                  {shared.length} shared platform{' '}
+                  {shared.length === 1 ? 'measurement' : 'measurements'}.
+                  {shared.length === 0 &&
+                    ' These browsers have no shared platform measurements, so there is no head-to-head result. Missing measurements do not establish platform incompatibility.'}
+                </p>
+                <p className="mb-4">
+                  <Link className="underline" href={onlyShared ? baseUrl : filterUrl}>
+                    {onlyShared ? 'Show all platforms (reset filter)' : 'Shared measurements only'}
+                  </Link>
+                </p>
+                {onlyShared && visible.length === 0 ? (
+                  <p>
+                    No shared measurements match this filter. Use the reset link to show all
+                    platforms.
+                  </p>
+                ) : (
+                  <div className="overflow-x-auto">
+                    <table className="w-full">
+                      <thead>
+                        <tr style={{ borderBottom: '1px solid var(--border-default)' }}>
+                          <th className="text-left py-2" style={{ color: 'var(--text-default)' }}>
+                            Platform
+                          </th>
+                          <th className="text-right py-2" style={{ color: 'var(--text-default)' }}>
+                            {browserA.name}
+                          </th>
+                          <th className="text-right py-2" style={{ color: 'var(--text-default)' }}>
+                            {browserB.name}
+                          </th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {visible.map((platform) => {
+                          return (
+                            <tr
+                              key={platform.id}
+                              style={{ borderBottom: '1px solid var(--border-subtle)' }}
                             >
-                              {platform.label}
-                            </td>
-                            <td
-                              className="text-right py-2"
-                              style={{
-                                color:
-                                  platform.outcome === 'a'
-                                    ? 'var(--color-success)'
-                                    : 'var(--text-default)',
-                                fontWeight: platform.outcome === 'a' ? 'bold' : 'normal',
-                              }}
-                            >
-                              {scoreA?.toFixed(2) || 'N/A'}
-                            </td>
-                            <td
-                              className="text-right py-2"
-                              style={{
-                                color:
-                                  platform.outcome === 'b'
-                                    ? 'var(--color-success)'
-                                    : 'var(--text-default)',
-                                fontWeight: platform.outcome === 'b' ? 'bold' : 'normal',
-                              }}
-                            >
-                              {scoreB?.toFixed(2) || 'N/A'}
-                            </td>
-                          </tr>
-                        );
-                      })}
-                    </tbody>
-                  </table>
-                </div>
+                              <td
+                                className="py-2 font-medium"
+                                style={{ color: 'var(--text-default)' }}
+                              >
+                                {platform.label}
+                              </td>
+                              <td
+                                className="text-right py-2"
+                                style={{
+                                  color:
+                                    platform.outcome === 'a'
+                                      ? 'var(--color-success)'
+                                      : 'var(--text-default)',
+                                  fontWeight: platform.outcome === 'a' ? 'bold' : 'normal',
+                                }}
+                              >
+                                {label(platform.a)}
+                              </td>
+                              <td
+                                className="text-right py-2"
+                                style={{
+                                  color:
+                                    platform.outcome === 'b'
+                                      ? 'var(--color-success)'
+                                      : 'var(--text-default)',
+                                  fontWeight: platform.outcome === 'b' ? 'bold' : 'normal',
+                                }}
+                              >
+                                {label(platform.b)}
+                              </td>
+                            </tr>
+                          );
+                        })}
+                      </tbody>
+                    </table>
+                  </div>
+                )}
               </section>
             </article>
           </main>
