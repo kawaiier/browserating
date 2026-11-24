@@ -1,4 +1,4 @@
-import { getComparisonData, generateComparisonSlugs } from '@/app/lib/getComparisonData';
+import { getComparisonData } from '@/app/lib/getComparisonData';
 import {
   buildCompareUrl,
   canonicalPair,
@@ -23,11 +23,7 @@ import {
   getScoreOutcome,
 } from '@/app/lib/comparisonViewModel';
 import { comparisonOptions, suggestPartners } from '@/app/lib/comparisonOptions';
-
-export async function generateStaticParams() {
-  const comparisons = await generateComparisonSlugs();
-  return comparisons.map((c) => ({ slug: c.slug }));
-}
+import { hasSharedMeasurement } from '@/app/lib/comparisonIndex';
 
 // Shared by metadata and page: a syntactically valid, distinct pair of known browsers.
 async function resolvePair(slug) {
@@ -43,12 +39,16 @@ export async function generateMetadata({ params }) {
   if (!resolved) return { title: 'Comparison Not Found' };
   const { data, canonical } = resolved;
 
+  const title = `${data.browserA.name} vs ${data.browserB.name} - Speedometer 3.1 Comparison`;
+  const description = `Compare recorded Speedometer 3.1 benchmark results for ${data.browserA.name} and ${data.browserB.name} across platforms.`;
+  const url = `https://browserating.com/compare/${canonical.slug}`;
   return {
-    title: `${data.browserA.name} vs ${data.browserB.name} - Browser Performance Comparison`,
-    description: `Compare ${data.browserA.name} and ${data.browserB.name} performance. Speedometer 3.1 benchmark results.`,
-    alternates: {
-      canonical: `https://browserating.com/compare/${canonical.slug}`,
-    },
+    title,
+    description,
+    alternates: { canonical: url },
+    robots: { index: hasSharedMeasurement(data), follow: true },
+    openGraph: { title, description, url, siteName: 'BrowseRating', type: 'website' },
+    twitter: { card: 'summary', title, description },
   };
 }
 

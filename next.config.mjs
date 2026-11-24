@@ -6,6 +6,8 @@ const __dirname = dirname(__filename);
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  // Resolve metadata before streaming so canonical and robots directives stay in the head.
+  htmlLimitedBots: /.*/,
   turbopack: {
     root: __dirname,
   },

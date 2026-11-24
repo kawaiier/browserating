@@ -15,7 +15,7 @@
 - **🔍 Comprehensive Browser Rankings**: Performance comparisons across macOS (ARM & Intel), Windows, Android, and iPad platforms
 - **📱 Responsive Design**: Optimized for all devices with mobile-first approach
 - **🎯 Advanced Filtering**: Filter browsers by engine (Blink, Gecko, WebKit) and platform
-- **📊 Detailed Metrics**: Speedometer 3.1 scores, RAM usage, ad-blocking effectiveness, and more
+- **📊 Detailed Metrics**: Speedometer 3.1 scores, with RAM usage and ad-blocking data where recorded
 - **🎨 Interactive Charts**: Visual representations of performance data using Chart.js
 - **🌙 Dark Mode Support**: Full dark/light theme toggle with system preference detection
 - **🔒 Privacy-Focused**: Transparent data practices with dedicated privacy policy
@@ -88,7 +88,11 @@ The application provides several key functionalities:
 ### Head-to-Head Comparisons (`/compare/[browser-a]-vs-[browser-b]`)
 
 - Side-by-side Speedometer 3.1 score comparison across all platforms
-- Winner highlighted per platform
+- Recorded scores, versions, engines, test dates, and differences where both browsers have measurements
+- Platform and engine controls, explicit browser selection, and shareable URLs
+- Pairs without shared measurements remain available but are omitted from the sitemap and marked `noindex, follow`
+
+The sitemap includes every canonical pair with a valid Speedometer 3.1 score for both browsers on at least one shared platform using their first-listed engines. This coverage-based list is not a popularity ranking; comparison pages are rendered dynamically.
 
 ### Platform-Specific Views (`/platforms/[platform]`)
 
@@ -136,7 +140,7 @@ Browser performance data is stored in JSON files located in `public/data/`. The 
      ]
    }
    ```
-3. Save the file - changes will be reflected on the next page load
+3. Save the file - publish changes with a new deployment
 
 ## 🤝 Contributing
 
