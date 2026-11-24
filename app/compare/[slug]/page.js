@@ -159,8 +159,12 @@ export default async function ComparePage({ params, searchParams }) {
             Skip to main content
           </a>
           <Header lastModified={lastModified} compact />
-          <main id="main-content" className="container mx-auto px-4 py-8 scroll-mt-4" tabIndex={-1}>
-            <article className="max-w-4xl mx-auto">
+          <main
+            id="main-content"
+            className="container mx-auto min-w-0 px-4 py-8 scroll-mt-4"
+            tabIndex={-1}
+          >
+            <article className="max-w-4xl min-w-0 mx-auto [overflow-wrap:anywhere]">
               <nav aria-label="Breadcrumb" className="mb-4">
                 <Link
                   href="/#rankings"
@@ -176,7 +180,10 @@ export default async function ComparePage({ params, searchParams }) {
               </nav>
 
               <header className="mb-8">
-                <h1 className="text-4xl font-bold mb-4" style={{ color: 'var(--text-default)' }}>
+                <h1
+                  className="text-3xl sm:text-4xl font-bold mb-4"
+                  style={{ color: 'var(--text-default)' }}
+                >
                   {browserA.name} vs {browserB.name}
                 </h1>
                 <p className="text-lg" style={{ color: 'var(--text-subtle)' }}>
@@ -210,7 +217,7 @@ export default async function ComparePage({ params, searchParams }) {
                       id="comparison-platform"
                       name="platform"
                       defaultValue={selected?.id || ''}
-                      className="p-2 rounded"
+                      className="min-h-11 max-w-full p-2 rounded"
                       style={{
                         backgroundColor: 'var(--surface-raised)',
                         color: 'var(--text-default)',
@@ -231,7 +238,7 @@ export default async function ComparePage({ params, searchParams }) {
                   </div>
                   <button
                     type="submit"
-                    className="rounded px-3 py-2"
+                    className="min-h-11 rounded px-3 py-2"
                     style={{ backgroundColor: 'var(--color-brand)', color: 'white' }}
                   >
                     Show platform
@@ -252,14 +259,14 @@ export default async function ComparePage({ params, searchParams }) {
                       {selected.a.engine || 'engine not recorded'}. {browserB.name}:{' '}
                       {selected.b.engine || 'engine not recorded'}. {outcomeText(selected)}
                     </p>
-                    <div className="grid md:grid-cols-2 gap-4">
+                    <div className="grid min-w-0 md:grid-cols-2 gap-4">
                       {[
                         [browserA, selected.a],
                         [browserB, selected.b],
                       ].map(([browser, observation]) => {
                         const name = `engine.${browser.slug}.${selected.id}`;
                         return (
-                          <div key={browser.slug}>
+                          <div key={browser.slug} className="min-w-0">
                             <Link
                               href={`/browsers/${browser.slug}`}
                               className="inline-flex items-center gap-2 font-semibold underline"
@@ -290,7 +297,7 @@ export default async function ComparePage({ params, searchParams }) {
                                     id={name}
                                     name={name}
                                     defaultValue={observation.engine}
-                                    className="p-2 rounded"
+                                    className="min-h-11 max-w-full p-2 rounded"
                                     style={{
                                       backgroundColor: 'var(--surface-raised)',
                                       color: 'var(--text-default)',
@@ -306,7 +313,7 @@ export default async function ComparePage({ params, searchParams }) {
                                 </div>
                                 <button
                                   type="submit"
-                                  className="rounded px-3 py-2"
+                                  className="min-h-11 rounded px-3 py-2"
                                   style={{ backgroundColor: 'var(--color-brand)', color: 'white' }}
                                 >
                                   Show engine
@@ -370,73 +377,109 @@ export default async function ComparePage({ params, searchParams }) {
                     platforms.
                   </p>
                 ) : (
-                  <div className="overflow-x-auto">
-                    <table className="w-full">
-                      <thead>
-                        <tr style={{ borderBottom: '1px solid var(--border-default)' }}>
-                          <th className="text-left py-2" style={{ color: 'var(--text-default)' }}>
-                            Platform
-                          </th>
-                          <th className="text-right py-2" style={{ color: 'var(--text-default)' }}>
-                            {browserA.name}
-                          </th>
-                          <th className="text-right py-2" style={{ color: 'var(--text-default)' }}>
-                            {browserB.name}
-                          </th>
-                          <th
-                            className="text-left py-2 pl-4"
-                            style={{ color: 'var(--text-default)' }}
-                          >
-                            Recorded result
-                          </th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {visible.map((platform) => {
-                          const result = getScoreOutcome(platform.a, platform.b);
-                          return (
-                            <tr
-                              key={platform.id}
-                              style={{ borderBottom: '1px solid var(--border-subtle)' }}
+                  <div>
+                    <p
+                      id="comparison-table-scroll-hint"
+                      className="mb-2 text-sm"
+                      style={{ color: 'var(--text-subtle)' }}
+                    >
+                      Scroll horizontally to see all columns when the table does not fit.
+                    </p>
+                    <div
+                      role="region"
+                      aria-label="All-platform comparison table"
+                      aria-describedby="comparison-table-scroll-hint"
+                      tabIndex={0}
+                      className="max-w-full overflow-x-auto rounded focus-visible:outline-2 focus-visible:outline-offset-2"
+                    >
+                      <table className="w-full min-w-[700px] table-fixed">
+                        <caption className="sr-only">
+                          Speedometer 3.1 results by platform for {browserA.name} and{' '}
+                          {browserB.name}
+                        </caption>
+                        <thead>
+                          <tr style={{ borderBottom: '1px solid var(--border-default)' }}>
+                            <th
+                              scope="col"
+                              className="text-left py-2 pr-3"
+                              style={{ color: 'var(--text-default)' }}
                             >
-                              <td
-                                className="py-2 font-medium"
-                                style={{ color: 'var(--text-default)' }}
+                              Platform
+                            </th>
+                            <th
+                              scope="col"
+                              className="text-right py-2 px-2"
+                              style={{ color: 'var(--text-default)' }}
+                            >
+                              {browserA.name}
+                            </th>
+                            <th
+                              scope="col"
+                              className="text-right py-2 px-2"
+                              style={{ color: 'var(--text-default)' }}
+                            >
+                              {browserB.name}
+                            </th>
+                            <th
+                              scope="col"
+                              className="text-left py-2 pl-4"
+                              style={{ color: 'var(--text-default)' }}
+                            >
+                              Recorded result
+                            </th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {visible.map((platform) => {
+                            const result = getScoreOutcome(platform.a, platform.b);
+                            return (
+                              <tr
+                                key={platform.id}
+                                style={{ borderBottom: '1px solid var(--border-subtle)' }}
                               >
-                                {platform.label}
-                              </td>
-                              <td
-                                className="text-right py-2"
-                                style={{
-                                  color: 'var(--text-default)',
-                                }}
-                              >
-                                {label(platform.a)}
-                                {result.state === 'a' && (
-                                  <div className="font-semibold">Higher recorded score</div>
-                                )}
-                                {evidence(platform.a)}
-                              </td>
-                              <td
-                                className="text-right py-2"
-                                style={{
-                                  color: 'var(--text-default)',
-                                }}
-                              >
-                                {label(platform.b)}
-                                {result.state === 'b' && (
-                                  <div className="font-semibold">Higher recorded score</div>
-                                )}
-                                {evidence(platform.b)}
-                              </td>
-                              <td className="py-2 pl-4" style={{ color: 'var(--text-default)' }}>
-                                {formatScoreOutcome(result, browserA.name, browserB.name)}
-                              </td>
-                            </tr>
-                          );
-                        })}
-                      </tbody>
-                    </table>
+                                <th
+                                  scope="row"
+                                  className="py-2 pr-3 text-left align-top font-medium"
+                                  style={{ color: 'var(--text-default)' }}
+                                >
+                                  {platform.label}
+                                </th>
+                                <td
+                                  className="text-right align-top py-2 px-2"
+                                  style={{
+                                    color: 'var(--text-default)',
+                                  }}
+                                >
+                                  {label(platform.a)}
+                                  {result.state === 'a' && (
+                                    <div className="font-semibold">Higher recorded score</div>
+                                  )}
+                                  {evidence(platform.a)}
+                                </td>
+                                <td
+                                  className="text-right align-top py-2 px-2"
+                                  style={{
+                                    color: 'var(--text-default)',
+                                  }}
+                                >
+                                  {label(platform.b)}
+                                  {result.state === 'b' && (
+                                    <div className="font-semibold">Higher recorded score</div>
+                                  )}
+                                  {evidence(platform.b)}
+                                </td>
+                                <td
+                                  className="align-top py-2 pl-4"
+                                  style={{ color: 'var(--text-default)' }}
+                                >
+                                  {formatScoreOutcome(result, browserA.name, browserB.name)}
+                                </td>
+                              </tr>
+                            );
+                          })}
+                        </tbody>
+                      </table>
+                    </div>
                   </div>
                 )}
               </section>

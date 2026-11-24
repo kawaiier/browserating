@@ -67,14 +67,14 @@ export default function BrowserCompareDropdown({
           if (!invalid && !pending) navigate(a, b);
         }}
       >
-        <div className="grid gap-4 sm:grid-cols-2">
+        <div className="grid min-w-0 gap-4 sm:grid-cols-2">
           {[
             ['a', 'First browser', a, setA, b],
             ['b', 'Second browser', b, setB, a],
           ].map(([name, label, value, setValue, other]) => (
             <label
               key={name}
-              className="block text-sm font-medium"
+              className="block min-w-0 text-sm font-medium"
               style={{ color: 'var(--text-default)' }}
             >
               {label}
@@ -85,7 +85,7 @@ export default function BrowserCompareDropdown({
                 required
                 aria-invalid={attempted && invalid ? 'true' : undefined}
                 aria-describedby={attempted && invalid ? 'compare-error' : undefined}
-                className="mt-2 w-full rounded-md px-3 py-2"
+                className="mt-2 min-h-11 w-full min-w-0 max-w-full rounded-md px-3 py-2"
                 style={selectStyle}
               >
                 <option value="">Choose a browser</option>
@@ -119,7 +119,7 @@ export default function BrowserCompareDropdown({
           <button
             type="submit"
             disabled={pending}
-            className="rounded-md px-4 py-2 font-semibold disabled:opacity-50"
+            className="min-h-11 rounded-md px-4 py-2 font-semibold disabled:opacity-50"
             style={buttonStyle}
           >
             Compare browsers
@@ -129,7 +129,7 @@ export default function BrowserCompareDropdown({
               type="button"
               disabled={pending}
               onClick={() => navigate(second, first)}
-              className="rounded-md px-4 py-2 disabled:opacity-50"
+              className="min-h-11 rounded-md px-4 py-2 disabled:opacity-50"
               style={buttonStyle}
             >
               Swap browsers
@@ -142,7 +142,7 @@ export default function BrowserCompareDropdown({
               setB(second);
               setAttempted(false);
             }}
-            className="rounded-md px-4 py-2"
+            className="min-h-11 rounded-md px-4 py-2"
             style={buttonStyle}
           >
             Reset selection
