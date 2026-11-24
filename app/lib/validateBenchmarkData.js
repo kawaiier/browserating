@@ -1,6 +1,7 @@
 import { getBrowserSlug } from './getBrowserSlug.js';
 import { PAIR_SEPARATOR } from './comparisonUrl.js';
 import { platformNames } from './platformDefinitions.js';
+import { benchmarkSources } from './benchmarkProvenance.js';
 
 const optionalMetrics = {
   speedometer3: (value) => value > 0,
@@ -110,6 +111,22 @@ export function validateBenchmarkData(catalog, platformData) {
         }
         if (typeof version.version !== 'string' || !version.version.trim()) {
           error(`${versionPath}.version`, 'expected a non-empty version string');
+        }
+        if (version.source != null && !benchmarkSources.includes(version.source)) {
+          error(`${versionPath}.source`, `expected one of: ${benchmarkSources.join(', ')}`);
+        }
+        if (
+          version.cohortId != null &&
+          (typeof version.cohortId !== 'string' ||
+            !/^[a-zA-Z0-9][a-zA-Z0-9._-]{0,63}$/.test(version.cohortId))
+        ) {
+          error(`${versionPath}.cohortId`, 'expected a 1–64 character cohort identifier');
+        }
+        if (version.source === 'community' && !version.cohortId) {
+          error(`${versionPath}.cohortId`, 'required for community observations');
+        }
+        if (version.source !== 'community' && version.cohortId != null) {
+          error(`${versionPath}.cohortId`, 'only valid for community observations');
         }
         if (typeof version.observationId !== 'string' || !version.observationId.trim()) {
           error(`${versionPath}.observationId`, 'expected a stable non-empty observation ID');

@@ -32,6 +32,7 @@ import {
 import { comparisonMetrics, formatMetricScore } from '@/app/lib/comparisonMetrics';
 import { comparisonOptions, suggestPartners } from '@/app/lib/comparisonOptions';
 import { hasSharedMeasurement } from '@/app/lib/comparisonIndex';
+import { getObservationSourceLabel } from '@/app/lib/benchmarkProvenance';
 
 // Shared by metadata and page: a syntactically valid, distinct pair of known browsers.
 async function resolvePair(slug) {
@@ -41,14 +42,41 @@ async function resolvePair(slug) {
   return data ? { parts, data, canonical: canonicalPair(...parts) } : null;
 }
 
-export async function generateMetadata({ params }) {
+export async function generateMetadata({ params, searchParams }) {
   const { slug } = await params;
   const resolved = await resolvePair(slug);
   if (!resolved) return { title: 'Comparison Not Found' };
-  const { data, canonical } = resolved;
+  const { data, canonical, parts } = resolved;
+  const query = parseViewState(await searchParams);
+  const engines = validateEngines(query.engines, data);
+  const initial =
+    Object.keys(engines).length || query.metric !== data.metric.id
+      ? await getComparisonData(...parts, engines, query.metric)
+      : data;
+  const observations = validateObservations(query.observations, initial);
+  const hasHistoricalSelections = Object.values(observations).some(
+    (platforms) => Object.keys(platforms).length > 0
+  );
+  const viewData = hasHistoricalSelections
+    ? await getComparisonData(...parts, engines, query.metric, observations)
+    : initial;
+  const selectedPlatform =
+    viewData.platforms.find(
+      ({ id }) =>
+        observations[viewData.browserA.slug]?.[id] || observations[viewData.browserB.slug]?.[id]
+    ) ||
+    viewData.platforms.find(({ id }) => id === query.platform) ||
+    viewData.platforms.find(
+      (platform) => platform.a.state === 'available' && platform.b.state === 'available'
+    ) ||
+    viewData.platforms[0];
+  const selectedRecords = selectedPlatform
+    ? [selectedPlatform.a.record, selectedPlatform.b.record].filter(Boolean)
+    : [];
+  const provenance = [...new Set(selectedRecords.map(getObservationSourceLabel))];
 
   const title = `${data.browserA.name} vs ${data.browserB.name} - Speedometer 3.1 Comparison`;
-  const description = `Compare recorded Speedometer 3.1 benchmark results for ${data.browserA.name} and ${data.browserB.name} across platforms.`;
+  const description = `Compare recorded Speedometer 3.1 benchmark results for ${data.browserA.name} and ${data.browserB.name} across platforms.${provenance.length ? ` Observation sources for this view: ${provenance.join('; ')}.` : ''}`;
   const url = `https://browserating.com/compare/${canonical.slug}`;
   const indexable = hasSharedMeasurement(data);
   // Pair cards show scores, so only pairs with a shared measurement get one.
@@ -210,6 +238,7 @@ export default async function ComparePage({ params, searchParams }) {
       <div className="mt-1 text-sm font-normal" style={{ color: 'var(--text-subtle)' }}>
         <div>Version: {observation.record.version || 'Not recorded'}</div>
         <div>Observation ID: {observation.record.observationId || 'Not recorded'}</div>
+        <div>Source: {getObservationSourceLabel(observation.record)}</div>
         <div>Engine: {observation.engine || 'Not recorded'}</div>
         <div>
           {freshness === 'unknown'
@@ -333,6 +362,7 @@ export default async function ComparePage({ params, searchParams }) {
                         <p>Score: {label(observation)}</p>
                         <p>Engine: {observation.engine || 'Not recorded'}</p>
                         <p>Version: {observation.record?.version || 'Not recorded'}</p>
+                        <p>Source: {getObservationSourceLabel(observation.record)}</p>
                         <p>Test date: {observation.record?.date || 'Not recorded'}</p>
                       </div>
                     ))}
@@ -660,7 +690,8 @@ export default async function ComparePage({ params, searchParams }) {
                                   <option value="">Latest recorded</option>
                                   {observation.history.map((record) => (
                                     <option key={record.observationId} value={record.observationId}>
-                                      {record.date || 'Test date not recorded'} — {record.version} (
+                                      {record.date || 'Test date not recorded'} — {record.version} —{' '}
+                                      {getObservationSourceLabel(record)} (
                                       {record.observationId.slice(-8)})
                                     </option>
                                   ))}

@@ -40,14 +40,21 @@ Comparison policy ownership:
 - `comparisonIndex.js`: sitemap eligibility using default engines and latest primary-metric coverage, independent of query state.
 - `getComparisonData.js`: server-side composition of the shared model and sitemap slug generation.
 
-The current schema has no approved benchmark revision, source, hardware/setup, or method
-reference fields. The validation report keeps this historical provenance gap separate
-from hard errors; do not backfill legacy records with inferred values. Historical pair
-selection uses exact recorded calendar-date equality as its matching rule and withholds a
+The schema supports optional `source: "curated" | "community"` and `cohortId` fields on
+individual version observations. Unmarked historical records are treated and displayed as
+curated; do not backfill inferred source or cohort values. Community observations require a
+stable, non-personal 1–64 character cohort ID. The selected observation ID in a comparison URL resolves
+to that exact source/cohort, and the comparison evidence and query-specific metadata display
+it. Cohort IDs are labels, not proof of matched hardware, methodology, or compatibility.
+
+Historical pair selection still uses exact recorded calendar-date equality and withholds a
 head-to-head result when dates differ or are unknown. Equal dates do not establish matched
 hardware or setup. Browser detail history is shown as independent bars; no line trend is
-inferred without compatible provenance. Add setup fields only through a documented
-migration once their meaning and collection process are agreed.
+inferred without compatible provenance. No cross-device averaging or population distribution
+is implemented: define a defensible cohort rule, minimum sample count, and distribution
+method in the separate UGC scope before adding those views. Community observations continue
+to ship through the same reviewed static-data deployment; source-specific caching and
+publication policies belong to the UGC implementation, not this schema groundwork.
 
 Curated data ships with a deployment. Deploy the successful build so rendered comparison
 content and sitemap coverage refresh together; cache behavior and invalidation are defined

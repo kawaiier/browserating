@@ -3,6 +3,7 @@ import { readFileSync } from 'node:fs';
 import test from 'node:test';
 
 import { indexableComparisonSlugs } from './comparisonIndex.js';
+import { getObservationSourceLabel } from './benchmarkProvenance.js';
 import { comparisonOptions } from './comparisonOptions.js';
 import { generatePairSlugs } from './comparisonUrl.js';
 import { mergeBrowserData } from './mergeBrowserData.js';
@@ -79,6 +80,44 @@ test('different engines are allowed and the first-listed engine remains primary'
   assert.deepEqual(
     merged[0]['macos-arm'].engineVariants.map(({ engine }) => engine),
     ['Blink', 'WebKit']
+  );
+});
+
+test('community provenance is explicit, validated, and retained by merged observations', () => {
+  const dataset = validDataset();
+  const observation = dataset.platforms.windows[0].versions[0];
+  observation.source = 'community';
+  observation.cohortId = 'desktop-arm-v1';
+  assert.equal(
+    getObservationSourceLabel(observation),
+    'Community-reported · cohort desktop-arm-v1'
+  );
+  assert.deepEqual(validateBenchmarkData(dataset.catalog, dataset.platforms).errors, []);
+  assert.equal(
+    mergeBrowserData(dataset.catalog, dataset.platforms)[0].windows.versions[0].cohortId,
+    'desktop-arm-v1'
+  );
+  assert.equal(
+    getObservationSourceLabel(dataset.platforms.android[0].versions[0]),
+    'Curated benchmark dataset'
+  );
+
+  const missingCohort = validDataset();
+  missingCohort.platforms.windows[0].versions[0].source = 'community';
+  assert.match(errorMessages(missingCohort), /cohortId: required for community observations/);
+
+  const invalidSource = validDataset();
+  invalidSource.platforms.windows[0].versions[0].source = 'unknown';
+  assert.match(errorMessages(invalidSource), /source: expected one of: curated, community/);
+
+  const invalidCohort = validDataset();
+  Object.assign(invalidCohort.platforms.windows[0].versions[0], {
+    source: 'community',
+    cohortId: '../private',
+  });
+  assert.match(
+    errorMessages(invalidCohort),
+    /cohortId: expected a 1–64 character cohort identifier/
   );
 });
 

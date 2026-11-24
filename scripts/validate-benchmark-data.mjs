@@ -27,7 +27,7 @@ if (warnings.length) {
   for (const warning of warnings) console.warn(`- ${warning}`);
 }
 console.log(
-  `Historical provenance report: ${versionRecords} version records have stable observation IDs; no approved revision/source/hardware/setup/method fields are defined, so matching setup remains unknown.`
+  `Historical provenance report: ${versionRecords} version records have stable observation IDs; source/cohort labels do not establish matching setup, and benchmark revision, hardware/setup, and method references remain undocumented.`
 );
 
 if (errors.length) {
