@@ -22,8 +22,10 @@ import { getBrowsersServer } from '@/app/lib/getBrowsersServer';
 import {
   formatScoreOutcome,
   getMeasurementFreshness,
+  getMetricCoverage,
   getScoreOutcome,
 } from '@/app/lib/comparisonViewModel';
+import { comparisonMetrics, formatMetricScore } from '@/app/lib/comparisonMetrics';
 import { comparisonOptions, suggestPartners } from '@/app/lib/comparisonOptions';
 import { hasSharedMeasurement } from '@/app/lib/comparisonIndex';
 
@@ -93,6 +95,7 @@ export default async function ComparePage({ params, searchParams }) {
         second: parts[1],
         engines: validateEngines(query.engines, initial),
         platform: query.platform,
+        metric: query.metric,
       })
     );
   }
@@ -100,7 +103,7 @@ export default async function ComparePage({ params, searchParams }) {
   const ordered = query.reverse ? [canonical.second, canonical.first] : parts;
   const engines = validateEngines(query.engines, initial);
   const [data, lastModified] = await Promise.all([
-    getComparisonData(...ordered, engines),
+    getComparisonData(...ordered, engines, query.metric),
     getDataLastModified(),
   ]);
   const { browserA, browserB } = data;
@@ -112,6 +115,7 @@ export default async function ComparePage({ params, searchParams }) {
   const options = comparisonOptions(catalog, engines);
   const measured = (side) => data.platforms.some((p) => p[side].state === 'available');
   const noData = !measured('a') && !measured('b');
+  const coverage = getMetricCoverage(data.platforms);
   const partners = shared.length
     ? []
     : [browserA, browserB]
@@ -126,6 +130,7 @@ export default async function ComparePage({ params, searchParams }) {
   const invalidEngine = Object.entries(query.engines).some(([slug, platforms]) =>
     Object.entries(platforms).some(([id, engine]) => engines[slug]?.[id] !== engine)
   );
+  const invalidMetric = rawQuery?.metric != null && rawQuery.metric !== query.metric;
   const viewUrl = (changes) =>
     buildCompareUrl({
       first: ordered[0],
@@ -133,12 +138,15 @@ export default async function ComparePage({ params, searchParams }) {
       engines,
       platform: query.platform,
       sharedOnly: onlyShared,
+      metric: query.metric,
       ...changes,
     });
   const baseUrl = viewUrl({ sharedOnly: false });
   const filterUrl = viewUrl({ sharedOnly: true });
   const committedUrl = viewUrl({ platform: selected?.id });
-  const selectedOutcome = selected ? getScoreOutcome(selected.a, selected.b) : null;
+  const selectedOutcome = selected
+    ? getScoreOutcome(selected.a, selected.b, true, data.metric)
+    : null;
   const selectedMaxScore = selected
     ? Math.max(0, ...[selected.a, selected.b].map((o) => (o.state === 'available' ? o.score : 0)))
     : 0;
@@ -150,9 +158,10 @@ export default async function ComparePage({ params, searchParams }) {
       'missing-platform': 'No measurement',
       'missing-engine': 'No measurement for this engine',
       'missing-version': 'No recorded version',
-      'missing-metric': 'Speedometer score not recorded',
-      'invalid-metric': 'Invalid Speedometer score',
-    })[observation.state] || observation.score?.toFixed(2);
+      'missing-metric': `${data.metric.name} score not recorded`,
+      'invalid-metric': `Invalid ${data.metric.name} score`,
+    })[observation.state] ||
+    (observation.state === 'available' ? formatMetricScore(observation.score, data.metric) : '');
   const evidence = (observation) => {
     if (!observation.record) return null;
     const freshness = getMeasurementFreshness(observation.record.date);
@@ -172,6 +181,9 @@ export default async function ComparePage({ params, searchParams }) {
   const hiddenState = (omit) => (
     <>
       {query.reverse && <input type="hidden" name="order" value="reverse" />}
+      {data.metric.id !== 'speedometer3' && (
+        <input type="hidden" name="metric" value={data.metric.id} />
+      )}
       {omit !== 'platform' && selected && (
         <input type="hidden" name="platform" value={selected.id} />
       )}
@@ -187,7 +199,12 @@ export default async function ComparePage({ params, searchParams }) {
     </>
   );
   const outcomeText = (platform) =>
-    formatScoreOutcome(getScoreOutcome(platform.a, platform.b), browserA.name, browserB.name);
+    formatScoreOutcome(
+      getScoreOutcome(platform.a, platform.b, true, data.metric),
+      browserA.name,
+      browserB.name,
+      data.metric
+    );
 
   return (
     <ErrorBoundary analyticsScope="comparison">
@@ -234,7 +251,7 @@ export default async function ComparePage({ params, searchParams }) {
                   {browserA.name} vs {browserB.name}
                 </h1>
                 <p className="text-lg" style={{ color: 'var(--text-subtle)' }}>
-                  Compare recorded Speedometer 3.1 results by platform.
+                  Compare recorded benchmark results by platform.
                 </p>
               </header>
 
@@ -249,7 +266,9 @@ export default async function ComparePage({ params, searchParams }) {
                 <h2>
                   {browserA.name} vs {browserB.name}
                 </h2>
-                <p>Metric: Speedometer 3.1 (higher is better)</p>
+                <p>
+                  Metric: {data.metric.name} — {data.metric.interpretation}
+                </p>
                 <p>Platform: {selected?.label || 'No platform selected'}</p>
                 {selected ? (
                   <>
@@ -291,6 +310,53 @@ export default async function ComparePage({ params, searchParams }) {
                 <h2 className="text-2xl font-bold mb-4" style={{ color: 'var(--text-default)' }}>
                   Performance Comparison
                 </h2>
+                <form
+                  method="get"
+                  data-comparison-control
+                  className="mb-4 flex flex-wrap items-end gap-3"
+                >
+                  {hiddenState('metric')}
+                  <div>
+                    <label htmlFor="comparison-metric" className="block font-medium">
+                      Metric
+                    </label>
+                    <select
+                      id="comparison-metric"
+                      name="metric"
+                      defaultValue={data.metric.id}
+                      className="min-h-[44px] max-w-full p-2 rounded"
+                      style={{
+                        backgroundColor: 'var(--surface-raised)',
+                        color: 'var(--text-default)',
+                        border: '1px solid var(--border-default)',
+                      }}
+                    >
+                      {Object.values(comparisonMetrics).map((metric) => (
+                        <option key={metric.id} value={metric.id}>
+                          {metric.name}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                  <button
+                    type="submit"
+                    className="min-h-[44px] rounded px-3 py-2"
+                    style={{ border: '1px solid currentColor', color: 'var(--text-default)' }}
+                  >
+                    Show metric
+                  </button>
+                  <p className="text-sm" style={{ color: 'var(--text-subtle)' }}>
+                    {coverage.observations} recorded{' '}
+                    {coverage.observations === 1 ? 'result' : 'results'}; {coverage.sharedPlatforms}{' '}
+                    shared {coverage.sharedPlatforms === 1 ? 'platform' : 'platforms'}.
+                  </p>
+                </form>
+                {invalidMetric && (
+                  <p role="status" className="mb-4" style={{ color: 'var(--text-default)' }}>
+                    That metric is not available; Speedometer 3.1 is shown. RAM comparisons are
+                    withheld until their measurement methods are documented.
+                  </p>
+                )}
                 {noData ? (
                   <div
                     className="mb-6 rounded-lg p-4"
@@ -299,9 +365,11 @@ export default async function ComparePage({ params, searchParams }) {
                       border: '1px solid var(--border-subtle)',
                     }}
                   >
-                    <h3 className="text-xl font-bold mb-2">No benchmarks recorded yet</h3>
+                    <h3 className="text-xl font-bold mb-2">
+                      No {data.metric.name} results recorded for this pair
+                    </h3>
                     <p className="mb-3">
-                      Neither {browserA.name} nor {browserB.name} has a recorded Speedometer 3.1
+                      Neither {browserA.name} nor {browserB.name} has a recorded {data.metric.name}
                       measurement on any platform, so there is nothing to compare. This does not
                       mean either browser cannot run on these platforms.
                     </p>
@@ -388,7 +456,9 @@ export default async function ComparePage({ params, searchParams }) {
                           border: '1px solid var(--border-subtle)',
                         }}
                       >
-                        <h3 className="text-xl font-bold">{selected.label} — Speedometer 3.1</h3>
+                        <h3 className="text-xl font-bold">
+                          {selected.label} — {data.metric.name}
+                        </h3>
                         <p id="comparison-result" className="my-2">
                           {selected.label}. {browserA.name}:{' '}
                           {selected.a.engine || 'engine not recorded'}. {browserB.name}:{' '}
@@ -435,7 +505,7 @@ export default async function ComparePage({ params, searchParams }) {
                                   {browser.name}
                                 </Link>
                                 <p className="font-semibold mt-2">{label(observation)}</p>
-                                {observation.state === 'available' && (
+                                {observation.state === 'available' && selectedMaxScore > 0 && (
                                   <div
                                     aria-hidden="true"
                                     className="mt-2 h-3 w-full overflow-hidden rounded-full"
@@ -521,10 +591,10 @@ export default async function ComparePage({ params, searchParams }) {
                       </div>
                     )}
                     <p className="mb-4" style={{ color: 'var(--text-subtle)' }}>
-                      Speedometer 3.1 — higher is better. Dates are when each measurement was
-                      tested; older measurements are more than 180 days old. Different dates alone
-                      do not establish different test setups. Hardware and setup details are not
-                      recorded for individual measurements. See the{' '}
+                      Method: {data.metric.method} {data.metric.interpretation} Dates are when each
+                      measurement was tested; older measurements are more than 180 days old.
+                      Different dates alone do not establish different test setups. Hardware and
+                      setup details are not recorded for individual measurements. See the{' '}
                       <Link href="/#methodology" className="underline">
                         general testing methodology
                       </Link>{' '}
@@ -536,7 +606,7 @@ export default async function ComparePage({ params, searchParams }) {
                       {shared.length === 0 &&
                         ' These browsers have no shared platform measurements, so there is no head-to-head result. Missing measurements do not establish platform incompatibility.'}
                     </p>
-                    {partners.length > 0 && (
+                    {partners.length > 0 && data.metric.id === 'speedometer3' && (
                       <div className="mb-4">
                         <h3 className="text-lg font-bold mb-2">
                           Comparisons with shared measurements
@@ -599,7 +669,7 @@ export default async function ComparePage({ params, searchParams }) {
                         >
                           <table className="w-full min-w-[700px] table-fixed">
                             <caption className="sr-only">
-                              Speedometer 3.1 results by platform for {browserA.name} and{' '}
+                              {data.metric.name} results by platform for {browserA.name} and{' '}
                               {browserB.name}
                             </caption>
                             <thead>
@@ -636,7 +706,12 @@ export default async function ComparePage({ params, searchParams }) {
                             </thead>
                             <tbody>
                               {visible.map((platform) => {
-                                const result = getScoreOutcome(platform.a, platform.b);
+                                const result = getScoreOutcome(
+                                  platform.a,
+                                  platform.b,
+                                  true,
+                                  data.metric
+                                );
                                 return (
                                   <tr
                                     key={platform.id}
@@ -677,7 +752,12 @@ export default async function ComparePage({ params, searchParams }) {
                                       className="align-top py-2 pl-4"
                                       style={{ color: 'var(--text-default)' }}
                                     >
-                                      {formatScoreOutcome(result, browserA.name, browserB.name)}
+                                      {formatScoreOutcome(
+                                        result,
+                                        browserA.name,
+                                        browserB.name,
+                                        data.metric
+                                      )}
                                     </td>
                                   </tr>
                                 );
@@ -699,6 +779,7 @@ export default async function ComparePage({ params, searchParams }) {
                   engines={engines}
                   platform={query.platform}
                   sharedOnly={onlyShared}
+                  metric={query.metric}
                 />
               </div>
             </article>

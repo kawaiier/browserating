@@ -67,6 +67,7 @@ test('parseViewState ignores repeated keys, malformed engine keys and non-revers
     platform: null,
     engines: { crest: { 'macos-arm': 'WebKit' } },
     sharedOnly: false,
+    metric: 'speedometer3',
   });
   assert.equal(parseViewState({ order: 'forward' }).reverse, false);
   assert.equal(parseViewState(undefined).reverse, false);
@@ -159,6 +160,23 @@ test('resolveCompareRequest returns 404, redirect or render decisions', () => {
       type: 'redirect',
       url: '/compare/crest-vs-firefox?engine.crest.macos-arm=WebKit&order=reverse',
     }
+  );
+});
+
+test('ad-blocking metric is validated and survives canonical pair redirects', () => {
+  assert.equal(parseViewState({ metric: 'adblock' }).metric, 'adblock');
+  assert.equal(parseViewState({ metric: 'ram' }).metric, 'speedometer3');
+  assert.equal(
+    buildCompareUrl({ first: 'firefox', second: 'crest', metric: 'adblock' }),
+    '/compare/crest-vs-firefox?metric=adblock&order=reverse'
+  );
+  assert.deepEqual(
+    resolveCompareRequest(
+      'firefox-vs-crest',
+      new URLSearchParams('metric=adblock&junk=1'),
+      new Set(['firefox', 'crest'])
+    ),
+    { type: 'redirect', url: '/compare/crest-vs-firefox?metric=adblock&order=reverse' }
   );
 });
 

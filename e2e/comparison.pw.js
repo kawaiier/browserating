@@ -35,6 +35,24 @@ test('HTTP normalization, invalid routes, metadata and rendered evidence agree',
   expect(html).toContain('Speedometer 3.1');
 });
 
+test('ad-blocking view shows recorded scores and explains unavailable pair data', async ({
+  page,
+}) => {
+  await page.goto('/compare/arc-browser-vs-brave');
+  await page.getByLabel('Metric').selectOption('adblock');
+  await page.getByRole('button', { name: 'Show metric' }).click();
+  await expect(page).toHaveURL(/metric=adblock/);
+  const result = page.getByRole('region', { name: 'Selected result for macOS ARM' });
+  await expect(result).toContainText('96%');
+  await expect(result).toContainText('Same recorded score.');
+
+  await page.goto('/compare/deta-surf-vs-web?metric=adblock');
+  await expect(
+    page.getByRole('heading', { name: 'No Ad-blocking test results recorded for this pair' })
+  ).toBeVisible();
+  await expect(page.getByText('0 recorded results')).toBeVisible();
+});
+
 test('engine, platform, reload, history and swaps preserve the committed view', async ({
   page,
 }) => {

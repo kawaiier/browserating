@@ -3,6 +3,7 @@
 
 export const PAIR_SEPARATOR = '-vs-';
 import { platformNames } from './platformDefinitions.js';
+import { comparisonMetrics, DEFAULT_COMPARISON_METRIC } from './comparisonMetrics.js';
 const ENGINE_PREFIX = 'engine.';
 
 /** Splits a pair slug into two distinct, non-empty browser slugs, or returns null. */
@@ -41,6 +42,10 @@ export function parseViewState(query = {}) {
         : null,
     engines,
     sharedOnly: query?.shared === '1',
+    metric:
+      typeof query?.metric === 'string' && Object.hasOwn(comparisonMetrics, query.metric)
+        ? query.metric
+        : DEFAULT_COMPARISON_METRIC,
   };
 }
 
@@ -67,7 +72,14 @@ export function validateEngines(engines, model) {
  * Builds a canonical comparison URL. `first` is the browser shown first; `engines` maps
  * browser slug → platform → engine. Query keys are sorted for deterministic output.
  */
-export function buildCompareUrl({ first, second, engines = {}, platform, sharedOnly } = {}) {
+export function buildCompareUrl({
+  first,
+  second,
+  engines = {},
+  platform,
+  sharedOnly,
+  metric = DEFAULT_COMPARISON_METRIC,
+} = {}) {
   const pair = canonicalPair(first, second);
   const entries = [];
   for (const slug of [pair.first, pair.second]) {
@@ -78,6 +90,8 @@ export function buildCompareUrl({ first, second, engines = {}, platform, sharedO
   if (pair.reversed) entries.push(['order', 'reverse']);
   if (platform && Object.hasOwn(platformNames, platform)) entries.push(['platform', platform]);
   if (sharedOnly) entries.push(['shared', '1']);
+  if (Object.hasOwn(comparisonMetrics, metric) && metric !== DEFAULT_COMPARISON_METRIC)
+    entries.push(['metric', metric]);
   entries.sort(([a], [b]) => (a < b ? -1 : a > b ? 1 : 0));
   const query = new URLSearchParams(entries).toString();
   return `/compare/${pair.slug}${query ? `?${query}` : ''}`;
@@ -116,7 +130,9 @@ export function resolveCompareRequest(slug, searchParams, knownSlugs) {
   const parts = parsePairSlug(slug);
   if (!parts || !parts.every((part) => knownSlugs.has(part))) return { type: 'not-found' };
   if (!canonicalPair(...parts).reversed) return { type: 'render' };
-  const { engines, platform, sharedOnly } = parseViewState(searchParamsToObject(searchParams));
+  const { engines, platform, sharedOnly, metric } = parseViewState(
+    searchParamsToObject(searchParams)
+  );
   const pairEngines = Object.fromEntries(
     parts.filter((s) => engines[s]).map((s) => [s, engines[s]])
   );
@@ -128,6 +144,7 @@ export function resolveCompareRequest(slug, searchParams, knownSlugs) {
       engines: pairEngines,
       platform,
       sharedOnly,
+      metric,
     }),
   };
 }

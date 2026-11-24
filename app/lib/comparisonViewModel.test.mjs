@@ -6,9 +6,11 @@ import {
   formatScoreOutcome,
   getComparisonObservation,
   getMeasurementFreshness,
+  getMetricCoverage,
   getScoreOutcome,
 } from './comparisonViewModel.js';
 import { mergeBrowserData } from './mergeBrowserData.js';
+import { getComparisonMetric } from './comparisonMetrics.js';
 
 const record = (score, version = 'first') => ({
   version,
@@ -57,6 +59,62 @@ test('score outcomes apply precision, positive denominators and order consistent
     formatScoreOutcome(getScoreOutcome(available(10), available(8), false), 'A', 'B'),
     /incompatible/
   );
+});
+
+test('ad-blocking comparisons retain zero, use percentage points and distinguish missing data', () => {
+  const adblock = getComparisonMetric('adblock');
+  const data = [
+    {
+      name: 'Browser A',
+      windows: {
+        engine: 'Blink',
+        versions: [
+          { ...record(10), scores: { speedometer3: 10, adblock: null } },
+          { version: 'older-adblock', date: '2025-12-01', scores: { adblock: 0 } },
+        ],
+      },
+    },
+    {
+      name: 'Browser B',
+      windows: {
+        engine: 'Gecko',
+        versions: [{ version: 'current', date: '2026-01-01', scores: { adblock: 35 } }],
+      },
+    },
+  ];
+  const model = deriveComparison(data, 'browser-a', 'browser-b', {}, 'adblock');
+  const windows = model.platforms.find((platform) => platform.id === 'windows');
+  assert.equal(windows.a.state, 'available');
+  assert.equal(windows.a.score, 0);
+  assert.equal(windows.a.record.version, 'older-adblock');
+  assert.equal(windows.outcome, 'b');
+  const result = getScoreOutcome(windows.a, windows.b, true, adblock);
+  assert.deepEqual(result, { state: 'b', difference: 35 });
+  assert.equal(
+    formatScoreOutcome(result, 'A', 'B', adblock),
+    'B has the higher recorded ad-blocking test score (35 percentage points higher).'
+  );
+  assert.equal(getMetricCoverage(model.platforms).observations, 2);
+  assert.equal(getMetricCoverage(model.platforms).sharedPlatforms, 1);
+
+  const missing = getComparisonObservation(
+    { windows: { versions: [{ scores: { adblock: null } }] } },
+    'windows',
+    undefined,
+    'adblock'
+  );
+  assert.equal(missing.state, 'missing-metric');
+  for (const score of [-1, 101, Infinity]) {
+    assert.equal(
+      getComparisonObservation(
+        { windows: { versions: [{ scores: { adblock: score } }] } },
+        'windows',
+        undefined,
+        'adblock'
+      ).state,
+      'invalid-metric'
+    );
+  }
 });
 
 test('freshness uses recorded calendar dates and the 180-day threshold', () => {

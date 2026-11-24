@@ -13,6 +13,7 @@ export default function BrowserCompareDropdown({
   engines = {},
   platform,
   sharedOnly = false,
+  metric,
   source = 'direct/unknown',
 }) {
   const router = useRouter();
@@ -29,6 +30,7 @@ export default function BrowserCompareDropdown({
       engines,
       platform,
       sharedOnly,
+      metric,
     });
     const entrySource = takeComparisonSource(window.location.pathname) || source;
     rememberComparisonSource(entrySource, destination);
@@ -124,6 +126,9 @@ export default function BrowserCompareDropdown({
         </div>
         {platform && <input type="hidden" name="platform" value={platform} />}
         {sharedOnly && <input type="hidden" name="shared" value="1" />}
+        {metric && metric !== 'speedometer3' && (
+          <input type="hidden" name="metric" value={metric} />
+        )}
         {Object.entries(engines).flatMap(([slug, platforms]) =>
           Object.entries(platforms).map(([id, engine]) => (
             <input
