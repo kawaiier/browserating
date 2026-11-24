@@ -16,3 +16,13 @@ export function indexableComparisonSlugs(browsers) {
     return coverage.get(a).some((platform) => coverage.get(b).includes(platform));
   });
 }
+
+export function randomComparisonSample(comparisons, count, random = Math.random) {
+  const sample = [...comparisons];
+  const size = Math.min(count, sample.length);
+  for (let i = 0; i < size; i += 1) {
+    const j = i + Math.floor(random() * (sample.length - i));
+    [sample[i], sample[j]] = [sample[j], sample[i]];
+  }
+  return sample.slice(0, size);
+}

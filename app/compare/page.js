@@ -6,8 +6,10 @@ import Footer from '@/app/components/Footer';
 import Header from '@/app/components/Header';
 import { getBrowsersServer } from '@/app/lib/getBrowsersServer';
 import { comparisonOptions } from '@/app/lib/comparisonOptions';
-import { indexableComparisonSlugs } from '@/app/lib/comparisonIndex';
+import { indexableComparisonSlugs, randomComparisonSample } from '@/app/lib/comparisonIndex';
 import { buildCompareUrl } from '@/app/lib/comparisonUrl';
+
+export const dynamic = 'force-dynamic';
 
 export const metadata = {
   title: 'Compare Browsers - Speedometer 3.1 Benchmarks',
@@ -20,13 +22,13 @@ export default async function CompareHub() {
   const catalog = await getBrowsersServer();
   const options = comparisonOptions(catalog);
   const bySlug = new Map(options.map((option) => [option.slug, option]));
-  const examples = indexableComparisonSlugs(catalog)
-    .slice(0, 6)
-    .map(({ browserA, browserB }) => {
+  const examples = randomComparisonSample(indexableComparisonSlugs(catalog), 6).map(
+    ({ browserA, browserB }) => {
       const a = bySlug.get(browserA);
       const b = bySlug.get(browserB);
       return { a, b, count: a.platforms.filter((id) => b.platforms.includes(id)).length };
-    });
+    }
+  );
 
   return (
     <ErrorBoundary analyticsScope="comparison">
@@ -59,8 +61,8 @@ export default async function CompareHub() {
                   Comparisons with shared measurements
                 </h2>
                 <p className="mb-4" style={{ color: 'var(--text-subtle)' }}>
-                  Examples are selected from pairs with recorded scores on at least one shared
-                  platform.
+                  Random examples are selected from pairs with recorded scores on at least one
+                  shared platform.
                 </p>
                 {examples.length ? (
                   <ul className="grid gap-3 sm:grid-cols-2">

@@ -335,13 +335,6 @@ export default async function ComparePage({ params, searchParams }) {
                 </p>
               </header>
 
-              <ComparisonShare
-                first={browserA.slug}
-                second={browserB.slug}
-                path={committedUrl}
-                title={`${browserA.name} vs ${browserB.name}`}
-                printDate={new Date().toISOString().slice(0, 10)}
-              />
               <section className="comparison-print-result">
                 <h2>
                   {browserA.name} vs {browserB.name}
@@ -923,6 +916,13 @@ export default async function ComparePage({ params, searchParams }) {
                   metric={query.metric}
                 />
               </div>
+              <ComparisonShare
+                first={browserA.slug}
+                second={browserB.slug}
+                path={committedUrl}
+                title={`${browserA.name} vs ${browserB.name}`}
+                printDate={new Date().toISOString().slice(0, 10)}
+              />
             </article>
           </main>
           <Footer />

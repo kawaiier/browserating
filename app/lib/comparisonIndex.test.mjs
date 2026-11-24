@@ -5,8 +5,19 @@ import { mergeBrowserData } from './mergeBrowserData.js';
 
 const browsers = mergeBrowserData(fixture.catalog, fixture.platforms);
 import { deriveComparison } from './comparisonViewModel.js';
-import { hasSharedMeasurement, indexableComparisonSlugs } from './comparisonIndex.js';
+import {
+  hasSharedMeasurement,
+  indexableComparisonSlugs,
+  randomComparisonSample,
+} from './comparisonIndex.js';
 import { canonicalPair, parsePairSlug } from './comparisonUrl.js';
+
+test('random comparison sampling is a non-mutating shuffle', () => {
+  const candidates = ['a', 'b', 'c'];
+  const sample = randomComparisonSample(candidates, 3, () => 0.99);
+  assert.deepEqual(sample, ['c', 'a', 'b']);
+  assert.deepEqual(candidates, ['a', 'b', 'c']);
+});
 
 test('index candidates are exactly canonical pairs with shared default measurements', () => {
   const candidates = indexableComparisonSlugs(browsers);

@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { track } from '@vercel/analytics/react';
 import { canonicalPair } from '@/app/lib/comparisonUrl';
+import { Copy, Printer, Share2 } from 'lucide-react';
 
 export default function ComparisonShare({ first, second, path, title, printDate }) {
   const { first: browserA, second: browserB } = canonicalPair(first, second);
@@ -63,25 +64,28 @@ export default function ComparisonShare({ first, second, path, title, printDate 
           <button
             type="button"
             onClick={copy}
-            className="min-h-[44px] rounded px-3 py-2"
+            className="min-h-[44px] inline-flex items-center gap-2 rounded px-3 py-2"
             style={{ border: '1px solid currentColor' }}
           >
+            <Copy aria-hidden="true" size={16} />
             Copy link
           </button>
           <button
             type="button"
             onClick={share}
-            className="min-h-[44px] rounded px-3 py-2"
+            className="min-h-[44px] inline-flex items-center gap-2 rounded px-3 py-2"
             style={{ border: '1px solid currentColor' }}
           >
+            <Share2 aria-hidden="true" size={16} />
             Share
           </button>
           <button
             type="button"
             onClick={() => window.print()}
-            className="min-h-[44px] rounded px-3 py-2"
+            className="min-h-[44px] inline-flex items-center gap-2 rounded px-3 py-2"
             style={{ border: '1px solid currentColor' }}
           >
+            <Printer aria-hidden="true" size={16} />
             Print
           </button>
         </div>
