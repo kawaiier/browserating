@@ -55,6 +55,12 @@ export default async function sitemap() {
     ...platformPages,
     ...comparisonPages,
     {
+      url: `${baseUrl}/compare`,
+      lastModified: dataLastModified,
+      changeFrequency: 'weekly',
+      priority: 0.8,
+    },
+    {
       url: `${baseUrl}/quiz`,
       lastModified: dataLastModified,
       changeFrequency: 'weekly',

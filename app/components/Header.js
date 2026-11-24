@@ -31,6 +31,9 @@ export default function Header({ lastModified, compact = false }) {
             />
           </Link>
           <nav aria-label="Site navigation" className="flex flex-wrap items-center gap-4">
+            <Link href="/compare" className="underline" style={{ color: 'var(--text-default)' }}>
+              Compare
+            </Link>
             <Link href="/#rankings" className="underline" style={{ color: 'var(--text-default)' }}>
               View rankings
             </Link>
@@ -145,6 +148,13 @@ export default function Header({ lastModified, compact = false }) {
           className="flex flex-wrap gap-3 mt-8 pt-8"
           style={{ borderTop: '1px solid var(--border-subtle)' }}
         >
+          <Link
+            href="/compare"
+            className="inline-flex items-center gap-2 px-4 py-2 btn-atlantic-secondary font-medium"
+            style={{ color: 'var(--text-brand)', border: '1.5px solid var(--border-brand)' }}
+          >
+            Compare Browsers
+          </Link>
           <Link
             href="/#rankings"
             className="inline-flex items-center gap-2 px-4 py-2 btn-atlantic font-medium transition-all"

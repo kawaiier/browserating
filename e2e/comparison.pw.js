@@ -105,3 +105,30 @@ test('small viewport reflows without page-level horizontal overflow', async ({ p
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
   await expect(page.getByRole('region', { name: 'All-platform comparison table' })).toBeVisible();
 });
+
+test('comparison hub offers measured examples and all catalog browsers', async ({ page }) => {
+  await page.goto('/compare');
+  await expect(page.getByRole('heading', { level: 1 })).toHaveText('Compare browser performance');
+  await expect(page.getByLabel('First browser').locator('option[value="deta-surf"]')).toContainText(
+    'No benchmarks yet'
+  );
+  await expect(
+    page.getByLabel('First browser').locator('option[value="firefox-beta"]')
+  ).toContainText('Firefox Beta');
+  await expect(
+    page.getByRole('heading', { name: 'Comparisons with shared measurements' })
+  ).toBeVisible();
+  await page.getByLabel('First browser').selectOption('firefox');
+  await page.getByLabel('Second browser').selectOption('google-chrome');
+  await page.getByRole('button', { name: 'Compare browsers', exact: true }).click();
+  await expect(page.getByRole('heading', { level: 1 })).toHaveText('Firefox vs Google Chrome');
+});
+
+test('hub validates GET submissions and redirects valid pairs', async ({ request }) => {
+  const invalid = await request.get('/compare?a=firefox&b=firefox');
+  expect(invalid.status()).toBe(400);
+  expect(await invalid.text()).toContain('Choose two different browsers');
+  const valid = await request.get('/compare?a=firefox&b=google-chrome', { maxRedirects: 0 });
+  expect(valid.status()).toBe(307);
+  expect(valid.headers().location).toContain('/compare/firefox-vs-google-chrome');
+});
