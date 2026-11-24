@@ -2,6 +2,7 @@ import { getBrowsersServer } from './getBrowsersServer';
 import { deriveComparison } from './comparisonViewModel';
 import { indexableComparisonSlugs } from './comparisonIndex';
 
+// Server boundary that loads the catalog and delegates all comparison rules to the pure model.
 export async function getComparisonData(browserA, browserB, engines, metric, observations) {
   return deriveComparison(
     await getBrowsersServer(),

@@ -2,9 +2,10 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { track } from '@vercel/analytics/react';
+import { canonicalPair } from '@/app/lib/comparisonUrl';
 
 export default function ComparisonShare({ first, second, path, title, printDate }) {
-  const [browserA, browserB] = [first, second].sort();
+  const { first: browserA, second: browserB } = canonicalPair(first, second);
   const [message, setMessage] = useState('');
   const [fallbackUrl, setFallbackUrl] = useState('');
   const dateRef = useRef(null);

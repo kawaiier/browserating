@@ -7,6 +7,8 @@ import {
   getComparisonObservation,
   getMeasurementFreshness,
   getMetricCoverage,
+  getSharedPlatforms,
+  getComparisonOutcome,
   isExactDateMatch,
   getScoreOutcome,
 } from './comparisonViewModel.js';
@@ -126,6 +128,29 @@ test('freshness uses recorded calendar dates and the 180-day threshold', () => {
   for (const date of [null, '', '2026-02-30', 'not a date']) {
     assert.equal(getMeasurementFreshness(date, now), 'unknown');
   }
+});
+
+test('shared-platform coverage honors exact dates only for historical selections', () => {
+  const available = (date, score) => ({
+    state: 'available',
+    score,
+    record: { date },
+  });
+  const platforms = [
+    { id: 'current', a: available('2026-03-01', 10), b: available('2026-02-28', 8) },
+    { id: 'matched', a: available('2026-03-01', 10), b: available('2026-03-01', 8) },
+    { id: 'missing', a: available('2026-03-01', 10), b: { state: 'missing-metric' } },
+  ];
+  assert.deepEqual(
+    getSharedPlatforms(platforms).map(({ id }) => id),
+    ['current', 'matched']
+  );
+  assert.deepEqual(
+    getSharedPlatforms(platforms, new Set(['current', 'matched'])).map(({ id }) => id),
+    ['matched']
+  );
+  assert.deepEqual(getComparisonOutcome(platforms[0], true), { state: 'unavailable' });
+  assert.deepEqual(getComparisonOutcome(platforms[1], true), { state: 'a', percent: 25 });
 });
 
 test('derives identity, coverage, first observation and engine-specific outcome', () => {

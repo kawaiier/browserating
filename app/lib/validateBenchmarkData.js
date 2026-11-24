@@ -1,4 +1,5 @@
 import { getBrowserSlug } from './getBrowserSlug.js';
+import { PAIR_SEPARATOR } from './comparisonUrl.js';
 import { platformNames } from './platformDefinitions.js';
 
 const optionalMetrics = {
@@ -46,7 +47,7 @@ export function validateBenchmarkData(catalog, platformData) {
     names.add(browser.name);
 
     const slug = getBrowserSlug(browser.name);
-    if (!slug || slug.includes('-vs-')) {
+    if (!slug || slug.includes(PAIR_SEPARATOR)) {
       error(`${path}.name`, `does not produce a valid browser slug ("${slug}")`);
     } else if (slugs.has(slug)) {
       error(`${path}.name`, `slug "${slug}" collides with catalog name "${slugs.get(slug)}"`);

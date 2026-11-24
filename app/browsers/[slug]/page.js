@@ -12,6 +12,7 @@ import Footer from '@/app/components/Footer';
 import BrowserCompareDropdown from '@/app/components/BrowserCompareDropdown';
 import { comparisonOptions } from '@/app/lib/comparisonOptions';
 import { getEngineVariants } from '@/app/lib/getPlatformEngineData';
+import { platformNames } from '@/app/lib/platformDefinitions';
 
 export async function generateStaticParams() {
   const slugs = await getAllBrowserSlugs();
@@ -62,15 +63,7 @@ export default async function BrowserPage({ params, searchParams }) {
   }
 
   const query = await searchParams;
-  const platforms = ['macos-arm', 'macos-intel', 'windows', 'android', 'ipad'];
-  const platformLabels = {
-    'macos-arm': 'macOS (Apple Silicon)',
-    'macos-intel': 'macOS (Intel)',
-    windows: 'Windows',
-    android: 'Android',
-    ipad: 'iPad',
-  };
-
+  const platforms = Object.keys(platformNames);
   const platform =
     typeof query?.platform === 'string' && platforms.includes(query.platform)
       ? query.platform
@@ -183,7 +176,7 @@ export default async function BrowserPage({ params, searchParams }) {
                           className="text-lg font-semibold mb-2"
                           style={{ color: 'var(--text-default)' }}
                         >
-                          {platformLabels[platform]}
+                          {platformNames[platform]}
                         </h3>
                         <div className="grid grid-cols-3 gap-4 text-sm">
                           <div>

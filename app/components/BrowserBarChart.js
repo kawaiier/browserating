@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { TrendingDown, TrendingUp } from 'lucide-react';
+import { platformNames } from '../lib/platformDefinitions';
 
 export default function BrowserBarChart({ browsers, platform, getEngineColor }) {
   const [sortOrder, setSortOrder] = useState('desc');
@@ -128,14 +129,6 @@ export default function BrowserBarChart({ browsers, platform, getEngineColor }) 
       </div>
     );
   }
-
-  const platformNames = {
-    'macos-arm': 'macOS ARM',
-    'macos-intel': 'macOS Intel',
-    windows: 'Windows',
-    android: 'Android',
-    ipad: 'iPad OS',
-  };
 
   const platformName = platformNames[platform] || platform;
 

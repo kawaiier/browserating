@@ -2,6 +2,7 @@ import { getBrowserSlug } from './getBrowserSlug.js';
 import { getComparisonObservation } from './comparisonViewModel.js';
 import { platformNames } from './platformDefinitions.js';
 
+// Chooser coverage follows the selected engine (or each browser's primary engine).
 export function comparisonOptions(catalog, engines = {}) {
   return catalog
     .map((browser) => {

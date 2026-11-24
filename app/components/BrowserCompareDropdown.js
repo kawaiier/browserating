@@ -3,7 +3,7 @@
 import { useRouter } from 'next/navigation';
 import { useState, useTransition } from 'react';
 import { track } from '@vercel/analytics/react';
-import { buildCompareUrl } from '@/app/lib/comparisonUrl';
+import { buildCompareUrl, canonicalPair } from '@/app/lib/comparisonUrl';
 import { rememberComparisonSource, takeComparisonSource } from '@/app/lib/comparisonAnalytics';
 
 export default function BrowserCompareDropdown({
@@ -40,7 +40,7 @@ export default function BrowserCompareDropdown({
       browsers.some((browser) => browser.slug === left) &&
       browsers.some((browser) => browser.slug === right)
     ) {
-      const [browserA, browserB] = [left, right].sort();
+      const { first: browserA, second: browserB } = canonicalPair(left, right);
       track('comparison_applied', {
         browser_a: browserA,
         browser_b: browserB,

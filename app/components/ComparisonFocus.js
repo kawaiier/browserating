@@ -3,6 +3,7 @@
 import { useEffect, useRef } from 'react';
 import { usePathname } from 'next/navigation';
 import { track } from '@vercel/analytics/react';
+import { canonicalPair } from '@/app/lib/comparisonUrl';
 
 // Native GET forms work without JavaScript; restore focus after an enhanced submission.
 export default function ComparisonFocus({ first, second }) {
@@ -30,7 +31,7 @@ export default function ComparisonFocus({ first, second }) {
       if (!event.target.matches('form[data-comparison-control]')) return;
       const control = event.target.querySelector('select');
       const value = control?.value;
-      const [browserA, browserB] = [first, second].sort();
+      const { first: browserA, second: browserB } = canonicalPair(first, second);
       if (control?.name === 'platform' && value && value !== control.dataset.current) {
         track('comparison_platform_changed', {
           browser_a: browserA,

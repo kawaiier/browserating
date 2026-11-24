@@ -23,9 +23,11 @@ import { getBrowsersServer } from '@/app/lib/getBrowsersServer';
 import {
   formatScoreOutcome,
   getMeasurementFreshness,
+  getComparisonOutcome,
   getMetricCoverage,
-  getScoreOutcome,
+  getSharedPlatforms,
   isExactDateMatch,
+  isHistoricalDateMismatch,
 } from '@/app/lib/comparisonViewModel';
 import { comparisonMetrics, formatMetricScore } from '@/app/lib/comparisonMetrics';
 import { comparisonOptions, suggestPartners } from '@/app/lib/comparisonOptions';
@@ -123,12 +125,10 @@ export default async function ComparePage({ params, searchParams }) {
       observations[browserA.slug]?.[platform.id] || observations[browserB.slug]?.[platform.id]
     );
   const catalog = await getBrowsersServer();
-  const shared = data.platforms.filter(
-    (p) =>
-      p.a.state === 'available' &&
-      p.b.state === 'available' &&
-      (!usesHistoricalSelection(p) || isExactDateMatch(p.a, p.b))
+  const historicalPlatformIds = new Set(
+    data.platforms.filter(usesHistoricalSelection).map((platform) => platform.id)
   );
+  const shared = getSharedPlatforms(data.platforms, historicalPlatformIds);
   const onlyShared = query.sharedOnly;
   const options = comparisonOptions(catalog, engines);
   const measured = (side) => data.platforms.some((p) => p[side].state === 'available');
@@ -183,14 +183,9 @@ export default async function ComparePage({ params, searchParams }) {
   const filterUrl = viewUrl({ sharedOnly: true });
   const committedUrl = viewUrl({ platform: selected?.id });
   const unmatchedHistoricalDate = (platform) =>
-    usesHistoricalSelection(platform) &&
-    platform.a.state === 'available' &&
-    platform.b.state === 'available' &&
-    !isExactDateMatch(platform.a, platform.b);
+    isHistoricalDateMismatch(platform, usesHistoricalSelection(platform));
   const scoreOutcome = (platform) =>
-    unmatchedHistoricalDate(platform)
-      ? { state: 'unavailable' }
-      : getScoreOutcome(platform.a, platform.b, true, data.metric);
+    getComparisonOutcome(platform, usesHistoricalSelection(platform), data.metric);
   const selectedOutcome = selected ? scoreOutcome(selected) : null;
   const selectedMaxScore = selected
     ? Math.max(0, ...[selected.a, selected.b].map((o) => (o.state === 'available' ? o.score : 0)))

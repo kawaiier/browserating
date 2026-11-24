@@ -1,3 +1,4 @@
+// Metric validity, direction, display precision and user-facing interpretation live here.
 export const comparisonMetrics = {
   speedometer3: {
     id: 'speedometer3',

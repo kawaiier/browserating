@@ -3,9 +3,32 @@ import { getBrowserSlug } from './getBrowserSlug.js';
 import { getEngineVariants } from './getPlatformEngineData.js';
 import { comparisonMetric, getComparisonMetric } from './comparisonMetrics.js';
 
+// Pure comparison policy: record selection, freshness, coverage and score outcomes.
 export { comparisonMetric } from './comparisonMetrics.js';
 
 export const OLDER_MEASUREMENT_DAYS = 180;
+
+export function hasBothMeasurements(platform) {
+  return platform.a.state === 'available' && platform.b.state === 'available';
+}
+
+export function isHistoricalDateMismatch(platform, historical = false) {
+  return historical && hasBothMeasurements(platform) && !isExactDateMatch(platform.a, platform.b);
+}
+
+export function getSharedPlatforms(platforms, historicalPlatformIds = new Set()) {
+  return platforms.filter(
+    (platform) =>
+      hasBothMeasurements(platform) &&
+      !isHistoricalDateMismatch(platform, historicalPlatformIds.has(platform.id))
+  );
+}
+
+export function getComparisonOutcome(platform, historical = false, metric = comparisonMetric) {
+  return isHistoricalDateMismatch(platform, historical)
+    ? { state: 'unavailable' }
+    : getScoreOutcome(platform.a, platform.b, true, metric);
+}
 
 export function getScoreOutcome(a, b, compatible = true, metric = comparisonMetric) {
   if (!compatible) return { state: 'incompatible' };
@@ -107,9 +130,7 @@ export function getMetricCoverage(platforms) {
         total + Number(platform.a.state === 'available') + Number(platform.b.state === 'available'),
       0
     ),
-    sharedPlatforms: platforms.filter(
-      (platform) => platform.a.state === 'available' && platform.b.state === 'available'
-    ).length,
+    sharedPlatforms: platforms.filter(hasBothMeasurements).length,
   };
 }
 
@@ -141,18 +162,7 @@ export function deriveComparison(
       observations[slugB]?.[id]
     );
     const historical = Boolean(observations[slugA]?.[id] || observations[slugB]?.[id]);
-    const outcome =
-      a.state !== 'available' || b.state !== 'available' || (historical && !isExactDateMatch(a, b))
-        ? 'unavailable'
-        : a.score === b.score
-          ? 'tie'
-          : metric.direction === 'higher'
-            ? a.score > b.score
-              ? 'a'
-              : 'b'
-            : a.score < b.score
-              ? 'a'
-              : 'b';
+    const outcome = getComparisonOutcome({ a, b }, historical, metric).state;
     return { id, label, a, b, outcome };
   });
   const identity = ({ name, logo, website, description }) => ({

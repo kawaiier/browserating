@@ -25,7 +25,20 @@ used by historical comparison URLs. Preserve IDs when editing existing records a
 a new unique ID to each new record; never derive identity from version labels, dates, or
 array positions. Version strings are opaque labels and may contain channels or build dates.
 Missing or `null` metrics are unknown (RAM is `scores.ram` in MB; ad-block percentages
-include zero), not fabricated scores.
+include zero), not fabricated scores. At runtime, Speedometer uses the first-listed version
+for each selected engine; optional metrics use the first newest-first version with a non-null
+value for that metric. Version labels are opaque and are never parsed or sorted to choose a
+record. The 180-day freshness label is informational only: it marks measurements older than
+180 calendar days as older, and does not remove them from comparisons or indexability.
+
+Comparison policy ownership:
+
+- `comparisonUrl.js`: lexicographic canonical pair slug, `order=reverse` presentation, and validated query serialization. Engine and observation choices stay keyed by browser slug/platform so they survive pair ordering.
+- `comparisonViewModel.js`: engine/record selection, score validity, outcomes, metric coverage, and exact-date rules for historical selections.
+- `comparisonMetrics.js`: metric definitions and score formatting.
+- `comparisonOptions.js`: chooser availability under selected engines.
+- `comparisonIndex.js`: sitemap eligibility using default engines and latest primary-metric coverage, independent of query state.
+- `getComparisonData.js`: server-side composition of the shared model and sitemap slug generation.
 
 The current schema has no approved benchmark revision, source, hardware/setup, or method
 reference fields. The validation report keeps this historical provenance gap separate
@@ -37,8 +50,16 @@ inferred without compatible provenance. Add setup fields only through a document
 migration once their meaning and collection process are agreed.
 
 Curated data ships with a deployment. Deploy the successful build so rendered comparison
-content and sitemap coverage refresh together, following the publication policy in
-[comparison performance](comparison-performance.md).
+content and sitemap coverage refresh together; cache behavior and invalidation are defined
+in [comparison performance](comparison-performance.md).
+
+## Maintainer release checklist
+
+- [ ] Validate dataset IDs, ordering, engine uniqueness, and schema with `npm run validate:data`; review coverage-count changes.
+- [ ] Run `npm test`, `npm run lint`, `npm run format:check`, and `npm run build`.
+- [ ] Inspect a measured and an empty comparison, canonical URLs/metadata, and the generated sitemap after build.
+- [ ] For comparison UI or shared-header/theme changes, run the applicable Playwright checks; header/theme changes also cover home, browser, platform, and quiz pages.
+- [ ] Deploy the same validated data/build and verify production comparison content and cache policy.
 
 The browser suite runs in Chromium, Firefox and WebKit and covers: HTTP normalization and
 404s; metadata, canonical, robots and the per-pair social card; engine and platform
