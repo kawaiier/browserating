@@ -6,6 +6,7 @@
       {
         "version": "8.1.1",
         "date": "2026-02-23",
+        "observationId": "obs-5e9cb162-f29a-4959-bf2c-9edc388372f3",
         "scores": {
           "speedometer3": 22.83
         }
@@ -19,6 +20,7 @@
       {
         "version": "1.46.1",
         "date": "2026-02-23",
+        "observationId": "obs-c9cf898b-9884-4374-8378-07a895fd9802",
         "scores": {
           "speedometer3": 28.53
         }
@@ -26,6 +28,7 @@
       {
         "version": "1.43.0",
         "date": "2025-05-23",
+        "observationId": "obs-e633dd46-a829-4bcf-b91c-b6d6502c374e",
         "scores": {
           "speedometer3": 27.2
         }
@@ -39,6 +42,7 @@
       {
         "version": "1.1",
         "date": "2026-02-23",
+        "observationId": "obs-f083a938-d48d-4ba3-a2af-70123fea3213",
         "scores": {
           "speedometer3": 28.17
         }
@@ -52,6 +56,7 @@
       {
         "version": "1.86",
         "date": "2026-02-23",
+        "observationId": "obs-57e7a880-fb28-4ed3-8089-e1039d380725",
         "scores": {
           "speedometer3": 18.47
         }
@@ -59,6 +64,7 @@
       {
         "version": "1.78.1",
         "date": "2025-05-23",
+        "observationId": "obs-2a237dd7-e4c6-44bf-bf1c-a8f8f9fb4f70",
         "scores": {
           "speedometer3": 21.83
         }
@@ -72,6 +78,7 @@
       {
         "version": "145.0.7632.108",
         "date": "2026-02-23",
+        "observationId": "obs-ca740c5d-8fa7-41b8-8352-da1869a5e62a",
         "scores": {
           "speedometer3": 21.7
         }
@@ -79,6 +86,7 @@
       {
         "version": "137.0.7151.34",
         "date": "2025-05-23",
+        "observationId": "obs-fe881d77-a7f8-454d-a24e-8ac67f373ba9",
         "scores": {
           "speedometer3": 22.27
         }
@@ -86,12 +94,13 @@
     ]
   },
   {
-    "name": "DuckDuckGo",
+    "name": "DuckDuckGo Browser",
     "engine": "WebKit",
     "versions": [
       {
         "version": "7.208.0",
         "date": "2026-02-23",
+        "observationId": "obs-7d5cb673-9ff0-400b-991e-d37a06caf7cc",
         "scores": {
           "speedometer3": 23.7
         }
@@ -99,6 +108,7 @@
       {
         "version": "7.169.0",
         "date": "2025-05-23",
+        "observationId": "obs-e53a5481-3e50-479a-8f61-7e36848a4102",
         "scores": {
           "speedometer3": 25.07
         }
@@ -112,6 +122,7 @@
       {
         "version": "148.0",
         "date": "2026-02-23",
+        "observationId": "obs-9ceb4f65-d659-4ba5-9baf-7df6ad7dc1bf",
         "scores": {
           "speedometer3": 27.33
         }
@@ -119,6 +130,7 @@
       {
         "version": "138.2",
         "date": "2025-05-23",
+        "observationId": "obs-5d6b9025-a47b-4972-bd99-395d162c49aa",
         "scores": {
           "speedometer3": 27.87
         }
@@ -132,6 +144,7 @@
       {
         "version": "144.3719.115",
         "date": "2026-02-23",
+        "observationId": "obs-582dd191-3dbd-4382-a653-931dba40c45f",
         "scores": {
           "speedometer3": 26.07
         }
@@ -139,6 +152,7 @@
       {
         "version": "136.3240.77",
         "date": "2025-05-23",
+        "observationId": "obs-5ece7d35-2803-418e-a51a-11245132dbc0",
         "scores": {
           "speedometer3": 23.23
         }
@@ -152,6 +166,7 @@
       {
         "version": "6.3.0",
         "date": "2026-02-23",
+        "observationId": "obs-68c16551-e7bc-4305-b386-94873f05453e",
         "scores": {
           "speedometer3": 27.77
         }
@@ -159,6 +174,7 @@
       {
         "version": "5.5.3",
         "date": "2025-05-23",
+        "observationId": "obs-f0ac3729-41b2-4249-998c-8883277f0442",
         "scores": {
           "speedometer3": 27.17
         }
@@ -172,6 +188,7 @@
       {
         "version": "1.4.8",
         "date": "2026-02-23",
+        "observationId": "obs-e10de478-b8fe-4ae4-b0ed-800cab5f683b",
         "scores": {
           "speedometer3": 26.47
         }
@@ -179,6 +196,7 @@
       {
         "version": "1.3.23",
         "date": "2025-05-23",
+        "observationId": "obs-d4065a50-137a-4c13-9426-0afe8412f58d",
         "scores": {
           "speedometer3": 26.1
         }
@@ -192,6 +210,7 @@
       {
         "version": "26.3",
         "date": "2026-02-23",
+        "observationId": "obs-e5e34c11-d6fb-49b4-a4f0-cb614f699095",
         "scores": {
           "speedometer3": 27.27
         }
@@ -199,6 +218,7 @@
       {
         "version": "18.5",
         "date": "2025-05-23",
+        "observationId": "obs-05020ce1-686c-4c23-bca7-04ef67024e84",
         "scores": {
           "speedometer3": 30.9
         }
@@ -212,6 +232,7 @@
       {
         "version": "7.8.3931.87",
         "date": "2026-02-23",
+        "observationId": "obs-ecfccb57-2fa9-4991-819b-0cf346dd5a84",
         "scores": {
           "speedometer3": 18.5
         }
@@ -219,6 +240,7 @@
       {
         "version": "7.4.3691.46",
         "date": "2025-05-23",
+        "observationId": "obs-4722e071-c8c4-488b-b2eb-8aacd811365e",
         "scores": {
           "speedometer3": 19.3
         }

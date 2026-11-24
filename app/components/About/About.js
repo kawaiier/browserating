@@ -1,7 +1,24 @@
 'use client';
 
 import { useState } from 'react';
-import { Apple, AppWindow, ArrowRight, BarChart3, Bot, Brain, Check, FlaskConical, Laptop, Lightbulb, Shield, Sparkles, Tablet, Target, TriangleAlert, Zap } from 'lucide-react';
+import {
+  Apple,
+  AppWindow,
+  ArrowRight,
+  BarChart3,
+  Bot,
+  Brain,
+  Check,
+  FlaskConical,
+  Laptop,
+  Lightbulb,
+  Shield,
+  Sparkles,
+  Tablet,
+  Target,
+  TriangleAlert,
+  Zap,
+} from 'lucide-react';
 
 export default function About() {
   const [activeSection, setActiveSection] = useState('methodology');
@@ -169,8 +186,7 @@ export default function About() {
             style={{
               backgroundColor:
                 activeSection === section.id ? 'var(--color-brand)' : 'var(--surface-sunken)',
-              color:
-                activeSection === section.id ? 'var(--text-inverse)' : 'var(--text-default)',
+              color: activeSection === section.id ? 'var(--text-inverse)' : 'var(--text-default)',
             }}
             onMouseEnter={(e) => {
               if (activeSection !== section.id) {
@@ -183,7 +199,9 @@ export default function About() {
               }
             }}
           >
-            <span className="text-lg"><section.icon className="w-5 h-5" aria-hidden="true" /></span>
+            <span className="text-lg">
+              <section.icon className="w-5 h-5" aria-hidden="true" />
+            </span>
             {section.label}
           </button>
         ))}
@@ -225,7 +243,10 @@ export default function About() {
                       </div>
                     </div>
                     <div className="flex-1 text-center sm:text-left">
-                      <h3 className="text-xl font-semibold mb-2" style={{ color: 'var(--text-default)' }}>
+                      <h3
+                        className="text-xl font-semibold mb-2"
+                        style={{ color: 'var(--text-default)' }}
+                      >
                         {step.title}
                       </h3>
                       <p className="mb-3 leading-relaxed" style={{ color: 'var(--text-subtle)' }}>
@@ -236,7 +257,8 @@ export default function About() {
                           className="cursor-pointer font-medium"
                           style={{ color: 'var(--text-brand)' }}
                         >
-                          Technical Details <ArrowRight className="inline w-3.5 h-3.5" aria-hidden="true" />
+                          Technical Details{' '}
+                          <ArrowRight className="inline w-3.5 h-3.5" aria-hidden="true" />
                         </summary>
                         <p
                           className="mt-3 text-sm rounded-lg p-4"
@@ -262,25 +284,40 @@ export default function About() {
                 border: '1px solid var(--color-information-subtle)',
               }}
             >
-              <h3 className="text-lg font-semibold mb-4 flex items-center gap-2" style={{ color: 'var(--text-default)' }}>
+              <h3
+                className="text-lg font-semibold mb-4 flex items-center gap-2"
+                style={{ color: 'var(--text-default)' }}
+              >
                 <Sparkles className="w-6 h-6" aria-hidden="true" />
                 Why Our Testing Matters
               </h3>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
                 <div className="flex items-start gap-2">
-                  <Check className="mt-1 w-4 h-4" style={{ color: 'var(--color-success)' }} aria-hidden="true" />
+                  <Check
+                    className="mt-1 w-4 h-4"
+                    style={{ color: 'var(--color-success)' }}
+                    aria-hidden="true"
+                  />
                   <span style={{ color: 'var(--text-subtle)' }}>
                     Consistent testing environment across all browsers
                   </span>
                 </div>
                 <div className="flex items-start gap-2">
-                  <Check className="mt-1 w-4 h-4" style={{ color: 'var(--color-success)' }} aria-hidden="true" />
+                  <Check
+                    className="mt-1 w-4 h-4"
+                    style={{ color: 'var(--color-success)' }}
+                    aria-hidden="true"
+                  />
                   <span style={{ color: 'var(--text-subtle)' }}>
                     Statistical accuracy through multiple test runs
                   </span>
                 </div>
                 <div className="flex items-start gap-2">
-                  <Check className="mt-1 w-4 h-4" style={{ color: 'var(--color-success)' }} aria-hidden="true" />
+                  <Check
+                    className="mt-1 w-4 h-4"
+                    style={{ color: 'var(--color-success)' }}
+                    aria-hidden="true"
+                  />
                   <span style={{ color: 'var(--text-subtle)' }}>
                     Real-world scenarios and websites
                   </span>
@@ -332,13 +369,19 @@ export default function About() {
                         <span className="shrink-0" style={{ color: 'var(--text-subtle)' }}>
                           Operating System:
                         </span>
-                        <span className="font-medium sm:text-right" style={{ color: 'var(--text-default)' }}>
+                        <span
+                          className="font-medium sm:text-right"
+                          style={{ color: 'var(--text-default)' }}
+                        >
                           {system.specs.os}
                         </span>
                       </div>
                       <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-0.5 sm:gap-4">
                         <span style={{ color: 'var(--text-subtle)' }}>Device:</span>
-                        <span className="font-medium sm:text-right" style={{ color: 'var(--text-default)' }}>
+                        <span
+                          className="font-medium sm:text-right"
+                          style={{ color: 'var(--text-default)' }}
+                        >
                           {system.specs.device}
                         </span>
                       </div>
@@ -350,19 +393,28 @@ export default function About() {
                         >
                           <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-0.5 sm:gap-4">
                             <span style={{ color: 'var(--text-subtle)' }}>Processor:</span>
-                            <span className="font-medium sm:text-right" style={{ color: 'var(--text-default)' }}>
+                            <span
+                              className="font-medium sm:text-right"
+                              style={{ color: 'var(--text-default)' }}
+                            >
                               {system.specs.processor}
                             </span>
                           </div>
                           <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-0.5 sm:gap-4">
                             <span style={{ color: 'var(--text-subtle)' }}>Memory:</span>
-                            <span className="font-medium sm:text-right" style={{ color: 'var(--text-default)' }}>
+                            <span
+                              className="font-medium sm:text-right"
+                              style={{ color: 'var(--text-default)' }}
+                            >
                               {system.specs.memory}
                             </span>
                           </div>
 
                           <div className="mt-4">
-                            <h4 className="text-sm font-semibold mb-2" style={{ color: 'var(--text-default)' }}>
+                            <h4
+                              className="text-sm font-semibold mb-2"
+                              style={{ color: 'var(--text-default)' }}
+                            >
                               Key Features:
                             </h4>
                             <div className="flex flex-wrap gap-2">
@@ -421,7 +473,10 @@ export default function About() {
                   border: '1px solid var(--color-brand-subtle)',
                 }}
               >
-                <h3 className="text-xl font-bold mb-3 flex items-center gap-2" style={{ color: 'var(--text-default)' }}>
+                <h3
+                  className="text-xl font-bold mb-3 flex items-center gap-2"
+                  style={{ color: 'var(--text-default)' }}
+                >
                   <Target className="w-6 h-6" aria-hidden="true" />
                   Understanding Performance Metrics
                 </h3>
@@ -464,7 +519,9 @@ export default function About() {
                       <h4 className="text-lg font-semibold mb-2" style={{ color: metric.color }}>
                         {metric.metric}
                       </h4>
-                      <p className="mb-4" style={{ color: 'var(--text-subtle)' }}>{metric.description}</p>
+                      <p className="mb-4" style={{ color: 'var(--text-subtle)' }}>
+                        {metric.description}
+                      </p>
 
                       <div className="grid grid-cols-1 sm:grid-cols-4 gap-4 text-sm">
                         <div>
@@ -480,7 +537,10 @@ export default function About() {
                           <div style={{ color: 'var(--text-subtle)' }}>{metric.good}</div>
                         </div>
                         <div>
-                          <span className="font-medium" style={{ color: 'var(--color-score-fair)' }}>
+                          <span
+                            className="font-medium"
+                            style={{ color: 'var(--color-score-fair)' }}
+                          >
                             Average:
                           </span>
                           <div style={{ color: 'var(--text-subtle)' }}>{metric.average}</div>
@@ -505,30 +565,53 @@ export default function About() {
                 border: '1px solid var(--color-success-subtle)',
               }}
             >
-              <h3 className="text-lg font-semibold mb-4 flex items-center gap-2" style={{ color: 'var(--text-default)' }}>
+              <h3
+                className="text-lg font-semibold mb-4 flex items-center gap-2"
+                style={{ color: 'var(--text-default)' }}
+              >
                 <Lightbulb className="w-6 h-6" aria-hidden="true" />
                 Pro Tips for Interpreting Results
               </h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
                 <div className="flex items-start gap-2">
-                  <ArrowRight className="mt-1 w-4 h-4" style={{ color: 'var(--color-information)' }} aria-hidden="true" />
+                  <ArrowRight
+                    className="mt-1 w-4 h-4"
+                    style={{ color: 'var(--color-information)' }}
+                    aria-hidden="true"
+                  />
                   <span style={{ color: 'var(--text-subtle)' }}>
                     Focus on consistent performance across metrics rather than just peak scores
                   </span>
                 </div>
                 <div className="flex items-start gap-2">
-                  <ArrowRight className="mt-1 w-4 h-4" style={{ color: 'var(--color-information)' }} aria-hidden="true" />
+                  <ArrowRight
+                    className="mt-1 w-4 h-4"
+                    style={{ color: 'var(--color-information)' }}
+                    aria-hidden="true"
+                  />
                   <span style={{ color: 'var(--text-subtle)' }}>
                     Consider your specific use case: gaming, productivity, or general browsing
                   </span>
                 </div>
                 <div className="flex items-start gap-2">
-                  <ArrowRight className="mt-1 w-4 h-4" style={{ color: 'var(--color-information)' }} aria-hidden="true" />
-                  <span style={{ color: 'var(--text-subtle)' }}>Balance performance with features that matter to you</span>
+                  <ArrowRight
+                    className="mt-1 w-4 h-4"
+                    style={{ color: 'var(--color-information)' }}
+                    aria-hidden="true"
+                  />
+                  <span style={{ color: 'var(--text-subtle)' }}>
+                    Balance performance with features that matter to you
+                  </span>
                 </div>
                 <div className="flex items-start gap-2">
-                  <ArrowRight className="mt-1 w-4 h-4" style={{ color: 'var(--color-information)' }} aria-hidden="true" />
-                  <span style={{ color: 'var(--text-subtle)' }}>Remember that browser updates can significantly impact performance</span>
+                  <ArrowRight
+                    className="mt-1 w-4 h-4"
+                    style={{ color: 'var(--color-information)' }}
+                    aria-hidden="true"
+                  />
+                  <span style={{ color: 'var(--text-subtle)' }}>
+                    Remember that browser updates can significantly impact performance
+                  </span>
                 </div>
               </div>
             </div>

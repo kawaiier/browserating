@@ -1,15 +1,39 @@
 import { promises as fs } from 'fs';
 import path from 'path';
+import { cache } from 'react';
 
 import { mergeBrowserData } from './mergeBrowserData';
 
-export async function getBrowsersServer() {
-  const dataDir = path.join(process.cwd(), 'public', 'data');
+// cache() dedupes reads within one server request (metadata + page + helpers).
+// Data ships with each deployment, so there is no cross-request cache to invalidate.
+export const getBrowsersServer = cache(async function getBrowsersServer() {
+  // BENCHMARK_DATA_DIR lets the failure smoke test point one server at a breakable copy.
+  const dataDir = process.env.BENCHMARK_DATA_DIR || path.join(process.cwd(), 'public', 'data');
 
   const readFile = async (filename) => {
     const filePath = path.join(dataDir, filename);
     const content = await fs.readFile(filePath, 'utf8');
-    return JSON.parse(content);
+    const data = JSON.parse(content);
+    const isCatalog = filename === 'browsers.json';
+    if (
+      !Array.isArray(data) ||
+      data.length === 0 ||
+      data.some(
+        (entry) =>
+          !entry ||
+          typeof entry.name !== 'string' ||
+          !entry.name.trim() ||
+          (!isCatalog &&
+            (typeof entry.engine !== 'string' ||
+              !Array.isArray(entry.versions) ||
+              entry.versions.some(
+                (version) => !version || typeof version !== 'object' || Array.isArray(version)
+              )))
+      )
+    ) {
+      throw new Error(`Malformed benchmark dataset: ${filename}`);
+    }
+    return data;
   };
 
   const [browsers, androidData, macosIntelData, macosArmData, windowsData, ipadData] =
@@ -29,4 +53,4 @@ export async function getBrowsersServer() {
     windows: windowsData,
     ipad: ipadData,
   });
-}
+});

@@ -33,25 +33,23 @@ async function getLogoDataUrl(logoPath) {
 
 function fallbackCard(origin) {
   return new ImageResponse(
-    (
-      <div
-        style={{
-          width: '1200px',
-          height: '630px',
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          justifyContent: 'center',
-          background: 'linear-gradient(135deg, #1e1b4b 0%, #312e81 50%, #4c1d95 100%)',
-          gap: '16px',
-        }}
-      >
-        <div style={{ fontSize: '64px', fontWeight: 700, color: '#ffffff' }}>
-          Find Your Perfect Browser
-        </div>
-        <div style={{ fontSize: '28px', color: '#c4b5fd' }}>{`${origin}/quiz`}</div>
+    <div
+      style={{
+        width: '1200px',
+        height: '630px',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        background: 'linear-gradient(135deg, #1e1b4b 0%, #312e81 50%, #4c1d95 100%)',
+        gap: '16px',
+      }}
+    >
+      <div style={{ fontSize: '64px', fontWeight: 700, color: '#ffffff' }}>
+        Find Your Perfect Browser
       </div>
-    ),
+      <div style={{ fontSize: '28px', color: '#c4b5fd' }}>{`${origin}/quiz`}</div>
+    </div>,
     SIZE
   );
 }
@@ -66,73 +64,67 @@ export async function GET(request) {
     profile = r ? profiles.find((p) => p.id === r.toLowerCase()) : null;
     if (!profile) return fallbackCard(origin);
 
-    const browserEntry = browsers.find(
-      (b) => b.name.toLowerCase() === profile.name.toLowerCase()
-    );
+    const browserEntry = browsers.find((b) => b.name.toLowerCase() === profile.name.toLowerCase());
     logoDataUrl = await getLogoDataUrl(browserEntry?.logo ?? null);
   } catch {
     return fallbackCard(origin);
   }
 
   return new ImageResponse(
-    (
-      <div
-        style={{
-          width: '1200px',
-          height: '630px',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: logoDataUrl ? 'flex-start' : 'center',
-          background: 'linear-gradient(135deg, #1e1b4b 0%, #312e81 50%, #4c1d95 100%)',
-          padding: '60px',
-          gap: logoDataUrl ? '60px' : '0',
-        }}
-      >
-        {logoDataUrl && (
-          <div
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              width: '220px',
-              height: '220px',
-              flexShrink: 0,
-            }}
-          >
-            {/* eslint-disable-next-line @next/next/no-img-element -- next/image is unsupported inside Satori/ImageResponse rendering */}
-            <img
-              src={logoDataUrl}
-              width={200}
-              height={200}
-              alt={profile.name}
-              style={{ objectFit: 'contain' }}
-            />
-          </div>
-        )}
+    <div
+      style={{
+        width: '1200px',
+        height: '630px',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: logoDataUrl ? 'flex-start' : 'center',
+        background: 'linear-gradient(135deg, #1e1b4b 0%, #312e81 50%, #4c1d95 100%)',
+        padding: '60px',
+        gap: logoDataUrl ? '60px' : '0',
+      }}
+    >
+      {logoDataUrl && (
         <div
           style={{
             display: 'flex',
-            flexDirection: 'column',
-            alignItems: logoDataUrl ? 'flex-start' : 'center',
-            textAlign: logoDataUrl ? 'left' : 'center',
-            gap: '12px',
-            flex: 1,
+            alignItems: 'center',
+            justifyContent: 'center',
+            width: '220px',
+            height: '220px',
+            flexShrink: 0,
           }}
         >
-          <div style={{ fontSize: '28px', color: '#c4b5fd', fontWeight: 400 }}>
-            Someone matched with
-          </div>
-          <div
-            style={{ fontSize: '80px', fontWeight: 700, color: '#ffffff', lineHeight: 1 }}
-          >
-            {profile.name}
-          </div>
-          <div style={{ fontSize: '26px', color: '#a78bfa', marginTop: '16px' }}>
-            {`What's yours? Take the quiz at ${origin}/quiz`}
-          </div>
+          {/* eslint-disable-next-line @next/next/no-img-element -- next/image is unsupported inside Satori/ImageResponse rendering */}
+          <img
+            src={logoDataUrl}
+            width={200}
+            height={200}
+            alt={profile.name}
+            style={{ objectFit: 'contain' }}
+          />
+        </div>
+      )}
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: logoDataUrl ? 'flex-start' : 'center',
+          textAlign: logoDataUrl ? 'left' : 'center',
+          gap: '12px',
+          flex: 1,
+        }}
+      >
+        <div style={{ fontSize: '28px', color: '#c4b5fd', fontWeight: 400 }}>
+          Someone matched with
+        </div>
+        <div style={{ fontSize: '80px', fontWeight: 700, color: '#ffffff', lineHeight: 1 }}>
+          {profile.name}
+        </div>
+        <div style={{ fontSize: '26px', color: '#a78bfa', marginTop: '16px' }}>
+          {`What's yours? Take the quiz at ${origin}/quiz`}
         </div>
       </div>
-    ),
+    </div>,
     SIZE
   );
 }

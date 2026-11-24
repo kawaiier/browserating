@@ -15,7 +15,7 @@
 - **🔍 Comprehensive Browser Rankings**: Performance comparisons across macOS (ARM & Intel), Windows, Android, and iPad platforms
 - **📱 Responsive Design**: Optimized for all devices with mobile-first approach
 - **🎯 Advanced Filtering**: Filter browsers by engine (Blink, Gecko, WebKit) and platform
-- **📊 Detailed Metrics**: Speedometer 3.1 scores, RAM usage, ad-blocking effectiveness, and more
+- **📊 Detailed Metrics**: Speedometer 3.1 scores, with RAM usage and ad-blocking data where recorded
 - **🎨 Interactive Charts**: Visual representations of performance data using Chart.js
 - **🌙 Dark Mode Support**: Full dark/light theme toggle with system preference detection
 - **🔒 Privacy-Focused**: Transparent data practices with dedicated privacy policy
@@ -42,8 +42,8 @@
 
 Before running this project, make sure you have:
 
-- **Node.js**: Version 18.17 or higher
-- **Bun**: Version 1.0 or higher ([bun.sh](https://bun.sh))
+- **Node.js**: Version 24.x (see `package.json`)
+- **npm**: Bundled with Node.js
 - **Git**: For cloning the repository
 
 ## 🛠️ Installation
@@ -58,13 +58,13 @@ Before running this project, make sure you have:
 2. **Install dependencies**:
 
    ```bash
-   bun install
+   npm ci
    ```
 
 3. **Run the development server**:
 
    ```bash
-   bun dev
+   npm run dev
    ```
 
 4. **Open your browser** and visit [http://localhost:3000](http://localhost:3000) to see the application.
@@ -88,7 +88,11 @@ The application provides several key functionalities:
 ### Head-to-Head Comparisons (`/compare/[browser-a]-vs-[browser-b]`)
 
 - Side-by-side Speedometer 3.1 score comparison across all platforms
-- Winner highlighted per platform
+- Recorded scores, versions, engines, test dates, and differences where both browsers have measurements
+- Platform and engine controls, explicit browser selection, and shareable URLs
+- Pairs without shared measurements remain available but are omitted from the sitemap and marked `noindex, follow`
+
+The sitemap includes every canonical pair with a valid Speedometer 3.1 score for both browsers on at least one shared platform using their first-listed engines. This coverage-based list is not a popularity ranking; comparison pages are rendered dynamically.
 
 ### Platform-Specific Views (`/platforms/[platform]`)
 
@@ -122,21 +126,44 @@ Browser performance data is stored in JSON files located in `public/data/`. The 
 2. Modify the data following the existing structure:
    ```json
    {
-     "name": "Chrome",
-     "engine": "Blink",
-     "versions": [
+     "name": "Google Chrome",
+     "engineVariants": [
        {
-         "version": "120.0.6099.109",
-         "scores": {
-           "speedometer3": 145.2,
-           "ramUsage": 245.8,
-           "adblock": 85.3
-         }
+         "engine": "Blink",
+         "versions": [
+           {
+             "version": "stable label (opaque)",
+             "date": "2026-11-15",
+             "observationId": "obs-<new-unique-uuid>",
+             "scores": { "speedometer3": 145.2, "adblock": 85.3 }
+           }
+         ]
+       },
+       {
+         "engine": "WebKit",
+         "versions": [
+           {
+             "version": "nightly build label",
+             "date": "2026-11-15",
+             "observationId": "obs-<another-new-unique-uuid>",
+             "scores": { "speedometer3": 139.4 }
+           }
+         ]
        }
      ]
    }
    ```
-3. Save the file - changes will be reflected on the next page load
+   `name` must exactly match an entry in `browsers.json`. Use either the legacy top-level `engine`/`versions` shape or `engineVariants`; variant order matters because the first engine is the default. Version labels are opaque. Every new record needs a globally unique, immutable `observationId`; preserve existing IDs. Metrics may be omitted or `null` when unmeasured; RAM is stored as `scores.ram` in MB.
+3. Run `npm run validate:data` and review errors, warnings, and primary-engine/pair coverage counts. Never infer missing provenance.
+4. Commit and deploy the data update. `npm run build` validates before rendering; each deployment refreshes comparison pages and the sitemap together. Follow the [dataset publication and release checklist](docs/comparison-release-verification.md).
+
+### Extending comparison data and behavior
+
+- **Add a browser:** add its stable display name and metadata to `browsers.json`, then add platform records using that exact name. Slugs are derived from names, so renaming a browser changes its pair URLs; retain existing names/slugs or plan redirects before a rename.
+- **Add an engine variant:** add a unique engine entry with its own newest-first `versions` history. Keep the intended default engine first; comparison URLs store engine choices against the browser slug and platform.
+- **Add a metric:** define its ID, validity, direction, unit, precision, and interpretation in `app/lib/comparisonMetrics.js`; update data validation, comparison rendering, and helper tests to cover it. Only enable it for pair comparisons once its method and comparability limits are documented.
+
+Comparison responsibilities are split by policy: `comparisonUrl.js` owns canonical pairs and query serialization; `comparisonMetrics.js` owns metric definitions and formatting; `comparisonViewModel.js` selects records and derives coverage/outcomes; `comparisonOptions.js` builds chooser coverage; `comparisonIndex.js` defines sitemap eligibility. See the [release verification checklist](docs/comparison-release-verification.md) and [cache policy](docs/comparison-performance.md).
 
 ## 🤝 Contributing
 
@@ -153,7 +180,7 @@ We welcome contributions from the community! Please see our [Contributing Guidel
 1. Fork the repository
 2. Create a feature branch: `git checkout -b feature/amazing-feature`
 3. Make your changes following our coding standards
-4. Run tests: `bun test`
+4. Run tests: `npm test`
 5. Submit a pull request
 
 ## 📈 Performance & SEO

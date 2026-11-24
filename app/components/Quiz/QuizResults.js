@@ -1,12 +1,15 @@
 'use client';
 
 import Link from 'next/link';
+import ComparisonEntryLink from '@/app/components/ComparisonEntryLink';
 import QuizResultCard from './QuizResultCard';
 import QuizShareButtons from './QuizShareButtons';
 import QuizPriorityBars from './QuizPriorityBars';
 import { TRAIT_META } from '../../lib/quiz-constants';
 import { getPriorityTraits } from './quizEngine';
 import { SKIP_ANSWER } from './quizState';
+import { buildCompareUrl } from '../../lib/comparisonUrl';
+import { platformNames } from '../../lib/platformDefinitions';
 
 const PLATFORM_LABELS = {
   windows: 'Windows',
@@ -148,9 +151,16 @@ export default function QuizResults({
     ? getTradeoffs(hero, userTraits, results.selectedPlatforms ?? [], isShared)
     : [];
   const sharedMatch = hero ?? discontinuedResults[0];
+  // A single unambiguous quiz device can be passed through. Multiple devices or
+  // architectures use the comparison page's first-shared-platform default.
+  const selectedPlatforms = results.selectedPlatforms ?? [];
+  const comparePlatform =
+    selectedPlatforms.length === 1 && Object.hasOwn(platformNames, selectedPlatforms[0])
+      ? selectedPlatforms[0]
+      : undefined;
   const compareHref =
-    showDetailedResults && hero?.slug && runnerUps[0]?.slug
-      ? `/compare/${hero.slug}-vs-${runnerUps[0].slug}`
+    showDetailedResults && hero?.slug && runnerUps[0]?.slug && hero.slug !== runnerUps[0].slug
+      ? buildCompareUrl({ first: hero.slug, second: runnerUps[0].slug, platform: comparePlatform })
       : null;
 
   if (!hero && (!isShared || results.hasSharedAnswers)) {
@@ -406,12 +416,17 @@ export default function QuizResults({
 
       {compareHref && (
         <div className="mt-6 text-center">
-          <Link
+          <p className="mb-2 text-sm" style={{ color: 'var(--text-subtle)' }}>
+            This comparison shows measured performance, rather than the qualitative traits used by
+            the quiz.
+          </p>
+          <ComparisonEntryLink
             href={compareHref}
+            source="quiz"
             className="inline-flex items-center gap-2 rounded-md bg-(--surface-sunken) px-5 py-2.5 text-sm font-medium text-(--text-default) transition-colors duration-200 hover:bg-(--surface-hovered) focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-(--border-focused)"
           >
             Compare {hero.name} vs {runnerUps[0].name}
-          </Link>
+          </ComparisonEntryLink>
         </div>
       )}
 

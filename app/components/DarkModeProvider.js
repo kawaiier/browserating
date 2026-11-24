@@ -9,10 +9,15 @@ export function DarkModeProvider({ children }) {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    let preference = null;
+    try {
+      preference = window.localStorage.getItem('darkMode');
+    } catch {
+      // Storage may be blocked; the system preference still works.
+    }
     const isDarkMode =
-      localStorage?.getItem('darkMode') === 'true' ||
-      (!('darkMode' in localStorage) &&
-        window?.matchMedia?.('(prefers-color-scheme: dark)')?.matches);
+      preference === 'true' ||
+      (preference === null && window.matchMedia?.('(prefers-color-scheme: dark)').matches);
 
     // eslint-disable-next-line react-hooks/set-state-in-effect -- syncing React state with localStorage on mount
     setDarkMode(isDarkMode);
@@ -28,7 +33,11 @@ export function DarkModeProvider({ children }) {
     const newDarkMode = !darkMode;
     setDarkMode(newDarkMode);
     document.documentElement.classList.toggle('dark');
-    localStorage.setItem('darkMode', newDarkMode);
+    try {
+      window.localStorage.setItem('darkMode', newDarkMode);
+    } catch {
+      // Keep the choice for this session when storage is unavailable.
+    }
   };
 
   return (

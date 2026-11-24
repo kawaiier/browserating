@@ -5,9 +5,19 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowRight, TrendingDown, TrendingUp } from 'lucide-react';
 import { getEngineVariant, getEngineVariants } from '../lib/getPlatformEngineData';
+import { getBrowserSlug } from '../lib/getBrowserSlug';
+import { isFiniteMetric } from '../lib/benchmarkMetrics';
+import { rememberComparisonSource } from '../lib/comparisonAnalytics';
 
 const BrowserCard = React.memo(
-  ({ browser, getEngineColor, rank, selectedPlatform, selectedEngine = 'All', isLoading = false }) => {
+  ({
+    browser,
+    getEngineColor,
+    rank,
+    selectedPlatform,
+    selectedEngine = 'All',
+    isLoading = false,
+  }) => {
     const [showModal, setShowModal] = useState(false);
     const [localEngine, setLocalEngine] = useState(null);
     const [imageLoaded, setImageLoaded] = useState(false);
@@ -16,7 +26,8 @@ const BrowserCard = React.memo(
 
     const platformData = browser[selectedPlatform];
     const engineVariants = getEngineVariants(platformData);
-    const activeEngine = selectedEngine !== 'All' ? selectedEngine : localEngine || engineVariants[0]?.engine;
+    const activeEngine =
+      selectedEngine !== 'All' ? selectedEngine : localEngine || engineVariants[0]?.engine;
     const activeVariant = getEngineVariant(platformData, activeEngine);
 
     useEffect(() => {
@@ -39,8 +50,8 @@ const BrowserCard = React.memo(
     }
 
     const latestVersion = activeVariant.versions[0];
-    const prevSpeedometer3Score =
-      activeVariant.versions.length > 1 ? activeVariant.versions[1].scores.speedometer3 : null;
+    const latestSpeedometer3 = latestVersion.scores?.speedometer3;
+    const prevSpeedometer3Score = activeVariant.versions[1]?.scores?.speedometer3;
 
     const platformEngine = activeVariant.engine;
 
@@ -81,15 +92,15 @@ const BrowserCard = React.memo(
       );
     };
 
-    const scoreDifference = prevSpeedometer3Score
-      ? latestVersion.scores.speedometer3 - prevSpeedometer3Score
-      : null;
+    const scoreDifference =
+      isFiniteMetric(latestSpeedometer3) && isFiniteMetric(prevSpeedometer3Score)
+        ? latestSpeedometer3 - prevSpeedometer3Score
+        : null;
 
-    const scoreChangeText = scoreDifference
-      ? `${scoreDifference > 0 ? 'Increased' : 'Decreased'} by ${Math.abs(scoreDifference).toFixed(
-          2
-        )} points from previous version`
-      : '';
+    const scoreChangeText =
+      scoreDifference === null
+        ? ''
+        : `${scoreDifference > 0 ? 'Increased' : scoreDifference < 0 ? 'Decreased' : 'Unchanged'} by ${Math.abs(scoreDifference).toFixed(2)} points from previous version`;
 
     const handleCardInteraction = (e) => {
       if (e.type === 'click' || (e.type === 'keydown' && (e.key === 'Enter' || e.key === ' '))) {
@@ -99,14 +110,15 @@ const BrowserCard = React.memo(
     };
 
     const getPerformanceLevel = (score) => {
-      if (score >= 40)
-        return { level: 'Excellent', color: 'var(--color-score-excellent)' };
+      if (score >= 40) return { level: 'Excellent', color: 'var(--color-score-excellent)' };
       if (score >= 30) return { level: 'Good', color: 'var(--color-score-good)' };
       if (score >= 20) return { level: 'Fair', color: 'var(--color-score-fair)' };
       return { level: 'Poor', color: 'var(--color-score-poor)' };
     };
 
-    const performance = getPerformanceLevel(latestVersion.scores.speedometer3);
+    const performance = isFiniteMetric(latestSpeedometer3)
+      ? getPerformanceLevel(latestSpeedometer3)
+      : null;
 
     if (isLoading) {
       return (
@@ -154,7 +166,7 @@ const BrowserCard = React.memo(
     }
 
     return (
-      <>
+      <div>
         <div
           ref={cardRef}
           className={`
@@ -215,8 +227,11 @@ const BrowserCard = React.memo(
                   {browser.name}
                 </h3>
                 <div className="flex items-center gap-2 mt-1">
-                  <span className="body-small font-medium" style={{ color: performance.color }}>
-                    {performance.level}
+                  <span
+                    className="body-small font-medium"
+                    style={{ color: performance?.color || 'var(--text-subtle)' }}
+                  >
+                    {performance?.level || 'No score'}
                   </span>
                   <span style={{ color: 'var(--text-subtlest)' }}>·</span>
                   <span className="body-small" style={{ color: 'var(--text-subtle)' }}>
@@ -300,9 +315,13 @@ const BrowserCard = React.memo(
                     className="px-2 py-1 rounded-md body-small font-medium"
                     style={{
                       backgroundColor:
-                        activeEngine === variant.engine ? 'var(--color-brand)' : 'var(--surface-sunken)',
+                        activeEngine === variant.engine
+                          ? 'var(--color-brand)'
+                          : 'var(--surface-sunken)',
                       color:
-                        activeEngine === variant.engine ? 'var(--text-inverse)' : 'var(--text-subtle)',
+                        activeEngine === variant.engine
+                          ? 'var(--text-inverse)'
+                          : 'var(--text-subtle)',
                       border: '1px solid var(--border-subtle)',
                     }}
                     aria-pressed={activeEngine === variant.engine}
@@ -334,9 +353,9 @@ const BrowserCard = React.memo(
               </span>
               <span
                 className="metric-large leading-none score-glow"
-                style={{ color: performance.color }}
+                style={{ color: performance?.color || 'var(--text-subtle)' }}
               >
-                {latestVersion.scores.speedometer3.toFixed(1)}
+                {isFiniteMetric(latestSpeedometer3) ? latestSpeedometer3.toFixed(1) : '—'}
               </span>
               {scoreDifference !== null && (
                 <span
@@ -371,11 +390,17 @@ const BrowserCard = React.memo(
 
             {/* Footer actions */}
             <div className="mt-3 flex items-center justify-between">
-              <span className="body-small" style={{ color: 'var(--text-subtlest)', fontSize: '10px' }}>
+              <span
+                className="body-small"
+                style={{ color: 'var(--text-subtlest)', fontSize: '10px' }}
+              >
                 Tap for history
               </span>
               <Link
-                href={`/browsers/${browser.name.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')}`}
+                href={`/browsers/${browser.name
+                  .toLowerCase()
+                  .replace(/\s+/g, '-')
+                  .replace(/[^a-z0-9-]/g, '')}`}
                 className="body-small font-medium hover:underline"
                 style={{ color: 'var(--text-brand)' }}
                 onClick={(e) => e.stopPropagation()}
@@ -386,6 +411,15 @@ const BrowserCard = React.memo(
           </div>
         </div>
 
+        <Link
+          href={`/browsers/${getBrowserSlug(browser.name)}?${new URLSearchParams({ platform: selectedPlatform, engine: platformEngine })}#compare-browsers`}
+          className="mt-2 inline-flex min-h-[44px] items-center px-2 text-sm font-medium underline"
+          style={{ color: 'var(--text-brand)' }}
+          onClick={(event) => rememberComparisonSource('rankings', event.currentTarget.href)}
+        >
+          Compare {browser.name}
+        </Link>
+
         {showModal && (
           <BrowserDetailsModal
             browser={browser}
@@ -394,7 +428,7 @@ const BrowserCard = React.memo(
             onClose={() => setShowModal(false)}
           />
         )}
-      </>
+      </div>
     );
   }
 );

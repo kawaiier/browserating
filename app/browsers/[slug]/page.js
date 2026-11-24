@@ -10,6 +10,9 @@ import ErrorBoundary from '@/app/components/ErrorBoundary';
 import Header from '@/app/components/Header';
 import Footer from '@/app/components/Footer';
 import BrowserCompareDropdown from '@/app/components/BrowserCompareDropdown';
+import { comparisonOptions } from '@/app/lib/comparisonOptions';
+import { getEngineVariants } from '@/app/lib/getPlatformEngineData';
+import { platformNames } from '@/app/lib/platformDefinitions';
 
 export async function generateStaticParams() {
   const slugs = await getAllBrowserSlugs();
@@ -47,7 +50,7 @@ export async function generateMetadata({ params }) {
   };
 }
 
-export default async function BrowserPage({ params }) {
+export default async function BrowserPage({ params, searchParams }) {
   const { slug } = await params;
   const [browser, allBrowsers, lastModified] = await Promise.all([
     getBrowserBySlug(slug),
@@ -59,22 +62,19 @@ export default async function BrowserPage({ params }) {
     notFound();
   }
 
-  const compareBrowsers = allBrowsers
-    .map((b) => ({
-      name: b.name,
-      slug: b.name.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, ''),
-    }))
-    .filter((b) => b.slug !== slug)
-    .sort((a, b) => a.name.localeCompare(b.name));
-
-  const platforms = ['macos-arm', 'macos-intel', 'windows', 'android', 'ipad'];
-  const platformLabels = {
-    'macos-arm': 'macOS (Apple Silicon)',
-    'macos-intel': 'macOS (Intel)',
-    windows: 'Windows',
-    android: 'Android',
-    ipad: 'iPad',
-  };
+  const query = await searchParams;
+  const platforms = Object.keys(platformNames);
+  const platform =
+    typeof query?.platform === 'string' && platforms.includes(query.platform)
+      ? query.platform
+      : undefined;
+  const engine =
+    platform &&
+    typeof query?.engine === 'string' &&
+    getEngineVariants(browser[platform]).some((variant) => variant.engine === query.engine)
+      ? query.engine
+      : undefined;
+  const engines = engine ? { [slug]: { [platform]: engine } } : {};
 
   return (
     <ErrorBoundary>
@@ -90,12 +90,8 @@ export default async function BrowserPage({ params }) {
           >
             Skip to main content
           </a>
-          <Header lastModified={lastModified} />
-          <main
-            id="main-content"
-            className="container mx-auto px-4 py-8 scroll-mt-4"
-            tabIndex={-1}
-          >
+          <Header lastModified={lastModified} titleAs="p" />
+          <main id="main-content" className="container mx-auto px-4 py-8 scroll-mt-4" tabIndex={-1}>
             <script
               type="application/ld+json"
               dangerouslySetInnerHTML={{
@@ -104,8 +100,7 @@ export default async function BrowserPage({ params }) {
                   '@type': 'Product',
                   name: browser.name,
                   description:
-                    browser.description ||
-                    `${browser.name} browser performance benchmarks`,
+                    browser.description || `${browser.name} browser performance benchmarks`,
                   brand: {
                     '@type': 'Brand',
                     name: browser.name,
@@ -115,11 +110,7 @@ export default async function BrowserPage({ params }) {
             />
 
             <nav className="mb-6">
-              <Link
-                href="/"
-                className="hover:underline"
-                style={{ color: 'var(--text-brand)' }}
-              >
+              <Link href="/" className="hover:underline" style={{ color: 'var(--text-brand)' }}>
                 <ArrowLeft className="inline w-4 h-4" aria-hidden="true" /> Back to Rankings
               </Link>
             </nav>
@@ -181,13 +172,19 @@ export default async function BrowserPage({ params }) {
                           boxShadow: 'var(--shadow-raised)',
                         }}
                       >
-                        <h3 className="text-lg font-semibold mb-2" style={{ color: 'var(--text-default)' }}>
-                          {platformLabels[platform]}
+                        <h3
+                          className="text-lg font-semibold mb-2"
+                          style={{ color: 'var(--text-default)' }}
+                        >
+                          {platformNames[platform]}
                         </h3>
                         <div className="grid grid-cols-3 gap-4 text-sm">
                           <div>
                             <div style={{ color: 'var(--text-subtle)' }}>Speedometer 3.1</div>
-                            <div className="text-xl font-bold" style={{ color: 'var(--text-brand)' }}>
+                            <div
+                              className="text-xl font-bold"
+                              style={{ color: 'var(--text-brand)' }}
+                            >
                               {latestVersion?.scores?.speedometer3?.toFixed(2) || 'N/A'}
                             </div>
                           </div>
@@ -202,7 +199,10 @@ export default async function BrowserPage({ params }) {
                           </div>
                           <div>
                             <div style={{ color: 'var(--text-subtle)' }}>Engine</div>
-                            <div className="text-xl font-bold" style={{ color: 'var(--text-default)' }}>
+                            <div
+                              className="text-xl font-bold"
+                              style={{ color: 'var(--text-default)' }}
+                            >
                               {data.engine || 'N/A'}
                             </div>
                           </div>
@@ -214,9 +214,11 @@ export default async function BrowserPage({ params }) {
               </section>
 
               <BrowserCompareDropdown
-                currentSlug={slug}
-                currentName={browser.name}
-                browsers={compareBrowsers}
+                first={slug}
+                browsers={comparisonOptions(allBrowsers)}
+                platform={platform}
+                engines={engines}
+                source="detail"
               />
             </article>
           </main>

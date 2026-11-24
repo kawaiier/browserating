@@ -1,12 +1,11 @@
 'use client';
 
-import { Bar, Line } from 'react-chartjs-2';
+import { Bar } from 'react-chartjs-2';
 import {
   BarElement,
   CategoryScale,
   Chart as ChartJS,
   Legend,
-  LineElement,
   LinearScale,
   PointElement,
   Title,
@@ -15,25 +14,16 @@ import {
 import { useEffect, useRef, useState } from 'react';
 
 import Image from 'next/image';
-import { BarChart3, LineChart, Target, TrendingDown, TrendingUp } from 'lucide-react';
+import { BarChart3, LineChart, Target } from 'lucide-react';
 import { getEngineColor, platformNames } from '../lib/constants';
 import { getEngineVariant, getEngineVariants } from '../lib/getPlatformEngineData';
+import { isFiniteMetric } from '../lib/benchmarkMetrics';
 
-ChartJS.register(
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  Title,
-  Tooltip,
-  Legend,
-  BarElement
-);
+ChartJS.register(CategoryScale, LinearScale, PointElement, Title, Tooltip, Legend, BarElement);
 
 const BrowserDetailsModal = ({ browser, selectedPlatform, selectedEngine, onClose }) => {
   const [activeTab, setActiveTab] = useState('overview');
   const [modalEngine, setModalEngine] = useState(selectedEngine);
-  const [chartType, setChartType] = useState('bar');
   const modalRef = useRef(null);
   const closeButtonRef = useRef(null);
   const firstFocusableRef = useRef(null);
@@ -152,42 +142,20 @@ const BrowserDetailsModal = ({ browser, selectedPlatform, selectedEngine, onClos
   }
 
   const latestVersion = activeVariant.versions[0];
+  const latestScores = latestVersion.scores || {};
+  const latestSpeedometer3 = latestScores.speedometer3;
   const sortedData = [...activeVariant.versions].reverse();
   const platformEngine = activeVariant.engine;
-
-  const getPerformanceTrend = () => {
-    if (sortedData.length < 2) return { trend: 'stable', change: 0 };
-
-    const recent = sortedData.slice(-3).map((d) => d.scores.speedometer3);
-    const older = sortedData.slice(-6, -3).map((d) => d.scores.speedometer3);
-
-    const recentAvg = recent.reduce((a, b) => a + b, 0) / recent.length;
-    const olderAvg = older.length > 0 ? older.reduce((a, b) => a + b, 0) / older.length : recentAvg;
-
-    const change = ((recentAvg - olderAvg) / olderAvg) * 100;
-
-    if (Math.abs(change) < 2) return { trend: 'stable', change: 0 };
-    return { trend: change > 0 ? 'improving' : 'declining', change };
-  };
-
-  const trend = getPerformanceTrend();
 
   const chartData = {
     labels: sortedData.map((data) => `v${data.version}`),
     datasets: [
       {
         label: 'Speedometer 3.1 Score',
-        data: sortedData.map((data) => data.scores.speedometer3),
-        backgroundColor: chartType === 'bar' ? 'rgba(120, 83, 224, 0.8)' : 'transparent',
+        data: sortedData.map((data) => data.scores?.speedometer3 ?? null),
+        backgroundColor: 'rgba(120, 83, 224, 0.8)',
         borderColor: '#7853E0',
-        borderWidth: chartType === 'line' ? 3 : 1,
-        fill: chartType === 'line',
-        tension: 0.4,
-        pointBackgroundColor: '#7853E0',
-        pointBorderColor: '#fff',
-        pointBorderWidth: 2,
-        pointRadius: chartType === 'line' ? 6 : 0,
-        pointHoverRadius: 8,
+        borderWidth: 1,
       },
     ],
   };
@@ -237,7 +205,10 @@ const BrowserDetailsModal = ({ browser, selectedPlatform, selectedEngine, onClos
         displayColors: false,
         callbacks: {
           title: (context) => `Version ${sortedData[context[0].dataIndex].version}`,
-          label: (context) => `Score: ${context.parsed.y.toFixed(2)}`,
+          label: (context) =>
+            isFiniteMetric(context.parsed.y)
+              ? `Score: ${context.parsed.y.toFixed(2)}`
+              : 'Score unavailable',
         },
       },
     },
@@ -306,7 +277,11 @@ const BrowserDetailsModal = ({ browser, selectedPlatform, selectedEngine, onClos
                   Performance analysis on {platformName}
                 </p>
                 {engineVariants.length > 1 && (
-                  <div className="flex items-center gap-1 mt-2" role="group" aria-label="Select engine">
+                  <div
+                    className="flex items-center gap-1 mt-2"
+                    role="group"
+                    aria-label="Select engine"
+                  >
                     <span className="text-sm mr-1" style={{ color: 'var(--text-subtle)' }}>
                       Engine:
                     </span>
@@ -350,28 +325,6 @@ const BrowserDetailsModal = ({ browser, selectedPlatform, selectedEngine, onClos
                   >
                     v{latestVersion.version}
                   </span>
-                  {trend.trend !== 'stable' && (
-                    <span
-                      className="px-3 py-1.5 rounded-md text-sm font-medium"
-                      style={{
-                        backgroundColor:
-                          trend.trend === 'improving'
-                            ? 'var(--color-success-subtle)'
-                            : 'var(--color-danger-subtle)',
-                        color:
-                          trend.trend === 'improving'
-                            ? 'var(--color-success)'
-                            : 'var(--color-danger)',
-                      }}
-                    >
-                      {trend.trend === 'improving' ? (
-                        <TrendingUp className="inline w-4 h-4" aria-hidden="true" />
-                      ) : (
-                        <TrendingDown className="inline w-4 h-4" aria-hidden="true" />
-                      )}{' '}
-                      {Math.abs(trend.change).toFixed(1)}%
-                    </span>
-                  )}
                 </div>
               </div>
             </div>
@@ -413,8 +366,7 @@ const BrowserDetailsModal = ({ browser, selectedPlatform, selectedEngine, onClos
                 style={{
                   backgroundColor:
                     activeTab === tab.id ? 'var(--color-brand-subtle)' : 'transparent',
-                  color:
-                    activeTab === tab.id ? 'var(--text-brand)' : 'var(--text-subtle)',
+                  color: activeTab === tab.id ? 'var(--text-brand)' : 'var(--text-subtle)',
                 }}
                 onMouseEnter={(e) => {
                   if (activeTab !== tab.id) {
@@ -429,7 +381,9 @@ const BrowserDetailsModal = ({ browser, selectedPlatform, selectedEngine, onClos
                   }
                 }}
               >
-                <span className="mr-2"><tab.icon className="inline w-4 h-4" aria-hidden="true" /></span>
+                <span className="mr-2">
+                  <tab.icon className="inline w-4 h-4" aria-hidden="true" />
+                </span>
                 {tab.label}
               </button>
             ))}
@@ -444,45 +398,19 @@ const BrowserDetailsModal = ({ browser, selectedPlatform, selectedEngine, onClos
               <section>
                 <div className="flex items-center justify-between mb-6">
                   <h2 className="text-xl font-semibold" style={{ color: 'var(--text-default)' }}>
-                    Performance Trend
+                    Recorded scores by version
                   </h2>
-                  <div className="flex items-center gap-2">
-                    <button
-                      onClick={() => setChartType(chartType === 'bar' ? 'line' : 'bar')}
-                      className="px-3 py-1.5 text-sm rounded-md transition-colors"
-                      style={{
-                        backgroundColor: 'var(--surface-sunken)',
-                        color: 'var(--text-default)',
-                      }}
-                      onMouseEnter={(e) => {
-                        e.currentTarget.style.backgroundColor = 'var(--surface-hovered)';
-                      }}
-                      onMouseLeave={(e) => {
-                        e.currentTarget.style.backgroundColor = 'var(--surface-sunken)';
-                      }}
-                    >
-                      {chartType === 'bar' ? (
-                        <>
-                          <LineChart className="inline w-4 h-4 mr-1" aria-hidden="true" /> Line
-                        </>
-                      ) : (
-                        <>
-                          <BarChart3 className="inline w-4 h-4 mr-1" aria-hidden="true" /> Bar
-                        </>
-                      )}
-                    </button>
-                  </div>
                 </div>
                 <div
                   className="rounded-lg p-6"
                   style={{ backgroundColor: 'var(--surface-sunken)' }}
                 >
+                  <p className="mb-3 text-sm" style={{ color: 'var(--text-subtle)' }}>
+                    Hardware, setup, and benchmark revision are not recorded for these observations,
+                    so no continuous trend is inferred.
+                  </p>
                   <div className="h-48 sm:h-64 md:h-80">
-                    {chartType === 'bar' ? (
-                      <Bar data={chartData} options={chartOptions} />
-                    ) : (
-                      <Line data={chartData} options={chartOptions} />
-                    )}
+                    <Bar data={chartData} options={chartOptions} />
                   </div>
                 </div>
               </section>
@@ -506,15 +434,12 @@ const BrowserDetailsModal = ({ browser, selectedPlatform, selectedEngine, onClos
                     >
                       Speedometer 3.1
                     </div>
-                    <div
-                      className="text-3xl font-bold"
-                      style={{ color: 'var(--text-brand)' }}
-                    >
-                      {latestVersion.scores.speedometer3.toFixed(2)}
+                    <div className="text-3xl font-bold" style={{ color: 'var(--text-brand)' }}>
+                      {isFiniteMetric(latestSpeedometer3) ? latestSpeedometer3.toFixed(2) : '—'}
                     </div>
                   </div>
 
-                  {latestVersion.scores.ram && (
+                  {isFiniteMetric(latestScores.ram) && (
                     <div
                       className="rounded-lg p-6"
                       style={{
@@ -528,18 +453,15 @@ const BrowserDetailsModal = ({ browser, selectedPlatform, selectedEngine, onClos
                       >
                         Memory Usage
                       </div>
-                      <div
-                        className="text-3xl font-bold"
-                        style={{ color: 'var(--text-brand)' }}
-                      >
-                        {latestVersion.scores.ram >= 1000
-                          ? `${(latestVersion.scores.ram / 1000).toFixed(1)} GB`
-                          : `${latestVersion.scores.ram.toFixed(0)} MB`}
+                      <div className="text-3xl font-bold" style={{ color: 'var(--text-brand)' }}>
+                        {latestScores.ram >= 1000
+                          ? `${(latestScores.ram / 1000).toFixed(1)} GB`
+                          : `${latestScores.ram.toFixed(0)} MB`}
                       </div>
                     </div>
                   )}
 
-                  {latestVersion.scores.adblock && (
+                  {isFiniteMetric(latestScores.adblock) && (
                     <div
                       className="rounded-lg p-6"
                       style={{
@@ -553,11 +475,8 @@ const BrowserDetailsModal = ({ browser, selectedPlatform, selectedEngine, onClos
                       >
                         Ad Blocking
                       </div>
-                      <div
-                        className="text-3xl font-bold"
-                        style={{ color: 'var(--color-success)' }}
-                      >
-                        {latestVersion.scores.adblock.toFixed(0)}%
+                      <div className="text-3xl font-bold" style={{ color: 'var(--color-success)' }}>
+                        {latestScores.adblock.toFixed(0)}%
                       </div>
                     </div>
                   )}
@@ -574,7 +493,7 @@ const BrowserDetailsModal = ({ browser, selectedPlatform, selectedEngine, onClos
               <div className="space-y-4">
                 {activeVariant.versions.map((version, index) => (
                   <div
-                    key={version.version}
+                    key={version.observationId}
                     className="rounded-lg p-6 transition-colors"
                     style={{
                       backgroundColor: 'var(--surface-sunken)',
@@ -607,13 +526,23 @@ const BrowserDetailsModal = ({ browser, selectedPlatform, selectedEngine, onClos
                         </div>
                         {version.date && (
                           <p className="text-sm mt-1" style={{ color: 'var(--text-subtle)' }}>
-                            Tested: {new Date(version.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
+                            Tested:{' '}
+                            {new Date(version.date).toLocaleDateString('en-US', {
+                              month: 'short',
+                              day: 'numeric',
+                              year: 'numeric',
+                            })}
                           </p>
                         )}
                       </div>
                       <div className="text-right">
-                        <div className="text-2xl font-bold" style={{ color: 'var(--text-default)' }}>
-                          {version.scores.speedometer3.toFixed(2)}
+                        <div
+                          className="text-2xl font-bold"
+                          style={{ color: 'var(--text-default)' }}
+                        >
+                          {isFiniteMetric(version.scores?.speedometer3)
+                            ? version.scores.speedometer3.toFixed(2)
+                            : '—'}
                         </div>
                         <div className="text-sm" style={{ color: 'var(--text-subtle)' }}>
                           Speedometer 3.1
@@ -621,15 +550,16 @@ const BrowserDetailsModal = ({ browser, selectedPlatform, selectedEngine, onClos
                       </div>
                     </div>
 
-                    {(version.scores.ram || version.scores.adblock) && (
+                    {(isFiniteMetric(version.scores?.ram) ||
+                      isFiniteMetric(version.scores?.adblock)) && (
                       <div className="flex flex-wrap gap-x-6 gap-y-1 text-sm">
-                        {version.scores.ram && (
+                        {isFiniteMetric(version.scores?.ram) && (
                           <div style={{ color: 'var(--text-subtle)' }}>
                             <span className="font-medium">Memory:</span>{' '}
                             {version.scores.ram.toFixed(0)} MB
                           </div>
                         )}
-                        {version.scores.adblock && (
+                        {isFiniteMetric(version.scores?.adblock) && (
                           <div style={{ color: 'var(--text-subtle)' }}>
                             <span className="font-medium">Ad Blocking:</span>{' '}
                             {version.scores.adblock.toFixed(0)}%
@@ -652,19 +582,34 @@ const BrowserDetailsModal = ({ browser, selectedPlatform, selectedEngine, onClos
                 <table className="min-w-full text-sm">
                   <thead>
                     <tr style={{ borderBottom: '1px solid var(--border-default)' }}>
-                      <th className="text-left py-3 px-3 sm:px-4 font-semibold" style={{ color: 'var(--text-default)' }}>
+                      <th
+                        className="text-left py-3 px-3 sm:px-4 font-semibold"
+                        style={{ color: 'var(--text-default)' }}
+                      >
                         Version
                       </th>
-                      <th className="text-right py-3 px-3 sm:px-4 font-semibold" style={{ color: 'var(--text-default)' }}>
+                      <th
+                        className="text-right py-3 px-3 sm:px-4 font-semibold"
+                        style={{ color: 'var(--text-default)' }}
+                      >
                         Speedometer
                       </th>
-                      <th className="text-right py-3 px-3 sm:px-4 font-semibold" style={{ color: 'var(--text-default)' }}>
+                      <th
+                        className="text-right py-3 px-3 sm:px-4 font-semibold"
+                        style={{ color: 'var(--text-default)' }}
+                      >
                         Memory
                       </th>
-                      <th className="text-right py-3 px-3 sm:px-4 font-semibold" style={{ color: 'var(--text-default)' }}>
+                      <th
+                        className="text-right py-3 px-3 sm:px-4 font-semibold"
+                        style={{ color: 'var(--text-default)' }}
+                      >
                         Ad Block
                       </th>
-                      <th className="text-right py-3 px-3 sm:px-4 font-semibold" style={{ color: 'var(--text-default)' }}>
+                      <th
+                        className="text-right py-3 px-3 sm:px-4 font-semibold"
+                        style={{ color: 'var(--text-default)' }}
+                      >
                         Tested
                       </th>
                     </tr>
@@ -672,7 +617,7 @@ const BrowserDetailsModal = ({ browser, selectedPlatform, selectedEngine, onClos
                   <tbody>
                     {activeVariant.versions.map((version, index) => (
                       <tr
-                        key={version.version}
+                        key={version.observationId}
                         style={{ borderBottom: '1px solid var(--border-subtle)' }}
                         className="transition-colors"
                         onMouseEnter={(e) => {
@@ -700,17 +645,41 @@ const BrowserDetailsModal = ({ browser, selectedPlatform, selectedEngine, onClos
                             )}
                           </div>
                         </td>
-                        <td className="py-3 px-3 sm:px-4 text-right font-mono" style={{ color: 'var(--text-default)' }}>
-                          {version.scores.speedometer3.toFixed(2)}
+                        <td
+                          className="py-3 px-3 sm:px-4 text-right font-mono"
+                          style={{ color: 'var(--text-default)' }}
+                        >
+                          {isFiniteMetric(version.scores?.speedometer3)
+                            ? version.scores.speedometer3.toFixed(2)
+                            : '—'}
                         </td>
-                        <td className="py-3 px-3 sm:px-4 text-right font-mono" style={{ color: 'var(--text-subtle)' }}>
-                          {version.scores.ram ? `${version.scores.ram.toFixed(0)} MB` : '—'}
+                        <td
+                          className="py-3 px-3 sm:px-4 text-right font-mono"
+                          style={{ color: 'var(--text-subtle)' }}
+                        >
+                          {isFiniteMetric(version.scores?.ram)
+                            ? `${version.scores.ram.toFixed(0)} MB`
+                            : '—'}
                         </td>
-                        <td className="py-3 px-3 sm:px-4 text-right font-mono" style={{ color: 'var(--text-subtle)' }}>
-                          {version.scores.adblock ? `${version.scores.adblock.toFixed(0)}%` : '—'}
+                        <td
+                          className="py-3 px-3 sm:px-4 text-right font-mono"
+                          style={{ color: 'var(--text-subtle)' }}
+                        >
+                          {isFiniteMetric(version.scores?.adblock)
+                            ? `${version.scores.adblock.toFixed(0)}%`
+                            : '—'}
                         </td>
-                        <td className="py-3 px-3 sm:px-4 text-right font-mono" style={{ color: 'var(--text-subtle)' }}>
-                          {version.date ? new Date(version.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : '—'}
+                        <td
+                          className="py-3 px-3 sm:px-4 text-right font-mono"
+                          style={{ color: 'var(--text-subtle)' }}
+                        >
+                          {version.date
+                            ? new Date(version.date).toLocaleDateString('en-US', {
+                                month: 'short',
+                                day: 'numeric',
+                                year: 'numeric',
+                              })
+                            : '—'}
                         </td>
                       </tr>
                     ))}

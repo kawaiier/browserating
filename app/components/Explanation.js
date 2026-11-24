@@ -1,7 +1,22 @@
 'use client';
 
 import React, { useState } from 'react';
-import { BarChart3, BookOpen, Brain, Check, Clock, FlaskConical, Globe, Laptop, Lightbulb, Scale, Shield, Target, TriangleAlert, Zap } from 'lucide-react';
+import {
+  BarChart3,
+  BookOpen,
+  Brain,
+  Check,
+  Clock,
+  FlaskConical,
+  Globe,
+  Laptop,
+  Lightbulb,
+  Scale,
+  Shield,
+  Target,
+  TriangleAlert,
+  Zap,
+} from 'lucide-react';
 
 const StatCard = ({ icon: Icon, number, label, description }) => (
   <div
@@ -180,7 +195,8 @@ export default function Explanation() {
             onClick={() => setActiveTab(tab.id)}
             className="flex items-center gap-2 px-6 py-3 rounded-md font-medium transition-all duration-300"
             style={{
-              backgroundColor: activeTab === tab.id ? 'var(--color-brand)' : 'var(--surface-sunken)',
+              backgroundColor:
+                activeTab === tab.id ? 'var(--color-brand)' : 'var(--surface-sunken)',
               color: activeTab === tab.id ? 'var(--text-inverse)' : 'var(--text-default)',
             }}
             onMouseEnter={(e) => {
@@ -194,7 +210,9 @@ export default function Explanation() {
               }
             }}
           >
-            <span className="text-lg"><tab.icon className="w-5 h-5" aria-hidden="true" /></span>
+            <span className="text-lg">
+              <tab.icon className="w-5 h-5" aria-hidden="true" />
+            </span>
             {tab.label}
           </button>
         ))}
@@ -295,7 +313,10 @@ export default function Explanation() {
                     depends on your specific needs: privacy features, extension ecosystem, platform
                     integration, or development tools.
                   </p>
-                  <p className="text-sm leading-relaxed mb-0" style={{ color: 'var(--color-warning)' }}>
+                  <p
+                    className="text-sm leading-relaxed mb-0"
+                    style={{ color: 'var(--color-warning)' }}
+                  >
                     <strong>Our role:</strong> Provide the performance piece of your decision-making
                     puzzle, not the entire solution.
                   </p>
@@ -336,7 +357,11 @@ export default function Explanation() {
               </h3>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
                 <div className="flex items-start gap-2">
-                  <Check className="mt-1 w-4 h-4" style={{ color: 'var(--color-success)' }} aria-hidden="true" />
+                  <Check
+                    className="mt-1 w-4 h-4"
+                    style={{ color: 'var(--color-success)' }}
+                    aria-hidden="true"
+                  />
                   <div>
                     <div className="font-medium" style={{ color: 'var(--text-default)' }}>
                       Controlled Environment
@@ -347,7 +372,11 @@ export default function Explanation() {
                   </div>
                 </div>
                 <div className="flex items-start gap-2">
-                  <Check className="mt-1 w-4 h-4" style={{ color: 'var(--color-success)' }} aria-hidden="true" />
+                  <Check
+                    className="mt-1 w-4 h-4"
+                    style={{ color: 'var(--color-success)' }}
+                    aria-hidden="true"
+                  />
                   <div>
                     <div className="font-medium" style={{ color: 'var(--text-default)' }}>
                       Statistical Rigor
@@ -358,7 +387,11 @@ export default function Explanation() {
                   </div>
                 </div>
                 <div className="flex items-start gap-2">
-                  <Check className="mt-1 w-4 h-4" style={{ color: 'var(--color-success)' }} aria-hidden="true" />
+                  <Check
+                    className="mt-1 w-4 h-4"
+                    style={{ color: 'var(--color-success)' }}
+                    aria-hidden="true"
+                  />
                   <div>
                     <div className="font-medium" style={{ color: 'var(--text-default)' }}>
                       Full Transparency
@@ -381,7 +414,10 @@ export default function Explanation() {
                 <h3 className="text-2xl font-bold mb-3" style={{ color: 'var(--text-default)' }}>
                   What Each Metric Tells You
                 </h3>
-                <p className="max-w-2xl mx-auto leading-relaxed" style={{ color: 'var(--text-subtle)' }}>
+                <p
+                  className="max-w-2xl mx-auto leading-relaxed"
+                  style={{ color: 'var(--text-subtle)' }}
+                >
                   Our testing goes beyond simple speed tests to give you a complete picture of
                   browser performance and capabilities.
                 </p>
@@ -403,7 +439,10 @@ export default function Explanation() {
                       <Zap className="w-6 h-6" aria-hidden="true" />
                     </div>
                     <div className="flex-1 text-center sm:text-left">
-                      <h4 className="text-xl font-semibold mb-2" style={{ color: 'var(--text-default)' }}>
+                      <h4
+                        className="text-xl font-semibold mb-2"
+                        style={{ color: 'var(--text-default)' }}
+                      >
                         Speedometer 3.1 Performance
                       </h4>
                       <p className="mb-4 leading-relaxed" style={{ color: 'var(--text-subtle)' }}>
@@ -416,7 +455,10 @@ export default function Explanation() {
                           className="text-center p-3 rounded-lg"
                           style={{ backgroundColor: 'var(--surface-raised)' }}
                         >
-                          <div className="font-bold" style={{ color: 'var(--color-score-excellent)' }}>
+                          <div
+                            className="font-bold"
+                            style={{ color: 'var(--color-score-excellent)' }}
+                          >
                             40+
                           </div>
                           <div style={{ color: 'var(--text-subtle)' }}>Excellent</div>
@@ -459,7 +501,10 @@ export default function Explanation() {
                       <Brain className="w-6 h-6" aria-hidden="true" />
                     </div>
                     <div className="flex-1 text-center sm:text-left">
-                      <h4 className="text-xl font-semibold mb-2" style={{ color: 'var(--text-default)' }}>
+                      <h4
+                        className="text-xl font-semibold mb-2"
+                        style={{ color: 'var(--text-default)' }}
+                      >
                         Memory Efficiency
                       </h4>
                       <p className="mb-4 leading-relaxed" style={{ color: 'var(--text-subtle)' }}>
@@ -502,7 +547,10 @@ export default function Explanation() {
                       <Shield className="w-6 h-6" aria-hidden="true" />
                     </div>
                     <div className="flex-1 text-center sm:text-left">
-                      <h4 className="text-xl font-semibold mb-2" style={{ color: 'var(--text-default)' }}>
+                      <h4
+                        className="text-xl font-semibold mb-2"
+                        style={{ color: 'var(--text-default)' }}
+                      >
                         Ad-blocking effectiveness
                       </h4>
                       <p className="mb-4 leading-relaxed" style={{ color: 'var(--text-subtle)' }}>

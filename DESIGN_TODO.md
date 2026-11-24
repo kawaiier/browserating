@@ -1,4 +1,5 @@
 # BrowseRating — Design To-Do List
+
 > Branch: `design-update-2`  
 > Review method: 5-Dimension Expert Critique (Huashu-Design)  
 > Overall score: **6.2 / 10** — Good, with clear upgrade path to 7.5+
@@ -9,11 +10,11 @@ This document lists every design and craft issue found during the expert review,
 
 ## Severity Legend
 
-| Symbol | Level | Meaning |
-|--------|-------|---------|
-| ⚠️ | **Critical** | Breaks brand coherence, trust, or system integrity. Fix before shipping. |
-| ⚡ | **Important** | Degrades user experience or product credibility. Fix in next sprint. |
-| 💡 | **Optimization** | Elevates polish and distinctiveness. Address when bandwidth allows. |
+| Symbol | Level            | Meaning                                                                  |
+| ------ | ---------------- | ------------------------------------------------------------------------ |
+| ⚠️     | **Critical**     | Breaks brand coherence, trust, or system integrity. Fix before shipping. |
+| ⚡     | **Important**    | Degrades user experience or product credibility. Fix in next sprint.     |
+| 💡     | **Optimization** | Elevates polish and distinctiveness. Address when bandwidth allows.      |
 
 ---
 
@@ -23,12 +24,17 @@ This document lists every design and craft issue found during the expert review,
 
 **File:** `app/page.js` — line 24  
 **Current code:**
+
 ```jsx
-className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:bg-purple-600 hover:bg-purple-700 focus:text-white focus:shadow-xl focus:rounded-lg focus:font-semibold focus:transition-all focus:duration-200 focus:outline-none focus:ring-4 focus:ring-purple-500/50"
+className =
+  'sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:bg-purple-600 hover:bg-purple-700 focus:text-white focus:shadow-xl focus:rounded-lg focus:font-semibold focus:transition-all focus:duration-200 focus:outline-none focus:ring-4 focus:ring-purple-500/50';
 ```
+
 **Fix:**
+
 ```jsx
-className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:bg-accent-primary hover:bg-accent-primary-hover focus:text-white focus:shadow-xl focus:rounded-radius-md focus:font-semibold focus:transition-all focus:duration-200 focus:outline-none focus:ring-4 focus:ring-accent-primary/40"
+className =
+  'sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:bg-accent-primary hover:bg-accent-primary-hover focus:text-white focus:shadow-xl focus:rounded-radius-md focus:font-semibold focus:transition-all focus:duration-200 focus:outline-none focus:ring-4 focus:ring-accent-primary/40';
 ```
 
 **Why this matters:**  
@@ -40,10 +46,13 @@ The entire design system is built around a warm amber accent (`#D4A800`). The sk
 
 **File:** `app/page.js` — line 21  
 **Current code:**
+
 ```jsx
 <div className="min-h-screen bg-white dark:bg-gray-900 transition-colors duration-200">
 ```
+
 **Fix:**
+
 ```jsx
 <div className="min-h-screen bg-canvas transition-colors duration-200">
 ```
@@ -57,14 +66,19 @@ The design token `--bg-canvas` maps to `#fafaf8` in light mode and `#1a1a18` in 
 
 **File:** `app/components/BrowserCard.js` — line 257  
 **Current code:**
+
 ```jsx
 <div className="flex flex-wrap gap-2 mt-4 ml-18">
 ```
+
 **Fix:**
+
 ```jsx
 <div className="flex flex-wrap gap-2 mt-4 ml-[72px]">
 ```
+
 Or, if the intent is to align with the 56px logo container plus its 16px gap:
+
 ```jsx
 <div className="flex flex-wrap gap-2 mt-4 ml-[calc(56px+1rem)]">
 ```
@@ -80,20 +94,24 @@ Tailwind's default spacing scale goes up to `ml-16` (64px) and then jumps to `ml
 
 **File:** `app/components/Header.js` — lines 239–242  
 **Current code:**
+
 ```jsx
 <span className="text-4xl font-extrabold text-neutral-900">47.5</span>
 <span className="text-xs text-muted">Speedometer 3.1</span>
 ```
+
 And the SVG gauge progress arc:
+
 ```jsx
-strokeDasharray="326.73"
-strokeDashoffset="45.74"
+strokeDasharray = '326.73';
+strokeDashoffset = '45.74';
 ```
 
 **Fix:**  
 Pass the actual top score from the server through the component tree:
 
 In `app/page.js`:
+
 ```jsx
 const [initialBrowsers, lastModified] = await Promise.all([
   getBrowsersServer(),
@@ -107,10 +125,11 @@ const topScore = initialBrowsers.reduce((max, b) => {
 }, 0);
 
 // Pass to Header
-<Header lastModified={lastModified} topScore={topScore} />
+<Header lastModified={lastModified} topScore={topScore} />;
 ```
 
 In `Header.js`, use `topScore` to render the number and calculate:
+
 ```jsx
 const MAX_SCORE = 60; // Speedometer 3.1 practical ceiling
 const circumference = 2 * Math.PI * 52; // 326.73
@@ -131,13 +150,18 @@ The Hero section renders 4 decorative platform pills (macOS, Windows, Android, i
 **Two options:**
 
 **Option A — Remove the decorative pills entirely** (recommended):
+
 ```jsx
-{/* Remove the Platform Showcase div from Header.js lines 136–148 */}
+{
+  /* Remove the Platform Showcase div from Header.js lines 136–148 */
+}
 ```
+
 Replace with a single line of supporting text if needed:  
 `"Data available for macOS ARM, macOS Intel, Windows, Android, and iPad."`
 
 **Option B — Make them interactive shortcut links:**
+
 ```jsx
 const platforms = [
   { name: 'macOS ARM', slug: 'macos-arm', icon: '🍎' },
@@ -158,6 +182,7 @@ Having two different lists of platforms — one decorative in the hero, one func
 
 **File:** `app/components/BrowserCard.js` — line 97  
 **Current code:**
+
 ```jsx
 const handleCardInteraction = (e) => {
   if (e.type === 'click' || (e.type === 'keydown' && (e.key === 'Enter' || e.key === ' '))) {
@@ -167,7 +192,9 @@ const handleCardInteraction = (e) => {
   }
 };
 ```
+
 **Fix:**
+
 ```jsx
 const handleCardInteraction = (e) => {
   if (e.type === 'click' || (e.type === 'keydown' && (e.key === 'Enter' || e.key === ' '))) {
@@ -190,10 +217,13 @@ The page has `<h1>` in the Hero ("Browser Performance Rankings") and then `<h2>`
 
 **Fix:**  
 Change the `BrowserRankingList` section heading text to differentiate it:
+
 ```jsx
 <h2 className="text-3xl font-bold text-primary mb-2">Rankings by Platform</h2>
 ```
+
 or simply:
+
 ```jsx
 <h2 className="text-3xl font-bold text-primary mb-2">All Browsers</h2>
 ```
@@ -212,6 +242,7 @@ Screen reader users navigate pages by jumping between headings. When the same te
 
 **Recommended fix:**  
 Add to `app/layout.js`:
+
 ```jsx
 import { DM_Serif_Display, DM_Sans } from 'next/font/google';
 
@@ -230,6 +261,7 @@ const dmSans = DM_Sans({
   display: 'swap',
 });
 ```
+
 Apply to the root `<html>` element and reference in Tailwind config.
 
 Alternative pairing if a more editorial/journalistic tone is preferred: **Playfair Display** (display) + **Source Sans 3** (body).
@@ -242,18 +274,19 @@ The warm amber-neutral color system signals "editorial, measured, trustworthy." 
 ### 9. Hero hero-right stat card has no connection to actual platform data
 
 **File:** `app/components/Header.js` — lines 203–248  
-**Current state:** The stat card shows "Top Benchmark Score" with a hardcoded value (covered in issue #4), but it also has no indication of *which platform* the score is from. Users land on the page, the hero shows 47.5 — but is that macOS ARM? Windows? The fastest platform? The slowest?
+**Current state:** The stat card shows "Top Benchmark Score" with a hardcoded value (covered in issue #4), but it also has no indication of _which platform_ the score is from. Users land on the page, the hero shows 47.5 — but is that macOS ARM? Windows? The fastest platform? The slowest?
 
 **Fix:**  
 Add a platform label below the gauge label:
+
 ```jsx
 <span className="text-xs text-muted">Speedometer 3.1 · macOS ARM</span>
 ```
+
 Or, if `topScore` is now dynamic (issue #4), also pass `topPlatform` and render it:
+
 ```jsx
-<span className="text-xs text-muted">
-  Speedometer 3.1 · {platformNames[topPlatform]}
-</span>
+<span className="text-xs text-muted">Speedometer 3.1 · {platformNames[topPlatform]}</span>
 ```
 
 **Why this matters:**  
@@ -265,16 +298,20 @@ Benchmark scores without context are meaningless and misleading. A score of 47.5
 
 **File:** `app/components/BrowserRankingList.js` — lines 447–477  
 **Current code:**
+
 ```jsx
 onClick={() => document.getElementById('engine-dropdown')?.classList.toggle('hidden')}
 ```
+
 And:
+
 ```jsx
 document.getElementById('engine-dropdown')?.classList.add('hidden');
 ```
 
 **Fix:**  
 Promote to controlled React state (consistent with the `SortDropdown` component already in the same file):
+
 ```jsx
 const [engineDropdownOpen, setEngineDropdownOpen] = useState(false);
 
@@ -292,6 +329,7 @@ Direct DOM manipulation inside a React component bypasses React's rendering cycl
 
 **File:** `app/components/BrowserCard.js` — lines 7–12  
 **Current code:**
+
 ```js
 const getScoreColor = (score) => {
   if (score >= 40) return '#D4A800'; // amber for high scores
@@ -302,8 +340,9 @@ const getScoreColor = (score) => {
 ```
 
 **Current semantic color tokens from `globals.css`:**
+
 ```css
---color-score-excellent: #1a8f5d;  /* green */
+--color-score-excellent: #1a8f5d; /* green */
 --color-score-good: #b89200;
 --color-score-fair: #a76a00;
 --color-score-poor: #c83a2e;
@@ -312,6 +351,7 @@ const getScoreColor = (score) => {
 **Problem:** Scores ≥ 40 return `#D4A800` (amber, the primary brand accent) — but `#D4A800` is not the "excellent" semantic color; `#1a8f5d` (green) is. The amber accent is meant to be a brand highlight, not a data-encoding color. When the score badge and the brand accent use the same color, they blur into each other and lose their distinct communicative roles.
 
 **Fix:**
+
 ```js
 const getScoreColor = (score) => {
   if (score >= 40) return 'var(--color-score-excellent)'; // #1a8f5d green
@@ -320,6 +360,7 @@ const getScoreColor = (score) => {
   return 'var(--color-score-poor)';
 };
 ```
+
 Use CSS variable references so dark mode overrides propagate automatically.
 
 **Why this matters:**  
@@ -333,8 +374,11 @@ Color in a data tool carries semantic weight. Green means "this is good performa
 **Current state:** The score change (e.g., `↑ 1.2`) appears once in the score cluster (as a colored pill next to the score) and again in the metadata row below (as `+1.2 pts`). Both are conditionally rendered on `scoreDifference !== null`.
 
 **Fix:** Choose one location. The score cluster pill (top-right, near the score number) is higher impact. Remove the metadata row duplicate:
+
 ```jsx
-{/* Remove lines 281–292 in the metadata cluster */}
+{
+  /* Remove lines 281–292 in the metadata cluster */
+}
 ```
 
 **Why this matters:**  
@@ -348,6 +392,7 @@ Information repeated twice in a single card without additional context is visual
 **Current state:** The stat card renders unconditionally with the hardcoded score. Once the score is made dynamic (issue #4), it will need a loading state if the data fetch is asynchronous.
 
 **Fix:** Since `getBrowsersServer()` is already called in `page.js` at the server level, this should be a server component prop — no loading state needed if passed correctly. However, ensure the `Header` component accepts and validates the `topScore` prop with a sensible fallback:
+
 ```jsx
 export default function Header({ lastModified, topScore = 0 }) {
   // topScore of 0 renders the gauge arc at 0% — visually honest, never shows wrong data
@@ -375,28 +420,33 @@ grep -n "import" app/page.js
 
 **File:** `app/globals.css` — line 117  
 **Current:**
+
 ```css
 .dark {
-  --bg-canvas: var(--color-neutral-950);  /* resolves to #0f0e0c */
+  --bg-canvas: var(--color-neutral-950); /* resolves to #0f0e0c */
 }
 ```
+
 Wait — in the dark block, `neutral-950` is overridden to `#ffffff`. Let me re-examine: in the `.dark` block, `neutral-25` becomes `#1a1a18` and `neutral-950` becomes `#ffffff`. The canvas resolves via `var(--color-neutral-950)` which in dark mode = `#ffffff` — that cannot be right for a dark canvas.
 
 **Actual issue:** The `.dark` block remaps `--bg-canvas` to `var(--color-neutral-950)` but `--color-neutral-950` in dark mode is overridden to `#ffffff` (white), which would make the dark canvas white. Re-examine the token chain:
 
 ```css
 /* Dark mode overrides */
---color-neutral-950: #ffffff;   /* ← becomes white in dark mode */
---bg-canvas: var(--color-neutral-950);  /* ← would be white! */
+--color-neutral-950: #ffffff; /* ← becomes white in dark mode */
+--bg-canvas: var(--color-neutral-950); /* ← would be white! */
 ```
 
 But the dark canvas is actually defined directly:
+
 ```css
 --bg-canvas: var(--color-neutral-950);
 ```
+
 ...which maps to `#ffffff` in `.dark`. This appears to be a token mapping error. The dark mode canvas should use `var(--color-neutral-25)` which in dark mode resolves to `#1a1a18`.
 
 **Fix:**
+
 ```css
 .dark {
   --bg-canvas: var(--color-neutral-25); /* #1a1a18 — correct warm dark */
@@ -410,51 +460,42 @@ If the dark canvas token is broken, the dark mode experience could be showing in
 
 ## Summary Table
 
-| # | File | Line(s) | Severity | Category |
-|---|------|---------|----------|----------|
-| 1 | `app/page.js` | 24 | ⚠️ Critical | Brand consistency |
-| 2 | `app/page.js` | 21 | ⚠️ Critical | Token system integrity |
-| 3 | `app/components/BrowserCard.js` | 257 | ⚠️ Critical | Layout / Tailwind class |
-| 4 | `app/components/Header.js` | 239–242 | ⚡ Important | Data integrity |
-| 5 | `app/components/Header.js` | 136–148 | ⚡ Important | Information architecture |
-| 6 | `app/components/BrowserCard.js` | 97 | ⚡ Important | Interaction behavior |
-| 7 | `app/components/BrowserRankingList.js` | 580–583 | ⚡ Important | Heading hierarchy / SEO |
-| 8 | `app/layout.js` | — | 💡 Optimization | Typography |
-| 9 | `app/components/Header.js` | 244 | 💡 Optimization | Data context |
-| 10 | `app/components/BrowserRankingList.js` | 447–477 | 💡 Optimization | React patterns |
-| 11 | `app/components/BrowserCard.js` | 7–12 | 💡 Optimization | Color semantics |
-| 12 | `app/components/BrowserCard.js` | 281–292 | 💡 Optimization | Information density |
-| 13 | `app/components/Header.js` | 203–248 | 💡 Optimization | Data fallbacks |
-| 14 | `app/page.js` | imports | 💡 Optimization | Bundle hygiene |
-| 15 | `app/globals.css` | 117–133 | ⚡ Important | Token system integrity |
+| #   | File                                   | Line(s) | Severity        | Category                 |
+| --- | -------------------------------------- | ------- | --------------- | ------------------------ |
+| 1   | `app/page.js`                          | 24      | ⚠️ Critical     | Brand consistency        |
+| 2   | `app/page.js`                          | 21      | ⚠️ Critical     | Token system integrity   |
+| 3   | `app/components/BrowserCard.js`        | 257     | ⚠️ Critical     | Layout / Tailwind class  |
+| 4   | `app/components/Header.js`             | 239–242 | ⚡ Important    | Data integrity           |
+| 5   | `app/components/Header.js`             | 136–148 | ⚡ Important    | Information architecture |
+| 6   | `app/components/BrowserCard.js`        | 97      | ⚡ Important    | Interaction behavior     |
+| 7   | `app/components/BrowserRankingList.js` | 580–583 | ⚡ Important    | Heading hierarchy / SEO  |
+| 8   | `app/layout.js`                        | —       | 💡 Optimization | Typography               |
+| 9   | `app/components/Header.js`             | 244     | 💡 Optimization | Data context             |
+| 10  | `app/components/BrowserRankingList.js` | 447–477 | 💡 Optimization | React patterns           |
+| 11  | `app/components/BrowserCard.js`        | 7–12    | 💡 Optimization | Color semantics          |
+| 12  | `app/components/BrowserCard.js`        | 281–292 | 💡 Optimization | Information density      |
+| 13  | `app/components/Header.js`             | 203–248 | 💡 Optimization | Data fallbacks           |
+| 14  | `app/page.js`                          | imports | 💡 Optimization | Bundle hygiene           |
+| 15  | `app/globals.css`                      | 117–133 | ⚡ Important    | Token system integrity   |
 
 ---
 
 ## Recommended Fix Order
 
 **Batch 1 — 30 minutes, zero visual risk, highest ROI:**
+
 1. Fix skip-link purple → amber (`page.js:24`)
 2. Fix root wrapper `bg-white` → `bg-canvas` (`page.js:21`)
 3. Fix `ml-18` → `ml-[72px]` (`BrowserCard.js:257`)
 4. Audit and fix dark mode canvas token (`globals.css`)
 
-**Batch 2 — 2–3 hours, requires data plumbing:**
-5. Make Hero gauge score dynamic (pass `topScore` from server)
-6. Add platform label to Hero stat card
-7. Remove or make interactive the decorative platform pills in Hero
-8. Fix duplicate heading text in Rankings section
+**Batch 2 — 2–3 hours, requires data plumbing:** 5. Make Hero gauge score dynamic (pass `topScore` from server) 6. Add platform label to Hero stat card 7. Remove or make interactive the decorative platform pills in Hero 8. Fix duplicate heading text in Rankings section
 
-**Batch 3 — 1 sprint, architectural improvements:**
-9. Remove `scrollIntoView` from card interaction handler
-10. Refactor engine filter dropdown to React state
-11. Fix `getScoreColor` to use semantic token colors
-12. Remove duplicate trend indicator from metadata row
+**Batch 3 — 1 sprint, architectural improvements:** 9. Remove `scrollIntoView` from card interaction handler 10. Refactor engine filter dropdown to React state 11. Fix `getScoreColor` to use semantic token colors 12. Remove duplicate trend indicator from metadata row
 
-**Batch 4 — When bandwidth allows:**
-13. Introduce a custom typeface (DM Serif Display + DM Sans recommended)
-14. Audit all unused imports
+**Batch 4 — When bandwidth allows:** 13. Introduce a custom typeface (DM Serif Display + DM Sans recommended) 14. Audit all unused imports
 
 ---
 
-*Generated from: 5-Dimension Expert Critique using Huashu-Design skill*  
-*Dimensions reviewed: Philosophy Alignment · Visual Hierarchy · Craft Quality · Functionality · Originality*
+_Generated from: 5-Dimension Expert Critique using Huashu-Design skill_  
+_Dimensions reviewed: Philosophy Alignment · Visual Hierarchy · Craft Quality · Functionality · Originality_

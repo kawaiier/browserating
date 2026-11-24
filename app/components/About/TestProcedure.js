@@ -53,10 +53,11 @@ export default function TestProcedure() {
           <span className="font-medium" style={{ color: 'var(--text-brand)' }}>
             the cumulative memory consumption was measured
           </span>{' '}
-          after sequentially loading seven diverse websites: IGN, ESPN, Figma,
-          Britannica, Wired, Bloomberg, and Reddit&apos;s popular page.
-          Measurements were taken using Activity Monitor, filtered by each
-          browser&apos;s name.
+          after sequentially loading seven diverse websites: IGN, ESPN, Figma, Britannica, Wired,
+          Bloomberg, and Reddit&apos;s popular page. Measurements were taken using Activity Monitor,
+          filtered by each browser&apos;s name. We do not compare RAM results because individual
+          records lack enough setup and process-aggregation provenance to establish matched
+          conditions.
         </p>
       </div>
 
@@ -87,7 +88,8 @@ export default function TestProcedure() {
           >
             AdBlock Tester
           </a>{' '}
-          website was used.
+          website was used. The recorded percentage is a tool score; per-run scoring configuration
+          and setup were not retained, so it is not a guarantee of real-world protection.
         </p>
       </div>
     </div>

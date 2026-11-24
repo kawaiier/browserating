@@ -7,13 +7,16 @@
   },
   "scripts": {
     "dev": "next dev",
+    "prebuild": "npm run validate:data",
     "build": "next build",
+    "validate:data": "node scripts/validate-benchmark-data.mjs",
     "start": "next start",
     "test": "node --test",
     "lint": "eslint .",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md,css}\"",
     "format:check": "prettier --check \"**/*.{js,jsx,ts,tsx,json,md,css}\"",
-    "prepare": "husky"
+    "prepare": "husky",
+    "test:e2e": "playwright test"
   },
   "dependencies": {
     "@vercel/analytics": "^2.0.1",
@@ -25,8 +28,10 @@
     "react-dom": "^19.3.1"
   },
   "devDependencies": {
+    "@axe-core/playwright": "^4.14.0",
     "@commitlint/config-conventional": "^21.2.0",
     "@eslint/compat": "^2.1.0",
+    "@playwright/test": "^1.65.1",
     "@tailwindcss/postcss": "^4.3.3",
     "eslint": "^10.15.0",
     "eslint-config-next": "^16.2.12",

@@ -30,7 +30,7 @@ export default async function sitemap() {
     priority: 0.8,
   }));
 
-  const comparisonPages = comparisonSlugs.slice(0, 100).map(({ slug }) => ({
+  const comparisonPages = comparisonSlugs.map(({ slug }) => ({
     url: `${baseUrl}/compare/${slug}`,
     lastModified: dataLastModified,
     changeFrequency: 'weekly',
@@ -54,6 +54,12 @@ export default async function sitemap() {
     ...browserPages,
     ...platformPages,
     ...comparisonPages,
+    {
+      url: `${baseUrl}/compare`,
+      lastModified: dataLastModified,
+      changeFrequency: 'weekly',
+      priority: 0.8,
+    },
     {
       url: `${baseUrl}/quiz`,
       lastModified: dataLastModified,

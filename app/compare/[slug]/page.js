@@ -1,62 +1,296 @@
-import { getComparisonData, generateComparisonSlugs } from '@/app/lib/getComparisonData';
-import { notFound } from 'next/navigation';
+import { getComparisonData } from '@/app/lib/getComparisonData';
+import {
+  buildCompareUrl,
+  canonicalPair,
+  parsePairSlug,
+  parseViewState,
+  validateEngines,
+  validateObservations,
+} from '@/app/lib/comparisonUrl';
+import { notFound, permanentRedirect } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
-import { ArrowLeft, ArrowRight } from 'lucide-react';
 import { getDataLastModified } from '@/app/lib/getDataLastModified';
 import DarkModeProvider from '@/app/components/DarkModeProvider';
 import ErrorBoundary from '@/app/components/ErrorBoundary';
 import Header from '@/app/components/Header';
 import Footer from '@/app/components/Footer';
+import BrowserCompareDropdown from '@/app/components/BrowserCompareDropdown';
+import ComparisonFocus from '@/app/components/ComparisonFocus';
+import ComparisonAnalytics from '@/app/components/ComparisonAnalytics';
+import ComparisonShare from '@/app/components/ComparisonShare';
+import { getBrowsersServer } from '@/app/lib/getBrowsersServer';
+import {
+  formatScoreOutcome,
+  getMeasurementFreshness,
+  getComparisonOutcome,
+  getMetricCoverage,
+  getSharedPlatforms,
+  isExactDateMatch,
+  isHistoricalDateMismatch,
+} from '@/app/lib/comparisonViewModel';
+import { comparisonMetrics, formatMetricScore } from '@/app/lib/comparisonMetrics';
+import { comparisonOptions, suggestPartners } from '@/app/lib/comparisonOptions';
+import { hasSharedMeasurement } from '@/app/lib/comparisonIndex';
+import { getObservationSourceLabel } from '@/app/lib/benchmarkProvenance';
 
-export async function generateStaticParams() {
-  const comparisons = await generateComparisonSlugs();
-  return comparisons.map((c) => ({ slug: c.slug }));
+// Shared by metadata and page: a syntactically valid, distinct pair of known browsers.
+async function resolvePair(slug) {
+  const parts = parsePairSlug(slug);
+  if (!parts) return null;
+  const data = await getComparisonData(...parts);
+  return data ? { parts, data, canonical: canonicalPair(...parts) } : null;
 }
 
-export async function generateMetadata({ params }) {
+export async function generateMetadata({ params, searchParams }) {
   const { slug } = await params;
-  const parts = slug.split('-vs-');
-  if (parts.length !== 2) return { title: 'Comparison Not Found' };
+  const resolved = await resolvePair(slug);
+  if (!resolved) return { title: 'Comparison Not Found' };
+  const { data, canonical, parts } = resolved;
+  const query = parseViewState(await searchParams);
+  const engines = validateEngines(query.engines, data);
+  const initial =
+    Object.keys(engines).length || query.metric !== data.metric.id
+      ? await getComparisonData(...parts, engines, query.metric)
+      : data;
+  const observations = validateObservations(query.observations, initial);
+  const hasHistoricalSelections = Object.values(observations).some(
+    (platforms) => Object.keys(platforms).length > 0
+  );
+  const viewData = hasHistoricalSelections
+    ? await getComparisonData(...parts, engines, query.metric, observations)
+    : initial;
+  const selectedPlatform =
+    viewData.platforms.find(
+      ({ id }) =>
+        observations[viewData.browserA.slug]?.[id] || observations[viewData.browserB.slug]?.[id]
+    ) ||
+    viewData.platforms.find(({ id }) => id === query.platform) ||
+    viewData.platforms.find(
+      (platform) => platform.a.state === 'available' && platform.b.state === 'available'
+    ) ||
+    viewData.platforms[0];
+  const selectedRecords = selectedPlatform
+    ? [selectedPlatform.a.record, selectedPlatform.b.record].filter(Boolean)
+    : [];
+  const provenance = [...new Set(selectedRecords.map(getObservationSourceLabel))];
 
-  const data = await getComparisonData(parts[0], parts[1]);
-  if (!data) return { title: 'Comparison Not Found' };
-
+  const title = `${data.browserA.name} vs ${data.browserB.name} - Speedometer 3.1 Comparison`;
+  const description = `Compare recorded Speedometer 3.1 benchmark results for ${data.browserA.name} and ${data.browserB.name} across platforms.${provenance.length ? ` Observation sources for this view: ${provenance.join('; ')}.` : ''}`;
+  const url = `https://browserating.com/compare/${canonical.slug}`;
+  const indexable = hasSharedMeasurement(data);
+  // Pair cards show scores, so only pairs with a shared measurement get one.
+  const image = indexable
+    ? {
+        url: `https://browserating.com/api/og/compare?pair=${canonical.slug}`,
+        width: 1200,
+        height: 630,
+        alt: `${data.browserA.name} vs ${data.browserB.name} Speedometer 3.1 results`,
+      }
+    : null;
   return {
-    title: `${data.browserA.name} vs ${data.browserB.name} - Browser Performance Comparison`,
-    description: `Compare ${data.browserA.name} and ${data.browserB.name} performance. Speedometer 3.1 benchmarks, RAM usage, and more.`,
-    alternates: {
-      canonical: `https://browserating.com/compare/${slug}`,
+    title,
+    description,
+    alternates: { canonical: url },
+    robots: { index: indexable, follow: true },
+    openGraph: {
+      title,
+      description,
+      url,
+      siteName: 'BrowseRating',
+      type: 'website',
+      ...(image && { images: [image] }),
+    },
+    twitter: {
+      card: image ? 'summary_large_image' : 'summary',
+      title,
+      description,
+      ...(image && { images: [image.url] }),
     },
   };
 }
 
-export default async function ComparePage({ params }) {
+export default async function ComparePage({ params, searchParams }) {
   const { slug } = await params;
-  const [data, lastModified] = await Promise.all([
-    getComparisonData(slug.split('-vs-')[0], slug.split('-vs-')[1]),
-    getDataLastModified(),
-  ]);
+  const rawQuery = await searchParams;
+  const query = parseViewState(rawQuery);
+  const resolved = await resolvePair(slug);
+  if (!resolved) notFound();
+  const { parts, canonical } = resolved;
+  const requestedEngines = validateEngines(query.engines, resolved.data);
+  const initial = Object.keys(requestedEngines).length
+    ? await getComparisonData(...parts, requestedEngines, query.metric)
+    : resolved.data;
+  const engines = validateEngines(query.engines, initial);
+  const observations = validateObservations(query.observations, initial);
+  const hasHistoricalSelections = Object.values(observations).some(
+    (platforms) => Object.keys(platforms).length > 0
+  );
 
-  if (!data) {
-    notFound();
+  // A legacy reversed path keeps its visual order; any `order` it carries is ignored.
+  // Only validated engine and observation choices survive the permanent redirect.
+  if (canonical.reversed) {
+    permanentRedirect(
+      buildCompareUrl({
+        first: parts[0],
+        second: parts[1],
+        engines,
+        observations,
+        platform: query.platform,
+        metric: query.metric,
+      })
+    );
   }
 
+  const ordered = query.reverse ? [canonical.second, canonical.first] : parts;
+  const [data, lastModified] = await Promise.all([
+    getComparisonData(...ordered, engines, query.metric, observations),
+    getDataLastModified(),
+  ]);
   const { browserA, browserB } = data;
-  const platforms = ['macos-arm', 'macos-intel', 'windows', 'android', 'ipad'];
-  const platformLabels = {
-    'macos-arm': 'macOS (ARM)',
-    'macos-intel': 'macOS (Intel)',
-    windows: 'Windows',
-    android: 'Android',
-    ipad: 'iPad',
+  const usesHistoricalSelection = (platform) =>
+    Boolean(
+      observations[browserA.slug]?.[platform.id] || observations[browserB.slug]?.[platform.id]
+    );
+  const catalog = await getBrowsersServer();
+  const historicalPlatformIds = new Set(
+    data.platforms.filter(usesHistoricalSelection).map((platform) => platform.id)
+  );
+  const shared = getSharedPlatforms(data.platforms, historicalPlatformIds);
+  const onlyShared = query.sharedOnly;
+  const options = comparisonOptions(catalog, engines);
+  const measured = (side) => data.platforms.some((p) => p[side].state === 'available');
+  const noData = !measured('a') && !measured('b');
+  const coverage = getMetricCoverage(data.platforms);
+  const partners =
+    shared.length || hasHistoricalSelections
+      ? []
+      : [browserA, browserB]
+          .map((browser) => ({
+            browser,
+            suggestions: suggestPartners(options, browser.slug, [browserA.slug, browserB.slug]),
+          }))
+          .filter((entry) => entry.suggestions.length > 0);
+  const visible = onlyShared ? shared : data.platforms;
+  const selected =
+    data.platforms.find((p) => p.id === query.platform) ||
+    data.platforms.find(usesHistoricalSelection) ||
+    shared[0] ||
+    null;
+  const invalidPlatform = rawQuery?.platform != null && !query.platform;
+  const invalidEngine = Object.entries(query.engines).some(([slug, platforms]) =>
+    Object.entries(platforms).some(([id, engine]) => engines[slug]?.[id] !== engine)
+  );
+  const invalidMetric = rawQuery?.metric != null && rawQuery.metric !== query.metric;
+  const parsedObservationKeys = new Set(
+    Object.entries(query.observations).flatMap(([slug, platforms]) =>
+      Object.keys(platforms).map((id) => `observation.${slug}.${id}`)
+    )
+  );
+  const invalidObservation =
+    Object.entries(query.observations).some(([slug, platforms]) =>
+      Object.entries(platforms).some(
+        ([id, observationId]) => observations[slug]?.[id] !== observationId
+      )
+    ) ||
+    Object.keys(rawQuery || {}).some(
+      (key) => key.startsWith('observation.') && !parsedObservationKeys.has(key)
+    );
+  const viewUrl = (changes) =>
+    buildCompareUrl({
+      first: ordered[0],
+      second: ordered[1],
+      engines,
+      observations,
+      platform: query.platform,
+      sharedOnly: onlyShared,
+      metric: query.metric,
+      ...changes,
+    });
+  const baseUrl = viewUrl({ sharedOnly: false });
+  const filterUrl = viewUrl({ sharedOnly: true });
+  const committedUrl = viewUrl({ platform: selected?.id });
+  const unmatchedHistoricalDate = (platform) =>
+    isHistoricalDateMismatch(platform, usesHistoricalSelection(platform));
+  const scoreOutcome = (platform) =>
+    getComparisonOutcome(platform, usesHistoricalSelection(platform), data.metric);
+  const selectedOutcome = selected ? scoreOutcome(selected) : null;
+  const selectedMaxScore = selected
+    ? Math.max(0, ...[selected.a, selected.b].map((o) => (o.state === 'available' ? o.score : 0)))
+    : 0;
+  const otherShared =
+    selectedOutcome?.state === 'unavailable' ? shared.filter((p) => p.id !== selected.id) : [];
+  const label = (observation) =>
+    ({
+      'missing-browser': 'No browser data',
+      'missing-platform': 'No measurement',
+      'missing-engine': 'No measurement for this engine',
+      'missing-version': 'No recorded version',
+      'missing-metric': `${data.metric.name} score not recorded`,
+      'invalid-metric': `Invalid ${data.metric.name} score`,
+      'missing-observation': 'Selected observation is unavailable',
+    })[observation.state] ||
+    (observation.state === 'available' ? formatMetricScore(observation.score, data.metric) : '');
+  const evidence = (observation) => {
+    if (!observation.record) return null;
+    const freshness = getMeasurementFreshness(observation.record.date);
+    return (
+      <div className="mt-1 text-sm font-normal" style={{ color: 'var(--text-subtle)' }}>
+        <div>Version: {observation.record.version || 'Not recorded'}</div>
+        <div>Observation ID: {observation.record.observationId || 'Not recorded'}</div>
+        <div>Source: {getObservationSourceLabel(observation.record)}</div>
+        <div>Engine: {observation.engine || 'Not recorded'}</div>
+        <div>
+          {freshness === 'unknown'
+            ? 'Test date not recorded'
+            : `Tested on ${observation.record.date}`}
+        </div>
+        {freshness === 'older' && <div>Older measurement (over 180 days old)</div>}
+      </div>
+    );
+  };
+  const hiddenState = (omit) => {
+    const omitted = new Set(Array.isArray(omit) ? omit : [omit]);
+    return (
+      <>
+        {query.reverse && <input type="hidden" name="order" value="reverse" />}
+        {data.metric.id !== 'speedometer3' && (
+          <input type="hidden" name="metric" value={data.metric.id} />
+        )}
+        {!omitted.has('platform') && selected && (
+          <input type="hidden" name="platform" value={selected.id} />
+        )}
+        {Object.entries(engines).flatMap(([slug, platforms]) =>
+          Object.entries(platforms).map(([id, engine]) => {
+            const name = `engine.${slug}.${id}`;
+            return omitted.has(name) ? null : (
+              <input key={name} type="hidden" name={name} value={engine} />
+            );
+          })
+        )}
+        {Object.entries(observations).flatMap(([slug, platforms]) =>
+          Object.entries(platforms).map(([id, observationId]) => {
+            const name = `observation.${slug}.${id}`;
+            return omitted.has(name) ? null : (
+              <input key={name} type="hidden" name={name} value={observationId} />
+            );
+          })
+        )}
+        {onlyShared && <input type="hidden" name="shared" value="1" />}
+      </>
+    );
+  };
+  const outcomeText = (platform) => {
+    if (unmatchedHistoricalDate(platform))
+      return 'No matched-date result: choose observations recorded on the same date. Equal dates do not establish matching hardware or setup.';
+    return formatScoreOutcome(scoreOutcome(platform), browserA.name, browserB.name, data.metric);
   };
 
   return (
-    <ErrorBoundary>
+    <ErrorBoundary analyticsScope="comparison">
       <DarkModeProvider>
         <div
-          className="min-h-screen transition-colors duration-200"
+          className="comparison-shell min-h-screen transition-colors duration-200"
           style={{ backgroundColor: 'var(--surface-default)' }}
         >
           <a
@@ -66,158 +300,629 @@ export default async function ComparePage({ params }) {
           >
             Skip to main content
           </a>
-          <Header lastModified={lastModified} />
+          <Header lastModified={lastModified} compact />
           <main
             id="main-content"
-            className="container mx-auto px-4 py-8 scroll-mt-4"
+            className="comparison-page container mx-auto min-w-0 px-4 py-8 scroll-mt-4"
             tabIndex={-1}
           >
-            <article className="max-w-4xl mx-auto">
-              <nav className="mb-6">
+            <article className="max-w-4xl min-w-0 mx-auto [overflow-wrap:anywhere]">
+              <nav aria-label="Breadcrumb" className="mb-4">
                 <Link
-                  href="/"
-                  className="hover:underline"
-                  style={{ color: 'var(--text-brand)' }}
+                  href="/#rankings"
+                  className="underline"
+                  style={{ color: 'var(--text-default)' }}
                 >
-                  <ArrowLeft className="inline w-4 h-4" aria-hidden="true" /> Back to Full Rankings
+                  Home / Rankings
                 </Link>
+                <span aria-hidden="true"> / </span>
+                <span>
+                  Compare {browserA.name} and {browserB.name}
+                </span>
               </nav>
 
               <header className="mb-8">
-                <h1 className="text-4xl font-bold mb-4" style={{ color: 'var(--text-default)' }}>
+                <h1
+                  id="comparison-heading"
+                  tabIndex={-1}
+                  className="text-3xl sm:text-4xl font-bold mb-4"
+                  style={{ color: 'var(--text-default)' }}
+                >
                   {browserA.name} vs {browserB.name}
                 </h1>
                 <p className="text-lg" style={{ color: 'var(--text-subtle)' }}>
-                  Detailed performance comparison
+                  Compare recorded benchmark results by platform.
                 </p>
               </header>
 
-              <section className="mb-8">
-                <div className="grid md:grid-cols-2 gap-6">
-                  <div
-                    className="rounded-lg p-6"
-                    style={{
-                      backgroundColor: 'var(--surface-raised)',
-                      border: '1px solid var(--border-subtle)',
-                      boxShadow: 'var(--shadow-raised)',
-                    }}
-                  >
-                    <div className="flex items-center gap-4 mb-4">
-                      <div className="relative w-12 h-12">
-                        <Image
-                          src={browserA.logo}
-                          alt={`${browserA.name} logo`}
-                          fill
-                          className="object-contain"
-                        />
+              <section className="comparison-print-result">
+                <h2>
+                  {browserA.name} vs {browserB.name}
+                </h2>
+                <p>
+                  Metric: {data.metric.name} — {data.metric.interpretation}
+                </p>
+                <p>Platform: {selected?.label || 'No platform selected'}</p>
+                {selected ? (
+                  <>
+                    <p>{outcomeText(selected)}</p>
+                    {[
+                      [browserA, selected.a],
+                      [browserB, selected.b],
+                    ].map(([browser, observation]) => (
+                      <div key={browser.slug}>
+                        <h3>{browser.name}</h3>
+                        <p>Score: {label(observation)}</p>
+                        <p>Engine: {observation.engine || 'Not recorded'}</p>
+                        <p>Version: {observation.record?.version || 'Not recorded'}</p>
+                        <p>Source: {getObservationSourceLabel(observation.record)}</p>
+                        <p>Test date: {observation.record?.date || 'Not recorded'}</p>
                       </div>
-                      <h2 className="text-2xl font-bold" style={{ color: 'var(--text-default)' }}>
-                        {browserA.name}
-                      </h2>
-                    </div>
-                  </div>
-
-                  <div
-                    className="rounded-lg p-6"
-                    style={{
-                      backgroundColor: 'var(--surface-raised)',
-                      border: '1px solid var(--border-subtle)',
-                      boxShadow: 'var(--shadow-raised)',
-                    }}
-                  >
-                    <div className="flex items-center gap-4 mb-4">
-                      <div className="relative w-12 h-12">
-                        <Image
-                          src={browserB.logo}
-                          alt={`${browserB.name} logo`}
-                          fill
-                          className="object-contain"
-                        />
-                      </div>
-                      <h2 className="text-2xl font-bold" style={{ color: 'var(--text-default)' }}>
-                        {browserB.name}
-                      </h2>
-                    </div>
-                  </div>
-                </div>
+                    ))}
+                  </>
+                ) : (
+                  <p>No shared platform measurement is available.</p>
+                )}
+                <p>
+                  Limitations: Scores are recorded measurements, not an overall browser
+                  recommendation. Hardware and setup details are not recorded for individual
+                  measurements; different test dates alone do not establish different setups.
+                  Missing measurements do not establish platform incompatibility.
+                </p>
               </section>
-
-              <section>
+              <section className="comparison-screen-result">
+                <ComparisonAnalytics
+                  first={browserA.slug}
+                  second={browserB.slug}
+                  noSharedData={!noData && shared.length === 0}
+                />
+                <ComparisonFocus
+                  key={`${ordered.join('-')}-${viewUrl()}`}
+                  first={browserA.slug}
+                  second={browserB.slug}
+                />
                 <h2 className="text-2xl font-bold mb-4" style={{ color: 'var(--text-default)' }}>
                   Performance Comparison
                 </h2>
-                <div className="overflow-x-auto">
-                  <table className="w-full">
-                    <thead>
-                      <tr style={{ borderBottom: '1px solid var(--border-default)' }}>
-                        <th
-                          className="text-left py-2"
-                          style={{ color: 'var(--text-default)' }}
-                        >
-                          Platform
-                        </th>
-                        <th
-                          className="text-right py-2"
-                          style={{ color: 'var(--text-default)' }}
-                        >
-                          {browserA.name}
-                        </th>
-                        <th
-                          className="text-right py-2"
-                          style={{ color: 'var(--text-default)' }}
-                        >
-                          {browserB.name}
-                        </th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {platforms.map((platform) => {
-                        const dataA = browserA[platform];
-                        const dataB = browserB[platform];
-                        if (!dataA && !dataB) return null;
-
-                        const scoreA = dataA?.versions?.[0]?.scores?.speedometer3;
-                        const scoreB = dataB?.versions?.[0]?.scores?.speedometer3;
-
-                        return (
-                          <tr
-                            key={platform}
-                            style={{ borderBottom: '1px solid var(--border-subtle)' }}
+                <form
+                  method="get"
+                  data-comparison-control
+                  className="mb-4 flex flex-wrap items-end gap-3"
+                >
+                  {hiddenState('metric')}
+                  <div>
+                    <label htmlFor="comparison-metric" className="block font-medium">
+                      Metric
+                    </label>
+                    <select
+                      id="comparison-metric"
+                      name="metric"
+                      defaultValue={data.metric.id}
+                      className="min-h-[44px] max-w-full p-2 rounded"
+                      style={{
+                        backgroundColor: 'var(--surface-raised)',
+                        color: 'var(--text-default)',
+                        border: '1px solid var(--border-default)',
+                      }}
+                    >
+                      {Object.values(comparisonMetrics).map((metric) => (
+                        <option key={metric.id} value={metric.id}>
+                          {metric.name}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                  <button
+                    type="submit"
+                    className="min-h-[44px] rounded px-3 py-2"
+                    style={{ border: '1px solid currentColor', color: 'var(--text-default)' }}
+                  >
+                    Show metric
+                  </button>
+                  <p className="text-sm" style={{ color: 'var(--text-subtle)' }}>
+                    {coverage.observations} recorded{' '}
+                    {coverage.observations === 1 ? 'result' : 'results'}; {coverage.sharedPlatforms}{' '}
+                    shared {coverage.sharedPlatforms === 1 ? 'platform' : 'platforms'}.
+                  </p>
+                </form>
+                {invalidMetric && (
+                  <p role="status" className="mb-4" style={{ color: 'var(--text-default)' }}>
+                    That metric is not available; Speedometer 3.1 is shown. RAM comparisons are
+                    withheld until their measurement methods are documented.
+                  </p>
+                )}
+                {noData ? (
+                  <div
+                    className="mb-6 rounded-lg p-4"
+                    style={{
+                      backgroundColor: 'var(--surface-raised)',
+                      border: '1px solid var(--border-subtle)',
+                    }}
+                  >
+                    <h3 className="text-xl font-bold mb-2">
+                      No {data.metric.name} results recorded for this pair
+                    </h3>
+                    <p className="mb-3">
+                      Neither {browserA.name} nor {browserB.name} has a recorded {data.metric.name}
+                      measurement on any platform, so there is nothing to compare. This does not
+                      mean either browser cannot run on these platforms.
+                    </p>
+                    <ul className="list-disc pl-6 space-y-2">
+                      {[browserA, browserB].map((browser) => (
+                        <li key={browser.slug}>
+                          <Link
+                            className="inline-block py-1 underline"
+                            href={`/browsers/${browser.slug}`}
                           >
-                            <td className="py-2 font-medium" style={{ color: 'var(--text-default)' }}>
-                              {platformLabels[platform]}
-                            </td>
-                            <td
-                              className="text-right py-2"
-                              style={{
-                                color:
-                                  scoreA > scoreB
-                                    ? 'var(--color-success)'
-                                    : 'var(--text-default)',
-                                fontWeight: scoreA > scoreB ? 'bold' : 'normal',
-                              }}
-                            >
-                              {scoreA?.toFixed(2) || 'N/A'}
-                            </td>
-                            <td
-                              className="text-right py-2"
-                              style={{
-                                color:
-                                  scoreB > scoreA
-                                    ? 'var(--color-success)'
-                                    : 'var(--text-default)',
-                                fontWeight: scoreB > scoreA ? 'bold' : 'normal',
-                              }}
-                            >
-                              {scoreB?.toFixed(2) || 'N/A'}
-                            </td>
-                          </tr>
-                        );
-                      })}
-                    </tbody>
-                  </table>
-                </div>
+                            {browser.name} details
+                          </Link>
+                        </li>
+                      ))}
+                      <li>
+                        <Link className="inline-block py-1 underline" href="/#rankings">
+                          Browse browsers with recorded benchmarks
+                        </Link>
+                      </li>
+                      <li>
+                        <Link className="inline-block py-1 underline" href="#compare-browsers">
+                          Choose different browsers to compare
+                        </Link>
+                      </li>
+                    </ul>
+                  </div>
+                ) : (
+                  <>
+                    {(invalidPlatform || invalidEngine || invalidObservation) && (
+                      <p role="status" className="mb-4" style={{ color: 'var(--text-default)' }}>
+                        {invalidPlatform && 'That platform is unavailable; the default is shown. '}
+                        {invalidEngine &&
+                          'An engine choice was unavailable; the primary engine is shown.'}
+                        {invalidObservation &&
+                          'A historical observation was unavailable for this browser, platform, or engine; the latest record is shown.'}
+                      </p>
+                    )}
+                    <form
+                      method="get"
+                      data-comparison-control
+                      className="mb-4 flex flex-wrap items-end gap-3"
+                    >
+                      {hiddenState('platform')}
+                      <div>
+                        <label htmlFor="comparison-platform" className="block font-medium">
+                          Platform
+                        </label>
+                        <select
+                          id="comparison-platform"
+                          name="platform"
+                          data-current={selected?.id || ''}
+                          defaultValue={selected?.id || ''}
+                          className="min-h-[44px] max-w-full p-2 rounded"
+                          style={{
+                            backgroundColor: 'var(--surface-raised)',
+                            color: 'var(--text-default)',
+                            border: '1px solid var(--border-default)',
+                          }}
+                        >
+                          {!selected && (
+                            <option value="" disabled>
+                              Choose a platform
+                            </option>
+                          )}
+                          {data.platforms.map((p) => (
+                            <option key={p.id} value={p.id}>
+                              {p.label}
+                            </option>
+                          ))}
+                        </select>
+                      </div>
+                      <button
+                        type="submit"
+                        className="min-h-[44px] rounded px-3 py-2"
+                        style={{ border: '1px solid currentColor', color: 'var(--text-default)' }}
+                      >
+                        Show platform
+                      </button>
+                    </form>
+                    {selected && (
+                      <section
+                        aria-label={`Selected result for ${selected.label}`}
+                        className="mb-6 rounded-lg p-4"
+                        style={{
+                          backgroundColor: 'var(--surface-raised)',
+                          border: '1px solid var(--border-subtle)',
+                        }}
+                      >
+                        <h3 className="text-xl font-bold">
+                          {selected.label} — {data.metric.name}
+                        </h3>
+                        <p id="comparison-result" className="my-2">
+                          {selected.label}. {browserA.name}:{' '}
+                          {selected.a.engine || 'engine not recorded'}. {browserB.name}:{' '}
+                          {selected.b.engine || 'engine not recorded'}. {outcomeText(selected)}
+                        </p>
+                        {usesHistoricalSelection(selected) &&
+                          isExactDateMatch(selected.a, selected.b) && (
+                            <p className="mb-2 text-sm" style={{ color: 'var(--text-subtle)' }}>
+                              Matched by exact recorded date ({selected.a.record.date}); hardware
+                              and setup remain undocumented.
+                            </p>
+                          )}
+                        {otherShared.length > 0 && (
+                          <p className="mb-2">
+                            Both browsers have measurements on:{' '}
+                            {otherShared.map((p, index) => (
+                              <span key={p.id}>
+                                {index > 0 && ', '}
+                                <Link
+                                  prefetch={false}
+                                  className="underline"
+                                  href={viewUrl({ platform: p.id })}
+                                >
+                                  {p.label}
+                                </Link>
+                              </span>
+                            ))}
+                            .
+                          </p>
+                        )}
+                        <div className="grid min-w-0 md:grid-cols-2 gap-4">
+                          {[
+                            [browserA, selected.a],
+                            [browserB, selected.b],
+                          ].map(([browser, observation]) => {
+                            const name = `engine.${browser.slug}.${selected.id}`;
+                            return (
+                              <div key={browser.slug} className="min-w-0">
+                                <Link
+                                  href={`/browsers/${browser.slug}`}
+                                  className="inline-flex items-center gap-2 font-semibold underline"
+                                  style={{ color: 'var(--text-default)' }}
+                                >
+                                  <Image
+                                    src={browser.logo}
+                                    alt=""
+                                    width={32}
+                                    height={32}
+                                    className="object-contain"
+                                  />
+                                  {browser.name}
+                                </Link>
+                                <p className="font-semibold mt-2">{label(observation)}</p>
+                                {observation.state === 'available' && selectedMaxScore > 0 && (
+                                  <div
+                                    aria-hidden="true"
+                                    className="mt-2 h-3 w-full overflow-hidden rounded-full"
+                                    style={{ backgroundColor: 'var(--border-subtle)' }}
+                                  >
+                                    <div
+                                      className="h-full rounded-full"
+                                      style={{
+                                        width: `${(observation.score / selectedMaxScore) * 100}%`,
+                                        backgroundColor: 'var(--color-brand)',
+                                      }}
+                                    />
+                                  </div>
+                                )}
+                                {observation.engines.length > 1 ? (
+                                  <form
+                                    method="get"
+                                    data-comparison-control
+                                    className="mt-2 flex flex-wrap items-end gap-2"
+                                  >
+                                    {hiddenState(name)}
+                                    <div>
+                                      <label htmlFor={name} className="block">
+                                        {browser.name} engine
+                                      </label>
+                                      <select
+                                        id={name}
+                                        name={name}
+                                        data-current={observation.engine}
+                                        defaultValue={observation.engine}
+                                        className="min-h-[44px] max-w-full p-2 rounded"
+                                        style={{
+                                          backgroundColor: 'var(--surface-raised)',
+                                          color: 'var(--text-default)',
+                                          border: '1px solid var(--border-default)',
+                                        }}
+                                      >
+                                        {observation.engines.map((engine) => (
+                                          <option key={engine} value={engine}>
+                                            {engine}
+                                          </option>
+                                        ))}
+                                      </select>
+                                    </div>
+                                    <button
+                                      type="submit"
+                                      className="min-h-[44px] rounded px-3 py-2"
+                                      style={{
+                                        border: '1px solid currentColor',
+                                        color: 'var(--text-default)',
+                                      }}
+                                    >
+                                      Show engine
+                                    </button>
+                                  </form>
+                                ) : null}
+                                {evidence(observation)}
+                              </div>
+                            );
+                          })}
+                        </div>
+                        <form
+                          method="get"
+                          data-comparison-control
+                          className="mt-5 flex flex-wrap items-end gap-3"
+                        >
+                          {hiddenState([
+                            `observation.${browserA.slug}.${selected.id}`,
+                            `observation.${browserB.slug}.${selected.id}`,
+                          ])}
+                          {[
+                            [browserA, selected.a],
+                            [browserB, selected.b],
+                          ].map(([browser, observation]) => {
+                            const name = `observation.${browser.slug}.${selected.id}`;
+                            return (
+                              <div key={name} className="min-w-0 max-w-full">
+                                <label htmlFor={name} className="block font-medium">
+                                  {browser.name} observation
+                                </label>
+                                <select
+                                  id={name}
+                                  name={name}
+                                  defaultValue={observations[browser.slug]?.[selected.id] || ''}
+                                  className="min-h-[44px] w-full max-w-full p-2 rounded"
+                                  style={{
+                                    backgroundColor: 'var(--surface-raised)',
+                                    color: 'var(--text-default)',
+                                    border: '1px solid var(--border-default)',
+                                  }}
+                                >
+                                  <option value="">Latest recorded</option>
+                                  {observation.history.map((record) => (
+                                    <option key={record.observationId} value={record.observationId}>
+                                      {record.date || 'Test date not recorded'} — {record.version} —{' '}
+                                      {getObservationSourceLabel(record)} (
+                                      {record.observationId.slice(-8)})
+                                    </option>
+                                  ))}
+                                </select>
+                              </div>
+                            );
+                          })}
+                          <button
+                            type="submit"
+                            className="min-h-[44px] rounded px-3 py-2"
+                            style={{
+                              border: '1px solid currentColor',
+                              color: 'var(--text-default)',
+                            }}
+                          >
+                            Compare observations
+                          </button>
+                          <p className="w-full text-sm" style={{ color: 'var(--text-subtle)' }}>
+                            Historical comparisons require the same recorded test date on both
+                            sides. This exact-date rule does not establish matching hardware or
+                            setup.
+                          </p>
+                        </form>
+                      </section>
+                    )}
+                    {!selected && (
+                      <div className="mb-6 flex flex-wrap gap-6">
+                        {[browserA, browserB].map((browser) => (
+                          <Link
+                            key={browser.slug}
+                            href={`/browsers/${browser.slug}`}
+                            className="inline-flex items-center gap-2 font-semibold underline"
+                            style={{ color: 'var(--text-default)' }}
+                          >
+                            <Image
+                              src={browser.logo}
+                              alt=""
+                              width={32}
+                              height={32}
+                              className="object-contain"
+                            />
+                            {browser.name}
+                          </Link>
+                        ))}
+                      </div>
+                    )}
+                    <p className="mb-4" style={{ color: 'var(--text-subtle)' }}>
+                      Method: {data.metric.method} {data.metric.interpretation} Dates are when each
+                      measurement was tested; older measurements are more than 180 days old.
+                      Different dates alone do not establish different test setups. Hardware and
+                      setup details are not recorded for individual measurements. See the{' '}
+                      <Link href="/#methodology" className="underline">
+                        general testing methodology
+                      </Link>{' '}
+                      for the procedure, which does not document each measurement’s setup.
+                    </p>
+                    <p className="mb-4" style={{ color: 'var(--text-subtle)' }}>
+                      {shared.length} shared platform{' '}
+                      {shared.length === 1 ? 'measurement' : 'measurements'}.
+                      {shared.length === 0 &&
+                        (hasHistoricalSelections
+                          ? ' The selected observations do not share an exact recorded test date, so there is no matched-date result.'
+                          : ' These browsers have no shared platform measurements, so there is no head-to-head result. Missing measurements do not establish platform incompatibility.')}
+                    </p>
+                    {partners.length > 0 && data.metric.id === 'speedometer3' && (
+                      <div className="mb-4">
+                        <h3 className="text-lg font-bold mb-2">
+                          Comparisons with shared measurements
+                        </h3>
+                        {partners.map(({ browser, suggestions }) => (
+                          <p key={browser.slug} className="mb-2">
+                            Compare {browser.name} with:{' '}
+                            {suggestions.map((option, index) => (
+                              <span key={option.slug}>
+                                {index > 0 && ', '}
+                                <Link
+                                  prefetch={false}
+                                  className="underline"
+                                  href={buildCompareUrl({
+                                    first: browser.slug,
+                                    second: option.slug,
+                                  })}
+                                >
+                                  {option.name}
+                                </Link>{' '}
+                                ({option.shared} shared{' '}
+                                {option.shared === 1 ? 'platform' : 'platforms'})
+                              </span>
+                            ))}
+                          </p>
+                        ))}
+                      </div>
+                    )}
+                    <p className="mb-4">
+                      <Link
+                        prefetch={false}
+                        className="underline"
+                        href={onlyShared ? baseUrl : filterUrl}
+                      >
+                        {onlyShared
+                          ? 'Show all platforms (reset filter)'
+                          : 'Shared measurements only'}
+                      </Link>
+                    </p>
+                    {onlyShared && visible.length === 0 ? (
+                      <p>
+                        No shared measurements match this filter. Use the reset link to show all
+                        platforms.
+                      </p>
+                    ) : (
+                      <div>
+                        <p
+                          id="comparison-table-scroll-hint"
+                          className="mb-2 text-sm"
+                          style={{ color: 'var(--text-subtle)' }}
+                        >
+                          Scroll horizontally to see all columns when the table does not fit.
+                        </p>
+                        <div
+                          role="region"
+                          aria-label="All-platform comparison table"
+                          aria-describedby="comparison-table-scroll-hint"
+                          tabIndex={0}
+                          className="max-w-full overflow-x-auto rounded focus-visible:outline-2 focus-visible:outline-offset-2"
+                        >
+                          <table className="w-full min-w-[700px] table-fixed">
+                            <caption className="sr-only">
+                              {data.metric.name} results by platform for {browserA.name} and{' '}
+                              {browserB.name}
+                            </caption>
+                            <thead>
+                              <tr style={{ borderBottom: '1px solid var(--border-default)' }}>
+                                <th
+                                  scope="col"
+                                  className="text-left py-2 pr-3"
+                                  style={{ color: 'var(--text-default)' }}
+                                >
+                                  Platform
+                                </th>
+                                <th
+                                  scope="col"
+                                  className="text-right py-2 px-2"
+                                  style={{ color: 'var(--text-default)' }}
+                                >
+                                  {browserA.name}
+                                </th>
+                                <th
+                                  scope="col"
+                                  className="text-right py-2 px-2"
+                                  style={{ color: 'var(--text-default)' }}
+                                >
+                                  {browserB.name}
+                                </th>
+                                <th
+                                  scope="col"
+                                  className="text-left py-2 pl-4"
+                                  style={{ color: 'var(--text-default)' }}
+                                >
+                                  Recorded result
+                                </th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              {visible.map((platform) => {
+                                const result = scoreOutcome(platform);
+                                return (
+                                  <tr
+                                    key={platform.id}
+                                    style={{ borderBottom: '1px solid var(--border-subtle)' }}
+                                  >
+                                    <th
+                                      scope="row"
+                                      className="py-2 pr-3 text-left align-top font-medium"
+                                      style={{ color: 'var(--text-default)' }}
+                                    >
+                                      {platform.label}
+                                    </th>
+                                    <td
+                                      className="text-right align-top py-2 px-2"
+                                      style={{
+                                        color: 'var(--text-default)',
+                                      }}
+                                    >
+                                      {label(platform.a)}
+                                      {result.state === 'a' && (
+                                        <div className="font-semibold">Higher recorded score</div>
+                                      )}
+                                      {evidence(platform.a)}
+                                    </td>
+                                    <td
+                                      className="text-right align-top py-2 px-2"
+                                      style={{
+                                        color: 'var(--text-default)',
+                                      }}
+                                    >
+                                      {label(platform.b)}
+                                      {result.state === 'b' && (
+                                        <div className="font-semibold">Higher recorded score</div>
+                                      )}
+                                      {evidence(platform.b)}
+                                    </td>
+                                    <td
+                                      className="align-top py-2 pl-4"
+                                      style={{ color: 'var(--text-default)' }}
+                                    >
+                                      {outcomeText(platform)}
+                                    </td>
+                                  </tr>
+                                );
+                              })}
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    )}
+                  </>
+                )}
               </section>
+              <div className="comparison-chooser mt-8">
+                <BrowserCompareDropdown
+                  key={`${browserA.slug}-${browserB.slug}`}
+                  first={browserA.slug}
+                  second={browserB.slug}
+                  browsers={options}
+                  engines={engines}
+                  observations={observations}
+                  platform={query.platform}
+                  sharedOnly={onlyShared}
+                  metric={query.metric}
+                />
+              </div>
+              <ComparisonShare
+                first={browserA.slug}
+                second={browserB.slug}
+                path={committedUrl}
+                title={`${browserA.name} vs ${browserB.name}`}
+                printDate={new Date().toISOString().slice(0, 10)}
+              />
             </article>
           </main>
           <Footer />

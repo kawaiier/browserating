@@ -103,8 +103,9 @@
   --shadow-overlay-bold: 0 8px 12px rgba(9, 30, 66, 0.12), 0 0 1px rgba(9, 30, 66, 0.15);
 
   /* ─── TYPOGRAPHY ─── */
-  --font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu,
-    'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  --font-family:
+    -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, 'Fira Sans',
+    'Droid Sans', 'Helvetica Neue', sans-serif;
   --font-family-mono: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace;
 
   /* Heading scale */
@@ -272,6 +273,46 @@ textarea:focus-visible,
   box-shadow: 0 0 0 4px rgba(87, 157, 255, 0.2);
 }
 
+/* Comparison text and control boundaries need contrast on their actual surfaces. */
+.comparison-page {
+  --text-subtle: #505f79;
+}
+
+.comparison-page select {
+  border-color: #6b778c !important;
+}
+
+.dark .comparison-page {
+  --text-subtle: #b3bac5;
+}
+
+.dark .comparison-page select {
+  border-color: #b3bac5 !important;
+}
+
+/* Footer text sits on the sunken surface, where the default subtle and brand tokens fall
+   below 4.5:1 in light mode. */
+.site-footer {
+  --text-subtle: #505f79;
+  --text-brand: #0052cc;
+}
+
+.dark .site-footer {
+  --text-subtle: #b3bac5;
+  --text-brand: #579dff;
+}
+
+@media (forced-colors: active) {
+  .comparison-page :focus-visible {
+    outline: 2px solid Highlight;
+    outline-offset: 2px;
+  }
+  .comparison-page select,
+  .comparison-page button {
+    border: 1px solid ButtonText !important;
+  }
+}
+
 /* ─── ANIMATIONS ─── */
 @keyframes fade-in {
   0% {
@@ -332,6 +373,14 @@ textarea:focus-visible,
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .comparison-shell,
+  .comparison-shell *,
+  .comparison-shell *::before,
+  .comparison-shell *::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
   .quiz-float {
     animation: none !important;
   }
@@ -492,7 +541,9 @@ textarea:focus-visible,
 /* ─── ATLANTIC: Pill-shaped Bar Chart Bars ─── */
 .bar-pill {
   border-radius: 999px !important;
-  transition: box-shadow var(--transition-normal), transform var(--transition-normal);
+  transition:
+    box-shadow var(--transition-normal),
+    transform var(--transition-normal);
 }
 
 .bar-pill:hover {
@@ -547,4 +598,53 @@ textarea:focus-visible,
 .badge-status-danger .badge-status-icon {
   background-color: var(--color-danger);
   box-shadow: 0 1px 3px rgba(222, 53, 11, 0.3);
+}
+
+.comparison-print-result,
+.comparison-print-meta {
+  display: none;
+}
+
+@media print {
+  .comparison-shell > header,
+  .comparison-shell > footer,
+  .comparison-page article > nav,
+  .comparison-page article > header,
+  .comparison-share,
+  .comparison-screen-result,
+  .comparison-chooser {
+    display: none !important;
+  }
+
+  .comparison-shell,
+  .comparison-page {
+    background: white !important;
+    color: black !important;
+    min-height: 0 !important;
+    padding: 0 !important;
+  }
+
+  .comparison-print-result,
+  .comparison-print-meta {
+    display: block;
+    color: black;
+    overflow-wrap: anywhere;
+  }
+
+  .comparison-print-result h2 {
+    font-size: 20pt;
+    font-weight: bold;
+  }
+  .comparison-print-result h3 {
+    font-size: 14pt;
+    font-weight: bold;
+    margin-top: 1em;
+  }
+  .comparison-print-result p,
+  .comparison-print-meta p {
+    margin: 0.4em 0;
+  }
+  .comparison-print-meta {
+    margin-top: 1em;
+  }
 }
