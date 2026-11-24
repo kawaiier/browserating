@@ -7,6 +7,7 @@ import {
   generatePairSlugs,
   parsePairSlug,
   parseViewState,
+  resolveCompareRequest,
   validateEngines,
 } from './comparisonUrl.js';
 import { getBrowserSlug } from './getBrowserSlug.js';
@@ -105,4 +106,31 @@ test('generatePairSlugs emits only canonical slugs, and parse/build round-trips'
     assert.equal(canonicalPair(...parts).reversed, false, `${pair.slug} is canonical`);
     assert.equal(buildCompareUrl({ first: parts[0], second: parts[1] }), `/compare/${pair.slug}`);
   }
+});
+
+test('resolveCompareRequest returns 404, redirect or render decisions', () => {
+  const known = new Set(['crest', 'firefox', 'google-chrome']);
+  const resolve = (slug, query = '') =>
+    resolveCompareRequest(slug, new URLSearchParams(query), known);
+  assert.deepEqual(resolve('firefox-vs-google-chrome'), { type: 'render' });
+  assert.deepEqual(resolve('firefox-vs-google-chrome', 'order=reverse&junk=1'), { type: 'render' });
+  for (const slug of ['unknown-vs-firefox', 'firefox-vs-firefox', 'a-vs-b-vs-c', 'firefox', null]) {
+    assert.deepEqual(resolve(slug), { type: 'not-found' }, String(slug));
+  }
+  assert.deepEqual(resolve('google-chrome-vs-firefox'), {
+    type: 'redirect',
+    url: '/compare/firefox-vs-google-chrome?order=reverse',
+  });
+  // Legacy reversed path: incoming order ignored, junk and other browsers' engines dropped,
+  // repeated keys ignored, pair engines kept attached to their browser.
+  assert.deepEqual(
+    resolve(
+      'firefox-vs-crest',
+      'order=reverse&utm_source=x&engine.crest.macos-arm=WebKit&engine.brave.windows=Blink&engine.firefox.windows=A&engine.firefox.windows=B'
+    ),
+    {
+      type: 'redirect',
+      url: '/compare/crest-vs-firefox?engine.crest.macos-arm=WebKit&order=reverse',
+    }
+  );
 });

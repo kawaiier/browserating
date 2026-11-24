@@ -83,3 +83,34 @@ export function generatePairSlugs(slugs) {
   }
   return pairs;
 }
+
+/** Converts URLSearchParams to the Next.js searchParams shape (repeated keys → arrays). */
+export function searchParamsToObject(params) {
+  const query = {};
+  for (const key of new Set(params.keys())) {
+    const values = params.getAll(key);
+    query[key] = values.length > 1 ? values : values[0];
+  }
+  return query;
+}
+
+/**
+ * Decides how a /compare/<slug> request is answered before rendering, so invalid pairs get
+ * a real 404 and reversed pairs a real 308. Engine values are only checked syntactically
+ * here (browser must be in the pair); the page validates them against benchmark data.
+ *
+ * @returns {{ type: 'render' } | { type: 'not-found' } | { type: 'redirect', url: string }}
+ */
+export function resolveCompareRequest(slug, searchParams, knownSlugs) {
+  const parts = parsePairSlug(slug);
+  if (!parts || !parts.every((part) => knownSlugs.has(part))) return { type: 'not-found' };
+  if (!canonicalPair(...parts).reversed) return { type: 'render' };
+  const { engines } = parseViewState(searchParamsToObject(searchParams));
+  const pairEngines = Object.fromEntries(
+    parts.filter((s) => engines[s]).map((s) => [s, engines[s]])
+  );
+  return {
+    type: 'redirect',
+    url: buildCompareUrl({ first: parts[0], second: parts[1], engines: pairEngines }),
+  };
+}
