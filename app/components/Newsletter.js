@@ -51,8 +51,8 @@ export default function Newsletter() {
               className="text-sm mb-2 flex items-center justify-center gap-1.5"
               style={{ color: 'var(--text-subtle)' }}
             >
-              <Lock className="w-3.5 h-3.5" aria-hidden="true" /> No spam, ever. Unsubscribe with one
-              click.
+              <Lock className="w-3.5 h-3.5" aria-hidden="true" /> No spam, ever. Unsubscribe with
+              one click.
             </p>
             <p className="text-xs" style={{ color: 'var(--text-subtle)' }}>
               Free forever • Monthly updates • Browser insights

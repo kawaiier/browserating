@@ -306,7 +306,11 @@ const BrowserDetailsModal = ({ browser, selectedPlatform, selectedEngine, onClos
                   Performance analysis on {platformName}
                 </p>
                 {engineVariants.length > 1 && (
-                  <div className="flex items-center gap-1 mt-2" role="group" aria-label="Select engine">
+                  <div
+                    className="flex items-center gap-1 mt-2"
+                    role="group"
+                    aria-label="Select engine"
+                  >
                     <span className="text-sm mr-1" style={{ color: 'var(--text-subtle)' }}>
                       Engine:
                     </span>
@@ -413,8 +417,7 @@ const BrowserDetailsModal = ({ browser, selectedPlatform, selectedEngine, onClos
                 style={{
                   backgroundColor:
                     activeTab === tab.id ? 'var(--color-brand-subtle)' : 'transparent',
-                  color:
-                    activeTab === tab.id ? 'var(--text-brand)' : 'var(--text-subtle)',
+                  color: activeTab === tab.id ? 'var(--text-brand)' : 'var(--text-subtle)',
                 }}
                 onMouseEnter={(e) => {
                   if (activeTab !== tab.id) {
@@ -429,7 +432,9 @@ const BrowserDetailsModal = ({ browser, selectedPlatform, selectedEngine, onClos
                   }
                 }}
               >
-                <span className="mr-2"><tab.icon className="inline w-4 h-4" aria-hidden="true" /></span>
+                <span className="mr-2">
+                  <tab.icon className="inline w-4 h-4" aria-hidden="true" />
+                </span>
                 {tab.label}
               </button>
             ))}
@@ -506,10 +511,7 @@ const BrowserDetailsModal = ({ browser, selectedPlatform, selectedEngine, onClos
                     >
                       Speedometer 3.1
                     </div>
-                    <div
-                      className="text-3xl font-bold"
-                      style={{ color: 'var(--text-brand)' }}
-                    >
+                    <div className="text-3xl font-bold" style={{ color: 'var(--text-brand)' }}>
                       {latestVersion.scores.speedometer3.toFixed(2)}
                     </div>
                   </div>
@@ -528,10 +530,7 @@ const BrowserDetailsModal = ({ browser, selectedPlatform, selectedEngine, onClos
                       >
                         Memory Usage
                       </div>
-                      <div
-                        className="text-3xl font-bold"
-                        style={{ color: 'var(--text-brand)' }}
-                      >
+                      <div className="text-3xl font-bold" style={{ color: 'var(--text-brand)' }}>
                         {latestVersion.scores.ram >= 1000
                           ? `${(latestVersion.scores.ram / 1000).toFixed(1)} GB`
                           : `${latestVersion.scores.ram.toFixed(0)} MB`}
@@ -553,10 +552,7 @@ const BrowserDetailsModal = ({ browser, selectedPlatform, selectedEngine, onClos
                       >
                         Ad Blocking
                       </div>
-                      <div
-                        className="text-3xl font-bold"
-                        style={{ color: 'var(--color-success)' }}
-                      >
+                      <div className="text-3xl font-bold" style={{ color: 'var(--color-success)' }}>
                         {latestVersion.scores.adblock.toFixed(0)}%
                       </div>
                     </div>
@@ -607,12 +603,20 @@ const BrowserDetailsModal = ({ browser, selectedPlatform, selectedEngine, onClos
                         </div>
                         {version.date && (
                           <p className="text-sm mt-1" style={{ color: 'var(--text-subtle)' }}>
-                            Tested: {new Date(version.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
+                            Tested:{' '}
+                            {new Date(version.date).toLocaleDateString('en-US', {
+                              month: 'short',
+                              day: 'numeric',
+                              year: 'numeric',
+                            })}
                           </p>
                         )}
                       </div>
                       <div className="text-right">
-                        <div className="text-2xl font-bold" style={{ color: 'var(--text-default)' }}>
+                        <div
+                          className="text-2xl font-bold"
+                          style={{ color: 'var(--text-default)' }}
+                        >
                           {version.scores.speedometer3.toFixed(2)}
                         </div>
                         <div className="text-sm" style={{ color: 'var(--text-subtle)' }}>
@@ -652,19 +656,34 @@ const BrowserDetailsModal = ({ browser, selectedPlatform, selectedEngine, onClos
                 <table className="min-w-full text-sm">
                   <thead>
                     <tr style={{ borderBottom: '1px solid var(--border-default)' }}>
-                      <th className="text-left py-3 px-3 sm:px-4 font-semibold" style={{ color: 'var(--text-default)' }}>
+                      <th
+                        className="text-left py-3 px-3 sm:px-4 font-semibold"
+                        style={{ color: 'var(--text-default)' }}
+                      >
                         Version
                       </th>
-                      <th className="text-right py-3 px-3 sm:px-4 font-semibold" style={{ color: 'var(--text-default)' }}>
+                      <th
+                        className="text-right py-3 px-3 sm:px-4 font-semibold"
+                        style={{ color: 'var(--text-default)' }}
+                      >
                         Speedometer
                       </th>
-                      <th className="text-right py-3 px-3 sm:px-4 font-semibold" style={{ color: 'var(--text-default)' }}>
+                      <th
+                        className="text-right py-3 px-3 sm:px-4 font-semibold"
+                        style={{ color: 'var(--text-default)' }}
+                      >
                         Memory
                       </th>
-                      <th className="text-right py-3 px-3 sm:px-4 font-semibold" style={{ color: 'var(--text-default)' }}>
+                      <th
+                        className="text-right py-3 px-3 sm:px-4 font-semibold"
+                        style={{ color: 'var(--text-default)' }}
+                      >
                         Ad Block
                       </th>
-                      <th className="text-right py-3 px-3 sm:px-4 font-semibold" style={{ color: 'var(--text-default)' }}>
+                      <th
+                        className="text-right py-3 px-3 sm:px-4 font-semibold"
+                        style={{ color: 'var(--text-default)' }}
+                      >
                         Tested
                       </th>
                     </tr>
@@ -700,17 +719,35 @@ const BrowserDetailsModal = ({ browser, selectedPlatform, selectedEngine, onClos
                             )}
                           </div>
                         </td>
-                        <td className="py-3 px-3 sm:px-4 text-right font-mono" style={{ color: 'var(--text-default)' }}>
+                        <td
+                          className="py-3 px-3 sm:px-4 text-right font-mono"
+                          style={{ color: 'var(--text-default)' }}
+                        >
                           {version.scores.speedometer3.toFixed(2)}
                         </td>
-                        <td className="py-3 px-3 sm:px-4 text-right font-mono" style={{ color: 'var(--text-subtle)' }}>
+                        <td
+                          className="py-3 px-3 sm:px-4 text-right font-mono"
+                          style={{ color: 'var(--text-subtle)' }}
+                        >
                           {version.scores.ram ? `${version.scores.ram.toFixed(0)} MB` : '—'}
                         </td>
-                        <td className="py-3 px-3 sm:px-4 text-right font-mono" style={{ color: 'var(--text-subtle)' }}>
+                        <td
+                          className="py-3 px-3 sm:px-4 text-right font-mono"
+                          style={{ color: 'var(--text-subtle)' }}
+                        >
                           {version.scores.adblock ? `${version.scores.adblock.toFixed(0)}%` : '—'}
                         </td>
-                        <td className="py-3 px-3 sm:px-4 text-right font-mono" style={{ color: 'var(--text-subtle)' }}>
-                          {version.date ? new Date(version.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : '—'}
+                        <td
+                          className="py-3 px-3 sm:px-4 text-right font-mono"
+                          style={{ color: 'var(--text-subtle)' }}
+                        >
+                          {version.date
+                            ? new Date(version.date).toLocaleDateString('en-US', {
+                                month: 'short',
+                                day: 'numeric',
+                                year: 'numeric',
+                              })
+                            : '—'}
                         </td>
                       </tr>
                     ))}

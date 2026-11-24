@@ -48,10 +48,7 @@ const SkeletonLoader = ({ index }) => (
           style={{ backgroundColor: 'var(--surface-sunken)' }}
         ></div>
       </div>
-      <div
-        className="h-24 rounded-lg"
-        style={{ backgroundColor: 'var(--surface-sunken)' }}
-      ></div>
+      <div className="h-24 rounded-lg" style={{ backgroundColor: 'var(--surface-sunken)' }}></div>
     </div>
   </div>
 );
@@ -111,7 +108,10 @@ const StatsBar = ({ browsers, selectedPlatform, selectedEngine }) => {
     if (validBrowsers.length === 0) return null;
 
     const scores = validBrowsers
-      .map((b) => getEngineVariant(b[selectedPlatform], selectedEngine)?.versions?.[0]?.scores?.speedometer3)
+      .map(
+        (b) =>
+          getEngineVariant(b[selectedPlatform], selectedEngine)?.versions?.[0]?.scores?.speedometer3
+      )
       .filter((score) => typeof score === 'number');
     if (scores.length === 0) return null;
     const avgScore = scores.reduce((a, b) => a + b, 0) / scores.length;
@@ -119,7 +119,9 @@ const StatsBar = ({ browsers, selectedPlatform, selectedEngine }) => {
     const minScore = Math.min(...scores);
 
     const engines = [
-      ...new Set(validBrowsers.flatMap((b) => getEngineVariants(b[selectedPlatform]).map((v) => v.engine))),
+      ...new Set(
+        validBrowsers.flatMap((b) => getEngineVariants(b[selectedPlatform]).map((v) => v.engine))
+      ),
     ];
 
     return {
@@ -206,8 +208,10 @@ export default function BrowserRankingList({ initialBrowsers = [] }) {
 
   const sortBrowsersByPlatform = useCallback((browsers, platform, engine) => {
     return [...browsers].sort((a, b) => {
-      const aScore = getEngineVariant(a[platform], engine)?.versions?.[0]?.scores?.speedometer3 || 0;
-      const bScore = getEngineVariant(b[platform], engine)?.versions?.[0]?.scores?.speedometer3 || 0;
+      const aScore =
+        getEngineVariant(a[platform], engine)?.versions?.[0]?.scores?.speedometer3 || 0;
+      const bScore =
+        getEngineVariant(b[platform], engine)?.versions?.[0]?.scores?.speedometer3 || 0;
       return bScore - aScore;
     });
   }, []);
@@ -248,7 +252,9 @@ export default function BrowserRankingList({ initialBrowsers = [] }) {
   const engines = useMemo(() => {
     const platformEngines = browsers
       .filter((browser) => browser[selectedPlatform]?.versions?.length > 0)
-      .flatMap((browser) => getEngineVariants(browser[selectedPlatform]).map((variant) => variant.engine))
+      .flatMap((browser) =>
+        getEngineVariants(browser[selectedPlatform]).map((variant) => variant.engine)
+      )
       .filter(Boolean);
 
     return ['All', ...new Set(platformEngines)];
@@ -289,11 +295,7 @@ export default function BrowserRankingList({ initialBrowsers = [] }) {
       >
         Select Platform
       </h3>
-      <div
-        className="flex flex-wrap gap-2"
-        role="radiogroup"
-        aria-label="Select platform"
-      >
+      <div className="flex flex-wrap gap-2" role="radiogroup" aria-label="Select platform">
         {platforms.map((platform) => (
           <button
             key={platform}
@@ -302,8 +304,7 @@ export default function BrowserRankingList({ initialBrowsers = [] }) {
             style={{
               backgroundColor:
                 selectedPlatform === platform ? 'var(--color-brand)' : 'var(--surface-sunken)',
-              color:
-                selectedPlatform === platform ? 'var(--text-inverse)' : 'var(--text-default)',
+              color: selectedPlatform === platform ? 'var(--text-inverse)' : 'var(--text-default)',
               border: `1px solid ${selectedPlatform === platform ? 'var(--color-brand)' : 'var(--border-subtle)'}`,
             }}
             role="radio"
@@ -322,7 +323,9 @@ export default function BrowserRankingList({ initialBrowsers = [] }) {
             <span className="flex items-center gap-2">
               {(() => {
                 const PlatformIcon = platformIcons[platform];
-                return PlatformIcon ? <PlatformIcon className="w-4 h-4" aria-hidden="true" /> : null;
+                return PlatformIcon ? (
+                  <PlatformIcon className="w-4 h-4" aria-hidden="true" />
+                ) : null;
               })()}
               {platformNames[platform]}
             </span>
@@ -375,8 +378,7 @@ export default function BrowserRankingList({ initialBrowsers = [] }) {
             style={{
               backgroundColor:
                 selectedEngine === engine ? 'var(--color-brand)' : 'var(--surface-sunken)',
-              color:
-                selectedEngine === engine ? 'var(--text-inverse)' : 'var(--text-default)',
+              color: selectedEngine === engine ? 'var(--text-inverse)' : 'var(--text-default)',
               border: `1px solid ${selectedEngine === engine ? 'var(--color-brand)' : 'var(--border-subtle)'}`,
             }}
             role="radio"
@@ -404,10 +406,7 @@ export default function BrowserRankingList({ initialBrowsers = [] }) {
       <span className="body-small font-medium" style={{ color: 'var(--text-subtle)' }}>
         View:
       </span>
-      <div
-        className="flex rounded-md p-0.5"
-        style={{ backgroundColor: 'var(--surface-sunken)' }}
-      >
+      <div className="flex rounded-md p-0.5" style={{ backgroundColor: 'var(--surface-sunken)' }}>
         <button
           onClick={() => setViewMode('grid')}
           className="px-3 py-1 rounded-sm body-small font-medium transition-all flex items-center gap-1.5"
@@ -568,7 +567,10 @@ export default function BrowserRankingList({ initialBrowsers = [] }) {
 
       <div
         className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2 mb-6"
-        style={{ paddingBottom: 'var(--space-150)', borderBottom: '1px solid var(--border-subtle)' }}
+        style={{
+          paddingBottom: 'var(--space-150)',
+          borderBottom: '1px solid var(--border-subtle)',
+        }}
       >
         <h3 className="heading-small" style={{ color: 'var(--text-default)' }}>
           {filteredAndSearchedBrowsers.length === 0

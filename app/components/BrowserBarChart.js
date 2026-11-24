@@ -54,10 +54,8 @@ export default function BrowserBarChart({ browsers, platform, getEngineColor }) 
         label: 'Excellent',
         color: 'var(--color-score-excellent)',
       };
-    if (score >= maxScore * 0.7)
-      return { label: 'Good', color: 'var(--color-score-good)' };
-    if (score >= maxScore * 0.5)
-      return { label: 'Fair', color: 'var(--color-score-fair)' };
+    if (score >= maxScore * 0.7) return { label: 'Good', color: 'var(--color-score-good)' };
+    if (score >= maxScore * 0.5) return { label: 'Fair', color: 'var(--color-score-fair)' };
     return { label: 'Poor', color: 'var(--color-score-poor)' };
   };
 
@@ -150,10 +148,7 @@ export default function BrowserBarChart({ browsers, platform, getEngineColor }) 
       }}
     >
       {/* Header */}
-      <div
-        className="p-4 sm:p-6"
-        style={{ borderBottom: '1px solid var(--border-subtle)' }}
-      >
+      <div className="p-4 sm:p-6" style={{ borderBottom: '1px solid var(--border-subtle)' }}>
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
           <div>
             <h3 className="text-xl font-bold" style={{ color: 'var(--text-default)' }}>
@@ -212,19 +207,31 @@ export default function BrowserBarChart({ browsers, platform, getEngineColor }) 
         {/* Legend */}
         <div className="mt-4 flex flex-wrap gap-4 text-sm">
           <div className="flex items-center gap-2">
-            <div className="w-3 h-3 rounded" style={{ backgroundColor: 'var(--color-score-excellent)' }}></div>
+            <div
+              className="w-3 h-3 rounded"
+              style={{ backgroundColor: 'var(--color-score-excellent)' }}
+            ></div>
             <span style={{ color: 'var(--text-subtle)' }}>Excellent (90-100%)</span>
           </div>
           <div className="flex items-center gap-2">
-            <div className="w-3 h-3 rounded" style={{ backgroundColor: 'var(--color-score-good)' }}></div>
+            <div
+              className="w-3 h-3 rounded"
+              style={{ backgroundColor: 'var(--color-score-good)' }}
+            ></div>
             <span style={{ color: 'var(--text-subtle)' }}>Good (70-89%)</span>
           </div>
           <div className="flex items-center gap-2">
-            <div className="w-3 h-3 rounded" style={{ backgroundColor: 'var(--color-score-fair)' }}></div>
+            <div
+              className="w-3 h-3 rounded"
+              style={{ backgroundColor: 'var(--color-score-fair)' }}
+            ></div>
             <span style={{ color: 'var(--text-subtle)' }}>Fair (50-69%)</span>
           </div>
           <div className="flex items-center gap-2">
-            <div className="w-3 h-3 rounded" style={{ backgroundColor: 'var(--color-score-poor)' }}></div>
+            <div
+              className="w-3 h-3 rounded"
+              style={{ backgroundColor: 'var(--color-score-poor)' }}
+            ></div>
             <span style={{ color: 'var(--text-subtle)' }}>Poor (&lt;50%)</span>
           </div>
         </div>
@@ -414,10 +421,7 @@ export default function BrowserBarChart({ browsers, platform, getEngineColor }) 
 
       {/* Selected Browser Comparison */}
       {selectedBars.length > 1 && (
-        <div
-          className="p-4 sm:p-6"
-          style={{ borderTop: '1px solid var(--border-subtle)' }}
-        >
+        <div className="p-4 sm:p-6" style={{ borderTop: '1px solid var(--border-subtle)' }}>
           <h4 className="text-lg font-semibold mb-4" style={{ color: 'var(--text-default)' }}>
             Comparison ({selectedBars.length} selected)
           </h4>
@@ -457,20 +461,31 @@ export default function BrowserBarChart({ browsers, platform, getEngineColor }) 
                   </div>
                   <div className="space-y-1 text-sm">
                     <div style={{ color: 'var(--text-subtle)' }}>
-                      Score: <span className="font-semibold" style={{ color: 'var(--text-default)' }}>{item.score.toFixed(1)}</span>
+                      Score:{' '}
+                      <span className="font-semibold" style={{ color: 'var(--text-default)' }}>
+                        {item.score.toFixed(1)}
+                      </span>
                     </div>
                     <div style={{ color: 'var(--text-subtle)' }}>
-                      Engine: <span className="font-medium" style={{ color: 'var(--text-default)' }}>{item.engine}</span>
+                      Engine:{' '}
+                      <span className="font-medium" style={{ color: 'var(--text-default)' }}>
+                        {item.engine}
+                      </span>
                     </div>
                     {item.ramUsage && (
                       <div style={{ color: 'var(--text-subtle)' }}>
-                        RAM: <span className="font-medium" style={{ color: 'var(--text-default)' }}>{item.ramUsage.toFixed(0)} MB</span>
+                        RAM:{' '}
+                        <span className="font-medium" style={{ color: 'var(--text-default)' }}>
+                          {item.ramUsage.toFixed(0)} MB
+                        </span>
                       </div>
                     )}
                     {item.adblockScore && (
                       <div style={{ color: 'var(--text-subtle)' }}>
                         Adblock:{' '}
-                        <span className="font-medium" style={{ color: 'var(--text-default)' }}>{item.adblockScore.toFixed(0)}%</span>
+                        <span className="font-medium" style={{ color: 'var(--text-default)' }}>
+                          {item.adblockScore.toFixed(0)}%
+                        </span>
                       </div>
                     )}
                   </div>

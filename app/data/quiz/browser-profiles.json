@@ -16,7 +16,7 @@
       "easeOfUse": 9,
       "ai": 6
     },
-            "traitRationales": {
+    "traitRationales": {
       "privacy": "The profile does not cite evidence for default privacy protections or data practices; 3/10 is provisional, not proof the capability is absent.",
       "speed": "No source-linked, platform-matched benchmark is attached; this is a qualitative estimate, not a Speedometer result.",
       "customization": "Profile evidence: “Unmatched extension library via Chrome Web Store”. Extension support is only one part of the customization score.",
@@ -57,7 +57,7 @@
       "easeOfUse": 8,
       "ai": 4
     },
-            "traitRationales": {
+    "traitRationales": {
       "privacy": "Profile evidence: “Enhanced Tracking Protection built-in”. This describes listed protections, not an anonymity guarantee.",
       "speed": "No source-linked, platform-matched benchmark is attached; this is a qualitative estimate, not a Speedometer result.",
       "customization": "Profile evidence: “Deep customization via userChrome.css and extensions”. Extension support is only one part of the customization score.",
@@ -98,7 +98,7 @@
       "easeOfUse": 9,
       "ai": 3
     },
-            "traitRationales": {
+    "traitRationales": {
       "privacy": "Profile evidence: “Intelligent Tracking Prevention with on-device ML”. This describes listed protections, not an anonymity guarantee.",
       "speed": "No source-linked, platform-matched benchmark is attached; this is a qualitative estimate, not a Speedometer result.",
       "customization": "The profile does not cite evidence for UI, settings, or extension controls; 3/10 is provisional, not proof the capability is absent.",
@@ -139,7 +139,7 @@
       "easeOfUse": 8,
       "ai": 8
     },
-            "traitRationales": {
+    "traitRationales": {
       "privacy": "The profile does not cite evidence for default privacy protections or data practices; 5/10 is a qualitative estimate, not a measured comparison.",
       "speed": "No source-linked, platform-matched benchmark is attached; this is a qualitative estimate, not a Speedometer result.",
       "customization": "The profile does not cite evidence for UI, settings, or extension controls; 6/10 is a qualitative estimate, not a measured comparison.",
@@ -180,7 +180,7 @@
       "easeOfUse": 8,
       "ai": 6
     },
-            "traitRationales": {
+    "traitRationales": {
       "privacy": "Profile evidence: “Built-in ad and tracker blocking — no extension needed”. This describes listed protections, not an anonymity guarantee.",
       "speed": "No source-linked, platform-matched benchmark is attached; this is a qualitative estimate, not a Speedometer result.",
       "customization": "Profile evidence: “Built-in ad and tracker blocking — no extension needed”; “Chromium-based with full Chrome extension support”. Extension support is only one part of the customization score.",
@@ -221,7 +221,7 @@
       "easeOfUse": 4,
       "ai": 2
     },
-            "traitRationales": {
+    "traitRationales": {
       "privacy": "The profile does not cite evidence for default privacy protections or data practices; 7/10 is a qualitative estimate, not a measured comparison.",
       "speed": "No source-linked, platform-matched benchmark is attached; this is a qualitative estimate, not a Speedometer result.",
       "customization": "Profile evidence: “Unmatched UI customization: themes, layouts, toolbar placement”; “Built-in tab stacking, tiling, and two-level tab bars”. Extension support is only one part of the customization score.",
@@ -262,7 +262,7 @@
       "easeOfUse": 7,
       "ai": 7
     },
-            "traitRationales": {
+    "traitRationales": {
       "privacy": "The profile does not cite evidence for default privacy protections or data practices; 5/10 is a qualitative estimate, not a measured comparison.",
       "speed": "No source-linked, platform-matched benchmark is attached; this is a qualitative estimate, not a Speedometer result.",
       "customization": "The profile does not cite evidence for UI, settings, or extension controls; 5/10 is a qualitative estimate, not a measured comparison.",
@@ -303,7 +303,7 @@
       "easeOfUse": 7,
       "ai": 6
     },
-            "traitRationales": {
+    "traitRationales": {
       "privacy": "The profile does not cite evidence for default privacy protections or data practices; 4/10 is a qualitative estimate, not a measured comparison.",
       "speed": "No source-linked, platform-matched benchmark is attached; this is a qualitative estimate, not a Speedometer result.",
       "customization": "Profile evidence: “Customizable RGB color themes and GX sound effects”. Extension support is only one part of the customization score.",
@@ -344,7 +344,7 @@
       "easeOfUse": 5,
       "ai": 6
     },
-            "traitRationales": {
+    "traitRationales": {
       "privacy": "The profile does not cite evidence for default privacy protections or data practices; 5/10 is a qualitative estimate, not a measured comparison.",
       "speed": "No source-linked, platform-matched benchmark is attached; this is a qualitative estimate, not a Speedometer result.",
       "customization": "Profile evidence: “Boosts to restyle or add custom JS to any website”. Extension support is only one part of the customization score.",
@@ -385,7 +385,7 @@
       "easeOfUse": 7,
       "ai": 2
     },
-            "traitRationales": {
+    "traitRationales": {
       "privacy": "Profile evidence: “Built on Firefox with full Gecko privacy protections”. This describes listed protections, not an anonymity guarantee.",
       "speed": "No source-linked, platform-matched benchmark is attached; this is a qualitative estimate, not a Speedometer result.",
       "customization": "The profile does not cite evidence for UI, settings, or extension controls; 7/10 is a qualitative estimate, not a measured comparison.",
@@ -426,7 +426,7 @@
       "easeOfUse": 5,
       "ai": 1
     },
-            "traitRationales": {
+    "traitRationales": {
       "privacy": "Profile evidence: “Anti-fingerprinting measures built into every aspect of the browser”. This describes listed protections, not an anonymity guarantee.",
       "speed": "No source-linked, platform-matched benchmark is attached; this is a qualitative estimate, not a Speedometer result.",
       "customization": "The profile does not cite evidence for UI, settings, or extension controls; 2/10 is provisional, not proof the capability is absent.",
@@ -467,7 +467,7 @@
       "easeOfUse": 5,
       "ai": 1
     },
-            "traitRationales": {
+    "traitRationales": {
       "privacy": "Profile evidence: “Zero Mozilla telemetry, crash reporting, or phoning home”. This describes listed protections, not an anonymity guarantee.",
       "speed": "No source-linked, platform-matched benchmark is attached; this is a qualitative estimate, not a Speedometer result.",
       "customization": "The profile does not cite evidence for UI, settings, or extension controls; 7/10 is a qualitative estimate, not a measured comparison.",
@@ -508,7 +508,7 @@
       "easeOfUse": 10,
       "ai": 4
     },
-            "traitRationales": {
+    "traitRationales": {
       "privacy": "Profile evidence: “Fire Button instantly wipes tabs, cookies, and browsing data”; “Duck Player provides a clean, tracker-free YouTube experience”. This describes listed protections, not an anonymity guarantee.",
       "speed": "No source-linked, platform-matched benchmark is attached; this is a qualitative estimate, not a Speedometer result.",
       "customization": "The profile does not cite evidence for UI, settings, or extension controls; 3/10 is provisional, not proof the capability is absent.",
@@ -549,7 +549,7 @@
       "easeOfUse": 7,
       "ai": 2
     },
-            "traitRationales": {
+    "traitRationales": {
       "privacy": "Profile evidence: “Built by Kagi — zero telemetry, no ads, user-funded”. This describes listed protections, not an anonymity guarantee.",
       "speed": "Profile claim: “Exceptional battery life and performance on Apple Silicon”. No source-linked, platform-matched test is attached, so 8/10 remains qualitative.",
       "customization": "Profile evidence: “Runs Chrome and Firefox extensions natively on WebKit”. Extension support is only one part of the customization score.",
@@ -590,7 +590,7 @@
       "easeOfUse": 5,
       "ai": 2
     },
-            "traitRationales": {
+    "traitRationales": {
       "privacy": "The profile does not cite evidence for default privacy protections or data practices for this high 8/10 rating; verify it before treating the score as established.",
       "speed": "No source-linked, platform-matched benchmark is attached; this is a qualitative estimate, not a Speedometer result.",
       "customization": "Profile evidence: “Deeply customizable toolbar and panel layout”. Extension support is only one part of the customization score.",
@@ -631,7 +631,7 @@
       "easeOfUse": 6,
       "ai": 1
     },
-            "traitRationales": {
+    "traitRationales": {
       "privacy": "Profile evidence: “Fingerprint resistance baked into every browser setting by design”. This describes listed protections, not an anonymity guarantee.",
       "speed": "No source-linked, platform-matched benchmark is attached; this is a qualitative estimate, not a Speedometer result.",
       "customization": "The profile does not cite evidence for UI, settings, or extension controls; 2/10 is provisional, not proof the capability is absent.",
@@ -672,7 +672,7 @@
       "easeOfUse": 7,
       "ai": 1
     },
-            "traitRationales": {
+    "traitRationales": {
       "privacy": "Profile evidence: “Strips some Google telemetry compared to stock Chromium”. This describes listed protections, not an anonymity guarantee.",
       "speed": "Profile claim: “Recompiled with AVX2/SSE4 optimizations for measurable Speedometer gains”. No source-linked, platform-matched test is attached, so 10/10 remains qualitative.",
       "customization": "Profile evidence: “Open-source Chromium fork, compatible with most Chrome extensions and sites”. Extension support is only one part of the customization score.",
@@ -713,7 +713,7 @@
       "easeOfUse": 8,
       "ai": 1
     },
-            "traitRationales": {
+    "traitRationales": {
       "privacy": "Profile evidence: “Removes telemetry, data collection and sponsored content”. This describes listed protections, not an anonymity guarantee.",
       "speed": "No source-linked, platform-matched benchmark is attached; this is a qualitative estimate, not a Speedometer result.",
       "customization": "Profile evidence: “Supports modern WebExtensions”. Extension support is only one part of the customization score.",
@@ -754,7 +754,7 @@
       "easeOfUse": 8,
       "ai": 6
     },
-            "traitRationales": {
+    "traitRationales": {
       "privacy": "The profile does not cite evidence for default privacy protections or data practices; 3/10 is provisional, not proof the capability is absent.",
       "speed": "Profile claim: “Turbo mode speeds up loading on slow connections”. No source-linked, platform-matched test is attached, so 7/10 remains qualitative.",
       "customization": "The profile does not cite evidence for UI, settings, or extension controls; 5/10 is a qualitative estimate, not a measured comparison.",
@@ -795,7 +795,7 @@
       "easeOfUse": 7,
       "ai": 3
     },
-            "traitRationales": {
+    "traitRationales": {
       "privacy": "Profile evidence: “Blocks ads and trackers using uBlock Origin”. This describes listed protections, not an anonymity guarantee.",
       "speed": "No source-linked, platform-matched benchmark is attached; this is a qualitative estimate, not a Speedometer result.",
       "customization": "The profile does not cite evidence for UI, settings, or extension controls; 7/10 is a qualitative estimate, not a measured comparison.",
@@ -836,7 +836,7 @@
       "easeOfUse": 6,
       "ai": 10
     },
-            "traitRationales": {
+    "traitRationales": {
       "privacy": "The profile does not cite evidence for default privacy protections or data practices; 3/10 is provisional, not proof the capability is absent.",
       "speed": "No source-linked, platform-matched benchmark is attached; this is a qualitative estimate, not a Speedometer result.",
       "customization": "The profile does not cite evidence for UI, settings, or extension controls; 5/10 is a qualitative estimate, not a measured comparison.",
@@ -877,7 +877,7 @@
       "easeOfUse": 7,
       "ai": 2
     },
-            "traitRationales": {
+    "traitRationales": {
       "privacy": "Profile evidence: “Privacy-respecting browsing alternative”. This describes listed protections, not an anonymity guarantee.",
       "speed": "Profile claim: “WebKit-based for efficient native performance”. No source-linked, platform-matched test is attached, so 6/10 remains qualitative.",
       "customization": "The profile does not cite evidence for UI, settings, or extension controls; 4/10 is a qualitative estimate, not a measured comparison.",
@@ -918,7 +918,7 @@
       "easeOfUse": 5,
       "ai": 8
     },
-            "traitRationales": {
+    "traitRationales": {
       "privacy": "The profile does not cite evidence for default privacy protections or data practices; 4/10 is a qualitative estimate, not a measured comparison.",
       "speed": "No source-linked, platform-matched benchmark is attached; this is a qualitative estimate, not a Speedometer result.",
       "customization": "The profile does not cite evidence for UI, settings, or extension controls; 6/10 is a qualitative estimate, not a measured comparison.",
@@ -959,7 +959,7 @@
       "easeOfUse": 8,
       "ai": 10
     },
-            "traitRationales": {
+    "traitRationales": {
       "privacy": "The profile does not cite evidence for default privacy protections or data practices; 3/10 is provisional, not proof the capability is absent.",
       "speed": "No source-linked, platform-matched benchmark is attached; this is a qualitative estimate, not a Speedometer result.",
       "customization": "The profile does not cite evidence for UI, settings, or extension controls; 4/10 is a qualitative estimate, not a measured comparison.",
@@ -1000,7 +1000,7 @@
       "easeOfUse": 8,
       "ai": 10
     },
-            "traitRationales": {
+    "traitRationales": {
       "privacy": "The profile does not cite evidence for default privacy protections or data practices; 3/10 is provisional, not proof the capability is absent.",
       "speed": "No source-linked, platform-matched benchmark is attached; this is a qualitative estimate, not a Speedometer result.",
       "customization": "The profile does not cite evidence for UI, settings, or extension controls; 4/10 is a qualitative estimate, not a measured comparison.",
@@ -1041,7 +1041,7 @@
       "easeOfUse": 8,
       "ai": 2
     },
-            "traitRationales": {
+    "traitRationales": {
       "privacy": "The profile does not cite evidence for default privacy protections or data practices; 6/10 is a qualitative estimate, not a measured comparison.",
       "speed": "No source-linked, platform-matched benchmark is attached; this is a qualitative estimate, not a Speedometer result.",
       "customization": "The profile does not cite evidence for UI, settings, or extension controls; 7/10 is a qualitative estimate, not a measured comparison.",
@@ -1082,7 +1082,7 @@
       "easeOfUse": 8,
       "ai": 9
     },
-            "traitRationales": {
+    "traitRationales": {
       "privacy": "The profile does not cite evidence for default privacy protections or data practices; 4/10 is a qualitative estimate, not a measured comparison.",
       "speed": "No source-linked, platform-matched benchmark is attached; this is a qualitative estimate, not a Speedometer result.",
       "customization": "The profile does not cite evidence for UI, settings, or extension controls; 5/10 is a qualitative estimate, not a measured comparison.",
@@ -1123,7 +1123,7 @@
       "easeOfUse": 6,
       "ai": 10
     },
-            "traitRationales": {
+    "traitRationales": {
       "privacy": "The profile does not cite evidence for default privacy protections or data practices; 3/10 is provisional, not proof the capability is absent.",
       "speed": "No source-linked, platform-matched benchmark is attached; this is a qualitative estimate, not a Speedometer result.",
       "customization": "The profile does not cite evidence for UI, settings, or extension controls; 5/10 is a qualitative estimate, not a measured comparison.",
@@ -1164,7 +1164,7 @@
       "easeOfUse": 6,
       "ai": 1
     },
-            "traitRationales": {
+    "traitRationales": {
       "privacy": "Profile evidence: “Blocks ads, trackers, cookie banners, and third-party cookies by default”. This describes listed protections, not an anonymity guarantee.",
       "speed": "No source-linked, platform-matched benchmark is attached; this is a qualitative estimate, not a Speedometer result.",
       "customization": "Profile evidence: “Open-source Chromium browser with extension support”. Extension support is only one part of the customization score.",
@@ -1205,7 +1205,7 @@
       "easeOfUse": 6,
       "ai": 4
     },
-            "traitRationales": {
+    "traitRationales": {
       "privacy": "The profile does not cite evidence for default privacy protections or data practices; 4/10 is a qualitative estimate, not a measured comparison.",
       "speed": "No source-linked, platform-matched benchmark is attached; this is a qualitative estimate, not a Speedometer result.",
       "customization": "The profile does not cite evidence for UI, settings, or extension controls; 6/10 is a qualitative estimate, not a measured comparison.",
@@ -1246,7 +1246,7 @@
       "easeOfUse": 8,
       "ai": 9
     },
-            "traitRationales": {
+    "traitRationales": {
       "privacy": "The profile does not cite evidence for default privacy protections or data practices; 4/10 is a qualitative estimate, not a measured comparison.",
       "speed": "No source-linked, platform-matched benchmark is attached; this is a qualitative estimate, not a Speedometer result.",
       "customization": "The profile does not cite evidence for UI, settings, or extension controls; 4/10 is a qualitative estimate, not a measured comparison.",
@@ -1287,7 +1287,7 @@
       "easeOfUse": 8,
       "ai": 1
     },
-            "traitRationales": {
+    "traitRationales": {
       "privacy": "The profile does not cite evidence for default privacy protections or data practices; 5/10 is a qualitative estimate, not a measured comparison.",
       "speed": "No source-linked, platform-matched benchmark is attached; this is a qualitative estimate, not a Speedometer result.",
       "customization": "The profile does not cite evidence for UI, settings, or extension controls; 3/10 is provisional, not proof the capability is absent.",
@@ -1328,7 +1328,7 @@
       "easeOfUse": 8,
       "ai": 1
     },
-            "traitRationales": {
+    "traitRationales": {
       "privacy": "The profile does not cite evidence for default privacy protections or data practices; 4/10 is a qualitative estimate, not a measured comparison.",
       "speed": "No source-linked, platform-matched benchmark is attached; this is a qualitative estimate, not a Speedometer result.",
       "customization": "The profile does not cite evidence for UI, settings, or extension controls; 4/10 is a qualitative estimate, not a measured comparison.",
@@ -1369,7 +1369,7 @@
       "easeOfUse": 8,
       "ai": 8
     },
-            "traitRationales": {
+    "traitRationales": {
       "privacy": "The profile does not cite evidence for default privacy protections or data practices; 4/10 is a qualitative estimate, not a measured comparison.",
       "speed": "No source-linked, platform-matched benchmark is attached; this is a qualitative estimate, not a Speedometer result.",
       "customization": "The profile does not cite evidence for UI, settings, or extension controls; 5/10 is a qualitative estimate, not a measured comparison.",
@@ -1410,7 +1410,7 @@
       "easeOfUse": 8,
       "ai": 1
     },
-            "traitRationales": {
+    "traitRationales": {
       "privacy": "Profile evidence: “Built-in ad and tracker blocking”. This describes listed protections, not an anonymity guarantee.",
       "speed": "No source-linked, platform-matched benchmark is attached; this is a qualitative estimate, not a Speedometer result.",
       "customization": "The profile does not cite evidence for UI, settings, or extension controls; 3/10 is provisional, not proof the capability is absent.",
@@ -1451,7 +1451,7 @@
       "easeOfUse": 6,
       "ai": 3
     },
-            "traitRationales": {
+    "traitRationales": {
       "privacy": "The profile does not cite evidence for default privacy protections or data practices; 3/10 is provisional, not proof the capability is absent.",
       "speed": "No source-linked, platform-matched benchmark is attached; this is a qualitative estimate, not a Speedometer result.",
       "customization": "The profile does not cite evidence for UI, settings, or extension controls; 6/10 is a qualitative estimate, not a measured comparison.",
@@ -1492,7 +1492,7 @@
       "easeOfUse": 7,
       "ai": 4
     },
-            "traitRationales": {
+    "traitRationales": {
       "privacy": "The profile does not cite evidence for default privacy protections or data practices; 4/10 is a qualitative estimate, not a measured comparison.",
       "speed": "No source-linked, platform-matched benchmark is attached; this is a qualitative estimate, not a Speedometer result.",
       "customization": "The profile does not cite evidence for UI, settings, or extension controls; 6/10 is a qualitative estimate, not a measured comparison.",
@@ -1533,7 +1533,7 @@
       "easeOfUse": 8,
       "ai": 1
     },
-            "traitRationales": {
+    "traitRationales": {
       "privacy": "The profile does not cite evidence for default privacy protections or data practices; 5/10 is a qualitative estimate, not a measured comparison.",
       "speed": "No source-linked, platform-matched benchmark is attached; this is a qualitative estimate, not a Speedometer result.",
       "customization": "The profile does not cite evidence for UI, settings, or extension controls; 3/10 is provisional, not proof the capability is absent.",
@@ -1574,7 +1574,7 @@
       "easeOfUse": 6,
       "ai": 8
     },
-            "traitRationales": {
+    "traitRationales": {
       "privacy": "The profile does not cite evidence for default privacy protections or data practices; 5/10 is a qualitative estimate, not a measured comparison.",
       "speed": "No source-linked, platform-matched benchmark is attached; this is a qualitative estimate, not a Speedometer result.",
       "customization": "The profile does not cite evidence for UI, settings, or extension controls; 5/10 is a qualitative estimate, not a measured comparison.",
@@ -1615,7 +1615,7 @@
       "easeOfUse": 6,
       "ai": 1
     },
-            "traitRationales": {
+    "traitRationales": {
       "privacy": "Profile evidence: “Removes Google-specific features, telemetry and web service dependencies”; “Chromium performance without Google tracking”. This describes listed protections, not an anonymity guarantee.",
       "speed": "Profile claim: “Chromium performance without Google tracking”. No source-linked, platform-matched test is attached, so 7/10 remains qualitative.",
       "customization": "Profile evidence: “Compatible with Chrome extensions”. Extension support is only one part of the customization score.",
@@ -1656,7 +1656,7 @@
       "easeOfUse": 6,
       "ai": 1
     },
-            "traitRationales": {
+    "traitRationales": {
       "privacy": "Profile evidence: “Built-in ad blocker”; “Anti-fingerprinting patches and extra hardening”. This describes listed protections, not an anonymity guarantee.",
       "speed": "No source-linked, platform-matched benchmark is attached; this is a qualitative estimate, not a Speedometer result.",
       "customization": "The profile does not cite evidence for UI, settings, or extension controls; 5/10 is a qualitative estimate, not a measured comparison.",
@@ -1697,7 +1697,7 @@
       "easeOfUse": 8,
       "ai": 2
     },
-            "traitRationales": {
+    "traitRationales": {
       "privacy": "Profile evidence: “The former mobile browser bundled Ghostery's tracker blocking”. This describes listed protections, not an anonymity guarantee.",
       "speed": "No source-linked, platform-matched benchmark is attached; this is a qualitative estimate, not a Speedometer result.",
       "customization": "Profile evidence: “Ghostery directs desktop users to Firefox with its browser extension”. Extension support is only one part of the customization score.",
@@ -1738,7 +1738,7 @@
       "easeOfUse": 6,
       "ai": 1
     },
-            "traitRationales": {
+    "traitRationales": {
       "privacy": "The profile does not cite evidence for default privacy protections or data practices; 6/10 is a qualitative estimate, not a measured comparison.",
       "speed": "No source-linked, platform-matched benchmark is attached; this is a qualitative estimate, not a Speedometer result.",
       "customization": "Profile evidence: “Supports a wider range of extensions than official Firefox Android”. Extension support is only one part of the customization score.",
@@ -1779,7 +1779,7 @@
       "easeOfUse": 8,
       "ai": 1
     },
-            "traitRationales": {
+    "traitRationales": {
       "privacy": "The profile does not cite evidence for default privacy protections or data practices; 5/10 is a qualitative estimate, not a measured comparison.",
       "speed": "No source-linked, platform-matched benchmark is attached; this is a qualitative estimate, not a Speedometer result.",
       "customization": "The profile does not cite evidence for UI, settings, or extension controls; 2/10 is provisional, not proof the capability is absent.",
@@ -1820,7 +1820,7 @@
       "easeOfUse": 7,
       "ai": 1
     },
-            "traitRationales": {
+    "traitRationales": {
       "privacy": "Profile evidence: “Included a built-in ad blocker and night mode”. This describes listed protections, not an anonymity guarantee.",
       "speed": "No source-linked, platform-matched benchmark is attached; this is a qualitative estimate, not a Speedometer result.",
       "customization": "Profile evidence: “Supported desktop Chrome extensions on Android”. Extension support is only one part of the customization score.",
@@ -1861,7 +1861,7 @@
       "easeOfUse": 7,
       "ai": 1
     },
-            "traitRationales": {
+    "traitRationales": {
       "privacy": "Profile evidence: “Stripped telemetry from Mozilla's Fenix codebase”; “Shipped with stricter privacy settings by default than Firefox”. This describes listed protections, not an anonymity guarantee.",
       "speed": "No source-linked, platform-matched benchmark is attached; this is a qualitative estimate, not a Speedometer result.",
       "customization": "Profile evidence: “Shipped with stricter privacy settings by default than Firefox”. Extension support is only one part of the customization score.",
@@ -1902,7 +1902,7 @@
       "easeOfUse": 9,
       "ai": 2
     },
-            "traitRationales": {
+    "traitRationales": {
       "privacy": "The profile does not cite evidence for default privacy protections or data practices; 4/10 is a qualitative estimate, not a measured comparison.",
       "speed": "No source-linked, platform-matched benchmark is attached; this is a qualitative estimate, not a Speedometer result.",
       "customization": "The profile does not cite evidence for UI, settings, or extension controls; 2/10 is provisional, not proof the capability is absent.",
@@ -1943,7 +1943,7 @@
       "easeOfUse": 8,
       "ai": 2
     },
-            "traitRationales": {
+    "traitRationales": {
       "privacy": "Profile evidence: “Built-in ad and tracker blocking”. This describes listed protections, not an anonymity guarantee.",
       "speed": "No source-linked, platform-matched benchmark is attached; this is a qualitative estimate, not a Speedometer result.",
       "customization": "Profile evidence: “No extensions or configuration needed”. Extension support is only one part of the customization score.",
@@ -1984,7 +1984,7 @@
       "easeOfUse": 9,
       "ai": 6
     },
-            "traitRationales": {
+    "traitRationales": {
       "privacy": "Profile evidence: “Secret Mode and tracker blocking”. This describes listed protections, not an anonymity guarantee.",
       "speed": "No source-linked, platform-matched benchmark is attached; this is a qualitative estimate, not a Speedometer result.",
       "customization": "Profile evidence: “Content blocker extension system”. Extension support is only one part of the customization score.",
@@ -2025,7 +2025,7 @@
       "easeOfUse": 9,
       "ai": 1
     },
-            "traitRationales": {
+    "traitRationales": {
       "privacy": "The profile does not cite evidence for default privacy protections or data practices; 5/10 is a qualitative estimate, not a measured comparison.",
       "speed": "No source-linked, platform-matched benchmark is attached; this is a qualitative estimate, not a Speedometer result.",
       "customization": "The profile does not cite evidence for UI, settings, or extension controls; 2/10 is provisional, not proof the capability is absent.",
@@ -2066,7 +2066,7 @@
       "easeOfUse": 8,
       "ai": 1
     },
-            "traitRationales": {
+    "traitRationales": {
       "privacy": "The profile does not cite evidence for default privacy protections or data practices; 5/10 is a qualitative estimate, not a measured comparison.",
       "speed": "No source-linked, platform-matched benchmark is attached; this is a qualitative estimate, not a Speedometer result.",
       "customization": "The profile does not cite evidence for UI, settings, or extension controls; 3/10 is provisional, not proof the capability is absent.",
@@ -2107,7 +2107,7 @@
       "easeOfUse": 8,
       "ai": 2
     },
-            "traitRationales": {
+    "traitRationales": {
       "privacy": "The profile does not cite evidence for default privacy protections or data practices; 7/10 is a qualitative estimate, not a measured comparison.",
       "speed": "Profile claim: “Stream and download content privately”. No source-linked, platform-matched test is attached, so 6/10 remains qualitative.",
       "customization": "The profile does not cite evidence for UI, settings, or extension controls; 3/10 is provisional, not proof the capability is absent.",
@@ -2148,7 +2148,7 @@
       "easeOfUse": 8,
       "ai": 1
     },
-            "traitRationales": {
+    "traitRationales": {
       "privacy": "The profile does not cite evidence for default privacy protections or data practices; 5/10 is a qualitative estimate, not a measured comparison.",
       "speed": "Profile claim: “Fast browsing”. No source-linked, platform-matched test is attached, so 7/10 remains qualitative.",
       "customization": "The profile does not cite evidence for UI, settings, or extension controls; 3/10 is provisional, not proof the capability is absent.",

@@ -7,7 +7,14 @@ import { ArrowRight, TrendingDown, TrendingUp } from 'lucide-react';
 import { getEngineVariant, getEngineVariants } from '../lib/getPlatformEngineData';
 
 const BrowserCard = React.memo(
-  ({ browser, getEngineColor, rank, selectedPlatform, selectedEngine = 'All', isLoading = false }) => {
+  ({
+    browser,
+    getEngineColor,
+    rank,
+    selectedPlatform,
+    selectedEngine = 'All',
+    isLoading = false,
+  }) => {
     const [showModal, setShowModal] = useState(false);
     const [localEngine, setLocalEngine] = useState(null);
     const [imageLoaded, setImageLoaded] = useState(false);
@@ -16,7 +23,8 @@ const BrowserCard = React.memo(
 
     const platformData = browser[selectedPlatform];
     const engineVariants = getEngineVariants(platformData);
-    const activeEngine = selectedEngine !== 'All' ? selectedEngine : localEngine || engineVariants[0]?.engine;
+    const activeEngine =
+      selectedEngine !== 'All' ? selectedEngine : localEngine || engineVariants[0]?.engine;
     const activeVariant = getEngineVariant(platformData, activeEngine);
 
     useEffect(() => {
@@ -99,8 +107,7 @@ const BrowserCard = React.memo(
     };
 
     const getPerformanceLevel = (score) => {
-      if (score >= 40)
-        return { level: 'Excellent', color: 'var(--color-score-excellent)' };
+      if (score >= 40) return { level: 'Excellent', color: 'var(--color-score-excellent)' };
       if (score >= 30) return { level: 'Good', color: 'var(--color-score-good)' };
       if (score >= 20) return { level: 'Fair', color: 'var(--color-score-fair)' };
       return { level: 'Poor', color: 'var(--color-score-poor)' };
@@ -300,9 +307,13 @@ const BrowserCard = React.memo(
                     className="px-2 py-1 rounded-md body-small font-medium"
                     style={{
                       backgroundColor:
-                        activeEngine === variant.engine ? 'var(--color-brand)' : 'var(--surface-sunken)',
+                        activeEngine === variant.engine
+                          ? 'var(--color-brand)'
+                          : 'var(--surface-sunken)',
                       color:
-                        activeEngine === variant.engine ? 'var(--text-inverse)' : 'var(--text-subtle)',
+                        activeEngine === variant.engine
+                          ? 'var(--text-inverse)'
+                          : 'var(--text-subtle)',
                       border: '1px solid var(--border-subtle)',
                     }}
                     aria-pressed={activeEngine === variant.engine}
@@ -371,11 +382,17 @@ const BrowserCard = React.memo(
 
             {/* Footer actions */}
             <div className="mt-3 flex items-center justify-between">
-              <span className="body-small" style={{ color: 'var(--text-subtlest)', fontSize: '10px' }}>
+              <span
+                className="body-small"
+                style={{ color: 'var(--text-subtlest)', fontSize: '10px' }}
+              >
                 Tap for history
               </span>
               <Link
-                href={`/browsers/${browser.name.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')}`}
+                href={`/browsers/${browser.name
+                  .toLowerCase()
+                  .replace(/\s+/g, '-')
+                  .replace(/[^a-z0-9-]/g, '')}`}
                 className="body-small font-medium hover:underline"
                 style={{ color: 'var(--text-brand)' }}
                 onClick={(e) => e.stopPropagation()}

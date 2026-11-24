@@ -1,8 +1,8 @@
-import { useSyncExternalStore, useCallback } from "react";
+import { useSyncExternalStore, useCallback } from 'react';
 
 function subscribe(callback) {
-  window.addEventListener("storage", callback);
-  return () => window.removeEventListener("storage", callback);
+  window.addEventListener('storage', callback);
+  return () => window.removeEventListener('storage', callback);
 }
 
 export function useLocalStorage(key, defaultValue) {
@@ -15,24 +15,19 @@ export function useLocalStorage(key, defaultValue) {
     }
   }, [key, defaultValue]);
 
-  const storedValue = useSyncExternalStore(
-    subscribe,
-    getSnapshot,
-    () => defaultValue,
-  );
+  const storedValue = useSyncExternalStore(subscribe, getSnapshot, () => defaultValue);
 
   const setValue = useCallback(
     (value) => {
       try {
-        const valueToStore =
-          value instanceof Function ? value(storedValue) : value;
+        const valueToStore = value instanceof Function ? value(storedValue) : value;
         window.localStorage.setItem(key, JSON.stringify(valueToStore));
-        window.dispatchEvent(new Event("storage"));
+        window.dispatchEvent(new Event('storage'));
       } catch (error) {
         console.warn(`Error setting localStorage key "${key}":`, error);
       }
     },
-    [key, storedValue],
+    [key, storedValue]
   );
 
   return [storedValue, setValue];

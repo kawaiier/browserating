@@ -334,7 +334,11 @@ export default function QuizContainer({
       }
 
       newAnswers[currentQuestionIndex] = optionId;
-      track('quiz_answer', { question_id: currentQuestion.id, option_id: optionId, selected: true });
+      track('quiz_answer', {
+        question_id: currentQuestion.id,
+        option_id: optionId,
+        selected: true,
+      });
       setAnswers(newAnswers);
       writeQuizUrl(currentStep, newAnswers, { replace: true });
       if (!flow.reviewing) advanceFrom(currentStep, newAnswers, AUTO_ADVANCE_DELAY);

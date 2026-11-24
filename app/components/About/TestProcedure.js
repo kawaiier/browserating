@@ -53,10 +53,9 @@ export default function TestProcedure() {
           <span className="font-medium" style={{ color: 'var(--text-brand)' }}>
             the cumulative memory consumption was measured
           </span>{' '}
-          after sequentially loading seven diverse websites: IGN, ESPN, Figma,
-          Britannica, Wired, Bloomberg, and Reddit&apos;s popular page.
-          Measurements were taken using Activity Monitor, filtered by each
-          browser&apos;s name.
+          after sequentially loading seven diverse websites: IGN, ESPN, Figma, Britannica, Wired,
+          Bloomberg, and Reddit&apos;s popular page. Measurements were taken using Activity Monitor,
+          filtered by each browser&apos;s name.
         </p>
       </div>
 

@@ -68,11 +68,7 @@ export default async function PlatformPage({ params }) {
           <main id="main-content" className="container mx-auto px-4 py-8 scroll-mt-4" tabIndex={-1}>
             <article className="max-w-4xl mx-auto">
               <nav className="mb-6">
-                <Link
-                  href="/"
-                  className="hover:underline"
-                  style={{ color: 'var(--text-brand)' }}
-                >
+                <Link href="/" className="hover:underline" style={{ color: 'var(--text-brand)' }}>
                   <ArrowLeft className="inline w-4 h-4" aria-hidden="true" /> Back to Rankings
                 </Link>
               </nav>
