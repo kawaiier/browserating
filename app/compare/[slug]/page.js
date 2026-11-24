@@ -323,7 +323,11 @@ export default async function ComparePage({ params, searchParams }) {
                             {otherShared.map((p, index) => (
                               <span key={p.id}>
                                 {index > 0 && ', '}
-                                <Link className="underline" href={viewUrl({ platform: p.id })}>
+                                <Link
+                                  prefetch={false}
+                                  className="underline"
+                                  href={viewUrl({ platform: p.id })}
+                                >
                                   {p.label}
                                 </Link>
                               </span>
@@ -451,6 +455,7 @@ export default async function ComparePage({ params, searchParams }) {
                               <span key={option.slug}>
                                 {index > 0 && ', '}
                                 <Link
+                                  prefetch={false}
                                   className="underline"
                                   href={buildCompareUrl({
                                     first: browser.slug,
@@ -468,7 +473,11 @@ export default async function ComparePage({ params, searchParams }) {
                       </div>
                     )}
                     <p className="mb-4">
-                      <Link className="underline" href={onlyShared ? baseUrl : filterUrl}>
+                      <Link
+                        prefetch={false}
+                        className="underline"
+                        href={onlyShared ? baseUrl : filterUrl}
+                      >
                         {onlyShared
                           ? 'Show all platforms (reset filter)'
                           : 'Shared measurements only'}
