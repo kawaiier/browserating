@@ -3,8 +3,10 @@ import fs from 'node:fs';
 import test from 'node:test';
 import {
   deriveComparison,
+  formatScoreOutcome,
   getComparisonObservation,
   getMeasurementFreshness,
+  getScoreOutcome,
 } from './comparisonViewModel.js';
 import { mergeBrowserData } from './mergeBrowserData.js';
 
@@ -26,6 +28,36 @@ const browsers = [
   },
   { name: 'Browser B', windows: { engine: 'Gecko', versions: [record(7)] } },
 ];
+
+test('score outcomes apply precision, positive denominators and order consistently', () => {
+  const available = (score) => ({ state: 'available', score });
+  const result = getScoreOutcome(available(10), available(8));
+  assert.deepEqual(result, { state: 'a', percent: 25 });
+  assert.equal(
+    formatScoreOutcome(result, 'A', 'B'),
+    'A has the higher recorded score (25.0% higher than B).'
+  );
+  const reversed = getScoreOutcome(available(8), available(10));
+  assert.equal(formatScoreOutcome(reversed, 'B', 'A'), formatScoreOutcome(result, 'A', 'B'));
+  assert.deepEqual(getScoreOutcome(available(10), available(10)), { state: 'tie' });
+  assert.deepEqual(getScoreOutcome(available(10.001), available(10.002)), {
+    state: 'displayed-tie',
+  });
+  assert.equal(
+    formatScoreOutcome(getScoreOutcome(available(10.001), available(10.002)), 'A', 'B'),
+    'Same displayed score.'
+  );
+  assert.equal(getScoreOutcome(available(10), available(3)).percent.toFixed(1), '233.3');
+  for (const score of [0, -1, Infinity, NaN]) {
+    assert.equal(getScoreOutcome(available(10), available(score)).state, 'unavailable');
+  }
+  assert.equal(getScoreOutcome(available(10), { state: 'missing-metric' }).state, 'unavailable');
+  assert.equal(getScoreOutcome(available(10), available(8), false).state, 'incompatible');
+  assert.match(
+    formatScoreOutcome(getScoreOutcome(available(10), available(8), false), 'A', 'B'),
+    /incompatible/
+  );
+});
 
 test('freshness uses recorded calendar dates and the 180-day threshold', () => {
   const now = new Date('2026-11-24T00:00:00Z');

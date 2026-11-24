@@ -20,8 +20,10 @@ import ComparisonFocus from '@/app/components/ComparisonFocus';
 import { getBrowsersServer } from '@/app/lib/getBrowsersServer';
 import {
   deriveComparison,
+  formatScoreOutcome,
   getComparisonObservation,
   getMeasurementFreshness,
+  getScoreOutcome,
 } from '@/app/lib/comparisonViewModel';
 import { getBrowserSlug } from '@/app/lib/getBrowserSlug';
 import { platformNames } from '@/app/lib/platformDefinitions';
@@ -159,16 +161,8 @@ export default async function ComparePage({ params, searchParams }) {
       {onlyShared && <input type="hidden" name="shared" value="1" />}
     </>
   );
-  const outcomeText = (platform) => {
-    if (platform.outcome === 'unavailable')
-      return 'No head-to-head result: a score is missing or unavailable.';
-    if (platform.outcome === 'tie') return 'Same recorded score.';
-    if (platform.a.score.toFixed(2) === platform.b.score.toFixed(2)) return 'Same displayed score.';
-    const winner = platform.outcome === 'a' ? browserA : browserB;
-    const high = Math.max(platform.a.score, platform.b.score);
-    const low = Math.min(platform.a.score, platform.b.score);
-    return `${winner.name} has the higher recorded score (${(((high - low) / low) * 100).toFixed(1)}% higher).`;
-  };
+  const outcomeText = (platform) =>
+    formatScoreOutcome(getScoreOutcome(platform.a, platform.b), browserA.name, browserB.name);
 
   return (
     <ErrorBoundary>
@@ -437,10 +431,17 @@ export default async function ComparePage({ params, searchParams }) {
                           <th className="text-right py-2" style={{ color: 'var(--text-default)' }}>
                             {browserB.name}
                           </th>
+                          <th
+                            className="text-left py-2 pl-4"
+                            style={{ color: 'var(--text-default)' }}
+                          >
+                            Recorded result
+                          </th>
                         </tr>
                       </thead>
                       <tbody>
                         {visible.map((platform) => {
+                          const result = getScoreOutcome(platform.a, platform.b);
                           return (
                             <tr
                               key={platform.id}
@@ -455,28 +456,29 @@ export default async function ComparePage({ params, searchParams }) {
                               <td
                                 className="text-right py-2"
                                 style={{
-                                  color:
-                                    platform.outcome === 'a'
-                                      ? 'var(--color-success)'
-                                      : 'var(--text-default)',
-                                  fontWeight: platform.outcome === 'a' ? 'bold' : 'normal',
+                                  color: 'var(--text-default)',
                                 }}
                               >
                                 {label(platform.a)}
+                                {result.state === 'a' && (
+                                  <div className="font-semibold">Higher recorded score</div>
+                                )}
                                 {evidence(platform.a)}
                               </td>
                               <td
                                 className="text-right py-2"
                                 style={{
-                                  color:
-                                    platform.outcome === 'b'
-                                      ? 'var(--color-success)'
-                                      : 'var(--text-default)',
-                                  fontWeight: platform.outcome === 'b' ? 'bold' : 'normal',
+                                  color: 'var(--text-default)',
                                 }}
                               >
                                 {label(platform.b)}
+                                {result.state === 'b' && (
+                                  <div className="font-semibold">Higher recorded score</div>
+                                )}
                                 {evidence(platform.b)}
+                              </td>
+                              <td className="py-2 pl-4" style={{ color: 'var(--text-default)' }}>
+                                {formatScoreOutcome(result, browserA.name, browserB.name)}
                               </td>
                             </tr>
                           );
