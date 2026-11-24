@@ -18,13 +18,11 @@ import BrowserCompareDropdown from '@/app/components/BrowserCompareDropdown';
 import ComparisonFocus from '@/app/components/ComparisonFocus';
 import { getBrowsersServer } from '@/app/lib/getBrowsersServer';
 import {
-  deriveComparison,
   formatScoreOutcome,
-  getComparisonObservation,
   getMeasurementFreshness,
   getScoreOutcome,
 } from '@/app/lib/comparisonViewModel';
-import { getBrowserSlug } from '@/app/lib/getBrowserSlug';
+import { comparisonOptions } from '@/app/lib/comparisonOptions';
 import { platformNames } from '@/app/lib/platformDefinitions';
 
 export async function generateStaticParams() {
@@ -94,23 +92,6 @@ export default async function ComparePage({ params, searchParams }) {
   const invalidEngine = Object.entries(query.engines).some(([slug, platforms]) =>
     Object.entries(platforms).some(([id, engine]) => engines[slug]?.[id] !== engine)
   );
-  const optionsFor = (browser) =>
-    catalog
-      .filter((candidate) => getBrowserSlug(candidate.name) !== browser.slug)
-      .map((candidate) => {
-        const slug = getBrowserSlug(candidate.name);
-        const comparison = deriveComparison(catalog, browser.slug, slug, engines);
-        const count = comparison.platforms.filter(
-          (p) => p.a.state === 'available' && p.b.state === 'available'
-        ).length;
-        const measured = Object.keys(platformNames).some(
-          (id) => getComparisonObservation(candidate, id).state === 'available'
-        );
-        return {
-          slug,
-          name: `${candidate.name}${measured ? ` — ${count} shared platforms` : ' — No benchmarks yet'}`,
-        };
-      });
   const baseUrl = buildCompareUrl({
     first: ordered[0],
     second: ordered[1],
@@ -461,14 +442,12 @@ export default async function ComparePage({ params, searchParams }) {
               </section>
               <div className="mt-8">
                 <BrowserCompareDropdown
-                  currentSlug={browserA.slug}
-                  currentName={browserA.name}
-                  browsers={optionsFor(browserA)}
-                />
-                <BrowserCompareDropdown
-                  currentSlug={browserB.slug}
-                  currentName={browserB.name}
-                  browsers={optionsFor(browserB)}
+                  key={`${browserA.slug}-${browserB.slug}`}
+                  first={browserA.slug}
+                  second={browserB.slug}
+                  browsers={comparisonOptions(catalog, engines)}
+                  engines={engines}
+                  platform={query.platform}
                 />
               </div>
             </article>

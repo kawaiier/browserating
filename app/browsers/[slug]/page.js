@@ -10,6 +10,7 @@ import ErrorBoundary from '@/app/components/ErrorBoundary';
 import Header from '@/app/components/Header';
 import Footer from '@/app/components/Footer';
 import BrowserCompareDropdown from '@/app/components/BrowserCompareDropdown';
+import { comparisonOptions } from '@/app/lib/comparisonOptions';
 
 export async function generateStaticParams() {
   const slugs = await getAllBrowserSlugs();
@@ -59,14 +60,6 @@ export default async function BrowserPage({ params }) {
     notFound();
   }
 
-  const compareBrowsers = allBrowsers
-    .map((b) => ({
-      name: b.name,
-      slug: b.name.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, ''),
-    }))
-    .filter((b) => b.slug !== slug)
-    .sort((a, b) => a.name.localeCompare(b.name));
-
   const platforms = ['macos-arm', 'macos-intel', 'windows', 'android', 'ipad'];
   const platformLabels = {
     'macos-arm': 'macOS (Apple Silicon)',
@@ -91,11 +84,7 @@ export default async function BrowserPage({ params }) {
             Skip to main content
           </a>
           <Header lastModified={lastModified} />
-          <main
-            id="main-content"
-            className="container mx-auto px-4 py-8 scroll-mt-4"
-            tabIndex={-1}
-          >
+          <main id="main-content" className="container mx-auto px-4 py-8 scroll-mt-4" tabIndex={-1}>
             <script
               type="application/ld+json"
               dangerouslySetInnerHTML={{
@@ -104,8 +93,7 @@ export default async function BrowserPage({ params }) {
                   '@type': 'Product',
                   name: browser.name,
                   description:
-                    browser.description ||
-                    `${browser.name} browser performance benchmarks`,
+                    browser.description || `${browser.name} browser performance benchmarks`,
                   brand: {
                     '@type': 'Brand',
                     name: browser.name,
@@ -115,11 +103,7 @@ export default async function BrowserPage({ params }) {
             />
 
             <nav className="mb-6">
-              <Link
-                href="/"
-                className="hover:underline"
-                style={{ color: 'var(--text-brand)' }}
-              >
+              <Link href="/" className="hover:underline" style={{ color: 'var(--text-brand)' }}>
                 <ArrowLeft className="inline w-4 h-4" aria-hidden="true" /> Back to Rankings
               </Link>
             </nav>
@@ -181,13 +165,19 @@ export default async function BrowserPage({ params }) {
                           boxShadow: 'var(--shadow-raised)',
                         }}
                       >
-                        <h3 className="text-lg font-semibold mb-2" style={{ color: 'var(--text-default)' }}>
+                        <h3
+                          className="text-lg font-semibold mb-2"
+                          style={{ color: 'var(--text-default)' }}
+                        >
                           {platformLabels[platform]}
                         </h3>
                         <div className="grid grid-cols-3 gap-4 text-sm">
                           <div>
                             <div style={{ color: 'var(--text-subtle)' }}>Speedometer 3.1</div>
-                            <div className="text-xl font-bold" style={{ color: 'var(--text-brand)' }}>
+                            <div
+                              className="text-xl font-bold"
+                              style={{ color: 'var(--text-brand)' }}
+                            >
                               {latestVersion?.scores?.speedometer3?.toFixed(2) || 'N/A'}
                             </div>
                           </div>
@@ -202,7 +192,10 @@ export default async function BrowserPage({ params }) {
                           </div>
                           <div>
                             <div style={{ color: 'var(--text-subtle)' }}>Engine</div>
-                            <div className="text-xl font-bold" style={{ color: 'var(--text-default)' }}>
+                            <div
+                              className="text-xl font-bold"
+                              style={{ color: 'var(--text-default)' }}
+                            >
                               {data.engine || 'N/A'}
                             </div>
                           </div>
@@ -213,11 +206,7 @@ export default async function BrowserPage({ params }) {
                 </div>
               </section>
 
-              <BrowserCompareDropdown
-                currentSlug={slug}
-                currentName={browser.name}
-                browsers={compareBrowsers}
-              />
+              <BrowserCompareDropdown first={slug} browsers={comparisonOptions(allBrowsers)} />
             </article>
           </main>
           <Footer />
