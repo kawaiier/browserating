@@ -2,6 +2,7 @@
 
 import { Component } from 'react';
 import Link from 'next/link';
+import { track } from '@vercel/analytics/react';
 
 class ErrorBoundary extends Component {
   constructor(props) {
@@ -15,6 +16,8 @@ class ErrorBoundary extends Component {
 
   componentDidCatch(error, errorInfo) {
     console.error('ErrorBoundary caught an error:', error, errorInfo);
+    if (this.props.analyticsScope === 'comparison')
+      track('comparison_load_failed', { failure_category: 'client-render' });
   }
 
   render() {

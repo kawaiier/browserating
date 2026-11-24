@@ -1,12 +1,18 @@
 'use client';
 
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
+import { track } from '@vercel/analytics/react';
 import Link from 'next/link';
 
 // `retry` re-fetches the server segment; `reset` would only re-render the failed client tree.
 export default function ComparisonError({ error, retry }) {
+  const reported = useRef(false);
   useEffect(() => {
     console.error('Comparison failed:', error);
+    if (!reported.current) {
+      reported.current = true;
+      track('comparison_load_failed', { failure_category: 'route-load' });
+    }
   }, [error]);
 
   return (

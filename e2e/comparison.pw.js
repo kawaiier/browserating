@@ -3,6 +3,10 @@ import AxeBuilder from '@axe-core/playwright';
 
 const measured = '/compare/crest-vs-firefox?platform=macos-arm';
 
+async function comparisonEvents(page) {
+  return page.evaluate(() => JSON.parse(sessionStorage.getItem('comparison-test-events') || '[]'));
+}
+
 async function audit(page) {
   const results = await new AxeBuilder({ page })
     .withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'wcag22aa'])
@@ -54,6 +58,89 @@ test('engine, platform, reload, history and swaps preserve the committed view', 
   await page.getByRole('button', { name: 'Swap browsers' }).click();
   await expect(page.getByRole('heading', { level: 1 })).toHaveText('Crest vs Firefox');
   await expect(page).toHaveURL(/engine\.crest\.macos-arm=WebKit/);
+});
+
+test('comparison analytics record committed actions and distinguish empty coverage', async ({
+  page,
+}) => {
+  await page.addInitScript(() => {
+    window.va = (...event) => {
+      const events = JSON.parse(sessionStorage.getItem('comparison-test-events') || '[]');
+      events.push(event);
+      sessionStorage.setItem('comparison-test-events', JSON.stringify(events));
+    };
+  });
+  await page.goto('/compare');
+  await page.getByLabel('First browser').selectOption('firefox');
+  await page.getByLabel('Second browser').selectOption('google-chrome');
+  expect((await comparisonEvents(page)).filter((event) => event[0] === 'event')).toHaveLength(0);
+  await page.getByRole('button', { name: 'Compare browsers', exact: true }).click();
+  await expect(page.getByRole('heading', { level: 1 })).toHaveText('Firefox vs Google Chrome');
+  await expect
+    .poll(
+      async () =>
+        (await comparisonEvents(page)).filter((event) => event[1]?.name === 'comparison_started')
+          .length
+    )
+    .toBe(1);
+  let events = await comparisonEvents(page);
+  expect(events.find((event) => event[1]?.name === 'comparison_started')[1].data.source).toBe(
+    'hub'
+  );
+  expect(events.filter((event) => event[1]?.name === 'comparison_applied')).toHaveLength(1);
+
+  await page.goto(measured);
+  await page.getByLabel('Crest engine').selectOption('WebKit');
+  await page.getByRole('button', { name: 'Show engine' }).click();
+  await expect
+    .poll(async () =>
+      (await comparisonEvents(page)).some((event) => event[1]?.name === 'comparison_engine_changed')
+    )
+    .toBe(true);
+  await page.getByLabel('Platform', { exact: true }).selectOption('windows');
+  await page.getByRole('button', { name: 'Show platform' }).click();
+  await expect
+    .poll(async () =>
+      (await comparisonEvents(page)).some(
+        (event) => event[1]?.name === 'comparison_platform_changed'
+      )
+    )
+    .toBe(true);
+  await page.evaluate(() => {
+    Object.defineProperty(navigator, 'clipboard', {
+      configurable: true,
+      value: { writeText: async () => {} },
+    });
+  });
+  await page.getByRole('button', { name: 'Copy link' }).click();
+  await expect
+    .poll(async () =>
+      (await comparisonEvents(page)).some(
+        (event) =>
+          event[1]?.name === 'comparison_share_succeeded' && event[1].data.channel === 'copy'
+      )
+    )
+    .toBe(true);
+
+  await page.goto('/compare/firefox-beta-vs-floorp');
+  await expect(page.getByText(/no shared platform measurements/)).toBeVisible();
+  await expect
+    .poll(async () =>
+      (await comparisonEvents(page)).some((event) => event[1]?.name === 'comparison_no_shared_data')
+    )
+    .toBe(true);
+  await page.goto('/compare/meteor-vs-web');
+  await expect(page.getByRole('heading', { name: 'No benchmarks recorded yet' })).toBeVisible();
+  events = await comparisonEvents(page);
+  expect(events.some((event) => event[1]?.name === 'comparison_load_failed')).toBe(false);
+  expect(
+    events.some(
+      (event) =>
+        event[1]?.name === 'comparison_no_shared_data' &&
+        event[1].data.browser_a === 'meteor' &&
+        event[1].data.browser_b === 'web'
+    )
+  ).toBe(false);
 });
 
 test('keyboard form validation and submission', async ({ page }) => {

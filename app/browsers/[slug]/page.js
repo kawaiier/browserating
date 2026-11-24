@@ -225,6 +225,7 @@ export default async function BrowserPage({ params, searchParams }) {
                 browsers={comparisonOptions(allBrowsers)}
                 platform={platform}
                 engines={engines}
+                source="detail"
               />
             </article>
           </main>

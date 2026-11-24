@@ -16,6 +16,7 @@ import Header from '@/app/components/Header';
 import Footer from '@/app/components/Footer';
 import BrowserCompareDropdown from '@/app/components/BrowserCompareDropdown';
 import ComparisonFocus from '@/app/components/ComparisonFocus';
+import ComparisonAnalytics from '@/app/components/ComparisonAnalytics';
 import ComparisonShare from '@/app/components/ComparisonShare';
 import { getBrowsersServer } from '@/app/lib/getBrowsersServer';
 import {
@@ -189,7 +190,7 @@ export default async function ComparePage({ params, searchParams }) {
     formatScoreOutcome(getScoreOutcome(platform.a, platform.b), browserA.name, browserB.name);
 
   return (
-    <ErrorBoundary>
+    <ErrorBoundary analyticsScope="comparison">
       <DarkModeProvider>
         <div
           className="comparison-shell min-h-screen transition-colors duration-200"
@@ -238,6 +239,8 @@ export default async function ComparePage({ params, searchParams }) {
               </header>
 
               <ComparisonShare
+                first={browserA.slug}
+                second={browserB.slug}
                 path={committedUrl}
                 title={`${browserA.name} vs ${browserB.name}`}
                 printDate={new Date().toISOString().slice(0, 10)}
@@ -275,7 +278,16 @@ export default async function ComparePage({ params, searchParams }) {
                 </p>
               </section>
               <section className="comparison-screen-result">
-                <ComparisonFocus key={`${ordered.join('-')}-${viewUrl()}`} />
+                <ComparisonAnalytics
+                  first={browserA.slug}
+                  second={browserB.slug}
+                  noSharedData={!noData && shared.length === 0}
+                />
+                <ComparisonFocus
+                  key={`${ordered.join('-')}-${viewUrl()}`}
+                  first={browserA.slug}
+                  second={browserB.slug}
+                />
                 <h2 className="text-2xl font-bold mb-4" style={{ color: 'var(--text-default)' }}>
                   Performance Comparison
                 </h2>
@@ -338,6 +350,7 @@ export default async function ComparePage({ params, searchParams }) {
                         <select
                           id="comparison-platform"
                           name="platform"
+                          data-current={selected?.id || ''}
                           defaultValue={selected?.id || ''}
                           className="min-h-[44px] max-w-full p-2 rounded"
                           style={{
@@ -451,6 +464,7 @@ export default async function ComparePage({ params, searchParams }) {
                                       <select
                                         id={name}
                                         name={name}
+                                        data-current={observation.engine}
                                         defaultValue={observation.engine}
                                         className="min-h-[44px] max-w-full p-2 rounded"
                                         style={{

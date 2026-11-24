@@ -2,9 +2,10 @@
 
 import { useEffect, useRef } from 'react';
 import { usePathname } from 'next/navigation';
+import { track } from '@vercel/analytics/react';
 
 // Native GET forms work without JavaScript; restore focus after an enhanced submission.
-export default function ComparisonFocus() {
+export default function ComparisonFocus({ first, second }) {
   const pathname = usePathname();
   const announcement = useRef(null);
   useEffect(() => {
@@ -27,8 +28,28 @@ export default function ComparisonFocus() {
     }
     const submitted = (event) => {
       if (!event.target.matches('form[data-comparison-control]')) return;
+      const control = event.target.querySelector('select');
+      const value = control?.value;
+      const [browserA, browserB] = [first, second].sort();
+      if (control?.name === 'platform' && value && value !== control.dataset.current) {
+        track('comparison_platform_changed', {
+          browser_a: browserA,
+          browser_b: browserB,
+          platform: value,
+        });
+      } else {
+        const match = control?.name.match(/^engine\.([a-z0-9-]+)\.([a-z0-9-]+)$/);
+        if (match && value && control.dataset.current !== value) {
+          track('comparison_engine_changed', {
+            browser_a: browserA,
+            browser_b: browserB,
+            browser: match[1],
+            platform: match[2],
+            engine: value,
+          });
+        }
+      }
       try {
-        const control = event.target.querySelector('select');
         if (control?.id) sessionStorage.setItem('comparison-focus', control.id);
       } catch {
         // Navigation still works without storage.
@@ -36,6 +57,6 @@ export default function ComparisonFocus() {
     };
     document.addEventListener('submit', submitted);
     return () => document.removeEventListener('submit', submitted);
-  }, [pathname]);
+  }, [pathname, first, second]);
   return <div ref={announcement} className="sr-only" role="status" aria-atomic="true" />;
 }

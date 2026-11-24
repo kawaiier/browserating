@@ -2,7 +2,9 @@
 
 import { useRouter } from 'next/navigation';
 import { useState, useTransition } from 'react';
+import { track } from '@vercel/analytics/react';
 import { buildCompareUrl } from '@/app/lib/comparisonUrl';
+import { rememberComparisonSource, takeComparisonSource } from '@/app/lib/comparisonAnalytics';
 
 export default function BrowserCompareDropdown({
   browsers,
@@ -11,6 +13,7 @@ export default function BrowserCompareDropdown({
   engines = {},
   platform,
   sharedOnly = false,
+  source = 'direct/unknown',
 }) {
   const router = useRouter();
   const [a, setA] = useState(first);
@@ -20,14 +23,32 @@ export default function BrowserCompareDropdown({
 
   const invalid = !a || !b || a === b;
   const navigate = (left, right) => {
+    const destination = buildCompareUrl({
+      first: left,
+      second: right,
+      engines,
+      platform,
+      sharedOnly,
+    });
+    const entrySource = takeComparisonSource(window.location.pathname) || source;
+    rememberComparisonSource(entrySource, destination);
+    if (
+      browsers.some((browser) => browser.slug === left) &&
+      browsers.some((browser) => browser.slug === right)
+    ) {
+      const [browserA, browserB] = [left, right].sort();
+      track('comparison_applied', {
+        browser_a: browserA,
+        browser_b: browserB,
+        source: entrySource,
+      });
+    }
     try {
       sessionStorage.setItem('comparison-focus', 'comparison-heading');
     } catch {
       // Navigation remains available when storage is blocked.
     }
-    startTransition(() =>
-      router.push(buildCompareUrl({ first: left, second: right, engines, platform, sharedOnly }))
-    );
+    startTransition(() => router.push(destination));
   };
   const options = (other) =>
     browsers.map((browser) => {

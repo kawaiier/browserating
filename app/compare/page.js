@@ -1,4 +1,4 @@
-import Link from 'next/link';
+import ComparisonEntryLink from '@/app/components/ComparisonEntryLink';
 import BrowserCompareDropdown from '@/app/components/BrowserCompareDropdown';
 import DarkModeProvider from '@/app/components/DarkModeProvider';
 import ErrorBoundary from '@/app/components/ErrorBoundary';
@@ -29,7 +29,7 @@ export default async function CompareHub() {
     });
 
   return (
-    <ErrorBoundary>
+    <ErrorBoundary analyticsScope="comparison">
       <DarkModeProvider>
         <div className="min-h-screen" style={{ backgroundColor: 'var(--surface-default)' }}>
           <a
@@ -49,7 +49,7 @@ export default async function CompareHub() {
                 Choose two browsers to explore their recorded Speedometer 3.1 scores, test dates,
                 and coverage across platforms.
               </p>
-              <BrowserCompareDropdown browsers={options} first="" />
+              <BrowserCompareDropdown browsers={options} first="" source="hub" />
               <section aria-labelledby="examples-heading">
                 <h2
                   id="examples-heading"
@@ -73,13 +73,14 @@ export default async function CompareHub() {
                           border: '1px solid var(--border-subtle)',
                         }}
                       >
-                        <Link
+                        <ComparisonEntryLink
+                          source="hub"
                           className="font-semibold underline"
                           style={{ color: 'var(--text-default)' }}
                           href={buildCompareUrl({ first: a.slug, second: b.slug })}
                         >
                           {a.name} vs {b.name}
-                        </Link>
+                        </ComparisonEntryLink>
                         <p className="text-sm mt-1" style={{ color: 'var(--text-subtle)' }}>
                           {count} shared measured {count === 1 ? 'platform' : 'platforms'}
                         </p>

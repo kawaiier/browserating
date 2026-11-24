@@ -1,8 +1,10 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
+import { track } from '@vercel/analytics/react';
 
-export default function ComparisonShare({ path, title, printDate }) {
+export default function ComparisonShare({ first, second, path, title, printDate }) {
+  const [browserA, browserB] = [first, second].sort();
   const [message, setMessage] = useState('');
   const [fallbackUrl, setFallbackUrl] = useState('');
   const dateRef = useRef(null);
@@ -23,6 +25,11 @@ export default function ComparisonShare({ path, title, printDate }) {
     const value = url();
     try {
       await navigator.clipboard.writeText(value);
+      track('comparison_share_succeeded', {
+        browser_a: browserA,
+        browser_b: browserB,
+        channel: 'copy',
+      });
       setFallbackUrl('');
       setMessage('Comparison link copied.');
     } catch {
@@ -34,6 +41,11 @@ export default function ComparisonShare({ path, title, printDate }) {
     if (!navigator.share) return copy();
     try {
       await navigator.share({ title, url: url() });
+      track('comparison_share_succeeded', {
+        browser_a: browserA,
+        browser_b: browserB,
+        channel: 'native',
+      });
       setMessage('');
     } catch (error) {
       if (error?.name !== 'AbortError') {

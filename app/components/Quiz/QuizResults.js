@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import ComparisonEntryLink from '@/app/components/ComparisonEntryLink';
 import QuizResultCard from './QuizResultCard';
 import QuizShareButtons from './QuizShareButtons';
 import QuizPriorityBars from './QuizPriorityBars';
@@ -419,12 +420,13 @@ export default function QuizResults({
             This comparison shows measured performance, rather than the qualitative traits used by
             the quiz.
           </p>
-          <Link
+          <ComparisonEntryLink
             href={compareHref}
+            source="quiz"
             className="inline-flex items-center gap-2 rounded-md bg-(--surface-sunken) px-5 py-2.5 text-sm font-medium text-(--text-default) transition-colors duration-200 hover:bg-(--surface-hovered) focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-(--border-focused)"
           >
             Compare {hero.name} vs {runnerUps[0].name}
-          </Link>
+          </ComparisonEntryLink>
         </div>
       )}
 

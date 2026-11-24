@@ -7,6 +7,7 @@ import { ArrowRight, TrendingDown, TrendingUp } from 'lucide-react';
 import { getEngineVariant, getEngineVariants } from '../lib/getPlatformEngineData';
 import { getBrowserSlug } from '../lib/getBrowserSlug';
 import { isFiniteMetric } from '../lib/benchmarkMetrics';
+import { rememberComparisonSource } from '../lib/comparisonAnalytics';
 
 const BrowserCard = React.memo(
   ({
@@ -414,6 +415,7 @@ const BrowserCard = React.memo(
           href={`/browsers/${getBrowserSlug(browser.name)}?${new URLSearchParams({ platform: selectedPlatform, engine: platformEngine })}#compare-browsers`}
           className="mt-2 inline-flex min-h-[44px] items-center px-2 text-sm font-medium underline"
           style={{ color: 'var(--text-brand)' }}
+          onClick={(event) => rememberComparisonSource('rankings', event.currentTarget.href)}
         >
           Compare {browser.name}
         </Link>
