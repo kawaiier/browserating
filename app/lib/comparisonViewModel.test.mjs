@@ -1,7 +1,11 @@
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import test from 'node:test';
-import { deriveComparison, getComparisonObservation } from './comparisonViewModel.js';
+import {
+  deriveComparison,
+  getComparisonObservation,
+  getMeasurementFreshness,
+} from './comparisonViewModel.js';
 import { mergeBrowserData } from './mergeBrowserData.js';
 
 const record = (score, version = 'first') => ({
@@ -22,6 +26,15 @@ const browsers = [
   },
   { name: 'Browser B', windows: { engine: 'Gecko', versions: [record(7)] } },
 ];
+
+test('freshness uses recorded calendar dates and the 180-day threshold', () => {
+  const now = new Date('2026-11-24T00:00:00Z');
+  assert.equal(getMeasurementFreshness('2026-05-28', now), 'current');
+  assert.equal(getMeasurementFreshness('2026-05-27', now), 'older');
+  for (const date of [null, '', '2026-02-30', 'not a date']) {
+    assert.equal(getMeasurementFreshness(date, now), 'unknown');
+  }
+});
 
 test('derives identity, coverage, first observation and engine-specific outcome', () => {
   const model = deriveComparison(browsers, 'browser-a', 'browser-b');

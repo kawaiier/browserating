@@ -8,6 +8,17 @@ export const comparisonMetric = {
   direction: 'higher',
 };
 
+export const OLDER_MEASUREMENT_DAYS = 180;
+
+// Dates are calendar dates, not deployment timestamps. Use UTC to avoid timezone shifts.
+export function getMeasurementFreshness(date, now = new Date()) {
+  if (typeof date !== 'string' || !/^\d{4}-\d{2}-\d{2}$/.test(date)) return 'unknown';
+  const timestamp = Date.parse(`${date}T00:00:00Z`);
+  if (!Number.isFinite(timestamp) || new Date(timestamp).toISOString().slice(0, 10) !== date)
+    return 'unknown';
+  return now.getTime() - timestamp > OLDER_MEASUREMENT_DAYS * 86400000 ? 'older' : 'current';
+}
+
 export function getComparisonObservation(browser, platform, engine) {
   if (!browser) return { state: 'missing-browser', engines: [] };
   const data = browser[platform];

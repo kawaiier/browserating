@@ -17,7 +17,11 @@ import Header from '@/app/components/Header';
 import Footer from '@/app/components/Footer';
 import BrowserCompareDropdown from '@/app/components/BrowserCompareDropdown';
 import { getBrowsersServer } from '@/app/lib/getBrowsersServer';
-import { deriveComparison, getComparisonObservation } from '@/app/lib/comparisonViewModel';
+import {
+  deriveComparison,
+  getComparisonObservation,
+  getMeasurementFreshness,
+} from '@/app/lib/comparisonViewModel';
 import { getBrowserSlug } from '@/app/lib/getBrowserSlug';
 import { platformNames } from '@/app/lib/platformDefinitions';
 
@@ -110,6 +114,22 @@ export default async function ComparePage({ params, searchParams }) {
       'missing-metric': 'Speedometer score not recorded',
       'invalid-metric': 'Invalid Speedometer score',
     })[observation.state] || observation.score?.toFixed(2);
+  const evidence = (observation) => {
+    if (!observation.record) return null;
+    const freshness = getMeasurementFreshness(observation.record.date);
+    return (
+      <div className="mt-1 text-sm font-normal" style={{ color: 'var(--text-subtle)' }}>
+        <div>Version: {observation.record.version || 'Not recorded'}</div>
+        <div>Engine: {observation.engine || 'Not recorded'}</div>
+        <div>
+          {freshness === 'unknown'
+            ? 'Test date not recorded'
+            : `Tested on ${observation.record.date}`}
+        </div>
+        {freshness === 'older' && <div>Older measurement (over 180 days old)</div>}
+      </div>
+    );
+  };
 
   return (
     <ErrorBoundary>
@@ -217,6 +237,16 @@ export default async function ComparePage({ params, searchParams }) {
                   Performance Comparison
                 </h2>
                 <p className="mb-4" style={{ color: 'var(--text-subtle)' }}>
+                  Speedometer 3.1 — higher is better. Dates are when each measurement was tested;
+                  older measurements are more than 180 days old. Different dates alone do not
+                  establish different test setups. Hardware and setup details are not recorded for
+                  individual measurements. See the{' '}
+                  <Link href="/#methodology" className="underline">
+                    general testing methodology
+                  </Link>{' '}
+                  for the procedure, which does not document each measurement’s setup.
+                </p>
+                <p className="mb-4" style={{ color: 'var(--text-subtle)' }}>
                   {shared.length} shared platform{' '}
                   {shared.length === 1 ? 'measurement' : 'measurements'}.
                   {shared.length === 0 &&
@@ -272,6 +302,7 @@ export default async function ComparePage({ params, searchParams }) {
                                 }}
                               >
                                 {label(platform.a)}
+                                {evidence(platform.a)}
                               </td>
                               <td
                                 className="text-right py-2"
@@ -284,6 +315,7 @@ export default async function ComparePage({ params, searchParams }) {
                                 }}
                               >
                                 {label(platform.b)}
+                                {evidence(platform.b)}
                               </td>
                             </tr>
                           );
