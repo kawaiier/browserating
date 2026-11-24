@@ -12,7 +12,27 @@ export const getBrowsersServer = cache(async function getBrowsersServer() {
   const readFile = async (filename) => {
     const filePath = path.join(dataDir, filename);
     const content = await fs.readFile(filePath, 'utf8');
-    return JSON.parse(content);
+    const data = JSON.parse(content);
+    const isCatalog = filename === 'browsers.json';
+    if (
+      !Array.isArray(data) ||
+      data.length === 0 ||
+      data.some(
+        (entry) =>
+          !entry ||
+          typeof entry.name !== 'string' ||
+          !entry.name.trim() ||
+          (!isCatalog &&
+            (typeof entry.engine !== 'string' ||
+              !Array.isArray(entry.versions) ||
+              entry.versions.some(
+                (version) => !version || typeof version !== 'object' || Array.isArray(version)
+              )))
+      )
+    ) {
+      throw new Error(`Malformed benchmark dataset: ${filename}`);
+    }
+    return data;
   };
 
   const [browsers, androidData, macosIntelData, macosArmData, windowsData, ipadData] =
