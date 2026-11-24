@@ -103,8 +103,9 @@
   --shadow-overlay-bold: 0 8px 12px rgba(9, 30, 66, 0.12), 0 0 1px rgba(9, 30, 66, 0.15);
 
   /* ─── TYPOGRAPHY ─── */
-  --font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu,
-    'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  --font-family:
+    -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, 'Fira Sans',
+    'Droid Sans', 'Helvetica Neue', sans-serif;
   --font-family-mono: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace;
 
   /* Heading scale */
@@ -272,6 +273,34 @@ textarea:focus-visible,
   box-shadow: 0 0 0 4px rgba(87, 157, 255, 0.2);
 }
 
+/* Comparison text and control boundaries need contrast on their actual surfaces. */
+.comparison-page {
+  --text-subtle: #505f79;
+}
+
+.comparison-page select {
+  border-color: #6b778c !important;
+}
+
+.dark .comparison-page {
+  --text-subtle: #b3bac5;
+}
+
+.dark .comparison-page select {
+  border-color: #b3bac5 !important;
+}
+
+@media (forced-colors: active) {
+  .comparison-page :focus-visible {
+    outline: 2px solid Highlight;
+    outline-offset: 2px;
+  }
+  .comparison-page select,
+  .comparison-page button {
+    border: 1px solid ButtonText !important;
+  }
+}
+
 /* ─── ANIMATIONS ─── */
 @keyframes fade-in {
   0% {
@@ -332,6 +361,13 @@ textarea:focus-visible,
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .comparison-page *,
+  .comparison-page *::before,
+  .comparison-page *::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
   .quiz-float {
     animation: none !important;
   }
@@ -492,7 +528,9 @@ textarea:focus-visible,
 /* ─── ATLANTIC: Pill-shaped Bar Chart Bars ─── */
 .bar-pill {
   border-radius: 999px !important;
-  transition: box-shadow var(--transition-normal), transform var(--transition-normal);
+  transition:
+    box-shadow var(--transition-normal),
+    transform var(--transition-normal);
 }
 
 .bar-pill:hover {

@@ -19,6 +19,11 @@ export default function BrowserCompareDropdown({
 
   const invalid = !a || !b || a === b;
   const navigate = (left, right) => {
+    try {
+      sessionStorage.setItem('comparison-focus', 'comparison-heading');
+    } catch {
+      // Navigation remains available when storage is blocked.
+    }
     startTransition(() =>
       router.push(buildCompareUrl({ first: left, second: right, engines, platform }))
     );
@@ -46,7 +51,7 @@ export default function BrowserCompareDropdown({
     border: '1px solid var(--border-default)',
     color: 'var(--text-default)',
   };
-  const buttonStyle = { border: '1px solid var(--border-default)', color: 'var(--text-default)' };
+  const buttonStyle = { border: '1px solid currentColor', color: 'var(--text-default)' };
 
   return (
     <section className="mb-8">
@@ -148,10 +153,11 @@ export default function BrowserCompareDropdown({
             Reset selection
           </button>
         </div>
-        <p role="status" className="mt-2 text-sm" style={{ color: 'var(--text-subtle)' }}>
-          {pending
-            ? 'Loading comparison…'
-            : 'Measurements indicate benchmark coverage, not platform support.'}
+        <p className="mt-2 text-sm" style={{ color: 'var(--text-subtle)' }}>
+          Measurements indicate benchmark coverage, not platform support.
+        </p>
+        <p role="status" className="text-sm">
+          {pending ? 'Loading comparison…' : ''}
         </p>
       </form>
     </section>

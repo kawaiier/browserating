@@ -161,7 +161,7 @@ export default async function ComparePage({ params, searchParams }) {
           <Header lastModified={lastModified} compact />
           <main
             id="main-content"
-            className="container mx-auto min-w-0 px-4 py-8 scroll-mt-4"
+            className="comparison-page container mx-auto min-w-0 px-4 py-8 scroll-mt-4"
             tabIndex={-1}
           >
             <article className="max-w-4xl min-w-0 mx-auto [overflow-wrap:anywhere]">
@@ -181,6 +181,8 @@ export default async function ComparePage({ params, searchParams }) {
 
               <header className="mb-8">
                 <h1
+                  id="comparison-heading"
+                  tabIndex={-1}
                   className="text-3xl sm:text-4xl font-bold mb-4"
                   style={{ color: 'var(--text-default)' }}
                 >
@@ -192,7 +194,7 @@ export default async function ComparePage({ params, searchParams }) {
               </header>
 
               <section>
-                <ComparisonFocus />
+                <ComparisonFocus key={`${ordered.join('-')}-${baseUrl}`} />
                 <h2 className="text-2xl font-bold mb-4" style={{ color: 'var(--text-default)' }}>
                   Performance Comparison
                 </h2>
@@ -239,7 +241,7 @@ export default async function ComparePage({ params, searchParams }) {
                   <button
                     type="submit"
                     className="min-h-11 rounded px-3 py-2"
-                    style={{ backgroundColor: 'var(--color-brand)', color: 'white' }}
+                    style={{ border: '1px solid currentColor', color: 'var(--text-default)' }}
                   >
                     Show platform
                   </button>
@@ -254,7 +256,7 @@ export default async function ComparePage({ params, searchParams }) {
                     }}
                   >
                     <h3 className="text-xl font-bold">{selected.label} — Speedometer 3.1</h3>
-                    <p id="comparison-result" tabIndex={-1} role="status" className="my-2">
+                    <p id="comparison-result" className="my-2">
                       {selected.label}. {browserA.name}:{' '}
                       {selected.a.engine || 'engine not recorded'}. {browserB.name}:{' '}
                       {selected.b.engine || 'engine not recorded'}. {outcomeText(selected)}
@@ -314,7 +316,10 @@ export default async function ComparePage({ params, searchParams }) {
                                 <button
                                   type="submit"
                                   className="min-h-11 rounded px-3 py-2"
-                                  style={{ backgroundColor: 'var(--color-brand)', color: 'white' }}
+                                  style={{
+                                    border: '1px solid currentColor',
+                                    color: 'var(--text-default)',
+                                  }}
                                 >
                                   Show engine
                                 </button>
