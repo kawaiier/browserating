@@ -35,7 +35,7 @@
     "@playwright/test": "^1.65.1",
     "@tailwindcss/postcss": "^4.3.3",
     "eslint": "^10.15.0",
-    "eslint-config-next": "^16.2.12",
+    "eslint-config-next": "^16.4.6",
     "husky": "^9.1.7",
     "lint-staged": "^17.6.2",
     "postcss": "^8.5.23",
