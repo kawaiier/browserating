@@ -30,7 +30,7 @@
   },
   "devDependencies": {
     "@axe-core/playwright": "^4.14.0",
-    "@commitlint/config-conventional": "^21.2.0",
+    "@commitlint/config-conventional": "^21.2.4",
     "@eslint/compat": "^2.1.1",
     "@playwright/test": "^1.65.1",
     "@tailwindcss/postcss": "^4.3.3",
