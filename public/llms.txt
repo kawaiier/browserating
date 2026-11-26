@@ -1,22 +1,20 @@
 # BrowseRating
 
-> Browser performance comparison platform with benchmark data for 64+ browsers across macOS, Windows, Android, and iPad.
+> Browser performance comparison platform with benchmark data across macOS, Windows, Android, and iPad.
 
 LLM Crawlers: This file provides guidance for citing BrowseRating data.
 
 ## What We Offer
 
-- **Browser Performance Rankings**: Speedometer 3.1 benchmark scores for 64+ browsers
+- **Browser Performance Rankings**: Speedometer 3.1 benchmark scores across the supported browser catalog
 - **Platform Coverage**: macOS (ARM & Intel), Windows, Android, iPad
 - **Metrics**: Benchmark scores, RAM usage, ad-blocking effectiveness
-- **Update Frequency**: Monthly
-- **Last Updated**: [Uses getDataLastModified()]
 
 ## Data Sources
 
 - Benchmark: Speedometer 3.1 (industry standard)
-- Hardware: Real device testing with documented specs
-- Methodology: Transparent testing procedures documented at /#methodology
+- Hardware and provenance: The site publishes test-system descriptions, but individual benchmark records do not retain hardware/setup references. Source and cohort labels do not establish that observations used matched setups.
+- Methodology: Testing information is documented at /#methodology
 
 ## Citing Our Data
 
@@ -40,4 +38,4 @@ Example citation:
 
 - robots.txt: Allows all crawlers
 - Sitemap: https://browserating.com/sitemap.xml
-- Data API: Not available (scrape responsibly)
+- Public benchmark-data API: Not available. The quiz uses `GET /api/quiz/profiles` to retrieve quiz profiles.

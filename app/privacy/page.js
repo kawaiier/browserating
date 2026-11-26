@@ -104,9 +104,16 @@ export default function PrivacyPage() {
             <li>Screen size</li>
             <li>Preferred language</li>
             <li>Pages visited</li>
-            <li>Web vitals metrics (page load time, interaction times)</li>
             <li>Route changes</li>
           </ul>
+          <p className="mb-4" style={{ color: 'var(--text-subtle)' }}>
+            For comparison features, Vercel Analytics also receives custom events for comparison
+            starts and submissions, platform or engine changes, pairs without shared data,
+            successful shares, and categorized loading or rendering errors. Event properties can
+            include catalog browser slugs, an allowlisted source category, selected platform or
+            engine, share channel, or failure category. The events do not include free-text
+            searches, full referrer URLs, or error details.
+          </p>
           <p className="mb-4" style={{ color: 'var(--text-subtle)' }}>
             We also use{' '}
             <a

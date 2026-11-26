@@ -1,9 +1,9 @@
 # Browserating
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Next.js](https://img.shields.io/badge/Next.js-16.1.6-black)](https://nextjs.org/)
+[![Next.js](https://img.shields.io/badge/Next.js-16-black)](https://nextjs.org/)
 [![React](https://img.shields.io/badge/React-19-blue)](https://reactjs.org/)
-[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4.1.18-38B2AC)](https://tailwindcss.com/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4-38B2AC)](https://tailwindcss.com/)
 [![SEO Optimized](https://img.shields.io/badge/SEO-Optimized-green)](https://browserating.com)
 
 **Browserating** is a comprehensive, SEO-optimized Next.js web application that provides unbiased browser performance rankings and comparisons across multiple platforms. Using data from Speedometer 3.1 benchmarks, it delivers detailed insights into browser efficiency, ad-blocking capabilities, and RAM usage to help users make informed decisions about their browsing experience.
@@ -21,22 +21,23 @@
 - **🔒 Privacy-Focused**: Transparent data practices with dedicated privacy policy
 - **⚡ Server-Side Rendering**: Fast loading with Next.js SSR and static generation
 - **🔍 SEO Optimized**: Structured data (JSON-LD), dynamic sitemaps, and meta tags for search engines
-- **♿ Accessibility**: WCAG compliant with keyboard navigation and screen reader support
+- **♿ Accessibility checks**: Keyboard checks and automated axe scans for comparison flows
 - **🔗 Individual Browser Pages**: Dedicated pages for each browser with cross-platform benchmarks (`/browsers/[slug]`)
 - **⚖️ Head-to-Head Comparisons**: Side-by-side browser comparison pages (`/compare/[browser-a]-vs-[browser-b]`)
 - **📋 Platform Pages**: Dedicated ranking pages per platform (`/platforms/[platform]`)
+- **🧭 Browser quiz**: Personalized recommendations at `/quiz`, with shareable result pages
 
 ## 🚀 Tech Stack
 
-- **Framework**: Next.js 16.1.6 (App Router)
-- **Frontend**: React 19, Tailwind CSS 4.1.18
-- **Language**: TypeScript (dev), JavaScript
-- **Charts**: Chart.js 4.5.1 with react-chartjs-2 5.3.0
-- **Icons**: Lucide React 0.576.0
-- **Analytics**: Vercel Analytics 1.6.1, counter.dev
+- **Framework**: Next.js 16 (App Router)
+- **Frontend**: React 19, Tailwind CSS 4
+- **Language**: JavaScript
+- **Charts**: Chart.js 4 with react-chartjs-2
+- **Icons**: Lucide React
+- **Analytics**: Vercel Analytics, Counter.dev
 - **Data Storage**: JSON files
 - **Deployment**: Vercel
-- **Development Tools**: Bun, ESLint 10, Prettier 3.8.1, Husky 9, lint-staged, commitlint
+- **Development Tools**: Bun, ESLint 10, Prettier 3, Husky 9, lint-staged, commitlint
 
 ## 📋 Prerequisites
 
@@ -93,6 +94,12 @@ The application provides several key functionalities:
 - Pairs without shared measurements remain available but are omitted from the sitemap and marked `noindex, follow`
 
 The sitemap includes every canonical pair with a valid Speedometer 3.1 score for both browsers on at least one shared platform using their first-listed engines. This coverage-based list is not a popularity ranking; comparison pages are rendered dynamically.
+
+### Browser Quiz (`/quiz`)
+
+- Answer a short questionnaire to get browser recommendations
+- Share results through `/quiz/result/[id]` links; personalized answers can be carried in the link
+- Profile trait ratings and their editorial basis are maintained using the [quiz trait rubric](docs/quiz-trait-rubric.md)
 
 ### Platform-Specific Views (`/platforms/[platform]`)
 
@@ -192,7 +199,7 @@ This application is optimized for both user experience and search engines:
 - **Structured Data**: JSON-LD schema markup for rich snippets
 - **Sitemap**: Dynamic XML sitemap for search engine crawling
 - **Meta Tags**: Comprehensive SEO meta tags and Open Graph
-- **Accessibility**: WCAG 2.1 AA compliance
+- **Accessibility**: Automated axe-core checks cover comparison states; they do not establish site-wide WCAG conformance. See the [release verification checklist](docs/comparison-release-verification.md) for coverage and remaining manual reviews.
 
 ## 🙏 Acknowledgments
 
